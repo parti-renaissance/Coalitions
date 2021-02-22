@@ -5,10 +5,10 @@ import logo from 'assets/logo.png';
 import Link from 'components/Link';
 import { PATHS } from 'routes';
 import { Logo, HeaderContainer } from './Header.style';
-import { getUserToken } from 'redux2/Login';
-import useSelector from 'redux2/useSelector';
+import { getUserToken } from 'redux/Login';
+import useSelector from 'redux/useSelector';
 import { useLocation } from 'react-router';
-import { useLogout } from 'redux2/Login/hooks';
+import { useLogout } from 'redux/Login/hooks';
 
 const Header: React.FC = () => {
   const isUserLoggedIn = Boolean(useSelector(getUserToken));

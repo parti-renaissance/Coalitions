@@ -7,7 +7,7 @@ import { LoginButton, LoginContainer, LoginForm, Logo, Title } from './Login.sty
 import { initialValues, validateForm } from './service';
 
 import logo from 'assets/logo.png';
-import { useLogin } from 'redux2/Login/hooks';
+import { useLogin } from 'redux/Login/hooks';
 
 const InnerLoginForm: React.FC = () => {
   const intl = useIntl();

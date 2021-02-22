@@ -3,12 +3,12 @@ import React from 'react';
 
 import Avatar from '../Avatar';
 import { Input } from '../Avatar.style';
-import configureStore from 'redux2/store';
+import configureStore from 'redux/store';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import enMessages from 'translations/en.json';
 import flattenMessages from 'services/i18n/intl';
-import * as avatartHooks from 'redux2/Avatar/hooks';
+import * as avatartHooks from 'redux/Avatar/hooks';
 
 jest.mock('react-router-dom', () => ({
   Link: () => null,

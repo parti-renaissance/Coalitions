@@ -20,6 +20,6 @@ RUN yarn build
 
 
 FROM nginx:${NGINX_VERSION}-alpine
-COPY --from=build /usr/src/app/public /usr/share/nginx/html
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]

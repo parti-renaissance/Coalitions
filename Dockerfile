@@ -7,13 +7,17 @@ WORKDIR /usr/src/app
 
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV production
+ENV REACT_APP_ENV production
 
-COPY package.json ./
+# useful for node-gyp
+RUN apk add python make gcc g++
 
-# build steps
-# ...
+COPY frontend/ ./
 
-COPY . ./
+# useful to get react-app-rewired and types for typescript
+RUN yarn install --production=false
+RUN yarn build
+
 
 FROM nginx:${NGINX_VERSION}-alpine
 COPY --from=build /usr/src/app/public /usr/share/nginx/html

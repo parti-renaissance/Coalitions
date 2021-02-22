@@ -12,7 +12,7 @@
     "formik": "2.0.6",
     "history": "4.10.1",
     "jwt-decode": "2.2.0",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-intl": "3.9.1",

@@ -1,7 +1,7 @@
 import { githubApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
 import { updateUser } from './slice';
-import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
+import { useTypedAsyncFn } from 'redux2/useTypedAsyncFn';
 
 export const useFetchUser = () => {
   const dispatch = useDispatch();

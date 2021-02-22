@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   webpack: function override(config, env) {
     const analyzeBundle = process.argv.indexOf('--analyze-bundle') !== -1;
@@ -11,7 +13,21 @@ module.exports = {
     }
 
     // Customize webpack config here
-
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.alias,
+        stylesheet: path.resolve(__dirname, 'src/stylesheet'),
+        components: path.resolve(__dirname, 'src/components'),
+        __fixtures__: path.resolve(__dirname, 'src/__fixtures__'),
+        __mocks__: path.resolve(__dirname, 'src/__mocks__'),
+        redux2: path.resolve(__dirname, 'src/redux2'),
+        routes: path.resolve(__dirname, 'src/routes'),
+        services: path.resolve(__dirname, 'src/services'),
+        translations: path.resolve(__dirname, 'src/translations'),
+        assets: path.resolve(__dirname, 'src/assets'),
+      },
+    };
     return config;
   },
   devServer: function(configFunction) {

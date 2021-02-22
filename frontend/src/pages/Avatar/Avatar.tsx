@@ -12,10 +12,10 @@ import {
   HomeLink,
   ErrorMessage,
 } from './Avatar.style';
-import useSelector from 'redux/useSelector';
+import useSelector from 'redux2/useSelector';
 import { useDispatch } from 'react-redux';
-import { updateUsername } from 'redux/Avatar';
-import { useFetchUser } from 'redux/Avatar/hooks';
+import { updateUsername } from 'redux2/Avatar';
+import { useFetchUser } from 'redux2/Avatar/hooks';
 import { Link as RouterLink } from 'react-router-dom';
 
 const Avatar: React.FC = () => {

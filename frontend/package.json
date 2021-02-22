@@ -57,9 +57,9 @@
       "!src/index.js",
       "!src/tempPolyfills.js",
       "!src/setupTests.js",
-      "!src/redux/reducers.js",
-      "!src/redux/sagas.js",
-      "!src/redux/store.js"
+      "!src/redux2/reducers.js",
+      "!src/redux2/sagas.js",
+      "!src/redux2/store.js"
     ],
     "coverageThreshold": {
       "global": {

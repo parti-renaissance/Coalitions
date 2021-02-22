@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-import configureStore from './redux/store';
+import configureStore from './redux2/store';
 
 declare global {
   interface Window {

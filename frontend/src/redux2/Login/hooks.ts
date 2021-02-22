@@ -6,7 +6,7 @@ import * as Sentry from '@sentry/browser';
 import jwt_decode from 'jwt-decode';
 import { FormValues } from 'src/pages/Login/service';
 import { userLoggedIn } from './slice';
-import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
+import { useTypedAsyncFn } from 'redux2/useTypedAsyncFn';
 
 export const useLogout = () => {
   const { push } = useHistory();

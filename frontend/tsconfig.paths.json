@@ -5,12 +5,12 @@
       "components/*": ["src/components/*"],
       "__fixtures__/*": ["src/__fixtures__/*"],
       "__mocks__/*": ["src/__mocks__/*"],
-      "redux2/*": ["src/redux2/*"],
+      "redux/*": ["src/redux/*"],
       "routes": ["src/routes"],
       "services/*": ["src/services/*"],
       "stylesheet": ["src/stylesheet"],
       "translations/*": ["src/translations/*"],
-      "assets/*": ["src/assets/*"],
+      "assets/*": ["src/assets/*"]
     }
   }
 }

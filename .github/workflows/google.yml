@@ -21,7 +21,7 @@ env:
   GKE_CLUSTER: cluster-1    # TODO: update to cluster name
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
   DEPLOYMENT_NAME: gke-test
-  IMAGE: facebook-messenger
+  IMAGE: coalitions
 
 jobs:
   setup-build-publish-deploy:

@@ -13,12 +13,13 @@
 name: Build and Deploy to GKE
 
 on:
+  push:
+    branches: [master]
   release:
-    types: [created]
+    types: [published]
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  GKE_CLUSTER: cluster-1    # TODO: update to cluster name
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
   DEPLOYMENT_NAME: gke-test
   IMAGE: coalitions
@@ -32,16 +33,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Extract branch name
-      shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      id: extract_branch
-
     # Setup gcloud CLI
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@master
       with:
-        version: '290.0.1'
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_key: ${{ secrets.ACOUNT_SERVICE }}
         export_default_credentials: true
@@ -53,11 +48,10 @@ jobs:
     - name: Build
       run: |-
         docker build \
-          --tag "eu.gcr.io/$PROJECT_ID/$IMAGE:${{ steps.extract_branch.outputs.branch }}-$GITHUB_SHA" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" \
+          --tag "eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+          --tag "eu.gcr.io/$PROJECT_ID/$IMAGE:master" \
           .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
-      run: docker -- push eu.gcr.io/$PROJECT_ID/$IMAGE:${{ steps.extract_branch.outputs.branch }}-$GITHUB_SHA
+      run: docker push --all-tags

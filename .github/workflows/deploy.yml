@@ -45,7 +45,7 @@ jobs:
         IMAGE: coalitions
       run: |-
         docker build \
-          --tag ${REGISTRY}/${IMAGE}:master \
+          --tag ${REGISTRY}/${IMAGE}:master-${GITHUB_SHA} \
           .
 
-        docker push -- ${REGISTRY}/${IMAGE}:master
+        docker push -- ${REGISTRY}/${IMAGE}:master-${GITHUB_SHA}

@@ -20,6 +20,8 @@ RUN yarn build
 
 
 FROM nginx:${NGINX_VERSION}-alpine
+RUN rm /etc/nginx/conf.d/default.conf
+COPY docker/nginx_conf /etc/nginx/conf.d
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]

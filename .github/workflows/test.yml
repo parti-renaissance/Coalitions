@@ -1,0 +1,29 @@
+name: Test, lint, performance checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Test, lint, performance checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install project
+        run: cd frontend && yarn
+
+      - name: Run linter
+        run: cd frontend && yarn lint
+
+      - name: Run css linter
+        run: cd frontend && yarn lint-style
+
+      - name: Unit test
+        run: cd frontend && yarn test:coverage
+
+      - name: Check bundle size
+        run: cd frontend && yarn build && ./node_modules/.bin/bundlesize

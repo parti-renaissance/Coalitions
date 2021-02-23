@@ -13,6 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Restore node_modules from cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install project
         run: cd frontend && yarn
 

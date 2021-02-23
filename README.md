@@ -4,7 +4,7 @@
 
 ## Getting started
 
-- Follow the [installation](./docs/installation.md) docs
+- Follow the [installation docs](./docs/installation.md)
 - Head to [localhost:3000](http://localhost:3000)
 
 ## Documentation index

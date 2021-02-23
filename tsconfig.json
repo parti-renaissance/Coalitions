@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "es6",
     "allowJs": true,
@@ -21,7 +20,8 @@
     ],
     "sourceMap": true,
     "inlineSources": true,
-    "sourceRoot": "/"
+    "sourceRoot": "/",
+    "baseUrl": "src"
   },
   "exclude": [
     "node_modules"

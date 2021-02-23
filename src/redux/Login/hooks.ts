@@ -4,7 +4,7 @@ import { PATHS } from 'routes';
 import { useDispatch } from 'react-redux';
 import * as Sentry from '@sentry/browser';
 import jwt_decode from 'jwt-decode';
-import { FormValues } from 'src/pages/Login/service';
+import { FormValues } from 'pages/Login/service';
 import { userLoggedIn } from './slice';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 

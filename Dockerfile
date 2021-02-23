@@ -12,7 +12,7 @@ ENV REACT_APP_ENV production
 # useful for node-gyp
 RUN apk add python make gcc g++
 
-COPY frontend/ ./
+COPY . ./
 
 # useful to get react-app-rewired and types for typescript
 RUN yarn install --production=false

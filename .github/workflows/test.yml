@@ -2,6 +2,8 @@ name: Test, lint, performance checks
 
 on:
   push:
+    branches:
+      - master
   pull_request:
 
 jobs:
@@ -16,22 +18,25 @@ jobs:
       - name: Restore node_modules from cache
         uses: actions/cache@v2
         with:
-          path: "**/node_modules"
+          path: '**/node_modules'
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-
 
       - name: Install project
-        run: cd frontend && yarn
+        run: yarn
 
       - name: Run linter
-        run: cd frontend && yarn lint
+        run: yarn lint
 
       - name: Run css linter
-        run: cd frontend && yarn lint-style
+        run: yarn lint-style
+
+      - name: Type check
+        run: yarn type-check
 
       - name: Unit test
-        run: cd frontend && yarn test:coverage
+        run: yarn test:coverage
 
       - name: Check bundle size
-        run: cd frontend && yarn build && ./node_modules/.bin/bundlesize
+        run: yarn build && ./node_modules/.bin/bundlesize

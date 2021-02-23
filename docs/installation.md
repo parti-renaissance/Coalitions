@@ -15,7 +15,6 @@ What you need to do to (re)start the project:
 
 - start the frontend:
   ```bash
-  cd frontend
   yarn install
   yarn start
   ```

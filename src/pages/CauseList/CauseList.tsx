@@ -6,9 +6,10 @@ import { useFetchCauses } from 'redux/Cause/hooks';
 import StyledCauseList from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
+import { getCauses } from 'redux/Cause/selectors';
 
 const CauseList: React.FunctionComponent = () => {
-  const causes = useSelector(state => state.cause.causes);
+  const causes = useSelector(getCauses);
   const [{ loading, error }, doFetchCauses] = useFetchCauses();
 
   useEffect(() => {

@@ -6,4 +6,7 @@ export const state = {
   login: {
     token: 'someToken',
   },
+  cause: {
+    causes: [],
+  },
 };

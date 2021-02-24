@@ -82,7 +82,7 @@
     }
   ],
   "devDependencies": {
-    "@types/cheerio": "0.22.17",
+    "@types/cheerio": "0.22.24",
     "@types/enzyme": "3.10.8",
     "@types/history": "4.7.5",
     "@types/jest": "24.9.1",

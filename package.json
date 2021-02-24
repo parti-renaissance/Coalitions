@@ -12,7 +12,7 @@
     "babel-polyfill": "6.26.0",
     "env-cmd": "8.0.2",
     "formik": "2.2.6",
-    "history": "4.10.1",
+    "history": "5.0.0",
     "jwt-decode": "2.2.0",
     "lodash": "4.17.21",
     "react": "16.14.0",

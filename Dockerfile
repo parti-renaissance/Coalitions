@@ -5,7 +5,6 @@ FROM node:${NODE_VERSION}-alpine AS build
 
 WORKDIR /usr/src/app
 
-ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV production
 ENV REACT_APP_ENV production
 
@@ -17,7 +16,6 @@ COPY . ./
 # useful to get react-app-rewired and types for typescript
 RUN yarn install --production=false
 RUN yarn build
-
 
 FROM nginx:${NGINX_VERSION}-alpine
 RUN rm /etc/nginx/conf.d/default.conf

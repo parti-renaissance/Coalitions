@@ -3,10 +3,9 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import InputRow from 'components/InputRow';
-import { LoginButton, LoginContainer, LoginForm, Logo, Title } from './Login.style';
+import { LoginButton, LoginContainer, LoginForm, Title } from './Login.style';
 import { initialValues, validateForm } from './service';
 
-import logo from 'assets/logo.png';
 import { useLogin } from 'redux/Login/hooks';
 
 const InnerLoginForm: React.FC = () => {
@@ -14,7 +13,6 @@ const InnerLoginForm: React.FC = () => {
   const [{ loading }, login] = useLogin();
   return (
     <LoginContainer>
-      <Logo alt="Forge logo" src={logo} />
       <Title>
         <FormattedMessage id="login.title" />
       </Title>

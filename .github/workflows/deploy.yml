@@ -49,9 +49,11 @@ jobs:
           REGISTRY: eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}
           IMAGE: coalitions
           SOURCE_NAME: ${{ steps.ref_name.outputs.SOURCE_NAME }}
+          REACT_APP_ENV: "${{ steps.ref_name.outputs.SOURCE_NAME == 'master' && 'preprod' || 'production' }}"
         run: |-
           docker build \
             --tag ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA} \
+            --build-arg REACT_APP_ENV=${REACT_APP_ENV} \
             .
 
           docker push -- ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA}

@@ -1,10 +1,9 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link as RouterLink } from 'react-router-dom';
-import logo from 'assets/logo.png';
 import Link from 'components/Link';
 import { PATHS } from 'routes';
-import { Logo, HeaderContainer } from './Header.style';
+import { HeaderContainer } from './Header.style';
 import { getUserToken } from 'redux/Login';
 import useSelector from 'redux/useSelector';
 import { useLocation } from 'react-router';
@@ -19,7 +18,7 @@ const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <RouterLink to={PATHS.HOME}>
-        <Logo alt="Forge logo" src={logo} />
+        <div>En Marche</div>
       </RouterLink>
       {isUserLoggedIn && (
         <Link as="button" onClick={logout}>

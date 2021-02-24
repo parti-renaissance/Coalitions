@@ -26,5 +26,8 @@
     "email-placeholder": "ex: comes@theodo.fr",
     "password": "Mot de passe",
     "password-placeholder": "xxxxxxxxxxx"
+  },
+  "cause_list": {
+    "description": "Voici la liste des causes que vous pouvez soutenir"
   }
 }

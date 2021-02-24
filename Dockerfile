@@ -1,12 +1,13 @@
 ARG NODE_VERSION=14
 ARG NGINX_VERSION=1.19
+ARG REACT_APP_ENV=production
 
 FROM node:${NODE_VERSION}-alpine AS build
 
 WORKDIR /usr/src/app
 
 ENV NODE_ENV production
-ENV REACT_APP_ENV production
+ENV REACT_APP_ENV=$REACT_APP_ENV
 
 # useful for node-gyp
 RUN apk add python make gcc g++

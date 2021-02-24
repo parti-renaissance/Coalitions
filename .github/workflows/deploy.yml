@@ -24,34 +24,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    # Setup gcloud CLI
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
-      with:
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        service_account_key: ${{ secrets.ACOUNT_SERVICE }}
-        export_default_credentials: true
+      # Setup gcloud CLI
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.ACOUNT_SERVICE }}
+          export_default_credentials: true
 
-    # Configure Docker to use the gcloud command-line tool as a credential
-    - run: gcloud --quiet auth configure-docker
+      # Configure Docker to use the gcloud command-line tool as a credential
+      - run: gcloud --quiet auth configure-docker
 
-    - name: Get github ref name
+      - name: Get github ref name
         id: ref_name
         run: |
           echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
 
-    # Build the Docker image
-    - name: Build & push Docker image
-      env:
-        REGISTRY: eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}
-        IMAGE: coalitions
-        SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
-      run: |-
-        docker build \
-          --tag ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA} \
-          .
+      # Build the Docker image
+      - name: Build & push Docker image
+        env:
+          REGISTRY: eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}
+          IMAGE: coalitions
+          SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
+        run: |-
+          docker build \
+            --tag ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA} \
+            .
 
-        docker push -- ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA}
+          docker push -- ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA}

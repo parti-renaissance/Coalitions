@@ -38,14 +38,20 @@ jobs:
     # Configure Docker to use the gcloud command-line tool as a credential
     - run: gcloud --quiet auth configure-docker
 
+    - name: Get github ref name
+        id: ref_name
+        run: |
+          echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
+
     # Build the Docker image
     - name: Build & push Docker image
       env:
         REGISTRY: eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}
         IMAGE: coalitions
+        SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
       run: |-
         docker build \
-          --tag ${REGISTRY}/${IMAGE}:master-${GITHUB_SHA} \
+          --tag ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA} \
           .
 
-        docker push -- ${REGISTRY}/${IMAGE}:master-${GITHUB_SHA}
+        docker push -- ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA}

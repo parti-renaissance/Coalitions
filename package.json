@@ -8,7 +8,7 @@
     "@formatjs/intl-pluralrules": "1.5.9",
     "@formatjs/intl-relativetimeformat": "4.5.16",
     "@reduxjs/toolkit": "1.5.0",
-    "@sentry/browser": "5.15.0",
+    "@sentry/browser": "5.30.0",
     "babel-polyfill": "6.26.0",
     "env-cmd": "8.0.2",
     "formik": "2.2.6",

@@ -118,7 +118,7 @@
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-risxss": "1.1.1",
     "npm-audit-resolver": "2.2.0",
-    "plop": "2.5.3",
+    "plop": "2.7.4",
     "prettier": "1.19.1",
     "react-app-rewire-webpack-bundle-analyzer": "1.1.0",
     "react-app-rewired": "2.1.8",

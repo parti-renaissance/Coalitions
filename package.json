@@ -95,7 +95,7 @@
     "@types/react-redux": "7.1.7",
     "@types/react-router": "5.1.11",
     "@types/react-router-dom": "5.1.7",
-    "@types/react-test-renderer": "16.9.2",
+    "@types/react-test-renderer": "16.9.5",
     "@types/styled-components": "4.4.3",
     "@types/superagent": "4.1.10",
     "@types/webpack-env": "1.15.1",

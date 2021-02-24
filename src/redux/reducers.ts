@@ -7,9 +7,11 @@ import { combineReducers } from 'redux';
 
 import { reducer as avatar } from './Avatar';
 import { reducer as login } from './Login';
+import { reducer as cause } from './Cause';
 import { RootState } from './types';
 
 export default combineReducers<RootState>({
   login,
   avatar,
+  cause,
 });

@@ -48,7 +48,7 @@ jobs:
         env:
           REGISTRY: eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}
           IMAGE: coalitions
-          SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
+          SOURCE_NAME: ${{ steps.ref_name.outputs.SOURCE_NAME }}
         run: |-
           docker build \
             --tag ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA} \

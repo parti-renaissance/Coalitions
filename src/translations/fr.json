@@ -28,6 +28,8 @@
     "password-placeholder": "xxxxxxxxxxx"
   },
   "cause_list": {
-    "description": "Voici la liste des causes que vous pouvez soutenir"
+    "description": "Voici la liste des causes que vous pouvez soutenir",
+    "error": "Une erreur est survenue en récupérant la liste des causes",
+    "no_cause": "Aucune cause n'a été trouvée"
   }
 }

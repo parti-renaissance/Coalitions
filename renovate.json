@@ -2,7 +2,13 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": true,
+      "groupName": "Dependencies (non-major)",
+      "schedule": ["after 7am", "before 9am"]
     }
-  ]
+  ],
+  
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  }
 }

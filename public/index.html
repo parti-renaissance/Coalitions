@@ -30,14 +30,13 @@
     </noscript>
     <div id="root"></div>
     <script type="text/javascript">
-      // Uncomment the section below to enable Sentry:
-      // window.config = {
-      //   sentry: {
-      //     dsn: "",
-      //     environment: "",
-      //     version: ""
-      //   }
-      // };
+      window.config = {
+        sentry: {
+          dsn: 'https://ea5b81a440f74d229fc93d111cf84b71@sentry.theo.do/14',
+          environment: '<%= process.env.REACT_APP_ENV %>',
+          version: '',
+        },
+      };
     </script>
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
     <!--

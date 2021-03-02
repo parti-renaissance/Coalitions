@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
-const StyledCauseList = styled.div`
+export const StyledCauseList = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export default StyledCauseList;
+export const CauseListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;

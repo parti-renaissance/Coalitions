@@ -15,6 +15,7 @@ import {
   Supports,
 } from './Cause.style';
 import { isMobile } from 'services/mobile/mobile';
+import { FormattedMessage } from 'react-intl';
 
 interface CauseProps {
   cause: CauseType;
@@ -28,18 +29,29 @@ const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
         <CoalitionName>{cause.coalition.name}</CoalitionName>
         <CauseName>{cause.name}</CauseName>
         <Author>
-          Par {cause.author.first_name} {cause.author.last_name_initial}
+          <FormattedMessage
+            id="cause.author"
+            values={{
+              firstName: cause.author.first_name,
+              lastNameInitial: cause.author.last_name_initial,
+            }}
+          />
         </Author>
         <Supports>
           <Icon src="/images/supports.svg"></Icon>
-          <span>17038 soutiens</span>
+          <FormattedMessage
+            id="cause.supports"
+            values={{
+              supportsNumber: 17038,
+            }}
+          />
         </Supports>
         <ButtonContainer>
           <StyledButton size="small" variant="contained" color="secondary">
-            Soutenir
+            <FormattedMessage id="cause.support-button" />
           </StyledButton>
           <DefaultButton size="small" variant="outlined">
-            Voir
+            <FormattedMessage id="cause.see-button" />
           </DefaultButton>
         </ButtonContainer>
       </StyledContent>

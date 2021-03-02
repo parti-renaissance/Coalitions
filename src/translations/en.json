@@ -31,5 +31,11 @@
     "description": "Here is the list of the causes that you can support",
     "error": "Error fetching the causes. Retry in a few minutes",
     "no_cause": "No cause have been found"
+  },
+  "cause": {
+    "author": "By {firstName} {lastNameInitial}",
+    "supports": "{supportsNumber} supports",
+    "support-button": "Support",
+    "see-button": "See"
   }
 }

@@ -21,7 +21,9 @@ const CauseList: React.FunctionComponent = () => {
       <FormattedMessage id="cause_list.description" />
       {loading && <Loader />}
       {!loading && error !== undefined && <FormattedMessage id="cause_list.error" />}
-      {!loading && !error && causes.length === 0 && <FormattedMessage id="cause_list.no_cause" />}
+      {!loading && error === undefined && causes.length === 0 && (
+        <FormattedMessage id="cause_list.no_cause" />
+      )}
       {causes.length > 0 && (
         <CauseListContainer>
           {causes.map(cause => (

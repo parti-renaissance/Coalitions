@@ -1,4 +1,4 @@
-import { mount, ReactWrapper } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 
 import configureStore from 'redux/store';
@@ -8,8 +8,6 @@ import { CAUSES_MOCK } from 'redux/Cause/fixtures';
 import { TestProvider } from 'services/test/TestProvider';
 
 describe('<CauseList />', () => {
-  let wrapper: ReactWrapper<{}, {}>;
-
   const dispatch = jest.fn();
   const { store } = configureStore({});
   store.dispatch = dispatch;

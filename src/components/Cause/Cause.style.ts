@@ -63,7 +63,7 @@ export const StyledContent = styled(CardContent)`
 export const ButtonContainer = styled.div`
   margin-top: ${getSpacing(5)};
 
-  > button:first-child {
+  > :first-child {
     margin-right: ${getSpacing(3)};
   }
 `;

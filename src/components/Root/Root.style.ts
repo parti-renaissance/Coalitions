@@ -1,18 +1,16 @@
 import styled from 'styled-components';
-import { borderRadius, colorUsage, getSpacing } from 'stylesheet';
+import { getSpacing, fontFamily } from 'stylesheet';
 
 export const RootContainer = styled.div`
   display: flex;
+  font-family: ${fontFamily.main};
   flex-direction: column;
   height: 100%;
-  padding: 0 ${getSpacing(26)};
+  padding: 0 ${getSpacing(4)};
 `;
 RootContainer.displayName = 'RootContainer';
 
 export const PageContent = styled.main`
-  background-color: ${colorUsage.contentBackground};
-  border-radius: ${borderRadius.large};
-  padding: ${getSpacing(6)};
   flex-grow: 1;
 `;
 PageContent.displayName = 'PageContent';

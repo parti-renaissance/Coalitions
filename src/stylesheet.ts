@@ -1,3 +1,5 @@
+import { createMuiTheme } from '@material-ui/core';
+
 /**
  * App spacing measurement convention
  * Use the getSpacing function below to compute padding and margin
@@ -9,16 +11,19 @@ const MEASUREMENT_UNIT = 'px';
  * Do not use directly the colorPalette in your components
  * Create an entry in the colorUsage below instead
  */
-const colorPalette = {
-  greyLight: '#e0e0e0',
+export const colorPalette = {
+  greyLight: '#F2F2F2',
+  grey: '#979797',
+  grey2: '#BDBDBD',
   greyDark: '#222',
   amberLight: '#FFD54F',
   amber: '#FFC107',
   amberDark: '#FF8F00',
   blueLight: '#F4F9FB',
   white: '#FFFFFF',
-  red: '#FF7373',
+  red: '#EB0303',
   blackTransparent: 'rgba(0, 0, 0, 0.24)',
+  blue: '#045BFF',
 };
 
 /**
@@ -49,13 +54,15 @@ export const colorUsage = {
 };
 
 export const fontFamily = {
-  main: `'Lato', 'Helvetica', 'Arial', sans-serif`,
+  main: `'Roboto', 'Helvetica', 'Arial', sans-serif`,
+  abril: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
   code: 'Monospace',
 };
 
 export const fontSize = {
   XXLarge: '60px',
-  large: '24px',
+  large: '20px',
+  mediumLarge: '18px',
   medium: '16px',
   small: '14px',
   XSmall: '12px',
@@ -80,3 +87,14 @@ export const borderRadius = {
 
 export const getSpacing = (multiplier: number): string =>
   `${multiplier * SPACING_UNIT}${MEASUREMENT_UNIT}`;
+
+export const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: colorPalette.blue,
+    },
+    secondary: {
+      main: colorPalette.red,
+    },
+  },
+});

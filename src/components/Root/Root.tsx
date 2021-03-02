@@ -5,6 +5,7 @@ import Header from 'components/Header';
 import { flattenMessages } from 'services/i18n/intl';
 import enMessages from 'translations/en.json';
 import frMessages from 'translations/fr.json';
+import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 
 /* Language polyfills needed for IE11, Edge, Safari 12 & 13 support
 https://github.com/formatjs/react-intl/blob/master/docs/Upgrade-Guide.md#migrate-to-using-native-intl-apis
@@ -19,6 +20,7 @@ import '@formatjs/intl-relativetimeformat/dist/locale-data/fr';
 /* End of language polyfills */
 
 import { PageContent, RootContainer } from './Root.style';
+import { theme } from 'stylesheet';
 
 const locales = {
   fr: flattenMessages(frMessages),
@@ -31,10 +33,14 @@ interface Props {
 
 const Root: React.FunctionComponent<Props> = ({ children }) => (
   <IntlProvider locale="fr" messages={locales.fr}>
-    <RootContainer>
-      <Header />
-      <PageContent>{children}</PageContent>
-    </RootContainer>
+    <StylesProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <RootContainer>
+          <Header />
+          <PageContent>{children}</PageContent>
+        </RootContainer>
+      </ThemeProvider>
+    </StylesProvider>
   </IntlProvider>
 );
 

@@ -31,5 +31,11 @@
     "description": "Voici la liste des causes que vous pouvez soutenir",
     "error": "Une erreur est survenue en récupérant la liste des causes",
     "no_cause": "Aucune cause n'a été trouvée"
+  },
+  "cause": {
+    "author": "Par {firstName} {lastNameInitial}",
+    "supports": "{supportsNumber} soutiens",
+    "support-button": "Soutenir",
+    "see-button": "Voir"
   }
 }

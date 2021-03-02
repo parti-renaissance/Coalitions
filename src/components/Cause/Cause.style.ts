@@ -1,6 +1,6 @@
 import { Card, CardMedia, CardContent } from '@material-ui/core';
-import styled, { css } from 'styled-components';
-import { fontFamily, fontSize, getSpacing, colorPalette } from 'stylesheet';
+import styled from 'styled-components';
+import { fontFamily, fontSize, getSpacing, colorPalette, media } from 'stylesheet';
 
 const ICON_SIZE = '16px';
 
@@ -20,39 +20,41 @@ export const CoalitionName = styled.p`
   color: ${colorPalette.blue};
   margin-bottom: ${getSpacing(2)};
 `;
+CoalitionName.displayName = 'CoalitionName';
 export const CauseName = styled.p`
   font-family: ${fontFamily.abril};
   font-size: ${fontSize.large};
   margin-bottom: ${getSpacing(3)};
 `;
+CauseName.displayName = 'CauseName';
 
 export const Author = styled.p`
   font-size: ${fontSize.small};
   color: ${colorPalette.grey};
   margin-bottom: ${getSpacing(1)};
 `;
+Author.displayName = 'Author';
 
 export const Supports = styled.div`
   font-size: ${fontSize.small};
   display: flex;
 `;
 
-export const StyledCard = styled(Card)<{ isMobile: boolean }>`
-  max-width: ${getSpacing(70)};
+export const StyledCard = styled(Card)`
+  max-width: ${getSpacing(75)};
   margin-bottom: ${getSpacing(4)};
   box-shadow: none;
   border: 1px solid ${colorPalette.greyLight};
-  ${props =>
-    !props.isMobile &&
-    css`
-      width: ${getSpacing(80)}
-      margin-right: ${getSpacing(8)};
-    `}
+  ${media.desktop(`
+    width: ${getSpacing(75)};
+    margin-right: ${getSpacing(8)};
+  `)}
 `;
 
 export const StyledMedia = styled(CardMedia)`
   height: ${getSpacing(26)};
 `;
+StyledMedia.displayName = 'StyledMedia';
 
 export const StyledContent = styled(CardContent)`
   padding: ${getSpacing(6)} ${getSpacing(4)};
@@ -65,6 +67,7 @@ export const ButtonContainer = styled.div`
     margin-right: ${getSpacing(3)};
   }
 `;
+ButtonContainer.displayName = 'ButtonContainer';
 
 export const Icon = styled.img`
   height: ${ICON_SIZE};

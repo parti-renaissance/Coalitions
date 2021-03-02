@@ -1,47 +1,22 @@
-import styled, { css } from 'styled-components';
-import {
-  borderRadius,
-  colorUsage,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  getSpacing,
-  lineHeight,
-} from 'stylesheet';
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import { borderRadius, fontFamily, fontSize, colorPalette, getSpacing } from 'stylesheet';
 
-const Button = styled.button`
-  padding: ${getSpacing(2)} ${getSpacing(4)};
+export const StyledButton = styled(Button)`
+  padding: ${getSpacing(1)} ${getSpacing(3)};
 
-  font-weight: ${fontWeight.bold};
   font-family: ${fontFamily.main};
-  font-size: ${fontSize.medium};
-  line-height: ${lineHeight.medium};
+  font-size: ${fontSize.small};
 
-  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
-  ${props =>
-    props.disabled &&
-    css`
-      pointer-events: none;
-    `}
-
-  border: none;
   border-radius: ${borderRadius.medium};
 
   text-decoration: none;
-
-  color: ${colorUsage.primaryButtonColor};
-  background-color: ${props =>
-    props.disabled
-      ? colorUsage.primaryButtonBackgroundDisabled
-      : colorUsage.primaryButtonBackground};
-  transition: background-color 0.3s ease-in-out;
-
-  &:hover {
-    background-color: ${props =>
-      props.disabled
-        ? colorUsage.primaryButtonBackgroundDisabled
-        : colorUsage.primaryButtonBackgroundHover};
-  }
+  text-transform: none;
 `;
 
-export default Button;
+export const DefaultButton = styled(StyledButton)`
+  color: ${colorPalette.grey2};
+  border: 1px solid ${colorPalette.grey2};
+`;
+
+export default StyledButton;

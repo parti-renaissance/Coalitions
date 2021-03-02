@@ -1,21 +1,21 @@
 import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 
-import { IntlProvider } from 'react-intl';
 import frMessages from 'translations/fr.json';
 import flattenMessages from 'services/i18n/intl';
 
 import Cause from './Cause';
 import { CAUSE_MOCK } from 'redux/Cause/fixtures';
+import { TestProvider } from 'services/test/TestProvider';
 
 describe('render', () => {
   let wrapper: ReactWrapper<{}, {}>;
 
   beforeEach(() => {
     wrapper = mount(
-      <IntlProvider locale="fr" messages={flattenMessages(frMessages)}>
+      <TestProvider messages={flattenMessages(frMessages)}>
         <Cause cause={CAUSE_MOCK} />
-      </IntlProvider>,
+      </TestProvider>,
     );
   });
 

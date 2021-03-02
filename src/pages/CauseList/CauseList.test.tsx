@@ -1,16 +1,11 @@
 import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 
-import { IntlProvider } from 'react-intl';
-import frMessages from 'translations/fr.json';
-
 import configureStore from 'redux/store';
-import { Provider } from 'react-redux';
-import flattenMessages from 'services/i18n/intl';
 import * as hooks from 'redux/Cause/hooks';
-import * as selectors from 'redux/Cause/selectors';
 import CauseList from './CauseList';
 import { CAUSES_MOCK } from 'redux/Cause/fixtures';
+import { TestProvider } from 'services/test/TestProvider';
 
 describe('<CauseList />', () => {
   let wrapper: ReactWrapper<{}, {}>;
@@ -26,11 +21,9 @@ describe('<CauseList />', () => {
         .spyOn(hooks, 'useFetchCauses')
         .mockImplementation(() => [{ loading: false }, doFetchCauses]);
       mount(
-        <IntlProvider locale="fr" messages={flattenMessages(frMessages)}>
-          <Provider store={store}>
-            <CauseList />
-          </Provider>
-        </IntlProvider>,
+        <TestProvider dispatch={dispatch}>
+          <CauseList />
+        </TestProvider>,
       );
       expect(hooks.useFetchCauses).toHaveBeenCalled();
     });
@@ -40,11 +33,9 @@ describe('<CauseList />', () => {
         .spyOn(hooks, 'useFetchCauses')
         .mockImplementation(() => [{ loading: true }, doFetchCauses]);
       const wrapper = mount(
-        <IntlProvider locale="fr" messages={flattenMessages(frMessages)}>
-          <Provider store={store}>
-            <CauseList />
-          </Provider>
-        </IntlProvider>,
+        <TestProvider dispatch={dispatch}>
+          <CauseList />
+        </TestProvider>,
       );
       expect(wrapper.find('Loader')).toHaveLength(1);
     });
@@ -54,11 +45,9 @@ describe('<CauseList />', () => {
         .spyOn(hooks, 'useFetchCauses')
         .mockImplementation(() => [{ loading: false, error: new Error('error') }, doFetchCauses]);
       const wrapper = mount(
-        <IntlProvider locale="fr" messages={{}} onError={() => ''}>
-          <Provider store={store}>
-            <CauseList />
-          </Provider>
-        </IntlProvider>,
+        <TestProvider dispatch={dispatch}>
+          <CauseList />
+        </TestProvider>,
       );
       expect(wrapper.text()).toContain('cause_list.error');
     });
@@ -67,13 +56,10 @@ describe('<CauseList />', () => {
       jest
         .spyOn(hooks, 'useFetchCauses')
         .mockImplementation(() => [{ loading: false }, doFetchCauses]);
-      jest.spyOn(selectors, 'getCauses').mockReturnValue([]);
       const wrapper = mount(
-        <IntlProvider locale="fr" messages={{}} onError={() => ''}>
-          <Provider store={store}>
-            <CauseList />
-          </Provider>
-        </IntlProvider>,
+        <TestProvider dispatch={dispatch} partialState={{ cause: { causes: [] } }}>
+          <CauseList />
+        </TestProvider>,
       );
       expect(wrapper.text()).toContain('cause_list.no_cause');
     });
@@ -82,13 +68,10 @@ describe('<CauseList />', () => {
       jest
         .spyOn(hooks, 'useFetchCauses')
         .mockImplementation(() => [{ loading: false }, doFetchCauses]);
-      jest.spyOn(selectors, 'getCauses').mockReturnValue(CAUSES_MOCK);
       const wrapper = mount(
-        <IntlProvider locale="fr" messages={{}} onError={() => ''}>
-          <Provider store={store}>
-            <CauseList />
-          </Provider>
-        </IntlProvider>,
+        <TestProvider partialState={{ cause: { causes: CAUSES_MOCK } }}>
+          <CauseList />
+        </TestProvider>,
       );
       expect(wrapper.find('Cause')).toHaveLength(2);
     });

@@ -18,7 +18,12 @@ declare global {
   }
 }
 
-if (window.config && window.config.sentry && window.config.sentry.dsn) {
+if (
+  window.config.sentry.environment !== 'local' &&
+  window.config &&
+  window.config.sentry &&
+  window.config.sentry.dsn
+) {
   Sentry.init({
     dsn: window.config.sentry.dsn,
     release: window.config.sentry.release,

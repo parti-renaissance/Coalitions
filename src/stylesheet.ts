@@ -98,3 +98,11 @@ export const theme = createMuiTheme({
     },
   },
 });
+
+const PHONE_BREAK_POINT = '425px';
+const TABLET_BREAK_POINT = '768px';
+
+export const media = {
+  tablet: (styles: string) => `@media (min-width: ${PHONE_BREAK_POINT}) {${styles}}`,
+  desktop: (styles: string) => `@media (min-width: ${TABLET_BREAK_POINT}) {${styles}}`,
+};

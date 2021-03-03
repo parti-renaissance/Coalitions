@@ -14,7 +14,6 @@ import {
   StyledMedia,
   Supports,
 } from './Cause.style';
-import { isMobile } from 'services/mobile/mobile';
 import { FormattedMessage } from 'react-intl';
 
 interface CauseProps {
@@ -23,7 +22,7 @@ interface CauseProps {
 
 const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   return (
-    <StyledCard isMobile={isMobile()}>
+    <StyledCard>
       <StyledMedia image={cause.image_url} title="" />
       <StyledContent>
         <CoalitionName>{cause.coalition.name}</CoalitionName>

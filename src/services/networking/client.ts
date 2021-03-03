@@ -1,7 +1,7 @@
 import jwt_decode from 'jwt-decode';
 import request from 'superagent';
 
-const backendBaseUrl = process.env.REACT_APP_API_BASE_URL || '';
+const backendBaseUrl = process.env.REACT_APP_API_BASE_URL ?? '';
 
 interface AccessToken {
   exp: number;

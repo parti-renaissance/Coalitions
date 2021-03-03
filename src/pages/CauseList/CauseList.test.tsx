@@ -11,25 +11,31 @@ describe('<CauseList />', () => {
   const dispatch = jest.fn();
   const { store } = configureStore({});
   store.dispatch = dispatch;
-  const doFetchCauses = jest.fn();
+  const fetchFirstPage = jest.fn();
+  const fetchNextPage = jest.fn();
+  const mockUseFetchCauses = {
+    fetchFirstPage,
+    fetchNextPage,
+    hasMore: true,
+    loading: false,
+    error: undefined,
+  };
 
   describe('render', () => {
     it('should fetch cause list', () => {
-      jest
-        .spyOn(hooks, 'useFetchCauses')
-        .mockImplementation(() => [{ loading: false }, doFetchCauses]);
+      jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => mockUseFetchCauses);
       mount(
         <TestProvider dispatch={dispatch}>
           <CauseList />
         </TestProvider>,
       );
-      expect(hooks.useFetchCauses).toHaveBeenCalled();
+      expect(mockUseFetchCauses.fetchFirstPage).toHaveBeenCalled();
     });
 
     it('should display loader when loading', () => {
-      jest
-        .spyOn(hooks, 'useFetchCauses')
-        .mockImplementation(() => [{ loading: true }, doFetchCauses]);
+      jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => {
+        return { ...mockUseFetchCauses, loading: true };
+      });
       const wrapper = mount(
         <TestProvider dispatch={dispatch}>
           <CauseList />
@@ -39,9 +45,9 @@ describe('<CauseList />', () => {
     });
 
     it('should display error messages', () => {
-      jest
-        .spyOn(hooks, 'useFetchCauses')
-        .mockImplementation(() => [{ loading: false, error: new Error('error') }, doFetchCauses]);
+      jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => {
+        return { ...mockUseFetchCauses, error: new Error('error') };
+      });
       const wrapper = mount(
         <TestProvider dispatch={dispatch}>
           <CauseList />
@@ -51,9 +57,7 @@ describe('<CauseList />', () => {
     });
 
     it('should display no causes messages', () => {
-      jest
-        .spyOn(hooks, 'useFetchCauses')
-        .mockImplementation(() => [{ loading: false }, doFetchCauses]);
+      jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => mockUseFetchCauses);
       const wrapper = mount(
         <TestProvider dispatch={dispatch} partialState={{ cause: { causes: [] } }}>
           <CauseList />
@@ -63,9 +67,7 @@ describe('<CauseList />', () => {
     });
 
     it('should display causes', () => {
-      jest
-        .spyOn(hooks, 'useFetchCauses')
-        .mockImplementation(() => [{ loading: false }, doFetchCauses]);
+      jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => mockUseFetchCauses);
       const wrapper = mount(
         <TestProvider partialState={{ cause: { causes: CAUSES_MOCK } }}>
           <CauseList />
@@ -73,5 +75,20 @@ describe('<CauseList />', () => {
       );
       expect(wrapper.find('Cause')).toHaveLength(2);
     });
+
+    /* it('should load more causes when scrolling', () => {
+      jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => mockUseFetchCauses);
+      const wrapper = mount(
+        <TestProvider partialState={{ cause: { causes: CAUSES_MOCK } }}>
+          <CauseList />
+        </TestProvider>,
+      );
+      const infiniteScroll = wrapper.find('InfiniteScroll');
+      expect(infiniteScroll).toHaveLength(1);
+      infiniteScroll.simulate('scroll', {
+        target: { scrollHeight: 100, scrollTop: -800 },
+      });
+      expect(mockUseFetchCauses.fetchNextPage).toHaveBeenCalled();
+    }); */
   });
 });

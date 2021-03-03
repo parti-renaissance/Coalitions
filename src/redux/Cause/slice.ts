@@ -14,7 +14,7 @@ const causeSlice = createSlice({
   initialState,
   reducers: {
     updateCauses: (state, action: PayloadAction<Cause[]>) => {
-      state.causes = action.payload;
+      state.causes = [...state.causes, ...action.payload];
     },
   },
 });

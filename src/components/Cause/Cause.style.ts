@@ -34,6 +34,8 @@ export const CauseName = styled.p`
   font-family: ${fontFamily.abril};
   font-size: ${fontSize.large};
   overflow: hidden;
+  flex-grow: 1;
+  max-height: ${getSpacing(8)};
 `;
 CauseName.displayName = 'CauseName';
 
@@ -67,6 +69,9 @@ StyledMedia.displayName = 'StyledMedia';
 
 export const StyledContent = styled(CardContent)`
   padding: ${getSpacing(6)} ${getSpacing(4)};
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 export const ButtonContainer = styled.div`

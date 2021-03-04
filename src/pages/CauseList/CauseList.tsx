@@ -8,6 +8,7 @@ import { StyledCauseList, CauseListContainer } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
 import { getCauses } from 'redux/Cause/selectors';
+import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
 
 interface CauseListHeaderProps {
   loading: boolean;
@@ -42,18 +43,21 @@ const CauseList: React.FunctionComponent = () => {
     <StyledCauseList>
       <CauseListHeader loading={loading} error={error} causesNumber={causes.length} />
       {causes.length > 0 && (
-        <InfiniteScroll
-          dataLength={causes.length}
-          next={fetchNextPage}
-          hasMore={hasMore}
-          loader={<Loader />}
-        >
-          <CauseListContainer>
-            {causes.map(cause => (
-              <Cause key={cause.uuid} cause={cause} />
-            ))}
-          </CauseListContainer>
-        </InfiniteScroll>
+        <>
+          <CoalitionsFilter />
+          <InfiniteScroll
+            dataLength={causes.length}
+            next={fetchNextPage}
+            hasMore={hasMore}
+            loader={<Loader />}
+          >
+            <CauseListContainer>
+              {causes.map(cause => (
+                <Cause key={cause.uuid} cause={cause} />
+              ))}
+            </CauseListContainer>
+          </InfiniteScroll>
+        </>
       )}
     </StyledCauseList>
   );

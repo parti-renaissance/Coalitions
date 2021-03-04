@@ -46,7 +46,7 @@ export const StyledCard = styled(Card)`
   box-shadow: none;
   border: 1px solid ${colorPalette.greyLight};
   ${media.desktop(`
-    width: ${getSpacing(75)};
+    width: ${getSpacing(68)};
     margin-right: ${getSpacing(8)};
   `)}
 `;

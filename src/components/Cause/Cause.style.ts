@@ -21,10 +21,19 @@ export const CoalitionName = styled.p`
   margin-bottom: ${getSpacing(2)};
 `;
 CoalitionName.displayName = 'CoalitionName';
+
 export const CauseName = styled.p`
+  /*
+     OK for all browser except IE which is not maintained anymore since Nov 2020
+     cf: https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
+  */
+  display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
+  -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
+  -webkit-line-clamp: 2;
+  margin-bottom: ${getSpacing(3)};
   font-family: ${fontFamily.abril};
   font-size: ${fontSize.large};
-  margin-bottom: ${getSpacing(3)};
+  overflow: hidden;
 `;
 CauseName.displayName = 'CauseName';
 

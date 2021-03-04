@@ -3,9 +3,11 @@ import React from 'react';
 
 import configureStore from 'redux/store';
 import * as hooks from 'redux/Cause/hooks';
+import * as coalitionsHooks from 'redux/Coalition/hooks';
 import CauseList from './CauseList';
 import { CAUSES_MOCK } from 'redux/Cause/fixtures';
 import { TestProvider } from 'services/test/TestProvider';
+import { COALITIONS_STORE } from 'redux/Coalition/fixtures';
 
 describe('<CauseList />', () => {
   const dispatch = jest.fn();
@@ -19,6 +21,10 @@ describe('<CauseList />', () => {
     hasMore: true,
     loading: false,
     error: undefined,
+  };
+
+  const mockUseFetchCoalitions = {
+    fetchCoalitions: jest.fn(),
   };
 
   describe('render', () => {
@@ -68,27 +74,18 @@ describe('<CauseList />', () => {
 
     it('should display causes', () => {
       jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => mockUseFetchCauses);
+      jest
+        .spyOn(coalitionsHooks, 'useFetchCoalitions')
+        .mockImplementation(() => mockUseFetchCoalitions);
       const wrapper = mount(
-        <TestProvider partialState={{ cause: { causes: CAUSES_MOCK } }}>
+        <TestProvider
+          partialState={{ cause: { causes: CAUSES_MOCK }, coalition: COALITIONS_STORE }}
+        >
           <CauseList />
         </TestProvider>,
       );
       expect(wrapper.find('Cause')).toHaveLength(2);
+      expect(wrapper.find('StyledChip')).toHaveLength(4);
     });
-
-    /* it('should load more causes when scrolling', () => {
-      jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => mockUseFetchCauses);
-      const wrapper = mount(
-        <TestProvider partialState={{ cause: { causes: CAUSES_MOCK } }}>
-          <CauseList />
-        </TestProvider>,
-      );
-      const infiniteScroll = wrapper.find('InfiniteScroll');
-      expect(infiniteScroll).toHaveLength(1);
-      infiniteScroll.simulate('scroll', {
-        target: { scrollHeight: 100, scrollTop: -800 },
-      });
-      expect(mockUseFetchCauses.fetchNextPage).toHaveBeenCalled();
-    }); */
   });
 });

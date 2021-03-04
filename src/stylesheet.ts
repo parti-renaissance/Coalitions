@@ -15,6 +15,7 @@ export const colorPalette = {
   greyLight: '#F2F2F2',
   grey: '#979797',
   grey2: '#BDBDBD',
+  grey3: '#828282',
   greyDark: '#222',
   amberLight: '#FFD54F',
   amber: '#FFC107',

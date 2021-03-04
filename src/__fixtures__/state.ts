@@ -9,4 +9,8 @@ export const state = {
   cause: {
     causes: [],
   },
+  coalition: {
+    ids: [],
+    coalitions: {},
+  },
 };

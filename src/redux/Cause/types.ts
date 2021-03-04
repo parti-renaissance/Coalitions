@@ -7,13 +7,13 @@ export interface Cause {
   image_url: string;
 }
 
-export interface Author {
+interface Author {
   first_name: string;
   last_name_initial: string;
   uuid: string;
 }
 
-export interface Coalition {
+interface Coalition {
   name: string;
   uuid: string;
 }

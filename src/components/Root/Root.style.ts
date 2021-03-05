@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { getSpacing, fontFamily } from 'stylesheet';
+import { fontFamily } from 'stylesheet';
 
 export const RootContainer = styled.div`
   display: flex;
   font-family: ${fontFamily.main};
   flex-direction: column;
   height: 100%;
-  padding: 0 ${getSpacing(4)};
 `;
 RootContainer.displayName = 'RootContainer';
 

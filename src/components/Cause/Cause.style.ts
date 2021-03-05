@@ -9,6 +9,7 @@ export const CauseContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin: 0 ${getSpacing(3)};
   padding: ${getSpacing(4)};
   font-size: ${fontSize.large};
 `;
@@ -55,6 +56,7 @@ export const StyledCard = styled(Card)`
   max-width: ${getSpacing(75)};
   margin-bottom: ${getSpacing(4)};
   box-shadow: none;
+  flex: 1 0 auto;
   border: 1px solid ${colorPalette.greyLight};
   ${media.desktop(`
     width: ${getSpacing(68)};

@@ -8,6 +8,7 @@ export const state = {
   },
   cause: {
     causes: [],
+    numberOfCauses: null,
   },
   coalition: {
     ids: [],

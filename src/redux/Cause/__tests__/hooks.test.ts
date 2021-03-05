@@ -3,7 +3,9 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import { CAUSES_MOCK } from '../fixtures';
 import { useFetchCauses } from '../hooks';
 
-const doFetchCauses = jest.fn().mockReturnValue({ items: CAUSES_MOCK });
+const doFetchCauses = jest
+  .fn()
+  .mockReturnValue({ items: CAUSES_MOCK, metadata: { total_items: 12 } });
 jest
   .spyOn(useTypedAsyncFn, 'useTypedAsyncFn')
   .mockImplementation(() => [{ loading: false, error: undefined }, doFetchCauses]);
@@ -22,7 +24,10 @@ describe('useFetchCauses', () => {
     const { result } = renderHook(() => useFetchCauses());
     void (await act(() => result.current.fetchFirstPage()));
     expect(doFetchCauses).toHaveBeenCalledWith(1);
-    expect(mockDispatch).toHaveBeenCalledWith({ payload: CAUSES_MOCK, type: 'Cause/updateCauses' });
+    expect(mockDispatch).toHaveBeenCalledWith({
+      payload: { causes: CAUSES_MOCK, numberOfCauses: 12 },
+      type: 'Cause/updateCauses',
+    });
     expect(result.current.hasMore).toBeFalsy();
   });
 
@@ -41,9 +46,9 @@ describe('useFetchCauses', () => {
     void (await act(() => result.current.fetchNextPage()));
     expect(doFetchCauses.mock.calls).toEqual([[1], [2], [3]]);
     expect(mockDispatch.mock.calls).toEqual([
-      [{ payload: CAUSES_MOCK, type: 'Cause/updateCauses' }],
-      [{ payload: CAUSES_MOCK, type: 'Cause/updateCauses' }],
-      [{ payload: CAUSES_MOCK, type: 'Cause/updateCauses' }],
+      [{ payload: { causes: CAUSES_MOCK, numberOfCauses: 12 }, type: 'Cause/updateCauses' }],
+      [{ payload: { causes: CAUSES_MOCK, numberOfCauses: 12 }, type: 'Cause/updateCauses' }],
+      [{ payload: { causes: CAUSES_MOCK, numberOfCauses: 12 }, type: 'Cause/updateCauses' }],
     ]);
   });
 });

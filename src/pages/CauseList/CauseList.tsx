@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -9,6 +9,8 @@ import Loader from 'components/Loader';
 import Cause from 'components/Cause';
 import { getCauses } from 'redux/Cause/selectors';
 import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
+import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
+import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
 
 interface CauseListHeaderProps {
   loading: boolean;
@@ -31,6 +33,17 @@ const CauseListHeader: React.FunctionComponent<CauseListHeaderProps> = ({
   </>
 );
 
+const defineCtaPositionInList = (): number => {
+  let ctaPosition = 3;
+  if (window.innerWidth > TABLET_BREAK_POINT) {
+    ctaPosition = 6;
+  }
+  if (window.innerWidth > DESKTOP_BREAK_POINT) {
+    ctaPosition = 12;
+  }
+  return ctaPosition;
+};
+
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getCauses);
   const { hasMore, loading, error, fetchFirstPage, fetchNextPage } = useFetchCauses();
@@ -39,12 +52,27 @@ const CauseList: React.FunctionComponent = () => {
     fetchFirstPage();
   }, [fetchFirstPage]);
 
+  const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
+
+  useEffect(() => {
+    const handleResize = () => {
+      setCtaPosition(defineCtaPositionInList());
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  });
+
   return (
     <StyledCauseList>
       <CauseListHeader loading={loading} error={error} causesNumber={causes.length} />
       {causes.length > 0 && (
         <>
           <CoalitionsFilter />
+
           <InfiniteScroll
             dataLength={causes.length}
             next={fetchNextPage}
@@ -52,9 +80,13 @@ const CauseList: React.FunctionComponent = () => {
             loader={<Loader />}
           >
             <CauseListContainer>
-              {causes.map(cause => (
-                <Cause key={cause.uuid} cause={cause} />
-              ))}
+              {causes.reduce((acc: JSX.Element[], cause, index) => {
+                if (index === ctaPosition) {
+                  acc.push(<CreateCauseCTA key="cta" />);
+                }
+                acc.push(<Cause key={cause.uuid} cause={cause} />);
+                return acc;
+              }, [])}
             </CauseListContainer>
           </InfiniteScroll>
         </>

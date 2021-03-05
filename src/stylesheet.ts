@@ -62,6 +62,7 @@ export const fontFamily = {
 
 export const fontSize = {
   XXLarge: '60px',
+  xLarge: '24px',
   large: '20px',
   mediumLarge: '18px',
   medium: '16px',
@@ -100,10 +101,12 @@ export const theme = createMuiTheme({
   },
 });
 
-const PHONE_BREAK_POINT = '425px';
-const TABLET_BREAK_POINT = '768px';
+export const PHONE_BREAK_POINT = 425;
+export const TABLET_BREAK_POINT = 768;
+// Beyond this breakpoint screen are considered as large desktop
+export const DESKTOP_BREAK_POINT = 1568;
 
 export const media = {
-  tablet: (styles: string) => `@media (min-width: ${PHONE_BREAK_POINT}) {${styles}}`,
-  desktop: (styles: string) => `@media (min-width: ${TABLET_BREAK_POINT}) {${styles}}`,
+  tablet: (styles: string) => `@media (min-width: ${PHONE_BREAK_POINT}px) {${styles}}`,
+  desktop: (styles: string) => `@media (min-width: ${TABLET_BREAK_POINT}px) {${styles}}`,
 };

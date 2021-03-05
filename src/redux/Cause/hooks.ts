@@ -19,7 +19,7 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
 
   const fetchFirstPage = useCallback(async () => {
     const causes = await doFetchCauses(1);
-    dispatch(updateCauses(causes.items));
+    dispatch(updateCauses({ causes: causes.items, numberOfCauses: causes.metadata.total_items }));
     if (causes.items.length < pageSize) {
       setHasMore(false);
     }
@@ -30,7 +30,7 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
     if (!hasMore) return;
 
     const causes = await doFetchCauses(page);
-    dispatch(updateCauses(causes.items));
+    dispatch(updateCauses({ causes: causes.items, numberOfCauses: causes.metadata.total_items }));
     if (causes.items.length < pageSize) {
       setHasMore(false);
     }

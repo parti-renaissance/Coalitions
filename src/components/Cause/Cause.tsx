@@ -1,7 +1,6 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import { StyledButton, DefaultButton } from 'components/Button/Button';
-
+import LoginAndSupportModal from 'components/LoginModal';
 import { Cause as CauseType } from 'redux/Cause/types';
 import {
   Author,
@@ -21,40 +20,59 @@ interface CauseProps {
 }
 
 const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+
+  const onSupportClick = () => {
+    // TODO check if user is connected
+    setIsModalOpened(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpened(false);
+  };
+
   return (
-    <StyledCard>
-      <StyledMedia image={cause.image_url} title="" />
-      <StyledContent>
-        <CoalitionName>{cause.coalition.name}</CoalitionName>
-        <CauseName>{cause.name}</CauseName>
-        <Author>
-          <FormattedMessage
-            id="cause.author"
-            values={{
-              firstName: cause.author.first_name,
-              lastNameInitial: cause.author.last_name_initial,
-            }}
-          />
-        </Author>
-        <Supports>
-          <Icon src="/images/supports.svg"></Icon>
-          <FormattedMessage
-            id="cause.supports"
-            values={{
-              supportsNumber: 17038,
-            }}
-          />
-        </Supports>
-        <ButtonContainer>
-          <StyledButton size="small" variant="contained" color="secondary">
-            <FormattedMessage id="cause.support-button" />
-          </StyledButton>
-          <DefaultButton size="small" variant="outlined">
-            <FormattedMessage id="cause.see-button" />
-          </DefaultButton>
-        </ButtonContainer>
-      </StyledContent>
-    </StyledCard>
+    <>
+      <StyledCard>
+        <StyledMedia image={cause.image_url} title="" />
+        <StyledContent>
+          <CoalitionName>{cause.coalition.name}</CoalitionName>
+          <CauseName>{cause.name}</CauseName>
+          <Author>
+            <FormattedMessage
+              id="cause.author"
+              values={{
+                firstName: cause.author.first_name,
+                lastNameInitial: cause.author.last_name_initial,
+              }}
+            />
+          </Author>
+          <Supports>
+            <Icon src="/images/supports.svg"></Icon>
+            <FormattedMessage
+              id="cause.supports"
+              values={{
+                supportsNumber: 17038,
+              }}
+            />
+          </Supports>
+          <ButtonContainer>
+            <StyledButton
+              size="small"
+              variant="contained"
+              color="secondary"
+              onClick={onSupportClick}
+            >
+              <FormattedMessage id="cause.support-button" />
+            </StyledButton>
+            <DefaultButton size="small" variant="outlined">
+              <FormattedMessage id="cause.see-button" />
+            </DefaultButton>
+          </ButtonContainer>
+        </StyledContent>
+      </StyledCard>
+      <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} />
+    </>
   );
 };
 

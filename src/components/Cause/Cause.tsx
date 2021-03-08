@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyledButton, DefaultButton } from 'components/Button/Button';
-import LoginModal from 'components/LoginModal';
+import LoginAndSupportModal from 'components/LoginModal';
 import { Cause as CauseType } from 'redux/Cause/types';
 import {
   Author,
@@ -20,15 +20,15 @@ interface CauseProps {
 }
 
 const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
-  const [isLoginModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
   const onSupportClick = () => {
     // TODO check if user is connected
-    setIsLoginModalOpened(true);
+    setIsModalOpened(true);
   };
 
-  const closeLoginModal = () => {
-    setIsLoginModalOpened(false);
+  const closeModal = () => {
+    setIsModalOpened(false);
   };
 
   return (
@@ -71,7 +71,7 @@ const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </ButtonContainer>
         </StyledContent>
       </StyledCard>
-      <LoginModal isOpened={isLoginModalOpened} onClose={closeLoginModal} />
+      <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} />
     </>
   );
 };

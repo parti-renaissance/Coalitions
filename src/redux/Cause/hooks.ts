@@ -1,8 +1,9 @@
 import { coalitionApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
-import { updateCauses } from './slice';
+import { updateCauses, updateOneCause } from './slice';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback, useState } from 'react';
+import { Cause } from './types';
 
 const PAGE_SIZE = 12;
 
@@ -38,4 +39,20 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
   }, [hasMore, doFetchCauses, page, dispatch, pageSize]);
 
   return { hasMore, loading, error, fetchFirstPage, fetchNextPage };
+};
+
+export const useFetchOneCause = (id: string) => {
+  const dispatch = useDispatch();
+
+  const [{ loading, error }, doFetchCause] = useTypedAsyncFn(
+    async () => await coalitionApiClient.get(`causes/${id}`),
+    [],
+  );
+
+  const fetchCause = useCallback(async () => {
+    const cause: Cause = await doFetchCause();
+    dispatch(updateOneCause(cause));
+  }, [dispatch, doFetchCause]);
+
+  return { loading, error, fetchCause };
 };

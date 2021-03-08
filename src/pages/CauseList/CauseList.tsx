@@ -7,7 +7,7 @@ import { useFetchCauses } from 'redux/Cause/hooks';
 import { StyledCauseList, CauseListContainer } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
-import { getCauses } from 'redux/Cause/selectors';
+import { getAllCauses } from 'redux/Cause/selectors';
 import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
 import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
 import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
@@ -45,7 +45,7 @@ const defineCtaPositionInList = (): number => {
 };
 
 const CauseList: React.FunctionComponent = () => {
-  const causes = useSelector(getCauses);
+  const causes = useSelector(getAllCauses);
   const { hasMore, loading, error, fetchFirstPage, fetchNextPage } = useFetchCauses();
 
   useEffect(() => {

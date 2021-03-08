@@ -8,6 +8,8 @@ import {
   lineHeight,
 } from 'stylesheet';
 
+import { Link as InitialLink } from 'react-router-dom';
+
 interface ILink {
   href?: string;
   to?: string;
@@ -39,6 +41,10 @@ const Link = styled.a<ILink>`
   :hover {
     color: ${props => (props.disabled ? colorUsage.linkColorDisabled : colorUsage.linkColorHover)};
   }
+`;
+
+export const DefaultLink = styled(InitialLink)`
+  text-decoration: none;
 `;
 
 export default Link;

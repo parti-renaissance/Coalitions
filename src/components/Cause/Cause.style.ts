@@ -4,18 +4,6 @@ import { fontFamily, fontSize, getSpacing, colorPalette, media } from 'styleshee
 
 const ICON_SIZE = '16px';
 
-export const CauseContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 ${getSpacing(3)};
-  padding: ${getSpacing(4)};
-  font-size: ${fontSize.large};
-`;
-
-CauseContainer.displayName = 'CauseContainer';
-
 export const CoalitionName = styled.p`
   font-size: ${fontSize.small};
   color: ${colorPalette.blue};

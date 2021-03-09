@@ -3,7 +3,7 @@ import { colorPalette, fontFamily, fontSize, fontWeight, getSpacing, media } fro
 import Button from '@material-ui/core/Button';
 
 export const CTAContainer = styled.div`
-  margin-bottom: ${getSpacing(4)};
+  margin: 0 -${getSpacing(3)} ${getSpacing(4)} -${getSpacing(3)};
   ${media.desktop(`
     flex: 0 0 100%;
   `)};

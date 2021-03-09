@@ -82,6 +82,7 @@ export const lineHeight = {
   large: '36px',
   medium: '24px',
   small: '20px',
+  verySmall: '16px',
 };
 
 export const borderRadius = {

@@ -2,8 +2,6 @@ import { Card, CardMedia, CardContent } from '@material-ui/core';
 import styled from 'styled-components';
 import { fontFamily, fontSize, getSpacing, colorPalette, media } from 'stylesheet';
 
-const ICON_SIZE = '16px';
-
 export const CoalitionName = styled.p`
   font-size: ${fontSize.small};
   color: ${colorPalette.blue};
@@ -34,11 +32,6 @@ export const Author = styled.p`
   margin-bottom: ${getSpacing(1)};
 `;
 Author.displayName = 'Author';
-
-export const Supports = styled.div`
-  font-size: ${fontSize.small};
-  display: flex;
-`;
 
 export const StyledCard = styled(Card)`
   max-width: ${getSpacing(75)};
@@ -71,9 +64,3 @@ export const ButtonContainer = styled.div`
   }
 `;
 ButtonContainer.displayName = 'ButtonContainer';
-
-export const Icon = styled.img`
-  height: ${ICON_SIZE};
-  width: ${ICON_SIZE};
-  margin-right: ${getSpacing(2)};
-`;

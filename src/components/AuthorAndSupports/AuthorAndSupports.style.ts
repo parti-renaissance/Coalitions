@@ -8,8 +8,7 @@ export const Container = styled.div`
 
 export const AuthorContainer = styled.div`
   margin-bottom: ${getSpacing(1)};
-`;
-
-export const AuthorWrapper = styled.div`
-  margin-right: ${getSpacing(5)};
+  :first-child {
+    margin-right: ${getSpacing(3)};
+  }
 `;

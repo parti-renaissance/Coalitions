@@ -13,7 +13,7 @@ export const useLogout = () => {
 
   return useTypedAsyncFn<{}>(async () => {
     await client.logout();
-    push(PATHS.LOGIN);
+    push(PATHS.LOGIN.url());
   }, [push]);
 };
 
@@ -32,7 +32,7 @@ export const useLogin = () => {
             ...jwt_decode(token),
           });
         });
-        push(PATHS.HOME);
+        push(PATHS.HOME.url());
       } else {
         throw new Error('No token in login response body');
       }

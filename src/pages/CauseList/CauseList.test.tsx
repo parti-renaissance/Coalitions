@@ -5,9 +5,13 @@ import configureStore from 'redux/store';
 import * as hooks from 'redux/Cause/hooks';
 import * as coalitionsHooks from 'redux/Coalition/hooks';
 import CauseList from './CauseList';
-import { CAUSES_MOCK } from 'redux/Cause/fixtures';
+import { CAUSES_MOCK_STORE } from 'redux/Cause/fixtures';
 import { TestProvider } from 'services/test/TestProvider';
 import { COALITIONS_STORE } from 'redux/Coalition/fixtures';
+
+jest.mock('react-router-dom', () => ({
+  Link: 'Link',
+}));
 
 describe('<CauseList />', () => {
   const dispatch = jest.fn();
@@ -65,7 +69,7 @@ describe('<CauseList />', () => {
     it('should display no causes messages', () => {
       jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => mockUseFetchCauses);
       const wrapper = mount(
-        <TestProvider dispatch={dispatch} partialState={{ cause: { causes: [] } }}>
+        <TestProvider dispatch={dispatch} partialState={{ cause: { causes: {}, ids: [] } }}>
           <CauseList />
         </TestProvider>,
       );
@@ -78,9 +82,7 @@ describe('<CauseList />', () => {
         .spyOn(coalitionsHooks, 'useFetchCoalitions')
         .mockImplementation(() => mockUseFetchCoalitions);
       const wrapper = mount(
-        <TestProvider
-          partialState={{ cause: { causes: CAUSES_MOCK }, coalition: COALITIONS_STORE }}
-        >
+        <TestProvider partialState={{ cause: CAUSES_MOCK_STORE, coalition: COALITIONS_STORE }}>
           <CauseList />
         </TestProvider>,
       );

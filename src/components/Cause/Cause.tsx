@@ -14,6 +14,9 @@ import {
   Supports,
 } from './Cause.style';
 import { FormattedMessage } from 'react-intl';
+import { DefaultLink as Link } from 'components/Link/Link';
+
+import { PATHS } from 'routes';
 
 interface CauseProps {
   cause: CauseType;
@@ -65,9 +68,11 @@ const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
             >
               <FormattedMessage id="cause.support-button" />
             </StyledButton>
-            <DefaultButton size="small" variant="outlined">
-              <FormattedMessage id="cause.see-button" />
-            </DefaultButton>
+            <Link to={PATHS.CAUSE.url(cause.uuid)}>
+              <DefaultButton size="small" variant="outlined">
+                <FormattedMessage id="cause.see-button" />
+              </DefaultButton>
+            </Link>
           </ButtonContainer>
         </StyledContent>
       </StyledCard>

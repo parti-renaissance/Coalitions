@@ -1,12 +1,12 @@
 import { state } from '__fixtures__/state';
-import { getCauses } from '../selectors';
+import { getAllCauses } from '../selectors';
 
 const initialState = state;
 
 describe('Cause selectors', () => {
-  describe('getCauses function', () => {
+  describe('getAllCauses function', () => {
     it('Should return the value stored in store.cause.causes', () => {
-      expect(getCauses(initialState)).toStrictEqual([]);
+      expect(getAllCauses(initialState)).toStrictEqual([]);
     });
   });
 });

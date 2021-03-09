@@ -7,7 +7,8 @@ export const state = {
     token: 'someToken',
   },
   cause: {
-    causes: [],
+    ids: [],
+    causes: {},
     numberOfCauses: null,
   },
   coalition: {

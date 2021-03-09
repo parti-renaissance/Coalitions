@@ -40,7 +40,7 @@ const Avatar: React.FC = () => {
       <Content onSubmit={fetchUser}>
         <FormattedMessage id="page.back">
           {text => (
-            <HomeLink as={RouterLink} to={PATHS.HOME}>
+            <HomeLink as={RouterLink} to={PATHS.HOME.url()}>
               &lt; {text}
             </HomeLink>
           )}

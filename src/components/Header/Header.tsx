@@ -17,7 +17,7 @@ const Header: React.FC = () => {
 
   return (
     <HeaderContainer>
-      <RouterLink to={PATHS.HOME}>
+      <RouterLink to={PATHS.HOME.url()}>
         <div>En Marche</div>
       </RouterLink>
       {isUserLoggedIn && (
@@ -25,8 +25,8 @@ const Header: React.FC = () => {
           <FormattedMessage id="header.logout" />
         </Link>
       )}
-      {!isUserLoggedIn && pathname !== PATHS.LOGIN && (
-        <Link as={RouterLink} to={PATHS.LOGIN}>
+      {!isUserLoggedIn && pathname !== PATHS.LOGIN.url() && (
+        <Link as={RouterLink} to={PATHS.LOGIN.url()}>
           <FormattedMessage id="header.login" />
         </Link>
       )}

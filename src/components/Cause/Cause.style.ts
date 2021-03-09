@@ -4,7 +4,7 @@ import { boxShadow, fontFamily, fontSize, getSpacing, colorPalette, media } from
 
 export const CoalitionName = styled.p`
   font-size: ${fontSize.small};
-  color: ${colorPalette.blue};
+  color: ${colorPalette.blueCoalition};
   margin-bottom: ${getSpacing(2)};
 `;
 CoalitionName.displayName = 'CoalitionName';

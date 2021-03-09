@@ -51,12 +51,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </Author>
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
-            <SmallButton
-              size="small"
-              variant="contained"
-              color="secondary"
-              onClick={onSupportClick}
-            >
+            <SmallButton size="small" variant="contained" color="primary" onClick={onSupportClick}>
               <FormattedMessage id="cause.support-button" />
             </SmallButton>
             <Link to={PATHS.CAUSE.url(cause.uuid)}>

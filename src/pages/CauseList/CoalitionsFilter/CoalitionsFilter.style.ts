@@ -19,13 +19,13 @@ export const StyledChip = styled.p<{ isSelected?: boolean }>`
   ${({ isSelected }) =>
     isSelected === false || isSelected === undefined
       ? css`
-          color: ${colorPalette.grey3};
+          color: ${colorPalette.mintGreen2};
           background-color: ${colorPalette.white};
-          border: 1px solid ${colorPalette.grey3};
+          border: 1px solid ${colorPalette.mintGreen2};
         `
       : css`
-          color: ${colorPalette.white};
-          background-color: ${colorPalette.blue};
+          color: ${colorPalette.blueCoalition};
+          background-color: ${colorPalette.mintGreen};
           border: 1px solid ${colorPalette.white};
         `};
 `;

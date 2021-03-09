@@ -21,12 +21,17 @@ export const colorPalette = {
   amber: '#FFC107',
   amberDark: '#FF8F00',
   blueLight: '#F4F9FB',
+  blueCoalition: '#0029FF',
   white: '#FFFFFF',
   red: '#EB0303',
   blackTransparent: 'rgba(0, 0, 0, 0.24)',
+<<<<<<< HEAD
   blue: '#045BFF',
   black: '#000000',
   mintGreen: '#52DDAE',
+=======
+  mintGreen: '#B2FFE5',
+>>>>>>> 1e122f6... feat(cause): change color
   mintGreen2: '#52DDAE',
 };
 
@@ -102,7 +107,7 @@ export const getSpacing = (multiplier: number): string =>
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      main: colorPalette.blue,
+      main: colorPalette.blueCoalition,
     },
     secondary: {
       main: colorPalette.red,

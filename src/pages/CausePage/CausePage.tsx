@@ -1,5 +1,5 @@
 import Loader from 'components/Loader';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useFetchOneCause } from 'redux/Cause/hooks';
@@ -11,6 +11,7 @@ import {
   CauseImage,
   CausePageSubHeaderContainer,
 } from './CausePage.style';
+import { Tabs, Tab } from '@material-ui/core';
 
 interface CausePageNavParams {
   causeId: string;
@@ -20,10 +21,24 @@ const CausePage: React.FunctionComponent = () => {
   const { causeId } = useParams<CausePageNavParams>();
   const { loading, fetchCause } = useFetchOneCause(causeId);
   const cause = useSelector(getCause(causeId));
+  const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
 
   useEffect(() => {
     fetchCause();
   }, [fetchCause]);
+
+  const onActiveTabIndexChange = (_: ChangeEvent<{}>, value: number) => {
+    setActiveTabIndex(value);
+  };
+
+  const renderTabPanel = () => {
+    switch (activeTabIndex) {
+      case 0:
+        return <div>coucou</div>;
+      default:
+        return null;
+    }
+  };
 
   if (loading && cause === undefined) {
     return <Loader />;
@@ -34,13 +49,21 @@ const CausePage: React.FunctionComponent = () => {
   }
 
   return (
-    <CausePageHeader>
-      <CauseImage backgroundImage={cause.image_url} />
-      <CausePageSubHeaderContainer>
-        <CoalitionName>{cause.coalition.name}</CoalitionName>
-        <CauseName>{cause.name}</CauseName>
-      </CausePageSubHeaderContainer>
-    </CausePageHeader>
+    <>
+      <CausePageHeader>
+        <CauseImage backgroundImage={cause.image_url} />
+        <CausePageSubHeaderContainer>
+          <CoalitionName>{cause.coalition.name}</CoalitionName>
+          <CauseName>{cause.name}</CauseName>
+        </CausePageSubHeaderContainer>
+      </CausePageHeader>
+      <Tabs value={activeTabIndex} onChange={onActiveTabIndexChange}>
+        <Tab label="Item One" />
+        <Tab label="Item Two" />
+        <Tab label="Item Three" />
+      </Tabs>
+      {renderTabPanel()}
+    </>
   );
 };
 

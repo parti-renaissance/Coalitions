@@ -13,15 +13,23 @@ import {
   CausePageSubHeaderContainer,
   TabsWrapper,
   StyledTab,
+  AuthorAndSupportsWrapper,
 } from './CausePage.style';
 import { FormattedMessage } from 'react-intl';
 import { colorPalette } from 'stylesheet';
 import { Tabs } from '@material-ui/core';
 import AboutThisCause from './components/AboutThisCause';
+import AuthorAndSupports from 'components/AuthorAndSupports';
 
 interface CausePageNavParams {
   causeId: string;
 }
+
+const TAB_INDICATOR_PROPS = {
+  style: {
+    backgroundColor: colorPalette.mintGreen,
+  },
+};
 
 const CausePage: React.FunctionComponent = () => {
   const { causeId } = useParams<CausePageNavParams>();
@@ -61,17 +69,16 @@ const CausePage: React.FunctionComponent = () => {
         <CausePageSubHeaderContainer>
           <CoalitionName>{cause.coalition.name}</CoalitionName>
           <CauseName>{cause.name}</CauseName>
+          <AuthorAndSupportsWrapper>
+            <AuthorAndSupports cause={cause} showAuthor />
+          </AuthorAndSupportsWrapper>
         </CausePageSubHeaderContainer>
       </CausePageHeader>
       <TabsWrapper>
         <Tabs
           value={activeTabIndex}
           onChange={onActiveTabIndexChange}
-          TabIndicatorProps={{
-            style: {
-              backgroundColor: colorPalette.mintGreen,
-            },
-          }}
+          TabIndicatorProps={TAB_INDICATOR_PROPS}
         >
           <StyledTab label={<FormattedMessage id="cause.about.title" />} />
           <StyledTab label={<FormattedMessage id="cause.events.title" />} />

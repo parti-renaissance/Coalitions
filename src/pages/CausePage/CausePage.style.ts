@@ -62,3 +62,7 @@ export const StyledTab = styled(Tab)`
       font-weight: ${selected ? fontWeight.bold : fontWeight.normal};
     `};
 `;
+
+export const AuthorAndSupportsWrapper = styled.div`
+  margin-top: ${getSpacing(2)};
+`;

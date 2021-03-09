@@ -4,10 +4,20 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useFetchOneCause } from 'redux/Cause/hooks';
 import { getCause } from 'redux/Cause/selectors';
-import { CausePageHeader, CauseName, CoalitionName, CauseImage } from './CausePage.style';
+import {
+  CausePageHeader,
+  CauseName,
+  CoalitionName,
+  CauseImage,
+  CausePageSubHeaderContainer,
+} from './CausePage.style';
+
+interface CausePageNavParams {
+  causeId: string;
+}
 
 const CausePage: React.FunctionComponent = () => {
-  const { causeId } = useParams();
+  const { causeId } = useParams<CausePageNavParams>();
   const { loading, fetchCause } = useFetchOneCause(causeId);
   const cause = useSelector(getCause(causeId));
 
@@ -19,16 +29,18 @@ const CausePage: React.FunctionComponent = () => {
     return <Loader />;
   }
 
+  if (cause === undefined) {
+    return null;
+  }
+
   return (
-    <>
-      {cause !== undefined && (
-        <CausePageHeader>
-          <CauseImage backgroundImage={cause.image_url} />
-          <CoalitionName>{cause.coalition.name}</CoalitionName>
-          <CauseName>{cause.name}</CauseName>
-        </CausePageHeader>
-      )}
-    </>
+    <CausePageHeader>
+      <CauseImage backgroundImage={cause.image_url} />
+      <CausePageSubHeaderContainer>
+        <CoalitionName>{cause.coalition.name}</CoalitionName>
+        <CauseName>{cause.name}</CauseName>
+      </CausePageSubHeaderContainer>
+    </CausePageHeader>
   );
 };
 

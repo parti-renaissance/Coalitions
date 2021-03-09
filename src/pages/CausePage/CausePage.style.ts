@@ -9,7 +9,6 @@ export const CausePageHeader = styled.div`
 
 export const CauseImage = styled.div<{ backgroundImage: string }>`
   height: ${getSpacing(50)};
-  margin-bottom: ${getSpacing(5)};
   ${({ backgroundImage }) =>
     css`
       background-image: url(${backgroundImage});
@@ -31,3 +30,7 @@ export const CoalitionName = styled.p`
   margin-bottom: ${getSpacing(2)};
 `;
 CoalitionName.displayName = 'CoalitionName';
+
+export const CausePageSubHeaderContainer = styled.div`
+  padding: ${getSpacing(3)};
+`;

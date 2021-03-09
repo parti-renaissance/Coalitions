@@ -32,6 +32,10 @@ export const Author = styled.p`
   font-size: ${fontSize.small};
   color: ${colorPalette.grey};
   margin-bottom: ${getSpacing(1)};
+  max-width: min(75vw, ${getSpacing(60)});
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 Author.displayName = 'Author';
 

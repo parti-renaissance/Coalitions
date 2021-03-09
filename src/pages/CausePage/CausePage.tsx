@@ -15,6 +15,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { colorPalette } from 'stylesheet';
 import { Tabs } from '@material-ui/core';
+import AboutThisCause from './components/AboutThisCause';
 
 interface CausePageNavParams {
   causeId: string;
@@ -37,7 +38,7 @@ const CausePage: React.FunctionComponent = () => {
   const renderTabPanel = () => {
     switch (activeTabIndex) {
       case 0:
-        return <div>coucou</div>;
+        return <AboutThisCause />;
       default:
         return null;
     }
@@ -69,9 +70,9 @@ const CausePage: React.FunctionComponent = () => {
           },
         }}
       >
-        <StyledTab label={<FormattedMessage id="cause.about" />} />
-        <StyledTab label={<FormattedMessage id="cause.events" />} />
-        <StyledTab label={<FormattedMessage id="cause.discussions" />} />
+        <StyledTab label={<FormattedMessage id="cause.about.title" />} />
+        <StyledTab label={<FormattedMessage id="cause.events.title" />} />
+        <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
       </Tabs>
       {renderTabPanel()}
     </>

@@ -43,8 +43,8 @@ export const StyledTab = styled(Tab)`
   ${({ selected }) =>
     css`
       opacity: ${selected ? 1 : 0.6};
-      border-color: ${selected ? 'red' : 'blue'};
       border-bottom: 2px solid ${colorPalette.greyLight};
+      font-family: ${selected ? fontFamily.main : fontFamily.poppins};
       font-weight: ${selected ? fontWeight.bold : fontWeight.normal};
     `};
 `;

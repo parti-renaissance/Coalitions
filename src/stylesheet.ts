@@ -59,6 +59,7 @@ export const fontFamily = {
   main: `'Roboto', 'Helvetica', 'Arial', sans-serif`,
   abril: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
   code: 'Monospace',
+  poppins: `'Poppins', sans-serif`,
 };
 
 export const fontSize = {
@@ -80,7 +81,7 @@ export const fontWeight = {
 export const lineHeight = {
   large: '36px',
   medium: '24px',
-  small: '12px',
+  small: '20px',
 };
 
 export const borderRadius = {

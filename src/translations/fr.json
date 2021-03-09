@@ -37,8 +37,15 @@
     "supports": "{supportsNumber} soutiens",
     "support-button": "Soutenir",
     "see-button": "Voir",
-    "about": "À propos",
-    "events": "Événements",
-    "discussions": "Discussions"
+    "about": {
+      "title": "À propos",
+      "by": "Par"
+    },
+    "events": {
+      "title": "Événements"
+    },
+    "discussions": {
+      "title": "Discussions"
+    }
   }
 }

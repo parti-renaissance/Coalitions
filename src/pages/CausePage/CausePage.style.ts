@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-
-import { fontFamily, fontSize, getSpacing, colorPalette } from 'stylesheet';
+import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette } from 'stylesheet';
+import { Tab } from '@material-ui/core';
 
 export const CausePageHeader = styled.div`
   display: flex;
@@ -33,4 +33,18 @@ CoalitionName.displayName = 'CoalitionName';
 
 export const CausePageSubHeaderContainer = styled.div`
   padding: ${getSpacing(3)};
+`;
+
+export const StyledTab = styled(Tab)`
+  padding: ${getSpacing(2)} ${getSpacing(3)};
+  color: colorPalette.greyDark;
+  text-transform: capitalize;
+  font-size: ${fontSize.small};
+  ${({ selected }) =>
+    css`
+      opacity: ${selected ? 1 : 0.6};
+      border-color: ${selected ? 'red' : 'blue'};
+      border-bottom: 2px solid ${colorPalette.greyLight};
+      font-weight: ${selected ? fontWeight.bold : fontWeight.normal};
+    `};
 `;

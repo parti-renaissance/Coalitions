@@ -10,8 +10,11 @@ import {
   CoalitionName,
   CauseImage,
   CausePageSubHeaderContainer,
+  StyledTab,
 } from './CausePage.style';
-import { Tabs, Tab } from '@material-ui/core';
+import { FormattedMessage } from 'react-intl';
+import { colorPalette } from 'stylesheet';
+import { Tabs } from '@material-ui/core';
 
 interface CausePageNavParams {
   causeId: string;
@@ -57,10 +60,18 @@ const CausePage: React.FunctionComponent = () => {
           <CauseName>{cause.name}</CauseName>
         </CausePageSubHeaderContainer>
       </CausePageHeader>
-      <Tabs value={activeTabIndex} onChange={onActiveTabIndexChange}>
-        <Tab label="Item One" />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
+      <Tabs
+        value={activeTabIndex}
+        onChange={onActiveTabIndexChange}
+        TabIndicatorProps={{
+          style: {
+            backgroundColor: colorPalette.mintGreen,
+          },
+        }}
+      >
+        <StyledTab label={<FormattedMessage id="cause.about" />} />
+        <StyledTab label={<FormattedMessage id="cause.events" />} />
+        <StyledTab label={<FormattedMessage id="cause.discussions" />} />
       </Tabs>
       {renderTabPanel()}
     </>

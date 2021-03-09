@@ -25,6 +25,7 @@ export const colorPalette = {
   red: '#EB0303',
   blackTransparent: 'rgba(0, 0, 0, 0.24)',
   blue: '#045BFF',
+  mintGreen: '#52DDAE',
 };
 
 /**

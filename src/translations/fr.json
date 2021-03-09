@@ -36,6 +36,9 @@
     "author": "Par {firstName} {lastNameInitial}",
     "supports": "{supportsNumber} soutiens",
     "support-button": "Soutenir",
-    "see-button": "Voir"
+    "see-button": "Voir",
+    "about": "À propos",
+    "events": "Événements",
+    "discussions": "Discussions"
   }
 }

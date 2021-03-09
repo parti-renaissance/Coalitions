@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
-import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette } from 'stylesheet';
+import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette, media } from 'stylesheet';
 import { Tab } from '@material-ui/core';
+
+export const CausePageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const CausePageHeader = styled.div`
   display: flex;
@@ -33,6 +38,15 @@ CoalitionName.displayName = 'CoalitionName';
 
 export const CausePageSubHeaderContainer = styled.div`
   padding: ${getSpacing(3)};
+`;
+
+export const TabsWrapper = styled.div`
+  ${media.desktop(`
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `)}
 `;
 
 export const StyledTab = styled(Tab)`

@@ -5,11 +5,13 @@ import { useParams } from 'react-router';
 import { useFetchOneCause } from 'redux/Cause/hooks';
 import { getCause } from 'redux/Cause/selectors';
 import {
+  CausePageContainer,
   CausePageHeader,
   CauseName,
   CoalitionName,
   CauseImage,
   CausePageSubHeaderContainer,
+  TabsWrapper,
   StyledTab,
 } from './CausePage.style';
 import { FormattedMessage } from 'react-intl';
@@ -53,7 +55,7 @@ const CausePage: React.FunctionComponent = () => {
   }
 
   return (
-    <>
+    <CausePageContainer>
       <CausePageHeader>
         <CauseImage backgroundImage={cause.image_url} />
         <CausePageSubHeaderContainer>
@@ -61,21 +63,23 @@ const CausePage: React.FunctionComponent = () => {
           <CauseName>{cause.name}</CauseName>
         </CausePageSubHeaderContainer>
       </CausePageHeader>
-      <Tabs
-        value={activeTabIndex}
-        onChange={onActiveTabIndexChange}
-        TabIndicatorProps={{
-          style: {
-            backgroundColor: colorPalette.mintGreen,
-          },
-        }}
-      >
-        <StyledTab label={<FormattedMessage id="cause.about.title" />} />
-        <StyledTab label={<FormattedMessage id="cause.events.title" />} />
-        <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
-      </Tabs>
-      {renderTabPanel()}
-    </>
+      <TabsWrapper>
+        <Tabs
+          value={activeTabIndex}
+          onChange={onActiveTabIndexChange}
+          TabIndicatorProps={{
+            style: {
+              backgroundColor: colorPalette.mintGreen,
+            },
+          }}
+        >
+          <StyledTab label={<FormattedMessage id="cause.about.title" />} />
+          <StyledTab label={<FormattedMessage id="cause.events.title" />} />
+          <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
+        </Tabs>
+        {renderTabPanel()}
+      </TabsWrapper>
+    </CausePageContainer>
   );
 };
 

@@ -104,7 +104,7 @@ export const theme = createMuiTheme({
 export const PHONE_BREAK_POINT = 425;
 export const TABLET_BREAK_POINT = 768;
 // Beyond this breakpoint screen are considered as large desktop
-export const DESKTOP_BREAK_POINT = 1568;
+export const DESKTOP_BREAK_POINT = 1530;
 
 export const media = {
   tablet: (styles: string) => `@media (min-width: ${PHONE_BREAK_POINT}px) {${styles}}`,

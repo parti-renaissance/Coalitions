@@ -56,7 +56,6 @@ export const StyledCard = styled(Card)`
   max-width: ${getSpacing(75)};
   margin-bottom: ${getSpacing(4)};
   box-shadow: none;
-  flex: 1 0 auto;
   border: 1px solid ${colorPalette.greyLight};
   ${media.desktop(`
     width: ${getSpacing(68)};

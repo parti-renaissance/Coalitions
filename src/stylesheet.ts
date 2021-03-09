@@ -25,7 +25,9 @@ export const colorPalette = {
   red: '#EB0303',
   blackTransparent: 'rgba(0, 0, 0, 0.24)',
   blue: '#045BFF',
+  black: '#000000',
   mintGreen: '#52DDAE',
+  mintGreen2: '#52DDAE',
 };
 
 /**
@@ -88,6 +90,10 @@ export const lineHeight = {
 export const borderRadius = {
   medium: '4px',
   large: '10px',
+};
+
+export const boxShadow = {
+  card: `0px 4px 14px 0px ${colorPalette.black} 10%`,
 };
 
 export const getSpacing = (multiplier: number): string =>

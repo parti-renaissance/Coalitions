@@ -1,6 +1,6 @@
 import { Card, CardMedia, CardContent } from '@material-ui/core';
 import styled from 'styled-components';
-import { fontFamily, fontSize, getSpacing, colorPalette, media } from 'stylesheet';
+import { boxShadow, fontFamily, fontSize, getSpacing, colorPalette, media } from 'stylesheet';
 
 export const CoalitionName = styled.p`
   font-size: ${fontSize.small};
@@ -40,8 +40,7 @@ Author.displayName = 'Author';
 export const StyledCard = styled(Card)`
   max-width: ${getSpacing(75)};
   margin-bottom: ${getSpacing(4)};
-  box-shadow: none;
-  border: 1px solid ${colorPalette.greyLight};
+  box-shadow: ${boxShadow.card};
   ${media.desktop(`
     width: ${getSpacing(68)};
     margin-right: ${getSpacing(8)};

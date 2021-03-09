@@ -7,14 +7,13 @@ import {
   ButtonContainer,
   CauseName,
   CoalitionName,
-  Icon,
   StyledCard,
   StyledContent,
   StyledMedia,
-  Supports,
 } from './Cause.style';
 import { FormattedMessage } from 'react-intl';
 import { DefaultLink as Link } from 'components/Link/Link';
+import AuthorAndSupports from 'components/AuthorAndSupports';
 
 import { PATHS } from 'routes';
 
@@ -50,15 +49,7 @@ const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
               }}
             />
           </Author>
-          <Supports>
-            <Icon src="/images/supports.svg"></Icon>
-            <FormattedMessage
-              id="cause.supports"
-              values={{
-                supportsNumber: 17038,
-              }}
-            />
-          </Supports>
+          <AuthorAndSupports cause={cause} />
           <ButtonContainer>
             <StyledButton
               size="small"

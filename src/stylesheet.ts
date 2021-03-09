@@ -25,6 +25,7 @@ export const colorPalette = {
   red: '#EB0303',
   blackTransparent: 'rgba(0, 0, 0, 0.24)',
   blue: '#045BFF',
+  mintGreen: '#52DDAE',
 };
 
 /**
@@ -58,6 +59,7 @@ export const fontFamily = {
   main: `'Roboto', 'Helvetica', 'Arial', sans-serif`,
   abril: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
   code: 'Monospace',
+  poppins: `'Poppins', sans-serif`,
 };
 
 export const fontSize = {
@@ -79,7 +81,8 @@ export const fontWeight = {
 export const lineHeight = {
   large: '36px',
   medium: '24px',
-  small: '12px',
+  small: '20px',
+  verySmall: '16px',
 };
 
 export const borderRadius = {

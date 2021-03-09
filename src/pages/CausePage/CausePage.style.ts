@@ -51,7 +51,7 @@ export const TabsWrapper = styled.div`
 
 export const StyledTab = styled(Tab)`
   padding: ${getSpacing(2)} ${getSpacing(3)};
-  color: colorPalette.greyDark;
+  color: ${colorPalette.greyDark};
   text-transform: capitalize;
   font-size: ${fontSize.small};
   ${({ selected }) =>

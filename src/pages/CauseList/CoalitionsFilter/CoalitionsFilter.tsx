@@ -4,13 +4,18 @@ import { CoalitionFiltersContainer, StyledChip } from './CoalitionsFilter.style'
 
 import { Coalition } from 'redux/Coalition/types';
 import { getCoalitions } from 'redux/Coalition/selectors';
-import { clearFilterByCoalition, toggleFilterByCoalition } from 'redux/Coalition/slice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-export const CoalitionsFilter: React.FunctionComponent = () => {
+type Props = {
+  handleCoalitionsFilterClick: (ids: string[]) => void;
+};
+
+export const CoalitionsFilter: React.FunctionComponent<Props> = ({
+  handleCoalitionsFilterClick,
+}) => {
   const coalitions = useSelector(getCoalitions);
-  const dispatch = useDispatch();
   const [allSelected, setAllSelected] = useState(true);
+  const [selectedCoalitions, setSelectedCoalitions] = useState<string[]>([]);
   const { fetchCoalitions } = useFetchCoalitions();
 
   useEffect(() => {
@@ -20,13 +25,17 @@ export const CoalitionsFilter: React.FunctionComponent = () => {
   const handleClickOnChips = (coalition: Coalition | null) => {
     if (coalition === null) {
       setAllSelected(true);
-      dispatch(clearFilterByCoalition());
+      setSelectedCoalitions([]);
+      handleCoalitionsFilterClick([]);
     } else {
       setAllSelected(false);
-      dispatch(toggleFilterByCoalition(coalition));
+      setSelectedCoalitions([...selectedCoalitions, coalition.uuid]);
+      handleCoalitionsFilterClick([...selectedCoalitions, coalition.uuid]);
     }
   };
-
+  if (coalitions.length === 0) {
+    return null;
+  }
   return (
     <CoalitionFiltersContainer>
       <StyledChip onClick={() => handleClickOnChips(null)} isSelected={allSelected}>
@@ -36,7 +45,7 @@ export const CoalitionsFilter: React.FunctionComponent = () => {
         <StyledChip
           key={coalition.uuid}
           onClick={() => handleClickOnChips(coalition)}
-          isSelected={coalition.filtered_by}
+          isSelected={selectedCoalitions.includes(coalition.uuid)}
         >
           {coalition.name}
         </StyledChip>

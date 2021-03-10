@@ -17,6 +17,9 @@ const causeSlice = createSlice({
   name: 'Cause',
   initialState,
   reducers: {
+    resetCauses: state => {
+      state.ids = [];
+    },
     updateCauses: (state, action: PayloadAction<{ causes: Cause[]; numberOfCauses: number }>) => {
       state.causes = action.payload.causes.reduce(
         (accumulator, cause) => ({
@@ -37,5 +40,5 @@ const causeSlice = createSlice({
   },
 });
 
-export const { updateCauses, updateOneCause } = causeSlice.actions;
+export const { resetCauses, updateCauses, updateOneCause } = causeSlice.actions;
 export default causeSlice.reducer;

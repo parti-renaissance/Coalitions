@@ -16,6 +16,7 @@ export const StyledChip = styled.p<{ isSelected?: boolean }>`
   padding: ${getSpacing(2)} ${getSpacing(3)};
   margin-right: ${getSpacing(3)};
   margin-bottom: ${getSpacing(2)};
+  cursor: pointer;
   ${({ isSelected }) =>
     isSelected === false || isSelected === undefined
       ? css`

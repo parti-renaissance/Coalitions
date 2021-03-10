@@ -24,7 +24,6 @@ const CauseListHeader: React.FunctionComponent<CauseListHeaderProps> = ({
   causesNumber,
 }) => (
   <>
-    <FormattedMessage id="cause_list.description" />
     {loading && causesNumber === 0 && <Loader />}
     {!loading && error !== undefined && <FormattedMessage id="cause_list.error" />}
     {!loading && error === undefined && causesNumber === 0 && (
@@ -46,11 +45,12 @@ const defineCtaPositionInList = (): number => {
 
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
+  const [filteredByCoalitionIds, setFilteredByCoalitionIds] = useState<string[]>([]);
   const { hasMore, loading, error, fetchFirstPage, fetchNextPage } = useFetchCauses();
 
   useEffect(() => {
-    fetchFirstPage();
-  }, [fetchFirstPage]);
+    fetchFirstPage(filteredByCoalitionIds);
+  }, [fetchFirstPage, filteredByCoalitionIds]);
 
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
 
@@ -68,14 +68,14 @@ const CauseList: React.FunctionComponent = () => {
 
   return (
     <StyledCauseList>
+      <FormattedMessage id="cause_list.description" />
+      <CoalitionsFilter handleCoalitionsFilterClick={setFilteredByCoalitionIds} />
       <CauseListHeader loading={loading} error={error} causesNumber={causes.length} />
       {causes.length > 0 && (
         <>
-          <CoalitionsFilter />
-
           <InfiniteScroll
             dataLength={causes.length}
-            next={fetchNextPage}
+            next={() => fetchNextPage(filteredByCoalitionIds)}
             hasMore={hasMore}
             loader={<Loader />}
           >

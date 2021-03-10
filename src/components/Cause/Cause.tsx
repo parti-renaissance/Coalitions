@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { StyledButton, DefaultButton } from 'components/Button/Button';
-import LoginAndSupportModal from 'components/LoginModal';
+import React, { useState, FunctionComponent } from 'react';
+import { SmallButton, DefaultButton } from 'components/Button/Button';
 import { Cause as CauseType } from 'redux/Cause/types';
 import {
   Author,
@@ -11,9 +10,10 @@ import {
   StyledContent,
   StyledMedia,
 } from './Cause.style';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { DefaultLink as Link } from 'components/Link/Link';
 import AuthorAndSupports from 'components/AuthorAndSupports';
+import LoginAndSupportModal from './components/LoginAndSupportModal';
 
 import { PATHS } from 'routes';
 
@@ -21,9 +21,8 @@ interface CauseProps {
   cause: CauseType;
 }
 
-const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
+const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
-  const intl = useIntl();
 
   const onSupportClick = () => {
     // TODO check if user is connected
@@ -52,14 +51,14 @@ const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </Author>
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
-            <StyledButton
+            <SmallButton
               size="small"
               variant="contained"
               color="secondary"
               onClick={onSupportClick}
             >
               <FormattedMessage id="cause.support-button" />
-            </StyledButton>
+            </SmallButton>
             <Link to={PATHS.CAUSE.url(cause.uuid)}>
               <DefaultButton size="small" variant="outlined">
                 <FormattedMessage id="cause.see-button" />
@@ -68,11 +67,7 @@ const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </ButtonContainer>
         </StyledContent>
       </StyledCard>
-      <LoginAndSupportModal
-        isOpened={isModalOpened}
-        onClose={closeModal}
-        title={intl.formatMessage({ id: 'cause.confirm-support' })}
-      />
+      <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} cause={cause} />
     </>
   );
 };

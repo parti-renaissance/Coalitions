@@ -25,13 +25,9 @@ export const colorPalette = {
   white: '#FFFFFF',
   red: '#EB0303',
   blackTransparent: 'rgba(0, 0, 0, 0.24)',
-<<<<<<< HEAD
   blue: '#045BFF',
   black: '#000000',
-  mintGreen: '#52DDAE',
-=======
   mintGreen: '#B2FFE5',
->>>>>>> 1e122f6... feat(cause): change color
   mintGreen2: '#52DDAE',
 };
 
@@ -118,7 +114,7 @@ export const theme = createMuiTheme({
 export const PHONE_BREAK_POINT = 425;
 export const TABLET_BREAK_POINT = 768;
 // Beyond this breakpoint screen are considered as large desktop
-export const DESKTOP_BREAK_POINT = 1530;
+export const DESKTOP_BREAK_POINT = 1490;
 
 export const media = {
   tablet: (styles: string) => `@media (min-width: ${PHONE_BREAK_POINT}px) {${styles}}`,

@@ -11,7 +11,7 @@ import {
   StyledContent,
   StyledMedia,
 } from './Cause.style';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { DefaultLink as Link } from 'components/Link/Link';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 
@@ -23,6 +23,7 @@ interface CauseProps {
 
 const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const intl = useIntl();
 
   const onSupportClick = () => {
     // TODO check if user is connected
@@ -67,7 +68,11 @@ const Cause: React.FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </ButtonContainer>
         </StyledContent>
       </StyledCard>
-      <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} />
+      <LoginAndSupportModal
+        isOpened={isModalOpened}
+        onClose={closeModal}
+        title={intl.formatMessage({ id: 'cause.confirm-support' })}
+      />
     </>
   );
 };

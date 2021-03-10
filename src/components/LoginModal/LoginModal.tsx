@@ -36,6 +36,10 @@ const LoginModal: FunctionComponent<LoginModalProps> = ({
   const isMobile = getIsMobile();
   const intl = useIntl();
 
+  const onValidateClick = () => {
+    // TODO
+  };
+
   return (
     <Dialog
       fullScreen={isMobile}
@@ -60,7 +64,7 @@ const LoginModal: FunctionComponent<LoginModalProps> = ({
         <ValidateButtonContainer>
           <FixedBottomButton
             label={intl.formatMessage({ id: 'login_modal.validate' })}
-            onClick={() => {}}
+            onClick={onValidateClick}
           />
         </ValidateButtonContainer>
       </ContentContainer>

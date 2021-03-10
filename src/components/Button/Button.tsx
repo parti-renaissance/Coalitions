@@ -20,13 +20,11 @@ export const ButtonBase = styled(Button)`
   }
 `;
 
-// @ts-ignore
 export const SmallButton = styled(ButtonBase)`
   padding: ${getSpacing(1)} ${getSpacing(3)};
   font-size: ${fontSize.small};
 `;
 
-// @ts-ignore
 export const FullWidthButton = styled(ButtonBase)`
   padding: ${getSpacing(3)};
   width: 100%;
@@ -34,7 +32,6 @@ export const FullWidthButton = styled(ButtonBase)`
   font-weight: ${fontWeight.bold};
 `;
 
-// @ts-ignore
 export const DefaultButton = styled(SmallButton)`
   color: ${colorPalette.grey2};
   border: 1px solid ${colorPalette.grey2};

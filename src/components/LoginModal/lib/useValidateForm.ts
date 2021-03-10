@@ -1,16 +1,16 @@
 import { useIntl } from 'react-intl';
 
-export interface FORM_VALUES {
+export interface FormValues {
   firstName?: string;
   email?: string;
   city?: string;
 }
 
-export const useValidateForm = () => {
+export const useValidateForm = <OtherFormValues>() => {
   const intl = useIntl();
 
-  const validateForm = ({ firstName, email, city }: FORM_VALUES) => {
-    const errors: FORM_VALUES = {};
+  const validateForm = ({ firstName, email, city }: FormValues & OtherFormValues) => {
+    const errors = {} as FormValues & OtherFormValues;
     const requiredErrorMessage = intl.formatMessage({ id: 'login_modal.form_errors.required' });
 
     if (!firstName) {

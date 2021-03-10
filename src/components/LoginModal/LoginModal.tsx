@@ -1,4 +1,4 @@
-import React, { FunctionComponent, forwardRef, ForwardRefRenderFunction } from 'react';
+import React, { FunctionComponent, forwardRef, ForwardRefRenderFunction, ChangeEvent } from 'react';
 import { getIsMobile } from '../../services/mobile/mobile';
 import {
   StyledCloseButton,
@@ -14,13 +14,16 @@ import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { Formik } from 'formik';
-import { useValidateForm } from './lib/useValidateForm';
+import { useValidateForm, FormValues } from './lib/useValidateForm';
 
-interface LoginModalProps {
+interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
   onClose: () => void;
   title: string;
-  AdditionalFields: FunctionComponent<{}>;
+  AdditionalFields: FunctionComponent<{
+    onChange: (e: ChangeEvent<any>) => void;
+    values: OtherFormValues & FormValues;
+  }>;
 }
 
 const SlideUpComponent: ForwardRefRenderFunction<{}, SlideProps> = (props, ref) => (
@@ -29,15 +32,15 @@ const SlideUpComponent: ForwardRefRenderFunction<{}, SlideProps> = (props, ref) 
 
 const SlideUp = forwardRef<{}, SlideProps>(SlideUpComponent);
 
-const LoginModal: FunctionComponent<LoginModalProps> = ({
+const LoginModal = <OtherFormValues,>({
   isOpened,
   onClose,
   title,
   AdditionalFields,
-}) => {
+}: LoginModalProps<OtherFormValues>) => {
   const isMobile = getIsMobile();
   const intl = useIntl();
-  const { validateForm } = useValidateForm();
+  const { validateForm } = useValidateForm<OtherFormValues>();
 
   const onValidateClick = () => {
     // TODO
@@ -54,7 +57,11 @@ const LoginModal: FunctionComponent<LoginModalProps> = ({
           <StyledCloseIcon />
         </StyledCloseButton>
         <Title>{title}</Title>
-        <Formik initialValues={{}} validate={validateForm} onSubmit={onValidateClick}>
+        <Formik
+          initialValues={{} as FormValues & OtherFormValues}
+          validate={validateForm}
+          onSubmit={onValidateClick}
+        >
           {({ values, errors, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <InputFieldWrapper>
@@ -93,7 +100,7 @@ const LoginModal: FunctionComponent<LoginModalProps> = ({
                   helperText={errors.city}
                 />
               </InputFieldWrapper>
-              <AdditionalFields />
+              <AdditionalFields onChange={handleChange} values={values} />
               <ValidateButtonContainer>
                 <FixedBottomButton
                   disabled={isSubmitting || Object.keys(errors).length > 0}

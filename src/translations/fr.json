@@ -38,6 +38,8 @@
     "support-button": "Soutenir",
     "see-button": "Voir",
     "confirm-support": "Confirmez votre soutien",
+    "accept-evolution-email": "J’accepte d’être tenu au courant par email de l’évolution de cette cause",
+    "join-coalition": "Je rejoins la Coalition {coalitionName} et j’accepte de recevoir les actualités de la coalition",
     "about": {
       "title": "À propos",
       "by": "Par"

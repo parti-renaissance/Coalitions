@@ -16,6 +16,7 @@ interface LoginModalProps {
   isOpened: boolean;
   onClose: () => void;
   title: string;
+  AdditionalFields: FunctionComponent<{}>;
 }
 
 const SlideUpComponent: ForwardRefRenderFunction<{}, SlideProps> = (props, ref) => (
@@ -24,7 +25,12 @@ const SlideUpComponent: ForwardRefRenderFunction<{}, SlideProps> = (props, ref) 
 
 const SlideUp = forwardRef<{}, SlideProps>(SlideUpComponent);
 
-const LoginModal: FunctionComponent<LoginModalProps> = ({ isOpened, onClose, title }) => {
+const LoginModal: FunctionComponent<LoginModalProps> = ({
+  isOpened,
+  onClose,
+  title,
+  AdditionalFields,
+}) => {
   const isMobile = getIsMobile();
   const intl = useIntl();
 
@@ -48,6 +54,7 @@ const LoginModal: FunctionComponent<LoginModalProps> = ({ isOpened, onClose, tit
         <InputFieldWrapper>
           <InputField placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })} />
         </InputFieldWrapper>
+        <AdditionalFields />
       </ContentContainer>
     </Dialog>
   );

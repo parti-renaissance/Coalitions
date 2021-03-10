@@ -56,5 +56,8 @@
     "email-address": "Adresse email",
     "city-or-country": "Ville ou Pays hors France",
     "validate": "Valider"
+  },
+  "general": {
+    "see-more": "Voir plus"
   }
 }

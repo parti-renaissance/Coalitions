@@ -37,6 +37,7 @@
     "supports": "{supportsNumber} soutiens",
     "support-button": "Soutenir",
     "see-button": "Voir",
+    "confirm-support": "Confirmez votre soutien",
     "about": {
       "title": "À propos",
       "by": "Par"
@@ -47,5 +48,10 @@
     "discussions": {
       "title": "Discussions"
     }
+  },
+  "login_modal": {
+    "first-name": "Prénom",
+    "email-address": "Adresse email",
+    "city-or-country": "Ville ou Pays hors France "
   }
 }

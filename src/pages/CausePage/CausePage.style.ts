@@ -31,7 +31,7 @@ CauseName.displayName = 'CauseName';
 
 export const CoalitionName = styled.p`
   font-size: ${fontSize.small};
-  color: ${colorPalette.blue};
+  color: ${colorPalette.blueCoalition};
   margin-bottom: ${getSpacing(2)};
 `;
 CoalitionName.displayName = 'CoalitionName';

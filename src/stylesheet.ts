@@ -21,11 +21,14 @@ export const colorPalette = {
   amber: '#FFC107',
   amberDark: '#FF8F00',
   blueLight: '#F4F9FB',
+  blueCoalition: '#0029FF',
   white: '#FFFFFF',
   red: '#EB0303',
   blackTransparent: 'rgba(0, 0, 0, 0.24)',
   blue: '#045BFF',
-  mintGreen: '#52DDAE',
+  black: '#000000',
+  mintGreen: '#B2FFE5',
+  mintGreen2: '#52DDAE',
 };
 
 /**
@@ -90,13 +93,17 @@ export const borderRadius = {
   large: '10px',
 };
 
+export const boxShadow = {
+  card: `0px 4px 14px 0px ${colorPalette.black} 10%`,
+};
+
 export const getSpacing = (multiplier: number): string =>
   `${multiplier * SPACING_UNIT}${MEASUREMENT_UNIT}`;
 
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      main: colorPalette.blue,
+      main: colorPalette.blueCoalition,
     },
     secondary: {
       main: colorPalette.red,
@@ -107,7 +114,7 @@ export const theme = createMuiTheme({
 export const PHONE_BREAK_POINT = 425;
 export const TABLET_BREAK_POINT = 768;
 // Beyond this breakpoint screen are considered as large desktop
-export const DESKTOP_BREAK_POINT = 1530;
+export const DESKTOP_BREAK_POINT = 1490;
 
 export const media = {
   tablet: (styles: string) => `@media (min-width: ${PHONE_BREAK_POINT}px) {${styles}}`,

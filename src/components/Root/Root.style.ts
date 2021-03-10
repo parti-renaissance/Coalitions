@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fontFamily, DESKTOP_BREAK_POINT } from 'stylesheet';
+import { fontFamily } from 'stylesheet';
 
 export const RootContainer = styled.div`
   display: flex;
@@ -11,7 +11,5 @@ RootContainer.displayName = 'RootContainer';
 
 export const PageContent = styled.main`
   flex-grow: 1;
-  max-width: ${DESKTOP_BREAK_POINT}px;
-  align-self: center;
 `;
 PageContent.displayName = 'PageContent';

@@ -27,7 +27,7 @@ interface CausePageNavParams {
 
 const TAB_INDICATOR_PROPS = {
   style: {
-    backgroundColor: colorPalette.mintGreen,
+    backgroundColor: colorPalette.mintGreen2,
   },
 };
 

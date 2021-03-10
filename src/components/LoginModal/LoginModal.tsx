@@ -62,7 +62,7 @@ const LoginModal = <OtherFormValues,>({
           validate={validateForm}
           onSubmit={onValidateClick}
         >
-          {({ values, errors, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+          {({ values, errors, handleChange, handleBlur, handleSubmit, isSubmitting, touched }) => (
             <form onSubmit={handleSubmit}>
               <InputFieldWrapper>
                 <InputField
@@ -72,8 +72,8 @@ const LoginModal = <OtherFormValues,>({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.firstName}
-                  error={!!errors.firstName}
-                  helperText={errors.firstName}
+                  error={touched.firstName && !!errors.firstName}
+                  helperText={touched.firstName && errors.firstName}
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
@@ -84,8 +84,8 @@ const LoginModal = <OtherFormValues,>({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
-                  error={!!errors.email}
-                  helperText={errors.email}
+                  error={touched.email && !!errors.email}
+                  helperText={touched.email && errors.email}
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
@@ -96,14 +96,20 @@ const LoginModal = <OtherFormValues,>({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.city}
-                  error={!!errors.city}
-                  helperText={errors.city}
+                  error={touched.city && !!errors.city}
+                  helperText={touched.city && errors.city}
                 />
               </InputFieldWrapper>
               <AdditionalFields onChange={handleChange} values={values} />
               <ValidateButtonContainer>
                 <FixedBottomButton
-                  disabled={isSubmitting || Object.keys(errors).length > 0}
+                  disabled={
+                    isSubmitting ||
+                    Object.keys(errors).length > 0 ||
+                    !touched.firstName ||
+                    !touched.email ||
+                    !touched.city
+                  }
                   type="submit"
                 >
                   {intl.formatMessage({ id: 'login_modal.validate' })}

@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 import { FormControlLabelWrapper, Label } from './LoginAndSupportModal.style';
 import { Cause as CauseType } from 'redux/Cause/types';
+import { FormValues } from 'components/LoginModal/lib/useValidateForm';
 
 interface LoginAndSupportModalProps {
   isOpened: boolean;
@@ -25,7 +26,7 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
 
   const renderAdditionalFields: FunctionComponent<{
     onChange: (event: ChangeEvent<any>) => void;
-    values: { acceptEvolutionEmail: boolean; joinCoalition: boolean };
+    values: FormValues & LoginAndSupportOtherFormValues;
   }> = ({ onChange, values }) => (
     <>
       <FormControlLabelWrapper>

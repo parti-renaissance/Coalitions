@@ -6,11 +6,13 @@ import {
   ContentContainer,
   Title,
   InputFieldWrapper,
+  ValidateButtonContainer,
 } from './LoginModal.style';
 import { SlideProps } from '@material-ui/core/Slide';
 import { Dialog, Slide } from '@material-ui/core';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
+import FixedBottomButton from 'components/FixedBottomButton';
 
 interface LoginModalProps {
   isOpened: boolean;
@@ -55,6 +57,12 @@ const LoginModal: FunctionComponent<LoginModalProps> = ({
           <InputField placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })} />
         </InputFieldWrapper>
         <AdditionalFields />
+        <ValidateButtonContainer>
+          <FixedBottomButton
+            label={intl.formatMessage({ id: 'login_modal.validate' })}
+            onClick={() => {}}
+          />
+        </ValidateButtonContainer>
       </ContentContainer>
     </Dialog>
   );

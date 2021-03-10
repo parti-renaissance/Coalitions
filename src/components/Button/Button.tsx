@@ -1,22 +1,43 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { borderRadius, fontFamily, fontSize, colorPalette, getSpacing } from 'stylesheet';
+import {
+  borderRadius,
+  fontFamily,
+  fontSize,
+  colorPalette,
+  getSpacing,
+  fontWeight,
+} from 'stylesheet';
 
-export const StyledButton = styled(Button)`
-  padding: ${getSpacing(1)} ${getSpacing(3)};
-
+export const ButtonBase = styled(Button)`
   font-family: ${fontFamily.main};
-  font-size: ${fontSize.small};
-
   border-radius: ${borderRadius.medium};
-
   text-decoration: none;
   text-transform: none;
+  box-shadow: none;
+  :hover {
+    box-shadow: none;
+  }
 `;
 
-export const DefaultButton = styled(StyledButton)`
+// @ts-ignore
+export const SmallButton = styled(ButtonBase)`
+  padding: ${getSpacing(1)} ${getSpacing(3)};
+  font-size: ${fontSize.small};
+`;
+
+// @ts-ignore
+export const FullWidthButton = styled(ButtonBase)`
+  padding: ${getSpacing(3)};
+  width: 100%;
+  font-size: ${fontSize.mediumLarge};
+  font-weight: ${fontWeight.bold};
+`;
+
+// @ts-ignore
+export const DefaultButton = styled(ButtonBase)`
   color: ${colorPalette.grey2};
   border: 1px solid ${colorPalette.grey2};
 `;
 
-export default StyledButton;
+export default SmallButton;

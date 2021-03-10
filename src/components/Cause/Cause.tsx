@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import { StyledButton, DefaultButton } from 'components/Button/Button';
+import { SmallButton, DefaultButton } from 'components/Button/Button';
 import { Cause as CauseType } from 'redux/Cause/types';
 import {
   Author,
@@ -51,14 +51,14 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </Author>
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
-            <StyledButton
+            <SmallButton
               size="small"
               variant="contained"
               color="secondary"
               onClick={onSupportClick}
             >
               <FormattedMessage id="cause.support-button" />
-            </StyledButton>
+            </SmallButton>
             <Link to={PATHS.CAUSE.url(cause.uuid)}>
               <DefaultButton size="small" variant="outlined">
                 <FormattedMessage id="cause.see-button" />

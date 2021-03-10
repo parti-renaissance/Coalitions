@@ -1,12 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { StyledTextField } from './InputField.style';
+import { TextFieldProps } from '@material-ui/core/TextField';
 
-interface InputFieldProps {
-  placeholder: string;
-}
-
-const InputField: FunctionComponent<InputFieldProps> = ({ placeholder }) => (
-  <StyledTextField variant="outlined" placeholder={placeholder} />
+const InputField: FunctionComponent<TextFieldProps> = props => (
+  <StyledTextField {...props} variant="outlined" />
 );
 
 export default InputField;

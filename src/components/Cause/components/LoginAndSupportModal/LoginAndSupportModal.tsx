@@ -25,7 +25,7 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
   const intl = useIntl();
 
   const renderAdditionalFields: FunctionComponent<{
-    onChange: (event: ChangeEvent<any>) => void;
+    onChange: (event: ChangeEvent) => void;
     values: FormValues & LoginAndSupportOtherFormValues;
   }> = ({ onChange, values }) => (
     <>

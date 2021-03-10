@@ -21,7 +21,7 @@ interface LoginModalProps<OtherFormValues> {
   onClose: () => void;
   title: string;
   AdditionalFields: FunctionComponent<{
-    onChange: (e: ChangeEvent<any>) => void;
+    onChange: (e: ChangeEvent) => void;
     values: OtherFormValues & FormValues;
   }>;
 }

@@ -1,17 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { Container } from './FixedBottomButton.style';
 import { FullWidthButton } from 'components/Button/Button';
+import { ButtonProps } from '@material-ui/core/Button';
 
-interface FixedBottomButtonProps {
-  onClick: () => void;
-  label: string;
-}
-
-const FixedBottomButton: FunctionComponent<FixedBottomButtonProps> = ({ onClick, label }) => (
+const FixedBottomButton: FunctionComponent<ButtonProps> = props => (
   <Container>
-    <FullWidthButton size="small" variant="contained" color="primary" onClick={onClick}>
-      {label}
-    </FullWidthButton>
+    <FullWidthButton {...props} size="small" variant="contained" color="primary" />
   </Container>
 );
 

@@ -13,6 +13,8 @@ import { Dialog, Slide } from '@material-ui/core';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import FixedBottomButton from 'components/FixedBottomButton';
+import { Formik } from 'formik';
+import { useValidateForm } from './lib/useValidateForm';
 
 interface LoginModalProps {
   isOpened: boolean;
@@ -35,6 +37,7 @@ const LoginModal: FunctionComponent<LoginModalProps> = ({
 }) => {
   const isMobile = getIsMobile();
   const intl = useIntl();
+  const { validateForm } = useValidateForm();
 
   const onValidateClick = () => {
     // TODO
@@ -51,22 +54,57 @@ const LoginModal: FunctionComponent<LoginModalProps> = ({
           <StyledCloseIcon />
         </StyledCloseButton>
         <Title>{title}</Title>
-        <InputFieldWrapper>
-          <InputField placeholder={intl.formatMessage({ id: 'login_modal.first-name' })} />
-        </InputFieldWrapper>
-        <InputFieldWrapper>
-          <InputField placeholder={intl.formatMessage({ id: 'login_modal.email-address' })} />
-        </InputFieldWrapper>
-        <InputFieldWrapper>
-          <InputField placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })} />
-        </InputFieldWrapper>
-        <AdditionalFields />
-        <ValidateButtonContainer>
-          <FixedBottomButton
-            label={intl.formatMessage({ id: 'login_modal.validate' })}
-            onClick={onValidateClick}
-          />
-        </ValidateButtonContainer>
+        <Formik initialValues={{}} validate={validateForm} onSubmit={onValidateClick}>
+          {({ values, errors, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+            <form onSubmit={handleSubmit}>
+              <InputFieldWrapper>
+                <InputField
+                  placeholder={intl.formatMessage({ id: 'login_modal.first-name' })}
+                  type="text"
+                  name="firstName"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.firstName}
+                  error={!!errors.firstName}
+                  helperText={errors.firstName}
+                />
+              </InputFieldWrapper>
+              <InputFieldWrapper>
+                <InputField
+                  placeholder={intl.formatMessage({ id: 'login_modal.email-address' })}
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  error={!!errors.email}
+                  helperText={errors.email}
+                />
+              </InputFieldWrapper>
+              <InputFieldWrapper>
+                <InputField
+                  placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
+                  type="text"
+                  name="city"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.city}
+                  error={!!errors.city}
+                  helperText={errors.city}
+                />
+              </InputFieldWrapper>
+              <AdditionalFields />
+              <ValidateButtonContainer>
+                <FixedBottomButton
+                  disabled={isSubmitting || Object.keys(errors).length > 0}
+                  type="submit"
+                >
+                  {intl.formatMessage({ id: 'login_modal.validate' })}
+                </FixedBottomButton>
+              </ValidateButtonContainer>
+            </form>
+          )}
+        </Formik>
       </ContentContainer>
     </Dialog>
   );

@@ -35,7 +35,7 @@ export const FullWidthButton = styled(ButtonBase)`
 `;
 
 // @ts-ignore
-export const DefaultButton = styled(ButtonBase)`
+export const DefaultButton = styled(SmallButton)`
   color: ${colorPalette.grey2};
   border: 1px solid ${colorPalette.grey2};
 `;

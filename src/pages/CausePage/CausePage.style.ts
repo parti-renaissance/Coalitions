@@ -1,14 +1,12 @@
 import styled, { css } from 'styled-components';
 import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette, media } from 'stylesheet';
 import { Tab } from '@material-ui/core';
+import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
 export const CausePageContainer = styled.div<{ paddingBottom: number }>`
   display: flex;
   flex-direction: column;
-  ${({ paddingBottom }) =>
-    css`
-      padding-bottom: ${paddingBottom}px;
-    `};
+  padding-bottom: ${FULL_WIDTH_BUTTON_HEIGHT};
   ${media.desktop(`
     padding-bottom: 0;
   `)}

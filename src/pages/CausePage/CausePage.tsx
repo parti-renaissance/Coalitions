@@ -22,7 +22,6 @@ import { Tabs } from '@material-ui/core';
 import AboutThisCause from './components/AboutThisCause';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import FixedBottomButton from 'components/FixedBottomButton';
-import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 interface CausePageNavParams {
@@ -79,7 +78,7 @@ const CausePage: React.FunctionComponent = () => {
 
   return (
     <>
-      <CausePageContainer paddingBottom={FULL_WIDTH_BUTTON_HEIGHT + 5}>
+      <CausePageContainer>
         <CausePageHeader>
           <CauseImage backgroundImage={cause.image_url} />
           <CausePageSubHeaderContainer>

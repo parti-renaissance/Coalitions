@@ -25,10 +25,10 @@ export const SmallButton = styled(ButtonBase)`
   font-size: ${fontSize.small};
 `;
 
-export const FULL_WIDTH_BUTTON_HEIGHT = 50;
+export const FULL_WIDTH_BUTTON_HEIGHT = '50px';
 
 export const FullWidthButton = styled(ButtonBase)`
-  height: ${FULL_WIDTH_BUTTON_HEIGHT}px;
+  height: ${FULL_WIDTH_BUTTON_HEIGHT};
   width: 100%;
   font-size: ${fontSize.mediumLarge};
   font-weight: ${fontWeight.bold};

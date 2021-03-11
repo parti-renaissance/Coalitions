@@ -6,7 +6,7 @@ export const StyledTextField = styled(TextField)`
   width: 100%;
   fieldset {
     ${({ error }) =>
-      error
+      error === true
         ? css`
             border-width: 1px;
             border-color: ${colorPalette.red};

@@ -66,7 +66,8 @@ const LoginModal = <OtherFormValues,>({
           validate={validateForm}
           onSubmit={onValidateClick}
         >
-          {({
+          {// eslint-disable-next-line complexity
+          ({
             values,
             errors,
             handleChange,
@@ -86,8 +87,8 @@ const LoginModal = <OtherFormValues,>({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.firstName}
-                  error={touched.firstName && !!errors.firstName}
-                  helperText={touched.firstName && errors.firstName}
+                  error={touched.firstName === true && errors.firstName !== undefined}
+                  helperText={touched.firstName === true ? errors.firstName : undefined}
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
@@ -98,8 +99,8 @@ const LoginModal = <OtherFormValues,>({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
-                  error={touched.email && !!errors.email}
-                  helperText={touched.email && errors.email}
+                  error={touched.email === true && errors.email !== undefined}
+                  helperText={touched.email === true ? errors.email : undefined}
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
@@ -115,8 +116,8 @@ const LoginModal = <OtherFormValues,>({
                     <InputField
                       {...params}
                       placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
-                      error={touched.cityId && !!errors.cityId}
-                      helperText={touched.cityId && errors.cityId}
+                      error={touched.cityId === true && errors.cityId !== undefined}
+                      helperText={touched.cityId === true ? errors.cityId : undefined}
                     />
                   )}
                 />
@@ -127,9 +128,9 @@ const LoginModal = <OtherFormValues,>({
                   disabled={
                     isSubmitting ||
                     Object.keys(errors).length > 0 ||
-                    !touched.firstName ||
-                    !touched.email ||
-                    !touched.cityId
+                    touched.firstName !== true ||
+                    touched.email !== true ||
+                    touched.cityId !== true
                   }
                   type="submit"
                 >

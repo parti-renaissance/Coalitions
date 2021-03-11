@@ -26,7 +26,7 @@ export default function buildStore(preloadedState = {}) {
   const persistor = persistStore(store);
 
   /* istanbul ignore next */
-  if (process.env.NODE_ENV !== 'production' && module.hot) {
+  if (process.env.NODE_ENV !== 'production' && module.hot !== undefined) {
     module.hot.accept('./reducers', () => {
       import('./reducers').then(() => store.replaceReducer(persistedReducer));
     });

@@ -7,7 +7,7 @@ import { MediumLargeButton } from 'components/Button/Button';
 export const CausePageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: ${FULL_WIDTH_BUTTON_HEIGHT};
+  padding: 0 ${getSpacing(3)} ${FULL_WIDTH_BUTTON_HEIGHT};
   ${media.desktop(`
     padding-bottom: 0;
   `)}
@@ -20,6 +20,7 @@ export const CausePageHeader = styled.div`
 
 export const CauseImage = styled.div<{ backgroundImage: string }>`
   height: ${getSpacing(50)};
+  margin: 0 -${getSpacing(3)};
   ${({ backgroundImage }) =>
     css`
       background-image: url(${backgroundImage});
@@ -43,13 +44,14 @@ export const CoalitionName = styled.p`
 CoalitionName.displayName = 'CoalitionName';
 
 export const CausePageSubHeaderContainer = styled.div`
-  padding: ${getSpacing(3)};
+  padding: ${getSpacing(3)} 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
 export const TabsWrapper = styled.div`
+  margin: 0 -${getSpacing(3)};
   ${media.desktop(`
     align-self: center;
     display: flex;

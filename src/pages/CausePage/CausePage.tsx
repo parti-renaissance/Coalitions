@@ -24,6 +24,7 @@ import AboutThisCause from './components/AboutThisCause';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import FixedBottomButton from 'components/FixedBottomButton';
 import LoginAndSupportModal from 'components/LoginAndSupportModal';
+import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 
 interface CausePageNavParams {
   causeId: string;
@@ -112,6 +113,7 @@ const CausePage: React.FunctionComponent = () => {
           </Tabs>
           {renderTabPanel()}
         </TabsWrapper>
+        <CreateCauseCTA displayLinkToCauseList />
       </CausePageContainer>
       <MobileSupportButtonWrapper>
         <FixedBottomButton onClick={onSupportClick}>

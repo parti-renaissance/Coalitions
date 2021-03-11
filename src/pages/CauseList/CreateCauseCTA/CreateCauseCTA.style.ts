@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { colorPalette, fontFamily, fontSize, fontWeight, getSpacing, media } from 'stylesheet';
-import Button from '@material-ui/core/Button';
+import { colorPalette, fontSize, fontWeight, getSpacing, media } from 'stylesheet';
+import SmallButton from 'components/Button';
 
 export const CTAContainer = styled.div`
   margin: 0 -${getSpacing(3)} ${getSpacing(4)} -${getSpacing(3)};
@@ -10,7 +10,7 @@ export const CTAContainer = styled.div`
 `;
 
 export const CTABlock = styled.div`
-  background-color: ${colorPalette.greyLight};
+  background-color: ${colorPalette.mintGreen};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,14 +30,15 @@ export const HeadSentence = styled.p`
 export const DescriptionText = styled.p`
   font-size: ${fontSize.mediumLarge};
   font-weight: ${fontWeight.light};
-  margin-bottom: ${getSpacing(5)};
   text-align: center;
 `;
 
-export const CTAButton = styled(Button)`
+export const CTAButton = styled(SmallButton)`
   padding: ${getSpacing(3)} ${getSpacing(4)};
-  font-family: ${fontFamily.main};
-  font-size: ${fontSize.small};
-  text-decoration: none;
-  text-transform: none;
+  margin-top: ${getSpacing(5)};
+`;
+
+export const CauseListButton = styled(CTAButton)`
+  background-color: ${colorPalette.white};
+  color: ${colorPalette.blueCoalition};
 `;

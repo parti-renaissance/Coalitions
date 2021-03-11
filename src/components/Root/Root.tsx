@@ -3,7 +3,6 @@ import { IntlProvider } from 'react-intl';
 
 import Header from 'components/Header';
 import { flattenMessages } from 'services/i18n/intl';
-import enMessages from 'translations/en.json';
 import frMessages from 'translations/fr.json';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 
@@ -24,7 +23,6 @@ import { theme } from 'stylesheet';
 
 const locales = {
   fr: flattenMessages(frMessages),
-  en: flattenMessages(enMessages),
 };
 
 interface Props {

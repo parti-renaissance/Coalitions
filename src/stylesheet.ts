@@ -106,7 +106,7 @@ export const theme = createMuiTheme({
       main: colorPalette.blueCoalition,
     },
     secondary: {
-      main: colorPalette.red,
+      main: colorPalette.mintGreen,
     },
   },
 });

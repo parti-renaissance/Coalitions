@@ -7,14 +7,17 @@ import {
   Title,
   InputFieldWrapper,
   ValidateButtonContainer,
+  StyledAutocomplete,
 } from './LoginModal.style';
 import { SlideProps } from '@material-ui/core/Slide';
 import { Dialog, Slide } from '@material-ui/core';
+import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { Formik } from 'formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
+import { useCityAutoComplete, City } from './lib/useCityAutoComplete';
 
 interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
@@ -41,6 +44,7 @@ const LoginModal = <OtherFormValues,>({
   const isMobile = getIsMobile();
   const intl = useIntl();
   const { validateForm } = useValidateForm<OtherFormValues>();
+  const { cities } = useCityAutoComplete();
 
   const onValidateClick = () => {
     // TODO
@@ -62,7 +66,17 @@ const LoginModal = <OtherFormValues,>({
           validate={validateForm}
           onSubmit={onValidateClick}
         >
-          {({ values, errors, handleChange, handleBlur, handleSubmit, isSubmitting, touched }) => (
+          {({
+            values,
+            errors,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            touched,
+            setFieldValue,
+            setFieldTouched,
+          }) => (
             <form onSubmit={handleSubmit}>
               <InputFieldWrapper>
                 <InputField
@@ -89,15 +103,22 @@ const LoginModal = <OtherFormValues,>({
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
-                <InputField
-                  placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
-                  type="text"
-                  name="city"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.city}
-                  error={touched.city && !!errors.city}
-                  helperText={touched.city && errors.city}
+                <StyledAutocomplete
+                  freeSolo
+                  options={cities}
+                  getOptionLabel={city => (city as City).name}
+                  onBlur={() => setFieldTouched('cityId', true)}
+                  onChange={(e, value) => {
+                    setFieldValue('cityId', (value as City)?.id || '');
+                  }}
+                  renderInput={(params: TextFieldProps) => (
+                    <InputField
+                      {...params}
+                      placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
+                      error={touched.cityId && !!errors.cityId}
+                      helperText={touched.cityId && errors.cityId}
+                    />
+                  )}
                 />
               </InputFieldWrapper>
               <AdditionalFields onChange={handleChange} values={values} />
@@ -108,7 +129,7 @@ const LoginModal = <OtherFormValues,>({
                     Object.keys(errors).length > 0 ||
                     !touched.firstName ||
                     !touched.email ||
-                    !touched.city
+                    !touched.cityId
                   }
                   type="submit"
                 >

@@ -3,13 +3,13 @@ import { useIntl } from 'react-intl';
 export interface FormValues {
   firstName?: string;
   email?: string;
-  city?: string;
+  cityId?: string;
 }
 
 export const useValidateForm = <OtherFormValues>() => {
   const intl = useIntl();
 
-  const validateForm = ({ firstName, email, city }: FormValues & OtherFormValues) => {
+  const validateForm = ({ firstName, email, cityId }: FormValues & OtherFormValues) => {
     const errors = {} as FormValues & OtherFormValues;
     const requiredErrorMessage = intl.formatMessage({ id: 'login_modal.form_errors.required' });
 
@@ -23,8 +23,8 @@ export const useValidateForm = <OtherFormValues>() => {
       errors.email = intl.formatMessage({ id: 'login_modal.form_errors.invalid-email' });
     }
 
-    if (!city) {
-      errors.city = requiredErrorMessage;
+    if (!cityId) {
+      errors.cityId = requiredErrorMessage;
     }
 
     return errors;

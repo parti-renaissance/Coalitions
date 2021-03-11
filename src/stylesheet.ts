@@ -29,6 +29,11 @@ export const colorPalette = {
   black: '#000000',
   mintGreen: '#B2FFE5',
   mintGreen2: '#52DDAE',
+  veryLightRed: '#FFD5C3',
+  lightRed: '#E84D2B',
+  veryLightYellow: '#FFE9C3',
+  lightYellow: '#E89F2B',
+  veryLightGreen: '#DAFFC3',
 };
 
 /**

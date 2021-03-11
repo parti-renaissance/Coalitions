@@ -19,10 +19,15 @@ export const useSnackbar = () => {
     dispatch(updateSnackbar({ message, severity: Severity.error }));
   };
 
+  const showWarningSnackbar = (message: string) => {
+    dispatch(updateSnackbar({ message, severity: Severity.warning }));
+  };
+
   return {
     snackbarConfig,
     hideSnackbar,
     showSuccessSnackbar,
     showErrorSnackbar,
+    showWarningSnackbar,
   };
 };

@@ -1,9 +1,7 @@
 import React, { FunctionComponent, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router';
 import Loader from './components/Loader/Loader';
-import { Snackbar } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-import { useSnackbar } from 'redux/Snackbar/hooks';
+import Snackbar from 'components/Snackbar';
 
 const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Login'));
@@ -24,26 +22,17 @@ export const PATHS = {
   },
 };
 
-const routes: FunctionComponent<{}> = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { snackbarConfig, hideSnackbar } = useSnackbar();
-
-  return (
-    <>
-      <Suspense fallback={<Loader />}>
-        <Switch>
-          <Route exact path={PATHS.HOME.route} component={Home} />
-          <Route path={PATHS.LOGIN.route} component={Login} />
-          <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
-        </Switch>
-      </Suspense>
-      {snackbarConfig !== undefined ? (
-        <Snackbar open autoHideDuration={6000} onClose={hideSnackbar}>
-          <Alert severity={snackbarConfig.severity}>{snackbarConfig.message}</Alert>
-        </Snackbar>
-      ) : null}
-    </>
-  );
-};
+const routes: FunctionComponent<{}> = () => (
+  <>
+    <Suspense fallback={<Loader />}>
+      <Switch>
+        <Route exact path={PATHS.HOME.route} component={Home} />
+        <Route path={PATHS.LOGIN.route} component={Login} />
+        <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
+      </Switch>
+    </Suspense>
+    <Snackbar />
+  </>
+);
 
 export default routes;

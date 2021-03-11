@@ -2,7 +2,6 @@ import { IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import styled from 'styled-components';
 import { fontSize, colorPalette, media, getSpacing, fontWeight, fontFamily } from 'stylesheet';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 
 export const ContentContainer = styled.div`
   display: flex;
@@ -41,13 +40,4 @@ export const ValidateButtonContainer = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(10)};
   `)}
-`;
-
-export const StyledAutocomplete = styled(Autocomplete)`
-  .MuiAutocomplete-inputRoot {
-    padding: 0 !important;
-  }
-  .MuiAutocomplete-input {
-    padding: 18.5px 14px !important;
-  }
 `;

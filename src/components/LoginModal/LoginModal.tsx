@@ -7,7 +7,6 @@ import {
   Title,
   InputFieldWrapper,
   ValidateButtonContainer,
-  StyledAutocomplete,
 } from './LoginModal.style';
 import { SlideProps } from '@material-ui/core/Slide';
 import { Dialog, Slide } from '@material-ui/core';
@@ -18,6 +17,7 @@ import FixedBottomButton from 'components/FixedBottomButton';
 import { Formik } from 'formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
 import { useCityAutoComplete, City } from './lib/useCityAutoComplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
@@ -104,7 +104,7 @@ const LoginModal = <OtherFormValues,>({
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
-                <StyledAutocomplete
+                <Autocomplete
                   freeSolo
                   options={cities}
                   getOptionLabel={city => (city as City).name}

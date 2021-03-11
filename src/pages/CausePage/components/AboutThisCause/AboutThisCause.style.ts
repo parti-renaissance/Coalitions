@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { getSpacing, fontFamily, colorPalette, lineHeight, fontSize, media } from 'stylesheet';
 
 export const Container = styled.div`
-  padding: ${getSpacing(6)} ${getSpacing(3)};
+  padding: ${getSpacing(6)} 0;
   ${media.desktop(`
     max-width: ${getSpacing(140)};
   `)}

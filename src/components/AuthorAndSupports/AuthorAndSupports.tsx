@@ -11,7 +11,7 @@ interface AuthorAndSupportsProps {
 
 const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, showAuthor }) => (
   <Container>
-    {showAuthor && (
+    {showAuthor === true ? (
       <AuthorContainer>
         <IconAndLabel
           iconSrc="/images/user.svg"
@@ -26,7 +26,7 @@ const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, s
           )}
         />
       </AuthorContainer>
-    )}
+    ) : null}
     <AuthorContainer>
       <IconAndLabel
         iconSrc="/images/supports.svg"

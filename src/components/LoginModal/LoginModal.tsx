@@ -1,5 +1,5 @@
 import React, { FunctionComponent, forwardRef, ForwardRefRenderFunction, ChangeEvent } from 'react';
-import { getIsMobile } from '../../services/mobile/mobile';
+import { getIsMobile } from 'services/mobile/mobile';
 import {
   StyledCloseButton,
   StyledCloseIcon,
@@ -10,11 +10,14 @@ import {
 } from './LoginModal.style';
 import { SlideProps } from '@material-ui/core/Slide';
 import { Dialog, Slide } from '@material-ui/core';
+import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { Formik } from 'formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
+import { useCityAutoComplete, City } from './lib/useCityAutoComplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
@@ -41,6 +44,7 @@ const LoginModal = <OtherFormValues,>({
   const isMobile = getIsMobile();
   const intl = useIntl();
   const { validateForm } = useValidateForm<OtherFormValues>();
+  const { cities } = useCityAutoComplete();
 
   const onValidateClick = () => {
     // TODO
@@ -62,7 +66,18 @@ const LoginModal = <OtherFormValues,>({
           validate={validateForm}
           onSubmit={onValidateClick}
         >
-          {({ values, errors, handleChange, handleBlur, handleSubmit, isSubmitting, touched }) => (
+          {// eslint-disable-next-line complexity
+          ({
+            values,
+            errors,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            touched,
+            setFieldValue,
+            setFieldTouched,
+          }) => (
             <form onSubmit={handleSubmit}>
               <InputFieldWrapper>
                 <InputField
@@ -72,8 +87,8 @@ const LoginModal = <OtherFormValues,>({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.firstName}
-                  error={touched.firstName && !!errors.firstName}
-                  helperText={touched.firstName && errors.firstName}
+                  error={touched.firstName === true && errors.firstName !== undefined}
+                  helperText={touched.firstName === true ? errors.firstName : undefined}
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
@@ -84,20 +99,29 @@ const LoginModal = <OtherFormValues,>({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
-                  error={touched.email && !!errors.email}
-                  helperText={touched.email && errors.email}
+                  error={touched.email === true && errors.email !== undefined}
+                  helperText={touched.email === true ? errors.email : undefined}
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
-                <InputField
-                  placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
-                  type="text"
-                  name="city"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.city}
-                  error={touched.city && !!errors.city}
-                  helperText={touched.city && errors.city}
+                <Autocomplete
+                  freeSolo
+                  options={cities}
+                  getOptionLabel={city => (city as City).name}
+                  onBlur={() => setFieldTouched('cityId', true)}
+                  onChange={(e, value) => {
+                    setFieldValue('cityId', (value as City)?.id || '');
+                  }}
+                  renderInput={(params: TextFieldProps) => (
+                    <InputField
+                      {...params}
+                      placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
+                      error={touched.cityId === true && errors.cityId !== undefined}
+                      helperText={touched.cityId === true ? errors.cityId : undefined}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  )}
                 />
               </InputFieldWrapper>
               <AdditionalFields onChange={handleChange} values={values} />
@@ -106,9 +130,9 @@ const LoginModal = <OtherFormValues,>({
                   disabled={
                     isSubmitting ||
                     Object.keys(errors).length > 0 ||
-                    !touched.firstName ||
-                    !touched.email ||
-                    !touched.city
+                    touched.firstName !== true ||
+                    touched.email !== true ||
+                    touched.cityId !== true
                   }
                   type="submit"
                 >

@@ -1,10 +1,15 @@
 import styled, { css } from 'styled-components';
 import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette, media } from 'stylesheet';
 import { Tab } from '@material-ui/core';
+import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
 export const CausePageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: ${FULL_WIDTH_BUTTON_HEIGHT};
+  ${media.desktop(`
+    padding-bottom: 0;
+  `)}
 `;
 
 export const CausePageHeader = styled.div`
@@ -65,4 +70,10 @@ export const StyledTab = styled(Tab)`
 
 export const AuthorAndSupportsWrapper = styled.div`
   margin-top: ${getSpacing(2)};
+`;
+
+export const MobileFixedBottomButtonWrapper = styled.div`
+  ${media.desktop(`
+    display: none;
+  `)}
 `;

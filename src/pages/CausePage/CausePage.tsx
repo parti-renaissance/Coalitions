@@ -14,12 +14,15 @@ import {
   TabsWrapper,
   StyledTab,
   AuthorAndSupportsWrapper,
+  MobileFixedBottomButtonWrapper,
 } from './CausePage.style';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
 import { Tabs } from '@material-ui/core';
 import AboutThisCause from './components/AboutThisCause';
 import AuthorAndSupports from 'components/AuthorAndSupports';
+import FixedBottomButton from 'components/FixedBottomButton';
+import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 interface CausePageNavParams {
   causeId: string;
@@ -36,6 +39,8 @@ const CausePage: React.FunctionComponent = () => {
   const { loading, fetchCause } = useFetchOneCause(causeId);
   const cause = useSelector(getCause(causeId));
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+  const intl = useIntl();
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
   useEffect(() => {
     fetchCause();
@@ -43,6 +48,15 @@ const CausePage: React.FunctionComponent = () => {
 
   const onActiveTabIndexChange = (_: ChangeEvent<{}>, value: number) => {
     setActiveTabIndex(value);
+  };
+
+  const onSupportClick = () => {
+    // TODO check if user is connected
+    setIsModalOpened(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpened(false);
   };
 
   const renderTabPanel = () => {
@@ -63,30 +77,38 @@ const CausePage: React.FunctionComponent = () => {
   }
 
   return (
-    <CausePageContainer>
-      <CausePageHeader>
-        <CauseImage backgroundImage={cause.image_url} />
-        <CausePageSubHeaderContainer>
-          <CoalitionName>{cause.coalition.name}</CoalitionName>
-          <CauseName>{cause.name}</CauseName>
-          <AuthorAndSupportsWrapper>
-            <AuthorAndSupports cause={cause} showAuthor />
-          </AuthorAndSupportsWrapper>
-        </CausePageSubHeaderContainer>
-      </CausePageHeader>
-      <TabsWrapper>
-        <Tabs
-          value={activeTabIndex}
-          onChange={onActiveTabIndexChange}
-          TabIndicatorProps={TAB_INDICATOR_PROPS}
-        >
-          <StyledTab label={<FormattedMessage id="cause.about.title" />} />
-          <StyledTab label={<FormattedMessage id="cause.events.title" />} />
-          <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
-        </Tabs>
-        {renderTabPanel()}
-      </TabsWrapper>
-    </CausePageContainer>
+    <>
+      <CausePageContainer>
+        <CausePageHeader>
+          <CauseImage backgroundImage={cause.image_url} />
+          <CausePageSubHeaderContainer>
+            <CoalitionName>{cause.coalition.name}</CoalitionName>
+            <CauseName>{cause.name}</CauseName>
+            <AuthorAndSupportsWrapper>
+              <AuthorAndSupports cause={cause} showAuthor />
+            </AuthorAndSupportsWrapper>
+          </CausePageSubHeaderContainer>
+        </CausePageHeader>
+        <TabsWrapper>
+          <Tabs
+            value={activeTabIndex}
+            onChange={onActiveTabIndexChange}
+            TabIndicatorProps={TAB_INDICATOR_PROPS}
+          >
+            <StyledTab label={<FormattedMessage id="cause.about.title" />} />
+            <StyledTab label={<FormattedMessage id="cause.events.title" />} />
+            <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
+          </Tabs>
+          {renderTabPanel()}
+        </TabsWrapper>
+      </CausePageContainer>
+      <MobileFixedBottomButtonWrapper>
+        <FixedBottomButton onClick={onSupportClick}>
+          {intl.formatMessage({ id: 'cause.support-button' })}
+        </FixedBottomButton>
+      </MobileFixedBottomButtonWrapper>
+      <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} cause={cause} />
+    </>
   );
 };
 

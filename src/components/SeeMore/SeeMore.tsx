@@ -7,7 +7,7 @@ export const SeeMore: FunctionComponent<{ text: string }> = ({ text }) => {
   const [displayAll, setDisplayAll] = useState(false);
   const maxChar = getIsMobile() ? 400 : 1200;
   if (displayAll || text.length < maxChar) {
-    return <span>{text}</span>;
+    return <p>{text}</p>;
   }
   return (
     <p>

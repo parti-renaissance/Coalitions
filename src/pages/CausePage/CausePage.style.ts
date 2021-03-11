@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette, media } from 'stylesheet';
 import { Tab } from '@material-ui/core';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
+import { MediumLargeButton } from 'components/Button/Button';
 
 export const CausePageContainer = styled.div`
   display: flex;
@@ -43,6 +44,9 @@ CoalitionName.displayName = 'CoalitionName';
 
 export const CausePageSubHeaderContainer = styled.div`
   padding: ${getSpacing(3)};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const TabsWrapper = styled.div`
@@ -72,8 +76,15 @@ export const AuthorAndSupportsWrapper = styled.div`
   margin-top: ${getSpacing(2)};
 `;
 
-export const MobileFixedBottomButtonWrapper = styled.div`
+export const MobileSupportButtonWrapper = styled.div`
   ${media.desktop(`
     display: none;
+  `)}
+`;
+
+export const DesktopSupportButton = styled(MediumLargeButton)`
+  display: none;
+  ${media.desktop(`
+    display: block;
   `)}
 `;

@@ -14,7 +14,8 @@ import {
   TabsWrapper,
   StyledTab,
   AuthorAndSupportsWrapper,
-  MobileFixedBottomButtonWrapper,
+  MobileSupportButtonWrapper,
+  DesktopSupportButton,
 } from './CausePage.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -82,11 +83,21 @@ const CausePage: React.FunctionComponent = () => {
         <CausePageHeader>
           <CauseImage backgroundImage={cause.image_url} />
           <CausePageSubHeaderContainer>
-            <CoalitionName>{cause.coalition.name}</CoalitionName>
-            <CauseName>{cause.name}</CauseName>
-            <AuthorAndSupportsWrapper>
-              <AuthorAndSupports cause={cause} showAuthor />
-            </AuthorAndSupportsWrapper>
+            <div>
+              <CoalitionName>{cause.coalition.name}</CoalitionName>
+              <CauseName>{cause.name}</CauseName>
+              <AuthorAndSupportsWrapper>
+                <AuthorAndSupports cause={cause} showAuthor />
+              </AuthorAndSupportsWrapper>
+            </div>
+            <DesktopSupportButton
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={onSupportClick}
+            >
+              {intl.formatMessage({ id: 'cause.support-button' })}
+            </DesktopSupportButton>
           </CausePageSubHeaderContainer>
         </CausePageHeader>
         <TabsWrapper>
@@ -102,11 +113,11 @@ const CausePage: React.FunctionComponent = () => {
           {renderTabPanel()}
         </TabsWrapper>
       </CausePageContainer>
-      <MobileFixedBottomButtonWrapper>
+      <MobileSupportButtonWrapper>
         <FixedBottomButton onClick={onSupportClick}>
           {intl.formatMessage({ id: 'cause.support-button' })}
         </FixedBottomButton>
-      </MobileFixedBottomButtonWrapper>
+      </MobileSupportButtonWrapper>
       <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} cause={cause} />
     </>
   );

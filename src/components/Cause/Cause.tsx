@@ -13,7 +13,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { DefaultLink as Link } from 'components/Link/Link';
 import AuthorAndSupports from 'components/AuthorAndSupports';
-import LoginAndSupportModal from './components/LoginAndSupportModal';
+import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 import { PATHS } from 'routes';
 

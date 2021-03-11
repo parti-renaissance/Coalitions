@@ -1,5 +1,5 @@
 import React, { FunctionComponent, forwardRef, ForwardRefRenderFunction, ChangeEvent } from 'react';
-import { getIsMobile } from '../../services/mobile/mobile';
+import { getIsMobile } from 'services/mobile/mobile';
 import {
   StyledCloseButton,
   StyledCloseIcon,

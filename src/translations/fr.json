@@ -63,5 +63,11 @@
   },
   "general": {
     "see-more": "Voir plus"
+  },
+  "cause-cta": {
+    "title": "Vous aussi, agissez",
+    "description": "Rejoignez les {numberOfCauses} causes déjà créées.",
+    "cause-creation": "Je crée ma cause",
+    "go-to-cause-list": "Je soutiens l'une des {numberOfCauses} existantes"
   }
 }

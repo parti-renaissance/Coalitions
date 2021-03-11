@@ -94,7 +94,7 @@ export const borderRadius = {
 };
 
 export const boxShadow = {
-  card: `0px 4px 14px 0px ${colorPalette.black} 10%`,
+  card: `0px 4px 14px 0px rgba(0,0,0,0.1)`,
 };
 
 export const getSpacing = (multiplier: number): string =>

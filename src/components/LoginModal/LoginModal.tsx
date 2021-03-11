@@ -118,6 +118,8 @@ const LoginModal = <OtherFormValues,>({
                       placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
                       error={touched.cityId === true && errors.cityId !== undefined}
                       helperText={touched.cityId === true ? errors.cityId : undefined}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   )}
                 />

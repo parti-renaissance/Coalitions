@@ -55,6 +55,7 @@
     "first-name": "Prénom",
     "email-address": "Adresse email",
     "city-or-country": "Ville ou Pays hors France",
+    "validate": "Valider",
     "form_errors": {
       "required": "Champ requis",
       "invalid-email": "Email invalide"

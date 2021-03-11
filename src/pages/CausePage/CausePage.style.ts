@@ -3,7 +3,7 @@ import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette, media } fro
 import { Tab } from '@material-ui/core';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
-export const CausePageContainer = styled.div<{ paddingBottom: number }>`
+export const CausePageContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: ${FULL_WIDTH_BUTTON_HEIGHT};

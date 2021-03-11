@@ -14,6 +14,7 @@ import {
   TabsWrapper,
   StyledTab,
   AuthorAndSupportsWrapper,
+  MobileFixedBottomButtonWrapper,
 } from './CausePage.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -21,7 +22,7 @@ import { Tabs } from '@material-ui/core';
 import AboutThisCause from './components/AboutThisCause';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import FixedBottomButton from 'components/FixedBottomButton';
-import { getIsMobile } from 'services/mobile/mobile';
+import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 interface CausePageNavParams {
@@ -78,7 +79,7 @@ const CausePage: React.FunctionComponent = () => {
 
   return (
     <>
-      <CausePageContainer>
+      <CausePageContainer paddingBottom={FULL_WIDTH_BUTTON_HEIGHT + 5}>
         <CausePageHeader>
           <CauseImage backgroundImage={cause.image_url} />
           <CausePageSubHeaderContainer>
@@ -102,11 +103,11 @@ const CausePage: React.FunctionComponent = () => {
           {renderTabPanel()}
         </TabsWrapper>
       </CausePageContainer>
-      {getIsMobile() ? (
+      <MobileFixedBottomButtonWrapper>
         <FixedBottomButton onClick={onSupportClick}>
           {intl.formatMessage({ id: 'cause.support-button' })}
         </FixedBottomButton>
-      ) : null}
+      </MobileFixedBottomButtonWrapper>
       <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} cause={cause} />
     </>
   );

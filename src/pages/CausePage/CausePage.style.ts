@@ -2,9 +2,16 @@ import styled, { css } from 'styled-components';
 import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette, media } from 'stylesheet';
 import { Tab } from '@material-ui/core';
 
-export const CausePageContainer = styled.div`
+export const CausePageContainer = styled.div<{ paddingBottom: number }>`
   display: flex;
   flex-direction: column;
+  ${({ paddingBottom }) =>
+    css`
+      padding-bottom: ${paddingBottom}px;
+    `};
+  ${media.desktop(`
+    padding-bottom: 0;
+  `)}
 `;
 
 export const CausePageHeader = styled.div`
@@ -65,4 +72,10 @@ export const StyledTab = styled(Tab)`
 
 export const AuthorAndSupportsWrapper = styled.div`
   margin-top: ${getSpacing(2)};
+`;
+
+export const MobileFixedBottomButtonWrapper = styled.div`
+  ${media.desktop(`
+    display: none;
+  `)}
 `;

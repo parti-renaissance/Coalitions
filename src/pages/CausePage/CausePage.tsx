@@ -48,7 +48,7 @@ const CausePage: React.FunctionComponent = () => {
   const renderTabPanel = () => {
     switch (activeTabIndex) {
       case 0:
-        return <AboutThisCause />;
+        return cause !== undefined ? <AboutThisCause cause={cause} /> : null;
       default:
         return null;
     }

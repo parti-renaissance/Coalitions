@@ -69,7 +69,8 @@ export const fontFamily = {
 };
 
 export const fontSize = {
-  xLarge: '32px',
+  xxxLarge: '40px',
+  xLarge: '24px',
   large: '20px',
   mediumLarge: '18px',
   medium: '16px',

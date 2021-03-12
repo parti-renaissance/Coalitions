@@ -29,8 +29,8 @@ export const FULL_WIDTH_BUTTON_HEIGHT = '50px';
 
 export const MediumLargeButton = styled(ButtonBase)`
   height: ${FULL_WIDTH_BUTTON_HEIGHT};
-  padding-left: ${getSpacing(10)};
-  padding-right: ${getSpacing(10)};
+  padding-left: ${getSpacing(4)};
+  padding-right: ${getSpacing(4)};
   font-size: ${fontSize.mediumLarge};
   font-weight: ${fontWeight.bold};
 `;

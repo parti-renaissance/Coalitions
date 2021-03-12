@@ -88,5 +88,7 @@ export const DesktopSupportButton = styled(MediumLargeButton)`
   display: none;
   ${media.desktop(`
     display: block;
+    padding-left: ${getSpacing(10)};
+    padding-right: ${getSpacing(10)};
   `)}
 `;

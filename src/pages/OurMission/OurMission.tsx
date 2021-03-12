@@ -1,13 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { useIntl } from 'react-intl';
-import { Container, Title } from './OurMission.style';
+import OurMissionHeader from 'components/OurMission';
 
 const OurMission: FunctionComponent = () => {
-  const intl = useIntl();
   return (
-    <Container>
-      <Title>{intl.formatMessage({ id: 'our_mission.title' })}</Title>
-    </Container>
+    <>
+      <OurMissionHeader />
+    </>
   );
 };
 

@@ -9,6 +9,7 @@ import { reducer as avatar } from './Avatar';
 import { reducer as login } from './Login';
 import { reducer as cause } from './Cause';
 import { reducer as coalition } from './Coalition';
+import { reducer as snackbar } from './Snackbar';
 import { RootState } from './types';
 
 export default combineReducers<RootState>({
@@ -16,4 +17,5 @@ export default combineReducers<RootState>({
   avatar,
   cause,
   coalition,
+  snackbar,
 });

@@ -15,4 +15,7 @@ export const state = {
     ids: [],
     coalitions: {},
   },
+  snackbar: {
+    snackbarConfig: undefined,
+  },
 };

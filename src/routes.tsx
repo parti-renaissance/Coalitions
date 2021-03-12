@@ -1,6 +1,7 @@
-import React, { lazy, Suspense } from 'react';
+import React, { FunctionComponent, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router';
 import Loader from './components/Loader/Loader';
+import Snackbar from 'components/Snackbar';
 
 const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Login'));
@@ -21,14 +22,17 @@ export const PATHS = {
   },
 };
 
-const routes = () => (
-  <Suspense fallback={<Loader />}>
-    <Switch>
-      <Route exact path={PATHS.HOME.route} component={Home} />
-      <Route path={PATHS.LOGIN.route} component={Login} />
-      <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
-    </Switch>
-  </Suspense>
+const routes: FunctionComponent<{}> = () => (
+  <>
+    <Suspense fallback={<Loader />}>
+      <Switch>
+        <Route exact path={PATHS.HOME.route} component={Home} />
+        <Route path={PATHS.LOGIN.route} component={Login} />
+        <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
+      </Switch>
+    </Suspense>
+    <Snackbar />
+  </>
 );
 
 export default routes;

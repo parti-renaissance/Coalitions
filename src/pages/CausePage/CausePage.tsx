@@ -25,6 +25,8 @@ import AuthorAndSupports from 'components/AuthorAndSupports';
 import FixedBottomButton from 'components/FixedBottomButton';
 import LoginAndSupportModal from 'components/LoginAndSupportModal';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
+import { SmallButton } from 'components/Button/Button';
+import { useSnackbar } from 'redux/Snackbar/hooks';
 
 interface CausePageNavParams {
   causeId: string;
@@ -43,6 +45,7 @@ const CausePage: React.FunctionComponent = () => {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
   const intl = useIntl();
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const { showErrorSnackbar, showSuccessSnackbar, showWarningSnackbar } = useSnackbar();
 
   useEffect(() => {
     fetchCause();
@@ -66,7 +69,19 @@ const CausePage: React.FunctionComponent = () => {
       case 0:
         return cause !== undefined ? <AboutThisCause cause={cause} /> : null;
       default:
-        return null;
+        return (
+          <>
+            <SmallButton onClick={() => showSuccessSnackbar("Tout s'est bien passé !")}>
+              {'SHOW SUCCESS SNACKBAR'}
+            </SmallButton>
+            <SmallButton onClick={() => showErrorSnackbar('Une erreur est survenue !')}>
+              {'SHOW ERROR SNACKBAR'}
+            </SmallButton>
+            <SmallButton onClick={() => showWarningSnackbar('Attention Attention Attention!')}>
+              {'SHOW WARNING SNACKBAR'}
+            </SmallButton>
+          </>
+        );
     }
   };
 

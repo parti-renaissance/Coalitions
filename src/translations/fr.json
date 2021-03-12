@@ -69,5 +69,8 @@
     "description": "Rejoignez les {numberOfCauses} causes déjà créées.",
     "cause-creation": "Je crée ma cause",
     "go-to-cause-list": "Je soutiens l'une des {numberOfCauses} existantes"
+  },
+  "our_mission": {
+    "title": "Faire des idées de chacun une solution pour notre avenir commun"
   }
 }

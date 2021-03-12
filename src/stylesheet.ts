@@ -64,20 +64,15 @@ export const colorUsage = {
 };
 
 export const fontFamily = {
-  main: `'Roboto', 'Helvetica', 'Arial', sans-serif`,
+  main: `'Poppins', sans-serif`,
   abril: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
-  code: 'Monospace',
-  poppins: `'Poppins', sans-serif`,
 };
 
 export const fontSize = {
-  XXLarge: '60px',
-  xLarge: '24px',
   large: '20px',
   mediumLarge: '18px',
   medium: '16px',
   small: '14px',
-  XSmall: '12px',
 };
 
 export const fontWeight = {

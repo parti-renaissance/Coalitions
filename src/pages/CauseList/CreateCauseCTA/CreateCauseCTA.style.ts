@@ -22,7 +22,7 @@ export const CTABlock = styled.div`
 `;
 
 export const HeadSentence = styled.p`
-  font-size: ${fontSize.xLarge};
+  font-size: ${fontSize.large};
   font-weight: ${fontWeight.bold};
   margin-bottom: ${getSpacing(3)};
 `;

@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Description = styled.p`
-  font-family: ${fontFamily.poppins};
+  font-family: ${fontFamily.main};
   font-size: ${fontSize.small};
   line-height: ${lineHeight.small};
   color: ${colorPalette.greyDark};

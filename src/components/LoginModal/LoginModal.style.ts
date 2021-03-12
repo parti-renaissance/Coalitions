@@ -20,7 +20,7 @@ export const StyledCloseButton = styled(IconButton)`
 `;
 
 export const StyledCloseIcon = styled(Close)`
-  font-size: ${fontSize.xLarge};
+  font-size: 24px;
   color: ${colorPalette.greyDark};
 `;
 

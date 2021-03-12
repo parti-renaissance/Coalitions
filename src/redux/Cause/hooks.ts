@@ -1,4 +1,4 @@
-import { coalitionApiClient } from 'services/networking/client';
+import { coalitionApiClient, authenticatedApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
 import { resetCauses, updateCauses, updateOneCause } from './slice';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
@@ -74,4 +74,17 @@ export const useFetchOneCause = (id: string) => {
   }, [dispatch, doFetchCause]);
 
   return { loading, error, fetchCause };
+};
+
+export const useCauseFollow = (id: string) => {
+  const [{ loading }, doFollowCause] = useTypedAsyncFn(
+    async () => await authenticatedApiClient.put(`v3/causes/${id}/follower`, null),
+    [],
+  );
+
+  const followCause = useCallback(async () => {
+    await doFollowCause();
+  }, [doFollowCause]);
+
+  return { loading, followCause };
 };

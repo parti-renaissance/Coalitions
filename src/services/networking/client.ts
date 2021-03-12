@@ -131,11 +131,11 @@ class Client {
     return this.request('get', endpoint);
   }
 
-  post(endpoint: string, data: object) {
+  post(endpoint: string, data: object | null) {
     return this.request('post', endpoint, data);
   }
 
-  put(endpoint: string, data: object) {
+  put(endpoint: string, data: object | null) {
     return this.request('put', endpoint, data);
   }
 }
@@ -143,5 +143,6 @@ class Client {
 const client = new Client(backendBaseUrl);
 export const githubApiClient = new Client('https://api.github.com', false);
 export const coalitionApiClient = new Client(backendBaseUrl, false);
+export const authenticatedApiClient = new Client(backendBaseUrl, true);
 
 export default client;

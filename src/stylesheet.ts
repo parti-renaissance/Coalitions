@@ -4,7 +4,7 @@ import { createMuiTheme } from '@material-ui/core';
  * App spacing measurement convention
  * Use the getSpacing function below to compute padding and margin
  */
-const SPACING_UNIT = 5;
+export const SPACING_UNIT = 5;
 const MEASUREMENT_UNIT = 'px';
 
 /**

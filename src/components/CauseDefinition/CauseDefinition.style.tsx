@@ -19,9 +19,15 @@ export const Title = styled.h1`
 `;
 
 export const Definition = styled.p`
-  margin-top: ${getSpacing(4)};
-  font-size: ${fontSize.mediumLarge};
+  font-size: ${fontSize.small};
+  line-height: ${lineHeight.small};
   font-family: ${fontFamily.main};
-  line-height: ${lineHeight.medium};
   color: ${colorPalette.greyDark};
+  margin-top: ${getSpacing(4)};
+  ${media.desktop(`
+    font-size: ${fontSize.mediumLarge};
+    line-height: ${lineHeight.medium};
+    margin-top: ${getSpacing(7)};
+    max-width: ${getSpacing(108)};
+  `)}
 `;

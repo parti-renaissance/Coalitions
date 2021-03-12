@@ -1,7 +1,49 @@
 import jwt_decode from 'jwt-decode';
 import request from 'superagent';
 
-const backendBaseUrl = process.env.REACT_APP_API_BASE_URL ?? '';
+const ACCESS_TOKEN_KEY = 'access_token';
+const REFRESH_TOKEN_KEY = 'refresh_token';
+
+const backendBaseUrl = `${process.env.REACT_APP_API_BASE_URL}api/` ?? '';
+
+type oauthPayload = {
+  client_id?: string;
+  code?: string;
+  refresh_token?: string;
+  grant_type: string;
+};
+
+const authCall = async (payload: oauthPayload) => {
+  const result = await request
+    .agent()
+    .post(`${process.env.REACT_APP_API_BASE_URL}oauth/v2/token`)
+    .set('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
+    .send(payload);
+  const access_token: string | undefined = result.body.access_token;
+  if (access_token !== undefined) localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
+  const refresh_token: string | undefined = result.body.refresh_token;
+  if (refresh_token !== undefined) localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
+  return access_token;
+};
+
+export const login = async (code: string) => {
+  const payload = {
+    client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
+    code,
+    grant_type: 'authorization_code',
+  };
+  return authCall(payload);
+};
+
+export const refresh = async () => {
+  const refreshToken = localStorage.get(REFRESH_TOKEN_KEY);
+  const payload = {
+    client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
+    refresh_token: refreshToken,
+    grant_type: 'refresh_token',
+  };
+  return authCall(payload);
+};
 
 interface AccessToken {
   exp: number;
@@ -21,7 +63,7 @@ class Client {
   baseUrl: string;
   withCredentials: boolean;
   agent: request.SuperAgentStatic & request.Request;
-  tokenKey = 'token';
+  tokenKey = ACCESS_TOKEN_KEY;
 
   constructor(baseUrl: string, withCredentials = true) {
     this.baseUrl = baseUrl;
@@ -76,7 +118,7 @@ class Client {
     const parsedToken = jwt_decode<AccessToken>(token);
     if (tokenHasExpired(parsedToken)) {
       try {
-        await this.refreshToken();
+        await refresh();
       } catch (e) {
         // Token was invalid, logging out the user.
         this.updateToken('');
@@ -95,23 +137,6 @@ class Client {
 
   put(endpoint: string, data: object) {
     return this.request('put', endpoint, data);
-  }
-
-  async login(data: object) {
-    const result = await this.post('/auth/jwt/create', data);
-    const token: string | undefined = result.token || result.access;
-    if (token) this.updateToken(token);
-    return token;
-  }
-
-  async logout() {
-    const result = await this.post('/auth/jwt/logout', {});
-    return result;
-  }
-
-  async refreshToken() {
-    const { access } = await this.request('post', '/auth/jwt/refresh', {}, false);
-    this.updateToken(access);
   }
 }
 

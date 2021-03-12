@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from 'components/Link';
@@ -7,13 +7,23 @@ import { HeaderContainer } from './Header.style';
 import { getUserToken } from 'redux/Login';
 import useSelector from 'redux/useSelector';
 import { useLocation } from 'react-router';
-import { useLogout } from 'redux/Login/hooks';
+import { useLogin } from 'redux/Login/hooks';
+
+const oauthUrl = process.env.REACT_APP_OAUTH_URL;
+const oauthClientId = process.env.REACT_APP_OAUTH_CLIENT_ID;
 
 const Header: React.FC = () => {
+  const { search } = useLocation();
+  const [, login] = useLogin();
   const isUserLoggedIn = Boolean(useSelector(getUserToken));
-  const { pathname } = useLocation();
 
-  const [, logout] = useLogout();
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const code = params.get('code');
+    if (code !== null) {
+      login({ code });
+    }
+  }, [login, search]);
 
   return (
     <HeaderContainer>
@@ -21,12 +31,14 @@ const Header: React.FC = () => {
         <div>En Marche</div>
       </RouterLink>
       {isUserLoggedIn && (
-        <Link as="button" onClick={logout}>
+        <Link as="button">
           <FormattedMessage id="header.logout" />
         </Link>
       )}
-      {!isUserLoggedIn && pathname !== PATHS.LOGIN.url() && (
-        <Link as={RouterLink} to={PATHS.LOGIN.url()}>
+      {!isUserLoggedIn && (
+        <Link
+          href={`${oauthUrl}?response_type=code&client_id=${oauthClientId}&redirect_url=${window.location.href}`}
+        >
           <FormattedMessage id="header.login" />
         </Link>
       )}

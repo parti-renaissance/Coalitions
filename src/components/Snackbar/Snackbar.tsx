@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import MUISnackbar, { SnackbarProps } from '@material-ui/core/Snackbar';
+import { SnackbarProps } from '@material-ui/core/Snackbar';
 import { useSnackbar } from 'redux/Snackbar/hooks';
-import { StyledAlert } from './Snackbar.style';
+import { StyledAlert, StyledSnackbar } from './Snackbar.style';
 
 const Snackbar: FunctionComponent<SnackbarProps> = props => {
   const { snackbarConfig, hideSnackbar } = useSnackbar();
@@ -11,9 +11,9 @@ const Snackbar: FunctionComponent<SnackbarProps> = props => {
   }
 
   return (
-    <MUISnackbar {...props} open autoHideDuration={6000} onClose={hideSnackbar}>
+    <StyledSnackbar {...props} open autoHideDuration={6000} onClose={hideSnackbar}>
       <StyledAlert severity={snackbarConfig.severity}>{snackbarConfig.message}</StyledAlert>
-    </MUISnackbar>
+    </StyledSnackbar>
   );
 };
 

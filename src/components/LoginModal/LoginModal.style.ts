@@ -19,8 +19,10 @@ export const StyledCloseButton = styled(IconButton)`
   padding: ${getSpacing(1)};
 `;
 
+const CLOSE_ICON_FONT_SIZE = '24px';
+
 export const StyledCloseIcon = styled(Close)`
-  font-size: ${fontSize.xLarge};
+  font-size: ${CLOSE_ICON_FONT_SIZE};
   color: ${colorPalette.greyDark};
 `;
 

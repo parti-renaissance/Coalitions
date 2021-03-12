@@ -9,10 +9,6 @@ import { CAUSES_MOCK_STORE } from 'redux/Cause/fixtures';
 import { TestProvider } from 'services/test/TestProvider';
 import { COALITIONS_STORE } from 'redux/Coalition/fixtures';
 
-jest.mock('react-router-dom', () => ({
-  Link: 'Link',
-}));
-
 describe('<CauseList />', () => {
   const dispatch = jest.fn();
   const { store } = configureStore({});

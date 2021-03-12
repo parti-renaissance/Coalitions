@@ -69,5 +69,10 @@
     "description": "Rejoignez les {numberOfCauses} causes déjà créées.",
     "cause-creation": "Je crée ma cause",
     "go-to-cause-list": "Je soutiens l'une des {numberOfCauses} existantes"
+  },
+  "our_mission": {
+    "title": "Faire des idées de chacun une solution pour notre avenir commun",
+    "our-mission": "Notre mission",
+    "explanation": "Citoyens, associations, politiques, nous avons tous à coeur d’agir pour construire un monde meilleur. Nous avons tous des idées, des combats, des causes qui nous sont chères. Et si on se donnait les moyens de les concrétiser ?"
   }
 }

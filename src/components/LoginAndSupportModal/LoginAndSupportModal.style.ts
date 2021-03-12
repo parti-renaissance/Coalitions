@@ -7,7 +7,7 @@ export const FormControlLabelWrapper = styled.div`
 
 export const Label = styled.div`
   font-size: ${fontSize.small};
-  font-family: ${fontFamily.poppins};
+  font-family: ${fontFamily.main};
   color: ${colorPalette.greyDark};
   margin-left: ${getSpacing(2)};
 `;

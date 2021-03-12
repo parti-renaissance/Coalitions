@@ -8,10 +8,6 @@ import Cause from './Cause';
 import { CAUSE_MOCK } from 'redux/Cause/fixtures';
 import { TestProvider } from 'services/test/TestProvider';
 
-jest.mock('react-router-dom', () => ({
-  Link: 'Link',
-}));
-
 describe('render', () => {
   let wrapper: ReactWrapper<{}, {}>;
 

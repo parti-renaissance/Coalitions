@@ -11,6 +11,7 @@ export const StyledAlert = styled(Alert)`
     font-size: ${fontSize.small};
     color: ${colorPalette.greyDark};
   }
+
   ${({ severity }) => {
     const { icon, background } = getColorsFromSeverity(severity as Severity);
     return css`

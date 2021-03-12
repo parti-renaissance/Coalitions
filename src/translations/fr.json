@@ -49,7 +49,9 @@
     },
     "discussions": {
       "title": "Discussions"
-    }
+    },
+    "what-is-it": "Qu’est-ce qu’une cause ?",
+    "definition": "C’est un combat, un cri de ralliement, presqu’un slogan. C’est un appel qu’on lance à la société et aux politiques pour mobiliser autour d’une bonne idée. La vôtre."
   },
   "login_modal": {
     "first-name": "Prénom",
@@ -73,6 +75,10 @@
   "our_mission": {
     "title": "Faire des idées de chacun une solution pour notre avenir commun",
     "our-mission": "Notre mission",
-    "explanation": "Citoyens, associations, politiques, nous avons tous à coeur d’agir pour construire un monde meilleur. Nous avons tous des idées, des combats, des causes qui nous sont chères. Et si on se donnait les moyens de les concrétiser ?"
+    "explanation": "Citoyens, associations, politiques, nous avons tous à coeur d’agir pour construire un monde meilleur. Nous avons tous des idées, des combats, des causes qui nous sont chères. Et si on se donnait les moyens de les concrétiser ?",
+    "creation-steps-title": "Créer et faire connaitre sa cause c’est simple et rapide :",
+    "creation-step-one": "Je complète la page de ma cause sur la plateforme",
+    "creation-step-two": "Je reçois des conseils pour faire grandir ma communauté",
+    "creation-step-three": "Je lance une pétition, un événement, une campagne de sensibilisation pour faire vivre ma cause"
   }
 }

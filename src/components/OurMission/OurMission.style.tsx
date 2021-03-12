@@ -12,7 +12,7 @@ import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`
   display: flex;
-  padding: ${getSpacing(2)};
+  padding: ${getSpacing(3)};
   ${media.desktop(`
     background-color: ${colorPalette.greyLight};
     padding: ${getSpacing(16)} ${getSpacing(24)};

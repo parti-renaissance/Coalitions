@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useFetchOneCause } from 'redux/Cause/hooks';
 import { getCause } from 'redux/Cause/selectors';
+import { getUserToken } from 'redux/Login';
 import {
   CausePageContainer,
   CausePageHeader,
@@ -27,6 +28,8 @@ import LoginAndSupportModal from 'components/LoginAndSupportModal';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { SmallButton } from 'components/Button/Button';
 import { useSnackbar } from 'redux/Snackbar/hooks';
+import { useCauseFollow } from 'redux/Cause/hooks';
+import CircularProgress from 'components/CircularProgress';
 
 interface CausePageNavParams {
   causeId: string;
@@ -46,6 +49,8 @@ const CausePage: React.FunctionComponent = () => {
   const intl = useIntl();
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const { showErrorSnackbar, showSuccessSnackbar, showWarningSnackbar } = useSnackbar();
+  const { loading: loadingCauseFollow, followCause } = useCauseFollow(causeId);
+  const isUserLoggedIn = Boolean(useSelector(getUserToken));
 
   useEffect(() => {
     fetchCause();
@@ -56,8 +61,11 @@ const CausePage: React.FunctionComponent = () => {
   };
 
   const onSupportClick = () => {
-    // TODO check if user is connected
-    setIsModalOpened(true);
+    if (isUserLoggedIn) {
+      followCause();
+    } else {
+      setIsModalOpened(true);
+    }
   };
 
   const closeModal = () => {
@@ -112,7 +120,11 @@ const CausePage: React.FunctionComponent = () => {
               color="primary"
               onClick={onSupportClick}
             >
-              {intl.formatMessage({ id: 'cause.support-button' })}
+              {loadingCauseFollow ? (
+                <CircularProgress size={24} color="secondary" />
+              ) : (
+                intl.formatMessage({ id: 'cause.support-button' })
+              )}
             </DesktopSupportButton>
           </CausePageSubHeaderContainer>
         </CausePageHeader>
@@ -132,7 +144,11 @@ const CausePage: React.FunctionComponent = () => {
       </CausePageContainer>
       <MobileSupportButtonWrapper>
         <FixedBottomButton onClick={onSupportClick}>
-          {intl.formatMessage({ id: 'cause.support-button' })}
+          {loadingCauseFollow ? (
+            <CircularProgress size={24} color="secondary" />
+          ) : (
+            intl.formatMessage({ id: 'cause.support-button' })
+          )}
         </FixedBottomButton>
       </MobileSupportButtonWrapper>
       <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} cause={cause} />

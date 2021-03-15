@@ -5,26 +5,30 @@ import { getColorsFromSeverity } from './lib/getColorsFromSeverity';
 import { Severity } from 'redux/Snackbar/types';
 import Snackbar from '@material-ui/core/Snackbar';
 
-const PADDING_VERTICAL = '8px';
-
 export const StyledSnackbar = styled(Snackbar)`
-  bottom: ${getSpacing(3)};
-  left: ${getSpacing(3)};
-  right: ${getSpacing(3)};
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: unset;
   ${media.desktop(`
+    top: unset;
     left: 50%;
     right: auto;
+    bottom: ${getSpacing(2)};
   `)}
 `;
 
 export const StyledAlert = styled(Alert)`
+  padding: 0;
+  height: ${getSpacing(13)};
+  width: 100%;
   border-radius: unset;
-  width: calc(100%);
-  padding-top: ${PADDING_VERTICAL};
-  padding-bottom: ${PADDING_VERTICAL};
   justify-content: center;
+  align-items: center;
   ${media.desktop(`
     width: ${getSpacing(100)};
+    height: unset;
+    padding: ${getSpacing(2)};
   `)}
   .MuiAlert-message {
     font-family: ${fontFamily.main};

@@ -6,7 +6,7 @@ export interface City {
   name: string;
 }
 
-export const useCityAutocomplete = () => {
+export const useCityAndCountryAutocomplete = () => {
   const [isFetchingCities, setisFetchingCities] = useState<boolean>(false);
   const [cities, setCities] = useState<City[]>([]);
 

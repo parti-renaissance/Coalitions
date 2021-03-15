@@ -9,14 +9,14 @@ import {
   ValidateButtonContainer,
 } from './LoginModal.style';
 import { SlideProps } from '@material-ui/core/Slide';
-import { Dialog, Slide } from '@material-ui/core';
+import { Dialog, Slide, CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { Formik } from 'formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
-import { useCityAutoComplete, City } from './lib/useCityAutoComplete';
+import { useCityAndCountryAutocomplete, City } from './lib/useCityAndCountryAutocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 interface LoginModalProps<OtherFormValues> {
@@ -44,7 +44,7 @@ const LoginModal = <OtherFormValues,>({
   const isMobile = getIsMobile();
   const intl = useIntl();
   const { validateForm } = useValidateForm<OtherFormValues>();
-  const { cities } = useCityAutoComplete();
+  const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
 
   const onValidateClick = () => {
     // TODO
@@ -110,7 +110,7 @@ const LoginModal = <OtherFormValues,>({
                   getOptionLabel={city => (city as City).name}
                   onBlur={() => setFieldTouched('cityId', true)}
                   onChange={(e, value) => {
-                    setFieldValue('cityId', (value as City)?.id || '');
+                    setFieldValue('cityId', (value as City)?.uuid || '');
                   }}
                   renderInput={(params: TextFieldProps) => (
                     <InputField
@@ -118,8 +118,23 @@ const LoginModal = <OtherFormValues,>({
                       placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
                       error={touched.cityId === true && errors.cityId !== undefined}
                       helperText={touched.cityId === true ? errors.cityId : undefined}
-                      onChange={handleChange}
+                      onChange={e => {
+                        handleChange(e);
+                        setFieldValue('cityId', '');
+                        fetchCities(e.target.value);
+                      }}
                       onBlur={handleBlur}
+                      InputProps={{
+                        ...params.InputProps,
+                        endAdornment: (
+                          <>
+                            {isFetchingCities ? (
+                              <CircularProgress color="primary" size={20} />
+                            ) : null}
+                            {params?.InputProps?.endAdornment}
+                          </>
+                        ),
+                      }}
                     />
                   )}
                 />

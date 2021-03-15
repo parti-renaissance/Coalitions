@@ -29,7 +29,6 @@ import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { SmallButton } from 'components/Button/Button';
 import { useSnackbar } from 'redux/Snackbar/hooks';
 import { useCauseFollow } from 'redux/Cause/hooks';
-import CircularProgress from 'components/CircularProgress';
 
 interface CausePageNavParams {
   causeId: string;
@@ -120,12 +119,9 @@ const CausePage: React.FunctionComponent = () => {
                 variant="contained"
                 color="primary"
                 onClick={onSupportClick}
+                isLoading={loadingCauseFollow}
               >
-                {loadingCauseFollow ? (
-                  <CircularProgress size={24} color="secondary" />
-                ) : (
-                  intl.formatMessage({ id: 'cause.support-button' })
-                )}
+                {intl.formatMessage({ id: 'cause.support-button' })}
               </DesktopSupportButton>
             )}
           </CausePageSubHeaderContainer>
@@ -146,12 +142,8 @@ const CausePage: React.FunctionComponent = () => {
       </CausePageContainer>
       {cause.supported || (
         <MobileSupportButtonWrapper>
-          <FixedBottomButton onClick={onSupportClick}>
-            {loadingCauseFollow ? (
-              <CircularProgress size={24} color="secondary" />
-            ) : (
-              intl.formatMessage({ id: 'cause.support-button' })
-            )}
+          <FixedBottomButton onClick={onSupportClick} isLoading={loadingCauseFollow}>
+            {intl.formatMessage({ id: 'cause.support-button' })}
           </FixedBottomButton>
         </MobileSupportButtonWrapper>
       )}

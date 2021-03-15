@@ -98,7 +98,7 @@ export const useCauseFollow = (id: string) => {
     if (error === undefined) {
       dispatch(optimisticallyMarkCauseAsSupported(id));
     }
-  }, [doFollowCause]);
+  }, [dispatch, doFollowCause, error, id]);
 
   return { loading, followCause };
 };

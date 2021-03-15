@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
+import Button, { ButtonProps } from '@material-ui/core/Button';
 import {
   borderRadius,
   fontFamily,
@@ -8,8 +8,10 @@ import {
   getSpacing,
   fontWeight,
 } from 'stylesheet';
+import React, { FunctionComponent } from 'react';
+import CircularProgress from 'components/CircularProgress';
 
-export const ButtonBase = styled(Button)`
+export const StyledButtonBase = styled(Button)`
   font-family: ${fontFamily.main};
   border-radius: ${borderRadius.medium};
   text-decoration: none;
@@ -19,6 +21,12 @@ export const ButtonBase = styled(Button)`
     box-shadow: none;
   }
 `;
+
+export const ButtonBase: FunctionComponent<ButtonProps & { isLoading?: boolean }> = props => (
+  <StyledButtonBase {...props}>
+    {props.isLoading === true ? <CircularProgress size={24} color="secondary" /> : props.children}
+  </StyledButtonBase>
+);
 
 export const SmallButton = styled(ButtonBase)`
   padding: ${getSpacing(1)} ${getSpacing(3)};

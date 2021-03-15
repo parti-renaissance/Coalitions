@@ -114,18 +114,20 @@ const CausePage: React.FunctionComponent = () => {
                 <AuthorAndSupports cause={cause} showAuthor />
               </AuthorAndSupportsWrapper>
             </div>
-            <DesktopSupportButton
-              size="small"
-              variant="contained"
-              color="primary"
-              onClick={onSupportClick}
-            >
-              {loadingCauseFollow ? (
-                <CircularProgress size={24} color="secondary" />
-              ) : (
-                intl.formatMessage({ id: 'cause.support-button' })
-              )}
-            </DesktopSupportButton>
+            {cause.supported || (
+              <DesktopSupportButton
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={onSupportClick}
+              >
+                {loadingCauseFollow ? (
+                  <CircularProgress size={24} color="secondary" />
+                ) : (
+                  intl.formatMessage({ id: 'cause.support-button' })
+                )}
+              </DesktopSupportButton>
+            )}
           </CausePageSubHeaderContainer>
         </CausePageHeader>
         <TabsWrapper>
@@ -142,15 +144,17 @@ const CausePage: React.FunctionComponent = () => {
         </TabsWrapper>
         <CreateCauseCTA displayLinkToCauseList />
       </CausePageContainer>
-      <MobileSupportButtonWrapper>
-        <FixedBottomButton onClick={onSupportClick}>
-          {loadingCauseFollow ? (
-            <CircularProgress size={24} color="secondary" />
-          ) : (
-            intl.formatMessage({ id: 'cause.support-button' })
-          )}
-        </FixedBottomButton>
-      </MobileSupportButtonWrapper>
+      {cause.supported || (
+        <MobileSupportButtonWrapper>
+          <FixedBottomButton onClick={onSupportClick}>
+            {loadingCauseFollow ? (
+              <CircularProgress size={24} color="secondary" />
+            ) : (
+              intl.formatMessage({ id: 'cause.support-button' })
+            )}
+          </FixedBottomButton>
+        </MobileSupportButtonWrapper>
+      )}
       <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} cause={cause} />
     </>
   );

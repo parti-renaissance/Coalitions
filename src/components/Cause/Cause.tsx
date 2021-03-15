@@ -60,13 +60,20 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </Author>
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
-            <SmallButton size="small" variant="contained" color="primary" onClick={onSupportClick}>
-              {loading ? (
-                <CircularProgress size={24} color="secondary" />
-              ) : (
-                <FormattedMessage id="cause.support-button" />
-              )}
-            </SmallButton>
+            {cause.supported || (
+              <SmallButton
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={onSupportClick}
+              >
+                {loading ? (
+                  <CircularProgress size={24} color="secondary" />
+                ) : (
+                  <FormattedMessage id="cause.support-button" />
+                )}
+              </SmallButton>
+            )}
             <Link to={PATHS.CAUSE.url(cause.uuid)}>
               <DefaultButton size="small" variant="outlined">
                 <FormattedMessage id="cause.see-button" />

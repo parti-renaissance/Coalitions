@@ -1,6 +1,11 @@
 import { coalitionApiClient, authenticatedApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
-import { resetCauses, updateCauses, updateOneCause } from './slice';
+import {
+  optimisticallyMarkCauseAsSupported,
+  resetCauses,
+  updateCauses,
+  updateOneCause,
+} from './slice';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback, useState } from 'react';
 import { Cause } from './types';
@@ -77,13 +82,22 @@ export const useFetchOneCause = (id: string) => {
 };
 
 export const useCauseFollow = (id: string) => {
-  const [{ loading }, doFollowCause] = useTypedAsyncFn(
+  const dispatch = useDispatch();
+
+  const [{ loading, error }, doFollowCause] = useTypedAsyncFn(
     async () => await authenticatedApiClient.put(`v3/causes/${id}/follower`, null),
     [],
   );
 
   const followCause = useCallback(async () => {
-    await doFollowCause();
+    try {
+      await doFollowCause();
+    } catch (err) {
+      console.log('error', err);
+    }
+    if (error === undefined) {
+      dispatch(optimisticallyMarkCauseAsSupported(id));
+    }
   }, [doFollowCause]);
 
   return { loading, followCause };

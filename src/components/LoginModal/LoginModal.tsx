@@ -16,7 +16,7 @@ import InputField from 'components/InputField';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { Formik } from 'formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
-import { useCityAutocomplete, City } from './lib/useCityAutocomplete';
+import { useCityAndCountryAutocomplete, City } from './lib/useCityAndCountryAutocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 interface LoginModalProps<OtherFormValues> {
@@ -44,7 +44,7 @@ const LoginModal = <OtherFormValues,>({
   const isMobile = getIsMobile();
   const intl = useIntl();
   const { validateForm } = useValidateForm<OtherFormValues>();
-  const { cities, fetchCities, isFetchingCities } = useCityAutocomplete();
+  const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
 
   const onValidateClick = () => {
     // TODO

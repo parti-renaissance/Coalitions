@@ -16,7 +16,11 @@ import InputField from 'components/InputField';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { Formik } from 'formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
-import { useCityAndCountryAutocomplete, City } from './lib/useCityAndCountryAutocomplete';
+import {
+  useCityAndCountryAutocomplete,
+  CityOrCountry,
+  getCityOrCountryLabel,
+} from './lib/useCityAndCountryAutocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 interface LoginModalProps<OtherFormValues> {
@@ -107,10 +111,10 @@ const LoginModal = <OtherFormValues,>({
                 <Autocomplete
                   freeSolo
                   options={cities}
-                  getOptionLabel={city => (city as City).name}
+                  getOptionLabel={getCityOrCountryLabel}
                   onBlur={() => setFieldTouched('cityId', true)}
                   onChange={(e, value) => {
-                    setFieldValue('cityId', (value as City)?.uuid || '');
+                    setFieldValue('cityId', (value as CityOrCountry)?.uuid || '');
                   }}
                   renderInput={(params: TextFieldProps) => (
                     <InputField

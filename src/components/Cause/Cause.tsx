@@ -19,6 +19,7 @@ import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 import { PATHS } from 'routes';
 import { useCauseFollow } from 'redux/Cause/hooks';
+import CircularProgress from 'components/CircularProgress';
 
 interface CauseProps {
   cause: CauseType;
@@ -59,16 +60,13 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </Author>
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
-            {loading ? null : (
-              <SmallButton
-                size="small"
-                variant="contained"
-                color="primary"
-                onClick={onSupportClick}
-              >
+            <SmallButton size="small" variant="contained" color="primary" onClick={onSupportClick}>
+              {loading ? (
+                <CircularProgress size={24} color="secondary" />
+              ) : (
                 <FormattedMessage id="cause.support-button" />
-              </SmallButton>
-            )}
+              )}
+            </SmallButton>
             <Link to={PATHS.CAUSE.url(cause.uuid)}>
               <DefaultButton size="small" variant="outlined">
                 <FormattedMessage id="cause.see-button" />

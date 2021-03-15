@@ -11,6 +11,8 @@ import {
   MobileSupportButtonWrapper,
 } from './OurMission.style';
 import FixedBottomButton from 'components/FixedBottomButton';
+import { DefaultLink as Link } from 'components/Link/Link';
+import { PATHS } from 'routes';
 
 const OurMission: FunctionComponent = () => {
   const intl = useIntl();
@@ -26,21 +28,25 @@ const OurMission: FunctionComponent = () => {
           <Title>{intl.formatMessage({ id: 'our_mission.title' })}</Title>
           <SubTitle>{intl.formatMessage({ id: 'our_mission.our-mission' })}</SubTitle>
           <Content>{intl.formatMessage({ id: 'our_mission.explanation' })}</Content>
-          <DesktopCreateCauseButton
-            size="small"
-            variant="contained"
-            color="primary"
-            onClick={onCreateCauseClick}
-          >
-            {intl.formatMessage({ id: 'cause-cta.cause-creation' })}
-          </DesktopCreateCauseButton>
+          <Link to={PATHS.CREATE_CAUSE.url()}>
+            <DesktopCreateCauseButton
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={onCreateCauseClick}
+            >
+              {intl.formatMessage({ id: 'cause-cta.cause-creation' })}
+            </DesktopCreateCauseButton>
+          </Link>
         </SubContainer>
         <Image />
       </Container>
       <MobileSupportButtonWrapper>
-        <FixedBottomButton onClick={onCreateCauseClick}>
-          {intl.formatMessage({ id: 'cause-cta.cause-creation' })}
-        </FixedBottomButton>
+        <Link to={PATHS.CREATE_CAUSE.url()}>
+          <FixedBottomButton onClick={onCreateCauseClick}>
+            {intl.formatMessage({ id: 'cause-cta.cause-creation' })}
+          </FixedBottomButton>
+        </Link>
       </MobileSupportButtonWrapper>
     </>
   );

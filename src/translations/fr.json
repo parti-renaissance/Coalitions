@@ -80,5 +80,19 @@
     "creation-step-one": "Je complète la page de ma cause sur la plateforme",
     "creation-step-two": "Je reçois des conseils pour faire grandir ma communauté",
     "creation-step-three": "Je lance une pétition, un événement, une campagne de sensibilisation pour faire vivre ma cause"
+  },
+  "create_cause": {
+    "tips": "Conseil :",
+    "title": {
+      "title": "1. Quel est l’objectif de votre cause ?",
+      "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre.",
+      "placeholder": "Mon titre de cause (80 carac max.)"
+    },
+    "description": {
+      "title": "2. Description de votre cause",
+      "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre.",
+      "descriptionTitlePlaceholder": "Chapeau de votre cause (optionnel)",
+      "descriptionPlaceholder": "Description de votre cause (optionnel)"
+    }
   }
 }

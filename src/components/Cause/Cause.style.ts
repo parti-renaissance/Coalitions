@@ -43,7 +43,7 @@ export const StyledCard = styled(Card)`
   box-shadow: ${boxShadow.card};
   ${media.desktop(`
     width: ${getSpacing(68)};
-    margin-right: ${getSpacing(8)};
+    margin: 0 ${getSpacing(4)} ${getSpacing(4)};
   `)}
 `;
 

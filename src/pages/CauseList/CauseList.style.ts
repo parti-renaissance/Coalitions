@@ -15,6 +15,5 @@ export const CauseListContainer = styled.div`
   padding: 0 ${getSpacing(3)};
   ${media.desktop(`
     padding: 0;
-    margin-right: -${getSpacing(8)};
   `)};
 `;

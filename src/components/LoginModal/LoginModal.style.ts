@@ -1,7 +1,15 @@
 import { IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import styled from 'styled-components';
-import { fontSize, colorPalette, media, getSpacing, fontWeight, fontFamily } from 'stylesheet';
+import {
+  fontSize,
+  colorPalette,
+  media,
+  getSpacing,
+  lineHeight,
+  fontWeight,
+  fontFamily,
+} from 'stylesheet';
 
 export const ContentContainer = styled.div`
   display: flex;
@@ -31,6 +39,19 @@ export const Title = styled.div`
   font-size: ${fontSize.mediumLarge};
   font-weight: ${fontWeight.bold};
   margin-top: ${getSpacing(5)};
+`;
+
+export const Connect = styled.div`
+  margin-top: ${getSpacing(3)};
+  font-family: ${fontFamily.main};
+  font-size: ${fontSize.medium};
+  line-height: ${lineHeight.medium};
+`;
+
+export const ConnectLink = styled.a`
+  color: ${colorPalette.mintGreen};
+  text-decoration: underline;
+  margin-left: ${getSpacing(1)};
 `;
 
 export const InputFieldWrapper = styled.div`

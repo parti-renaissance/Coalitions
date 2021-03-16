@@ -7,11 +7,13 @@ import {
   Title,
   InputFieldWrapper,
   ValidateButtonContainer,
+  Connect,
+  ConnectLink,
 } from './LoginModal.style';
 import { SlideProps } from '@material-ui/core/Slide';
 import { Dialog, Slide, CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { Formik } from 'formik';
@@ -22,6 +24,7 @@ import {
   getCityOrCountryLabel,
 } from './lib/useCityAndCountryAutocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { oauthUrl } from 'services/networking/client';
 
 interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
@@ -65,6 +68,12 @@ const LoginModal = <OtherFormValues,>({
           <StyledCloseIcon />
         </StyledCloseButton>
         <Title>{title}</Title>
+        <Connect>
+          <FormattedMessage id="login_modal.signed-up" />
+          <ConnectLink href={oauthUrl}>
+            <FormattedMessage id="login_modal.connect" />
+          </ConnectLink>
+        </Connect>
         <Formik
           initialValues={{} as FormValues & OtherFormValues}
           validate={validateForm}

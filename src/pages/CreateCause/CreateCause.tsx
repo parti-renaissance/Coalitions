@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import { Formik } from 'formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
+import CoalitionCards from './components/CoalitionCards';
 
 const CreateCause: FunctionComponent = () => {
   const intl = useIntl();
@@ -75,7 +76,7 @@ const CreateCause: FunctionComponent = () => {
               <InputSection
                 title={intl.formatMessage({ id: 'create_cause.coalitions.title' })}
                 tips={intl.formatMessage({ id: 'create_cause.coalitions.tips' })}
-                BottomChildren={(() => <div />) as FunctionComponent<{}>}
+                BottomChildren={CoalitionCards}
               />
             </form>
           )}

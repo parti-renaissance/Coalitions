@@ -3,6 +3,7 @@ import { Container, SubContainer, TopImage, StyledInputDescription } from './Cre
 import InputSection from './components/InputSection';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
+import Cropper from './components/Cropper';
 
 const CreateCause: FunctionComponent = () => {
   const intl = useIntl();
@@ -42,6 +43,7 @@ const CreateCause: FunctionComponent = () => {
           />
         </InputSection>
       </SubContainer>
+      <Cropper />
     </Container>
   );
 };

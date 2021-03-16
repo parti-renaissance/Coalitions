@@ -20,7 +20,7 @@ const CreateCause: FunctionComponent = () => {
       <SubContainer>
         <TopImage src="/images/createCause.jpg" />
         <Formik initialValues={{} as FormValues} validate={validateForm} onSubmit={onValidateClick}>
-          {({ values, errors, handleChange, handleBlur, handleSubmit, touched }) => (
+          {({ values, errors, handleChange, handleBlur, handleSubmit, touched, setFieldValue }) => (
             <form onSubmit={handleSubmit}>
               <InputSection
                 title={intl.formatMessage({ id: 'create_cause.title.title' })}
@@ -76,7 +76,30 @@ const CreateCause: FunctionComponent = () => {
               <InputSection
                 title={intl.formatMessage({ id: 'create_cause.coalitions.title' })}
                 tips={intl.formatMessage({ id: 'create_cause.coalitions.tips' })}
-                BottomChildren={CoalitionCards}
+                BottomChildren={
+                  (() => (
+                    <CoalitionCards
+                      selectedCoalitionUuids={values.coalitionUuids}
+                      onCoalitionClick={(coalitionUuid: string) => {
+                        if (values.coalitionUuids !== undefined) {
+                          if (values.coalitionUuids.includes(coalitionUuid)) {
+                            const indexToRemove = values.coalitionUuids.indexOf(coalitionUuid);
+                            const newValues = [...values.coalitionUuids];
+                            newValues.splice(indexToRemove, 1);
+                            setFieldValue('coalitionUuids', newValues);
+                          } else {
+                            setFieldValue('coalitionUuids', [
+                              ...values.coalitionUuids,
+                              coalitionUuid,
+                            ]);
+                          }
+                        } else {
+                          setFieldValue('coalitionUuids', [coalitionUuid]);
+                        }
+                      }}
+                    />
+                  )) as FunctionComponent<{}>
+                }
               />
             </form>
           )}

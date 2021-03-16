@@ -60,8 +60,6 @@ export const SelectedCoalitionContainer = styled.div`
   height: ${MOBILE_IMAGE_HEIGHT};
   width: 100%;
   box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   border-radius: ${borderRadius.medium};
   border: ${BORDER_WIDTH} solid ${colorPalette.mintGreen2};
   display: flex;

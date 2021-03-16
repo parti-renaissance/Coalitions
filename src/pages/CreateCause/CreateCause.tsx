@@ -72,6 +72,11 @@ const CreateCause: FunctionComponent = () => {
                   inputProps={{ maxLength: 10000 }}
                 />
               </InputSection>
+              <InputSection
+                title={intl.formatMessage({ id: 'create_cause.coalitions.title' })}
+                tips={intl.formatMessage({ id: 'create_cause.coalitions.tips' })}
+                BottomChildren={(() => <div />) as FunctionComponent<{}>}
+              />
             </form>
           )}
         </Formik>

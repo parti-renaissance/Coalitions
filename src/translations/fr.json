@@ -89,6 +89,10 @@
       "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre.",
       "shortDescriptionPlaceholder": "Chapeau de votre cause (optionnel)",
       "descriptionPlaceholder": "Description de votre cause (optionnel)"
+    },
+    "coalitions": {
+      "title": "4. Quelle est la coalition dans laquelle vous souhaitez créer cette cause ?",
+      "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre."
     }
   },
   "form_errors": {

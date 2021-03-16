@@ -90,15 +90,11 @@ export const useCauseFollow = (id: string) => {
   );
 
   const followCause = useCallback(async () => {
-    try {
-      await doFollowCause();
-    } catch (err) {
-      console.log('error', err);
-    }
-    if (error === undefined) {
+    const response = await doFollowCause();
+    if (response.uuid !== undefined) {
       dispatch(optimisticallyMarkCauseAsSupported(id));
     }
-  }, [dispatch, doFollowCause, error, id]);
+  }, [dispatch, doFollowCause, id]);
 
-  return { loading, followCause };
+  return { loading, error, followCause };
 };

@@ -24,11 +24,13 @@ export const SubContainer = styled.div`
 `;
 
 export const TopImage = styled.img`
+  margin-bottom: -${getSpacing(5)};
   height: ${getSpacing(24)};
   width: ${getSpacing(24)};
   ${media.desktop(`
     height: ${getSpacing(33)};
     width: ${getSpacing(33)};
+    margin-bottom: -${getSpacing(10)};
   `)}
 `;
 

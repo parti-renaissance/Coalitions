@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   getSpacing,
   colorPalette,
@@ -10,7 +10,10 @@ import {
 } from 'stylesheet';
 
 export const Container = styled.div`
-  margin: ${getSpacing(10)} 0;
+  margin-top: ${getSpacing(10)};
+  ${media.desktop(`
+    margin-top: ${getSpacing(20)};
+  `)};
 `;
 
 export const Title = styled.div`
@@ -22,25 +25,32 @@ export const Title = styled.div`
   ${media.desktop(`
     margin-bottom: ${getSpacing(10)};
     text-align: center;
-    font-size: ${fontSize.xLarge};
-    line-height: ${lineHeight.medium};
+    font-size: ${fontSize.xxLarge};
+    line-height: ${lineHeight.large};
   `)}
 `;
 
-export const TipsContainer = styled.div`
+export const TipsContainer = styled.div<{ hasMiddleChildren: boolean }>`
   font-family: ${fontFamily.main};
   font-size: ${fontSize.small};
   line-height: ${lineHeight.small};
   color: ${colorPalette.greyDark};
-  margin-top: ${getSpacing(3)};
   padding: ${getSpacing(3)};
   background-color: ${colorPalette.greyLight};
   ${media.desktop(`
-    margin-top: ${getSpacing(6)};
     padding: ${getSpacing(4)};
     font-size: ${fontSize.mediumLarge};
     line-height: ${lineHeight.medium};
   `)}
+  ${({ hasMiddleChildren }) =>
+    hasMiddleChildren
+      ? css`
+          margin-top: ${getSpacing(3)};
+          ${media.desktop(`
+            margin-top: ${getSpacing(6)};
+          `)}
+        `
+      : css``};
 `;
 
 export const Tips = styled.span`

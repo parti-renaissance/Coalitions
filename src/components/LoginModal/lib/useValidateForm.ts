@@ -11,7 +11,7 @@ export const useValidateForm = <OtherFormValues>() => {
 
   const validateForm = ({ firstName, email, cityId }: FormValues & OtherFormValues) => {
     const errors = {} as FormValues & OtherFormValues;
-    const requiredErrorMessage = intl.formatMessage({ id: 'login_modal.form_errors.required' });
+    const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
 
     if (firstName === undefined || firstName.length === 0) {
       errors.firstName = requiredErrorMessage;
@@ -20,7 +20,7 @@ export const useValidateForm = <OtherFormValues>() => {
     if (email === undefined || email.length === 0) {
       errors.email = requiredErrorMessage;
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-      errors.email = intl.formatMessage({ id: 'login_modal.form_errors.invalid-email' });
+      errors.email = intl.formatMessage({ id: 'form_errors.invalid-email' });
     }
 
     if (cityId === undefined || cityId.length === 0) {

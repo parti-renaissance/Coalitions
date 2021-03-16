@@ -57,11 +57,7 @@
     "first-name": "Prénom",
     "email-address": "Adresse email",
     "city-or-country": "Ville ou Pays hors France",
-    "validate": "Valider",
-    "form_errors": {
-      "required": "Champ requis",
-      "invalid-email": "Email invalide"
-    }
+    "validate": "Valider"
   },
   "general": {
     "see-more": "Voir plus"
@@ -91,8 +87,12 @@
     "description": {
       "title": "2. Description de votre cause",
       "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre.",
-      "descriptionTitlePlaceholder": "Chapeau de votre cause (optionnel)",
+      "shortDescriptionPlaceholder": "Chapeau de votre cause (optionnel)",
       "descriptionPlaceholder": "Description de votre cause (optionnel)"
     }
+  },
+  "form_errors": {
+    "required": "Champ requis",
+    "invalid-email": "Email invalide"
   }
 }

@@ -19,7 +19,7 @@ const InputSection: FunctionComponent<InputSectionProps> = ({
     <Container>
       <Title>{title}</Title>
       {children}
-      <TipsContainer withBottomTop={children !== undefined}>
+      <TipsContainer hasMiddleChildren={children !== undefined}>
         <Tips>{intl.formatMessage({ id: 'create_cause.tips' })}</Tips>
         {` ${tips}`}
       </TipsContainer>

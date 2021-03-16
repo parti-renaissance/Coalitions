@@ -30,7 +30,7 @@ export const Title = styled.div`
   `)}
 `;
 
-export const TipsContainer = styled.div<{ withBottomTop: boolean }>`
+export const TipsContainer = styled.div<{ hasMiddleChildren: boolean }>`
   font-family: ${fontFamily.main};
   font-size: ${fontSize.small};
   line-height: ${lineHeight.small};
@@ -42,8 +42,8 @@ export const TipsContainer = styled.div<{ withBottomTop: boolean }>`
     font-size: ${fontSize.mediumLarge};
     line-height: ${lineHeight.medium};
   `)}
-  ${({ withBottomTop }) =>
-    withBottomTop
+  ${({ hasMiddleChildren }) =>
+    hasMiddleChildren
       ? css`
           margin-top: ${getSpacing(3)};
           ${media.desktop(`

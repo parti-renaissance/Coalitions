@@ -28,7 +28,7 @@ export const CoalitionContainer = styled.div`
   ${media.desktop(`
     margin-bottom: ${getSpacing(4)};
     width: calc(
-      (100% - ${MARGIN_BETWEEN_CARDS} - ${MARGIN_BETWEEN_CARDS}) / 3
+      (100% - 2 * ${MARGIN_BETWEEN_CARDS}) / 3
     );
   `)}
 `;

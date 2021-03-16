@@ -34,7 +34,7 @@ const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, s
           <FormattedMessage
             id="cause.supports"
             values={{
-              supportsNumber: 17038,
+              supportsNumber: cause.followers_count,
             }}
           />
         )}

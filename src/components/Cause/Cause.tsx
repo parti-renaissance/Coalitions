@@ -1,6 +1,8 @@
 import React, { useState, FunctionComponent } from 'react';
 import { SmallButton, DefaultButton } from 'components/Button/Button';
 import { Cause as CauseType } from 'redux/Cause/types';
+import useSelector from 'redux/useSelector';
+import { getUserToken } from 'redux/Login';
 import {
   Author,
   ButtonContainer,
@@ -16,6 +18,7 @@ import AuthorAndSupports from 'components/AuthorAndSupports';
 import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 import { PATHS } from 'routes';
+import { useCauseFollow } from 'redux/Cause/hooks';
 
 interface CauseProps {
   cause: CauseType;
@@ -23,10 +26,15 @@ interface CauseProps {
 
 const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const { loading, followCause } = useCauseFollow(cause.uuid);
+  const isUserLoggedIn = Boolean(useSelector(getUserToken));
 
   const onSupportClick = () => {
-    // TODO check if user is connected
-    setIsModalOpened(true);
+    if (isUserLoggedIn) {
+      followCause();
+    } else {
+      setIsModalOpened(true);
+    }
   };
 
   const closeModal = () => {
@@ -51,9 +59,17 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </Author>
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
-            <SmallButton size="small" variant="contained" color="primary" onClick={onSupportClick}>
-              <FormattedMessage id="cause.support-button" />
-            </SmallButton>
+            {cause.supported || (
+              <SmallButton
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={onSupportClick}
+                isLoading={loading}
+              >
+                <FormattedMessage id="cause.support-button" />
+              </SmallButton>
+            )}
             <Link to={PATHS.CAUSE.url(cause.uuid)}>
               <DefaultButton size="small" variant="outlined">
                 <FormattedMessage id="cause.see-button" />

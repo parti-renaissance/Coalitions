@@ -5,6 +5,8 @@ export interface Cause {
   description: string;
   uuid: string;
   image_url: string;
+  followers_count: number;
+  supported?: boolean;
 }
 
 interface Author {

@@ -36,7 +36,8 @@ export const login = async (code: string) => {
 };
 
 export const refresh = async () => {
-  const refreshToken = localStorage.get(REFRESH_TOKEN_KEY);
+  const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+  if (refreshToken === null) return;
   const payload = {
     client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
     refresh_token: refreshToken,
@@ -63,7 +64,8 @@ class Client {
   baseUrl: string;
   withCredentials: boolean;
   agent: request.SuperAgentStatic & request.Request;
-  tokenKey = ACCESS_TOKEN_KEY;
+  accessTokenKey = ACCESS_TOKEN_KEY;
+  refreshTokenKey = REFRESH_TOKEN_KEY;
 
   constructor(baseUrl: string, withCredentials = true) {
     this.baseUrl = baseUrl;
@@ -98,11 +100,11 @@ class Client {
   }
 
   getToken() {
-    return localStorage.getItem(this.tokenKey);
+    return localStorage.getItem(this.accessTokenKey);
   }
 
   updateToken(token: string) {
-    return localStorage.setItem(this.tokenKey, token);
+    return localStorage.setItem(this.accessTokenKey, token);
   }
 
   /**
@@ -113,16 +115,18 @@ class Client {
     const token = this.getToken();
 
     // There was no token to begin with, nothing to check.
-    if (!token) return;
-
-    const parsedToken = jwt_decode<AccessToken>(token);
-    if (tokenHasExpired(parsedToken)) {
-      try {
-        await refresh();
-      } catch (e) {
-        // Token was invalid, logging out the user.
-        this.updateToken('');
-        // LOGOUT
+    if (!token) {
+      await refresh();
+    } else {
+      const parsedToken = jwt_decode<AccessToken>(token);
+      if (tokenHasExpired(parsedToken)) {
+        try {
+          await refresh();
+        } catch (e) {
+          // Token was invalid, logging out the user.
+          this.updateToken('');
+          // LOGOUT
+        }
       }
     }
   }
@@ -131,11 +135,11 @@ class Client {
     return this.request('get', endpoint);
   }
 
-  post(endpoint: string, data: object) {
+  post(endpoint: string, data: object | null) {
     return this.request('post', endpoint, data);
   }
 
-  put(endpoint: string, data: object) {
+  put(endpoint: string, data: object | null) {
     return this.request('put', endpoint, data);
   }
 }
@@ -143,5 +147,6 @@ class Client {
 const client = new Client(backendBaseUrl);
 export const githubApiClient = new Client('https://api.github.com', false);
 export const coalitionApiClient = new Client(backendBaseUrl, false);
+export const authenticatedApiClient = new Client(backendBaseUrl, true);
 
 export default client;

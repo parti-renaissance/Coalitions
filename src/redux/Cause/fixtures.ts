@@ -1,5 +1,6 @@
 export const CAUSES_MOCK = [
   {
+    followers_count: 12,
     author: {
       first_name: 'Charles',
       last_name_initial: 'G',
@@ -15,6 +16,7 @@ export const CAUSES_MOCK = [
     image_url: 'imageUrl',
   },
   {
+    followers_count: 1,
     author: {
       first_name: 'Georges',
       last_name_initial: 'P',
@@ -34,6 +36,7 @@ export const CAUSES_MOCK = [
 export const CAUSES_MOCK_STORE = {
   causes: {
     cause1Uuid: {
+      followers_count: 12,
       author: {
         first_name: 'Charles',
         last_name_initial: 'G',
@@ -49,6 +52,7 @@ export const CAUSES_MOCK_STORE = {
       image_url: 'imageUrl',
     },
     cause2Uuid: {
+      followers_count: 1,
       author: {
         first_name: 'Georges',
         last_name_initial: 'P',

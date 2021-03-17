@@ -1,7 +1,7 @@
 import reducer, { userLoggedIn, userLoggedOut } from '../slice';
 
 const token = 'OX1dSSVRFX1BPU1QsQ0FOX1JFQURfTkV';
-const initialState = { token: null };
+const initialState = { token: null, afterAuthAction: { followCause: null, redirectTo: null } };
 
 describe('Login reducer', () => {
   describe('USER_LOGIN_SUCCESS case', () => {
@@ -18,7 +18,7 @@ describe('Logout reducer', () => {
   describe('USER_LOGOUT case', () => {
     it('Should remove all information about the logged in user', () => {
       const action = userLoggedOut;
-      const loggedState = { token };
+      const loggedState = { ...initialState, token };
       const expectedState = initialState;
 
       expect(reducer(loggedState, action)).toEqual(expectedState);

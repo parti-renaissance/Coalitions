@@ -29,6 +29,7 @@ import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { SmallButton } from 'components/Button/Button';
 import { useSnackbar } from 'redux/Snackbar/hooks';
 import { useCauseFollow } from 'redux/Cause/hooks';
+import { PATHS } from 'routes';
 
 interface CausePageNavParams {
   causeId: string;
@@ -147,7 +148,12 @@ const CausePage: React.FunctionComponent = () => {
           </FixedBottomButton>
         </MobileSupportButtonWrapper>
       )}
-      <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} cause={cause} />
+      <LoginAndSupportModal
+        isOpened={isModalOpened}
+        onClose={closeModal}
+        cause={cause}
+        redirectToAfterAuth={PATHS.CAUSE.url(cause.uuid)}
+      />
     </>
   );
 };

@@ -2,11 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type LoginState = Readonly<{
   token: string | null;
+  afterAuthAction: { followCause: { id: string } | null; redirectTo: string | null };
 }>;
 
-const initialState: LoginState = { token: null };
+const initialState: LoginState = {
+  token: null,
+  afterAuthAction: { followCause: null, redirectTo: null },
+};
 
-const avatarSlice = createSlice({
+const loginSlice = createSlice({
   name: 'Login',
   initialState,
   reducers: {
@@ -14,8 +18,23 @@ const avatarSlice = createSlice({
       state.token = action.payload;
     },
     userLoggedOut: () => initialState,
+    setAfterAuthFollowCause: (state, action: PayloadAction<string>) => {
+      state.afterAuthAction.followCause = { id: action.payload };
+    },
+    setAfterAuthRedirect: (state, action: PayloadAction<string>) => {
+      state.afterAuthAction.redirectTo = action.payload;
+    },
+    cleanAfterAuthAction: state => {
+      state.afterAuthAction = initialState.afterAuthAction;
+    },
   },
 });
 
-export const { userLoggedIn, userLoggedOut } = avatarSlice.actions;
-export default avatarSlice.reducer;
+export const {
+  userLoggedIn,
+  userLoggedOut,
+  setAfterAuthFollowCause,
+  setAfterAuthRedirect,
+  cleanAfterAuthAction,
+} = loginSlice.actions;
+export default loginSlice.reducer;

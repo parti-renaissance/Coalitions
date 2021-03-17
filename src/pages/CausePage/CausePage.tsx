@@ -55,7 +55,7 @@ const CausePage: React.FunctionComponent = () => {
 
   useEffect(() => {
     fetchCause();
-  }, [fetchCause]);
+  }, [fetchCause, isUserLoggedIn]);
 
   const onActiveTabIndexChange = (_: ChangeEvent<{}>, value: number) => {
     setActiveTabIndex(value);

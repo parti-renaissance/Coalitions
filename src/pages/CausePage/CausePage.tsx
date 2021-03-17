@@ -107,7 +107,7 @@ const CausePage: React.FunctionComponent = () => {
       <CausePageContainer>
         <CausePageHeader>
           <CauseImage backgroundImage={cause.image_url} />
-          {cause.supported ? (
+          {Boolean(cause.supported) ? (
             <Supported>
               <FormattedMessage id="cause.supported" />
             </Supported>
@@ -120,7 +120,7 @@ const CausePage: React.FunctionComponent = () => {
                 <AuthorAndSupports cause={cause} showAuthor />
               </AuthorAndSupportsWrapper>
             </div>
-            {cause.supported || (
+            {Boolean(cause.supported) || (
               <DesktopSupportButton
                 size="small"
                 variant="contained"
@@ -147,7 +147,7 @@ const CausePage: React.FunctionComponent = () => {
         </TabsWrapper>
         <CreateCauseCTA displayLinkToCauseList />
       </CausePageContainer>
-      {cause.supported || (
+      {Boolean(cause.supported) || (
         <MobileSupportButtonWrapper>
           <FixedBottomButton onClick={onSupportClick} isLoading={loadingCauseFollow}>
             {intl.formatMessage({ id: 'cause.support-button' })}

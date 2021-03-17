@@ -69,7 +69,7 @@ export const StyledTab = styled(Tab)`
   font-size: ${fontSize.small};
   ${({ selected }) =>
     css`
-      opacity: ${selected ? 1 : 0.6};
+      opacity: ${Boolean(selected) ? 1 : 0.6};
       border-bottom: 2px solid ${colorPalette.greyLight};
       font-family: ${fontFamily.main};
       font-weight: ${selected ? fontWeight.bold : fontWeight.normal};

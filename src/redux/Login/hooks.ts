@@ -39,7 +39,7 @@ export const useLogin = () => {
   return useTypedAsyncFn<{ code: string }>(
     async ({ code }) => {
       const token: string | undefined = await login(code);
-      if (token) {
+      if (token !== undefined) {
         dispatch(userLoggedIn(token));
         Sentry.configureScope(scope => {
           scope.setUser({

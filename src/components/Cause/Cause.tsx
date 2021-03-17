@@ -46,7 +46,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   return (
     <>
       <StyledCard>
-        {cause.supported ? (
+        {Boolean(cause.supported) ? (
           <Supported>
             <FormattedMessage id="cause.supported" />
           </Supported>
@@ -66,7 +66,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </Author>
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
-            {cause.supported || (
+            {Boolean(cause.supported) || (
               <SmallButton
                 size="small"
                 variant="contained"

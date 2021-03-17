@@ -1,10 +1,12 @@
 import React, { FunctionComponent, ChangeEvent } from 'react';
 import LoginModal from 'components/LoginModal';
 import { useIntl } from 'react-intl';
+import { useDispatch } from 'react-redux';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 import { FormControlLabelWrapper, Label } from './LoginAndSupportModal.style';
 import { Cause as CauseType } from 'redux/Cause/types';
 import { FormValues } from 'components/LoginModal/lib/useValidateForm';
+import { setAfterAuthFollowCause } from 'redux/Login/slice';
 
 interface LoginAndSupportModalProps {
   isOpened: boolean;
@@ -23,6 +25,7 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
   cause,
 }) => {
   const intl = useIntl();
+  const dispatch = useDispatch();
 
   const renderAdditionalFields: FunctionComponent<{
     onChange: (event: ChangeEvent) => void;
@@ -71,10 +74,15 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
     </>
   );
 
+  const onConnect = () => {
+    dispatch(setAfterAuthFollowCause(cause.uuid));
+  };
+
   return (
     <LoginModal<LoginAndSupportOtherFormValues>
       isOpened={isOpened}
       onClose={onClose}
+      onConnect={onConnect}
       title={intl.formatMessage({ id: 'cause.confirm-support' })}
       AdditionalFields={renderAdditionalFields}
     />

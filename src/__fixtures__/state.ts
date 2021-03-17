@@ -5,6 +5,7 @@ export const state = {
   },
   login: {
     token: 'someToken',
+    afterAuthAction: { followCause: null },
   },
   cause: {
     ids: [],

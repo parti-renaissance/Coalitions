@@ -3,7 +3,7 @@ import { getUserToken } from '../selectors';
 
 const token = 'OX1dSSVRFX1BPU1QsQ0FOX1JFQURfTkV';
 
-const initialState = { ...state, login: { token } };
+const initialState = { ...state, login: { ...state.login, token } };
 
 describe('Login selectors', () => {
   describe('getUserToken function', () => {

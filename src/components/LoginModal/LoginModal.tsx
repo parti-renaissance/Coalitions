@@ -24,11 +24,12 @@ import {
   getCityOrCountryLabel,
 } from './lib/useCityAndCountryAutocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { oauthUrl } from 'services/networking/client';
+import { oauthUrl } from 'services/networking/auth';
 
 interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
   onClose: () => void;
+  onConnect: () => void;
   title: string;
   AdditionalFields: FunctionComponent<{
     onChange: (e: ChangeEvent) => void;
@@ -45,6 +46,7 @@ const SlideUp = forwardRef<{}, SlideProps>(SlideUpComponent);
 const LoginModal = <OtherFormValues,>({
   isOpened,
   onClose,
+  onConnect,
   title,
   AdditionalFields,
 }: LoginModalProps<OtherFormValues>) => {
@@ -70,7 +72,7 @@ const LoginModal = <OtherFormValues,>({
         <Title>{title}</Title>
         <Connect>
           <FormattedMessage id="login_modal.signed-up" />
-          <ConnectLink href={oauthUrl}>
+          <ConnectLink onClick={onConnect} href={oauthUrl}>
             <FormattedMessage id="login_modal.connect" />
           </ConnectLink>
         </Connect>

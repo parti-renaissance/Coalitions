@@ -10,6 +10,7 @@ import {
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback, useState } from 'react';
 import { Cause } from './types';
+import { useFetchFollowedCauses } from './followHooks';
 
 const PAGE_SIZE = 12;
 
@@ -33,10 +34,7 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
     [],
   );
 
-  const [{ loading: loadingFollowed }, doFetchFollowedCauses] = useTypedAsyncFn(
-    async (uuids: string[]) => await authenticatedApiClient.post('v3/causes/followed', { uuids }),
-    [],
-  );
+  const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 
   const fetch = useCallback(
     async (page: number, filteredByCoalitionIds: string[]) => {
@@ -89,10 +87,7 @@ export const useFetchOneCause = (id: string) => {
     [],
   );
 
-  const [{ loading: loadingFollowed }, doFetchFollowedCauses] = useTypedAsyncFn(
-    async (uuids: string[]) => await authenticatedApiClient.post('v3/causes/followed', { uuids }),
-    [],
-  );
+  const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 
   const fetchCause = useCallback(async () => {
     const cause: Cause = await doFetchCause();

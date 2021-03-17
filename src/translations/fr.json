@@ -92,7 +92,8 @@
     },
     "image": {
       "title": "3. Ajouter une image",
-      "tips": "Ajoutez une image représentative de votre cause pour lui permettre d’avoir plus d’impact lorsque vous la partagerez."
+      "tips": "Ajoutez une image représentative de votre cause pour lui permettre d’avoir plus d’impact lorsque vous la partagerez.",
+      "update": "Modifier mon image"
     },
     "coalitions": {
       "title": "4. Quelle est la coalition dans laquelle vous souhaitez créer cette cause ?",

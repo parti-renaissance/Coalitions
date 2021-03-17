@@ -6,6 +6,7 @@ import InputField from 'components/InputField';
 import { Formik } from 'formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
 import CoalitionCards from './components/CoalitionCards';
+import ImageCropper from './components/ImageCropper';
 
 const CreateCause: FunctionComponent = () => {
   const intl = useIntl();
@@ -72,6 +73,12 @@ const CreateCause: FunctionComponent = () => {
                   helperText={touched.description === true ? errors.description : undefined}
                   inputProps={{ maxLength: 10000 }}
                 />
+              </InputSection>
+              <InputSection
+                title={intl.formatMessage({ id: 'create_cause.image.title' })}
+                tips={intl.formatMessage({ id: 'create_cause.image.tips' })}
+              >
+                <ImageCropper />
               </InputSection>
               <InputSection
                 title={intl.formatMessage({ id: 'create_cause.coalitions.title' })}

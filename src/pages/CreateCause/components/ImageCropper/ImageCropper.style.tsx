@@ -9,6 +9,7 @@ import {
   media,
 } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
+import Cropper from 'react-cropper';
 
 const INPUT_BORDER_WIDTH = '1px';
 
@@ -25,7 +26,7 @@ export const InputContainer = styled.div`
   `)}
 `;
 
-export const StyledInput = styled.input`
+export const HiddenInput = styled.input`
   display: none;
 `;
 
@@ -74,5 +75,18 @@ export const ImportLabel = styled.div`
     margin-top: ${getSpacing(4)};
     font-size: ${fontSize.mediumLarge};
     line-height: ${lineHeight.medium};
+  `)}
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+export const StyledCropper = styled(Cropper)`
+  width: 100%;
+  height: ${getSpacing(60)};
+  ${media.desktop(`
+    height: ${getSpacing(80)};
   `)}
 `;

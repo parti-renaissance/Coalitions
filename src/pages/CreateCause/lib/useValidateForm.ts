@@ -5,6 +5,7 @@ export interface FormValues {
   shortDescription?: string;
   description?: string;
   coalitionUuids?: string[];
+  image?: string;
 }
 
 export interface FormErrors {
@@ -12,12 +13,13 @@ export interface FormErrors {
   shortDescription?: string;
   description?: string;
   coalitionUuids?: string;
+  image?: string;
 }
 
 export const useValidateForm = () => {
   const intl = useIntl();
 
-  const validateForm = ({ title, coalitionUuids }: FormValues) => {
+  const validateForm = ({ title, coalitionUuids, image }: FormValues) => {
     const errors = {} as FormErrors;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
 
@@ -27,6 +29,10 @@ export const useValidateForm = () => {
 
     if (coalitionUuids === undefined || coalitionUuids.length === 0) {
       errors.coalitionUuids = requiredErrorMessage;
+    }
+
+    if (image === undefined) {
+      errors.image = requiredErrorMessage;
     }
 
     return errors;

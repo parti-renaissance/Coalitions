@@ -6,12 +6,13 @@ import { FormControlLabel, Checkbox } from '@material-ui/core';
 import { FormControlLabelWrapper, Label } from './LoginAndSupportModal.style';
 import { Cause as CauseType } from 'redux/Cause/types';
 import { FormValues } from 'components/LoginModal/lib/useValidateForm';
-import { setAfterAuthFollowCause } from 'redux/Login/slice';
+import { setAfterAuthFollowCause, setAfterAuthRedirect } from 'redux/Login/slice';
 
 interface LoginAndSupportModalProps {
   isOpened: boolean;
   onClose: () => void;
   cause: CauseType;
+  redirectToAfterAuth?: string;
 }
 
 interface LoginAndSupportOtherFormValues {
@@ -23,6 +24,7 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
   isOpened,
   onClose,
   cause,
+  redirectToAfterAuth = '',
 }) => {
   const intl = useIntl();
   const dispatch = useDispatch();
@@ -76,6 +78,9 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
 
   const onConnect = () => {
     dispatch(setAfterAuthFollowCause(cause.uuid));
+    if (redirectToAfterAuth !== '') {
+      dispatch(setAfterAuthRedirect(redirectToAfterAuth));
+    }
   };
 
   return (

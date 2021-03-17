@@ -1,7 +1,7 @@
 import reducer, { userLoggedIn, userLoggedOut } from '../slice';
 
 const token = 'OX1dSSVRFX1BPU1QsQ0FOX1JFQURfTkV';
-const initialState = { token: null, afterAuthAction: { followCause: null } };
+const initialState = { token: null, afterAuthAction: { followCause: null, redirectTo: null } };
 
 describe('Login reducer', () => {
   describe('USER_LOGIN_SUCCESS case', () => {

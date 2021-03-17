@@ -92,6 +92,13 @@
       "short-description-placeholder": "Chapeau de votre cause (optionnel)",
       "description-placeholder": "Description de votre cause (optionnel)"
     },
+    "image": {
+      "title": "3. Ajouter une image",
+      "tips": "Ajoutez une image représentative de votre cause pour lui permettre d’avoir plus d’impact lorsque vous la partagerez.",
+      "update": "Modifier mon image",
+      "importFromGallery": "Importer une photo depuis votre pellicule",
+      "importFromComputer": "Importer une photo depuis votre ordinateur"
+    },
     "coalitions": {
       "title": "4. Quelle est la coalition dans laquelle vous souhaitez créer cette cause ?",
       "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre.",

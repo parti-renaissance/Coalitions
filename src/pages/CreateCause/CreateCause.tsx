@@ -45,8 +45,7 @@ const CreateCause: FunctionComponent = () => {
             validate={validateForm}
             onSubmit={onValidateClick}
           >
-            {// eslint-disable-next-line complexity
-            ({
+            {({
               values,
               errors,
               handleChange,
@@ -54,7 +53,6 @@ const CreateCause: FunctionComponent = () => {
               handleSubmit,
               touched,
               setFieldValue,
-              isSubmitting,
               setFieldTouched,
             }) => (
               <form onSubmit={handleSubmit}>
@@ -153,9 +151,7 @@ const CreateCause: FunctionComponent = () => {
                   }
                 />
                 <ValidateButton
-                  disabled={
-                    isSubmitting || Object.keys(errors).length > 0 || touched.title !== true
-                  }
+                  disabled={Object.keys(errors).length > 0 || touched.title !== true}
                   type="submit"
                   size="small"
                   variant="contained"

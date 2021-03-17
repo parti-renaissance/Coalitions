@@ -96,6 +96,7 @@
       "title": "3. Ajouter une image",
       "tips": "Ajoutez une image représentative de votre cause pour lui permettre d’avoir plus d’impact lorsque vous la partagerez.",
       "update": "Modifier mon image",
+      "generate": "Générer",
       "importFromGallery": "Importer une photo depuis votre pellicule",
       "importFromComputer": "Importer une photo depuis votre ordinateur"
     },

@@ -78,7 +78,10 @@ const CreateCause: FunctionComponent = () => {
                 title={intl.formatMessage({ id: 'create_cause.image.title' })}
                 tips={intl.formatMessage({ id: 'create_cause.image.tips' })}
               >
-                <ImageCropper />
+                <ImageCropper
+                  image={values.image}
+                  setImage={image => setFieldValue('image', image)}
+                />
               </InputSection>
               <InputSection
                 title={intl.formatMessage({ id: 'create_cause.coalitions.title' })}

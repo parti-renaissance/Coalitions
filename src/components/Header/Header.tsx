@@ -8,9 +8,7 @@ import { getUserToken } from 'redux/Login';
 import useSelector from 'redux/useSelector';
 import { useLocation } from 'react-router';
 import { useLogin } from 'redux/Login/hooks';
-
-const oauthUrl = process.env.REACT_APP_OAUTH_URL;
-const oauthClientId = process.env.REACT_APP_OAUTH_CLIENT_ID;
+import { oauthUrl } from 'services/networking/client';
 
 const Header: React.FC = () => {
   const { search } = useLocation();
@@ -36,9 +34,7 @@ const Header: React.FC = () => {
         </Link>
       )}
       {!isUserLoggedIn && (
-        <Link
-          href={`${oauthUrl}?response_type=code&client_id=${oauthClientId}&redirect_url=${window.location.href}`}
-        >
+        <Link href={oauthUrl}>
           <FormattedMessage id="header.login" />
         </Link>
       )}

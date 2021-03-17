@@ -57,7 +57,9 @@
     "first-name": "Prénom",
     "email-address": "Adresse email",
     "city-or-country": "Ville ou Pays hors France",
-    "validate": "Valider"
+    "validate": "Valider",
+    "signed-up": "Déjà inscrit ?",
+    "connect": "Connectez vous"
   },
   "general": {
     "see-more": "Voir plus"

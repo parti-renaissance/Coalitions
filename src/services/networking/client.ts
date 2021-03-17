@@ -6,6 +6,10 @@ const REFRESH_TOKEN_KEY = 'refresh_token';
 
 const backendBaseUrl = `${process.env.REACT_APP_API_BASE_URL}api/` ?? '';
 
+const oauthBaseUrl = process.env.REACT_APP_OAUTH_URL;
+const oauthClientId = process.env.REACT_APP_OAUTH_CLIENT_ID;
+export const oauthUrl = `${oauthBaseUrl}?response_type=code&client_id=${oauthClientId}&redirect_url=${window.location.href}`;
+
 type oauthPayload = {
   client_id?: string;
   code?: string;

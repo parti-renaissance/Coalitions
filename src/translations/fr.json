@@ -59,7 +59,7 @@
     "city-or-country": "Ville ou Pays hors France",
     "validate": "Valider",
     "signed-up": "Déjà inscrit ?",
-    "connect": "Connectez vous"
+    "connect": "Connectez-vous"
   },
   "general": {
     "see-more": "Voir plus"
@@ -80,6 +80,8 @@
     "creation-step-three": "Je lance une pétition, un événement, une campagne de sensibilisation pour faire vivre ma cause"
   },
   "create_cause": {
+    "validate": "Enregistrer et voir l’aperçu",
+    "create-account": "Créez un compte pour continuer",
     "tips": "Conseil :",
     "title": {
       "title": "1. Quel est l’objectif de votre cause ?",

@@ -31,7 +31,7 @@ interface LoginModalProps<OtherFormValues> {
   onClose: () => void;
   onConnect: () => void;
   title: string;
-  AdditionalFields: FunctionComponent<{
+  AdditionalFields?: FunctionComponent<{
     onChange: (e: ChangeEvent) => void;
     values: OtherFormValues & FormValues;
   }>;
@@ -154,7 +154,9 @@ const LoginModal = <OtherFormValues,>({
                   )}
                 />
               </InputFieldWrapper>
-              <AdditionalFields onChange={handleChange} values={values} />
+              {AdditionalFields !== undefined ? (
+                <AdditionalFields onChange={handleChange} values={values} />
+              ) : null}
               <ValidateButtonContainer>
                 <FixedBottomButton
                   disabled={

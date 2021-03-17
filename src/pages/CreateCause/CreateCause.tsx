@@ -153,11 +153,7 @@ const CreateCause: FunctionComponent = () => {
                 />
                 <ValidateButton
                   disabled={
-                    isSubmitting ||
-                    Object.keys(errors).length > 0 ||
-                    touched.title !== true ||
-                    touched.coalitionUuids !== true ||
-                    touched.image !== true
+                    isSubmitting || Object.keys(errors).length > 0 || touched.title !== true
                   }
                   type="submit"
                   size="small"

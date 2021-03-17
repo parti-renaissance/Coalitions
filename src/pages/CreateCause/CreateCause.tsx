@@ -87,7 +87,7 @@ const CreateCause: FunctionComponent = () => {
                             const newValues = [...values.coalitionUuids];
                             newValues.splice(indexToRemove, 1);
                             setFieldValue('coalitionUuids', newValues);
-                          } else {
+                          } else if (values.coalitionUuids.length < 2) {
                             setFieldValue('coalitionUuids', [
                               ...values.coalitionUuids,
                               coalitionUuid,

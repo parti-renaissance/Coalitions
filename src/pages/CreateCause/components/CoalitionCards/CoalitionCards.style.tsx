@@ -6,6 +6,7 @@ import {
   fontFamily,
   lineHeight,
   borderRadius,
+  fontWeight,
   colorPalette,
 } from 'stylesheet';
 
@@ -88,4 +89,21 @@ export const SelectedCoalitionIndex = styled.div`
     height: ${DESKTOP_COALITION_INDEX_SIZE};
     width: ${DESKTOP_COALITION_INDEX_SIZE};
   `)}
+`;
+
+export const NumberOfSelectedCauses = styled.div`
+  font-family: ${fontFamily.main};
+  color: ${colorPalette.greyDark};
+  font-size: ${fontSize.medium};
+  line-height: ${lineHeight.small};
+  margin-bottom: ${getSpacing(3)};
+  ${media.desktop(`
+    font-size: ${fontSize.mediumLarge};
+    line-height: ${lineHeight.medium};
+    margin-bottom: ${getSpacing(4)};
+  `)}
+`;
+
+export const Bold = styled.span`
+  font-weight: ${fontWeight.bold};
 `;

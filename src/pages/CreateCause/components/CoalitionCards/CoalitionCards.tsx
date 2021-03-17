@@ -6,11 +6,14 @@ import {
   CoalitionName,
   SelectedCoalitionContainer,
   SelectedCoalitionIndex,
+  NumberOfSelectedCauses,
+  Bold,
 } from './CoalitionCards.style';
 import { useFetchCoalitions } from 'redux/Coalition/hooks';
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
 import { Coalition } from 'redux/Coalition/types';
+import { useIntl } from 'react-intl';
 
 interface CoalitionCardsProps {
   onCoalitionClick: (coalitionUuid: string) => void;
@@ -23,6 +26,7 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
 }) => {
   const coalitions = useSelector(getCoalitions);
   const { fetchCoalitions } = useFetchCoalitions();
+  const intl = useIntl();
 
   useEffect(() => {
     fetchCoalitions();
@@ -49,7 +53,31 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
     return null;
   }
 
-  return <Container>{coalitions.map(renderCoalitionCard)}</Container>;
+  const numberOfSelectedCoalitions =
+    selectedCoalitionUuids !== undefined ? selectedCoalitionUuids.length : 0;
+  return (
+    <Container>
+      <NumberOfSelectedCauses>
+        <Bold>
+          {numberOfSelectedCoalitions <= 1
+            ? intl.formatMessage(
+                { id: 'create_cause.coalitions.zero-or-one-selected-coalition' },
+                { numberOfSelectedCoalitions },
+              )
+            : intl.formatMessage(
+                {
+                  id: `create_cause.coalitions.more-than-one-selected-coalitions`,
+                },
+                { numberOfSelectedCoalitions },
+              )}
+        </Bold>
+        {` ${intl.formatMessage({
+          id: `create_cause.coalitions.max-number-of-selected-coalitions`,
+        })}`}
+      </NumberOfSelectedCauses>
+      {coalitions.map(renderCoalitionCard)}
+    </Container>
+  );
 };
 
 export default CoalitionCards;

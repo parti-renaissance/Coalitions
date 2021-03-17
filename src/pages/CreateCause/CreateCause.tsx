@@ -44,7 +44,7 @@ const CreateCause: FunctionComponent = () => {
               >
                 <InputField
                   placeholder={intl.formatMessage({
-                    id: 'create_cause.description.shortDescriptionPlaceholder',
+                    id: 'create_cause.description.short-description-placeholder',
                   })}
                   type="text"
                   name="shortDescription"
@@ -59,7 +59,7 @@ const CreateCause: FunctionComponent = () => {
                 />
                 <StyledInputDescription
                   placeholder={intl.formatMessage({
-                    id: 'create_cause.description.descriptionPlaceholder',
+                    id: 'create_cause.description.description-placeholder',
                   })}
                   type="text"
                   name="description"
@@ -87,7 +87,7 @@ const CreateCause: FunctionComponent = () => {
                             const newValues = [...values.coalitionUuids];
                             newValues.splice(indexToRemove, 1);
                             setFieldValue('coalitionUuids', newValues);
-                          } else {
+                          } else if (values.coalitionUuids.length < 2) {
                             setFieldValue('coalitionUuids', [
                               ...values.coalitionUuids,
                               coalitionUuid,

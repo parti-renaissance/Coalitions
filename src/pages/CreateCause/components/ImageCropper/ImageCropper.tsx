@@ -39,6 +39,7 @@ interface ImageCropperProps {
 
 const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image }) => {
   const [imageToCrop, setImageToCrop] = useState<string | undefined>(undefined);
+  const [croppedImage, setCroppedImage] = useState<string | undefined>(undefined);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const cropperRef = useRef<ReactCropperElement | null>(null);
   const intl = useIntl();
@@ -52,7 +53,9 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
   const onGenerateOrUpdateClick = () => {
     if (image !== undefined && imageToCrop === undefined) {
       openGallery();
-    } else {
+    } else if (croppedImage !== undefined) {
+      setImage(croppedImage);
+      setCroppedImage(undefined);
       setImageToCrop(undefined);
     }
   };
@@ -65,7 +68,7 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
 
   const onCrop = () => {
     if (cropperRef.current !== null) {
-      setImage(cropperRef.current.cropper.getCroppedCanvas().toDataURL());
+      setCroppedImage(cropperRef.current.cropper.getCroppedCanvas().toDataURL());
     }
   };
 

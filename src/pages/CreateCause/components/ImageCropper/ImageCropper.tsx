@@ -6,6 +6,7 @@ import {
   BottomContainer,
   UpdateButton,
   PlusIconContainer,
+  ImportLabel,
 } from './ImageCropper.style';
 import { getIsMobile } from 'services/mobile/mobile';
 import PlusIcon from '@material-ui/icons/Add';
@@ -27,6 +28,11 @@ const ImageCropper: FunctionComponent<{}> = () => {
         <PlusIconContainer>
           <PlusIcon color="primary" fontSize={isMobile ? 'small' : 'default'} />
         </PlusIconContainer>
+        <ImportLabel>
+          {isMobile
+            ? intl.formatMessage({ id: 'create_cause.image.importFromGallery' })
+            : intl.formatMessage({ id: 'create_cause.image.importFromComputer' })}
+        </ImportLabel>
       </InputContainer>
       <BottomContainer>
         <UpdateButton variant="outlined" color="primary">

@@ -11,7 +11,9 @@ import {
   StyledCard,
   StyledContent,
   StyledMedia,
+  Supported,
 } from './Cause.style';
+
 import { FormattedMessage } from 'react-intl';
 import { DefaultLink as Link } from 'components/Link/Link';
 import AuthorAndSupports from 'components/AuthorAndSupports';
@@ -44,6 +46,11 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   return (
     <>
       <StyledCard>
+        {cause.supported ? (
+          <Supported>
+            <FormattedMessage id="cause.supported" />
+          </Supported>
+        ) : null}
         <StyledMedia image={cause.image_url} title="" />
         <StyledContent>
           <CoalitionName>{cause.coalition.name}</CoalitionName>

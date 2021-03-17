@@ -42,6 +42,15 @@ const causeSlice = createSlice({
       state.causes[action.payload].followers_count =
         state.causes[action.payload].followers_count + 1;
     },
+    markCausesAsSupported: (state, action: PayloadAction<string[]>) => {
+      state.causes = action.payload.reduce(
+        (causes, supportedCauseId) => {
+          causes[supportedCauseId].supported = true;
+          return causes;
+        },
+        { ...state.causes },
+      );
+    },
   },
 });
 
@@ -49,6 +58,7 @@ export const {
   resetCauses,
   updateCauses,
   updateOneCause,
+  markCausesAsSupported,
   optimisticallyMarkCauseAsSupported,
 } = causeSlice.actions;
 export default causeSlice.reducer;

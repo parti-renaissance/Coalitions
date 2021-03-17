@@ -3,6 +3,7 @@ import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette, media } fro
 import { Tab } from '@material-ui/core';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 import { MediumLargeButton } from 'components/Button/Button';
+import { Supported as OriginalSupported } from 'components/Cause/Cause.style';
 
 export const CausePageContainer = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ export const CausePageContainer = styled.div`
 `;
 
 export const CausePageHeader = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
 `;
@@ -91,4 +93,8 @@ export const DesktopSupportButton = styled(MediumLargeButton)`
     padding-left: ${getSpacing(10)};
     padding-right: ${getSpacing(10)};
   `)}
+`;
+
+export const Supported = styled(OriginalSupported)`
+  right: -${getSpacing(3)};
 `;

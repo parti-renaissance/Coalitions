@@ -17,6 +17,7 @@ import {
   AuthorAndSupportsWrapper,
   MobileSupportButtonWrapper,
   DesktopSupportButton,
+  Supported,
 } from './CausePage.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -106,6 +107,11 @@ const CausePage: React.FunctionComponent = () => {
       <CausePageContainer>
         <CausePageHeader>
           <CauseImage backgroundImage={cause.image_url} />
+          {cause.supported ? (
+            <Supported>
+              <FormattedMessage id="cause.supported" />
+            </Supported>
+          ) : null}
           <CausePageSubHeaderContainer>
             <div>
               <CoalitionName>{cause.coalition.name}</CoalitionName>

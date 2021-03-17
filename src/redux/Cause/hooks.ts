@@ -1,6 +1,7 @@
 import { coalitionApiClient, authenticatedApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
 import {
+  markCausesAsSupported,
   optimisticallyMarkCauseAsSupported,
   resetCauses,
   updateCauses,
@@ -26,9 +27,14 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
 
-  const [{ loading, error }, doFetchCauses] = useTypedAsyncFn(
+  const [{ loading: loadingFetch, error }, doFetchCauses] = useTypedAsyncFn(
     async ({ page, coalitionsFilter }: { page: number; coalitionsFilter: string }) =>
       await coalitionApiClient.get(`causes?page_size=${pageSize}&page=${page}${coalitionsFilter}`),
+    [],
+  );
+
+  const [{ loading: loadingFollowed }, doFetchFollowedCauses] = useTypedAsyncFn(
+    async (uuids: string[]) => await authenticatedApiClient.post('v3/causes/followed', { uuids }),
     [],
   );
 
@@ -38,11 +44,15 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
         page,
         coalitionsFilter: buildFilteredByUrl(filteredByCoalitionIds),
       });
+      const supportedCauses = await doFetchFollowedCauses(
+        causes.items.map((cause: Cause) => cause.uuid),
+      );
       dispatch(updateCauses({ causes: causes.items, numberOfCauses: causes.metadata.total_items }));
+      dispatch(markCausesAsSupported(supportedCauses));
       setHasMore(causes.metadata.last_page >= page + 1);
       setPage(page + 1);
     },
-    [dispatch, doFetchCauses],
+    [dispatch, doFetchCauses, doFetchFollowedCauses],
   );
 
   const fetchFirstPage = useCallback(
@@ -62,7 +72,13 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
     [hasMore, fetch, page],
   );
 
-  return { hasMore, loading, error, fetchFirstPage, fetchNextPage };
+  return {
+    hasMore,
+    loading: loadingFetch || loadingFollowed,
+    error,
+    fetchFirstPage,
+    fetchNextPage,
+  };
 };
 
 export const useFetchOneCause = (id: string) => {
@@ -73,12 +89,19 @@ export const useFetchOneCause = (id: string) => {
     [],
   );
 
+  const [{ loading: loadingFollowed }, doFetchFollowedCauses] = useTypedAsyncFn(
+    async (uuids: string[]) => await authenticatedApiClient.post('v3/causes/followed', { uuids }),
+    [],
+  );
+
   const fetchCause = useCallback(async () => {
     const cause: Cause = await doFetchCause();
+    const supportedCauses = await doFetchFollowedCauses([cause.uuid]);
     dispatch(updateOneCause(cause));
-  }, [dispatch, doFetchCause]);
+    dispatch(markCausesAsSupported(supportedCauses));
+  }, [dispatch, doFetchCause, doFetchFollowedCauses]);
 
-  return { loading, error, fetchCause };
+  return { loading: loading || loadingFollowed, error, fetchCause };
 };
 
 export const useCauseFollow = (id: string) => {

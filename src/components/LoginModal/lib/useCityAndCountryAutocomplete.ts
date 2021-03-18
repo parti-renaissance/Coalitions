@@ -33,7 +33,7 @@ export const useCityAndCountryAutocomplete = () => {
       const { items } = await coalitionApiClient.get(
         `zones?type[]=city&type[]=country&page_size=20&name=${searchText}`,
       );
-      setCities(items);
+      setCities((items as CityOrCountry[]).filter(({ code }) => code !== 'FR'));
     } catch (e) {
       showErrorSnackbar(HandleErrorService.getErrorMessage(e));
     } finally {

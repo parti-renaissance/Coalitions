@@ -52,6 +52,7 @@ export const ConnectLink = styled.a`
   color: ${colorPalette.mintGreen};
   text-decoration: underline;
   margin-left: ${getSpacing(1)};
+  cursor: pointer;
 `;
 
 export const InputFieldWrapper = styled.div`

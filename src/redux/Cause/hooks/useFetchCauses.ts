@@ -1,16 +1,10 @@
-import { coalitionApiClient, authenticatedApiClient } from 'services/networking/client';
+import { coalitionApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
-import {
-  markCausesAsSupported,
-  optimisticallyMarkCauseAsSupported,
-  resetCauses,
-  updateCauses,
-  updateOneCause,
-} from './slice';
+import { markCausesAsSupported, resetCauses, updateCauses, updateOneCause } from '../slice';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback, useState } from 'react';
-import { Cause } from './types';
-import { useFetchFollowedCauses } from './followHooks';
+import { Cause } from '../types';
+import { useFetchFollowedCauses } from './useFetchFollowedCauses';
 
 const PAGE_SIZE = 12;
 
@@ -97,22 +91,4 @@ export const useFetchOneCause = (id: string) => {
   }, [dispatch, doFetchCause, doFetchFollowedCauses]);
 
   return { loading: loading || loadingFollowed, error, fetchCause };
-};
-
-export const useCauseFollow = (id: string) => {
-  const dispatch = useDispatch();
-
-  const [{ loading, error }, doFollowCause] = useTypedAsyncFn(
-    async () => await authenticatedApiClient.put(`v3/causes/${id}/follower`, null),
-    [],
-  );
-
-  const followCause = useCallback(async () => {
-    const response = await doFollowCause();
-    if (response.uuid !== undefined) {
-      dispatch(optimisticallyMarkCauseAsSupported(id));
-    }
-  }, [dispatch, doFollowCause, id]);
-
-  return { loading, error, followCause };
 };

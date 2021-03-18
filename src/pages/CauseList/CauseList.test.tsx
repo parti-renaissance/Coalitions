@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 
 import configureStore from 'redux/store';
-import * as hooks from 'redux/Cause/hooks';
+import * as hooks from 'redux/Cause/hooks/useFetchCauses';
 import * as coalitionsHooks from 'redux/Coalition/hooks';
 import CauseList from './CauseList';
 import { CAUSES_MOCK_STORE } from 'redux/Cause/fixtures';

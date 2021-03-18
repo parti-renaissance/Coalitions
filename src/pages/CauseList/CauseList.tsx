@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import useSelector from 'redux/useSelector';
-import { useFetchCauses } from 'redux/Cause/hooks';
+import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
 import { StyledCauseList, CauseListContainer } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';

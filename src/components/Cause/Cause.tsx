@@ -20,7 +20,7 @@ import AuthorAndSupports from 'components/AuthorAndSupports';
 import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 import { PATHS } from 'routes';
-import { useCauseFollow } from 'redux/Cause/hooks';
+import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 
 interface CauseProps {
   cause: CauseType;

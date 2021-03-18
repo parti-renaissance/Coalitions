@@ -2,7 +2,7 @@ import Loader from 'components/Loader';
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { useFetchOneCause } from 'redux/Cause/hooks';
+import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
 import { getCause } from 'redux/Cause/selectors';
 import { getUserToken } from 'redux/Login';
 import {
@@ -29,7 +29,7 @@ import LoginAndSupportModal from 'components/LoginAndSupportModal';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { SmallButton } from 'components/Button/Button';
 import { useSnackbar } from 'redux/Snackbar/hooks';
-import { useCauseFollow } from 'redux/Cause/hooks';
+import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 import { PATHS } from 'routes';
 
 interface CausePageNavParams {

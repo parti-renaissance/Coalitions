@@ -1,8 +1,8 @@
 import * as useTypedAsyncFn from 'redux/useTypedAsyncFn';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { CAUSES_MOCK } from '../fixtures';
-import { useFetchCauses } from '../hooks';
-import * as hooks from '../followHooks';
+import { useFetchCauses } from '../hooks/useFetchCauses';
+import * as hooks from '../hooks/useFetchFollowedCauses';
 
 const doFetchCauses = jest
   .fn()

@@ -59,6 +59,11 @@ const LoginModal = <OtherFormValues,>({
     // TODO
   };
 
+  const onConnectClick = () => {
+    onConnect();
+    window.location.href = oauthUrl;
+  };
+
   return (
     <Dialog
       fullScreen={isMobile}
@@ -72,7 +77,7 @@ const LoginModal = <OtherFormValues,>({
         <Title>{title}</Title>
         <Connect>
           <FormattedMessage id="login_modal.signed-up" />
-          <ConnectLink onClick={onConnect} href={oauthUrl}>
+          <ConnectLink onClick={onConnectClick}>
             <FormattedMessage id="login_modal.connect" />
           </ConnectLink>
         </Connect>

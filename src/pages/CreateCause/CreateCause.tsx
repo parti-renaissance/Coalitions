@@ -16,16 +16,25 @@ import ImageCropper from './components/ImageCropper';
 import useSelector from 'redux/useSelector';
 import { getUserToken } from 'redux/Login';
 import LoginAndPreviewModal from './components/LoginAndPreviewModal';
+import { Coalition } from 'redux/Coalition/types';
+import { useDispatch } from 'react-redux';
+import { updateInCreationCause } from 'redux/Cause/slice';
+import { convertFormValuesToCause } from './lib/convertFormValuesToCause';
+import { useHistory } from 'react-router';
+import { PATHS } from 'routes';
 
 const CreateCause: FunctionComponent = () => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const [isLoginModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
   const isUserLoggedIn = Boolean(useSelector(getUserToken));
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const onValidateClick = () => {
+  const onSubmit = (values: FormValues) => {
     if (isUserLoggedIn) {
-      // TODO
+      dispatch(updateInCreationCause(convertFormValuesToCause(values)));
+      history.push(PATHS.CAUSE_PREVIEW.url());
     } else {
       setIsLoginModalOpened(true);
     }
@@ -40,11 +49,7 @@ const CreateCause: FunctionComponent = () => {
       <Container>
         <SubContainer>
           <TopImage src="/images/createCause.jpg" />
-          <Formik
-            initialValues={{} as FormValues}
-            validate={validateForm}
-            onSubmit={onValidateClick}
-          >
+          <Formik initialValues={{} as FormValues} validate={validateForm} onSubmit={onSubmit}>
             {({
               values,
               errors,
@@ -125,29 +130,34 @@ const CreateCause: FunctionComponent = () => {
                   title={intl.formatMessage({ id: 'create_cause.coalitions.title' })}
                   tips={intl.formatMessage({ id: 'create_cause.coalitions.tips' })}
                   BottomChildren={
-                    (() => (
-                      <CoalitionCards
-                        selectedCoalitionUuids={values.coalitionUuids}
-                        onCoalitionClick={(coalitionUuid: string) => {
-                          if (values.coalitionUuids !== undefined) {
-                            if (values.coalitionUuids.includes(coalitionUuid)) {
-                              const indexToRemove = values.coalitionUuids.indexOf(coalitionUuid);
-                              const newValues = [...values.coalitionUuids];
-                              newValues.splice(indexToRemove, 1);
-                              setFieldValue('coalitionUuids', newValues);
-                            } else if (values.coalitionUuids.length < 2) {
-                              setFieldValue('coalitionUuids', [
-                                ...values.coalitionUuids,
-                                coalitionUuid,
-                              ]);
+                    (() => {
+                      const selectedCoalitionUuids =
+                        values.coalitions !== undefined
+                          ? values.coalitions.map(({ uuid }) => uuid)
+                          : [];
+                      return (
+                        <CoalitionCards
+                          selectedCoalitionUuids={selectedCoalitionUuids}
+                          onCoalitionClick={(coalition: Coalition) => {
+                            if (values.coalitions !== undefined) {
+                              if (selectedCoalitionUuids.includes(coalition.uuid)) {
+                                const indexToRemove = selectedCoalitionUuids.indexOf(
+                                  coalition.uuid,
+                                );
+                                const newValues = [...values.coalitions];
+                                newValues.splice(indexToRemove, 1);
+                                setFieldValue('coalitions', newValues);
+                              } else if (values.coalitions.length < 2) {
+                                setFieldValue('coalitions', [...values.coalitions, coalition]);
+                              }
+                            } else {
+                              setFieldTouched('coalitions');
+                              setFieldValue('coalitions', [coalition]);
                             }
-                          } else {
-                            setFieldTouched('coalitionUuids');
-                            setFieldValue('coalitionUuids', [coalitionUuid]);
-                          }
-                        }}
-                      />
-                    )) as FunctionComponent<{}>
+                          }}
+                        />
+                      );
+                    }) as FunctionComponent<{}>
                   }
                 />
                 <ValidateButton

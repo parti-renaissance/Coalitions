@@ -16,8 +16,8 @@ import { Coalition } from 'redux/Coalition/types';
 import { useIntl } from 'react-intl';
 
 interface CoalitionCardsProps {
-  onCoalitionClick: (coalitionUuid: string) => void;
-  selectedCoalitionUuids?: string[];
+  onCoalitionClick: (coalition: Coalition) => void;
+  selectedCoalitionUuids: string[];
 }
 
 const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
@@ -33,12 +33,12 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
   }, [fetchCoalitions]);
 
   const renderCoalitionCard = (coalition: Coalition) => {
-    const onClick = () => onCoalitionClick(coalition.uuid);
+    const onClick = () => onCoalitionClick(coalition);
     return (
       <CoalitionContainer key={coalition.uuid} onClick={onClick}>
         <CoalitionImage src={coalition.image_url} />
         <CoalitionName>{coalition.name}</CoalitionName>
-        {selectedCoalitionUuids !== undefined && selectedCoalitionUuids.includes(coalition.uuid) ? (
+        {selectedCoalitionUuids.includes(coalition.uuid) ? (
           <SelectedCoalitionContainer>
             <SelectedCoalitionIndex>
               {selectedCoalitionUuids.indexOf(coalition.uuid) + 1}
@@ -53,8 +53,7 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
     return null;
   }
 
-  const numberOfSelectedCoalitions =
-    selectedCoalitionUuids !== undefined ? selectedCoalitionUuids.length : 0;
+  const numberOfSelectedCoalitions = selectedCoalitionUuids.length;
   return (
     <Container>
       <NumberOfSelectedCauses>

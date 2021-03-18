@@ -53,8 +53,8 @@ const causeSlice = createSlice({
         { ...state.causes },
       );
     },
-    updateInCreationCause: (state, action: PayloadAction<{ cause: InCreationCause }>) => {
-      state.inCreationCause = action.payload.cause;
+    updateInCreationCause: (state, action: PayloadAction<InCreationCause>) => {
+      state.inCreationCause = action.payload;
     },
   },
 });
@@ -65,5 +65,6 @@ export const {
   updateOneCause,
   markCausesAsSupported,
   optimisticallyMarkCauseAsSupported,
+  updateInCreationCause,
 } = causeSlice.actions;
 export default causeSlice.reducer;

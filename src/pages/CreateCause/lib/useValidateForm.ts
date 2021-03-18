@@ -1,10 +1,11 @@
 import { useIntl } from 'react-intl';
+import { Coalition } from 'redux/Coalition/types';
 
 export interface FormValues {
   title?: string;
   shortDescription?: string;
   description?: string;
-  coalitionUuids?: string[];
+  coalitions?: Coalition[];
   image?: string;
 }
 
@@ -12,14 +13,14 @@ export interface FormErrors {
   title?: string;
   shortDescription?: string;
   description?: string;
-  coalitionUuids?: string;
+  coalitions?: string;
   image?: string;
 }
 
 export const useValidateForm = () => {
   const intl = useIntl();
 
-  const validateForm = ({ title, coalitionUuids, image }: FormValues) => {
+  const validateForm = ({ title, coalitions, image }: FormValues) => {
     const errors = {} as FormErrors;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
 
@@ -27,8 +28,8 @@ export const useValidateForm = () => {
       errors.title = requiredErrorMessage;
     }
 
-    if (coalitionUuids === undefined || coalitionUuids.length === 0) {
-      errors.coalitionUuids = requiredErrorMessage;
+    if (coalitions === undefined || coalitions.length === 0) {
+      errors.coalitions = requiredErrorMessage;
     }
 
     if (image === undefined) {

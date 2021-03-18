@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { Cause as CauseType } from 'redux/Cause/types';
+import { Cause, InCreationCause } from 'redux/Cause/types';
 import { Container, AuthorContainer } from './AuthorAndSupports.style';
 import { FormattedMessage } from 'react-intl';
 import IconAndLabel from 'components/IconAndLabel';
 
 interface AuthorAndSupportsProps {
-  cause: CauseType;
+  cause: InCreationCause | Cause;
   showAuthor?: boolean;
 }
 

@@ -4,18 +4,27 @@
  */
 
 import { combineReducers } from 'redux';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
 
 import { reducer as avatar } from './Avatar';
 import { reducer as login } from './Login';
 import { reducer as cause } from './Cause';
 import { reducer as coalition } from './Coalition';
 import { reducer as snackbar } from './Snackbar';
-import { RootState } from './types';
+import { reducer as user } from './User';
 
-export default combineReducers<RootState>({
+const causePersistConfig = {
+  key: 'cause',
+  storage: storage,
+  whitelist: ['inCreationCause'],
+};
+
+export default combineReducers({
   login,
   avatar,
-  cause,
+  cause: persistReducer(causePersistConfig, cause),
   coalition,
   snackbar,
+  user,
 });

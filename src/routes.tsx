@@ -7,6 +7,7 @@ const Home = lazy(() => import('./pages/Home'));
 const CausePage = lazy(() => import('./pages/CausePage'));
 const OurMission = lazy(() => import('./pages/OurMission'));
 const CreateCause = lazy(() => import('./pages/CreateCause'));
+const CausePreview = lazy(() => import('./pages/CausePreview'));
 
 export const PATHS = {
   HOME: {
@@ -25,6 +26,10 @@ export const PATHS = {
     route: '/create-cause',
     url: () => '/create-cause',
   },
+  CAUSE_PREVIEW: {
+    route: '/cause-preview',
+    url: () => '/cause-preview',
+  },
 };
 
 const routes: FunctionComponent<{}> = () => (
@@ -35,6 +40,7 @@ const routes: FunctionComponent<{}> = () => (
         <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
         <Route path={PATHS.OUR_MISSION.route} component={OurMission}></Route>
         <Route path={PATHS.CREATE_CAUSE.route} component={CreateCause}></Route>
+        <Route path={PATHS.CAUSE_PREVIEW.route} component={CausePreview}></Route>
       </Switch>
     </Suspense>
     <Snackbar />

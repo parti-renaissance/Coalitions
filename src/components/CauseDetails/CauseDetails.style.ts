@@ -5,7 +5,7 @@ import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 import { MediumLargeButton } from 'components/Button/Button';
 import { Supported as OriginalSupported } from 'components/Cause/Cause.style';
 
-export const CausePageContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 ${getSpacing(3)} ${FULL_WIDTH_BUTTON_HEIGHT};
@@ -14,7 +14,7 @@ export const CausePageContainer = styled.div`
   `)}
 `;
 
-export const CausePageHeader = styled.div`
+export const HeaderContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@ export const CoalitionName = styled.p`
 `;
 CoalitionName.displayName = 'CoalitionName';
 
-export const CausePageSubHeaderContainer = styled.div`
+export const HeaderSubContainer = styled.div`
   padding: ${getSpacing(3)} 0;
   display: flex;
   align-items: center;

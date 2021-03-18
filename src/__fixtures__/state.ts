@@ -11,6 +11,7 @@ export const state = {
     ids: [],
     causes: {},
     numberOfCauses: null,
+    inCreationCause: undefined,
   },
   coalition: {
     ids: [],
@@ -18,5 +19,8 @@ export const state = {
   },
   snackbar: {
     snackbarConfig: undefined,
+  },
+  user: {
+    currentUser: undefined,
   },
 };

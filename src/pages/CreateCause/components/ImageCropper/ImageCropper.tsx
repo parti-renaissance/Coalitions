@@ -63,6 +63,7 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length) {
       setImageToCrop(URL.createObjectURL(event.target.files[0]));
+      event.target.value = '';
     }
   };
 
@@ -77,7 +78,19 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
       return <Image src={image} />;
     } else if (imageToCrop !== undefined) {
       return (
-        <StyledCropper aspectRatio={16 / 9} src={imageToCrop} crop={onCrop} ref={cropperRef} />
+        <StyledCropper
+          aspectRatio={16 / 9}
+          src={imageToCrop}
+          cropend={onCrop}
+          ready={onCrop}
+          ref={cropperRef}
+          guides={false}
+          modal={false}
+          background={false}
+          movable={false}
+          zoomable={false}
+          viewMode={1}
+        />
       );
     } else {
       return <InputPlaceholder openGallery={openGallery} />;
@@ -92,7 +105,7 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
           <UpdateButton variant="outlined" color="primary" onClick={onGenerateOrUpdateClick}>
             {image !== undefined && imageToCrop === undefined
               ? intl.formatMessage({ id: 'create_cause.image.update' })
-              : intl.formatMessage({ id: 'create_cause.image.generate' })}
+              : intl.formatMessage({ id: 'create_cause.image.save' })}
           </UpdateButton>
         </BottomContainer>
       ) : null}

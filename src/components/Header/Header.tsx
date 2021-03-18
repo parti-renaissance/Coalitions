@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from 'components/Link';
 import { PATHS } from 'routes';
 import { HeaderContainer } from './Header.style';
-import { getUserToken } from 'redux/Login';
+import { isUserLogged } from 'redux/Login';
 import useSelector from 'redux/useSelector';
 import { useLocation } from 'react-router';
 import { useLogin } from 'redux/Login/hooks';
@@ -13,7 +13,7 @@ import { oauthUrl } from 'services/networking/auth';
 const Header: React.FC = () => {
   const { search } = useLocation();
   const [, login] = useLogin();
-  const isUserLoggedIn = Boolean(useSelector(getUserToken));
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
   useEffect(() => {
     const params = new URLSearchParams(search);

@@ -5,6 +5,7 @@ export const state = {
   },
   login: {
     token: 'someToken',
+    isLogged: false,
     afterAuthAction: { followCause: null, redirectTo: null },
   },
   cause: {

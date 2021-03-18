@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type LoginState = Readonly<{
   token: string | null;
+  isLogged: boolean;
   afterAuthAction: { followCause: { id: string } | null; redirectTo: string | null };
 }>;
 
 const initialState: LoginState = {
   token: null,
+  isLogged: false,
   afterAuthAction: { followCause: null, redirectTo: null },
 };
 
@@ -16,6 +18,7 @@ const loginSlice = createSlice({
   reducers: {
     userLoggedIn: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
+      state.isLogged = true;
     },
     userLoggedOut: () => initialState,
     setAfterAuthFollowCause: (state, action: PayloadAction<string>) => {
@@ -27,6 +30,9 @@ const loginSlice = createSlice({
     cleanAfterAuthAction: state => {
       state.afterAuthAction = initialState.afterAuthAction;
     },
+    setIsLogged: (state, action: PayloadAction<boolean>) => {
+      state.isLogged = action.payload;
+    },
   },
 });
 
@@ -36,5 +42,6 @@ export const {
   setAfterAuthFollowCause,
   setAfterAuthRedirect,
   cleanAfterAuthAction,
+  setIsLogged,
 } = loginSlice.actions;
 export default loginSlice.reducer;

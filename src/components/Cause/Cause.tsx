@@ -2,7 +2,7 @@ import React, { useState, FunctionComponent } from 'react';
 import { SmallButton, DefaultButton } from 'components/Button/Button';
 import { Cause as CauseType } from 'redux/Cause/types';
 import useSelector from 'redux/useSelector';
-import { getUserToken } from 'redux/Login';
+import { isUserLogged } from 'redux/Login';
 import {
   Author,
   ButtonContainer,
@@ -29,7 +29,7 @@ interface CauseProps {
 const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const { loading, followCause } = useCauseFollow(cause.uuid);
-  const isUserLoggedIn = Boolean(useSelector(getUserToken));
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
   const onSupportClick = () => {
     if (isUserLoggedIn) {

@@ -1,3 +1,5 @@
+import { store } from 'redux/store';
+import { setIsLogged } from 'redux/Login';
 import request from 'superagent';
 
 export const ACCESS_TOKEN_KEY = 'access_token';
@@ -44,5 +46,18 @@ export const refresh = async () => {
     refresh_token: refreshToken,
     grant_type: 'refresh_token',
   };
-  return authCall(payload);
+  try {
+    const access_token = await authCall(payload);
+    if (access_token === undefined) {
+      logout();
+    }
+  } catch (error) {
+    logout();
+  }
+};
+
+export const logout = () => {
+  localStorage.removeItem(ACCESS_TOKEN_KEY);
+  localStorage.removeItem(REFRESH_TOKEN_KEY);
+  store.dispatch(setIsLogged(false));
 };

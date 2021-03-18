@@ -92,7 +92,7 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
           <UpdateButton variant="outlined" color="primary" onClick={onGenerateOrUpdateClick}>
             {image !== undefined && imageToCrop === undefined
               ? intl.formatMessage({ id: 'create_cause.image.update' })
-              : intl.formatMessage({ id: 'create_cause.image.generate' })}
+              : intl.formatMessage({ id: 'create_cause.image.save' })}
           </UpdateButton>
         </BottomContainer>
       ) : null}

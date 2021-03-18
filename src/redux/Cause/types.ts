@@ -1,13 +1,16 @@
-export interface Cause {
+export interface InCreationCause {
   author: Author;
   coalition: Coalition;
   name: string;
   description: string;
-  uuid: string;
   image_url: string;
   followers_count: number;
   supported?: boolean;
 }
+
+export type Cause = {
+  uuid: string;
+} & InCreationCause;
 
 interface Author {
   first_name: string;

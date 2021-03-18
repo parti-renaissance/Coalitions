@@ -36,6 +36,7 @@
     "author": "Par {firstName} {lastNameInitial}",
     "supports": "{supportsNumber} soutiens",
     "support-button": "Soutenir",
+    "supported": "Soutenue",
     "see-button": "Voir",
     "confirm-support": "Confirmez votre soutien",
     "accept-evolution-email": "J’accepte d’être tenu au courant par email de l’évolution de cette cause",

@@ -2,7 +2,7 @@ import Loader from 'components/Loader';
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { useFetchOneCause } from 'redux/Cause/hooks';
+import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
 import { getCause } from 'redux/Cause/selectors';
 import { getUserToken } from 'redux/Login';
 import {
@@ -17,6 +17,7 @@ import {
   AuthorAndSupportsWrapper,
   MobileSupportButtonWrapper,
   DesktopSupportButton,
+  Supported,
 } from './CausePage.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -28,7 +29,7 @@ import LoginAndSupportModal from 'components/LoginAndSupportModal';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { SmallButton } from 'components/Button/Button';
 import { useSnackbar } from 'redux/Snackbar/hooks';
-import { useCauseFollow } from 'redux/Cause/hooks';
+import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 import { PATHS } from 'routes';
 
 interface CausePageNavParams {
@@ -54,7 +55,7 @@ const CausePage: React.FunctionComponent = () => {
 
   useEffect(() => {
     fetchCause();
-  }, [fetchCause]);
+  }, [fetchCause, isUserLoggedIn]);
 
   const onActiveTabIndexChange = (_: ChangeEvent<{}>, value: number) => {
     setActiveTabIndex(value);
@@ -106,6 +107,11 @@ const CausePage: React.FunctionComponent = () => {
       <CausePageContainer>
         <CausePageHeader>
           <CauseImage backgroundImage={cause.image_url} />
+          {Boolean(cause.supported) ? (
+            <Supported>
+              <FormattedMessage id="cause.supported" />
+            </Supported>
+          ) : null}
           <CausePageSubHeaderContainer>
             <div>
               <CoalitionName>{cause.coalition.name}</CoalitionName>
@@ -114,7 +120,7 @@ const CausePage: React.FunctionComponent = () => {
                 <AuthorAndSupports cause={cause} showAuthor />
               </AuthorAndSupportsWrapper>
             </div>
-            {cause.supported || (
+            {Boolean(cause.supported) || (
               <DesktopSupportButton
                 size="small"
                 variant="contained"
@@ -141,7 +147,7 @@ const CausePage: React.FunctionComponent = () => {
         </TabsWrapper>
         <CreateCauseCTA displayLinkToCauseList />
       </CausePageContainer>
-      {cause.supported || (
+      {Boolean(cause.supported) || (
         <MobileSupportButtonWrapper>
           <FixedBottomButton onClick={onSupportClick} isLoading={loadingCauseFollow}>
             {intl.formatMessage({ id: 'cause.support-button' })}

@@ -11,14 +11,16 @@ import {
   StyledCard,
   StyledContent,
   StyledMedia,
+  Supported,
 } from './Cause.style';
+
 import { FormattedMessage } from 'react-intl';
 import { DefaultLink as Link } from 'components/Link/Link';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 import { PATHS } from 'routes';
-import { useCauseFollow } from 'redux/Cause/hooks';
+import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 
 interface CauseProps {
   cause: CauseType;
@@ -44,6 +46,11 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   return (
     <>
       <StyledCard>
+        {Boolean(cause.supported) ? (
+          <Supported>
+            <FormattedMessage id="cause.supported" />
+          </Supported>
+        ) : null}
         <StyledMedia image={cause.image_url} title="" />
         <StyledContent>
           <CoalitionName>{cause.coalition.name}</CoalitionName>
@@ -59,7 +66,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </Author>
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
-            {cause.supported || (
+            {Boolean(cause.supported) || (
               <SmallButton
                 size="small"
                 variant="contained"

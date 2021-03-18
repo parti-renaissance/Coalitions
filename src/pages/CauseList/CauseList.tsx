@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import useSelector from 'redux/useSelector';
-import { useFetchCauses } from 'redux/Cause/hooks';
+import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
 import { StyledCauseList, CauseListContainer } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
@@ -11,6 +11,7 @@ import { getAllCauses } from 'redux/Cause/selectors';
 import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
 import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
 import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
+import { getUserToken } from 'redux/Login/selectors';
 
 interface CauseListHeaderProps {
   loading: boolean;
@@ -45,12 +46,13 @@ const defineCtaPositionInList = (): number => {
 
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
+  const isUserLoggedIn = Boolean(useSelector(getUserToken));
   const [filteredByCoalitionIds, setFilteredByCoalitionIds] = useState<string[]>([]);
   const { hasMore, loading, error, fetchFirstPage, fetchNextPage } = useFetchCauses();
 
   useEffect(() => {
     fetchFirstPage(filteredByCoalitionIds);
-  }, [fetchFirstPage, filteredByCoalitionIds]);
+  }, [fetchFirstPage, filteredByCoalitionIds, isUserLoggedIn]);
 
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
 

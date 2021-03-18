@@ -1,14 +1,21 @@
 import * as useTypedAsyncFn from 'redux/useTypedAsyncFn';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { CAUSES_MOCK } from '../fixtures';
-import { useFetchCauses } from '../hooks';
+import { useFetchCauses } from '../hooks/useFetchCauses';
+import * as hooks from '../hooks/useFetchFollowedCauses';
 
 const doFetchCauses = jest
   .fn()
   .mockReturnValue({ items: CAUSES_MOCK, metadata: { total_items: 12, last_page: 1 } });
+
+const doFetchFollowedCauses = jest.fn().mockReturnValue([CAUSES_MOCK[1].uuid]);
 jest
   .spyOn(useTypedAsyncFn, 'useTypedAsyncFn')
   .mockImplementation(() => [{ loading: false, error: undefined }, doFetchCauses]);
+
+jest.spyOn(hooks, 'useFetchFollowedCauses').mockImplementation(() => {
+  return { loading: false, error: undefined, doFetchFollowedCauses };
+});
 
 const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
@@ -30,6 +37,12 @@ describe('useFetchCauses', () => {
         {
           payload: { causes: CAUSES_MOCK, numberOfCauses: 12 },
           type: 'Cause/updateCauses',
+        },
+      ],
+      [
+        {
+          payload: [CAUSES_MOCK[1].uuid],
+          type: 'Cause/markCausesAsSupported',
         },
       ],
     ]);

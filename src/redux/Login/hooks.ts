@@ -8,7 +8,7 @@ import { cleanAfterAuthAction, userLoggedIn } from './slice';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { getAfterAuthFollowCause, getAfterAuthRedirectTo } from './selectors';
 import { useCallback } from 'react';
-import { useCauseFollow } from 'redux/Cause/hooks';
+import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 
 export const useAfterAuthAction = () => {
   const causeToFollow = useSelector(getAfterAuthFollowCause);
@@ -39,7 +39,7 @@ export const useLogin = () => {
   return useTypedAsyncFn<{ code: string }>(
     async ({ code }) => {
       const token: string | undefined = await login(code);
-      if (token) {
+      if (token !== undefined) {
         dispatch(userLoggedIn(token));
         Sentry.configureScope(scope => {
           scope.setUser({

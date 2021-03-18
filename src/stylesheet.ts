@@ -122,4 +122,5 @@ export const DESKTOP_BREAK_POINT = 1540;
 export const media = {
   tablet: (styles: string) => `@media (min-width: ${PHONE_BREAK_POINT}px) {${styles}}`,
   desktop: (styles: string) => `@media (min-width: ${TABLET_BREAK_POINT}px) {${styles}}`,
+  largeDesktop: (styles: string) => `@media (min-width: ${DESKTOP_BREAK_POINT}px) {${styles}}`,
 };

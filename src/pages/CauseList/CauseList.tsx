@@ -4,7 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import useSelector from 'redux/useSelector';
 import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
-import { StyledCauseList, CauseListContainer } from './CauseList.style';
+import { StyledCauseList, CauseListContainer, CTAContainer } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
 import { getAllCauses } from 'redux/Cause/selectors';
@@ -68,6 +68,9 @@ const CauseList: React.FunctionComponent = () => {
     };
   });
 
+  const causesBeforeCTA = causes.slice(0, ctaPosition);
+  const causesAfterCTA = causes.slice(ctaPosition);
+
   return (
     <StyledCauseList>
       <FormattedMessage id="cause_list.description" />
@@ -82,13 +85,17 @@ const CauseList: React.FunctionComponent = () => {
             loader={<Loader />}
           >
             <CauseListContainer>
-              {causes.reduce((acc: JSX.Element[], cause, index) => {
-                if (index === ctaPosition) {
-                  acc.push(<CreateCauseCTA key="cta" />);
-                }
-                acc.push(<Cause key={cause.uuid} cause={cause} />);
-                return acc;
-              }, [])}
+              {causesBeforeCTA.map(cause => (
+                <Cause key={cause.uuid} cause={cause} />
+              ))}
+            </CauseListContainer>
+            <CTAContainer>
+              <CreateCauseCTA />
+            </CTAContainer>
+            <CauseListContainer>
+              {causesAfterCTA.map(cause => (
+                <Cause key={cause.uuid} cause={cause} />
+              ))}
             </CauseListContainer>
           </InfiniteScroll>
         </>

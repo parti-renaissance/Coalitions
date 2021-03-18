@@ -17,3 +17,9 @@ export const CauseListContainer = styled.div`
     padding: 0;
   `)};
 `;
+
+export const CTAContainer = styled.div`
+  ${media.largeDesktop(`
+    padding: 0 ${getSpacing(9)};
+  `)};
+`;

@@ -30,14 +30,23 @@ const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, s
     <AuthorContainer>
       <IconAndLabel
         iconSrc="/images/supports.svg"
-        Label={() => (
-          <FormattedMessage
-            id="cause.supports"
-            values={{
-              supportsNumber: cause.followers_count,
-            }}
-          />
-        )}
+        Label={() =>
+          cause.followers_count > 1 ? (
+            <FormattedMessage
+              id="cause.supports"
+              values={{
+                supportsNumber: cause.followers_count,
+              }}
+            />
+          ) : (
+            <FormattedMessage
+              id="cause.support"
+              values={{
+                supportsNumber: cause.followers_count,
+              }}
+            />
+          )
+        }
       />
     </AuthorContainer>
   </Container>

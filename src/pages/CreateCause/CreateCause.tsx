@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import {
   Container,
   SubContainer,
@@ -22,18 +22,28 @@ import { updateInCreationCause } from 'redux/Cause/slice';
 import { convertFormValuesToCause } from './lib/convertFormValuesToCause';
 import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
+import { useFetchCurrentUser } from 'redux/User/hooks/useFetchCurrentUser';
+import { getCurrentUser } from 'redux/User/selectors';
 
 const CreateCause: FunctionComponent = () => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
+  const { fetchCurrentUser } = useFetchCurrentUser();
   const [isLoginModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
   const isUserLoggedIn = Boolean(useSelector(getUserToken));
+  const currentUser = useSelector(getCurrentUser);
   const dispatch = useDispatch();
   const history = useHistory();
 
+  useEffect(() => {
+    fetchCurrentUser();
+  }, [fetchCurrentUser, isUserLoggedIn]);
+
   const onSubmit = (values: FormValues) => {
-    if (isUserLoggedIn) {
-      dispatch(updateInCreationCause(convertFormValuesToCause(values)));
+    if (isUserLoggedIn && currentUser !== undefined) {
+      dispatch(
+        updateInCreationCause(convertFormValuesToCause({ formValues: values, currentUser })),
+      );
       history.push(PATHS.CAUSE_PREVIEW.url());
     } else {
       setIsLoginModalOpened(true);

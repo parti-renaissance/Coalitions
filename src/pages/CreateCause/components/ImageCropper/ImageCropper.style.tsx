@@ -86,8 +86,4 @@ export const Image = styled.img`
 
 export const StyledCropper = styled(Cropper)`
   width: 100%;
-  height: ${getSpacing(60)};
-  ${media.desktop(`
-    height: ${getSpacing(80)};
-  `)}
 `;

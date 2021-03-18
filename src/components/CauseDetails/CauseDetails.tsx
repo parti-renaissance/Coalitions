@@ -22,10 +22,10 @@ import FixedBottomButton from 'components/FixedBottomButton';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { SmallButton } from 'components/Button/Button';
 import { useSnackbar } from 'redux/Snackbar/hooks';
-import { InCreationCause } from 'redux/Cause/types';
+import { InCreationCause, Cause } from 'redux/Cause/types';
 
 interface CauseDetailsProps {
-  cause: InCreationCause;
+  cause: Cause | InCreationCause;
   onSupport?: () => void;
   isSupporting?: boolean;
 }

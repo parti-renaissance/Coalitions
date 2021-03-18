@@ -82,6 +82,7 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
           aspectRatio={16 / 9}
           src={imageToCrop}
           cropend={onCrop}
+          ready={onCrop}
           ref={cropperRef}
           guides={false}
           modal={false}

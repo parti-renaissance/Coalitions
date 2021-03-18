@@ -1,9 +1,13 @@
 import { SeeMore } from 'components/SeeMore/SeeMore';
 import React, { FunctionComponent } from 'react';
-import { InCreationCause } from 'redux/Cause/types';
+import { InCreationCause, Cause } from 'redux/Cause/types';
 import { Container, Description } from './AboutThisCause.style';
 
-const AboutThisCause: FunctionComponent<{ cause: InCreationCause }> = ({ cause }) => (
+interface AboutThisCauseProps {
+  cause: InCreationCause | Cause;
+}
+
+const AboutThisCause: FunctionComponent<AboutThisCauseProps> = ({ cause }) => (
   <Container>
     <Description>
       <SeeMore text={cause.description} />

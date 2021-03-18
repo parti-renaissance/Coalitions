@@ -13,4 +13,5 @@ export const Description = styled.p`
   font-size: ${fontSize.small};
   line-height: ${lineHeight.small};
   color: ${colorPalette.greyDark};
+  white-space: pre-line;
 `;

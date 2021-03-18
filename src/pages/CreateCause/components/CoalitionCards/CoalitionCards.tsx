@@ -29,8 +29,10 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
   const intl = useIntl();
 
   useEffect(() => {
-    fetchCoalitions();
-  }, [fetchCoalitions]);
+    if (coalitions.length === 0) {
+      fetchCoalitions();
+    }
+  }, [fetchCoalitions, coalitions]);
 
   const renderCoalitionCard = (coalition: Coalition) => {
     const onClick = () => onCoalitionClick(coalition);

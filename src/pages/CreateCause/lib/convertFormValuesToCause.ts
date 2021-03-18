@@ -1,15 +1,8 @@
 import { FormValues } from './useValidateForm';
 import { Coalition } from 'redux/Coalition/types';
-import { InCreationCause } from 'redux/Cause/types';
-import { User } from 'redux/User/types';
+import { InCreationCauseWithoutAuthor } from 'redux/Cause/types';
 
-export const convertFormValuesToCause = ({
-  formValues,
-  currentUser,
-}: {
-  formValues: FormValues;
-  currentUser: User;
-}): InCreationCause => {
+export const convertFormValuesToCause = (formValues: FormValues): InCreationCauseWithoutAuthor => {
   let description = '';
   if (formValues.shortDescription !== undefined && formValues.shortDescription.length > 0) {
     description = `${formValues.shortDescription}\n\n`;
@@ -24,10 +17,5 @@ export const convertFormValuesToCause = ({
     followers_count: 1,
     supported: true,
     coalition: (formValues.coalitions as Coalition[])[0],
-    author: {
-      first_name: currentUser.firstName,
-      last_name_initial: '',
-      uuid: currentUser.uuid,
-    },
   };
 };

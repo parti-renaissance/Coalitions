@@ -40,10 +40,8 @@ const CreateCause: FunctionComponent = () => {
   }, [fetchCurrentUser, isUserLoggedIn]);
 
   const onSubmit = (values: FormValues) => {
+    dispatch(updateInCreationCause(convertFormValuesToCause(values)));
     if (isUserLoggedIn && currentUser !== undefined) {
-      dispatch(
-        updateInCreationCause(convertFormValuesToCause({ formValues: values, currentUser })),
-      );
       history.push(PATHS.CAUSE_PREVIEW.url());
     } else {
       setIsLoginModalOpened(true);

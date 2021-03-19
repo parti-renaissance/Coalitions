@@ -1,9 +1,9 @@
-import { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { useCauseFollow } from "redux/Cause/hooks/useCauseFollow";
-import { PATHS } from "routes";
-import { getAfterAuthFollowCause, getAfterAuthRedirectTo, cleanAfterAuthAction } from "..";
+import { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
+import { PATHS } from 'routes';
+import { getAfterAuthFollowCause, getAfterAuthRedirectTo, cleanAfterAuthAction } from '..';
 
 export const useAfterAuthAction = () => {
   const causeToFollow = useSelector(getAfterAuthFollowCause);

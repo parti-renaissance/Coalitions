@@ -119,7 +119,7 @@ export const fontSize = {
   },
   h3: {
     mobile: '16px',
-    desktop: '30px',
+    desktop: '24px',
   },
   p: {
     mobile: '14px',

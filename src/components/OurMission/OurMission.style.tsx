@@ -17,7 +17,7 @@ export const SubContainer = styled.div`
   `)}
 `;
 
-export const SubTitle = styled.p`
+export const SubTitle = styled.h3`
   margin-top: ${getSpacing(7)};
   font-weight: ${fontWeight.bold};
 `;

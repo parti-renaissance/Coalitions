@@ -1,10 +1,22 @@
 import { Card, CardMedia, CardContent } from '@material-ui/core';
 import styled from 'styled-components';
-import { boxShadow, getSpacing, colorPalette, media, borderRadius, fonts } from 'stylesheet';
+import {
+  boxShadow,
+  getSpacing,
+  colorPalette,
+  media,
+  borderRadius,
+  fontFamily,
+  fontSize,
+  lineHeight,
+} from 'stylesheet';
 
-export const CoalitionName = styled.p`
+export const CoalitionName = styled.div`
   color: ${colorPalette.blueCoalition};
   margin-bottom: ${getSpacing(2)};
+  font-family: ${fontFamily.primary};
+  font-size: ${fontSize.p.mobile};
+  line-height: ${lineHeight.primary};
 `;
 CoalitionName.displayName = 'CoalitionName';
 
@@ -17,23 +29,25 @@ export const CauseName = styled.div`
   -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
   -webkit-line-clamp: 2;
   margin-bottom: ${getSpacing(3)};
-  ${fonts.smallTitle};
   overflow: hidden;
   flex-grow: 1;
   max-height: ${getSpacing(10)};
-  ${media.desktop(`
-    max-height: ${getSpacing(14)};
-  `)}
+  font-family: ${fontFamily.secondary};
+  font-size: ${fontSize.smallTitle.mobile};
+  line-height: ${lineHeight.secondary};
 `;
 CauseName.displayName = 'CauseName';
 
-export const Author = styled.p`
+export const Author = styled.div`
   color: ${colorPalette.grey};
   margin-bottom: ${getSpacing(1)};
   max-width: min(75vw, ${getSpacing(60)});
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: ${fontFamily.primary};
+  font-size: ${fontSize.p.mobile};
+  line-height: ${lineHeight.primary};
 `;
 Author.displayName = 'Author';
 

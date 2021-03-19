@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing } from 'stylesheet';
+import { getSpacing, fontFamily, fontSize, lineHeight } from 'stylesheet';
 
 const ICON_SIZE = '16px';
 
@@ -12,4 +12,10 @@ export const Icon = styled.img`
   height: ${ICON_SIZE};
   width: ${ICON_SIZE};
   margin-right: ${getSpacing(2)};
+`;
+
+export const Label = styled.div`
+  font-family: ${fontFamily.primary};
+  font-size: ${fontSize.p.mobile};
+  line-height: ${lineHeight.primary};
 `;

@@ -67,5 +67,8 @@ export const DesktopHeaderWrapper = styled.div`
   display: none;
   ${media.desktop(`
     display: block;
+    position: sticky;
+    top: 0;
+    z-index: 1;
   `)}
 `;

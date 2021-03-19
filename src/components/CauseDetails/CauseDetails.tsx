@@ -11,6 +11,7 @@ import {
   MobileSupportButtonWrapper,
   DesktopSupportButton,
   Supported,
+  CauseName,
 } from './CauseDetails.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -80,7 +81,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
           <HeaderSubContainer>
             <div>
               <CoalitionName>{cause.coalition.name}</CoalitionName>
-              <h1>{cause.name}</h1>
+              <CauseName>{cause.name}</CauseName>
               <AuthorAndSupportsWrapper>
                 <AuthorAndSupports cause={cause} showAuthor />
               </AuthorAndSupportsWrapper>

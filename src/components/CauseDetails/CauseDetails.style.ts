@@ -89,3 +89,7 @@ export const DesktopSupportButton = styled(MediumLargeButton)`
 export const Supported = styled(OriginalSupported)`
   right: -${getSpacing(3)};
 `;
+
+export const CauseName = styled.div`
+  ${fonts.smallTitle}
+`;

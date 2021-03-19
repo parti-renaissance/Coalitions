@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { getSpacing, media, fonts } from 'stylesheet';
+import { getSpacing, media, fontFamily, lineHeight, fontSize } from 'stylesheet';
 import Alert from '@material-ui/lab/Alert';
 import { getColorsFromSeverity } from './lib/getColorsFromSeverity';
 import { Severity } from 'redux/Snackbar/types';
@@ -31,7 +31,9 @@ export const StyledAlert = styled(Alert)`
     padding: ${getSpacing(2)};
   `)}
   .MuiAlert-message {
-    ${fonts.p};
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-size: ${fontSize.p.mobile};
   }
 
   ${({ severity }) => {

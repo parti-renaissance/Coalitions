@@ -2,25 +2,19 @@ import React, { useState, ChangeEvent, FunctionComponent } from 'react';
 import {
   Container,
   HeaderContainer,
-  CauseName,
-  CoalitionName,
   CauseImage,
-  HeaderSubContainer,
   TabsWrapper,
   StyledTab,
-  AuthorAndSupportsWrapper,
-  MobileSupportButtonWrapper,
-  DesktopSupportButton,
   Supported,
 } from './CauseDetails.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
 import { Tabs } from '@material-ui/core';
 import AboutThisCause from './components/AboutThisCause';
-import AuthorAndSupports from 'components/AuthorAndSupports';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { InCreationCause, Cause } from 'redux/Cause/types';
+import Header from './components/Header';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;
@@ -63,26 +57,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
               <FormattedMessage id="cause.supported" />
             </Supported>
           ) : null}
-          <HeaderSubContainer>
-            <div>
-              <CoalitionName>{cause.coalition.name}</CoalitionName>
-              <CauseName>{cause.name}</CauseName>
-              <AuthorAndSupportsWrapper>
-                <AuthorAndSupports cause={cause} showAuthor />
-              </AuthorAndSupportsWrapper>
-            </div>
-            {!isPreview && !isSupported ? (
-              <DesktopSupportButton
-                size="small"
-                variant="contained"
-                color="primary"
-                onClick={onSupport}
-                isLoading={isSupporting}
-              >
-                {intl.formatMessage({ id: 'cause.support-button' })}
-              </DesktopSupportButton>
-            ) : null}
-          </HeaderSubContainer>
+          <Header cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
         </HeaderContainer>
         <TabsWrapper>
           <Tabs
@@ -98,13 +73,6 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
         </TabsWrapper>
         {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}
       </Container>
-      {!isPreview && !isSupported ? (
-        <MobileSupportButtonWrapper>
-          <FixedBottomButton onClick={onSupport} isLoading={isSupporting}>
-            {intl.formatMessage({ id: 'cause.support-button' })}
-          </FixedBottomButton>
-        </MobileSupportButtonWrapper>
-      ) : null}
     </>
   );
 };

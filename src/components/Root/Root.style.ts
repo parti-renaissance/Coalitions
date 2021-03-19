@@ -1,30 +1,11 @@
 import styled from 'styled-components';
-import { fonts, colorPalette } from 'stylesheet';
+import { styledTags } from 'stylesheet';
 
 export const RootContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-
-  color: ${colorPalette.greyDark};
-  h1 {
-    ${fonts.h1};
-  }
-  h2 {
-    ${fonts.h2};
-  }
-  h3 {
-    ${fonts.h3};
-  }
-  p {
-    ${fonts.p};
-  }
-  input {
-    ${fonts.input};
-  }
-  textarea {
-    ${fonts.input};
-  }
+  ${styledTags}
 `;
 RootContainer.displayName = 'RootContainer';
 

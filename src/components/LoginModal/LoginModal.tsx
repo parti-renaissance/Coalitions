@@ -9,9 +9,10 @@ import {
   ValidateButtonContainer,
   Connect,
   ConnectLink,
+  StyledDialog,
 } from './LoginModal.style';
 import { SlideProps } from '@material-ui/core/Slide';
-import { Dialog, Slide, CircularProgress } from '@material-ui/core';
+import { Slide, CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import { FormattedMessage, useIntl } from 'react-intl';
 import InputField from 'components/InputField';
@@ -65,7 +66,7 @@ const LoginModal = <OtherFormValues,>({
   };
 
   return (
-    <Dialog
+    <StyledDialog
       fullScreen={isMobile}
       open={isOpened}
       TransitionComponent={isMobile ? SlideUp : undefined}
@@ -180,7 +181,7 @@ const LoginModal = <OtherFormValues,>({
           )}
         </Formik>
       </ContentContainer>
-    </Dialog>
+    </StyledDialog>
   );
 };
 

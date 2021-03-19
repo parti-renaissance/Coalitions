@@ -1,7 +1,8 @@
 import { IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing, fonts } from 'stylesheet';
+import { colorPalette, media, getSpacing, fonts, styledTags } from 'stylesheet';
+import { Dialog } from '@material-ui/core';
 
 export const ContentContainer = styled.div`
   display: flex;
@@ -51,4 +52,8 @@ export const ValidateButtonContainer = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(10)};
   `)}
+`;
+
+export const StyledDialog = styled(Dialog)`
+  ${styledTags}
 `;

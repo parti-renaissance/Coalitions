@@ -205,6 +205,13 @@ export const fonts = {
       font-size: ${fontSize.button.desktop};
     `)}
   `,
+  menu: css`
+    font-family: ${fontFamily.primary};
+    font-size: ${fontSize.button.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.button.desktop};
+    `)}
+  `,
 };
 
 export const styledTags = css`

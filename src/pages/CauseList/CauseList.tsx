@@ -51,7 +51,7 @@ const CauseList: React.FunctionComponent = () => {
   const { hasMore, loading, error, fetchFirstPage, fetchNextPage } = useFetchCauses();
 
   useEffect(() => {
-    fetchFirstPage(filteredByCoalitionIds);
+    fetchFirstPage(filteredByCoalitionIds, isUserLoggedIn);
   }, [fetchFirstPage, filteredByCoalitionIds, isUserLoggedIn]);
 
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
@@ -80,7 +80,7 @@ const CauseList: React.FunctionComponent = () => {
         <>
           <InfiniteScroll
             dataLength={causes.length}
-            next={() => fetchNextPage(filteredByCoalitionIds)}
+            next={() => fetchNextPage(filteredByCoalitionIds, isUserLoggedIn)}
             hasMore={hasMore}
             loader={<Loader />}
           >

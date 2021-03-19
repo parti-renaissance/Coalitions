@@ -187,6 +187,7 @@ export const fonts = {
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-size: ${fontSize.input.mobile};
+    font-weight: ${fontWeight.normal};
     ${media.desktop(`
       font-size: ${fontSize.input.desktop};
     `)}

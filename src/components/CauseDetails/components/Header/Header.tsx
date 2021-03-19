@@ -30,7 +30,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
           <CoalitionName>{cause.coalition.name}</CoalitionName>
           <CauseName>{cause.name}</CauseName>
           <AuthorAndSupportsWrapper>
-            <AuthorAndSupports cause={cause} showAuthor scale />
+            <AuthorAndSupports cause={cause} showAuthor />
           </AuthorAndSupportsWrapper>
         </div>
         {!isPreview && !isSupported ? (

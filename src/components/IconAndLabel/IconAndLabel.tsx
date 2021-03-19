@@ -4,13 +4,12 @@ import { Container, Icon, Label } from './IconAndLabel.style';
 interface IconAndLabelProps {
   label: string;
   iconSrc: string;
-  scale?: boolean;
 }
 
-const IconAndLabel: FunctionComponent<IconAndLabelProps> = ({ label, iconSrc, scale }) => (
+const IconAndLabel: FunctionComponent<IconAndLabelProps> = ({ label, iconSrc }) => (
   <Container>
-    <Icon scale={scale} src={iconSrc} />
-    <Label scale={scale}>{label}</Label>
+    <Icon src={iconSrc} />
+    <Label>{label}</Label>
   </Container>
 );
 

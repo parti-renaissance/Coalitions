@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components';
-import { getSpacing, fontFamily, fontSize, lineHeight, media } from 'stylesheet';
+import styled from 'styled-components';
+import { getSpacing, media, colorPalette, fontFamily, fontSize, lineHeight } from 'stylesheet';
 
-const ICON_SIZE = '16px';
-const BIG_ICON_SIZE = '20px';
+const MOBILE_ICON_SIZE = '16px';
+const DESKTOP_ICON_SIZE = '20px';
 
 export const Container = styled.div`
   display: flex;
@@ -10,30 +10,21 @@ export const Container = styled.div`
 `;
 
 export const Icon = styled.img<{ scale?: boolean }>`
-  height: ${ICON_SIZE};
-  width: ${ICON_SIZE};
+  height: ${MOBILE_ICON_SIZE};
+  width: ${MOBILE_ICON_SIZE};
   margin-right: ${getSpacing(2)};
-  ${({ scale }) =>
-    scale === true
-      ? css`
-          ${media.desktop(`
-            height: ${BIG_ICON_SIZE};
-            width: ${BIG_ICON_SIZE};
-          `)}
-        `
-      : css``}
+  ${media.desktop(`
+    height: ${DESKTOP_ICON_SIZE};
+    width: ${DESKTOP_ICON_SIZE};
+  `)}
 `;
 
 export const Label = styled.div<{ scale?: boolean }>`
   font-family: ${fontFamily.primary};
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};
-  ${({ scale }) =>
-    scale === true
-      ? css`
-          ${media.desktop(`
-            font-size: ${fontSize.input.desktop};
-          `)}
-        `
-      : css``}
+  color: ${colorPalette.greyDark};
+  ${media.desktop(`
+    font-size: ${fontSize.input.desktop};
+  `)}
 `;

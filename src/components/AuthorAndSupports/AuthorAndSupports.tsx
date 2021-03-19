@@ -7,21 +7,15 @@ import IconAndLabel from 'components/IconAndLabel';
 interface AuthorAndSupportsProps {
   cause: InCreationCause | Cause;
   showAuthor?: boolean;
-  scale?: boolean;
 }
 
-const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({
-  cause,
-  showAuthor,
-  scale,
-}) => {
+const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, showAuthor }) => {
   const intl = useIntl();
   return (
     <Container>
       {showAuthor === true ? (
         <AuthorContainer>
           <IconAndLabel
-            scale={scale}
             iconSrc="/images/user.svg"
             label={intl.formatMessage(
               { id: 'cause.author' },
@@ -35,7 +29,6 @@ const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({
       ) : null}
       <AuthorContainer>
         <IconAndLabel
-          scale={scale}
           iconSrc="/images/supports.svg"
           label={
             cause.followers_count > 1

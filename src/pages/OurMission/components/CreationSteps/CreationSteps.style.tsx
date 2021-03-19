@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { media, getSpacing, colorPalette, SPACING_UNIT, fonts } from 'stylesheet';
+import {
+  media,
+  getSpacing,
+  colorPalette,
+  SPACING_UNIT,
+  fonts,
+  fontFamily,
+  fontSize,
+} from 'stylesheet';
 
 const DESKTOP_CONTAINER_HORIZONTAL_PADDING = SPACING_UNIT * 24;
 const DESKTOP_MARGIN_BETWEEN_STEPS = SPACING_UNIT * 10;
@@ -37,8 +45,12 @@ export const StepContainer = styled.div`
 `;
 
 export const StepNumber = styled.div`
-  ${fonts.h1};
+  font-family: ${fontFamily.secondary};
+  font-size: ${fontSize.h3.mobile};
   color: ${colorPalette.blueCoalition};
+  ${media.desktop(`
+    font-size: ${fontSize.h3.desktop};
+  `)}
 `;
 
 export const StepText = styled.p`

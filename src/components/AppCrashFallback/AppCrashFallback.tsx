@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import React from 'react';
 
-import { Button, Container, HelperList, PageContent, Title } from './AppCrashFallback.style';
+import { Button, Container, HelperList, PageContent } from './AppCrashFallback.style';
 
 /**
  * Error page inspiration https://medium.com/design-ideas-thoughts/designing-error-pages-8d82e16e3472

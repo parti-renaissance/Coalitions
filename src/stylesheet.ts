@@ -98,7 +98,7 @@ export const media = {
   largeDesktop: (styles: string) => `@media (min-width: ${DESKTOP_BREAK_POINT}px) {${styles}}`,
 };
 
-const fontFamily = {
+export const fontFamily = {
   primary: `'Poppins', sans-serif`,
   secondary: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
 };
@@ -108,7 +108,7 @@ export const fontWeight = {
   normal: '400',
 };
 
-const fontSize = {
+export const fontSize = {
   h1: {
     mobile: '22px',
     desktop: '48px',
@@ -129,6 +129,14 @@ const fontSize = {
     mobile: '16px',
     desktop: '30px',
   },
+  smallButton: {
+    mobile: '14px',
+    desktop: '14px',
+  },
+  button: {
+    mobile: '18px',
+    desktop: '18px',
+  },
 };
 
 const lineHeight = {
@@ -141,7 +149,6 @@ export const fonts = {
     font-family: ${fontFamily.secondary};
     line-height: ${lineHeight.secondary};
     font-size: ${fontSize.h1.mobile};
-    color: ${colorPalette.greyDark};
     ${media.desktop(`
       font-size: ${fontSize.h1.desktop};
     `)}
@@ -151,7 +158,6 @@ export const fonts = {
     line-height: ${lineHeight.primary};
     font-weight: ${fontWeight.bold};
     font-size: ${fontSize.h2.mobile};
-    color: ${colorPalette.greyDark};
     ${media.desktop(`
       font-size: ${fontSize.h2.desktop};
     `)}
@@ -161,7 +167,6 @@ export const fonts = {
     line-height: ${lineHeight.primary};
     font-weight: ${fontWeight.bold};
     font-size: ${fontSize.h3.mobile};
-    color: ${colorPalette.greyDark};
     ${media.desktop(`
       font-size: ${fontSize.h3.desktop};
     `)}
@@ -170,7 +175,6 @@ export const fonts = {
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-size: ${fontSize.p.mobile};
-    color: ${colorPalette.greyDark};
     ${media.desktop(`
       font-size: ${fontSize.p.desktop};
     `)}
@@ -179,9 +183,24 @@ export const fonts = {
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-size: ${fontSize.h3.mobile};
-    color: ${colorPalette.greyDark};
     ${media.desktop(`
       font-size: ${fontSize.h3.desktop};
+    `)}
+  `,
+  smallButton: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-size: ${fontSize.smallButton.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.smallButton.desktop};
+    `)}
+  `,
+  button: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-size: ${fontSize.button.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.button.desktop};
     `)}
   `,
 };

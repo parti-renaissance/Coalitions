@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing, fonts } from 'stylesheet';
+import { colorPalette, media, getSpacing, fonts, fontWeight } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`
@@ -17,8 +17,9 @@ export const SubContainer = styled.div`
   `)}
 `;
 
-export const SubTitle = styled.h2`
+export const SubTitle = styled.p`
   margin-top: ${getSpacing(7)};
+  font-weight: ${fontWeight.bold};
 `;
 
 export const Content = styled.p`

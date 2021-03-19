@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { fonts } from 'stylesheet';
+import { fonts, colorPalette } from 'stylesheet';
 
 export const RootContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
 
+  color: ${colorPalette.greyDark};
   h1 {
     ${fonts.h1};
   }

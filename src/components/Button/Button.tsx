@@ -21,14 +21,14 @@ export const ButtonBase: FunctionComponent<ButtonProps & { isLoading?: boolean }
 );
 
 export const SmallButton = styled(ButtonBase)`
-  ${fonts.p};
+  ${fonts.smallButton};
   padding: ${getSpacing(1)} ${getSpacing(3)};
 `;
 
 export const FULL_WIDTH_BUTTON_HEIGHT = '50px';
 
 export const MediumLargeButton = styled(ButtonBase)`
-  ${fonts.h2};
+  ${fonts.button};
   height: ${FULL_WIDTH_BUTTON_HEIGHT};
   padding-left: ${getSpacing(4)};
   padding-right: ${getSpacing(4)};

@@ -56,3 +56,16 @@ export const StyledTab = styled(Tab)`
 export const Supported = styled(OriginalSupported)`
   right: -${getSpacing(3)};
 `;
+
+export const MobileHeaderWrapper = styled.div`
+  ${media.desktop(`
+    display: none;
+  `)}
+`;
+
+export const DesktopHeaderWrapper = styled.div`
+  display: none;
+  ${media.desktop(`
+    display: block;
+  `)}
+`;

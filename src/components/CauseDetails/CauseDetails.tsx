@@ -6,6 +6,8 @@ import {
   TabsWrapper,
   StyledTab,
   Supported,
+  DesktopHeaderWrapper,
+  MobileHeaderWrapper,
 } from './CauseDetails.style';
 import { FormattedMessage } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -44,27 +46,38 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
     }
   };
 
+  const renderHeader = () => (
+    <Header cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
+  );
+
   return (
-    <Container>
-      <HeaderContainer>
-        <CauseImage backgroundImage={cause.image_url} />
-        {Boolean(cause.supported) ? (
-          <Supported>
-            <FormattedMessage id="cause.supported" />
-          </Supported>
-        ) : null}
-        <Header cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
-      </HeaderContainer>
-      <TabsWrapper>
-        <Tabs value={tabIndex} onChange={onTabIndexChange} TabIndicatorProps={TAB_INDICATOR_PROPS}>
-          <StyledTab label={<FormattedMessage id="cause.about.title" />} />
-          <StyledTab label={<FormattedMessage id="cause.events.title" />} />
-          <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
-        </Tabs>
-        {renderTabPanel()}
-      </TabsWrapper>
-      {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}
-    </Container>
+    <>
+      <DesktopHeaderWrapper>{renderHeader()}</DesktopHeaderWrapper>
+      <Container>
+        <HeaderContainer>
+          <CauseImage backgroundImage={cause.image_url} />
+          {Boolean(cause.supported) ? (
+            <Supported>
+              <FormattedMessage id="cause.supported" />
+            </Supported>
+          ) : null}
+          <MobileHeaderWrapper>{renderHeader()}</MobileHeaderWrapper>
+        </HeaderContainer>
+        <TabsWrapper>
+          <Tabs
+            value={tabIndex}
+            onChange={onTabIndexChange}
+            TabIndicatorProps={TAB_INDICATOR_PROPS}
+          >
+            <StyledTab label={<FormattedMessage id="cause.about.title" />} />
+            <StyledTab label={<FormattedMessage id="cause.events.title" />} />
+            <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
+          </Tabs>
+          {renderTabPanel()}
+        </TabsWrapper>
+        {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}
+      </Container>
+    </>
   );
 };
 

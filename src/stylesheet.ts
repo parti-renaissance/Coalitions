@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core';
+import { css } from 'styled-components';
 
 /**
  * App spacing measurement convention
@@ -63,34 +64,6 @@ export const colorUsage = {
   inputPlaceholderColor: colorPalette.blackTransparent,
 };
 
-export const fontFamily = {
-  main: `'Poppins', sans-serif`,
-  abril: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
-};
-
-export const fontSize = {
-  xxxLarge: '40px',
-  xxLarge: '30px',
-  xLarge: '24px',
-  large: '20px',
-  mediumLarge: '18px',
-  medium: '16px',
-  small: '14px',
-};
-
-export const fontWeight = {
-  bold: '700',
-  normal: '400',
-  light: '300',
-};
-
-export const lineHeight = {
-  large: '36px',
-  medium: '24px',
-  small: '20px',
-  verySmall: '16px',
-};
-
 export const borderRadius = {
   medium: '4px',
   large: '10px',
@@ -123,4 +96,89 @@ export const media = {
   tablet: (styles: string) => `@media (min-width: ${PHONE_BREAK_POINT}px) {${styles}}`,
   desktop: (styles: string) => `@media (min-width: ${TABLET_BREAK_POINT}px) {${styles}}`,
   largeDesktop: (styles: string) => `@media (min-width: ${DESKTOP_BREAK_POINT}px) {${styles}}`,
+};
+
+export const fontFamily = {
+  primary: `'Poppins', sans-serif`,
+  secondary: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
+};
+
+export const fontWeight = {
+  bold: '700',
+  normal: '400',
+};
+
+const fontSize = {
+  h1: {
+    mobile: '22px',
+    desktop: '48px',
+  },
+  h2: {
+    mobile: '18px',
+    desktop: '34px',
+  },
+  h3: {
+    mobile: '16px',
+    desktop: '30px',
+  },
+  p: {
+    mobile: '14px',
+    desktop: '20px',
+  },
+};
+
+const lineHeight = {
+  primary: '130%',
+  secondary: '110%',
+};
+
+export const fonts = {
+  h1: css`
+    font-family: ${fontFamily.secondary};
+    line-height: ${lineHeight.secondary};
+    font-size: ${fontSize.h1.mobile};
+    color: ${colorPalette.greyDark};
+    ${media.desktop(`
+      font-size: ${fontSize.h1.desktop};
+    `)}
+  `,
+  h2: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-weight: ${fontWeight.bold};
+    font-size: ${fontSize.h2.mobile};
+    color: ${colorPalette.greyDark};
+    ${media.desktop(`
+      font-size: ${fontSize.h2.desktop};
+    `)}
+  `,
+  h3: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-weight: ${fontWeight.bold};
+    font-size: ${fontSize.h3.mobile};
+    color: ${colorPalette.greyDark};
+    ${media.desktop(`
+      font-size: ${fontSize.h3.desktop};
+    `)}
+  `,
+  p: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-size: ${fontSize.p.mobile};
+    color: ${colorPalette.greyDark};
+    ${media.desktop(`
+      font-size: ${fontSize.p.desktop};
+    `)}
+  `,
+  pBold: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-weight: ${fontWeight.bold};
+    font-size: ${fontSize.p.mobile};
+    color: ${colorPalette.greyDark};
+    ${media.desktop(`
+      font-size: ${fontSize.p.desktop};
+    `)}
+  `,
 };

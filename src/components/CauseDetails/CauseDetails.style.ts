@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette, media } from 'stylesheet';
+import { fontWeight, getSpacing, colorPalette, media, fonts } from 'stylesheet';
 import { Tab } from '@material-ui/core';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 import { MediumLargeButton } from 'components/Button/Button';
@@ -33,13 +33,12 @@ export const CauseImage = styled.div<{ backgroundImage: string }>`
 `;
 
 export const CauseName = styled.p`
-  font-family: ${fontFamily.abril};
-  font-size: ${fontSize.large};
+  ${fonts.h1};
 `;
 CauseName.displayName = 'CauseName';
 
 export const CoalitionName = styled.p`
-  font-size: ${fontSize.small};
+  ${fonts.p};
   color: ${colorPalette.blueCoalition};
   margin-bottom: ${getSpacing(2)};
 `;
@@ -64,14 +63,12 @@ export const TabsWrapper = styled.div`
 
 export const StyledTab = styled(Tab)`
   padding: ${getSpacing(2)} ${getSpacing(3)};
-  color: ${colorPalette.greyDark};
   text-transform: capitalize;
-  font-size: ${fontSize.small};
+  ${fonts.p};
   ${({ selected }) =>
     css`
       opacity: ${Boolean(selected) ? 1 : 0.6};
       border-bottom: 2px solid ${colorPalette.greyLight};
-      font-family: ${fontFamily.main};
       font-weight: ${selected ? fontWeight.bold : fontWeight.normal};
     `};
 `;

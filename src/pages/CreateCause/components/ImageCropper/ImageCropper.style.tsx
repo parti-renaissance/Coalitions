@@ -1,13 +1,5 @@
 import styled from 'styled-components';
-import {
-  colorPalette,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  getSpacing,
-  lineHeight,
-  media,
-} from 'stylesheet';
+import { colorPalette, fontWeight, getSpacing, media, fonts } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 import Cropper from 'react-cropper';
 
@@ -66,16 +58,10 @@ export const PlusIconContainer = styled.div`
 `;
 
 export const ImportLabel = styled.div`
-  font-family: ${fontFamily.main};
-  font-size: ${fontSize.small};
-  line-height: ${lineHeight.small};
-  color: ${colorPalette.greyDark};
-  font-weight: ${fontWeight.bold};
+  ${fonts.pBold};
   margin-top: ${getSpacing(2)};
   ${media.desktop(`
     margin-top: ${getSpacing(4)};
-    font-size: ${fontSize.mediumLarge};
-    line-height: ${lineHeight.medium};
   `)}
 `;
 

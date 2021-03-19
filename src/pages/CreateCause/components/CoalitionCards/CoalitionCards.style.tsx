@@ -2,12 +2,11 @@ import styled from 'styled-components';
 import {
   getSpacing,
   media,
-  fontSize,
-  fontFamily,
-  lineHeight,
   borderRadius,
   fontWeight,
   colorPalette,
+  fonts,
+  fontFamily,
 } from 'stylesheet';
 
 export const Container = styled.div`
@@ -47,9 +46,7 @@ export const CoalitionImage = styled.img`
 `;
 
 export const CoalitionName = styled.div`
-  font-family: ${fontFamily.main};
-  font-size: ${fontSize.small};
-  line-height: ${lineHeight.small};
+  ${fonts.p};
   margin-top: ${getSpacing(2)};
 `;
 
@@ -74,6 +71,8 @@ export const SelectedCoalitionContainer = styled.div`
 const MOBILE_COALITION_INDEX_SIZE = getSpacing(5);
 const DESKTOP_COALITION_INDEX_SIZE = getSpacing(6);
 
+const INDEX_FONT_SIZE = '18px';
+
 export const SelectedCoalitionIndex = styled.div`
   display: flex;
   align-items: center;
@@ -82,8 +81,8 @@ export const SelectedCoalitionIndex = styled.div`
   width: ${MOBILE_COALITION_INDEX_SIZE};
   background-color: ${colorPalette.mintGreen};
   border-radius: 50%;
-  font-family: ${fontFamily.abril};
-  font-size: ${fontSize.mediumLarge};
+  font-family: ${fontFamily.secondary};
+  font-size: ${INDEX_FONT_SIZE};
   color: ${colorPalette.blueCoalition};
   ${media.desktop(`
     height: ${DESKTOP_COALITION_INDEX_SIZE};
@@ -92,18 +91,13 @@ export const SelectedCoalitionIndex = styled.div`
 `;
 
 export const NumberOfSelectedCauses = styled.div`
-  font-family: ${fontFamily.main};
-  color: ${colorPalette.greyDark};
-  font-size: ${fontSize.medium};
-  line-height: ${lineHeight.small};
+  ${fonts.h3};
   margin-bottom: ${getSpacing(3)};
   ${media.desktop(`
-    font-size: ${fontSize.mediumLarge};
-    line-height: ${lineHeight.medium};
     margin-bottom: ${getSpacing(4)};
   `)}
 `;
 
-export const Bold = styled.span`
-  font-weight: ${fontWeight.bold};
+export const NormalWeight = styled.span`
+  font-weight: ${fontWeight.normal};
 `;

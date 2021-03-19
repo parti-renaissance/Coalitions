@@ -7,7 +7,7 @@ import {
   SelectedCoalitionContainer,
   SelectedCoalitionIndex,
   NumberOfSelectedCauses,
-  Bold,
+  NormalWeight,
 } from './CoalitionCards.style';
 import { useFetchCoalitions } from 'redux/Coalition/hooks';
 import { getCoalitions } from 'redux/Coalition/selectors';
@@ -59,22 +59,20 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
   return (
     <Container>
       <NumberOfSelectedCauses>
-        <Bold>
-          {numberOfSelectedCoalitions <= 1
-            ? intl.formatMessage(
-                { id: 'create_cause.coalitions.zero-or-one-selected-coalition' },
-                { numberOfSelectedCoalitions },
-              )
-            : intl.formatMessage(
-                {
-                  id: `create_cause.coalitions.more-than-one-selected-coalitions`,
-                },
-                { numberOfSelectedCoalitions },
-              )}
-        </Bold>
-        {` ${intl.formatMessage({
+        {numberOfSelectedCoalitions <= 1
+          ? intl.formatMessage(
+              { id: 'create_cause.coalitions.zero-or-one-selected-coalition' },
+              { numberOfSelectedCoalitions },
+            )
+          : intl.formatMessage(
+              {
+                id: `create_cause.coalitions.more-than-one-selected-coalitions`,
+              },
+              { numberOfSelectedCoalitions },
+            )}
+        <NormalWeight>{` ${intl.formatMessage({
           id: `create_cause.coalitions.max-number-of-selected-coalitions`,
-        })}`}
+        })}`}</NormalWeight>
       </NumberOfSelectedCauses>
       {coalitions.map(renderCoalitionCard)}
     </Container>

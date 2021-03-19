@@ -21,6 +21,7 @@ export const Container = styled.div`
 
 export const Title = styled.div`
   ${fonts.h1};
+  color: ${colorPalette.greyDark};
 `;
 
 export const SubContainer = styled.div`
@@ -54,6 +55,7 @@ export const StepNumber = styled.div`
 `;
 
 export const StepText = styled.p`
+  color: ${colorPalette.greyDark};
   margin-left: ${getSpacing(2)};
   ${media.desktop(`
     margin-left: ${getSpacing(6)};

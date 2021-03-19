@@ -35,6 +35,7 @@ export const CauseName = styled.div`
   font-family: ${fontFamily.secondary};
   font-size: ${fontSize.smallTitle.mobile};
   line-height: ${lineHeight.secondary};
+  color: ${colorPalette.greyDark};
 `;
 CauseName.displayName = 'CauseName';
 

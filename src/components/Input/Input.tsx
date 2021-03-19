@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, colorUsage, getSpacing, fonts } from 'stylesheet';
+import { borderRadius, colorUsage, getSpacing, colorPalette } from 'stylesheet';
 
 const getBorderColor = (hasError: boolean, originalColor: string): string =>
   hasError ? colorUsage.error : originalColor;
@@ -16,6 +16,7 @@ const Input = styled.input<Props>`
   border-radius: ${borderRadius.medium};
   border: 1px solid;
   border-color: ${props => getBorderColor(props.hasError, colorUsage.inputBorderColor)};
+  color: ${colorPalette.greyDark};
 
   :hover {
     border-color: ${props => getBorderColor(props.hasError, colorUsage.primaryTextColor)};

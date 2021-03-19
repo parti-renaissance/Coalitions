@@ -28,6 +28,7 @@ export const StyledCloseIcon = styled(Close)`
 `;
 
 export const Title = styled.h3`
+  color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(5)};
 `;
 

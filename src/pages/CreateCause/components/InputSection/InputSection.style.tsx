@@ -10,6 +10,7 @@ export const Container = styled.div`
 
 export const Title = styled.div`
   ${fonts.smallTitle};
+  color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(5)};
   ${media.desktop(`
     margin-bottom: ${getSpacing(10)};

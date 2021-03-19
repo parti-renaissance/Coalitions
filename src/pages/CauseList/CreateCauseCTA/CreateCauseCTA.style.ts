@@ -23,10 +23,12 @@ export const CTABlock = styled.div`
 
 export const HeadSentence = styled.div`
   ${fonts.smallTitle};
+  color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(3)};
 `;
 
 export const DescriptionText = styled.p`
+  color: ${colorPalette.greyDark};
   text-align: center;
 `;
 

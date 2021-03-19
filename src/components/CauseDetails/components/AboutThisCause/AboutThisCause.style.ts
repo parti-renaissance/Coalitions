@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, media, fonts } from 'stylesheet';
+import { getSpacing, media, colorPalette } from 'stylesheet';
 
 export const Container = styled.div`
   padding: ${getSpacing(6)} 0;
@@ -9,5 +9,6 @@ export const Container = styled.div`
 `;
 
 export const Description = styled.p`
+  color: ${colorPalette.greyDark};
   white-space: pre-line;
 `;

@@ -92,4 +92,5 @@ export const Supported = styled(OriginalSupported)`
 
 export const CauseName = styled.div`
   ${fonts.smallTitle}
+  color: ${colorPalette.greyDark};
 `;

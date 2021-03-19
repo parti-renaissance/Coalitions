@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { colorUsage, getSpacing, fonts } from 'stylesheet';
+import { colorUsage, getSpacing, colorPalette } from 'stylesheet';
 
 export const Label = styled.h3`
+  color: ${colorPalette.greyDark};
   display: block;
   margin-bottom: ${getSpacing(1)};
 `;

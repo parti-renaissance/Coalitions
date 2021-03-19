@@ -17,6 +17,7 @@ export const StyledTextField = styled(TextField)`
   }
   .MuiInputBase-root {
     ${fonts.h3};
+    color: ${colorPalette.greyDark};
     background-color: ${colorPalette.blueLight};
     border-radius: ${borderRadius.medium};
   }

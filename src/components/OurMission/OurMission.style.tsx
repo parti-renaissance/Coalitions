@@ -18,11 +18,13 @@ export const SubContainer = styled.div`
 `;
 
 export const SubTitle = styled.h3`
+  color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(7)};
   font-weight: ${fontWeight.bold};
 `;
 
 export const Content = styled.p`
+  color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(2)};
 `;
 

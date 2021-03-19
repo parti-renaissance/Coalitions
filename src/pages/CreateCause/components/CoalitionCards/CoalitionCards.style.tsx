@@ -46,6 +46,7 @@ export const CoalitionImage = styled.img`
 `;
 
 export const CoalitionName = styled.p`
+  color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(2)};
 `;
 
@@ -89,6 +90,7 @@ export const SelectedCoalitionIndex = styled.div`
 `;
 
 export const NumberOfSelectedCauses = styled.p`
+  color: ${colorPalette.greyDark};
   font-weight: ${fontWeight.bold};
   margin-bottom: ${getSpacing(3)};
   ${media.desktop(`

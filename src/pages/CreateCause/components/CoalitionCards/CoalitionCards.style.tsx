@@ -89,6 +89,7 @@ export const SelectedCoalitionIndex = styled.div`
 `;
 
 export const NumberOfSelectedCauses = styled.p`
+  font-weight: ${fontWeight.bold};
   margin-bottom: ${getSpacing(3)};
   ${media.desktop(`
     margin-bottom: ${getSpacing(4)};

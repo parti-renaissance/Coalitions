@@ -127,7 +127,7 @@ export const fontSize = {
   },
   input: {
     mobile: '16px',
-    desktop: '30px',
+    desktop: '18px',
   },
   smallButton: {
     mobile: '14px',
@@ -182,9 +182,9 @@ export const fonts = {
   input: css`
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
-    font-size: ${fontSize.h3.mobile};
+    font-size: ${fontSize.input.mobile};
     ${media.desktop(`
-      font-size: ${fontSize.h3.desktop};
+      font-size: ${fontSize.input.desktop};
     `)}
   `,
   smallButton: css`

@@ -17,8 +17,7 @@ export const Title = styled.div`
   `)}
 `;
 
-export const TipsContainer = styled.div<{ hasMiddleChildren: boolean }>`
-  ${fonts.p};
+export const TipsContainer = styled.p<{ hasMiddleChildren: boolean }>`
   padding: ${getSpacing(3)};
   background-color: ${colorPalette.greyLight};
   ${media.desktop(`

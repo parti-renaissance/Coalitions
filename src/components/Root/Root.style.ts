@@ -22,6 +22,9 @@ export const RootContainer = styled.div`
   input {
     ${fonts.input};
   }
+  textarea {
+    ${fonts.input};
+  }
 `;
 RootContainer.displayName = 'RootContainer';
 

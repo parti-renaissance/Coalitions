@@ -62,8 +62,6 @@ export const SelectedCoalitionContainer = styled.div`
 const MOBILE_COALITION_INDEX_SIZE = getSpacing(5);
 const DESKTOP_COALITION_INDEX_SIZE = getSpacing(6);
 
-const INDEX_FONT_SIZE = '18px';
-
 export const SelectedCoalitionIndex = styled.div`
   display: flex;
   align-items: center;
@@ -80,8 +78,7 @@ export const SelectedCoalitionIndex = styled.div`
   `)}
 `;
 
-export const NumberOfSelectedCauses = styled.div`
-  ${fonts.h3};
+export const NumberOfSelectedCauses = styled.p`
   margin-bottom: ${getSpacing(3)};
   ${media.desktop(`
     margin-bottom: ${getSpacing(4)};

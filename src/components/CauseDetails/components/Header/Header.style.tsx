@@ -7,11 +7,18 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${media.desktop(`
+    padding: ${getSpacing(8)} ${getSpacing(12)};
+    background-color: ${colorPalette.greyLight};
+  `)}
 `;
 
 export const CauseName = styled.p`
   font-family: ${fontFamily.abril};
   font-size: ${fontSize.large};
+  ${media.desktop(`
+    font-size: ${fontSize.xxxLarge};
+  `)}
 `;
 CauseName.displayName = 'CauseName';
 
@@ -19,6 +26,9 @@ export const CoalitionName = styled.p`
   font-size: ${fontSize.small};
   color: ${colorPalette.blueCoalition};
   margin-bottom: ${getSpacing(2)};
+  ${media.desktop(`
+    font-size: ${fontSize.mediumLarge};
+  `)}
 `;
 CoalitionName.displayName = 'CoalitionName';
 

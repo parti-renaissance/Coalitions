@@ -9,6 +9,7 @@ import {
   fontFamily,
   fontSize,
   lineHeight,
+  fonts,
 } from 'stylesheet';
 
 export const CoalitionName = styled.div`
@@ -85,6 +86,7 @@ export const ButtonContainer = styled.div`
 ButtonContainer.displayName = 'ButtonContainer';
 
 export const Supported = styled.div`
+  ${fonts.input};
   position: absolute;
   top: 0;
   right: 0;

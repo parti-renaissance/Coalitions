@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { fontWeight, getSpacing, colorPalette, media, fonts } from 'stylesheet';
 import { Tab } from '@material-ui/core';
-import { Supported as OriginalSupported } from 'components/Cause/Cause.style';
 
 const CONTAINER_MAX_WIDTH = '960px';
 
@@ -20,8 +19,6 @@ export const Container = styled.div`
 
 export const HeaderContainer = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: column;
 `;
 
 export const CauseImage = styled.div<{ backgroundImage: string }>`
@@ -57,10 +54,6 @@ export const StyledTab = styled(Tab)`
     `};
 `;
 
-export const Supported = styled(OriginalSupported)`
-  right: -${getSpacing(3)};
-`;
-
 export const MobileHeaderWrapper = styled.div`
   ${media.desktop(`
     display: none;
@@ -80,6 +73,6 @@ export const DesktopHeaderWrapper = styled.div`
 export const CreateCauseCTAWrapper = styled.div`
   margin-top: ${getSpacing(5)};
   ${media.desktop(`
-    margin-top: ${getSpacing(18)};
+    margin: ${getSpacing(18)} ${getSpacing(15)} ${getSpacing(12)} ${getSpacing(15)};
   `)}
 `;

@@ -5,7 +5,6 @@ import {
   CauseImage,
   TabsWrapper,
   StyledTab,
-  Supported,
   DesktopHeaderWrapper,
   MobileHeaderWrapper,
   CreateCauseCTAWrapper,
@@ -17,6 +16,7 @@ import AboutThisCause from './components/AboutThisCause';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import Header from './components/Header';
+import { Supported } from 'components/Cause/Cause.style';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;

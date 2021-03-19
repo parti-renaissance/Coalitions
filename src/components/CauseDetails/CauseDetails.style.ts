@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import { fontWeight, getSpacing, colorPalette, media, fonts } from 'stylesheet';
 import { Tab } from '@material-ui/core';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
-import { MediumLargeButton } from 'components/Button/Button';
 import { Supported as OriginalSupported } from 'components/Cause/Cause.style';
 
 export const Container = styled.div`
@@ -32,19 +31,6 @@ export const CauseImage = styled.div<{ backgroundImage: string }>`
     `};
 `;
 
-export const CoalitionName = styled.p`
-  color: ${colorPalette.blueCoalition};
-  margin-bottom: ${getSpacing(2)};
-`;
-CoalitionName.displayName = 'CoalitionName';
-
-export const HeaderSubContainer = styled.div`
-  padding: ${getSpacing(3)} 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 export const TabsWrapper = styled.div`
   margin: 0 -${getSpacing(3)};
   ${media.desktop(`
@@ -67,30 +53,6 @@ export const StyledTab = styled(Tab)`
     `};
 `;
 
-export const AuthorAndSupportsWrapper = styled.div`
-  margin-top: ${getSpacing(2)};
-`;
-
-export const MobileSupportButtonWrapper = styled.div`
-  ${media.desktop(`
-    display: none;
-  `)}
-`;
-
-export const DesktopSupportButton = styled(MediumLargeButton)`
-  display: none;
-  ${media.desktop(`
-    display: block;
-    padding-left: ${getSpacing(10)};
-    padding-right: ${getSpacing(10)};
-  `)}
-`;
-
 export const Supported = styled(OriginalSupported)`
   right: -${getSpacing(3)};
-`;
-
-export const CauseName = styled.div`
-  ${fonts.smallTitle}
-  color: ${colorPalette.greyDark};
 `;

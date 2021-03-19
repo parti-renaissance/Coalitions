@@ -11,7 +11,7 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 0 ${getSpacing(3)} ${FULL_WIDTH_BUTTON_HEIGHT};
   ${media.desktop(`
-    padding-bottom: 0;
+    padding: ${getSpacing(12)};
     max-width: ${CONTAINER_MAX_WIDTH};
     margin: auto;
   `)}

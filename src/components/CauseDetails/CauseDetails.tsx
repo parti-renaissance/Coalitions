@@ -20,8 +20,6 @@ import AboutThisCause from './components/AboutThisCause';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
-import { SmallButton } from 'components/Button/Button';
-import { useSnackbar } from 'redux/Snackbar/hooks';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 
 interface CauseDetailsProps {
@@ -38,7 +36,6 @@ const TAB_INDICATOR_PROPS = {
 
 const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, isSupporting }) => {
   const [tabIndex, setTabIndex] = useState<number>(0);
-  const { showErrorSnackbar, showSuccessSnackbar, showWarningSnackbar } = useSnackbar();
   const isPreview = Boolean(!onSupport);
   const isSupported = Boolean(cause.supported);
   const intl = useIntl();
@@ -52,19 +49,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
       case 0:
         return <AboutThisCause cause={cause} />;
       default:
-        return (
-          <>
-            <SmallButton onClick={() => showSuccessSnackbar("Tout s'est bien passé !")}>
-              {'SHOW SUCCESS SNACKBAR'}
-            </SmallButton>
-            <SmallButton onClick={() => showErrorSnackbar('Une erreur est survenue !')}>
-              {'SHOW ERROR SNACKBAR'}
-            </SmallButton>
-            <SmallButton onClick={() => showWarningSnackbar('Attention Attention Attention!')}>
-              {'SHOW WARNING SNACKBAR'}
-            </SmallButton>
-          </>
-        );
+        return null;
     }
   };
 

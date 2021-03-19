@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { getSpacing, media, borderRadius, fontWeight, colorPalette, fonts } from 'stylesheet';
+import {
+  getSpacing,
+  media,
+  borderRadius,
+  fontWeight,
+  colorPalette,
+  fontSize,
+  fontFamily,
+} from 'stylesheet';
 
 export const Container = styled.div`
   display: flex;
@@ -70,9 +78,11 @@ export const SelectedCoalitionIndex = styled.div`
   width: ${MOBILE_COALITION_INDEX_SIZE};
   background-color: ${colorPalette.mintGreen};
   border-radius: 50%;
-  ${fonts.h2};
   color: ${colorPalette.blueCoalition};
+  font-family: ${fontFamily.secondary};
+  font-size: ${fontSize.button.mobile};
   ${media.desktop(`
+    font-size: ${fontSize.button.desktop};
     height: ${DESKTOP_COALITION_INDEX_SIZE};
     width: ${DESKTOP_COALITION_INDEX_SIZE};
   `)}

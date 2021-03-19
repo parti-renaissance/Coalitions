@@ -36,6 +36,7 @@ export const DesktopSupportButton = styled(MediumLargeButton)`
     display: block;
     padding-left: ${getSpacing(14)};
     padding-right: ${getSpacing(14)};
+    margin-left: ${getSpacing(6)};
   `)}
 `;
 

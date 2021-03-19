@@ -20,7 +20,7 @@ export const StyledTextField = styled(TextField)`
     background-color: ${colorPalette.blueLight};
     border-radius: ${borderRadius.medium};
   }
-  p {
+  .MuiFormHelperText-root {
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-size: ${fontSize.p.mobile};

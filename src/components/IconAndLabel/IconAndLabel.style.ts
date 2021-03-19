@@ -9,7 +9,7 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const Icon = styled.img<{ scale?: boolean }>`
+export const Icon = styled.img`
   height: ${MOBILE_ICON_SIZE};
   width: ${MOBILE_ICON_SIZE};
   margin-right: ${getSpacing(2)};
@@ -19,7 +19,7 @@ export const Icon = styled.img<{ scale?: boolean }>`
   `)}
 `;
 
-export const Label = styled.div<{ scale?: boolean }>`
+export const Label = styled.div`
   font-family: ${fontFamily.primary};
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};

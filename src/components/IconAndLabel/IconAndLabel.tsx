@@ -2,14 +2,14 @@ import React, { FunctionComponent } from 'react';
 import { Container, Icon } from './IconAndLabel.style';
 
 interface IconAndLabelProps {
-  Label: FunctionComponent<{}>;
+  label: string;
   iconSrc: string;
 }
 
-const IconAndLabel: FunctionComponent<IconAndLabelProps> = ({ Label, iconSrc }) => (
+const IconAndLabel: FunctionComponent<IconAndLabelProps> = ({ label, iconSrc }) => (
   <Container>
     <Icon src={iconSrc} />
-    <Label />
+    <p>{label}</p>
   </Container>
 );
 

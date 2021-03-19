@@ -189,7 +189,6 @@ export const fonts = {
   `,
   smallButton: css`
     font-family: ${fontFamily.primary};
-    line-height: ${lineHeight.primary};
     font-size: ${fontSize.smallButton.mobile};
     ${media.desktop(`
       font-size: ${fontSize.smallButton.desktop};
@@ -197,7 +196,6 @@ export const fonts = {
   `,
   button: css`
     font-family: ${fontFamily.primary};
-    line-height: ${lineHeight.primary};
     font-size: ${fontSize.button.mobile};
     ${media.desktop(`
       font-size: ${fontSize.button.desktop};

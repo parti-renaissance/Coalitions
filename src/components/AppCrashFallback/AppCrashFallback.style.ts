@@ -21,7 +21,6 @@ Title.displayName = 'Title';
 export const HelperList = styled.ul`
   list-style: disc inside;
   margin-top: ${getSpacing(2)};
-  line-height: ${lineHeight.medium};
 `;
 HelperList.displayName = 'HelperList';
 

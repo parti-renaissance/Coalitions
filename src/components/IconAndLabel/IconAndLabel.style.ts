@@ -1,13 +1,12 @@
 import styled from 'styled-components';
-import { getSpacing, fontSize, lineHeight } from 'stylesheet';
+import { getSpacing, fonts } from 'stylesheet';
 
 const ICON_SIZE = '16px';
 
 export const Container = styled.div`
+  ${fonts.p};
   display: flex;
   align-items: center;
-  font-size: ${fontSize.small};
-  line-height: ${lineHeight.verySmall};
 `;
 
 export const Icon = styled.img`

@@ -21,8 +21,8 @@ export const ButtonBase: FunctionComponent<ButtonProps & { isLoading?: boolean }
 );
 
 export const SmallButton = styled(ButtonBase)`
+  ${fonts.p};
   padding: ${getSpacing(1)} ${getSpacing(3)};
-  font-size: ${fontSize.small};
 `;
 
 export const FULL_WIDTH_BUTTON_HEIGHT = '50px';

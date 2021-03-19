@@ -150,7 +150,6 @@ export const lineHeight = {
 
 export const fonts = {
   h1: css`
-    color: ${colorPalette.greyDark};
     font-family: ${fontFamily.secondary};
     line-height: ${lineHeight.secondary};
     font-size: ${fontSize.h1.mobile};
@@ -159,7 +158,6 @@ export const fonts = {
     `)}
   `,
   h2: css`
-    color: ${colorPalette.greyDark};
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-weight: ${fontWeight.bold};
@@ -169,7 +167,6 @@ export const fonts = {
     `)}
   `,
   h3: css`
-    color: ${colorPalette.greyDark};
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-weight: ${fontWeight.bold};
@@ -179,7 +176,6 @@ export const fonts = {
     `)}
   `,
   p: css`
-    color: ${colorPalette.greyDark};
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-size: ${fontSize.p.mobile};
@@ -188,7 +184,6 @@ export const fonts = {
     `)}
   `,
   input: css`
-    color: ${colorPalette.greyDark};
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-size: ${fontSize.input.mobile};
@@ -213,7 +208,6 @@ export const fonts = {
     `)}
   `,
   smallTitle: css`
-    color: ${colorPalette.greyDark};
     font-family: ${fontFamily.secondary};
     line-height: ${lineHeight.secondary};
     font-size: ${fontSize.smallTitle.mobile};

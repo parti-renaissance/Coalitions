@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, fontWeight, getSpacing, media, fonts } from 'stylesheet';
+import { colorPalette, fontWeight, getSpacing, media } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 import Cropper from 'react-cropper';
 

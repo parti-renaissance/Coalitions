@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import { createMuiTheme } from '@material-ui/core';
 import { css } from 'styled-components';
 
@@ -238,3 +240,5 @@ export const styledTags = css`
     ${fonts.input};
   }
 `;
+
+/* eslint-enable max-lines */

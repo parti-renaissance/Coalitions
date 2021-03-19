@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, fonts } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 import BaseButton from 'components/Button';
 
 export const Container = styled.div`

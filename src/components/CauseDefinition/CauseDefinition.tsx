@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Container, Definition } from './CauseDefinition.style';
+import { Container, Definition, Title } from './CauseDefinition.style';
 
 const CauseDefinition: FunctionComponent = () => {
   const intl = useIntl();
   return (
     <Container>
-      <h1>{intl.formatMessage({ id: 'cause.what-is-it' })}</h1>
+      <Title>{intl.formatMessage({ id: 'cause.what-is-it' })}</Title>
       <Definition>{intl.formatMessage({ id: 'cause.definition' })}</Definition>
     </Container>
   );

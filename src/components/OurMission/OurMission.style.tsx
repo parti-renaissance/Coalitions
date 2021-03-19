@@ -51,3 +51,7 @@ export const MobileSupportButtonWrapper = styled.div`
     display: none;
   `)}
 `;
+
+export const Title = styled.h1`
+  color: ${colorPalette.greyDark};
+`;

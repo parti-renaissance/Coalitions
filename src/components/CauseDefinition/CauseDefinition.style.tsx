@@ -17,3 +17,7 @@ export const Definition = styled.p`
     max-width: ${getSpacing(108)};
   `)}
 `;
+
+export const Title = styled.h1`
+  color: ${colorPalette.greyDark};
+`;

@@ -8,6 +8,7 @@ import {
   Image,
   DesktopCreateCauseButton,
   MobileSupportButtonWrapper,
+  Title,
 } from './OurMission.style';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { DefaultLink as Link } from 'components/Link/Link';
@@ -24,7 +25,7 @@ const OurMission: FunctionComponent = () => {
     <>
       <Container>
         <SubContainer>
-          <h1>{intl.formatMessage({ id: 'our_mission.title' })}</h1>
+          <Title>{intl.formatMessage({ id: 'our_mission.title' })}</Title>
           <SubTitle>{intl.formatMessage({ id: 'our_mission.our-mission' })}</SubTitle>
           <Content>{intl.formatMessage({ id: 'our_mission.explanation' })}</Content>
           <Link to={PATHS.CREATE_CAUSE.url()}>

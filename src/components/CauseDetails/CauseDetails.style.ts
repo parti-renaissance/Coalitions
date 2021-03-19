@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { fontWeight, getSpacing, colorPalette, media, fonts } from 'stylesheet';
 import { Tab } from '@material-ui/core';
-import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 import { Supported as OriginalSupported } from 'components/Cause/Cause.style';
 
 const CONTAINER_MAX_WIDTH = '960px';
@@ -9,9 +8,11 @@ const CONTAINER_MAX_WIDTH = '960px';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 ${getSpacing(3)} ${FULL_WIDTH_BUTTON_HEIGHT};
+  padding: ${getSpacing(3)};
+  padding-bottom: 0;
   ${media.desktop(`
     padding: ${getSpacing(12)};
+    padding-bottom: 0;
     max-width: ${CONTAINER_MAX_WIDTH};
     margin: auto;
   `)}
@@ -25,7 +26,6 @@ export const HeaderContainer = styled.div`
 
 export const CauseImage = styled.div<{ backgroundImage: string }>`
   height: ${getSpacing(50)};
-  margin: 0 -${getSpacing(3)};
   ${({ backgroundImage }) =>
     css`
       background-image: url(${backgroundImage});
@@ -33,15 +33,15 @@ export const CauseImage = styled.div<{ backgroundImage: string }>`
       background-repeat: no-repeat;
       background-size: cover;
     `};
+  ${media.desktop(`
+    height: ${getSpacing(88)};
+    width: 100%;
+  `)}
 `;
 
 export const TabsWrapper = styled.div`
-  margin: 0 -${getSpacing(3)};
   ${media.desktop(`
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-top: ${getSpacing(10)};
   `)}
 `;
 
@@ -74,5 +74,12 @@ export const DesktopHeaderWrapper = styled.div`
     position: sticky;
     top: 0;
     z-index: 1;
+  `)}
+`;
+
+export const CreateCauseCTAWrapper = styled.div`
+  margin-top: ${getSpacing(5)};
+  ${media.desktop(`
+    margin-top: ${getSpacing(18)};
   `)}
 `;

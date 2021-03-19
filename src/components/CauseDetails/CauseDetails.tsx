@@ -8,6 +8,7 @@ import {
   Supported,
   DesktopHeaderWrapper,
   MobileHeaderWrapper,
+  CreateCauseCTAWrapper,
 } from './CauseDetails.style';
 import { FormattedMessage } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -75,8 +76,12 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
           </Tabs>
           {renderTabPanel()}
         </TabsWrapper>
-        {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}
       </Container>
+      {!isPreview ? (
+        <CreateCauseCTAWrapper>
+          <CreateCauseCTA displayLinkToCauseList />
+        </CreateCauseCTAWrapper>
+      ) : null}
     </>
   );
 };

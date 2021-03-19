@@ -70,6 +70,6 @@ export const DesktopHeaderWrapper = styled.div`
 export const CreateCauseCTAWrapper = styled.div`
   margin: ${getSpacing(5)} 0 calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(6)}) 0;
   ${media.desktop(`
-    margin: ${getSpacing(18)} ${getSpacing(15)} ${getSpacing(12)} ${getSpacing(15)};
+    margin: ${getSpacing(18)} ${getSpacing(18)} ${getSpacing(18)} ${getSpacing(18)};
   `)}
 `;

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { getSpacing, colorPalette, media } from 'stylesheet';
 
+const zIndex = 1;
+
 export const Container = styled.div`
   position: fixed;
   bottom: 0;
@@ -8,7 +10,7 @@ export const Container = styled.div`
   right: 0;
   padding: ${getSpacing(3)};
   background-color: ${colorPalette.white};
-  z-index: 1;
+  z-index: ${zIndex};
   ${media.desktop(`
     position: unset;
     bottom: unset;

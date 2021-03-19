@@ -1,4 +1,4 @@
-import { colorPalette, borderRadius, fonts } from 'stylesheet';
+import { colorPalette, borderRadius, fonts, fontFamily, lineHeight, fontSize } from 'stylesheet';
 import { TextField } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 
@@ -19,5 +19,10 @@ export const StyledTextField = styled(TextField)`
     ${fonts.h3};
     background-color: ${colorPalette.blueLight};
     border-radius: ${borderRadius.medium};
+  }
+  p {
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-size: ${fontSize.p.mobile};
   }
 `;

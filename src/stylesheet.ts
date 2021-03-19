@@ -201,6 +201,7 @@ export const fonts = {
   button: css`
     font-family: ${fontFamily.primary};
     font-size: ${fontSize.button.mobile};
+    font-weight: ${fontWeight.bold};
     ${media.desktop(`
       font-size: ${fontSize.button.desktop};
     `)}

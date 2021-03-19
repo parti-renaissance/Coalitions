@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colorPalette, getSpacing, media, fonts } from 'stylesheet';
-import SmallButton from 'components/Button';
+import { MediumLargeButton } from 'components/Button/Button';
 
 export const CTAContainer = styled.div`
   margin: 0 -${getSpacing(3)} ${getSpacing(4)} -${getSpacing(3)};
@@ -30,8 +30,7 @@ export const DescriptionText = styled.p`
   text-align: center;
 `;
 
-export const CTAButton = styled(SmallButton)`
-  padding: ${getSpacing(3)} ${getSpacing(4)};
+export const CTAButton = styled(MediumLargeButton)`
   margin-top: ${getSpacing(5)};
 `;
 

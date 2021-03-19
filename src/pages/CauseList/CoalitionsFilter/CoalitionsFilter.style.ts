@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { getSpacing, colorPalette } from 'stylesheet';
+import { getSpacing, colorPalette, fontFamily, lineHeight, fontSize } from 'stylesheet';
 
 export const CoalitionFiltersContainer = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const CoalitionFiltersContainer = styled.div`
   align-items: space-between;
 `;
 
-export const StyledChip = styled.p<{ isSelected?: boolean }>`
+export const StyledChip = styled.div<{ isSelected?: boolean }>`
   min-width: ${getSpacing(10)};
   text-align: center;
   width: fit-content;
@@ -17,6 +17,9 @@ export const StyledChip = styled.p<{ isSelected?: boolean }>`
   margin-right: ${getSpacing(3)};
   margin-bottom: ${getSpacing(2)};
   cursor: pointer;
+  font-family: ${fontFamily.primary};
+  line-height: ${lineHeight.primary};
+  font-size: ${fontSize.p.mobile};
   ${({ isSelected }) =>
     isSelected === false || isSelected === undefined
       ? css`

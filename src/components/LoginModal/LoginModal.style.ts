@@ -27,11 +27,12 @@ export const StyledCloseIcon = styled(Close)`
   color: ${colorPalette.greyDark};
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h3`
   margin-top: ${getSpacing(5)};
 `;
 
 export const Connect = styled.div`
+  display: flex;
   margin-top: ${getSpacing(3)};
 `;
 

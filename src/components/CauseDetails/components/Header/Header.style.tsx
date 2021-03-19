@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, colorPalette, media, fonts } from 'stylesheet';
+import { getSpacing, colorPalette, media } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`
@@ -7,6 +7,10 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${media.desktop(`
+    padding: ${getSpacing(8)} ${getSpacing(12)};
+    background-color: ${colorPalette.greyLight};
+  `)}
 `;
 
 export const CoalitionName = styled.p`
@@ -35,7 +39,6 @@ export const DesktopSupportButton = styled(MediumLargeButton)`
   `)}
 `;
 
-export const CauseName = styled.div`
-  ${fonts.smallTitle}
+export const CauseName = styled.h1`
   color: ${colorPalette.greyDark};
 `;

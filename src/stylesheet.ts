@@ -137,6 +137,10 @@ export const fontSize = {
     mobile: '18px',
     desktop: '18px',
   },
+  smallTitle: {
+    mobile: '22px',
+    desktop: '30px',
+  },
 };
 
 const lineHeight = {
@@ -199,6 +203,14 @@ export const fonts = {
     font-size: ${fontSize.button.mobile};
     ${media.desktop(`
       font-size: ${fontSize.button.desktop};
+    `)}
+  `,
+  smallTitle: css`
+    font-family: ${fontFamily.secondary};
+    line-height: ${lineHeight.secondary};
+    font-size: ${fontSize.smallTitle.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.smallTitle.desktop};
     `)}
   `,
 };

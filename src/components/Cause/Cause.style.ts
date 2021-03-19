@@ -8,7 +8,7 @@ export const CoalitionName = styled.p`
 `;
 CoalitionName.displayName = 'CoalitionName';
 
-export const CauseName = styled.p`
+export const CauseName = styled.div`
   /*
      OK for all browser except IE which is not maintained anymore since Nov 2020
      cf: https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
@@ -17,10 +17,13 @@ export const CauseName = styled.p`
   -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
   -webkit-line-clamp: 2;
   margin-bottom: ${getSpacing(3)};
-  ${fonts.h1};
+  ${fonts.smallTitle};
   overflow: hidden;
   flex-grow: 1;
-  max-height: ${getSpacing(8)};
+  max-height: ${getSpacing(10)};
+  ${media.desktop(`
+    max-height: ${getSpacing(14)};
+  `)}
 `;
 CauseName.displayName = 'CauseName';
 

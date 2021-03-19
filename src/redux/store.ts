@@ -34,3 +34,5 @@ export default function buildStore(preloadedState = {}) {
 
   return { store, persistor };
 }
+
+export const { store, persistor } = buildStore();

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
 import { getCause } from 'redux/Cause/selectors';
-import { getUserToken } from 'redux/Login';
+import { isUserLogged } from 'redux/Login';
 import LoginAndSupportModal from 'components/LoginAndSupportModal';
 import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 import { PATHS } from 'routes';
@@ -20,7 +20,7 @@ const CausePage: React.FunctionComponent = () => {
   const cause = useSelector(getCause(causeId));
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const { loading: loadingCauseFollow, followCause } = useCauseFollow(causeId);
-  const isUserLoggedIn = Boolean(useSelector(getUserToken));
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
   useEffect(() => {
     fetchCause();

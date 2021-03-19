@@ -14,7 +14,7 @@ import { useValidateForm, FormValues } from './lib/useValidateForm';
 import CoalitionCards from './components/CoalitionCards';
 import ImageCropper from './components/ImageCropper';
 import useSelector from 'redux/useSelector';
-import { getUserToken } from 'redux/Login';
+import { isUserLogged } from 'redux/Login';
 import LoginAndPreviewModal from './components/LoginAndPreviewModal';
 import { Coalition } from 'redux/Coalition/types';
 import { useDispatch } from 'react-redux';
@@ -27,7 +27,7 @@ const CreateCause: FunctionComponent = () => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const [isLoginModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
-  const isUserLoggedIn = Boolean(useSelector(getUserToken));
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const dispatch = useDispatch();
   const history = useHistory();
 

@@ -11,7 +11,7 @@ import { getAllCauses } from 'redux/Cause/selectors';
 import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
 import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
 import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
-import { getUserToken } from 'redux/Login/selectors';
+import { isUserLogged } from 'redux/Login/selectors';
 
 interface CauseListHeaderProps {
   loading: boolean;
@@ -46,7 +46,7 @@ const defineCtaPositionInList = (): number => {
 
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
-  const isUserLoggedIn = Boolean(useSelector(getUserToken));
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const [filteredByCoalitionIds, setFilteredByCoalitionIds] = useState<string[]>([]);
   const { hasMore, loading, error, fetchFirstPage, fetchNextPage } = useFetchCauses();
 

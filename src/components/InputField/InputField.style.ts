@@ -1,4 +1,4 @@
-import { fontFamily, colorPalette, borderRadius, fontSize } from 'stylesheet';
+import { colorPalette, borderRadius, fonts } from 'stylesheet';
 import { TextField } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 
@@ -16,10 +16,8 @@ export const StyledTextField = styled(TextField)`
           `};
   }
   .MuiInputBase-root {
+    ${fonts.h3};
     background-color: ${colorPalette.blueLight};
     border-radius: ${borderRadius.medium};
-    font-family: ${fontFamily.main};
-    font-size: ${fontSize.medium};
-    color: ${colorPalette.greyDark};
   }
 `;

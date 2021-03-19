@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, colorUsage, fontFamily, fontSize, getSpacing } from 'stylesheet';
+import { borderRadius, colorUsage, getSpacing, fonts } from 'stylesheet';
 
 const getBorderColor = (hasError: boolean, originalColor: string): string =>
   hasError ? colorUsage.error : originalColor;
@@ -9,8 +9,7 @@ interface Props {
 }
 
 const Input = styled.input<Props>`
-  font-family: ${fontFamily.main};
-  font-size: ${fontSize.medium};
+  ${fonts.input};
   width: 100%;
   height: 60px;
   background-color: ${colorUsage.inputBackground};

@@ -1,12 +1,5 @@
 import styled, { css } from 'styled-components';
-import {
-  borderRadius,
-  colorUsage,
-  fontFamily,
-  fontWeight,
-  getSpacing,
-  lineHeight,
-} from 'stylesheet';
+import { borderRadius, colorUsage, getSpacing, fonts } from 'stylesheet';
 
 import { Link as InitialLink } from 'react-router-dom';
 
@@ -19,10 +12,7 @@ interface ILink {
 const Link = styled.a<ILink>`
   padding: ${getSpacing(2)} ${getSpacing(4)};
 
-  font-weight: ${fontWeight.bold};
-  font-family: ${fontFamily.main};
-  font-size: inherit;
-  line-height: ${lineHeight.medium};
+  ${fonts.h3};
   text-decoration: none;
 
   color: ${props => (props.disabled ? colorUsage.linkColorDisabled : colorUsage.linkColor)};

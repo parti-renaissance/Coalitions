@@ -1,4 +1,4 @@
-import { getSpacing, fontSize, fontFamily, colorPalette } from 'stylesheet';
+import { getSpacing, fonts } from 'stylesheet';
 import styled from 'styled-components';
 
 export const FormControlLabelWrapper = styled.div`
@@ -6,8 +6,6 @@ export const FormControlLabelWrapper = styled.div`
 `;
 
 export const Label = styled.div`
-  font-size: ${fontSize.small};
-  font-family: ${fontFamily.main};
-  color: ${colorPalette.greyDark};
+  ${fonts.p};
   margin-left: ${getSpacing(2)};
 `;

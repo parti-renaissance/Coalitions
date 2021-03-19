@@ -125,6 +125,10 @@ const fontSize = {
     mobile: '14px',
     desktop: '20px',
   },
+  input: {
+    mobile: '16px',
+    desktop: '30px',
+  },
 };
 
 const lineHeight = {
@@ -179,6 +183,15 @@ export const fonts = {
     color: ${colorPalette.greyDark};
     ${media.desktop(`
       font-size: ${fontSize.p.desktop};
+    `)}
+  `,
+  input: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-size: ${fontSize.h3.mobile};
+    color: ${colorPalette.greyDark};
+    ${media.desktop(`
+      font-size: ${fontSize.h3.desktop};
     `)}
   `,
 };

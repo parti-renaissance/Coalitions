@@ -1,17 +1,9 @@
 import { Card, CardMedia, CardContent } from '@material-ui/core';
 import styled from 'styled-components';
-import {
-  boxShadow,
-  fontFamily,
-  fontSize,
-  getSpacing,
-  colorPalette,
-  media,
-  borderRadius,
-} from 'stylesheet';
+import { boxShadow, getSpacing, colorPalette, media, borderRadius, fonts } from 'stylesheet';
 
 export const CoalitionName = styled.p`
-  font-size: ${fontSize.small};
+  ${fonts.p};
   color: ${colorPalette.blueCoalition};
   margin-bottom: ${getSpacing(2)};
 `;
@@ -26,8 +18,7 @@ export const CauseName = styled.p`
   -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
   -webkit-line-clamp: 2;
   margin-bottom: ${getSpacing(3)};
-  font-family: ${fontFamily.abril};
-  font-size: ${fontSize.large};
+  ${fonts.h1};
   overflow: hidden;
   flex-grow: 1;
   max-height: ${getSpacing(8)};
@@ -35,7 +26,7 @@ export const CauseName = styled.p`
 CauseName.displayName = 'CauseName';
 
 export const Author = styled.p`
-  font-size: ${fontSize.small};
+  ${fonts.p};
   color: ${colorPalette.grey};
   margin-bottom: ${getSpacing(1)};
   max-width: min(75vw, ${getSpacing(60)});

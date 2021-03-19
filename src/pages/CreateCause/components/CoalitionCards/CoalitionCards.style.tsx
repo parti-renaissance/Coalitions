@@ -1,13 +1,5 @@
 import styled from 'styled-components';
-import {
-  getSpacing,
-  media,
-  borderRadius,
-  fontWeight,
-  colorPalette,
-  fonts,
-  fontFamily,
-} from 'stylesheet';
+import { getSpacing, media, borderRadius, fontWeight, colorPalette, fonts } from 'stylesheet';
 
 export const Container = styled.div`
   display: flex;
@@ -81,8 +73,7 @@ export const SelectedCoalitionIndex = styled.div`
   width: ${MOBILE_COALITION_INDEX_SIZE};
   background-color: ${colorPalette.mintGreen};
   border-radius: 50%;
-  font-family: ${fontFamily.secondary};
-  font-size: ${INDEX_FONT_SIZE};
+  ${fonts.h2};
   color: ${colorPalette.blueCoalition};
   ${media.desktop(`
     height: ${DESKTOP_COALITION_INDEX_SIZE};

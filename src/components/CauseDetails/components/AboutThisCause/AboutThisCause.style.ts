@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, fontFamily, colorPalette, lineHeight, fontSize, media } from 'stylesheet';
+import { getSpacing, media, fonts } from 'stylesheet';
 
 export const Container = styled.div`
   padding: ${getSpacing(6)} 0;
@@ -9,9 +9,6 @@ export const Container = styled.div`
 `;
 
 export const Description = styled.p`
-  font-family: ${fontFamily.main};
-  font-size: ${fontSize.small};
-  line-height: ${lineHeight.small};
-  color: ${colorPalette.greyDark};
+  ${fonts.p};
   white-space: pre-line;
 `;

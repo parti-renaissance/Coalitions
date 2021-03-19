@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorUsage, fontFamily, fontSize, getSpacing, lineHeight } from 'stylesheet';
+import { getSpacing, fonts } from 'stylesheet';
 import BaseButton from 'components/Button';
 
 export const Container = styled.div`
@@ -10,13 +10,11 @@ Container.displayName = 'Container';
 
 export const PageContent = styled.div`
   padding: ${getSpacing(8)} ${getSpacing(4)};
-  font-family: ${fontFamily.main};
-  color: ${colorUsage.primaryTextColor};
 `;
 PageContent.displayName = 'PageContent';
 
 export const Title = styled.h1`
-  font-size: ${fontSize.large};
+  ${fonts.h1};
 `;
 Title.displayName = 'Title';
 

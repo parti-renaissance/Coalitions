@@ -139,11 +139,11 @@ export const fontSize = {
   },
   smallTitle: {
     mobile: '22px',
-    desktop: '30px',
+    desktop: '34px',
   },
 };
 
-const lineHeight = {
+export const lineHeight = {
   primary: '130%',
   secondary: '110%',
 };

@@ -13,7 +13,7 @@ const DESKTOP_CONTAINER_HORIZONTAL_PADDING = SPACING_UNIT * 24;
 const DESKTOP_MARGIN_BETWEEN_STEPS = SPACING_UNIT * 10;
 
 export const Container = styled.div`
-  padding: ${getSpacing(7)} ${getSpacing(3)};
+  padding: ${getSpacing(7)} ${getSpacing(3)} 0 ${getSpacing(3)};
   ${media.desktop(`
     padding: ${getSpacing(19)} ${DESKTOP_CONTAINER_HORIZONTAL_PADDING}px;
   `)}

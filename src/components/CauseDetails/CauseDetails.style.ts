@@ -1,14 +1,11 @@
 import styled, { css } from 'styled-components';
 import { fontWeight, getSpacing, colorPalette, media, fonts } from 'stylesheet';
 import { Tab } from '@material-ui/core';
+import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
 const CONTAINER_MAX_WIDTH = '960px';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: ${getSpacing(3)};
-  padding-bottom: 0;
   ${media.desktop(`
     padding: ${getSpacing(12)};
     padding-bottom: 0;
@@ -23,6 +20,7 @@ export const HeaderContainer = styled.div`
 
 export const CauseImage = styled.div<{ backgroundImage: string }>`
   height: ${getSpacing(50)};
+  width: 100%;
   ${({ backgroundImage }) =>
     css`
       background-image: url(${backgroundImage});
@@ -32,7 +30,6 @@ export const CauseImage = styled.div<{ backgroundImage: string }>`
     `};
   ${media.desktop(`
     height: ${getSpacing(88)};
-    width: 100%;
   `)}
 `;
 
@@ -71,7 +68,7 @@ export const DesktopHeaderWrapper = styled.div`
 `;
 
 export const CreateCauseCTAWrapper = styled.div`
-  margin-top: ${getSpacing(5)};
+  margin: ${getSpacing(5)} 0 calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(6)}) 0;
   ${media.desktop(`
     margin: ${getSpacing(18)} ${getSpacing(15)} ${getSpacing(12)} ${getSpacing(15)};
   `)}

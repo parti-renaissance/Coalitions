@@ -8,6 +8,7 @@ export const Container = styled.div`
   right: 0;
   padding: ${getSpacing(3)};
   background-color: ${colorPalette.white};
+  z-index: 1;
   ${media.desktop(`
     position: unset;
     bottom: unset;

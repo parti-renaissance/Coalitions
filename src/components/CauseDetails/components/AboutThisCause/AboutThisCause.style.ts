@@ -1,8 +1,13 @@
 import styled from 'styled-components';
-import { getSpacing, colorPalette } from 'stylesheet';
+import { getSpacing, colorPalette, media } from 'stylesheet';
 
 export const Container = styled.div`
-  margin-top: ${getSpacing(5)};
+  padding: ${getSpacing(3)};
+  margin-top: ${getSpacing(2)};
+  ${media.desktop(`
+    padding: 0;
+    margin-top: ${getSpacing(5)};
+  `)}
 `;
 
 export const Description = styled.p`

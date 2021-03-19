@@ -4,12 +4,16 @@ import { Tab } from '@material-ui/core';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 import { Supported as OriginalSupported } from 'components/Cause/Cause.style';
 
+const CONTAINER_MAX_WIDTH = '960px';
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 ${getSpacing(3)} ${FULL_WIDTH_BUTTON_HEIGHT};
   ${media.desktop(`
     padding-bottom: 0;
+    max-width: ${CONTAINER_MAX_WIDTH};
+    margin: auto;
   `)}
 `;
 

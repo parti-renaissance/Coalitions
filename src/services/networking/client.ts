@@ -1,4 +1,6 @@
 import jwt_decode from 'jwt-decode';
+import { getAccessToken } from 'redux/Login';
+import { store } from 'redux/store';
 import request from 'superagent';
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, refresh } from './auth';
 
@@ -58,11 +60,7 @@ class Client {
   }
 
   getToken() {
-    return localStorage.getItem(this.accessTokenKey);
-  }
-
-  updateToken(token: string) {
-    return localStorage.setItem(this.accessTokenKey, token);
+    return getAccessToken(store.getState());
   }
 
   /**
@@ -78,13 +76,7 @@ class Client {
     } else {
       const parsedToken = jwt_decode<AccessToken>(token);
       if (tokenHasExpired(parsedToken)) {
-        try {
-          await refresh();
-        } catch (e) {
-          // Token was invalid, logging out the user.
-          this.updateToken('');
-          // LOGOUT
-        }
+        await refresh();
       }
     }
   }

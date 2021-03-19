@@ -4,7 +4,8 @@ export const state = {
     username: 'someUsername',
   },
   login: {
-    token: 'someToken',
+    accessToken: 'someAccessToken',
+    refreshToken: 'someRefreshToken',
     isLogged: false,
     afterAuthAction: { followCause: null, redirectTo: null },
   },

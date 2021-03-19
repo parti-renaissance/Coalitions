@@ -1,6 +1,7 @@
 import { RootState } from 'redux/types';
 
-export const getUserToken = (store: RootState) => store.login.token;
+export const getAccessToken = (store: RootState) => store.login.accessToken;
+export const getRefreshToken = (store: RootState) => store.login.refreshToken;
 
 export const isUserLogged = (store: RootState) => Boolean(store.login.isLogged);
 

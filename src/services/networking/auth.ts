@@ -1,5 +1,6 @@
 import { store } from 'redux/store';
-import { setIsLogged } from 'redux/Login';
+import { userLoggedIn, userLoggedOut } from 'redux/Login';
+import { getRefreshToken } from 'redux/Login/selectors';
 import request from 'superagent';
 
 export const ACCESS_TOKEN_KEY = 'access_token';
@@ -23,10 +24,11 @@ const authCall = async (payload: oauthPayload) => {
     .set('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
     .send(payload);
   const access_token: string | undefined = result.body.access_token;
-  if (access_token !== undefined) localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
   const refresh_token: string | undefined = result.body.refresh_token;
-  if (refresh_token !== undefined) localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
-  return access_token;
+  return {
+    accessToken: access_token !== undefined ? access_token : null,
+    refreshToken: refresh_token !== undefined ? refresh_token : null,
+  };
 };
 
 export const login = async (code: string) => {
@@ -39,7 +41,7 @@ export const login = async (code: string) => {
 };
 
 export const refresh = async () => {
-  const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+  const refreshToken = getRefreshToken(store.getState());
   if (refreshToken === null) return;
   const payload = {
     client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
@@ -47,17 +49,13 @@ export const refresh = async () => {
     grant_type: 'refresh_token',
   };
   try {
-    const access_token = await authCall(payload);
-    if (access_token === undefined) {
-      logout();
+    const { accessToken, refreshToken } = await authCall(payload);
+    if (accessToken === null) {
+      store.dispatch(userLoggedOut());
+    } else {
+      store.dispatch(userLoggedIn({ accessToken, refreshToken }));
     }
   } catch (error) {
-    logout();
+    store.dispatch(userLoggedOut());
   }
-};
-
-export const logout = () => {
-  localStorage.removeItem(ACCESS_TOKEN_KEY);
-  localStorage.removeItem(REFRESH_TOKEN_KEY);
-  store.dispatch(setIsLogged(false));
 };

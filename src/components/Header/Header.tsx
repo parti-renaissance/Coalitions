@@ -7,7 +7,7 @@ import { HeaderContainer } from './Header.style';
 import { isUserLogged } from 'redux/Login';
 import useSelector from 'redux/useSelector';
 import { useLocation } from 'react-router';
-import { useLogin } from 'redux/Login/hooks';
+import { useLogin } from 'redux/Login/hooks/useLogin';
 import { oauthUrl } from 'services/networking/auth';
 
 const Header: React.FC = () => {

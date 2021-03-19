@@ -27,7 +27,6 @@ export const HeadSentence = styled.p`
 `;
 
 export const DescriptionText = styled.p`
-  ${fonts.p}
   text-align: center;
 `;
 

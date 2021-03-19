@@ -13,11 +13,6 @@ export const PageContent = styled.div`
 `;
 PageContent.displayName = 'PageContent';
 
-export const Title = styled.h1`
-  ${fonts.h1};
-`;
-Title.displayName = 'Title';
-
 export const HelperList = styled.ul`
   list-style: disc inside;
   margin-top: ${getSpacing(2)};

@@ -26,8 +26,7 @@ export const StyledCloseIcon = styled(Close)`
   color: ${colorPalette.greyDark};
 `;
 
-export const Title = styled.div`
-  ${fonts.h2};
+export const Title = styled.h2`
   margin-top: ${getSpacing(5)};
 `;
 

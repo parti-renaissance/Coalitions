@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { boxShadow, getSpacing, colorPalette, media, borderRadius, fonts } from 'stylesheet';
 
 export const CoalitionName = styled.p`
-  ${fonts.p};
   color: ${colorPalette.blueCoalition};
   margin-bottom: ${getSpacing(2)};
 `;
@@ -26,7 +25,6 @@ export const CauseName = styled.p`
 CauseName.displayName = 'CauseName';
 
 export const Author = styled.p`
-  ${fonts.p};
   color: ${colorPalette.grey};
   margin-bottom: ${getSpacing(1)};
   max-width: min(75vw, ${getSpacing(60)});

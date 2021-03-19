@@ -98,7 +98,7 @@ export const media = {
   largeDesktop: (styles: string) => `@media (min-width: ${DESKTOP_BREAK_POINT}px) {${styles}}`,
 };
 
-export const fontFamily = {
+const fontFamily = {
   primary: `'Poppins', sans-serif`,
   secondary: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
 };
@@ -169,16 +169,6 @@ export const fonts = {
   p: css`
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
-    font-size: ${fontSize.p.mobile};
-    color: ${colorPalette.greyDark};
-    ${media.desktop(`
-      font-size: ${fontSize.p.desktop};
-    `)}
-  `,
-  pBold: css`
-    font-family: ${fontFamily.primary};
-    line-height: ${lineHeight.primary};
-    font-weight: ${fontWeight.bold};
     font-size: ${fontSize.p.mobile};
     color: ${colorPalette.greyDark};
     ${media.desktop(`

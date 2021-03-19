@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent, FunctionComponent } from 'react';
 import {
   Container,
   HeaderContainer,
-  CauseName,
   CoalitionName,
   CauseImage,
   HeaderSubContainer,
@@ -81,7 +80,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
           <HeaderSubContainer>
             <div>
               <CoalitionName>{cause.coalition.name}</CoalitionName>
-              <CauseName>{cause.name}</CauseName>
+              <h1>{cause.name}</h1>
               <AuthorAndSupportsWrapper>
                 <AuthorAndSupports cause={cause} showAuthor />
               </AuthorAndSupportsWrapper>

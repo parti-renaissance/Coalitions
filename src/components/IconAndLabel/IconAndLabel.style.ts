@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { getSpacing, fonts } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 
 const ICON_SIZE = '16px';
 
 export const Container = styled.div`
-  ${fonts.p};
   display: flex;
   align-items: center;
 `;

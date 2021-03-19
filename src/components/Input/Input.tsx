@@ -9,7 +9,6 @@ interface Props {
 }
 
 const Input = styled.input<Props>`
-  ${fonts.input};
   width: 100%;
   height: 60px;
   background-color: ${colorUsage.inputBackground};

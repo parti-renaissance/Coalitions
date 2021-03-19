@@ -37,8 +37,7 @@ export const CoalitionImage = styled.img`
   `)}
 `;
 
-export const CoalitionName = styled.div`
-  ${fonts.p};
+export const CoalitionName = styled.p`
   margin-top: ${getSpacing(2)};
 `;
 

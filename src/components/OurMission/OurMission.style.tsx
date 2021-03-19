@@ -17,18 +17,12 @@ export const SubContainer = styled.div`
   `)}
 `;
 
-export const Title = styled.h1`
-  ${fonts.h1};
-`;
-
-export const SubTitle = styled.div`
+export const SubTitle = styled.h2`
   margin-top: ${getSpacing(7)};
-  ${fonts.h2};
 `;
 
 export const Content = styled.p`
   margin-top: ${getSpacing(2)};
-  ${fonts.p};
 `;
 
 export const Image = styled.img`

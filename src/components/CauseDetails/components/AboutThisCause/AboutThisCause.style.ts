@@ -9,6 +9,5 @@ export const Container = styled.div`
 `;
 
 export const Description = styled.p`
-  ${fonts.p};
   white-space: pre-line;
 `;

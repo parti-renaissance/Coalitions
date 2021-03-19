@@ -5,7 +5,6 @@ export const FormControlLabelWrapper = styled.div`
   margin-top: ${getSpacing(5)};
 `;
 
-export const Label = styled.div`
-  ${fonts.p};
+export const Label = styled.p`
   margin-left: ${getSpacing(2)};
 `;

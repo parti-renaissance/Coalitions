@@ -41,8 +41,7 @@ export const StepNumber = styled.div`
   color: ${colorPalette.blueCoalition};
 `;
 
-export const StepText = styled.div`
-  ${fonts.p};
+export const StepText = styled.p`
   margin-left: ${getSpacing(2)};
   ${media.desktop(`
     margin-left: ${getSpacing(6)};

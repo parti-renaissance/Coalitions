@@ -57,8 +57,8 @@ export const PlusIconContainer = styled.div`
   `)}
 `;
 
-export const ImportLabel = styled.div`
-  ${fonts.pBold};
+export const ImportLabel = styled.p`
+  font-weight: ${fontWeight.bold};
   margin-top: ${getSpacing(2)};
   ${media.desktop(`
     margin-top: ${getSpacing(4)};

@@ -32,13 +32,7 @@ export const CauseImage = styled.div<{ backgroundImage: string }>`
     `};
 `;
 
-export const CauseName = styled.p`
-  ${fonts.h1};
-`;
-CauseName.displayName = 'CauseName';
-
 export const CoalitionName = styled.p`
-  ${fonts.p};
   color: ${colorPalette.blueCoalition};
   margin-bottom: ${getSpacing(2)};
 `;
@@ -62,9 +56,9 @@ export const TabsWrapper = styled.div`
 `;
 
 export const StyledTab = styled(Tab)`
+  ${fonts.p};
   padding: ${getSpacing(2)} ${getSpacing(3)};
   text-transform: capitalize;
-  ${fonts.p};
   ${({ selected }) =>
     css`
       opacity: ${Boolean(selected) ? 1 : 0.6};

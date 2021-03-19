@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl';
 import {
   Container,
   SubContainer,
-  Title,
   SubTitle,
   Content,
   Image,
@@ -25,7 +24,7 @@ const OurMission: FunctionComponent = () => {
     <>
       <Container>
         <SubContainer>
-          <Title>{intl.formatMessage({ id: 'our_mission.title' })}</Title>
+          <h1>{intl.formatMessage({ id: 'our_mission.title' })}</h1>
           <SubTitle>{intl.formatMessage({ id: 'our_mission.our-mission' })}</SubTitle>
           <Content>{intl.formatMessage({ id: 'our_mission.explanation' })}</Content>
           <Link to={PATHS.CREATE_CAUSE.url()}>

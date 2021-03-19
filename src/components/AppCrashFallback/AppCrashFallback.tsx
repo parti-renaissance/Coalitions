@@ -20,7 +20,7 @@ const AppCrashFallback: React.FunctionComponent<IFallbackProps> = ({ eventId }) 
       style is not applied to the root tag of this component */}
       <Container>
         <PageContent>
-          <Title>Sorry, this is not working properly.</Title>
+          <h1>Sorry, this is not working properly.</h1>
           <br />
           <p>We know about this issue and are working to fix it.</p>
           <br />

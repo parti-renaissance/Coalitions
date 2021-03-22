@@ -1,9 +1,9 @@
+import { MediumLargeButton } from 'components/Button/Button';
 import { DefaultLink } from 'components/Link/Link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { PATHS } from 'routes';
 import {
-  CreateCauseButton,
   HeaderContainer,
   HeaderSubContainer,
   HeaderTitle,
@@ -37,9 +37,9 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isUserLoggedIn, on
     </HeaderSubContainer>
     <HeaderSubContainer>
       <DefaultLink to={PATHS.OUR_MISSION.url()}>
-        <CreateCauseButton variant="contained" color="primary">
+        <MediumLargeButton variant="contained" color="primary">
           <FormattedMessage id="header.cause-creation" />
-        </CreateCauseButton>
+        </MediumLargeButton>
       </DefaultLink>
       <LogLink onClick={onLogClick}>
         {isUserLoggedIn ? (

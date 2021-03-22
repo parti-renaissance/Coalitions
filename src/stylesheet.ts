@@ -113,7 +113,7 @@ export const fontWeight = {
 export const fontSize = {
   h1: {
     mobile: '22px',
-    desktop: '48px',
+    desktop: '34px',
   },
   h2: {
     mobile: '18px',
@@ -138,10 +138,6 @@ export const fontSize = {
   button: {
     mobile: '18px',
     desktop: '18px',
-  },
-  smallTitle: {
-    mobile: '22px',
-    desktop: '34px',
   },
 };
 
@@ -207,14 +203,6 @@ export const fonts = {
     font-weight: ${fontWeight.bold};
     ${media.desktop(`
       font-size: ${fontSize.button.desktop};
-    `)}
-  `,
-  smallTitle: css`
-    font-family: ${fontFamily.secondary};
-    line-height: ${lineHeight.secondary};
-    font-size: ${fontSize.smallTitle.mobile};
-    ${media.desktop(`
-      font-size: ${fontSize.smallTitle.desktop};
     `)}
   `,
 };

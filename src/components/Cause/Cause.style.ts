@@ -9,6 +9,7 @@ import {
   fontFamily,
   fontSize,
   lineHeight,
+  fonts,
 } from 'stylesheet';
 
 export const CoalitionName = styled.div`
@@ -33,7 +34,7 @@ export const CauseName = styled.div`
   flex-grow: 1;
   max-height: ${getSpacing(10)};
   font-family: ${fontFamily.secondary};
-  font-size: ${fontSize.smallTitle.mobile};
+  font-size: ${fontSize.h1.mobile};
   line-height: ${lineHeight.secondary};
   color: ${colorPalette.greyDark};
 `;
@@ -85,6 +86,7 @@ export const ButtonContainer = styled.div`
 ButtonContainer.displayName = 'ButtonContainer';
 
 export const Supported = styled.div`
+  ${fonts.input};
   position: absolute;
   top: 0;
   right: 0;

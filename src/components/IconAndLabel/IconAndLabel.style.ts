@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, fontFamily, fontSize, lineHeight } from 'stylesheet';
+import { getSpacing, colorPalette, fontFamily, fontSize, lineHeight } from 'stylesheet';
 
 const ICON_SIZE = '16px';
 
@@ -18,4 +18,5 @@ export const Label = styled.div`
   font-family: ${fontFamily.primary};
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};
+  color: ${colorPalette.greyDark};
 `;

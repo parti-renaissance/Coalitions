@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-  ${fonts.smallTitle};
+  ${fonts.h1};
   color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(5)};
   ${media.desktop(`

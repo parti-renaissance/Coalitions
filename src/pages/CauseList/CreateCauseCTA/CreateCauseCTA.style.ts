@@ -3,7 +3,6 @@ import { colorPalette, getSpacing, media, fonts } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const CTAContainer = styled.div`
-  margin: 0 -${getSpacing(3)} ${getSpacing(4)} -${getSpacing(3)};
   ${media.desktop(`
     flex: 0 0 100%;
   `)};
@@ -22,7 +21,7 @@ export const CTABlock = styled.div`
 `;
 
 export const HeadSentence = styled.div`
-  ${fonts.smallTitle};
+  ${fonts.h1};
   color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(3)};
 `;

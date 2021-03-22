@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback } from 'react';
 import { updateCurrentUser } from '../slice';
+
 export const useFetchCurrentUser = () => {
   const dispatch = useDispatch();
 

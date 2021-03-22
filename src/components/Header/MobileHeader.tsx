@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { HeaderContainer, HeaderSubContainer, LogLink } from './Header.style';
+import { isUserLogged, userLoggedOut } from 'redux/Login';
+import useSelector from 'redux/useSelector';
+import { useDispatch } from 'react-redux';
+import { oauthUrl } from 'services/networking/auth';
 
-type MobileHeaderProps = {
-  isUserLoggedIn: boolean;
-  onLogClick: () => void;
+export const MobileHeader: FunctionComponent<{}> = () => {
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const dispatch = useDispatch();
+
+  const onLogClick = () => {
+    if (isUserLoggedIn) {
+      dispatch(userLoggedOut());
+    } else {
+      window.location.href = oauthUrl;
+    }
+  };
+
+  return (
+    <HeaderContainer>
+      <HeaderSubContainer>
+        <LogLink onClick={onLogClick}>
+          {isUserLoggedIn ? (
+            <FormattedMessage id="header.logout" />
+          ) : (
+            <FormattedMessage id="header.login" />
+          )}
+        </LogLink>
+      </HeaderSubContainer>
+    </HeaderContainer>
+  );
 };
-
-export const MobileHeader: React.FC<MobileHeaderProps> = ({ isUserLoggedIn, onLogClick }) => (
-  <HeaderContainer>
-    <HeaderSubContainer>
-      <LogLink onClick={onLogClick}>
-        {isUserLoggedIn ? (
-          <FormattedMessage id="header.logout" />
-        ) : (
-          <FormattedMessage id="header.login" />
-        )}
-      </LogLink>
-    </HeaderSubContainer>
-  </HeaderContainer>
-);

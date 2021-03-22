@@ -6,7 +6,7 @@ import rootReducer from './reducers';
 export default function buildStore(preloadedState = {}) {
   const persistConfig = {
     key: 'root',
-    whitelist: ['login'],
+    whitelist: ['login', 'user'],
     storage,
   };
   const persistedReducer = persistReducer(persistConfig, rootReducer);

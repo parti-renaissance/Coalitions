@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { colorPalette, fonts, fontFamily, getSpacing } from 'stylesheet';
+import { colorPalette, fonts, fontFamily, getSpacing, styledTags } from 'stylesheet';
+import Menu from '@material-ui/core/Menu';
 
 export const HeaderContainer = styled.header`
   ${fonts.menu};
@@ -36,4 +37,23 @@ export const LogLink = styled.a`
   color: ${colorPalette.black};
   text-decoration: none;
   cursor: pointer;
+`;
+
+export const FirstNameContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const USER_ICON_WIDTH = '20px';
+
+export const UserIcon = styled.img`
+  height: ${USER_ICON_WIDTH};
+  width: ${USER_ICON_WIDTH};
+  margin-right: ${getSpacing(2)};
+`;
+
+export const StyledDesktopUserMenu = styled(Menu)`
+  li {
+    ${fonts.menu};
+  }
 `;

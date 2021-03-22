@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fontSize, getSpacing } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -8,7 +8,6 @@ export const HeaderContainer = styled.header`
   align-items: center;
   height: ${getSpacing(13)};
   padding: 0 ${getSpacing(4)};
-  font-size: ${fontSize.large};
 `;
 
 HeaderContainer.displayName = 'HeaderContainer';

@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { colorPalette, fontSize, fontWeight, getSpacing, media } from 'stylesheet';
-import SmallButton from 'components/Button';
+import { colorPalette, getSpacing, media, fonts } from 'stylesheet';
+import { MediumLargeButton } from 'components/Button/Button';
 
 export const CTAContainer = styled.div`
-  margin: 0 -${getSpacing(3)} ${getSpacing(4)} -${getSpacing(3)};
   ${media.desktop(`
     flex: 0 0 100%;
   `)};
@@ -21,20 +20,18 @@ export const CTABlock = styled.div`
   `)};
 `;
 
-export const HeadSentence = styled.p`
-  font-size: ${fontSize.large};
-  font-weight: ${fontWeight.bold};
+export const HeadSentence = styled.div`
+  ${fonts.h1};
+  color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(3)};
 `;
 
 export const DescriptionText = styled.p`
-  font-size: ${fontSize.mediumLarge};
-  font-weight: ${fontWeight.light};
+  color: ${colorPalette.greyDark};
   text-align: center;
 `;
 
-export const CTAButton = styled(SmallButton)`
-  padding: ${getSpacing(3)} ${getSpacing(4)};
+export const CTAButton = styled(MediumLargeButton)`
   margin-top: ${getSpacing(5)};
 `;
 

@@ -1,15 +1,8 @@
 import { IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import styled from 'styled-components';
-import {
-  fontSize,
-  colorPalette,
-  media,
-  getSpacing,
-  lineHeight,
-  fontWeight,
-  fontFamily,
-} from 'stylesheet';
+import { colorPalette, media, getSpacing, fonts, styledTags } from 'stylesheet';
+import { Dialog } from '@material-ui/core';
 
 export const ContentContainer = styled.div`
   display: flex;
@@ -34,21 +27,18 @@ export const StyledCloseIcon = styled(Close)`
   color: ${colorPalette.greyDark};
 `;
 
-export const Title = styled.div`
-  font-family: ${fontFamily.main};
-  font-size: ${fontSize.mediumLarge};
-  font-weight: ${fontWeight.bold};
+export const Title = styled.h3`
+  color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(5)};
 `;
 
 export const Connect = styled.div`
+  display: flex;
   margin-top: ${getSpacing(3)};
-  font-family: ${fontFamily.main};
-  font-size: ${fontSize.medium};
-  line-height: ${lineHeight.medium};
 `;
 
 export const ConnectLink = styled.a`
+  ${fonts.p};
   color: ${colorPalette.mintGreen};
   text-decoration: underline;
   margin-left: ${getSpacing(1)};
@@ -64,4 +54,8 @@ export const ValidateButtonContainer = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(10)};
   `)}
+`;
+
+export const StyledDialog = styled(Dialog)`
+  ${styledTags}
 `;

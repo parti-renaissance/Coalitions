@@ -2,22 +2,26 @@ import { Card, CardMedia, CardContent } from '@material-ui/core';
 import styled from 'styled-components';
 import {
   boxShadow,
-  fontFamily,
-  fontSize,
   getSpacing,
   colorPalette,
   media,
   borderRadius,
+  fontFamily,
+  fontSize,
+  lineHeight,
+  fonts,
 } from 'stylesheet';
 
-export const CoalitionName = styled.p`
-  font-size: ${fontSize.small};
+export const CoalitionName = styled.div`
   color: ${colorPalette.blueCoalition};
   margin-bottom: ${getSpacing(2)};
+  font-family: ${fontFamily.primary};
+  font-size: ${fontSize.p.mobile};
+  line-height: ${lineHeight.primary};
 `;
 CoalitionName.displayName = 'CoalitionName';
 
-export const CauseName = styled.p`
+export const CauseName = styled.div`
   /*
      OK for all browser except IE which is not maintained anymore since Nov 2020
      cf: https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
@@ -26,22 +30,26 @@ export const CauseName = styled.p`
   -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
   -webkit-line-clamp: 2;
   margin-bottom: ${getSpacing(3)};
-  font-family: ${fontFamily.abril};
-  font-size: ${fontSize.large};
   overflow: hidden;
   flex-grow: 1;
-  max-height: ${getSpacing(8)};
+  max-height: ${getSpacing(10)};
+  font-family: ${fontFamily.secondary};
+  font-size: ${fontSize.h1.mobile};
+  line-height: ${lineHeight.secondary};
+  color: ${colorPalette.greyDark};
 `;
 CauseName.displayName = 'CauseName';
 
-export const Author = styled.p`
-  font-size: ${fontSize.small};
+export const Author = styled.div`
   color: ${colorPalette.grey};
   margin-bottom: ${getSpacing(1)};
   max-width: min(75vw, ${getSpacing(60)});
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: ${fontFamily.primary};
+  font-size: ${fontSize.p.mobile};
+  line-height: ${lineHeight.primary};
 `;
 Author.displayName = 'Author';
 
@@ -78,6 +86,7 @@ export const ButtonContainer = styled.div`
 ButtonContainer.displayName = 'ButtonContainer';
 
 export const Supported = styled.div`
+  ${fonts.input};
   position: absolute;
   top: 0;
   right: 0;

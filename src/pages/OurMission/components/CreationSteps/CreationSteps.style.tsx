@@ -2,30 +2,26 @@ import styled from 'styled-components';
 import {
   media,
   getSpacing,
-  fontSize,
-  fontFamily,
   colorPalette,
-  lineHeight,
   SPACING_UNIT,
+  fonts,
+  fontFamily,
+  fontSize,
 } from 'stylesheet';
 
 const DESKTOP_CONTAINER_HORIZONTAL_PADDING = SPACING_UNIT * 24;
 const DESKTOP_MARGIN_BETWEEN_STEPS = SPACING_UNIT * 10;
 
 export const Container = styled.div`
-  padding: ${getSpacing(7)} ${getSpacing(3)};
+  padding: ${getSpacing(7)} ${getSpacing(3)} 0 ${getSpacing(3)};
   ${media.desktop(`
     padding: ${getSpacing(19)} ${DESKTOP_CONTAINER_HORIZONTAL_PADDING}px;
   `)}
 `;
 
 export const Title = styled.div`
-  font-size: ${fontSize.xLarge};
-  font-family: ${fontFamily.abril};
+  ${fonts.h1};
   color: ${colorPalette.greyDark};
-  ${media.desktop(`
-    font-size: ${fontSize.xxxLarge};
-  `)}
 `;
 
 export const SubContainer = styled.div`
@@ -50,20 +46,18 @@ export const StepContainer = styled.div`
 `;
 
 export const StepNumber = styled.div`
-  font-size: ${fontSize.xLarge};
-  font-family: ${fontFamily.abril};
+  font-family: ${fontFamily.secondary};
+  font-size: ${fontSize.h3.mobile};
   color: ${colorPalette.blueCoalition};
+  ${media.desktop(`
+    font-size: ${fontSize.h3.desktop};
+  `)}
 `;
 
-export const StepText = styled.div`
-  font-size: ${fontSize.small};
-  line-height: ${lineHeight.small};
-  font-family: ${fontFamily.main};
+export const StepText = styled.p`
   color: ${colorPalette.greyDark};
   margin-left: ${getSpacing(2)};
   ${media.desktop(`
-    font-size: ${fontSize.mediumLarge};
-    line-height: ${lineHeight.medium};
     margin-left: ${getSpacing(6)};
   `)}
 `;

@@ -1,4 +1,7 @@
+/* eslint-disable max-lines */
+
 import { createMuiTheme } from '@material-ui/core';
+import { css } from 'styled-components';
 
 /**
  * App spacing measurement convention
@@ -63,34 +66,6 @@ export const colorUsage = {
   inputPlaceholderColor: colorPalette.blackTransparent,
 };
 
-export const fontFamily = {
-  main: `'Poppins', sans-serif`,
-  abril: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
-};
-
-export const fontSize = {
-  xxxLarge: '40px',
-  xxLarge: '30px',
-  xLarge: '24px',
-  large: '20px',
-  mediumLarge: '18px',
-  medium: '16px',
-  small: '14px',
-};
-
-export const fontWeight = {
-  bold: '700',
-  normal: '400',
-  light: '300',
-};
-
-export const lineHeight = {
-  large: '36px',
-  medium: '24px',
-  small: '20px',
-  verySmall: '16px',
-};
-
 export const borderRadius = {
   medium: '4px',
   large: '10px',
@@ -124,3 +99,134 @@ export const media = {
   desktop: (styles: string) => `@media (min-width: ${TABLET_BREAK_POINT}px) {${styles}}`,
   largeDesktop: (styles: string) => `@media (min-width: ${DESKTOP_BREAK_POINT}px) {${styles}}`,
 };
+
+export const fontFamily = {
+  primary: `'Poppins', sans-serif`,
+  secondary: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
+};
+
+export const fontWeight = {
+  bold: '700',
+  normal: '400',
+};
+
+export const fontSize = {
+  h1: {
+    mobile: '22px',
+    desktop: '34px',
+  },
+  h2: {
+    mobile: '18px',
+    desktop: '34px',
+  },
+  h3: {
+    mobile: '16px',
+    desktop: '24px',
+  },
+  p: {
+    mobile: '14px',
+    desktop: '20px',
+  },
+  input: {
+    mobile: '16px',
+    desktop: '18px',
+  },
+  smallButton: {
+    mobile: '14px',
+    desktop: '14px',
+  },
+  button: {
+    mobile: '18px',
+    desktop: '18px',
+  },
+};
+
+export const lineHeight = {
+  primary: '130%',
+  secondary: '110%',
+};
+
+export const fonts = {
+  h1: css`
+    font-family: ${fontFamily.secondary};
+    line-height: ${lineHeight.secondary};
+    font-size: ${fontSize.h1.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.h1.desktop};
+    `)}
+  `,
+  h2: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-weight: ${fontWeight.bold};
+    font-size: ${fontSize.h2.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.h2.desktop};
+    `)}
+  `,
+  h3: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-weight: ${fontWeight.bold};
+    font-size: ${fontSize.h3.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.h3.desktop};
+    `)}
+  `,
+  p: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-size: ${fontSize.p.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.p.desktop};
+    `)}
+  `,
+  input: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-size: ${fontSize.input.mobile};
+    font-weight: ${fontWeight.normal};
+    ${media.desktop(`
+      font-size: ${fontSize.input.desktop};
+    `)}
+  `,
+  smallButton: css`
+    font-family: ${fontFamily.primary};
+    font-size: ${fontSize.smallButton.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.smallButton.desktop};
+    `)}
+  `,
+  button: css`
+    font-family: ${fontFamily.primary};
+    font-size: ${fontSize.button.mobile};
+    font-weight: ${fontWeight.bold};
+    ${media.desktop(`
+      font-size: ${fontSize.button.desktop};
+    `)}
+  `,
+};
+
+export const styledTags = css`
+  color: ${colorPalette.greyDark};
+  h1 {
+    ${fonts.h1};
+  }
+  h2 {
+    ${fonts.h2};
+  }
+  h3 {
+    ${fonts.h3};
+  }
+  p {
+    ${fonts.p};
+  }
+  input {
+    ${fonts.input};
+  }
+  textarea {
+    ${fonts.input};
+  }
+`;
+
+/* eslint-enable max-lines */

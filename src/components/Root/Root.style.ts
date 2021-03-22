@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { fontFamily } from 'stylesheet';
+import { styledTags } from 'stylesheet';
 
 export const RootContainer = styled.div`
   display: flex;
-  font-family: ${fontFamily.main};
   flex-direction: column;
   height: 100%;
+  ${styledTags}
 `;
 RootContainer.displayName = 'RootContainer';
 

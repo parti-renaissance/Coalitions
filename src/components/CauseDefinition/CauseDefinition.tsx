@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Container, Title, Definition } from './CauseDefinition.style';
+import { Container, Definition, Title } from './CauseDefinition.style';
 
 const CauseDefinition: FunctionComponent = () => {
   const intl = useIntl();

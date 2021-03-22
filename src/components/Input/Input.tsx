@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, colorUsage, fontFamily, fontSize, getSpacing } from 'stylesheet';
+import { borderRadius, colorUsage, getSpacing, colorPalette } from 'stylesheet';
 
 const getBorderColor = (hasError: boolean, originalColor: string): string =>
   hasError ? colorUsage.error : originalColor;
@@ -9,8 +9,6 @@ interface Props {
 }
 
 const Input = styled.input<Props>`
-  font-family: ${fontFamily.main};
-  font-size: ${fontSize.medium};
   width: 100%;
   height: 60px;
   background-color: ${colorUsage.inputBackground};
@@ -18,6 +16,7 @@ const Input = styled.input<Props>`
   border-radius: ${borderRadius.medium};
   border: 1px solid;
   border-color: ${props => getBorderColor(props.hasError, colorUsage.inputBorderColor)};
+  color: ${colorPalette.greyDark};
 
   :hover {
     border-color: ${props => getBorderColor(props.hasError, colorUsage.primaryTextColor)};

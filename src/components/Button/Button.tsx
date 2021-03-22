@@ -1,18 +1,10 @@
 import styled from 'styled-components';
 import Button, { ButtonProps } from '@material-ui/core/Button';
-import {
-  borderRadius,
-  fontFamily,
-  fontSize,
-  colorPalette,
-  getSpacing,
-  fontWeight,
-} from 'stylesheet';
+import { borderRadius, colorPalette, getSpacing, fonts } from 'stylesheet';
 import React, { FunctionComponent } from 'react';
 import CircularProgress from 'components/CircularProgress';
 
 export const StyledButtonBase = styled(Button)`
-  font-family: ${fontFamily.main};
   border-radius: ${borderRadius.medium};
   text-decoration: none;
   text-transform: none;
@@ -29,18 +21,17 @@ export const ButtonBase: FunctionComponent<ButtonProps & { isLoading?: boolean }
 );
 
 export const SmallButton = styled(ButtonBase)`
+  ${fonts.smallButton};
   padding: ${getSpacing(1)} ${getSpacing(3)};
-  font-size: ${fontSize.small};
 `;
 
 export const FULL_WIDTH_BUTTON_HEIGHT = '50px';
 
 export const MediumLargeButton = styled(ButtonBase)`
-  height: ${FULL_WIDTH_BUTTON_HEIGHT};
+  ${fonts.button};
+  min-height: ${FULL_WIDTH_BUTTON_HEIGHT};
   padding-left: ${getSpacing(4)};
   padding-right: ${getSpacing(4)};
-  font-size: ${fontSize.mediumLarge};
-  font-weight: ${fontWeight.bold};
 `;
 
 export const FullWidthButton = styled(MediumLargeButton)`

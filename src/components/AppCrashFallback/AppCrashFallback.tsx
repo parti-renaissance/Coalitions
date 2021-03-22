@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import React from 'react';
 
-import { Button, Container, HelperList, PageContent, Title } from './AppCrashFallback.style';
+import { Button, Container, HelperList, PageContent } from './AppCrashFallback.style';
 
 /**
  * Error page inspiration https://medium.com/design-ideas-thoughts/designing-error-pages-8d82e16e3472
@@ -20,7 +20,7 @@ const AppCrashFallback: React.FunctionComponent<IFallbackProps> = ({ eventId }) 
       style is not applied to the root tag of this component */}
       <Container>
         <PageContent>
-          <Title>Sorry, this is not working properly.</Title>
+          <h1>Sorry, this is not working properly.</h1>
           <br />
           <p>We know about this issue and are working to fix it.</p>
           <br />

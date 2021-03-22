@@ -3,12 +3,12 @@ import { useIntl } from 'react-intl';
 import {
   Container,
   SubContainer,
-  Title,
   SubTitle,
   Content,
   Image,
   DesktopCreateCauseButton,
   MobileSupportButtonWrapper,
+  Title,
 } from './OurMission.style';
 import FixedBottomButton from 'components/FixedBottomButton';
 import { DefaultLink as Link } from 'components/Link/Link';

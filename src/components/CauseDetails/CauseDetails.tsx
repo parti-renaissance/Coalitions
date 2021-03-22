@@ -2,27 +2,21 @@ import React, { useState, ChangeEvent, FunctionComponent } from 'react';
 import {
   Container,
   HeaderContainer,
-  CauseName,
-  CoalitionName,
   CauseImage,
-  HeaderSubContainer,
   TabsWrapper,
   StyledTab,
-  AuthorAndSupportsWrapper,
-  MobileSupportButtonWrapper,
-  DesktopSupportButton,
-  Supported,
+  DesktopHeaderWrapper,
+  MobileHeaderWrapper,
+  CreateCauseCTAWrapper,
 } from './CauseDetails.style';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { colorPalette } from 'stylesheet';
 import { Tabs } from '@material-ui/core';
 import AboutThisCause from './components/AboutThisCause';
-import AuthorAndSupports from 'components/AuthorAndSupports';
-import FixedBottomButton from 'components/FixedBottomButton';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
-import { SmallButton } from 'components/Button/Button';
-import { useSnackbar } from 'redux/Snackbar/hooks';
 import { InCreationCause, Cause } from 'redux/Cause/types';
+import Header from './components/Header';
+import { Supported } from 'components/Cause/Cause.style';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;
@@ -38,10 +32,7 @@ const TAB_INDICATOR_PROPS = {
 
 const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, isSupporting }) => {
   const [tabIndex, setTabIndex] = useState<number>(0);
-  const { showErrorSnackbar, showSuccessSnackbar, showWarningSnackbar } = useSnackbar();
   const isPreview = Boolean(!onSupport);
-  const isSupported = Boolean(cause.supported);
-  const intl = useIntl();
 
   const onTabIndexChange = (_: ChangeEvent<{}>, value: number) => {
     setTabIndex(value);
@@ -52,24 +43,17 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
       case 0:
         return <AboutThisCause cause={cause} />;
       default:
-        return (
-          <>
-            <SmallButton onClick={() => showSuccessSnackbar("Tout s'est bien passé !")}>
-              {'SHOW SUCCESS SNACKBAR'}
-            </SmallButton>
-            <SmallButton onClick={() => showErrorSnackbar('Une erreur est survenue !')}>
-              {'SHOW ERROR SNACKBAR'}
-            </SmallButton>
-            <SmallButton onClick={() => showWarningSnackbar('Attention Attention Attention!')}>
-              {'SHOW WARNING SNACKBAR'}
-            </SmallButton>
-          </>
-        );
+        return null;
     }
   };
 
+  const renderHeader = () => (
+    <Header cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
+  );
+
   return (
     <>
+      <DesktopHeaderWrapper>{renderHeader()}</DesktopHeaderWrapper>
       <Container>
         <HeaderContainer>
           <CauseImage backgroundImage={cause.image_url} />
@@ -78,26 +62,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
               <FormattedMessage id="cause.supported" />
             </Supported>
           ) : null}
-          <HeaderSubContainer>
-            <div>
-              <CoalitionName>{cause.coalition.name}</CoalitionName>
-              <CauseName>{cause.name}</CauseName>
-              <AuthorAndSupportsWrapper>
-                <AuthorAndSupports cause={cause} showAuthor />
-              </AuthorAndSupportsWrapper>
-            </div>
-            {!isPreview && !isSupported ? (
-              <DesktopSupportButton
-                size="small"
-                variant="contained"
-                color="primary"
-                onClick={onSupport}
-                isLoading={isSupporting}
-              >
-                {intl.formatMessage({ id: 'cause.support-button' })}
-              </DesktopSupportButton>
-            ) : null}
-          </HeaderSubContainer>
+          <MobileHeaderWrapper>{renderHeader()}</MobileHeaderWrapper>
         </HeaderContainer>
         <TabsWrapper>
           <Tabs
@@ -111,14 +76,11 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
           </Tabs>
           {renderTabPanel()}
         </TabsWrapper>
-        {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}
       </Container>
-      {!isPreview && !isSupported ? (
-        <MobileSupportButtonWrapper>
-          <FixedBottomButton onClick={onSupport} isLoading={isSupporting}>
-            {intl.formatMessage({ id: 'cause.support-button' })}
-          </FixedBottomButton>
-        </MobileSupportButtonWrapper>
+      {!isPreview ? (
+        <CreateCauseCTAWrapper>
+          <CreateCauseCTA displayLinkToCauseList />
+        </CreateCauseCTAWrapper>
       ) : null}
     </>
   );

@@ -19,6 +19,7 @@ export const CauseListContainer = styled.div`
 `;
 
 export const CTAContainer = styled.div`
+  margin-bottom: ${getSpacing(4)};
   ${media.largeDesktop(`
     padding: 0 ${getSpacing(9)};
   `)};

@@ -1,13 +1,5 @@
 import styled from 'styled-components';
-import {
-  fontSize,
-  fontFamily,
-  colorPalette,
-  fontWeight,
-  media,
-  getSpacing,
-  lineHeight,
-} from 'stylesheet';
+import { colorPalette, media, getSpacing, fontWeight } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`
@@ -25,29 +17,15 @@ export const SubContainer = styled.div`
   `)}
 `;
 
-export const Title = styled.h1`
-  font-size: ${fontSize.xLarge};
-  font-family: ${fontFamily.abril};
+export const SubTitle = styled.h3`
   color: ${colorPalette.greyDark};
-  ${media.desktop(`
-    font-size: ${fontSize.xxxLarge};
-  `)}
-`;
-
-export const SubTitle = styled.div`
   margin-top: ${getSpacing(7)};
-  font-size: ${fontSize.mediumLarge};
-  font-family: ${fontFamily.main};
   font-weight: ${fontWeight.bold};
-  color: ${colorPalette.greyDark};
 `;
 
 export const Content = styled.p`
-  margin-top: ${getSpacing(2)};
-  font-size: ${fontSize.small};
-  font-family: ${fontFamily.main};
-  line-height: ${lineHeight.small};
   color: ${colorPalette.greyDark};
+  margin-top: ${getSpacing(2)};
 `;
 
 export const Image = styled.img`
@@ -72,4 +50,8 @@ export const MobileSupportButtonWrapper = styled.div`
   ${media.desktop(`
     display: none;
   `)}
+`;
+
+export const Title = styled.h1`
+  color: ${colorPalette.greyDark};
 `;

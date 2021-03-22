@@ -1,28 +1,26 @@
 import styled, { css } from 'styled-components';
-import { fontFamily, fontSize, fontWeight, getSpacing, colorPalette, media } from 'stylesheet';
+import { fontWeight, getSpacing, colorPalette, media, fonts } from 'stylesheet';
 import { Tab } from '@material-ui/core';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
-import { MediumLargeButton } from 'components/Button/Button';
-import { Supported as OriginalSupported } from 'components/Cause/Cause.style';
+
+const CONTAINER_MAX_WIDTH = '960px';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 ${getSpacing(3)} ${FULL_WIDTH_BUTTON_HEIGHT};
   ${media.desktop(`
+    padding: ${getSpacing(12)};
     padding-bottom: 0;
+    max-width: ${CONTAINER_MAX_WIDTH};
+    margin: auto;
   `)}
 `;
 
 export const HeaderContainer = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: column;
 `;
 
 export const CauseImage = styled.div<{ backgroundImage: string }>`
   height: ${getSpacing(50)};
-  margin: 0 -${getSpacing(3)};
+  width: 100%;
   ${({ backgroundImage }) =>
     css`
       background-image: url(${backgroundImage});
@@ -30,71 +28,48 @@ export const CauseImage = styled.div<{ backgroundImage: string }>`
       background-repeat: no-repeat;
       background-size: cover;
     `};
-`;
-
-export const CauseName = styled.p`
-  font-family: ${fontFamily.abril};
-  font-size: ${fontSize.large};
-`;
-CauseName.displayName = 'CauseName';
-
-export const CoalitionName = styled.p`
-  font-size: ${fontSize.small};
-  color: ${colorPalette.blueCoalition};
-  margin-bottom: ${getSpacing(2)};
-`;
-CoalitionName.displayName = 'CoalitionName';
-
-export const HeaderSubContainer = styled.div`
-  padding: ${getSpacing(3)} 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  ${media.desktop(`
+    height: ${getSpacing(88)};
+  `)}
 `;
 
 export const TabsWrapper = styled.div`
-  margin: 0 -${getSpacing(3)};
   ${media.desktop(`
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-top: ${getSpacing(10)};
   `)}
 `;
 
 export const StyledTab = styled(Tab)`
+  ${fonts.p};
   padding: ${getSpacing(2)} ${getSpacing(3)};
-  color: ${colorPalette.greyDark};
   text-transform: capitalize;
-  font-size: ${fontSize.small};
   ${({ selected }) =>
     css`
       opacity: ${Boolean(selected) ? 1 : 0.6};
       border-bottom: 2px solid ${colorPalette.greyLight};
-      font-family: ${fontFamily.main};
       font-weight: ${selected ? fontWeight.bold : fontWeight.normal};
     `};
 `;
 
-export const AuthorAndSupportsWrapper = styled.div`
-  margin-top: ${getSpacing(2)};
-`;
-
-export const MobileSupportButtonWrapper = styled.div`
+export const MobileHeaderWrapper = styled.div`
   ${media.desktop(`
     display: none;
   `)}
 `;
 
-export const DesktopSupportButton = styled(MediumLargeButton)`
+export const DesktopHeaderWrapper = styled.div`
   display: none;
   ${media.desktop(`
     display: block;
-    padding-left: ${getSpacing(10)};
-    padding-right: ${getSpacing(10)};
+    position: sticky;
+    top: 0;
+    z-index: 1;
   `)}
 `;
 
-export const Supported = styled(OriginalSupported)`
-  right: -${getSpacing(3)};
+export const CreateCauseCTAWrapper = styled.div`
+  margin: ${getSpacing(5)} 0 calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(6)}) 0;
+  ${media.desktop(`
+    margin: ${getSpacing(18)} ${getSpacing(18)} ${getSpacing(18)} ${getSpacing(18)};
+  `)}
 `;

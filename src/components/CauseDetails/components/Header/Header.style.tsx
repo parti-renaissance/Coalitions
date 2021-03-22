@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { getSpacing, colorPalette, media } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
+import { Container as FixedBottomButtonsContainer } from 'components/FixedBottomButton/FixedBottomButton.style';
+
+const DESKTOP_BUTTONS_WIDTH = '300px';
 
 export const Container = styled.div`
   padding: ${getSpacing(3)} ${getSpacing(3)} ${getSpacing(2)} ${getSpacing(3)};
@@ -22,22 +25,26 @@ export const AuthorAndSupportsWrapper = styled.div`
   margin-top: ${getSpacing(2)};
 `;
 
-export const MobileSupportButtonWrapper = styled.div`
-  ${media.desktop(`
-    display: none;
-  `)}
+export const CauseName = styled.h1`
+  color: ${colorPalette.greyDark};
 `;
 
-export const DesktopSupportButton = styled(MediumLargeButton)`
-  display: none;
+export const ButtonsContainer = styled(FixedBottomButtonsContainer)`
+  display: flex;
   ${media.desktop(`
-    display: block;
-    padding-left: ${getSpacing(14)};
-    padding-right: ${getSpacing(14)};
+    flex-direction: column;
+    min-width: ${DESKTOP_BUTTONS_WIDTH};
     margin-left: ${getSpacing(6)};
   `)}
 `;
 
-export const CauseName = styled.h1`
-  color: ${colorPalette.greyDark};
+export const Button = styled(MediumLargeButton)`
+  flex: 1;
+  :nth-child(2) {
+    margin-left: ${getSpacing(3)};
+    ${media.desktop(`
+      margin-left: unset;
+      margin-top: ${getSpacing(3)};
+    `)}
+  }
 `;

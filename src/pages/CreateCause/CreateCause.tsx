@@ -22,8 +22,11 @@ import { updateInCreationCause } from 'redux/Cause/slice';
 import { convertFormValuesToCause } from './lib/convertFormValuesToCause';
 import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
+import { getInCreationCause } from 'redux/Cause/selectors';
+import { convertCauseToFormValues } from './lib/convertCauseToFormValues';
 
 const CreateCause: FunctionComponent = () => {
+  const inCreationCause = useSelector(getInCreationCause);
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const [isLoginModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
@@ -44,13 +47,19 @@ const CreateCause: FunctionComponent = () => {
     setIsLoginModalOpened(false);
   };
 
+  let initialValues = {} as FormValues;
+  if (inCreationCause !== undefined) {
+    initialValues = convertCauseToFormValues(inCreationCause);
+  }
+
   return (
     <>
       <Container>
         <SubContainer>
           <TopImage src="/images/createCause.jpg" />
-          <Formik initialValues={{} as FormValues} validate={validateForm} onSubmit={onSubmit}>
-            {({
+          <Formik initialValues={initialValues} validate={validateForm} onSubmit={onSubmit}>
+            {// eslint-disable-next-line complexity
+            ({
               values,
               errors,
               handleChange,
@@ -161,7 +170,10 @@ const CreateCause: FunctionComponent = () => {
                   }
                 />
                 <ValidateButton
-                  disabled={Object.keys(errors).length > 0 || touched.title !== true}
+                  disabled={
+                    Object.keys(errors).length > 0 ||
+                    (inCreationCause === undefined && touched.title !== true)
+                  }
                   type="submit"
                   size="small"
                   variant="contained"

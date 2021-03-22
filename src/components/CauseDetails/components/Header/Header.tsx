@@ -6,11 +6,12 @@ import {
   CauseName,
   ButtonsContainer,
   Button,
+  Link,
 } from './Header.style';
 import { useIntl } from 'react-intl';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
-import { useHistory } from 'react-router';
+import { PATHS } from 'routes';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -22,11 +23,6 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
   const isPreview = Boolean(!onSupport);
   const isSupported = Boolean(cause.supported);
   const intl = useIntl();
-  const history = useHistory();
-
-  const onUpdateInCreationCause = () => {
-    history.goBack();
-  };
 
   const onPublishInCreationCause = () => {
     // TODO
@@ -46,14 +42,11 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
           <ButtonsContainer>
             {isPreview ? (
               <>
-                <Button
-                  size="small"
-                  variant="outlined"
-                  color="primary"
-                  onClick={onUpdateInCreationCause}
-                >
-                  {intl.formatMessage({ id: 'cause_preview.update' })}
-                </Button>
+                <Link to={PATHS.CREATE_CAUSE.url()}>
+                  <Button size="small" variant="outlined" color="primary">
+                    {intl.formatMessage({ id: 'cause_preview.update' })}
+                  </Button>
+                </Link>
                 <Button
                   size="small"
                   variant="contained"

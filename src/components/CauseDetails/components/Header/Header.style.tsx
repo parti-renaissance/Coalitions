@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { getSpacing, colorPalette, media } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 import { Container as FixedBottomButtonsContainer } from 'components/FixedBottomButton/FixedBottomButton.style';
+import { DefaultLink } from 'components/Link/Link';
 
 const DESKTOP_BUTTONS_WIDTH = '300px';
 
@@ -39,7 +40,7 @@ export const ButtonsContainer = styled(FixedBottomButtonsContainer)`
 `;
 
 export const Button = styled(MediumLargeButton)`
-  flex: 1;
+  width: 100%;
   :nth-child(2) {
     margin-left: ${getSpacing(3)};
     ${media.desktop(`
@@ -47,4 +48,8 @@ export const Button = styled(MediumLargeButton)`
       margin-top: ${getSpacing(3)};
     `)}
   }
+`;
+
+export const Link = styled(DefaultLink)`
+  width: 100%;
 `;

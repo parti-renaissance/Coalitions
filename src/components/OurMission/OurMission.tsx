@@ -14,7 +14,7 @@ import FixedBottomButton from 'components/FixedBottomButton';
 import { DefaultLink as Link } from 'components/Link/Link';
 import { PATHS } from 'routes';
 
-const OurMission: FunctionComponent = () => {
+const OurMissionHeader: FunctionComponent = () => {
   const intl = useIntl();
 
   const onCreateCauseClick = () => {
@@ -52,4 +52,4 @@ const OurMission: FunctionComponent = () => {
   );
 };
 
-export default OurMission;
+export default OurMissionHeader;

@@ -2,6 +2,7 @@ import React, { FunctionComponent, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router';
 import Loader from './components/Loader/Loader';
 import Snackbar from 'components/Snackbar';
+import CauseList from 'pages/CauseList/CauseList';
 
 const Home = lazy(() => import('./pages/Home'));
 const CausePage = lazy(() => import('./pages/CausePage'));
@@ -17,6 +18,10 @@ export const PATHS = {
   CAUSE: {
     route: '/cause/:causeId',
     url: (causeId: string) => `/cause/${causeId}`,
+  },
+  CAUSE_LIST: {
+    route: '/cause-list',
+    url: () => '/cause-list',
   },
   OUR_MISSION: {
     route: '/our-mission',
@@ -37,6 +42,7 @@ const routes: FunctionComponent<{}> = () => (
     <Suspense fallback={<Loader />}>
       <Switch>
         <Route exact path={PATHS.HOME.route} component={Home} />
+        <Route exact path={PATHS.CAUSE_LIST.route} component={CauseList} />
         <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
         <Route path={PATHS.OUR_MISSION.route} component={OurMission}></Route>
         <Route path={PATHS.CREATE_CAUSE.route} component={CreateCause}></Route>

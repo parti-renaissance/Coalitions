@@ -17,7 +17,7 @@ HeaderContainer.displayName = 'HeaderContainer';
 export const HeaderSubContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
 `;
 
 export const HeaderTitle = styled.div`

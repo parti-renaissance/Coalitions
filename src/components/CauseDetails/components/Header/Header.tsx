@@ -10,6 +10,7 @@ import {
 import { useIntl } from 'react-intl';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
+import { useHistory } from 'react-router';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -21,9 +22,10 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
   const isPreview = Boolean(!onSupport);
   const isSupported = Boolean(cause.supported);
   const intl = useIntl();
+  const history = useHistory();
 
   const onUpdateInCreationCause = () => {
-    // TODO
+    history.goBack();
   };
 
   const onPublishInCreationCause = () => {

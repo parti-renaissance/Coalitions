@@ -37,6 +37,7 @@ export const LogLink = styled.a`
   margin-left: ${getSpacing(5)};
   color: ${colorPalette.black};
   text-decoration: none;
+  cursor: pointer;
 `;
 
 export const CreateCauseButton = styled(SmallButton)`

@@ -1,5 +1,5 @@
 import { Card, CardMedia, CardContent } from '@material-ui/core';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   boxShadow,
   getSpacing,
@@ -64,13 +64,21 @@ export const StyledCard = styled(Card)`
   `)}
 `;
 
-export const StyledMedia = styled(CardMedia)`
-  height: ${getSpacing(26)};
+export const StyledMedia = styled.div<{ backgroundImage: string }>`
+  width: 100%;
+  padding-bottom: 56.25%;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  ${({ backgroundImage }) =>
+    css`
+      background-image: url(${backgroundImage});
+    `};
 `;
 StyledMedia.displayName = 'StyledMedia';
 
 export const StyledContent = styled(CardContent)`
-  padding: ${getSpacing(6)} ${getSpacing(4)};
+  padding: ${getSpacing(5)};
   display: flex;
   flex-direction: column;
   height: 100%;

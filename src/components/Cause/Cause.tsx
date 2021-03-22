@@ -51,7 +51,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
             <FormattedMessage id="cause.supported" />
           </Supported>
         ) : null}
-        <StyledMedia image={cause.image_url} title="" />
+        <StyledMedia backgroundImage={cause.image_url} />
         <StyledContent>
           <CoalitionName>{cause.coalition.name}</CoalitionName>
           <CauseName>{cause.name}</CauseName>

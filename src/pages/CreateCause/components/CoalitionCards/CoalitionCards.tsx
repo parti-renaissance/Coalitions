@@ -38,15 +38,16 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
     const onClick = () => onCoalitionClick(coalition);
     return (
       <CoalitionContainer key={coalition.uuid} onClick={onClick}>
-        <CoalitionImage src={coalition.image_url} />
+        <CoalitionImage backgroundImage={coalition.image_url}>
+          {selectedCoalitionUuids.includes(coalition.uuid) ? (
+            <SelectedCoalitionContainer>
+              <SelectedCoalitionIndex>
+                {selectedCoalitionUuids.indexOf(coalition.uuid) + 1}
+              </SelectedCoalitionIndex>
+            </SelectedCoalitionContainer>
+          ) : null}
+        </CoalitionImage>
         <CoalitionName>{coalition.name}</CoalitionName>
-        {selectedCoalitionUuids.includes(coalition.uuid) ? (
-          <SelectedCoalitionContainer>
-            <SelectedCoalitionIndex>
-              {selectedCoalitionUuids.indexOf(coalition.uuid) + 1}
-            </SelectedCoalitionIndex>
-          </SelectedCoalitionContainer>
-        ) : null}
       </CoalitionContainer>
     );
   };

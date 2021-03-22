@@ -19,18 +19,15 @@ export const HeaderContainer = styled.div`
 `;
 
 export const CauseImage = styled.div<{ backgroundImage: string }>`
-  height: ${getSpacing(50)};
   width: 100%;
+  padding-bottom: 56.25%;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
   ${({ backgroundImage }) =>
     css`
       background-image: url(${backgroundImage});
-      background-position: top;
-      background-repeat: no-repeat;
-      background-size: cover;
     `};
-  ${media.desktop(`
-    height: ${getSpacing(88)};
-  `)}
 `;
 
 export const TabsWrapper = styled.div<{ isPreview: boolean }>`

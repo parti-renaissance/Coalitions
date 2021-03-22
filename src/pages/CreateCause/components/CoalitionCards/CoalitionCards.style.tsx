@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   getSpacing,
   media,
@@ -33,16 +33,18 @@ export const CoalitionContainer = styled.div`
   `)}
 `;
 
-const MOBILE_IMAGE_HEIGHT = getSpacing(18);
-const DESKTOP_IMAGE_HEIGHT = getSpacing(25);
-
-export const CoalitionImage = styled.img`
+export const CoalitionImage = styled.div<{ backgroundImage: string }>`
+  position: relative;
   border-radius: ${borderRadius.medium};
   width: 100%;
-  height: ${MOBILE_IMAGE_HEIGHT};
-  ${media.desktop(`
-    height: ${DESKTOP_IMAGE_HEIGHT};
-  `)}
+  padding-bottom: 56.25%;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  ${({ backgroundImage }) =>
+    css`
+      background-image: url(${backgroundImage});
+    `};
 `;
 
 export const CoalitionName = styled.p`
@@ -54,8 +56,7 @@ const BORDER_WIDTH = '3px';
 
 export const SelectedCoalitionContainer = styled.div`
   position: absolute;
-  top: 0;
-  height: ${MOBILE_IMAGE_HEIGHT};
+  height: 100%;
   width: 100%;
   box-sizing: border-box;
   border-radius: ${borderRadius.medium};
@@ -63,9 +64,6 @@ export const SelectedCoalitionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${media.desktop(`
-    height: ${DESKTOP_IMAGE_HEIGHT};
-  `)}
 `;
 
 const MOBILE_COALITION_INDEX_SIZE = getSpacing(5);

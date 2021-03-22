@@ -33,9 +33,18 @@ export const CauseImage = styled.div<{ backgroundImage: string }>`
   `)}
 `;
 
-export const TabsWrapper = styled.div`
+export const TabsWrapper = styled.div<{ isPreview: boolean }>`
+  ${({ isPreview }) =>
+    isPreview
+      ? css`
+          margin-bottom: calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(6)});
+        `
+      : css`
+          margin-bottom: ${getSpacing(5)};
+        `}
   ${media.desktop(`
     margin-top: ${getSpacing(10)};
+    margin-bottom: ${getSpacing(18)};
   `)}
 `;
 
@@ -67,9 +76,14 @@ export const DesktopHeaderWrapper = styled.div`
   `)}
 `;
 
-export const CreateCauseCTAWrapper = styled.div`
-  margin: ${getSpacing(5)} 0 calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(6)}) 0;
+export const CreateCauseCTAWrapper = styled.div<{ isSupported: boolean }>`
+  ${({ isSupported }) =>
+    !isSupported
+      ? css`
+          margin-bottom: calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(6)});
+        `
+      : css``}
   ${media.desktop(`
-    margin: ${getSpacing(18)} ${getSpacing(18)} ${getSpacing(18)} ${getSpacing(18)};
+    margin: 0 ${getSpacing(18)} ${getSpacing(18)} ${getSpacing(18)};
   `)}
 `;

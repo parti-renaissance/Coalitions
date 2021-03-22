@@ -3,13 +3,12 @@ import {
   Container,
   CoalitionName,
   AuthorAndSupportsWrapper,
-  MobileSupportButtonWrapper,
-  DesktopSupportButton,
   CauseName,
+  ButtonsContainer,
+  Button,
 } from './Header.style';
 import { useIntl } from 'react-intl';
 import AuthorAndSupports from 'components/AuthorAndSupports';
-import FixedBottomButton from 'components/FixedBottomButton';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 
 interface HeaderProps {
@@ -23,6 +22,14 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
   const isSupported = Boolean(cause.supported);
   const intl = useIntl();
 
+  const onUpdateInCreationCause = () => {
+    // TODO
+  };
+
+  const onPublishInCreationCause = () => {
+    // TODO
+  };
+
   return (
     <>
       <Container>
@@ -33,25 +40,41 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
             <AuthorAndSupports cause={cause} showAuthor />
           </AuthorAndSupportsWrapper>
         </div>
-        {!isPreview && !isSupported ? (
-          <DesktopSupportButton
-            size="small"
-            variant="contained"
-            color="primary"
-            onClick={onSupport}
-            isLoading={isSupporting}
-          >
-            {intl.formatMessage({ id: 'cause.support-button' })}
-          </DesktopSupportButton>
+        {isPreview || !isSupported ? (
+          <ButtonsContainer>
+            {isPreview ? (
+              <>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  color="primary"
+                  onClick={onUpdateInCreationCause}
+                >
+                  {intl.formatMessage({ id: 'cause_preview.update' })}
+                </Button>
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  onClick={onPublishInCreationCause}
+                >
+                  {intl.formatMessage({ id: 'cause_preview.publish' })}
+                </Button>
+              </>
+            ) : (
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={onSupport}
+                isLoading={isSupporting}
+              >
+                {intl.formatMessage({ id: 'cause.support-button' })}
+              </Button>
+            )}
+          </ButtonsContainer>
         ) : null}
       </Container>
-      {!isPreview && !isSupported ? (
-        <MobileSupportButtonWrapper>
-          <FixedBottomButton onClick={onSupport} isLoading={isSupporting}>
-            {intl.formatMessage({ id: 'cause.support-button' })}
-          </FixedBottomButton>
-        </MobileSupportButtonWrapper>
-      ) : null}
     </>
   );
 };

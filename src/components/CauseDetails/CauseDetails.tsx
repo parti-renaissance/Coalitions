@@ -33,6 +33,7 @@ const TAB_INDICATOR_PROPS = {
 const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, isSupporting }) => {
   const [tabIndex, setTabIndex] = useState<number>(0);
   const isPreview = Boolean(!onSupport);
+  const isSupported = Boolean(cause.supported);
 
   const onTabIndexChange = (_: ChangeEvent<{}>, value: number) => {
     setTabIndex(value);
@@ -57,14 +58,14 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
       <Container>
         <HeaderContainer>
           <CauseImage backgroundImage={cause.image_url} />
-          {Boolean(cause.supported) ? (
+          {isSupported ? (
             <Supported>
               <FormattedMessage id="cause.supported" />
             </Supported>
           ) : null}
           <MobileHeaderWrapper>{renderHeader()}</MobileHeaderWrapper>
         </HeaderContainer>
-        <TabsWrapper>
+        <TabsWrapper isPreview={isPreview}>
           <Tabs
             value={tabIndex}
             onChange={onTabIndexChange}
@@ -78,7 +79,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
         </TabsWrapper>
       </Container>
       {!isPreview ? (
-        <CreateCauseCTAWrapper>
+        <CreateCauseCTAWrapper isSupported={isSupported}>
           <CreateCauseCTA displayLinkToCauseList />
         </CreateCauseCTAWrapper>
       ) : null}

@@ -1,7 +1,11 @@
 {
   "header": {
     "login": "Connexion",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "app-name": "Je m'engage",
+    "causes": "Causes",
+    "coalitions": "Coalitions",
+    "cause-creation": "Je crée ma cause"
   },
   "home": {
     "use-a-link": "Ou utilise un lien",

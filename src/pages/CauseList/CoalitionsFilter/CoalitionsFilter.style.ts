@@ -2,10 +2,14 @@ import styled, { css } from 'styled-components';
 
 import { getSpacing, colorPalette, fontFamily, lineHeight, fontSize } from 'stylesheet';
 
-export const CoalitionFiltersContainer = styled.div`
+export const CoalitionFiltersContainer = styled.div<{ displayAll: boolean }>`
   display: flex;
   flex-wrap: wrap;
   align-items: space-between;
+  overflow: hidden;
+  max-height: ${({ displayAll }) => (displayAll ? '800px' : getSpacing(8))};
+  transition: max-height 0.5s;
+  padding: 0 ${getSpacing(3)};
 `;
 
 export const StyledChip = styled.div<{ isSelected?: boolean }>`
@@ -34,3 +38,15 @@ export const StyledChip = styled.div<{ isSelected?: boolean }>`
         `};
 `;
 StyledChip.displayName = 'StyledChip';
+
+export const Chevron = styled.img<{ displayAll: boolean }>`
+  height: ${getSpacing(5)};
+  width: ${getSpacing(5)};
+  transition: transform 0.5s;
+  ${({ displayAll }) =>
+    displayAll
+      ? css`
+          transform: rotate(180deg);
+        `
+      : ''};
+`;

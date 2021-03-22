@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useFetchCoalitions } from 'redux/Coalition/hooks';
-import { CoalitionFiltersContainer, StyledChip } from './CoalitionsFilter.style';
+import { Chevron, CoalitionFiltersContainer, StyledChip } from './CoalitionsFilter.style';
 
 import { Coalition } from 'redux/Coalition/types';
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
+import { getIsMobile } from 'services/mobile/mobile';
 
 type Props = {
   handleCoalitionsFilterClick: (ids: string[]) => void;
@@ -17,6 +18,8 @@ export const CoalitionsFilter: React.FunctionComponent<Props> = ({
   const [allSelected, setAllSelected] = useState(true);
   const [selectedCoalitions, setSelectedCoalitions] = useState<string[]>([]);
   const { fetchCoalitions } = useFetchCoalitions();
+  const isMobile = getIsMobile();
+  const [displayAll, setDisplayAll] = useState(!isMobile);
 
   useEffect(() => {
     fetchCoalitions();
@@ -37,19 +40,28 @@ export const CoalitionsFilter: React.FunctionComponent<Props> = ({
     return null;
   }
   return (
-    <CoalitionFiltersContainer>
-      <StyledChip onClick={() => handleClickOnChips(null)} isSelected={allSelected}>
-        Tout
-      </StyledChip>
-      {coalitions.map(coalition => (
-        <StyledChip
-          key={coalition.uuid}
-          onClick={() => handleClickOnChips(coalition)}
-          isSelected={selectedCoalitions.includes(coalition.uuid)}
-        >
-          {coalition.name}
+    <>
+      <CoalitionFiltersContainer displayAll={displayAll}>
+        <StyledChip onClick={() => handleClickOnChips(null)} isSelected={allSelected}>
+          Tout
         </StyledChip>
-      ))}
-    </CoalitionFiltersContainer>
+        {coalitions.map(coalition => (
+          <StyledChip
+            key={coalition.uuid}
+            onClick={() => handleClickOnChips(coalition)}
+            isSelected={selectedCoalitions.includes(coalition.uuid)}
+          >
+            {coalition.name}
+          </StyledChip>
+        ))}
+      </CoalitionFiltersContainer>
+      {isMobile && (
+        <Chevron
+          displayAll={displayAll}
+          onClick={() => setDisplayAll(!displayAll)}
+          src="/images/chevronDown.svg"
+        />
+      )}
+    </>
   );
 };

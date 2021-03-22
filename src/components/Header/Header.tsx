@@ -17,7 +17,7 @@ const Header: React.FC = () => {
     if (code !== null) {
       login({ code }).then(fetchCurrentUser);
     }
-  }, [login, search]);
+  }, [login, search, fetchCurrentUser]);
 
   if (getIsMobile()) {
     return <MobileHeader />;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, fonts, fontFamily, getSpacing, styledTags } from 'stylesheet';
+import { colorPalette, fonts, fontFamily, getSpacing } from 'stylesheet';
 import Menu from '@material-ui/core/Menu';
 
 export const HeaderContainer = styled.header`

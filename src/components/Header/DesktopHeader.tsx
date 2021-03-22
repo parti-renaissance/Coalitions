@@ -2,7 +2,6 @@ import { DefaultLink } from 'components/Link/Link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { PATHS } from 'routes';
-import { oauthUrl } from 'services/networking/auth';
 import {
   CreateCauseButton,
   HeaderContainer,
@@ -14,9 +13,10 @@ import {
 
 type DesktopHeaderProps = {
   isUserLoggedIn: boolean;
+  onLogClick: () => void;
 };
 
-export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isUserLoggedIn }) => (
+export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isUserLoggedIn, onLogClick }) => (
   <HeaderContainer>
     <HeaderSubContainer>
       <DefaultLink to={PATHS.HOME.url()}>
@@ -41,15 +41,13 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isUserLoggedIn }) 
           <FormattedMessage id="header.cause-creation" />
         </CreateCauseButton>
       </DefaultLink>
-      {isUserLoggedIn ? (
-        <LogLink>
+      <LogLink onClick={onLogClick}>
+        {isUserLoggedIn ? (
           <FormattedMessage id="header.logout" />
-        </LogLink>
-      ) : (
-        <LogLink href={oauthUrl}>
+        ) : (
           <FormattedMessage id="header.login" />
-        </LogLink>
-      )}
+        )}
+      </LogLink>
     </HeaderSubContainer>
   </HeaderContainer>
 );

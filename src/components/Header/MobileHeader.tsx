@@ -1,24 +1,22 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { oauthUrl } from 'services/networking/auth';
 import { HeaderContainer, HeaderSubContainer, LogLink } from './Header.style';
 
 type MobileHeaderProps = {
   isUserLoggedIn: boolean;
+  onLogClick: () => void;
 };
 
-export const MobileHeader: React.FC<MobileHeaderProps> = ({ isUserLoggedIn }) => (
+export const MobileHeader: React.FC<MobileHeaderProps> = ({ isUserLoggedIn, onLogClick }) => (
   <HeaderContainer>
     <HeaderSubContainer>
-      {isUserLoggedIn ? (
-        <LogLink>
+      <LogLink onClick={onLogClick}>
+        {isUserLoggedIn ? (
           <FormattedMessage id="header.logout" />
-        </LogLink>
-      ) : (
-        <LogLink href={oauthUrl}>
+        ) : (
           <FormattedMessage id="header.login" />
-        </LogLink>
-      )}
+        )}
+      </LogLink>
     </HeaderSubContainer>
   </HeaderContainer>
 );

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, media, colorPalette, fontFamily, fontSize, lineHeight } from 'stylesheet';
+import { getSpacing, colorPalette, fontFamily, fontSize, lineHeight } from 'stylesheet';
 
 const ICON_SIZE = '16px';
 

@@ -1,4 +1,4 @@
-import { getSpacing, fontFamily, lineHeight, fontSize, colorPalette } from 'stylesheet';
+import { getSpacing, colorPalette } from 'stylesheet';
 import styled from 'styled-components';
 
 export const FormControlLabelWrapper = styled.div`

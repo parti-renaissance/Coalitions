@@ -72,6 +72,7 @@ export const MobileHeader: FunctionComponent<{}> = () => {
           </CloseButton>
           {MENU_LINKS.map(({ labelId, linkTo }) => (
             <MenuLink
+              key={labelId}
               label={intl.formatMessage({ id: labelId })}
               linkTo={linkTo}
               onClick={closeDrawerMenu}

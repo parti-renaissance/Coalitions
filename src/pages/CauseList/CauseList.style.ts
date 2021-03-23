@@ -24,3 +24,18 @@ export const CTAContainer = styled.div`
     padding: 0 ${getSpacing(9)};
   `)};
 `;
+
+export const TitleContainer = styled.div`
+  margin-bottom: ${getSpacing(6)};
+  padding: 0 ${getSpacing(3)};
+  ${media.desktop(`
+    align-self: flex-start;
+  `)};
+`;
+
+export const Title = styled.h1`
+  margin-bottom: ${getSpacing(1)};
+  ${media.desktop(`
+    margin-bottom: ${getSpacing(2)};
+  `)};
+`;

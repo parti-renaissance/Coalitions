@@ -11,6 +11,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   min-height: ${MOBILE_HEADER_HEIGHT};
+  padding: 0 ${getSpacing(3)};
   ${media.desktop(`
     min-height: ${DESKTOP_HEADER_HEIGHT};
     padding: 0 ${getSpacing(10)};
@@ -46,7 +47,7 @@ export const BurgerIcon = styled.img`
 `;
 
 export const StyledButton = styled(Button)`
-  padding: 0 ${getSpacing(2)} 0 ${getSpacing(5)};
+  padding: ${getSpacing(2)};
   height: 100%;
   min-width: unset;
 `;

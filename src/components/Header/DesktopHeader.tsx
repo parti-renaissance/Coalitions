@@ -77,7 +77,11 @@ export const DesktopHeader: FunctionComponent<{}> = () => {
       );
     }
 
-    return null;
+    return (
+      <LogLink onClick={logout}>
+        <FormattedMessage id="header.logout" />
+      </LogLink>
+    );
   };
 
   return (

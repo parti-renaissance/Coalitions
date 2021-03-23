@@ -1,20 +1,9 @@
 import styled from 'styled-components';
-import { colorPalette, fontWeight, getSpacing, media } from 'stylesheet';
+import { colorPalette, getSpacing, media } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
-export const HomeContainer = styled.div``;
-HomeContainer.displayName = 'HomeContainer';
-
-export const Logo = styled.img`
-  width: ${getSpacing(32)};
-  margin-bottom: ${getSpacing(4)};
-`;
-Logo.displayName = 'Logo';
-
 export const SubTitle = styled.h3`
-  color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(7)};
-  font-weight: ${fontWeight.bold};
 `;
 
 export const CoalitionContainer = styled.div`

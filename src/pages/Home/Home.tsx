@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   CoalitionContainer,
-  HomeContainer,
   MobileCreateCauseButtonContainer,
   Container,
   SubContainer,
@@ -20,7 +19,7 @@ import { MediumLargeButton } from 'components/Button/Button';
 import { DefinitionWrapper } from 'components/Definition/Definition.style';
 
 const Home: React.FunctionComponent = () => (
-  <HomeContainer>
+  <>
     <Container>
       <SubContainer>
         <Title>
@@ -58,7 +57,7 @@ const Home: React.FunctionComponent = () => (
         <FormattedMessage id="coalition.title" />
       </SubTitle>
     </CoalitionContainer>
-  </HomeContainer>
+  </>
 );
 
 export default Home;

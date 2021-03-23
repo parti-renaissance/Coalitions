@@ -2,13 +2,13 @@ import React, { FunctionComponent, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router';
 import Loader from './components/Loader/Loader';
 import Snackbar from 'components/Snackbar';
-import CauseList from 'pages/CauseList/CauseList';
 
 const Home = lazy(() => import('./pages/Home'));
 const CausePage = lazy(() => import('./pages/CausePage'));
 const OurMission = lazy(() => import('./pages/OurMission'));
 const CreateCause = lazy(() => import('./pages/CreateCause'));
 const CausePreview = lazy(() => import('./pages/CausePreview'));
+const CauseList = lazy(() => import('./pages/CauseList'));
 
 export const PATHS = {
   HOME: {

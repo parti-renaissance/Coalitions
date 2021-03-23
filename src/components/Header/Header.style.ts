@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { colorPalette, fonts, fontFamily, getSpacing } from 'stylesheet';
 import Menu from '@material-ui/core/Menu';
+import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
 export const HeaderContainer = styled.header`
   ${fonts.menu};
@@ -53,6 +54,7 @@ export const UserIcon = styled.img`
 `;
 
 export const StyledDesktopUserMenu = styled(Menu)`
+  margin-top: ${FULL_WIDTH_BUTTON_HEIGHT};
   li {
     ${fonts.menu};
   }

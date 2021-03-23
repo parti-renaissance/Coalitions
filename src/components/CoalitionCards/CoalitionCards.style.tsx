@@ -1,32 +1,33 @@
 import styled, { css } from 'styled-components';
 import { getSpacing, media, borderRadius, colorPalette, fontSize, fontFamily } from 'stylesheet';
 
+const MARGIN_BETWEEN_CARDS = getSpacing(5);
+
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  margin-right: -${MARGIN_BETWEEN_CARDS};
 `;
-
-const MARGIN_BETWEEN_CARDS = getSpacing(5);
 
 export const CoalitionContainer = styled.div<{ updateTabletNbOfCardsByLine?: boolean }>`
   position: relative;
   margin-bottom: ${getSpacing(3)};
-  width: calc((100% - ${MARGIN_BETWEEN_CARDS}) / 2);
+  width: calc((100% - 2 * ${MARGIN_BETWEEN_CARDS}) / 2);
+  margin-right: ${MARGIN_BETWEEN_CARDS};
   ${({ updateTabletNbOfCardsByLine }) =>
     updateTabletNbOfCardsByLine === true
       ? css`
           ${media.tablet(`
             width: calc(
-              (100% - 2 * ${MARGIN_BETWEEN_CARDS}) / 3
+              (100% - 3 * ${MARGIN_BETWEEN_CARDS}) / 3
             );
             ${media.desktop(`
               width: calc(
-                (100% - 3 * ${MARGIN_BETWEEN_CARDS}) / 4
+                (100% - 4 * ${MARGIN_BETWEEN_CARDS}) / 4
               );
               ${media.largeDesktop(`
                 width: calc(
-                  (100% - 4 * ${MARGIN_BETWEEN_CARDS}) / 5
+                  (100% - 5 * ${MARGIN_BETWEEN_CARDS}) / 5
                 );
               `)}
             `)}
@@ -35,7 +36,7 @@ export const CoalitionContainer = styled.div<{ updateTabletNbOfCardsByLine?: boo
       : css`
           ${media.desktop(`
             width: calc(
-              (100% - 2 * ${MARGIN_BETWEEN_CARDS}) / 3
+              (100% - 3 * ${MARGIN_BETWEEN_CARDS}) / 3
             );
           `)}
         `}

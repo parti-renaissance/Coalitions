@@ -68,3 +68,10 @@ export const MobileSupportButtonWrapper = styled.div`
 export const Title = styled.h1`
   color: ${colorPalette.greyDark};
 `;
+
+export const CoalitionCardsWrapper = styled.div`
+  margin-top: ${getSpacing(3)};
+  ${media.desktop(`
+    margin-top: ${getSpacing(6)};
+  `)}
+`;

@@ -9,6 +9,7 @@ import {
   Content,
   DesktopCreateCauseButton,
   Image,
+  CoalitionCardsWrapper,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
 import { CoalitionDefinition } from 'components/Definition/CoalitionDefinition';
@@ -64,7 +65,9 @@ const Home: React.FunctionComponent = () => {
         <SubTitle id="coalitions">
           <FormattedMessage id="coalition.title" />
         </SubTitle>
-        <CoalitionCards onCoalitionClick={onCoalitionClick} updateTabletNbOfCardsByLine />
+        <CoalitionCardsWrapper>
+          <CoalitionCards onCoalitionClick={onCoalitionClick} updateTabletNbOfCardsByLine />
+        </CoalitionCardsWrapper>
       </CoalitionContainer>
     </>
   );

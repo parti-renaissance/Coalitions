@@ -10,6 +10,7 @@ export const Container = styled.div`
 `;
 
 export const CoalitionContainer = styled.div<{ updateTabletNbOfCardsByLine?: boolean }>`
+  cursor: pointer;
   position: relative;
   margin-bottom: ${getSpacing(3)};
   width: calc((100% - 2 * ${MARGIN_BETWEEN_CARDS}) / 2);

@@ -24,6 +24,7 @@ export const HeaderSubContainer = styled.div`
 `;
 
 const BURGER_ICON_WIDTH = '18px';
+
 const BURGER_ICON_HEIGHT = '16px';
 
 export const BurgerIcon = styled.img`

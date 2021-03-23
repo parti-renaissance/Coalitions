@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { borderRadius, colorUsage, getSpacing, fonts } from 'stylesheet';
 
 import { Link as InitialLink } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 interface ILink {
   href?: string;
@@ -34,6 +35,9 @@ const Link = styled.a<ILink>`
 `;
 
 export const DefaultLink = styled(InitialLink)`
+  text-decoration: none;
+`;
+export const DefaultHashLink = styled(HashLink)`
   text-decoration: none;
 `;
 

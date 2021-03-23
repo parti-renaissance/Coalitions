@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { DefaultLink } from 'components/Link/Link';
+import { DefaultLink, DefaultHashLink } from 'components/Link/Link';
 import { FormattedMessage } from 'react-intl';
 import { PATHS } from 'routes';
 import {
@@ -20,16 +20,16 @@ export const DesktopHeader: FunctionComponent<{}> = () => (
           <FormattedMessage id="header.app-name" />
         </HeaderTitle>
       </DefaultLink>
-      <DefaultLink to={PATHS.HOME.url()}>
+      <DefaultLink to={PATHS.CAUSE_LIST.url()}>
         <SubCategory>
           <FormattedMessage id="header.causes" />
         </SubCategory>
       </DefaultLink>
-      <DefaultLink to={PATHS.HOME.url()}>
+      <DefaultHashLink to={`${PATHS.HOME.url()}#coalitions`}>
         <SubCategory>
           <FormattedMessage id="header.coalitions" />
         </SubCategory>
-      </DefaultLink>
+      </DefaultHashLink>
     </HeaderSubContainer>
     <HeaderSubContainer>
       <CreateCauseButton to={PATHS.OUR_MISSION.url()}>

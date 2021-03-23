@@ -1,6 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { HeaderContainer, HeaderSubContainer, LogLink } from './Header.style';
+import {
+  HeaderContainer,
+  HeaderSubContainer,
+  LogLink,
+  BurgerIcon,
+  StyledButton,
+} from './Header.style';
 import { isUserLogged, userLoggedOut } from 'redux/Login';
 import useSelector from 'redux/useSelector';
 import { useDispatch } from 'react-redux';
@@ -20,6 +26,11 @@ export const MobileHeader: FunctionComponent<{}> = () => {
 
   return (
     <HeaderContainer>
+      <HeaderSubContainer>
+        <StyledButton>
+          <BurgerIcon src="/images/burgerIcon.svg" />
+        </StyledButton>
+      </HeaderSubContainer>
       <HeaderSubContainer>
         <LogLink onClick={onLogClick}>
           {isUserLoggedIn ? (

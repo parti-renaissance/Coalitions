@@ -1,23 +1,27 @@
 import styled from 'styled-components';
-import { colorPalette, fonts, fontFamily, getSpacing } from 'stylesheet';
+import { colorPalette, fonts, fontFamily, getSpacing, media } from 'stylesheet';
 import Menu from '@material-ui/core/Menu';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
+import Button from 'components/Button/Button';
+
+const MOBILE_HEADER_HEIGHT = '64px';
+const DESKTOP_HEADER_HEIGHT = '80px';
 
 export const HeaderContainer = styled.header`
-  ${fonts.menu};
+  ${fonts.input};
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
-  height: ${getSpacing(13)};
-  padding: ${getSpacing(3)} ${getSpacing(10)};
+  align-items: center;
+  min-height: ${MOBILE_HEADER_HEIGHT};
+  ${media.desktop(`
+    min-height: ${DESKTOP_HEADER_HEIGHT};
+    padding: 0 ${getSpacing(10)};
+  `)}
 `;
-
 HeaderContainer.displayName = 'HeaderContainer';
 
 export const HeaderSubContainer = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
 `;
 
@@ -56,6 +60,20 @@ export const UserIcon = styled.img`
 export const StyledDesktopUserMenu = styled(Menu)`
   margin-top: ${FULL_WIDTH_BUTTON_HEIGHT};
   li {
-    ${fonts.menu};
+    ${fonts.input};
   }
+`;
+
+const BURGER_ICON_WIDTH = '18px';
+const BURGER_ICON_HEIGHT = '16px';
+
+export const BurgerIcon = styled.img`
+  width: ${BURGER_ICON_WIDTH};
+  height: ${BURGER_ICON_HEIGHT};
+`;
+
+export const StyledButton = styled(Button)`
+  padding: 0 ${getSpacing(2)} 0 ${getSpacing(5)};
+  height: 100%;
+  min-width: unset;
 `;

@@ -16,16 +16,16 @@ export const CoalitionContainer = styled.div<{ updateTabletNbOfCardsByLine?: boo
   ${({ updateTabletNbOfCardsByLine }) =>
     updateTabletNbOfCardsByLine === true
       ? css`
-          ${media.desktop(`
-            width: calc(
-              (100% - 3 * ${MARGIN_BETWEEN_CARDS}) / 4
-            );
-          `)}
           ${media.tablet(`
             width: calc(
               (100% - 2 * ${MARGIN_BETWEEN_CARDS}) / 3
             );
-          `)}
+            ${media.desktop(`
+              width: calc(
+                (100% - 3 * ${MARGIN_BETWEEN_CARDS}) / 4
+              );
+            `)}
+        `)}
         `
       : css`
           ${media.desktop(`

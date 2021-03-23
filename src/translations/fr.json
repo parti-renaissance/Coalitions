@@ -124,5 +124,10 @@
   "cause_preview": {
     "update": "Modifier",
     "publish": "Publier"
+  },
+  "coalition": {
+    "title": "Les coalitions",
+    "what-is-it": "Qu’est-ce qu’une coalition ?",
+    "definition": "Les coalitions sont des thèmes regroupant un ensemble de causes."
   }
 }

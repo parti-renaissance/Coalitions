@@ -1,19 +1,8 @@
-import React, { FunctionComponent, useEffect } from 'react';
-import {
-  Container,
-  CoalitionContainer,
-  CoalitionImage,
-  CoalitionName,
-  SelectedCoalitionContainer,
-  SelectedCoalitionIndex,
-  NumberOfSelectedCauses,
-  NormalWeight,
-} from './CoalitionCards.style';
-import { useFetchCoalitions } from 'redux/Coalition/hooks';
-import { getCoalitions } from 'redux/Coalition/selectors';
-import { useSelector } from 'react-redux';
+import React, { FunctionComponent } from 'react';
+import { Container, NumberOfSelectedCauses, NormalWeight } from './CoalitionCards.style';
 import { Coalition } from 'redux/Coalition/types';
 import { useIntl } from 'react-intl';
+import GenericCoalitionCards from 'components/CoalitionCards';
 
 interface CoalitionCardsProps {
   onCoalitionClick: (coalition: Coalition) => void;
@@ -24,39 +13,10 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
   onCoalitionClick,
   selectedCoalitionUuids,
 }) => {
-  const coalitions = useSelector(getCoalitions);
-  const { fetchCoalitions } = useFetchCoalitions();
   const intl = useIntl();
 
-  useEffect(() => {
-    if (coalitions.length === 0) {
-      fetchCoalitions();
-    }
-  }, [fetchCoalitions, coalitions]);
-
-  const renderCoalitionCard = (coalition: Coalition) => {
-    const onClick = () => onCoalitionClick(coalition);
-    return (
-      <CoalitionContainer key={coalition.uuid} onClick={onClick}>
-        <CoalitionImage backgroundImage={coalition.image_url}>
-          {selectedCoalitionUuids.includes(coalition.uuid) ? (
-            <SelectedCoalitionContainer>
-              <SelectedCoalitionIndex>
-                {selectedCoalitionUuids.indexOf(coalition.uuid) + 1}
-              </SelectedCoalitionIndex>
-            </SelectedCoalitionContainer>
-          ) : null}
-        </CoalitionImage>
-        <CoalitionName>{coalition.name}</CoalitionName>
-      </CoalitionContainer>
-    );
-  };
-
-  if (coalitions.length === 0) {
-    return null;
-  }
-
-  const numberOfSelectedCoalitions = selectedCoalitionUuids.length;
+  const numberOfSelectedCoalitions =
+    selectedCoalitionUuids !== undefined ? selectedCoalitionUuids.length : 0;
   return (
     <Container>
       <NumberOfSelectedCauses>
@@ -75,7 +35,10 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
           id: `create_cause.coalitions.max-number-of-selected-coalitions`,
         })}`}</NormalWeight>
       </NumberOfSelectedCauses>
-      {coalitions.map(renderCoalitionCard)}
+      <GenericCoalitionCards
+        onCoalitionClick={onCoalitionClick}
+        selectedCoalitionUuids={selectedCoalitionUuids}
+      />
     </Container>
   );
 };

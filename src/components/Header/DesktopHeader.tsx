@@ -2,7 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { DefaultLink } from 'components/Link/Link';
 import { FormattedMessage } from 'react-intl';
 import { PATHS } from 'routes';
-import { HeaderContainer, HeaderSubContainer, HeaderTitle, SubCategory } from './Header.style';
+import {
+  HeaderContainer,
+  HeaderSubContainer,
+  HeaderTitle,
+  SubCategory,
+  CreateCauseButton,
+} from './Header.style';
 import { MediumLargeButton } from 'components/Button/Button';
 import LogInOrOutButton from './components/LogInOrOutButton';
 
@@ -26,11 +32,11 @@ export const DesktopHeader: FunctionComponent<{}> = () => (
       </DefaultLink>
     </HeaderSubContainer>
     <HeaderSubContainer>
-      <DefaultLink to={PATHS.OUR_MISSION.url()}>
+      <CreateCauseButton to={PATHS.OUR_MISSION.url()}>
         <MediumLargeButton variant="contained" color="primary">
           <FormattedMessage id="header.cause-creation" />
         </MediumLargeButton>
-      </DefaultLink>
+      </CreateCauseButton>
       <LogInOrOutButton />
     </HeaderSubContainer>
   </HeaderContainer>

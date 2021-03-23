@@ -4,7 +4,7 @@ import {
   FirstNameContainer,
   UserIcon,
   StyledDesktopUserMenu,
-  LogLink,
+  FirstName,
 } from './LogInOrOutButton.style';
 import { isUserLogged, userLoggedOut } from 'redux/Login';
 import useSelector from 'redux/useSelector';
@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux';
 import { oauthUrl } from 'services/networking/auth';
 import { getCurrentUser } from 'redux/User/selectors';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getIsMobile } from 'services/mobile/mobile';
+import { StyledButton } from '../../Header.style';
 
 const LogInOrOutButton: FunctionComponent<{}> = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
@@ -37,21 +39,25 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
 
   if (!isUserLoggedIn) {
     return (
-      <LogLink onClick={login}>
-        <FormattedMessage id="header.login" />
-      </LogLink>
+      <StyledButton onClick={login}>
+        {getIsMobile() ? (
+          <UserIcon src="/images/user.svg" />
+        ) : (
+          <FormattedMessage id="header.login" />
+        )}
+      </StyledButton>
     );
   }
 
   if (currentUser !== undefined) {
     return (
       <>
-        <LogLink onClick={showDesktopUserMenu}>
+        <StyledButton onClick={showDesktopUserMenu as () => void}>
           <FirstNameContainer>
             <UserIcon src="/images/user.svg" />
-            {currentUser.firstName}
+            <FirstName>{currentUser.firstName}</FirstName>
           </FirstNameContainer>
-        </LogLink>
+        </StyledButton>
         <StyledDesktopUserMenu
           anchorEl={desktopUserMenu}
           keepMounted
@@ -70,9 +76,9 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
   }
 
   return (
-    <LogLink onClick={logout}>
+    <StyledButton onClick={logout}>
       <FormattedMessage id="header.logout" />
-    </LogLink>
+    </StyledButton>
   );
 };
 

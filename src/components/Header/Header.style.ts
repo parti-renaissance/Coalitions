@@ -26,9 +26,12 @@ export const HeaderSubContainer = styled.div`
 `;
 
 export const HeaderTitle = styled.div`
-  padding: ${getSpacing(2)} ${getSpacing(5)};
+  padding: ${getSpacing(2)};
   font-family: ${fontFamily.secondary};
   color: ${colorPalette.black};
+  ${media.desktop(`
+    padding: ${getSpacing(2)} ${getSpacing(5)};
+  `)}
 `;
 
 export const SubCategory = styled.div`

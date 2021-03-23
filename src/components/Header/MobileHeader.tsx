@@ -6,11 +6,14 @@ import {
   LogLink,
   BurgerIcon,
   StyledButton,
+  HeaderTitle,
 } from './Header.style';
 import { isUserLogged, userLoggedOut } from 'redux/Login';
 import useSelector from 'redux/useSelector';
 import { useDispatch } from 'react-redux';
 import { oauthUrl } from 'services/networking/auth';
+import { DefaultLink } from 'components/Link/Link';
+import { PATHS } from 'routes';
 
 export const MobileHeader: FunctionComponent<{}> = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
@@ -30,6 +33,11 @@ export const MobileHeader: FunctionComponent<{}> = () => {
         <StyledButton>
           <BurgerIcon src="/images/burgerIcon.svg" />
         </StyledButton>
+        <DefaultLink to={PATHS.HOME.url()}>
+          <HeaderTitle>
+            <FormattedMessage id="header.app-name" />
+          </HeaderTitle>
+        </DefaultLink>
       </HeaderSubContainer>
       <HeaderSubContainer>
         <LogLink onClick={onLogClick}>

@@ -24,6 +24,7 @@ export const StyledDesktopUserMenu = styled(Menu)`
   li {
     ${fonts.input};
   }
+
   ${media.desktop(`
     margin-top: ${getSpacing(10)};
   `)}

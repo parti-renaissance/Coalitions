@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { colorPalette, fonts, fontFamily, getSpacing, media } from 'stylesheet';
 import Button from 'components/Button/Button';
 import { DefaultLink } from 'components/Link/Link';
+import Drawer from '@material-ui/core/Drawer';
 
 const MOBILE_HEADER_HEIGHT = '64px';
 const DESKTOP_HEADER_HEIGHT = '80px';
@@ -52,4 +53,10 @@ export const SubCategory = styled(StyledButton)`
 
 export const CreateCauseButton = styled(DefaultLink)`
   margin-right: ${getSpacing(5)};
+`;
+
+export const DrawerMenu = styled(Drawer)`
+  .MuiDrawer-paper {
+    width: 100%;
+  }
 `;

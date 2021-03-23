@@ -9,14 +9,14 @@ export const Container = styled.div`
   margin-right: -${MARGIN_BETWEEN_CARDS};
 `;
 
-export const CoalitionContainer = styled.div<{ updateTabletNbOfCardsByLine?: boolean }>`
+export const CoalitionContainer = styled.div<{ responsiveNbOfCardsByLine?: boolean }>`
   cursor: pointer;
   position: relative;
   margin-bottom: ${getSpacing(3)};
   width: calc((100% - 2 * ${MARGIN_BETWEEN_CARDS}) / 2);
   margin-right: ${MARGIN_BETWEEN_CARDS};
-  ${({ updateTabletNbOfCardsByLine }) =>
-    updateTabletNbOfCardsByLine === true
+  ${({ responsiveNbOfCardsByLine }) =>
+    responsiveNbOfCardsByLine === true
       ? css`
           ${media.tablet(`
             width: calc(

@@ -66,7 +66,7 @@ const Home: React.FunctionComponent = () => {
           <FormattedMessage id="coalition.title" />
         </SubTitle>
         <CoalitionCardsWrapper>
-          <CoalitionCards onCoalitionClick={onCoalitionClick} updateTabletNbOfCardsByLine />
+          <CoalitionCards onCoalitionClick={onCoalitionClick} responsiveNbOfCardsByLine />
         </CoalitionCardsWrapper>
       </CoalitionContainer>
     </>

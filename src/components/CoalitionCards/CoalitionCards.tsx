@@ -15,13 +15,13 @@ import { Coalition } from 'redux/Coalition/types';
 interface CoalitionCardsProps {
   onCoalitionClick: (coalition: Coalition) => void;
   selectedCoalitionUuids?: string[];
-  updateTabletNbOfCardsByLine?: boolean;
+  responsiveNbOfCardsByLine?: boolean;
 }
 
 const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
   onCoalitionClick,
   selectedCoalitionUuids,
-  updateTabletNbOfCardsByLine,
+  responsiveNbOfCardsByLine,
 }) => {
   const coalitions = useSelector(getCoalitions);
   const { fetchCoalitions } = useFetchCoalitions();
@@ -38,7 +38,7 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
       <CoalitionContainer
         key={coalition.uuid}
         onClick={onClick}
-        updateTabletNbOfCardsByLine={updateTabletNbOfCardsByLine}
+        responsiveNbOfCardsByLine={responsiveNbOfCardsByLine}
       >
         <CoalitionImage backgroundImage={coalition.image_url}>
           {selectedCoalitionUuids !== undefined &&

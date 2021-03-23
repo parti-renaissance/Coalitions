@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { fonts, getSpacing, colorPalette } from 'stylesheet';
+import { fonts, getSpacing, colorPalette, media } from 'stylesheet';
 import Menu from '@material-ui/core/Menu';
-import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
 export const FirstNameContainer = styled.div`
   display: flex;
@@ -21,8 +20,11 @@ export const UserIcon = styled.img`
 `;
 
 export const StyledDesktopUserMenu = styled(Menu)`
-  margin-top: ${FULL_WIDTH_BUTTON_HEIGHT};
+  margin-top: ${getSpacing(8)};
   li {
     ${fonts.input};
   }
+  ${media.desktop(`
+    margin-top: ${getSpacing(10)};
+  `)}
 `;

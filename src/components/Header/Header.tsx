@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { useLogin } from 'redux/Login/hooks/useLogin';
 import { getIsMobile } from 'services/mobile/mobile';
@@ -20,7 +20,7 @@ const Header: React.FC = () => {
     if (isUserLoggedIn && currentUser === undefined) {
       fetchCurrentUser();
     }
-  }, [isUserLoggedIn, currentUser]);
+  }, [isUserLoggedIn, currentUser, fetchCurrentUser]);
 
   useEffect(() => {
     const params = new URLSearchParams(search);

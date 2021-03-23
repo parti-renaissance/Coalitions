@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { colorPalette, fonts, fontFamily, getSpacing, media } from 'stylesheet';
 import Button from 'components/Button/Button';
 import { DefaultLink } from 'components/Link/Link';
-import Drawer from '@material-ui/core/Drawer';
+import { Close } from '@material-ui/icons';
+import { IconButton, Drawer } from '@material-ui/core';
 
 const MOBILE_HEADER_HEIGHT = '64px';
 const DESKTOP_HEADER_HEIGHT = '80px';
@@ -59,4 +60,17 @@ export const DrawerMenu = styled(Drawer)`
   .MuiDrawer-paper {
     width: 100%;
   }
+`;
+
+export const CloseButton = styled(IconButton)`
+  padding: ${getSpacing(5)};
+  align-self: flex-start;
+`;
+
+const CLOSE_ICON_FONT_SIZE = '24px';
+
+export const CloseIcon = styled(Close)`
+  font-size: ${CLOSE_ICON_FONT_SIZE};
+  color: ${colorPalette.greyDark};
+  width: unset;
 `;

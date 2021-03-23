@@ -7,6 +7,8 @@ import {
   StyledButton,
   HeaderTitle,
   DrawerMenu,
+  CloseButton,
+  CloseIcon,
 } from './Header.style';
 import { DefaultLink } from 'components/Link/Link';
 import { PATHS } from 'routes';
@@ -37,7 +39,9 @@ export const MobileHeader: FunctionComponent<{}> = () => {
         </HeaderSubContainer>
       </HeaderContainer>
       <DrawerMenu open={isDrawerMenuOpened} onClose={getCloseOrOpenDrawerMenu(false)}>
-        {'test'}
+        <CloseButton onClick={getCloseOrOpenDrawerMenu(false)}>
+          <CloseIcon />
+        </CloseButton>
       </DrawerMenu>
     </>
   );

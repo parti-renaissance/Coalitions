@@ -6,7 +6,7 @@ export const SubTitle = styled.h3`
   margin-top: ${getSpacing(7)};
 `;
 
-export const CoalitionContainer = styled.div`
+export const Block = styled.div`
   padding: 0 ${getSpacing(3)};
   ${media.desktop(`
   padding: 0 ${getSpacing(24)};
@@ -14,6 +14,7 @@ export const CoalitionContainer = styled.div`
 `;
 
 export const MobileCreateCauseButtonContainer = styled.div`
+  margin: ${getSpacing(7)} 0;
   display: flex;
   justify-content: center;
   ${media.desktop(`
@@ -74,4 +75,27 @@ export const CoalitionCardsWrapper = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(6)};
   `)}
+`;
+
+export const CausesContainer = styled.div`
+  height: ${getSpacing(78)};
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  flex-wrap: nowrap;
+  overflow: scroll;
+  margin-top: ${getSpacing(3)};
+  margin-bottom: ${getSpacing(8)};
+  ${media.desktop(`
+    flex-wrap: wrap;
+    overflow: hidden;
+    justify-content: center;
+    margin-bottom: ${getSpacing(13)};
+    margin-top: ${getSpacing(7)};
+  `)}
+
+  > * {
+    min-width: ${getSpacing(50)};
+    margin-right: ${getSpacing(3)};
+  }
 `;

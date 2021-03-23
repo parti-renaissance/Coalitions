@@ -24,6 +24,11 @@ export const CoalitionContainer = styled.div<{ updateTabletNbOfCardsByLine?: boo
               width: calc(
                 (100% - 3 * ${MARGIN_BETWEEN_CARDS}) / 4
               );
+              ${media.largeDesktop(`
+                width: calc(
+                  (100% - 4 * ${MARGIN_BETWEEN_CARDS}) / 5
+                );
+              `)}
             `)}
         `)}
         `

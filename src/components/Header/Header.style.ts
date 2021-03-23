@@ -67,6 +67,7 @@ export const CreateCauseButton = styled(DefaultLink)`
 export const DrawerMenu = styled(Drawer)`
   ${styledTags};
   .MuiDrawer-paper {
+    justify-content: space-between;
     width: 100%;
   }
 `;
@@ -102,4 +103,8 @@ export const ChevronRight = styled.img`
   height: ${CHEVRON_RIGHT_SIZE};
   width: ${CHEVRON_RIGHT_SIZE};
   transform: rotate(270deg);
+`;
+
+export const CreateCauseWrapper = styled(DefaultLink)`
+  padding: ${getSpacing(3)};
 `;

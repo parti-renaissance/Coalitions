@@ -15,6 +15,7 @@ export const useCauseFollow = (id: string) => {
 
   const followCause = useCallback(async () => {
     const response = await authenticatedApiClient.put(`v3/causes/${id}/follower`, null);
+
     if (response instanceof Error) {
       HandleErrorService.showErrorSnackbar(response);
     }

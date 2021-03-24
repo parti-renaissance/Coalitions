@@ -53,8 +53,7 @@ const CauseList: React.FunctionComponent = () => {
 
   useEffect(() => {
     fetchFirstPage(filteredByCoalitionIds, isUserLoggedIn);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isUserLoggedIn, filteredByCoalitionIds]);
+  }, [fetchFirstPage, filteredByCoalitionIds, isUserLoggedIn]);
 
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
 

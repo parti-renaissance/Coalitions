@@ -89,6 +89,7 @@ export const useFetchOneCause = (id: string) => {
   );
 
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
+
   const fetchCause = useCallback(
     async (isUserLoggedIn = false) => {
       const cause: Cause = await doFetchCause();

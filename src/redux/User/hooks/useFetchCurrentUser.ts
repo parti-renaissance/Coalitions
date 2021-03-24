@@ -13,7 +13,7 @@ export const useFetchCurrentUser = () => {
     [],
   );
 
-  const fetchCurrentUser = useCallback(async () => {
+  const fetch = useCallback(async () => {
     const currentUser = await doFetchCurrentUser();
 
     if (currentUser instanceof Error) {
@@ -32,6 +32,6 @@ export const useFetchCurrentUser = () => {
   return {
     isFetchingCurrentUser: loading,
     errorFetchingCurrentUser: error,
-    fetchCurrentUser,
+    fetchCurrentUser: fetch,
   };
 };

@@ -31,11 +31,12 @@ import { getAllCauses } from 'redux/Cause/selectors';
 import { isUserLogged } from 'redux/Login';
 import Loader from 'components/Loader';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
+import { useHistory } from 'react-router';
 
 const Home: React.FunctionComponent = () => {
+  const history = useHistory();
   const onCoalitionClick = (coalition: Coalition) => {
-    // TODO
-    console.log({ coalition });
+    history.push({ pathname: PATHS.CAUSE_LIST.url(), search: `?coalitionId=${coalition.uuid}` });
   };
   const causes = useSelector(getAllCauses);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));

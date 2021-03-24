@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 import { FormControlLabelWrapper, Label } from './LoginAndSupportModal.style';
 import { Cause as CauseType } from 'redux/Cause/types';
-import { FormValues } from 'components/LoginModal/lib/useValidateForm';
+import { FormValues } from 'components/LoginModal/components/CreateAccountForm/lib/useValidateForm';
 import { setAfterAuthFollowCause, setAfterAuthRedirect } from 'redux/Login/slice';
 
 interface LoginAndSupportModalProps {

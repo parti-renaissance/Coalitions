@@ -68,7 +68,11 @@
     "city-or-country": "Ville ou Pays hors France",
     "validate": "Valider",
     "signed-up": "Déjà inscrit ?",
-    "connect": "Connectez-vous"
+    "connect": "Connectez-vous",
+    "success_screen": {
+      "title": "Nous vous avons envoyé un email",
+      "text": "Afin de finaliser votre inscription, veuillez suivre les instructions dans l'email que nous vous avons envoyé."
+    }
   },
   "general": {
     "see-more": "Voir plus"

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, getSpacing, media } from 'stylesheet';
+import { colorPalette, fonts, getSpacing, media } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const SubTitle = styled.h3`
@@ -78,13 +78,14 @@ export const CoalitionCardsWrapper = styled.div`
 `;
 
 export const CausesContainer = styled.div`
-  height: ${getSpacing(78)};
+  height: ${getSpacing(82)};
   display: flex;
   flex-direction: row;
   flex: 1;
   flex-wrap: nowrap;
   overflow: scroll;
   margin-top: ${getSpacing(3)};
+  margin-right: -${getSpacing(3)};
   margin-bottom: ${getSpacing(8)};
   ${media.desktop(`
     flex-wrap: wrap;
@@ -94,8 +95,30 @@ export const CausesContainer = styled.div`
     margin-top: ${getSpacing(7)};
   `)}
 
+  > :first-child {
+    ${media.desktop(`margin-left: ${getSpacing(3)};`)}
+  }
+
   > * {
     min-width: ${getSpacing(50)};
     margin-right: ${getSpacing(3)};
+    margin-top: ${getSpacing(3)};
+    ${media.desktop(`
+    min-width: ${getSpacing(62)};
+  `)}
   }
+`;
+
+export const CausesHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: ${getSpacing(7)};
+`;
+
+export const SeeAllButton = styled.p`
+  ${fonts.button};
+  color: ${colorPalette.blueCoalition};
+  cursor: pointer;
+  margin-left: ${getSpacing(1)};
 `;

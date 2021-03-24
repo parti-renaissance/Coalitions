@@ -11,6 +11,8 @@ import {
   Image,
   CoalitionCardsWrapper,
   CausesContainer,
+  CausesHeader,
+  SeeAllButton,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
 import Cause from 'components/Cause';
@@ -73,9 +75,14 @@ const Home: React.FunctionComponent = () => {
         <CauseDefinition />
       </DefinitionWrapper>
       <Block>
-        <SubTitle>
-          <FormattedMessage id="home.support-causes" />
-        </SubTitle>
+        <CausesHeader>
+          <h3>
+            <FormattedMessage id="home.support-causes" />
+          </h3>
+          <DefaultLink to={PATHS.CAUSE_LIST.url()}>
+            <SeeAllButton>Voir tout</SeeAllButton>
+          </DefaultLink>
+        </CausesHeader>
         {loading ? (
           <Loader />
         ) : (

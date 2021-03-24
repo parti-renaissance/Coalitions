@@ -1,5 +1,5 @@
-import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { authenticatedApiClient } from 'services/networking/client';
+import { useState } from 'react';
 
 type doFetchFollowedCausesType = {
   uuids: string[];
@@ -7,16 +7,20 @@ type doFetchFollowedCausesType = {
 };
 
 export const useFetchFollowedCauses = () => {
-  const [{ loading, error }, doFetchFollowedCauses] = useTypedAsyncFn(
-    async ({ uuids, isUserLoggedIn }: doFetchFollowedCausesType) => {
-      if (!isUserLoggedIn) return [];
-      try {
-        return await authenticatedApiClient.post('v3/causes/followed', { uuids });
-      } catch (error) {
-        return [];
-      }
-    },
-    [],
-  );
-  return { loading, error, doFetchFollowedCauses };
+  const [loading, setLoading] = useState(false);
+
+  const doFetchFollowedCauses = async ({ uuids, isUserLoggedIn }: doFetchFollowedCausesType) => {
+    if (!isUserLoggedIn) return [];
+
+    setLoading(true);
+    try {
+      return await authenticatedApiClient.post('v3/causes/followed', { uuids });
+    } catch (error) {
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { loading, doFetchFollowedCauses };
 };

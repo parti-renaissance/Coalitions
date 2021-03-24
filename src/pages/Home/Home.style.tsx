@@ -22,7 +22,7 @@ export const MobileCreateCauseButtonContainer = styled.div`
   `)}
 `;
 
-export const HomeContainer = styled.div`
+export const TopPartContainer = styled.div`
   display: flex;
   padding: ${getSpacing(3)} ${getSpacing(3)} 0 ${getSpacing(3)};
   ${media.desktop(`
@@ -119,4 +119,11 @@ export const SeeAllButton = styled.p`
   color: ${colorPalette.blueCoalition};
   cursor: pointer;
   margin-left: ${getSpacing(1)};
+`;
+
+export const CTAWrapper = styled.div`
+  margin-top: ${getSpacing(4)};
+  ${media.desktop(`
+    margin-top: ${getSpacing(7)};
+  `)}
 `;

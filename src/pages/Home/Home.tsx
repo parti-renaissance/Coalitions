@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {
   Block,
+  CTAWrapper,
   MobileCreateCauseButtonContainer,
-  HomeContainer,
+  TopPartContainer,
   HomeSubContainer,
   Title,
   SubTitle,
@@ -29,6 +30,7 @@ import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
 import { getAllCauses } from 'redux/Cause/selectors';
 import { isUserLogged } from 'redux/Login';
 import Loader from 'components/Loader';
+import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 
 const Home: React.FunctionComponent = () => {
   const onCoalitionClick = (coalition: Coalition) => {
@@ -45,7 +47,7 @@ const Home: React.FunctionComponent = () => {
 
   return (
     <>
-      <HomeContainer>
+      <TopPartContainer>
         <HomeSubContainer>
           <Title>
             <FormattedMessage id="our_mission.title" />
@@ -63,7 +65,7 @@ const Home: React.FunctionComponent = () => {
           </DefaultLink>
         </HomeSubContainer>
         <Image />
-      </HomeContainer>
+      </TopPartContainer>
       <MobileCreateCauseButtonContainer>
         <DefaultLink to={PATHS.OUR_MISSION.url()}>
           <MediumLargeButton variant="contained" color="primary">
@@ -83,7 +85,7 @@ const Home: React.FunctionComponent = () => {
             <SeeAllButton>Voir tout</SeeAllButton>
           </DefaultLink>
         </CausesHeader>
-        {loading ? (
+        {loading && causes === [] ? (
           <Loader />
         ) : (
           <CauseCardsWrapper>
@@ -104,6 +106,9 @@ const Home: React.FunctionComponent = () => {
           <CoalitionCards onCoalitionClick={onCoalitionClick} responsiveNbOfCardsByLine />
         </CoalitionCardsWrapper>
       </Block>
+      <CTAWrapper>
+        <CreateCauseCTA displayLinkToCauseList />
+      </CTAWrapper>
     </>
   );
 };

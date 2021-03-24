@@ -1,30 +1,33 @@
 import { authenticatedApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
-import { useCallback, useState } from 'react';
+import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
+import { useCallback } from 'react';
 import { updateCurrentUser } from '../slice';
 import HandleErrorService from 'services/HandleErrorService';
 
 export const useFetchCurrentUser = () => {
   const dispatch = useDispatch();
-  const [isFetchingCurrentUser, setIsFetchingCurrentUser] = useState(false);
+
+  const [{ loading: isFetchingCurrentUser, error }, doFetchCurrentUser] = useTypedAsyncFn(
+    async () => await authenticatedApiClient.get('me'),
+    [],
+  );
 
   const fetchCurrentUser = useCallback(async () => {
-    setIsFetchingCurrentUser(true);
-    try {
-      const currentUser = await authenticatedApiClient.get('me');
-      dispatch(
-        updateCurrentUser({
-          uuid: currentUser.uuid,
-          firstName: currentUser.first_name,
-          email: currentUser.email_address,
-        }),
-      );
-    } catch (e) {
-      HandleErrorService.showErrorSnackbar(e);
-    } finally {
-      setIsFetchingCurrentUser(false);
+    const currentUser = await doFetchCurrentUser();
+
+    if (currentUser instanceof Error) {
+      HandleErrorService.showErrorSnackbar(currentUser);
     }
-  }, [dispatch]);
+
+    dispatch(
+      updateCurrentUser({
+        uuid: currentUser.uuid,
+        firstName: currentUser.first_name,
+        email: currentUser.email_address,
+      }),
+    );
+  }, [dispatch, doFetchCurrentUser]);
 
   return {
     isFetchingCurrentUser,

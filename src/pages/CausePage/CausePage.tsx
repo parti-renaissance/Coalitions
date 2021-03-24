@@ -24,8 +24,7 @@ const CausePage: React.FunctionComponent = () => {
 
   useEffect(() => {
     fetchCause(isUserLoggedIn);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isUserLoggedIn]);
+  }, [fetchCause, isUserLoggedIn]);
 
   const onSupport = () => {
     if (isUserLoggedIn) {

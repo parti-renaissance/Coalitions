@@ -22,7 +22,7 @@ export const MobileCreateCauseButtonContainer = styled.div`
   `)}
 `;
 
-export const Container = styled.div`
+export const HomeContainer = styled.div`
   display: flex;
   padding: ${getSpacing(3)} ${getSpacing(3)} 0 ${getSpacing(3)};
   ${media.desktop(`
@@ -31,7 +31,7 @@ export const Container = styled.div`
   `)}
 `;
 
-export const SubContainer = styled.div`
+export const HomeSubContainer = styled.div`
   ${media.desktop(`
     max-width: ${getSpacing(108)};
   `)}
@@ -77,16 +77,14 @@ export const CoalitionCardsWrapper = styled.div`
   `)}
 `;
 
-export const CausesContainer = styled.div`
+export const CauseCardsWrapper = styled.div`
   height: ${getSpacing(82)};
   display: flex;
   flex-direction: row;
   flex: 1;
   flex-wrap: nowrap;
   overflow: scroll;
-  margin-top: ${getSpacing(3)};
-  margin-right: -${getSpacing(3)};
-  margin-bottom: ${getSpacing(8)};
+  margin: ${getSpacing(3)} -${getSpacing(3)} ${getSpacing(8)} -${getSpacing(3)};
   ${media.desktop(`
     flex-wrap: wrap;
     overflow: hidden;
@@ -96,7 +94,7 @@ export const CausesContainer = styled.div`
   `)}
 
   > :first-child {
-    ${media.desktop(`margin-left: ${getSpacing(3)};`)}
+    margin-left: ${getSpacing(3)};
   }
 
   > * {

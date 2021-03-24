@@ -2,15 +2,15 @@ import * as React from 'react';
 import {
   Block,
   MobileCreateCauseButtonContainer,
-  Container,
-  SubContainer,
+  HomeContainer,
+  HomeSubContainer,
   Title,
   SubTitle,
   Content,
   DesktopCreateCauseButton,
   Image,
   CoalitionCardsWrapper,
-  CausesContainer,
+  CauseCardsWrapper,
   CausesHeader,
   SeeAllButton,
 } from './Home.style';
@@ -37,7 +37,7 @@ const Home: React.FunctionComponent = () => {
   };
   const causes = useSelector(getAllCauses);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const { loading, fetchFirstPage } = useFetchCauses(6);
+  const { loading, fetchFirstPage } = useFetchCauses(10);
 
   React.useEffect(() => {
     fetchFirstPage([]);
@@ -45,8 +45,8 @@ const Home: React.FunctionComponent = () => {
 
   return (
     <>
-      <Container>
-        <SubContainer>
+      <HomeContainer>
+        <HomeSubContainer>
           <Title>
             <FormattedMessage id="our_mission.title" />
           </Title>
@@ -61,9 +61,9 @@ const Home: React.FunctionComponent = () => {
               <FormattedMessage id="cause-cta.cause-creation" />
             </DesktopCreateCauseButton>
           </DefaultLink>
-        </SubContainer>
+        </HomeSubContainer>
         <Image />
-      </Container>
+      </HomeContainer>
       <MobileCreateCauseButtonContainer>
         <DefaultLink to={PATHS.OUR_MISSION.url()}>
           <MediumLargeButton variant="contained" color="primary">
@@ -86,11 +86,11 @@ const Home: React.FunctionComponent = () => {
         {loading ? (
           <Loader />
         ) : (
-          <CausesContainer>
+          <CauseCardsWrapper>
             {causes.map(cause => (
               <Cause key={cause.uuid} cause={cause} />
             ))}
-          </CausesContainer>
+          </CauseCardsWrapper>
         )}
       </Block>
       <DefinitionWrapper>

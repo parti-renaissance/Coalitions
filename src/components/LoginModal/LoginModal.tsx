@@ -14,6 +14,9 @@ import {
   Connect,
   ConnectLink,
   StyledDialog,
+  SuccessImage,
+  SuccessText,
+  SuccessContainer,
 } from './LoginModal.style';
 import { SlideProps } from '@material-ui/core/Slide';
 import { Slide } from '@material-ui/core';
@@ -67,7 +70,13 @@ const LoginModal = <OtherFormValues,>({
 
   const renderContent = () => {
     if (showSuccessScreen) {
-      return null;
+      return (
+        <SuccessContainer>
+          <SuccessImage src="/images/createCause.jpg" />
+          <Title>{intl.formatMessage({ id: 'login_modal.success_screen.title' })}</Title>
+          <SuccessText>{intl.formatMessage({ id: 'login_modal.success_screen.text' })}</SuccessText>
+        </SuccessContainer>
+      );
     }
 
     return (
@@ -93,12 +102,10 @@ const LoginModal = <OtherFormValues,>({
       open={isOpened}
       TransitionComponent={isMobile ? SlideUp : undefined}
     >
-      <ContentContainer>
-        <StyledCloseButton onClick={onClose}>
-          <StyledCloseIcon />
-        </StyledCloseButton>
-        {renderContent()}
-      </ContentContainer>
+      <StyledCloseButton onClick={onClose}>
+        <StyledCloseIcon />
+      </StyledCloseButton>
+      <ContentContainer>{renderContent()}</ContentContainer>
     </StyledDialog>
   );
 };

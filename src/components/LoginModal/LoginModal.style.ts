@@ -8,16 +8,19 @@ export const ContentContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: ${getSpacing(3)};
+  padding: 0 ${getSpacing(3)} ${getSpacing(3)} ${getSpacing(3)};
   ${media.desktop(`
-    min-width: ${getSpacing(100)};
-    min-height: ${getSpacing(70)};
+    width: ${getSpacing(74)};
+    padding: 0 ${getSpacing(8)} ${getSpacing(8)} ${getSpacing(8)};
   `)}
 `;
 
 export const StyledCloseButton = styled(IconButton)`
   align-self: flex-end;
-  padding: ${getSpacing(1)};
+  padding: ${getSpacing(3)};
+  ${media.desktop(`
+    padding: ${getSpacing(5)} ${getSpacing(8)};
+  `)}
 `;
 
 const CLOSE_ICON_FONT_SIZE = '24px';
@@ -47,4 +50,36 @@ export const ConnectLink = styled.a`
 
 export const StyledDialog = styled(Dialog)`
   ${styledTags}
+`;
+
+export const SuccessImage = styled.img`
+  align-self: center;
+  height: ${getSpacing(24)};
+  width: ${getSpacing(24)};
+  margin-bottom: ${getSpacing(3)};
+  ${media.desktop(`
+    height: ${getSpacing(33)};
+    width: ${getSpacing(33)};
+    margin-bottom: ${getSpacing(3)};
+  `)}
+`;
+
+export const SuccessText = styled.p`
+  margin-top: ${getSpacing(3)};
+  text-align: center;
+  ${media.desktop(`
+    margin-top: ${getSpacing(5)};
+    text-align: unset;
+  `)}
+`;
+
+export const SuccessContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  ${media.desktop(`
+    align-items: unset;
+  `)}
 `;

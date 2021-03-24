@@ -9,19 +9,24 @@ import HandleErrorService from 'services/HandleErrorService';
 export const useFetchCoalitions = () => {
   const dispatch = useDispatch();
 
-  const [{ loading: isFetchingCoalitions }, doFetchCoalitions] = useTypedAsyncFn(
+  const [{ loading: isFetchingCoalitions, error }, doFetchCoalitions] = useTypedAsyncFn(
     async () => await coalitionApiClient.get(`coalitions`),
     [],
   );
 
   const fetchCoalitions = useCallback(async () => {
-    try {
-      const coalitions: Coalition[] = await doFetchCoalitions();
-      dispatch(updateCoalitions(coalitions));
-    } catch (e) {
-      HandleErrorService.showErrorSnackbar(e);
+    const coalitions: Coalition[] = await doFetchCoalitions();
+
+    if (coalitions instanceof Error) {
+      return;
     }
+
+    dispatch(updateCoalitions(coalitions));
   }, [dispatch, doFetchCoalitions]);
+
+  if (error) {
+    HandleErrorService.showErrorSnackbar(error);
+  }
 
   return { fetchCoalitions, isFetchingCoalitions };
 };

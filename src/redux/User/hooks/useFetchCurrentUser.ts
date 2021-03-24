@@ -14,23 +14,27 @@ export const useFetchCurrentUser = () => {
   );
 
   const fetch = useCallback(async () => {
-    try {
-      const currentUser = await doFetchCurrentUser();
-      dispatch(
-        updateCurrentUser({
-          uuid: currentUser.uuid,
-          firstName: currentUser.first_name,
-          email: currentUser.email_address,
-        }),
-      );
-    } catch (e) {
-      HandleErrorService.showErrorSnackbar(e);
+    const currentUser = await doFetchCurrentUser();
+
+    if (currentUser instanceof Error) {
+      return;
     }
+
+    dispatch(
+      updateCurrentUser({
+        uuid: currentUser.uuid,
+        firstName: currentUser.first_name,
+        email: currentUser.email_address,
+      }),
+    );
   }, [dispatch, doFetchCurrentUser]);
+
+  if (error) {
+    HandleErrorService.showErrorSnackbar(error);
+  }
 
   return {
     isFetchingCurrentUser: loading,
-    errorFetchingCurrentUser: error,
     fetchCurrentUser: fetch,
   };
 };

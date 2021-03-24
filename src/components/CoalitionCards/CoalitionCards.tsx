@@ -31,7 +31,8 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
     if (coalitions.length === 0) {
       fetchCoalitions();
     }
-  }, [fetchCoalitions, coalitions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchCoalitions]);
 
   const renderCoalitionCard = (coalition: Coalition) => {
     const onClick = () => onCoalitionClick(coalition);

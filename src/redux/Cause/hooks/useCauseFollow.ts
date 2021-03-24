@@ -14,15 +14,20 @@ export const useCauseFollow = (id: string) => {
   );
 
   const followCause = useCallback(async () => {
-    try {
-      const response = await authenticatedApiClient.put(`v3/causes/${id}/follower`, null);
-      if (response.uuid !== undefined) {
-        dispatch(optimisticallyMarkCauseAsSupported(id));
-      }
-    } catch (e) {
-      HandleErrorService.showErrorSnackbar(e);
+    const response = await doFollowCause();
+
+    if (response instanceof Error) {
+      return;
+    }
+
+    if (response.uuid !== undefined) {
+      dispatch(optimisticallyMarkCauseAsSupported(id));
     }
   }, [dispatch, doFollowCause, id]);
 
-  return { loading, error, followCause };
+  if (error) {
+    HandleErrorService.showErrorSnackbar(error);
+  }
+
+  return { loading, followCause };
 };

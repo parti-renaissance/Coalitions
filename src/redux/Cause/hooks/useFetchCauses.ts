@@ -33,24 +33,23 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
 
   const fetch = useCallback(
     async (page: number, filteredByCoalitionIds: string[], isUserLoggedIn: boolean) => {
-      try {
-        const causes = await doFetchCauses({
-          page,
-          coalitionsFilter: buildFilteredByUrl(filteredByCoalitionIds),
-        });
-        const supportedCauses = await doFetchFollowedCauses({
-          uuids: causes.items.map((cause: Cause) => cause.uuid),
-          isUserLoggedIn,
-        });
-        dispatch(
-          updateCauses({ causes: causes.items, numberOfCauses: causes.metadata.total_items }),
-        );
-        dispatch(markCausesAsSupported(supportedCauses));
-        setHasMore(causes.metadata.last_page >= page + 1);
-        setPage(page + 1);
-      } catch (e) {
-        HandleErrorService.showErrorSnackbar(e);
+      const causes = await doFetchCauses({
+        page,
+        coalitionsFilter: buildFilteredByUrl(filteredByCoalitionIds),
+      });
+
+      if (causes instanceof Error) {
+        return;
       }
+
+      const supportedCauses = await doFetchFollowedCauses({
+        uuids: causes.items.map((cause: Cause) => cause.uuid),
+        isUserLoggedIn,
+      });
+      dispatch(updateCauses({ causes: causes.items, numberOfCauses: causes.metadata.total_items }));
+      dispatch(markCausesAsSupported(supportedCauses));
+      setHasMore(causes.metadata.last_page >= page + 1);
+      setPage(page + 1);
     },
     [dispatch, doFetchCauses, doFetchFollowedCauses],
   );
@@ -72,10 +71,13 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
     [hasMore, fetch, page],
   );
 
+  if (error) {
+    HandleErrorService.showErrorSnackbar(error);
+  }
+
   return {
     hasMore,
     loading: loadingFetch || loadingFollowed,
-    error,
     fetchFirstPage,
     fetchNextPage,
   };
@@ -93,20 +95,25 @@ export const useFetchOneCause = (id: string) => {
 
   const fetchCause = useCallback(
     async (isUserLoggedIn = false) => {
-      try {
-        const cause: Cause = await doFetchCause();
-        const supportedCauses = await doFetchFollowedCauses({
-          uuids: [cause.uuid],
-          isUserLoggedIn,
-        });
-        dispatch(updateOneCause(cause));
-        dispatch(markCausesAsSupported(supportedCauses));
-      } catch (e) {
-        HandleErrorService.showErrorSnackbar(e);
+      const cause: Cause = await doFetchCause();
+
+      if (cause instanceof Error) {
+        return;
       }
+
+      const supportedCauses = await doFetchFollowedCauses({
+        uuids: [cause.uuid],
+        isUserLoggedIn,
+      });
+      dispatch(updateOneCause(cause));
+      dispatch(markCausesAsSupported(supportedCauses));
     },
     [dispatch, doFetchCause, doFetchFollowedCauses],
   );
 
-  return { loading: loading || loadingFollowed, error, fetchCause };
+  if (error) {
+    HandleErrorService.showErrorSnackbar(error);
+  }
+
+  return { loading: loading || loadingFollowed, fetchCause };
 };

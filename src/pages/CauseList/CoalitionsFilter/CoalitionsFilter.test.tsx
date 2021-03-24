@@ -9,6 +9,7 @@ import { CoalitionsFilter } from './CoalitionsFilter';
 describe('<CoalitionsFilter />', () => {
   const mockUseFetchCoalitions = {
     fetchCoalitions: jest.fn(),
+    isFetchingCoalitions: false,
   };
 
   it('should display coalitions', () => {

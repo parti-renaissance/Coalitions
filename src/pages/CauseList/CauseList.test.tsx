@@ -25,6 +25,7 @@ describe('<CauseList />', () => {
 
   const mockUseFetchCoalitions = {
     fetchCoalitions: jest.fn(),
+    isFetchingCoalitions: false,
   };
 
   describe('render', () => {

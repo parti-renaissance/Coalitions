@@ -14,14 +14,13 @@ export const useCauseFollow = (id: string) => {
   );
 
   const followCause = useCallback(async () => {
-    const response = await authenticatedApiClient.put(`v3/causes/${id}/follower`, null);
-
-    if (response instanceof Error) {
-      HandleErrorService.showErrorSnackbar(response);
-    }
-
-    if (response.uuid !== undefined) {
-      dispatch(optimisticallyMarkCauseAsSupported(id));
+    try {
+      const response = await authenticatedApiClient.put(`v3/causes/${id}/follower`, null);
+      if (response.uuid !== undefined) {
+        dispatch(optimisticallyMarkCauseAsSupported(id));
+      }
+    } catch (e) {
+      HandleErrorService.showErrorSnackbar(e);
     }
   }, [dispatch, doFollowCause, id]);
 

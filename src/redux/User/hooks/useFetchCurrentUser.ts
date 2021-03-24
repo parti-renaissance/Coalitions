@@ -14,19 +14,18 @@ export const useFetchCurrentUser = () => {
   );
 
   const fetch = useCallback(async () => {
-    const currentUser = await doFetchCurrentUser();
-
-    if (currentUser instanceof Error) {
-      HandleErrorService.showErrorSnackbar(currentUser);
+    try {
+      const currentUser = await doFetchCurrentUser();
+      dispatch(
+        updateCurrentUser({
+          uuid: currentUser.uuid,
+          firstName: currentUser.first_name,
+          email: currentUser.email_address,
+        }),
+      );
+    } catch (e) {
+      HandleErrorService.showErrorSnackbar(e);
     }
-
-    dispatch(
-      updateCurrentUser({
-        uuid: currentUser.uuid,
-        firstName: currentUser.first_name,
-        email: currentUser.email_address,
-      }),
-    );
   }, [dispatch, doFetchCurrentUser]);
 
   return {

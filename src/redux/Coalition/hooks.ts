@@ -15,13 +15,12 @@ export const useFetchCoalitions = () => {
   );
 
   const fetchCoalitions = useCallback(async () => {
-    const coalitions: Coalition[] = await coalitionApiClient.get(`coalitions`);
-
-    if (coalitions instanceof Error) {
-      HandleErrorService.showErrorSnackbar(coalitions);
+    try {
+      const coalitions: Coalition[] = await doFetchCoalitions();
+      dispatch(updateCoalitions(coalitions));
+    } catch (e) {
+      HandleErrorService.showErrorSnackbar(e);
     }
-
-    dispatch(updateCoalitions(coalitions));
   }, [dispatch, doFetchCoalitions]);
 
   return { fetchCoalitions, isFetchingCoalitions };

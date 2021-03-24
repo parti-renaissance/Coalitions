@@ -1,37 +1,33 @@
-import React, { FunctionComponent, forwardRef, ForwardRefRenderFunction, ChangeEvent } from 'react';
+import React, {
+  FunctionComponent,
+  forwardRef,
+  ForwardRefRenderFunction,
+  ChangeEvent,
+  useState,
+} from 'react';
 import { getIsMobile } from 'services/mobile/mobile';
 import {
   StyledCloseButton,
   StyledCloseIcon,
   ContentContainer,
   Title,
-  InputFieldWrapper,
-  ValidateButtonContainer,
   Connect,
   ConnectLink,
   StyledDialog,
 } from './LoginModal.style';
 import { SlideProps } from '@material-ui/core/Slide';
-import { Slide, CircularProgress } from '@material-ui/core';
-import { TextFieldProps } from '@material-ui/core/TextField';
+import { Slide } from '@material-ui/core';
 import { FormattedMessage, useIntl } from 'react-intl';
-import InputField from 'components/InputField';
-import FixedBottomButton from 'components/FixedBottomButton';
-import { Formik } from 'formik';
-import { useValidateForm, FormValues } from './lib/useValidateForm';
-import {
-  useCityAndCountryAutocomplete,
-  CityOrCountry,
-  getCityOrCountryLabel,
-} from './lib/useCityAndCountryAutocomplete';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import { FormValues } from './components/CreateAccountForm/lib/useValidateForm';
 import { oauthUrl } from 'services/networking/auth';
+import CreateAccountForm from './components/CreateAccountForm';
 
 interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
   onClose: () => void;
   onConnect: () => void;
   title: string;
+  showSuccessScreenOnValidate?: boolean;
   AdditionalFields?: FunctionComponent<{
     onChange: (e: ChangeEvent) => void;
     values: OtherFormValues & FormValues;
@@ -50,19 +46,42 @@ const LoginModal = <OtherFormValues,>({
   onConnect,
   title,
   AdditionalFields,
+  showSuccessScreenOnValidate,
 }: LoginModalProps<OtherFormValues>) => {
   const isMobile = getIsMobile();
   const intl = useIntl();
-  const { validateForm } = useValidateForm<OtherFormValues>();
-  const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
+  const [showSuccessScreen, setShowSuccessScreen] = useState<boolean>(false);
 
-  const onValidateClick = () => {
-    // TODO
+  const onValidate = () => {
+    if (showSuccessScreenOnValidate === true) {
+      setShowSuccessScreen(true);
+    } else {
+      onClose();
+    }
   };
 
   const onConnectClick = () => {
     onConnect();
     window.location.href = oauthUrl;
+  };
+
+  const renderContent = () => {
+    if (showSuccessScreen) {
+      return null;
+    }
+
+    return (
+      <>
+        <Title>{title}</Title>
+        <Connect>
+          <p>{intl.formatMessage({ id: 'login_modal.signed-up' })}</p>
+          <ConnectLink onClick={onConnectClick}>
+            <FormattedMessage id="login_modal.connect" />
+          </ConnectLink>
+        </Connect>
+        <CreateAccountForm onValidate={onValidate} AdditionalFields={AdditionalFields} />
+      </>
+    );
   };
 
   return (
@@ -75,111 +94,7 @@ const LoginModal = <OtherFormValues,>({
         <StyledCloseButton onClick={onClose}>
           <StyledCloseIcon />
         </StyledCloseButton>
-        <Title>{title}</Title>
-        <Connect>
-          <p>{intl.formatMessage({ id: 'login_modal.signed-up' })}</p>
-          <ConnectLink onClick={onConnectClick}>
-            <FormattedMessage id="login_modal.connect" />
-          </ConnectLink>
-        </Connect>
-        <Formik
-          initialValues={{} as FormValues & OtherFormValues}
-          validate={validateForm}
-          onSubmit={onValidateClick}
-        >
-          {// eslint-disable-next-line complexity
-          ({
-            values,
-            errors,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-            touched,
-            setFieldValue,
-            setFieldTouched,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <InputFieldWrapper>
-                <InputField
-                  placeholder={intl.formatMessage({ id: 'login_modal.first-name' })}
-                  type="text"
-                  name="firstName"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.firstName}
-                  error={touched.firstName === true && errors.firstName !== undefined}
-                  helperText={touched.firstName === true ? errors.firstName : undefined}
-                />
-              </InputFieldWrapper>
-              <InputFieldWrapper>
-                <InputField
-                  placeholder={intl.formatMessage({ id: 'login_modal.email-address' })}
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  error={touched.email === true && errors.email !== undefined}
-                  helperText={touched.email === true ? errors.email : undefined}
-                />
-              </InputFieldWrapper>
-              <InputFieldWrapper>
-                <Autocomplete
-                  freeSolo
-                  options={cities}
-                  getOptionLabel={getCityOrCountryLabel}
-                  onBlur={() => setFieldTouched('cityId', true)}
-                  onChange={(e, value) => {
-                    setFieldValue('cityId', (value as CityOrCountry)?.uuid || '');
-                  }}
-                  renderInput={(params: TextFieldProps) => (
-                    <InputField
-                      {...params}
-                      placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
-                      error={touched.cityId === true && errors.cityId !== undefined}
-                      helperText={touched.cityId === true ? errors.cityId : undefined}
-                      onChange={e => {
-                        handleChange(e);
-                        setFieldValue('cityId', '');
-                        fetchCities(e.target.value);
-                      }}
-                      onBlur={handleBlur}
-                      InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                          <>
-                            {isFetchingCities ? (
-                              <CircularProgress color="primary" size={20} />
-                            ) : null}
-                            {params?.InputProps?.endAdornment}
-                          </>
-                        ),
-                      }}
-                    />
-                  )}
-                />
-              </InputFieldWrapper>
-              {AdditionalFields !== undefined ? (
-                <AdditionalFields onChange={handleChange} values={values} />
-              ) : null}
-              <ValidateButtonContainer>
-                <FixedBottomButton
-                  disabled={
-                    isSubmitting ||
-                    Object.keys(errors).length > 0 ||
-                    touched.firstName !== true ||
-                    touched.email !== true ||
-                    touched.cityId !== true
-                  }
-                  type="submit"
-                >
-                  {intl.formatMessage({ id: 'login_modal.validate' })}
-                </FixedBottomButton>
-              </ValidateButtonContainer>
-            </form>
-          )}
-        </Formik>
+        {renderContent()}
       </ContentContainer>
     </StyledDialog>
   );

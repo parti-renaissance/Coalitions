@@ -27,6 +27,7 @@ const LoginAndPreviewModal: FunctionComponent<LoginAndPreviewModalProps> = ({
       onClose={onClose}
       onConnect={onConnect}
       title={intl.formatMessage({ id: 'create_cause.create-account' })}
+      showSuccessScreenOnValidate
     />
   );
 };

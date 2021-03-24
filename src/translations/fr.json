@@ -71,7 +71,7 @@
     "connect": "Connectez-vous",
     "success_screen": {
       "title": "Nous vous avons envoyé un email",
-      "text": "Afin finaliser votre inscription, veuillez suivre les instructions dans l'email que nous vous avons envoyé."
+      "text": "Afin de finaliser votre inscription, veuillez suivre les instructions dans l'email que nous vous avons envoyé."
     }
   },
   "general": {

@@ -39,7 +39,7 @@ export const CreateCauseCTA: React.FunctionComponent<{ displayLinkToCauseList?: 
           </CTAButton>
         </Link>
         {displayLinkToCauseList === true && (
-          <Link to={PATHS.HOME.url()}>
+          <Link to={PATHS.CAUSE_LIST.url()}>
             <CauseListButton variant="contained">
               <FormattedMessage
                 id="cause-cta.go-to-cause-list"

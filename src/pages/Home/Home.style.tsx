@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { colorPalette, getSpacing, media } from 'stylesheet';
+import { colorPalette, fonts, getSpacing, media } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const SubTitle = styled.h3`
   margin-top: ${getSpacing(7)};
 `;
 
-export const CoalitionContainer = styled.div`
+export const Block = styled.div`
   padding: 0 ${getSpacing(3)};
   ${media.desktop(`
   padding: 0 ${getSpacing(24)};
@@ -14,6 +14,7 @@ export const CoalitionContainer = styled.div`
 `;
 
 export const MobileCreateCauseButtonContainer = styled.div`
+  margin: ${getSpacing(7)} 0;
   display: flex;
   justify-content: center;
   ${media.desktop(`
@@ -21,7 +22,7 @@ export const MobileCreateCauseButtonContainer = styled.div`
   `)}
 `;
 
-export const Container = styled.div`
+export const TopPartContainer = styled.div`
   display: flex;
   padding: ${getSpacing(3)} ${getSpacing(3)} 0 ${getSpacing(3)};
   ${media.desktop(`
@@ -30,7 +31,7 @@ export const Container = styled.div`
   `)}
 `;
 
-export const SubContainer = styled.div`
+export const HomeSubContainer = styled.div`
   ${media.desktop(`
     max-width: ${getSpacing(108)};
   `)}
@@ -73,5 +74,56 @@ export const CoalitionCardsWrapper = styled.div`
   margin-top: ${getSpacing(3)};
   ${media.desktop(`
     margin-top: ${getSpacing(6)};
+  `)}
+`;
+
+export const CauseCardsWrapper = styled.div`
+  height: ${getSpacing(82)};
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  flex-wrap: nowrap;
+  overflow: scroll;
+  margin: ${getSpacing(3)} -${getSpacing(3)} ${getSpacing(8)} -${getSpacing(3)};
+  ${media.desktop(`
+    flex-wrap: wrap;
+    overflow: hidden;
+    justify-content: center;
+    margin-bottom: ${getSpacing(13)};
+    margin-top: ${getSpacing(7)};
+  `)}
+
+  > :first-child {
+    margin-left: ${getSpacing(3)};
+  }
+
+  > * {
+    min-width: ${getSpacing(50)};
+    margin-right: ${getSpacing(3)};
+    margin-top: ${getSpacing(3)};
+    ${media.desktop(`
+    min-width: ${getSpacing(62)};
+  `)}
+  }
+`;
+
+export const CausesHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: ${getSpacing(7)};
+`;
+
+export const SeeAllButton = styled.p`
+  ${fonts.button};
+  color: ${colorPalette.blueCoalition};
+  cursor: pointer;
+  margin-left: ${getSpacing(1)};
+`;
+
+export const CTAWrapper = styled.div`
+  margin-top: ${getSpacing(4)};
+  ${media.desktop(`
+    margin-top: ${getSpacing(7)};
   `)}
 `;

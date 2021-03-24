@@ -1,17 +1,22 @@
 import * as React from 'react';
 import {
-  CoalitionContainer,
+  Block,
+  CTAWrapper,
   MobileCreateCauseButtonContainer,
-  Container,
-  SubContainer,
+  TopPartContainer,
+  HomeSubContainer,
   Title,
   SubTitle,
   Content,
   DesktopCreateCauseButton,
   Image,
   CoalitionCardsWrapper,
+  CauseCardsWrapper,
+  CausesHeader,
+  SeeAllButton,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
+import Cause from 'components/Cause';
 import { CoalitionDefinition } from 'components/Definition/CoalitionDefinition';
 import { DefaultLink } from 'components/Link/Link';
 import { FormattedMessage } from 'react-intl';
@@ -20,17 +25,30 @@ import { MediumLargeButton } from 'components/Button/Button';
 import { DefinitionWrapper } from 'components/Definition/Definition.style';
 import CoalitionCards from 'components/CoalitionCards';
 import { Coalition } from 'redux/Coalition/types';
+import { useSelector } from 'react-redux';
+import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
+import { getAllCauses } from 'redux/Cause/selectors';
+import { isUserLogged } from 'redux/Login';
+import Loader from 'components/Loader';
+import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 
 const Home: React.FunctionComponent = () => {
   const onCoalitionClick = (coalition: Coalition) => {
     // TODO
     console.log({ coalition });
   };
+  const causes = useSelector(getAllCauses);
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const { loading, fetchFirstPage } = useFetchCauses(10);
+
+  React.useEffect(() => {
+    fetchFirstPage([]);
+  }, [fetchFirstPage, isUserLoggedIn]);
 
   return (
     <>
-      <Container>
-        <SubContainer>
+      <TopPartContainer>
+        <HomeSubContainer>
           <Title>
             <FormattedMessage id="our_mission.title" />
           </Title>
@@ -45,9 +63,9 @@ const Home: React.FunctionComponent = () => {
               <FormattedMessage id="cause-cta.cause-creation" />
             </DesktopCreateCauseButton>
           </DefaultLink>
-        </SubContainer>
+        </HomeSubContainer>
         <Image />
-      </Container>
+      </TopPartContainer>
       <MobileCreateCauseButtonContainer>
         <DefaultLink to={PATHS.OUR_MISSION.url()}>
           <MediumLargeButton variant="contained" color="primary">
@@ -58,17 +76,39 @@ const Home: React.FunctionComponent = () => {
       <DefinitionWrapper>
         <CauseDefinition />
       </DefinitionWrapper>
+      <Block>
+        <CausesHeader>
+          <h3>
+            <FormattedMessage id="home.support-causes" />
+          </h3>
+          <DefaultLink to={PATHS.CAUSE_LIST.url()}>
+            <SeeAllButton>Voir tout</SeeAllButton>
+          </DefaultLink>
+        </CausesHeader>
+        {loading && causes === [] ? (
+          <Loader />
+        ) : (
+          <CauseCardsWrapper>
+            {causes.map(cause => (
+              <Cause key={cause.uuid} cause={cause} />
+            ))}
+          </CauseCardsWrapper>
+        )}
+      </Block>
       <DefinitionWrapper>
         <CoalitionDefinition />
       </DefinitionWrapper>
-      <CoalitionContainer>
+      <Block>
         <SubTitle id="coalitions">
           <FormattedMessage id="coalition.title" />
         </SubTitle>
         <CoalitionCardsWrapper>
           <CoalitionCards onCoalitionClick={onCoalitionClick} responsiveNbOfCardsByLine />
         </CoalitionCardsWrapper>
-      </CoalitionContainer>
+      </Block>
+      <CTAWrapper>
+        <CreateCauseCTA displayLinkToCauseList />
+      </CTAWrapper>
     </>
   );
 };

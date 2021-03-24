@@ -51,18 +51,6 @@ describe('<CauseList />', () => {
       expect(wrapper.find('Loader')).toHaveLength(1);
     });
 
-    it('should display error messages', () => {
-      jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => {
-        return { ...mockUseFetchCauses, error: new Error('error') };
-      });
-      const wrapper = mount(
-        <TestProvider dispatch={dispatch}>
-          <CauseList />
-        </TestProvider>,
-      );
-      expect(wrapper.text()).toContain('cause_list.error');
-    });
-
     it('should display no causes messages', () => {
       jest.spyOn(hooks, 'useFetchCauses').mockImplementation(() => mockUseFetchCauses);
       const wrapper = mount(

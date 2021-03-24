@@ -42,7 +42,7 @@ const Home: React.FunctionComponent = () => {
   const { loading, fetchFirstPage } = useFetchCauses(10);
 
   React.useEffect(() => {
-    fetchFirstPage([]);
+    fetchFirstPage([], isUserLoggedIn);
   }, [fetchFirstPage, isUserLoggedIn]);
 
   return (

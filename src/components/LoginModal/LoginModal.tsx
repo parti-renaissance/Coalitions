@@ -79,7 +79,10 @@ const LoginModal = <OtherFormValues,>({
             <FormattedMessage id="login_modal.connect" />
           </ConnectLink>
         </Connect>
-        <CreateAccountForm onValidate={onValidate} AdditionalFields={AdditionalFields} />
+        <CreateAccountForm<OtherFormValues>
+          onValidate={onValidate}
+          AdditionalFields={AdditionalFields}
+        />
       </>
     );
   };

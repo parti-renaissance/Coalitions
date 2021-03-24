@@ -1,5 +1,6 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { coalitionApiClient } from 'services/networking/client';
 import { updateCoalitions } from './slice';
 import { Coalition } from './types';
@@ -7,19 +8,21 @@ import HandleErrorService from 'services/HandleErrorService';
 
 export const useFetchCoalitions = () => {
   const dispatch = useDispatch();
-  const [isFetchingCoalitions, setIsFetchingCoalitions] = useState(false);
+
+  const [{ loading: isFetchingCoalitions }, doFetchCoalitions] = useTypedAsyncFn(
+    async () => await coalitionApiClient.get(`coalitions`),
+    [],
+  );
 
   const fetchCoalitions = useCallback(async () => {
-    setIsFetchingCoalitions(true);
-    try {
-      const coalitions: Coalition[] = await coalitionApiClient.get(`coalitions`);
-      dispatch(updateCoalitions(coalitions));
-    } catch (e) {
-      HandleErrorService.showErrorSnackbar(e);
-    } finally {
-      setIsFetchingCoalitions(false);
+    const coalitions: Coalition[] = await coalitionApiClient.get(`coalitions`);
+
+    if (coalitions instanceof Error) {
+      HandleErrorService.showErrorSnackbar(coalitions);
     }
-  }, [dispatch]);
+
+    dispatch(updateCoalitions(coalitions));
+  }, [dispatch, doFetchCoalitions]);
 
   return { fetchCoalitions, isFetchingCoalitions };
 };

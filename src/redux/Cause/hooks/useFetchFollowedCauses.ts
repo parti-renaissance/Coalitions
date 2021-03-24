@@ -18,6 +18,5 @@ export const useFetchFollowedCauses = () => {
     },
     [],
   );
-
   return { loading, error, doFetchFollowedCauses };
 };

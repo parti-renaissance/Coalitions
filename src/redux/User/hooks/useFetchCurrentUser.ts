@@ -8,7 +8,7 @@ import HandleErrorService from 'services/HandleErrorService';
 export const useFetchCurrentUser = () => {
   const dispatch = useDispatch();
 
-  const [{ loading: isFetchingCurrentUser, error }, doFetchCurrentUser] = useTypedAsyncFn(
+  const [{ loading, error }, doFetchCurrentUser] = useTypedAsyncFn(
     async () => await authenticatedApiClient.get('me'),
     [],
   );
@@ -30,7 +30,8 @@ export const useFetchCurrentUser = () => {
   }, [dispatch, doFetchCurrentUser]);
 
   return {
-    isFetchingCurrentUser,
+    isFetchingCurrentUser: loading,
+    errorFetchingCurrentUser: error,
     fetchCurrentUser,
   };
 };

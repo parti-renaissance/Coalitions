@@ -8,7 +8,7 @@ import HandleErrorService from 'services/HandleErrorService';
 export const useCauseFollow = (id: string) => {
   const dispatch = useDispatch();
 
-  const [{ loading }, doFollowCause] = useTypedAsyncFn(
+  const [{ loading, error }, doFollowCause] = useTypedAsyncFn(
     async () => await authenticatedApiClient.put(`v3/causes/${id}/follower`, null),
     [],
   );
@@ -25,5 +25,5 @@ export const useCauseFollow = (id: string) => {
     }
   }, [dispatch, doFollowCause, id]);
 
-  return { loading, followCause };
+  return { loading, error, followCause };
 };

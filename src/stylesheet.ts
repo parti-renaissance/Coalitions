@@ -103,7 +103,7 @@ export const media = {
 
 export const fontFamily = {
   primary: `'Poppins', sans-serif`,
-  secondary: `'Abril Fatface', 'Helvetica', 'Arial', cursive`,
+  secondary: `'Yeseva One', cursive`,
 };
 
 export const fontWeight = {

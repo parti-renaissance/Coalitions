@@ -7,7 +7,7 @@ import {
   media,
   styledTags,
   fontWeight,
-  margins,
+  defaultMargins,
 } from 'stylesheet';
 import { DefaultLink, DefaultHashLink } from 'components/Link/Link';
 import { Close } from '@material-ui/icons';
@@ -22,10 +22,10 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   min-height: ${MOBILE_HEADER_HEIGHT};
-  padding: 0 calc(${margins.horizontal.mobile} - ${getSpacing(2)});
+  padding: 0 calc(${defaultMargins.horizontal.mobile} - ${getSpacing(2)});
   ${media.desktop(`
     min-height: ${DESKTOP_HEADER_HEIGHT};
-    padding: 0 calc(${margins.horizontal.desktop} - ${getSpacing(5)});
+    padding: 0 calc(${defaultMargins.horizontal.desktop} - ${getSpacing(5)});
   `)}
 `;
 

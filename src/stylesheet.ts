@@ -111,7 +111,7 @@ export const fontWeight = {
   normal: '400',
 };
 
-export const margins = {
+export const defaultMargins = {
   horizontal: {
     desktop: '80px',
     mobile: '15px',

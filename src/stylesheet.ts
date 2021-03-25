@@ -111,6 +111,17 @@ export const fontWeight = {
   normal: '400',
 };
 
+export const margins = {
+  horizontal: {
+    desktop: '80px',
+    mobile: '15px',
+  },
+  vertical: {
+    desktop: '80px',
+    mobile: '35px',
+  },
+};
+
 export const fontSize = {
   h1: {
     mobile: '32px',

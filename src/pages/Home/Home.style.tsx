@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, fonts, getSpacing, media } from 'stylesheet';
+import { colorPalette, fonts, getSpacing, media, margins } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const SubTitle = styled.h3`
@@ -25,9 +25,10 @@ export const MobileCreateCauseButtonContainer = styled.div`
 export const TopPartContainer = styled.div`
   display: flex;
   padding: ${getSpacing(35)} ${getSpacing(3)};
+  padding: ${getSpacing(3)} ${margins.horizontal.mobile};
   ${media.desktop(`
     background-color: ${colorPalette.greyLight};
-    padding: ${getSpacing(16)} ${getSpacing(16)};
+    padding: ${margins.vertical.desktop} ${margins.horizontal.desktop};
   `)}
 `;
 

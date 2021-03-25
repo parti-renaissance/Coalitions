@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { useLogin } from 'redux/Login/hooks/useLogin';
-import { getIsMobile } from 'services/mobile/mobile';
 import { DesktopHeader } from './DesktopHeader';
 import { MobileHeader } from './MobileHeader';
 import { useFetchCurrentUser } from 'redux/User/hooks/useFetchCurrentUser';
@@ -30,7 +29,7 @@ const Header: React.FC = () => {
     }
   }, [login, search]);
 
-  if (getIsMobile()) {
+  if (window.innerWidth < 1000) {
     return <MobileHeader />;
   }
   return <DesktopHeader />;

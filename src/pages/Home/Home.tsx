@@ -4,7 +4,7 @@ import {
   CTAWrapper,
   MobileCreateCauseButtonContainer,
   TopPartContainer,
-  HomeSubContainer,
+  TopPartSubContainer,
   Title,
   SubTitle,
   Content,
@@ -49,7 +49,7 @@ const Home: React.FunctionComponent = () => {
   return (
     <>
       <TopPartContainer>
-        <HomeSubContainer>
+        <TopPartSubContainer>
           <Title>
             <FormattedMessage id="our_mission.title" />
           </Title>
@@ -64,7 +64,7 @@ const Home: React.FunctionComponent = () => {
               <FormattedMessage id="cause-cta.cause-creation" />
             </DesktopCreateCauseButton>
           </DefaultLink>
-        </HomeSubContainer>
+        </TopPartSubContainer>
         <Image />
       </TopPartContainer>
       <MobileCreateCauseButtonContainer>

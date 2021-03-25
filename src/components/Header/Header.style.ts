@@ -21,10 +21,10 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   min-height: ${MOBILE_HEADER_HEIGHT};
-  padding: 0 ${getSpacing(3)};
+  padding: 0 ${getSpacing(1)};
   ${media.desktop(`
     min-height: ${DESKTOP_HEADER_HEIGHT};
-    padding: 0 ${getSpacing(10)};
+    padding: 0 ${getSpacing(11)};
   `)}
 `;
 

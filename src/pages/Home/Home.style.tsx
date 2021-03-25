@@ -24,14 +24,14 @@ export const MobileCreateCauseButtonContainer = styled.div`
 
 export const TopPartContainer = styled.div`
   display: flex;
-  padding: ${getSpacing(3)} ${getSpacing(3)} 0 ${getSpacing(3)};
+  padding: ${getSpacing(35)} ${getSpacing(3)};
   ${media.desktop(`
     background-color: ${colorPalette.greyLight};
-    padding: ${getSpacing(16)} ${getSpacing(24)};
+    padding: ${getSpacing(16)} ${getSpacing(16)};
   `)}
 `;
 
-export const HomeSubContainer = styled.div`
+export const TopPartSubContainer = styled.div`
   ${media.desktop(`
     max-width: ${getSpacing(108)};
   `)}

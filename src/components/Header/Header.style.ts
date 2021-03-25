@@ -47,7 +47,7 @@ export const StyledButton = styled(MediumLargeButton)`
   padding: 0 ${getSpacing(2)};
   min-width: unset;
   ${media.desktop(`
-    padding: 0 ${getSpacing(4)};
+    padding: 0 ${getSpacing(5)};
   `)}
 `;
 
@@ -60,7 +60,7 @@ export const HeaderTitle = styled.div`
   align-items: center;
   padding: 0 ${getSpacing(2)};
   ${media.desktop(`
-    padding: 0 ${getSpacing(4)};
+    padding: 0 ${getSpacing(5)};
   `)}
 `;
 

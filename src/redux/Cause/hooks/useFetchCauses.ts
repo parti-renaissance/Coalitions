@@ -5,6 +5,7 @@ import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback, useState } from 'react';
 import { Cause } from '../types';
 import { useFetchFollowedCauses } from './useFetchFollowedCauses';
+import HandleErrorService from 'services/HandleErrorService';
 
 const PAGE_SIZE = 12;
 
@@ -36,6 +37,11 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
         page,
         coalitionsFilter: buildFilteredByUrl(filteredByCoalitionIds),
       });
+
+      if (causes instanceof Error) {
+        return;
+      }
+
       const supportedCauses = await doFetchFollowedCauses({
         uuids: causes.items.map((cause: Cause) => cause.uuid),
         isUserLoggedIn,
@@ -65,10 +71,13 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
     [hasMore, fetch, page],
   );
 
+  if (error) {
+    HandleErrorService.showErrorSnackbar(error);
+  }
+
   return {
     hasMore,
     loading: loadingFetch || loadingFollowed,
-    error,
     fetchFirstPage,
     fetchNextPage,
   };
@@ -87,12 +96,24 @@ export const useFetchOneCause = (id: string) => {
   const fetchCause = useCallback(
     async (isUserLoggedIn = false) => {
       const cause: Cause = await doFetchCause();
-      const supportedCauses = await doFetchFollowedCauses({ uuids: [cause.uuid], isUserLoggedIn });
+
+      if (cause instanceof Error) {
+        return;
+      }
+
+      const supportedCauses = await doFetchFollowedCauses({
+        uuids: [cause.uuid],
+        isUserLoggedIn,
+      });
       dispatch(updateOneCause(cause));
       dispatch(markCausesAsSupported(supportedCauses));
     },
     [dispatch, doFetchCause, doFetchFollowedCauses],
   );
 
-  return { loading: loading || loadingFollowed, error, fetchCause };
+  if (error) {
+    HandleErrorService.showErrorSnackbar(error);
+  }
+
+  return { loading: loading || loadingFollowed, fetchCause };
 };

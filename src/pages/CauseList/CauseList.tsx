@@ -21,21 +21,16 @@ import { isUserLogged } from 'redux/Login/selectors';
 
 interface CauseListHeaderProps {
   loading: boolean;
-  error?: Error;
   causesNumber: number;
 }
 
 const CauseListHeader: React.FunctionComponent<CauseListHeaderProps> = ({
   loading,
-  error,
   causesNumber,
 }) => (
   <>
     {loading && causesNumber === 0 && <Loader />}
-    {!loading && error !== undefined && <FormattedMessage id="cause_list.error" />}
-    {!loading && error === undefined && causesNumber === 0 && (
-      <FormattedMessage id="cause_list.no_cause" />
-    )}
+    {!loading && causesNumber === 0 && <FormattedMessage id="cause_list.no_cause" />}
   </>
 );
 
@@ -54,7 +49,7 @@ const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const [filteredByCoalitionIds, setFilteredByCoalitionIds] = useState<string[]>([]);
-  const { hasMore, loading, error, fetchFirstPage, fetchNextPage } = useFetchCauses();
+  const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
 
   useEffect(() => {
     fetchFirstPage(filteredByCoalitionIds, isUserLoggedIn);
@@ -88,7 +83,7 @@ const CauseList: React.FunctionComponent = () => {
         </p>
       </TitleContainer>
       <CoalitionsFilter handleCoalitionsFilterClick={setFilteredByCoalitionIds} />
-      <CauseListHeader loading={loading} error={error} causesNumber={causes.length} />
+      <CauseListHeader loading={loading} causesNumber={causes.length} />
       {causes.length > 0 && (
         <>
           <InfiniteScroll

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback } from 'react';
 import { updateCurrentUser } from '../slice';
+import HandleErrorService from 'services/HandleErrorService';
 
 export const useFetchCurrentUser = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,11 @@ export const useFetchCurrentUser = () => {
 
   const fetch = useCallback(async () => {
     const currentUser = await doFetchCurrentUser();
+
+    if (currentUser instanceof Error) {
+      return;
+    }
+
     dispatch(
       updateCurrentUser({
         uuid: currentUser.uuid,
@@ -23,9 +29,12 @@ export const useFetchCurrentUser = () => {
     );
   }, [dispatch, doFetchCurrentUser]);
 
+  if (error) {
+    HandleErrorService.showErrorSnackbar(error);
+  }
+
   return {
     isFetchingCurrentUser: loading,
-    errorFetchingCurrentUser: error,
     fetchCurrentUser: fetch,
   };
 };

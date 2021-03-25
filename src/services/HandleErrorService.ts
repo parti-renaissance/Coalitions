@@ -1,3 +1,8 @@
+import { store } from 'redux/store';
+import { updateSnackbar } from 'redux/Snackbar';
+import { Severity } from 'redux/Snackbar/types';
+import debounce from 'lodash/debounce';
+
 type APIErrorsType = Response | Error;
 type DefaultHandlerType = (error?: APIErrorsType) => string;
 
@@ -40,4 +45,15 @@ export default class HandleErrorService {
 
     return HandleErrorService.sendDefault(error, defaultHandler);
   }
+
+  static showErrorSnackbarBounced(error?: APIErrorsType, defaultHandler?: DefaultHandlerType) {
+    store.dispatch(
+      updateSnackbar({
+        message: HandleErrorService.getErrorMessage(error, defaultHandler),
+        severity: Severity.error,
+      }),
+    );
+  }
+
+  static showErrorSnackbar = debounce(HandleErrorService.showErrorSnackbarBounced, 2000);
 }

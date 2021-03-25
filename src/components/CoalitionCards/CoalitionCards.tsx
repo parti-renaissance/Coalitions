@@ -12,6 +12,7 @@ import { useFetchCoalitions } from 'redux/Coalition/hooks';
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
 import { Coalition } from 'redux/Coalition/types';
+import Loader from 'components/Loader';
 
 interface CoalitionCardsProps {
   onCoalitionClick: (coalition: Coalition) => void;
@@ -25,13 +26,14 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
   responsiveNbOfCardsByLine,
 }) => {
   const coalitions = useSelector(getCoalitions);
-  const { fetchCoalitions } = useFetchCoalitions();
+  const { fetchCoalitions, isFetchingCoalitions } = useFetchCoalitions();
 
   useEffect(() => {
     if (coalitions.length === 0) {
       fetchCoalitions();
     }
-  }, [fetchCoalitions, coalitions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchCoalitions]);
 
   const renderCoalitionCard = (coalition: Coalition) => {
     const onClick = () => onCoalitionClick(coalition);
@@ -55,6 +57,14 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
       </CoalitionContainer>
     );
   };
+
+  if (isFetchingCoalitions && coalitions.length === 0) {
+    return (
+      <Container>
+        <Loader />
+      </Container>
+    );
+  }
 
   if (coalitions.length === 0) {
     return null;

@@ -1,7 +1,6 @@
 import { coalitionApiClient } from 'services/networking/client';
 import { useState } from 'react';
 import HandleErrorService from 'services/HandleErrorService';
-import { useSnackbar } from 'redux/Snackbar/hooks';
 
 export enum CityOrCountryType {
   city = 'city',
@@ -23,7 +22,6 @@ export const getCityOrCountryLabel = (cityOrCountry: CityOrCountry) => {
 };
 
 export const useCityAndCountryAutocomplete = () => {
-  const { showErrorSnackbar } = useSnackbar();
   const [isFetchingCities, setisFetchingCities] = useState<boolean>(false);
   const [cities, setCities] = useState<CityOrCountry[]>([]);
 
@@ -35,7 +33,7 @@ export const useCityAndCountryAutocomplete = () => {
       );
       setCities((items as CityOrCountry[]).filter(({ code }) => code !== 'FR'));
     } catch (e) {
-      showErrorSnackbar(HandleErrorService.getErrorMessage(e));
+      HandleErrorService.showErrorSnackbar(e);
     } finally {
       setisFetchingCities(false);
     }

@@ -85,7 +85,12 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </ButtonContainer>
         </StyledContent>
       </StyledCard>
-      <LoginAndSupportModal isOpened={isModalOpened} onClose={closeModal} cause={cause} />
+      <LoginAndSupportModal
+        isOpened={isModalOpened}
+        onClose={closeModal}
+        cause={cause}
+        redirectToAfterAuth={PATHS.CAUSE.url(cause.uuid)}
+      />
     </>
   );
 };

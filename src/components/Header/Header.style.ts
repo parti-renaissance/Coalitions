@@ -22,7 +22,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   min-height: ${MOBILE_HEADER_HEIGHT};
-  padding: 0 calc(${defaultMargins.horizontal.mobile} - ${getSpacing(2)});
+  padding: 0 ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     min-height: ${DESKTOP_HEADER_HEIGHT};
     padding: 0 calc(${defaultMargins.horizontal.desktop} - ${getSpacing(5)});

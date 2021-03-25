@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing } from 'stylesheet';
+import { colorPalette, media, getSpacing, fonts, defaultMargins } from 'stylesheet';
 
 const BaseContainer = styled.div`
-  padding: ${getSpacing(3)};
+  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    padding: ${getSpacing(13)} ${getSpacing(24)};
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)}
 `;
 
@@ -25,13 +25,7 @@ export const Definition = styled.p`
   `)}
 `;
 
-export const Title = styled.h1`
+export const Title = styled.div`
+  ${fonts.h1Small};
   color: ${colorPalette.greyDark};
-`;
-
-export const DefinitionWrapper = styled.div`
-  margin-top: ${getSpacing(3)};
-  ${media.desktop(`
-    margin-top: unset;
-  `)}
 `;

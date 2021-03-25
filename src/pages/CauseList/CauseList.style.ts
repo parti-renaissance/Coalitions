@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, media, DESKTOP_BREAK_POINT } from 'stylesheet';
+import { getSpacing, media, DESKTOP_BREAK_POINT, fonts } from 'stylesheet';
 
 export const StyledCauseList = styled.div`
   display: flex;
@@ -34,6 +34,7 @@ export const TitleContainer = styled.div`
 `;
 
 export const Title = styled.h1`
+  ${fonts.h1};
   margin-bottom: ${getSpacing(1)};
   ${media.desktop(`
     margin-bottom: ${getSpacing(2)};

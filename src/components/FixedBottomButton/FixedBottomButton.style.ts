@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, colorPalette, media } from 'stylesheet';
+import { getSpacing, colorPalette, media, defaultMargins } from 'stylesheet';
 
 const zIndex = 1;
 
@@ -8,7 +8,7 @@ export const Container = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  padding: ${getSpacing(3)};
+  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
   background-color: ${colorPalette.white};
   z-index: ${zIndex};
   ${media.desktop(`

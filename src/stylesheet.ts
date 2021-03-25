@@ -113,11 +113,11 @@ export const fontWeight = {
 
 export const defaultMargins = {
   horizontal: {
-    desktop: '80px',
+    desktop: '60px',
     mobile: '15px',
   },
   vertical: {
-    desktop: '80px',
+    desktop: '60px',
     mobile: '35px',
   },
 };

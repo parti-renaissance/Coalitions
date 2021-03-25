@@ -21,7 +21,7 @@ export const CTABlock = styled.div`
 `;
 
 export const HeadSentence = styled.div`
-  ${fonts.h1};
+  ${fonts.h1Small};
   color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(3)};
 `;

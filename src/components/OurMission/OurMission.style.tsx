@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing, fontWeight } from 'stylesheet';
+import { colorPalette, media, getSpacing, fontWeight, fonts } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`
@@ -53,5 +53,6 @@ export const MobileSupportButtonWrapper = styled.div`
 `;
 
 export const Title = styled.h1`
+  ${fonts.h1};
   color: ${colorPalette.greyDark};
 `;

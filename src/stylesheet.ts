@@ -113,6 +113,10 @@ export const fontWeight = {
 
 export const fontSize = {
   h1: {
+    mobile: '32px',
+    desktop: '48px',
+  },
+  h1Small: {
     mobile: '22px',
     desktop: '34px',
   },
@@ -151,9 +155,19 @@ export const fonts = {
   h1: css`
     font-family: ${fontFamily.secondary};
     line-height: ${lineHeight.secondary};
+    font-weight: ${fontWeight.normal};
     font-size: ${fontSize.h1.mobile};
     ${media.desktop(`
       font-size: ${fontSize.h1.desktop};
+    `)}
+  `,
+  h1Small: css`
+    font-family: ${fontFamily.secondary};
+    line-height: ${lineHeight.secondary};
+    font-weight: ${fontWeight.normal};
+    font-size: ${fontSize.h1Small.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.h1Small.desktop};
     `)}
   `,
   h2: css`
@@ -177,6 +191,7 @@ export const fonts = {
   p: css`
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
+    font-weight: ${fontWeight.normal};
     font-size: ${fontSize.p.mobile};
     ${media.desktop(`
       font-size: ${fontSize.p.desktop};
@@ -193,6 +208,7 @@ export const fonts = {
   `,
   smallButton: css`
     font-family: ${fontFamily.primary};
+    font-weight: ${fontWeight.normal};
     font-size: ${fontSize.smallButton.mobile};
     ${media.desktop(`
       font-size: ${fontSize.smallButton.desktop};
@@ -210,9 +226,6 @@ export const fonts = {
 
 export const styledTags = css`
   color: ${colorPalette.greyDark};
-  h1 {
-    ${fonts.h1};
-  }
   h2 {
     ${fonts.h2};
   }

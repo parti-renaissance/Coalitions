@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, colorPalette, media } from 'stylesheet';
+import { getSpacing, colorPalette, media, fonts } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 import { Container as FixedBottomButtonsContainer } from 'components/FixedBottomButton/FixedBottomButton.style';
 import { DefaultLink } from 'components/Link/Link';
@@ -27,6 +27,7 @@ export const AuthorAndSupportsWrapper = styled.div`
 `;
 
 export const CauseName = styled.h1`
+  ${fonts.h1Small};
   color: ${colorPalette.greyDark};
 `;
 

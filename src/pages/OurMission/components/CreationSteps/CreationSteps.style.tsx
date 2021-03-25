@@ -20,7 +20,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-  ${fonts.h1};
+  ${fonts.h1Small};
   color: ${colorPalette.greyDark};
 `;
 

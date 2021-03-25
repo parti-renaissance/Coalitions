@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing } from 'stylesheet';
+import { colorPalette, media, getSpacing, fonts } from 'stylesheet';
 
 const BaseContainer = styled.div`
   padding: ${getSpacing(3)};
@@ -25,7 +25,8 @@ export const Definition = styled.p`
   `)}
 `;
 
-export const Title = styled.h1`
+export const Title = styled.div`
+  ${fonts.h1Small};
   color: ${colorPalette.greyDark};
 `;
 

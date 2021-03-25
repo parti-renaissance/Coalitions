@@ -67,6 +67,7 @@ export const MobileSupportButtonWrapper = styled.div`
 `;
 
 export const Title = styled.h1`
+  ${fonts.h1};
   color: ${colorPalette.greyDark};
 `;
 

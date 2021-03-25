@@ -28,7 +28,7 @@ export const CoalitionFiltersSubContainer = styled.div<{ displayAll: boolean }>`
   flex-wrap: wrap;
   align-items: space-between;
   overflow: hidden;
-  max-height: ${({ displayAll }) => (displayAll ? '800px' : getSpacing(8))};
+  max-height: ${({ displayAll }) => (displayAll ? '800px' : getSpacing(9))};
   transition: max-height 0.5s;
 `;
 

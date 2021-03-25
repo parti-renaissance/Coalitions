@@ -7,15 +7,16 @@ import {
   fonts,
   fontFamily,
   fontSize,
+  defaultMargins,
 } from 'stylesheet';
 
-const DESKTOP_CONTAINER_HORIZONTAL_PADDING = SPACING_UNIT * 24;
 const DESKTOP_MARGIN_BETWEEN_STEPS = SPACING_UNIT * 10;
 
 export const Container = styled.div`
-  padding: ${getSpacing(7)} ${getSpacing(3)} 0 ${getSpacing(3)};
+  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile} ${getSpacing(3)}
+    ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    padding: ${getSpacing(19)} ${DESKTOP_CONTAINER_HORIZONTAL_PADDING}px;
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)}
 `;
 
@@ -38,10 +39,9 @@ export const StepContainer = styled.div`
   margin-top: ${getSpacing(7)};
   ${media.desktop(`
     margin-top: 0;
-    width: ${(window.innerWidth -
-      2 * DESKTOP_CONTAINER_HORIZONTAL_PADDING -
-      2 * DESKTOP_MARGIN_BETWEEN_STEPS) /
-      3}px;
+    width: calc(${(window.innerWidth - 2 * DESKTOP_MARGIN_BETWEEN_STEPS) / 3}px - (2 / 3) * ${
+    defaultMargins.horizontal.desktop
+  });
   `)}
 `;
 

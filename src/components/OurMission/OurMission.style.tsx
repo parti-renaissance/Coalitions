@@ -1,14 +1,15 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing, fontWeight, fonts } from 'stylesheet';
+import { colorPalette, media, getSpacing, fontWeight, fonts, defaultMargins } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`
   display: flex;
-  padding: ${getSpacing(3)};
+  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
+    ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     background-color: ${colorPalette.greyLight};
-    padding: ${getSpacing(16)} ${getSpacing(24)};
-  `)}
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+  `)};
 `;
 
 export const SubContainer = styled.div`

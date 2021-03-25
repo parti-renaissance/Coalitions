@@ -8,9 +8,11 @@ export const CauseListContainer = styled.div`
 `;
 
 export const CTAContainer = styled.div`
-  margin-bottom: ${getSpacing(4)};
-  ${media.largeDesktop(`
-    padding: 0 ${getSpacing(9)};
+  margin-top: calc(${defaultMargins.vertical.mobile} - ${getSpacing(4)});
+  margin-bottom: ${defaultMargins.vertical.mobile};
+  ${media.desktop(`
+    margin-top: calc(${defaultMargins.vertical.desktop} - ${getSpacing(6)});
+    margin-bottom: ${defaultMargins.vertical.desktop};
   `)};
 `;
 

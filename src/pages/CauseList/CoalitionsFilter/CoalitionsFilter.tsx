@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useFetchCoalitions } from 'redux/Coalition/hooks';
-import { Chevron, CoalitionFiltersContainer, StyledChip } from './CoalitionsFilter.style';
+import {
+  Chevron,
+  CoalitionFiltersContainer,
+  CoalitionFiltersSubContainer,
+  StyledChip,
+} from './CoalitionsFilter.style';
 
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
@@ -42,9 +47,10 @@ export const CoalitionsFilter: React.FunctionComponent<Props> = ({
   if (coalitions.length === 0) {
     return null;
   }
+
   return (
-    <>
-      <CoalitionFiltersContainer displayAll={displayAll}>
+    <CoalitionFiltersContainer>
+      <CoalitionFiltersSubContainer displayAll={displayAll}>
         <StyledChip onClick={() => onClickOnChips(null)} isSelected={allSelected}>
           Tout
         </StyledChip>
@@ -57,7 +63,7 @@ export const CoalitionsFilter: React.FunctionComponent<Props> = ({
             {coalition.name}
           </StyledChip>
         ))}
-      </CoalitionFiltersContainer>
+      </CoalitionFiltersSubContainer>
       {isMobile && (
         <Chevron
           displayAll={displayAll}
@@ -65,6 +71,6 @@ export const CoalitionsFilter: React.FunctionComponent<Props> = ({
           src="/images/chevronDown.svg"
         />
       )}
-    </>
+    </CoalitionFiltersContainer>
   );
 };

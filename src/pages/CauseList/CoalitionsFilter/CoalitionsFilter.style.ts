@@ -1,15 +1,35 @@
 import styled, { css } from 'styled-components';
 
-import { getSpacing, colorPalette, fontFamily, lineHeight, fontSize } from 'stylesheet';
+import {
+  getSpacing,
+  colorPalette,
+  fontFamily,
+  lineHeight,
+  fontSize,
+  defaultMargins,
+  media,
+} from 'stylesheet';
 
-export const CoalitionFiltersContainer = styled.div<{ displayAll: boolean }>`
+export const CoalitionFiltersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile}
+    calc(${defaultMargins.vertical.mobile} - ${getSpacing(2)}) ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    padding: ${getSpacing(8)} ${defaultMargins.horizontal.desktop} ${getSpacing(6)} ${
+    defaultMargins.horizontal.desktop
+  };
+  `)};
+`;
+
+export const CoalitionFiltersSubContainer = styled.div<{ displayAll: boolean }>`
   display: flex;
   flex-wrap: wrap;
   align-items: space-between;
   overflow: hidden;
   max-height: ${({ displayAll }) => (displayAll ? '800px' : getSpacing(8))};
   transition: max-height 0.5s;
-  padding: 0 ${getSpacing(3)};
 `;
 
 export const StyledChip = styled.div<{ isSelected?: boolean }>`
@@ -18,7 +38,7 @@ export const StyledChip = styled.div<{ isSelected?: boolean }>`
   width: fit-content;
   border-radius: 20px;
   padding: ${getSpacing(2)} ${getSpacing(3)};
-  margin-right: ${getSpacing(3)};
+  margin-right: ${getSpacing(2)};
   margin-bottom: ${getSpacing(2)};
   cursor: pointer;
   font-family: ${fontFamily.primary};

@@ -14,6 +14,12 @@ import { getIsMobile } from 'services/mobile/mobile';
 import PlusIcon from '@material-ui/icons/Add';
 import { ReactCropperElement } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import Resizer from 'react-image-file-resizer';
+
+const IMAGE_DIMENSIONS = {
+  width: 960,
+  height: 540,
+};
 
 const InputPlaceholder: FunctionComponent<{ openGallery: () => void }> = ({ openGallery }) => {
   const isMobile = getIsMobile();
@@ -39,7 +45,7 @@ interface ImageCropperProps {
 
 const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image }) => {
   const [imageToCrop, setImageToCrop] = useState<string | undefined>(undefined);
-  const [croppedImage, setCroppedImage] = useState<string | undefined>(undefined);
+  const [croppedImage, setCroppedImage] = useState<Blob | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const cropperRef = useRef<ReactCropperElement | null>(null);
   const intl = useIntl();
@@ -53,10 +59,23 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
   const onGenerateOrUpdateClick = () => {
     if (image !== undefined && imageToCrop === undefined) {
       openGallery();
-    } else if (croppedImage !== undefined) {
-      setImage(croppedImage);
-      setCroppedImage(undefined);
-      setImageToCrop(undefined);
+    } else if (croppedImage !== null) {
+      Resizer.imageFileResizer(
+        croppedImage,
+        IMAGE_DIMENSIONS.width,
+        IMAGE_DIMENSIONS.height,
+        'base64',
+        100,
+        0,
+        (resizedImage: string | Blob | File | ProgressEvent<FileReader>): void => {
+          setImage(resizedImage as string);
+          setCroppedImage(null);
+          setImageToCrop(undefined);
+        },
+        'base64',
+        IMAGE_DIMENSIONS.width,
+        IMAGE_DIMENSIONS.height,
+      );
     }
   };
 
@@ -69,7 +88,9 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
 
   const onCrop = () => {
     if (cropperRef.current !== null) {
-      setCroppedImage(cropperRef.current.cropper.getCroppedCanvas().toDataURL());
+      cropperRef.current.cropper.getCroppedCanvas().toBlob((newCroppedImage: Blob | null) => {
+        setCroppedImage(newCroppedImage);
+      });
     }
   };
 

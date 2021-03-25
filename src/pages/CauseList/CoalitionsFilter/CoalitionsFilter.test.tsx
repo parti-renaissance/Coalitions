@@ -6,6 +6,16 @@ import { TestProvider } from 'services/test/TestProvider';
 import { COALITIONS_STORE } from 'redux/Coalition/fixtures';
 import { CoalitionsFilter } from './CoalitionsFilter';
 
+jest.mock('react-router', () => ({
+  useLocation: jest.fn().mockReturnValue({
+    pathname: '/cause-list',
+    search: '',
+  }),
+  useHistory: jest.fn().mockReturnValue({
+    replace: jest.fn(),
+  }),
+}));
+
 describe('<CoalitionsFilter />', () => {
   const mockUseFetchCoalitions = {
     fetchCoalitions: jest.fn(),
@@ -38,7 +48,7 @@ describe('<CoalitionsFilter />', () => {
     expect(wrapper.find('StyledChip')).toHaveLength(0);
   });
 
-  it('should filter when general chip is clicked', () => {
+  it('should reset filter when general chip is clicked', () => {
     const handleCoalitionsFilterClickMock = jest.fn();
     jest
       .spyOn(coalitionsHooks, 'useFetchCoalitions')
@@ -50,6 +60,10 @@ describe('<CoalitionsFilter />', () => {
     );
     const styledChips = wrapper.find('StyledChip');
     expect(styledChips).toHaveLength(4);
+    // First select a random filter
+    styledChips.at(1).simulate('click');
+    wrapper.update();
+    // Then click on the All filter
     styledChips.at(0).simulate('click');
     wrapper.update();
     expect(handleCoalitionsFilterClickMock).toHaveBeenCalledWith([]);

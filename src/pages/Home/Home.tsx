@@ -6,7 +6,6 @@ import {
   TopPartContainer,
   TopPartSubContainer,
   Title,
-  SubTitle,
   Content,
   DesktopCreateCauseButton,
   Image,
@@ -22,7 +21,6 @@ import { DefaultLink } from 'components/Link/Link';
 import { FormattedMessage } from 'react-intl';
 import { PATHS } from 'routes';
 import { MediumLargeButton } from 'components/Button/Button';
-import { DefinitionWrapper } from 'components/Definition/Definition.style';
 import CoalitionCards from 'components/CoalitionCards';
 import { Coalition } from 'redux/Coalition/types';
 import { useSelector } from 'react-redux';
@@ -53,9 +51,9 @@ const Home: React.FunctionComponent = () => {
           <Title>
             <FormattedMessage id="our_mission.title" />
           </Title>
-          <SubTitle>
+          <h3>
             <FormattedMessage id="our_mission.our-mission" />
-          </SubTitle>
+          </h3>
           <Content>
             <FormattedMessage id="our_mission.explanation" />
           </Content>
@@ -74,9 +72,7 @@ const Home: React.FunctionComponent = () => {
           </MediumLargeButton>
         </DefaultLink>
       </MobileCreateCauseButtonContainer>
-      <DefinitionWrapper>
-        <CauseDefinition />
-      </DefinitionWrapper>
+      <CauseDefinition />
       <Block>
         <CausesHeader>
           <h3>
@@ -96,13 +92,11 @@ const Home: React.FunctionComponent = () => {
           </CauseCardsWrapper>
         )}
       </Block>
-      <DefinitionWrapper>
-        <CoalitionDefinition />
-      </DefinitionWrapper>
+      <CoalitionDefinition />
       <Block>
-        <SubTitle id="coalitions">
+        <h3 id="coalitions">
           <FormattedMessage id="coalition.title" />
-        </SubTitle>
+        </h3>
         <CoalitionCardsWrapper>
           <CoalitionCards onCoalitionClick={onCoalitionClick} responsiveNbOfCardsByLine />
         </CoalitionCardsWrapper>

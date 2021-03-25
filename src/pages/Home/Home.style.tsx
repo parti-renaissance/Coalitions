@@ -2,14 +2,10 @@ import styled from 'styled-components';
 import { colorPalette, fonts, getSpacing, media, defaultMargins } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
-export const SubTitle = styled.h3`
-  margin-top: ${getSpacing(7)};
-`;
-
 export const Block = styled.div`
-  padding: 0 ${getSpacing(3)};
+  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-  padding: 0 ${getSpacing(24)};
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)}
 `;
 
@@ -24,7 +20,6 @@ export const MobileCreateCauseButtonContainer = styled.div`
 
 export const TopPartContainer = styled.div`
   display: flex;
-  padding: ${getSpacing(35)} ${getSpacing(3)};
   padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     background-color: ${colorPalette.greyLight};
@@ -70,12 +65,15 @@ export const MobileSupportButtonWrapper = styled.div`
 export const Title = styled.h1`
   ${fonts.h1};
   color: ${colorPalette.greyDark};
+  margin-bottom: ${getSpacing(7)};
 `;
 
 export const CoalitionCardsWrapper = styled.div`
   margin-top: ${getSpacing(3)};
+  margin-bottom: -${getSpacing(3)};
   ${media.desktop(`
     margin-top: ${getSpacing(6)};
+    margin-bottom: -${getSpacing(4)};
   `)}
 `;
 
@@ -86,12 +84,11 @@ export const CauseCardsWrapper = styled.div`
   flex: 1;
   flex-wrap: nowrap;
   overflow: scroll;
-  margin: ${getSpacing(3)} -${getSpacing(3)} ${getSpacing(8)} -${getSpacing(3)};
+  margin: ${getSpacing(3)} -${getSpacing(3)} 0 -${getSpacing(3)};
   ${media.desktop(`
     flex-wrap: wrap;
     overflow: hidden;
     justify-content: center;
-    margin-bottom: ${getSpacing(13)};
     margin-top: ${getSpacing(7)};
   `)}
 
@@ -113,7 +110,6 @@ export const CausesHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: ${getSpacing(7)};
 `;
 
 export const SeeAllButton = styled.p`

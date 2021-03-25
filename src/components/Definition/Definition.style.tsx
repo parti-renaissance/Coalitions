@@ -29,10 +29,3 @@ export const Title = styled.div`
   ${fonts.h1Small};
   color: ${colorPalette.greyDark};
 `;
-
-export const DefinitionWrapper = styled.div`
-  margin-top: ${getSpacing(3)};
-  ${media.desktop(`
-    margin-top: unset;
-  `)}
-`;

@@ -10,6 +10,7 @@ import {
   CloseButton,
   CloseIcon,
   MenuLinkContainer,
+  MenuHashLinkContainer,
   MenuLinkLabel,
   ChevronRight,
   CreateCauseWrapper,
@@ -19,21 +20,32 @@ import { PATHS } from 'routes';
 import LogInOrOutButton from './components/LogInOrOutButton';
 import { FullWidthButton } from 'components/Button/Button';
 
-const MenuLink: FunctionComponent<{ label: string; linkTo: string; onClick: () => void }> = ({
-  label,
-  linkTo,
-  onClick,
-}) => (
-  <MenuLinkContainer to={linkTo} onClick={onClick}>
-    <MenuLinkLabel>{label}</MenuLinkLabel>
-    <ChevronRight src="/images/chevronDown.svg" />
-  </MenuLinkContainer>
-);
+const MenuLink: FunctionComponent<{
+  label: string;
+  linkTo: string;
+  isHashLink?: boolean;
+  onClick: () => void;
+}> = ({ label, linkTo, isHashLink, onClick }) => {
+  const Container = (isHashLink === true
+    ? MenuHashLinkContainer
+    : MenuLinkContainer) as FunctionComponent<{ to: string; onClick: () => void }>;
 
-const MENU_LINKS: { labelId: string; linkTo: string }[] = [
+  return (
+    <Container to={linkTo} onClick={onClick}>
+      <MenuLinkLabel>{label}</MenuLinkLabel>
+      <ChevronRight src="/images/chevronDown.svg" />
+    </Container>
+  );
+};
+
+const MENU_LINKS: { labelId: string; linkTo: string; isHashLink?: boolean }[] = [
   { labelId: 'header.home', linkTo: PATHS.HOME.url() },
   { labelId: 'header.causes', linkTo: PATHS.CAUSE_LIST.url() },
-  { labelId: 'header.coalitions', linkTo: `${PATHS.HOME.url()}#coalitions` },
+  {
+    labelId: 'header.coalitions',
+    linkTo: `${PATHS.HOME.url()}#coalitions`,
+    isHashLink: true,
+  },
 ];
 
 export const MobileHeader: FunctionComponent<{}> = () => {
@@ -70,12 +82,13 @@ export const MobileHeader: FunctionComponent<{}> = () => {
           <CloseButton onClick={closeDrawerMenu}>
             <CloseIcon />
           </CloseButton>
-          {MENU_LINKS.map(({ labelId, linkTo }) => (
+          {MENU_LINKS.map(({ labelId, linkTo, isHashLink }) => (
             <MenuLink
               key={labelId}
               label={intl.formatMessage({ id: labelId })}
               linkTo={linkTo}
               onClick={closeDrawerMenu}
+              isHashLink={isHashLink}
             />
           ))}
         </div>

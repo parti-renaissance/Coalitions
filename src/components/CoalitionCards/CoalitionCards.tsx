@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import {
   Container,
+  SubContainer,
   CoalitionContainer,
   CoalitionImage,
   CoalitionName,
@@ -59,7 +60,11 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
     return null;
   }
 
-  return <Container>{coalitions.map(renderCoalitionCard)}</Container>;
+  return (
+    <Container>
+      <SubContainer>{coalitions.map(renderCoalitionCard)}</SubContainer>
+    </Container>
+  );
 };
 
 export default CoalitionCards;

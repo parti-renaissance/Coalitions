@@ -14,7 +14,7 @@ export const CoalitionFiltersContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile}
+  padding: 0 ${defaultMargins.horizontal.mobile}
     calc(${defaultMargins.vertical.mobile} - ${getSpacing(2)}) ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     padding: ${getSpacing(8)} ${defaultMargins.horizontal.desktop} ${getSpacing(6)} ${
@@ -60,6 +60,7 @@ export const StyledChip = styled.div<{ isSelected?: boolean }>`
 StyledChip.displayName = 'StyledChip';
 
 export const Chevron = styled.img<{ displayAll: boolean }>`
+  margin-top: ${getSpacing(2)};
   height: ${getSpacing(5)};
   width: ${getSpacing(5)};
   transition: transform 0.5s;

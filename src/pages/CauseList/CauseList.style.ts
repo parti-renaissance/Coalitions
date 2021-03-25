@@ -5,6 +5,10 @@ export const CauseListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 0 ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    padding: 0 ${defaultMargins.horizontal.desktop};
+  `)};
 `;
 
 export const CTAContainer = styled.div`

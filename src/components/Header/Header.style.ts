@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   colorPalette,
   fonts,
@@ -9,7 +9,7 @@ import {
   fontWeight,
 } from 'stylesheet';
 import Button from 'components/Button/Button';
-import { DefaultLink } from 'components/Link/Link';
+import { DefaultLink, DefaultHashLink } from 'components/Link/Link';
 import { Close } from '@material-ui/icons';
 import { IconButton, Drawer } from '@material-ui/core';
 
@@ -86,10 +86,18 @@ export const CloseIcon = styled(Close)`
   width: unset;
 `;
 
-export const MenuLinkContainer = styled(DefaultLink)`
+const MENU_LINK_CONTAINER_CSS = css`
   display: flex;
   justify-content: space-between;
   padding: ${getSpacing(4)} ${getSpacing(3)};
+`;
+
+export const MenuLinkContainer = styled(DefaultLink)`
+  ${MENU_LINK_CONTAINER_CSS}
+`;
+
+export const MenuHashLinkContainer = styled(DefaultHashLink)`
+  ${MENU_LINK_CONTAINER_CSS}
 `;
 
 export const MenuLinkLabel = styled.p`

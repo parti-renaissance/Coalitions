@@ -84,12 +84,12 @@ export const CauseCardsWrapper = styled.div`
   flex: 1;
   flex-wrap: nowrap;
   overflow: scroll;
-  margin: ${getSpacing(3)} -${getSpacing(3)} 0 -${getSpacing(3)};
+  margin: 0 -${getSpacing(3)} 0 -${getSpacing(3)};
   ${media.desktop(`
     flex-wrap: wrap;
     overflow: hidden;
     justify-content: center;
-    margin-top: ${getSpacing(7)};
+    margin-top: ${getSpacing(6)};
   `)}
 
   > :first-child {

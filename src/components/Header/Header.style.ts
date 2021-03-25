@@ -8,10 +8,10 @@ import {
   styledTags,
   fontWeight,
 } from 'stylesheet';
-import Button from 'components/Button/Button';
 import { DefaultLink, DefaultHashLink } from 'components/Link/Link';
 import { Close } from '@material-ui/icons';
 import { IconButton, Drawer } from '@material-ui/core';
+import { MediumLargeButton, FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
 const MOBILE_HEADER_HEIGHT = '64px';
 const DESKTOP_HEADER_HEIGHT = '80px';
@@ -41,19 +41,27 @@ export const BurgerIcon = styled.img`
   height: ${BURGER_ICON_HEIGHT};
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(MediumLargeButton)`
   ${fonts.input};
-  padding: ${getSpacing(2)};
-  height: 100%;
-  min-width: unset;
   color: ${colorPalette.black};
+  padding: 0 ${getSpacing(2)};
+  min-width: unset;
   ${media.desktop(`
-    padding: ${getSpacing(2)} ${getSpacing(5)};
+    padding: 0 ${getSpacing(5)};
   `)}
 `;
 
-export const HeaderTitle = styled(StyledButton)`
+export const HeaderTitle = styled.div`
+  ${fonts.input};
+  color: ${colorPalette.black};
+  min-height: ${FULL_WIDTH_BUTTON_HEIGHT};
   font-family: ${fontFamily.secondary};
+  display: flex;
+  align-items: center;
+  padding: 0 ${getSpacing(2)};
+  ${media.desktop(`
+    padding: 0 ${getSpacing(5)};
+  `)}
 `;
 
 export const SubCategory = styled(StyledButton)`

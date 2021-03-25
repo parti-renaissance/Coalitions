@@ -34,7 +34,7 @@ export const CauseName = styled.div`
   flex-grow: 1;
   max-height: ${getSpacing(10)};
   font-family: ${fontFamily.secondary};
-  font-size: ${fontSize.h1.mobile};
+  font-size: ${fontSize.h1Small.mobile};
   line-height: ${lineHeight.secondary};
   color: ${colorPalette.greyDark};
 `;

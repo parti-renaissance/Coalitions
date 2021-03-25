@@ -4,6 +4,10 @@ import { getSpacing, media, borderRadius, colorPalette, fontSize, fontFamily } f
 const MARGIN_BETWEEN_CARDS = getSpacing(5);
 
 export const Container = styled.div`
+  overflow: hidden;
+`;
+
+export const SubContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-right: -${MARGIN_BETWEEN_CARDS};

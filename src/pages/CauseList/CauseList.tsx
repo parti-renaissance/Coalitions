@@ -4,13 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import useSelector from 'redux/useSelector';
 import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
-import {
-  StyledCauseList,
-  CauseListContainer,
-  CTAContainer,
-  Title,
-  TitleContainer,
-} from './CauseList.style';
+import { CauseListContainer, CTAContainer, Title, TitleContainer } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
 import { getAllCauses } from 'redux/Cause/selectors';
@@ -73,7 +67,7 @@ const CauseList: React.FunctionComponent = () => {
   const causesAfterCTA = causes.slice(ctaPosition);
 
   return (
-    <StyledCauseList>
+    <>
       <TitleContainer>
         <Title>
           <FormattedMessage id="cause_list.title" />
@@ -108,7 +102,7 @@ const CauseList: React.FunctionComponent = () => {
           </InfiniteScroll>
         </>
       )}
-    </StyledCauseList>
+    </>
   );
 };
 

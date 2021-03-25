@@ -1,35 +1,31 @@
 import styled from 'styled-components';
-import { getSpacing, media, DESKTOP_BREAK_POINT, fonts } from 'stylesheet';
-
-export const StyledCauseList = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: ${DESKTOP_BREAK_POINT}px;
-`;
+import { getSpacing, media, fonts, defaultMargins, colorPalette } from 'stylesheet';
 
 export const CauseListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 0 ${getSpacing(3)};
+  padding: 0 ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    padding: 0;
+    padding: 0 ${defaultMargins.horizontal.desktop};
   `)};
 `;
 
 export const CTAContainer = styled.div`
-  margin-bottom: ${getSpacing(4)};
-  ${media.largeDesktop(`
-    padding: 0 ${getSpacing(9)};
+  margin-top: calc(${defaultMargins.vertical.mobile} - ${getSpacing(4)});
+  margin-bottom: ${defaultMargins.vertical.mobile};
+  ${media.desktop(`
+    margin-top: calc(${defaultMargins.vertical.desktop} - ${getSpacing(6)});
+    margin-bottom: ${defaultMargins.vertical.desktop};
   `)};
 `;
 
 export const TitleContainer = styled.div`
-  margin-bottom: ${getSpacing(6)};
-  padding: 0 ${getSpacing(3)};
+  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
+    ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    align-self: flex-start;
+    background-color: ${colorPalette.greyLight};
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)};
 `;
 

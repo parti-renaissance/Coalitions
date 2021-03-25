@@ -78,13 +78,13 @@ export const CoalitionCardsWrapper = styled.div`
 `;
 
 export const CauseCardsWrapper = styled.div`
-  height: ${getSpacing(82)};
+  height: ${getSpacing(95)};
   display: flex;
   flex-direction: row;
   flex: 1;
   flex-wrap: nowrap;
   overflow: scroll;
-  margin: 0 -${getSpacing(3)} 0 -${getSpacing(3)};
+  margin: ${getSpacing(1)} -${getSpacing(3)} 0 -${getSpacing(3)};
   ${media.desktop(`
     flex-wrap: wrap;
     overflow: hidden;

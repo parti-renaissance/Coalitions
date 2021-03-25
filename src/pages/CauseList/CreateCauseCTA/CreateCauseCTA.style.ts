@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, getSpacing, media, fonts } from 'stylesheet';
+import { colorPalette, getSpacing, media, fonts, defaultMargins } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const CTAContainer = styled.div`
@@ -12,11 +12,10 @@ export const CTABlock = styled.div`
   background-color: ${colorPalette.mintGreen};
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: ${getSpacing(5)} ${getSpacing(8)};
+  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    margin: auto;
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)};
 `;
 

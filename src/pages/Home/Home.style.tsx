@@ -118,10 +118,3 @@ export const SeeAllButton = styled.p`
   cursor: pointer;
   margin-left: ${getSpacing(1)};
 `;
-
-export const CTAWrapper = styled.div`
-  margin-top: ${getSpacing(4)};
-  ${media.desktop(`
-    margin-top: ${getSpacing(7)};
-  `)}
-`;

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Block,
-  CTAWrapper,
   MobileCreateCauseButtonContainer,
   TopPartContainer,
   TopPartSubContainer,
@@ -101,9 +100,7 @@ const Home: React.FunctionComponent = () => {
           <CoalitionCards onCoalitionClick={onCoalitionClick} responsiveNbOfCardsByLine />
         </CoalitionCardsWrapper>
       </Block>
-      <CTAWrapper>
-        <CreateCauseCTA displayLinkToCauseList />
-      </CTAWrapper>
+      <CreateCauseCTA displayLinkToCauseList />
     </>
   );
 };

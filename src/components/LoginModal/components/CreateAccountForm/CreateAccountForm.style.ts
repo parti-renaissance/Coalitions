@@ -7,7 +7,14 @@ export const InputFieldWrapper = styled.div`
 `;
 
 export const ValidateButtonContainer = styled.div`
+  margin-top: auto;
   ${media.desktop(`
     margin-top: ${getSpacing(10)};
   `)}
+`;
+
+export const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;

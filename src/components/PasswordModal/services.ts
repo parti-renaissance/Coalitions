@@ -12,6 +12,10 @@ export const useValidatePasswordForm = () => {
       errors.password = requiredErrorMessage;
     }
 
+    if (password !== undefined && password.length < 8) {
+      errors.password = intl.formatMessage({ id: 'form_errors.not-long-enough-password' });
+    }
+
     if (passwordConfirmation === undefined || passwordConfirmation.length === 0) {
       errors.passwordConfirmation = requiredErrorMessage;
     }

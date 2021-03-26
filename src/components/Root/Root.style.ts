@@ -12,6 +12,7 @@ export const RootContainer = styled.div`
 RootContainer.displayName = 'RootContainer';
 
 export const PageContent = styled.main`
+  position: relative;
   flex-grow: 1;
 `;
 PageContent.displayName = 'PageContent';

@@ -47,12 +47,6 @@ export const DesktopCreateCauseButton = styled(MediumLargeButton)`
   `)}
 `;
 
-export const MobileSupportButtonWrapper = styled.div`
-  ${media.desktop(`
-    display: none;
-  `)}
-`;
-
 export const Title = styled.h1`
   ${fonts.h1};
   color: ${colorPalette.greyDark};

@@ -4,7 +4,7 @@ import { getSpacing, colorPalette, media, defaultMargins } from 'stylesheet';
 const zIndex = 1;
 
 export const Container = styled.div`
-  position: fixed;
+  position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
@@ -12,11 +12,6 @@ export const Container = styled.div`
   background-color: ${colorPalette.white};
   z-index: ${zIndex};
   ${media.desktop(`
-    position: unset;
-    bottom: unset;
-    left: unset;
-    right: unset;
-    padding: unset;
-    background-color: unset;
+    display: none;
   `)}
 `;

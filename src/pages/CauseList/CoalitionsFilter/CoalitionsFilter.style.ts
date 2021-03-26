@@ -8,6 +8,7 @@ import {
   fontSize,
   defaultMargins,
   media,
+  fontWeight,
 } from 'stylesheet';
 
 export const CoalitionFiltersContainer = styled.div`
@@ -44,6 +45,7 @@ export const StyledChip = styled.div<{ isSelected?: boolean }>`
   font-family: ${fontFamily.primary};
   line-height: ${lineHeight.primary};
   font-size: ${fontSize.p.mobile};
+  font-weight: ${fontWeight.normal};
   ${({ isSelected }) =>
     isSelected === false || isSelected === undefined
       ? css`

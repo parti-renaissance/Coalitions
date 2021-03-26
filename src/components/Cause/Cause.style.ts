@@ -10,6 +10,7 @@ import {
   fontSize,
   lineHeight,
   fonts,
+  fontWeight,
 } from 'stylesheet';
 
 export const CoalitionName = styled.div`
@@ -18,6 +19,7 @@ export const CoalitionName = styled.div`
   font-family: ${fontFamily.primary};
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};
+  font-weight: ${fontWeight.normal};
 `;
 CoalitionName.displayName = 'CoalitionName';
 
@@ -50,6 +52,7 @@ export const Author = styled.div`
   font-family: ${fontFamily.primary};
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};
+  font-weight: ${fontWeight.normal};
 `;
 Author.displayName = 'Author';
 

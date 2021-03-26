@@ -17,6 +17,6 @@ export const NumberOfSelectedCauses = styled.p`
   `)}
 `;
 
-export const NormalWeight = styled.span`
-  font-weight: ${fontWeight.normal};
+export const Bold = styled.span`
+  font-weight: ${fontWeight.bold};
 `;

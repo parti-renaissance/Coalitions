@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import { PATHS } from 'routes';
 import { Container as StickyMobileButtonsContainer } from 'components/FixedBottomButton/FixedBottomButton.style';
+import { usePublishCause } from 'redux/Cause/hooks/usePublishCause';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -21,9 +22,10 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
   const isPreview = Boolean(!onSupport);
   const isSupported = Boolean(cause.supported);
   const intl = useIntl();
+  const { loading, publishCause } = usePublishCause();
 
   const onPublishInCreationCause = () => {
-    // TODO
+    publishCause();
   };
 
   const renderContent = () => {
@@ -40,6 +42,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
             variant="contained"
             color="primary"
             onClick={onPublishInCreationCause}
+            isLoading={loading}
           >
             {intl.formatMessage({ id: 'cause_preview.publish' })}
           </Button>

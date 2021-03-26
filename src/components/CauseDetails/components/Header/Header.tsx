@@ -1,17 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import {
-  Container,
-  CoalitionName,
-  AuthorAndSupportsWrapper,
-  CauseName,
-  ButtonsContainer,
-  Button,
-  Link,
-} from './Header.style';
-import { useIntl } from 'react-intl';
+import { Container, CoalitionName, AuthorAndSupportsWrapper, CauseName } from './Header.style';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
-import { PATHS } from 'routes';
+import HeaderButtons from '../HeaderButtons';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -19,59 +10,17 @@ interface HeaderProps {
   isSupporting?: boolean;
 }
 
-const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting }) => {
-  const isPreview = Boolean(!onSupport);
-  const isSupported = Boolean(cause.supported);
-  const intl = useIntl();
-
-  const onPublishInCreationCause = () => {
-    // TODO
-  };
-
-  return (
-    <>
-      <Container>
-        <div>
-          <CoalitionName>{cause.coalition.name}</CoalitionName>
-          <CauseName>{cause.name}</CauseName>
-          <AuthorAndSupportsWrapper>
-            <AuthorAndSupports cause={cause} showAuthor />
-          </AuthorAndSupportsWrapper>
-        </div>
-        {isPreview || !isSupported ? (
-          <ButtonsContainer>
-            {isPreview ? (
-              <>
-                <Link to={PATHS.CREATE_CAUSE.url()}>
-                  <Button size="small" variant="outlined" color="primary">
-                    {intl.formatMessage({ id: 'cause_preview.update' })}
-                  </Button>
-                </Link>
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="primary"
-                  onClick={onPublishInCreationCause}
-                >
-                  {intl.formatMessage({ id: 'cause_preview.publish' })}
-                </Button>
-              </>
-            ) : (
-              <Button
-                size="small"
-                variant="contained"
-                color="primary"
-                onClick={onSupport}
-                isLoading={isSupporting}
-              >
-                {intl.formatMessage({ id: 'cause.support-button' })}
-              </Button>
-            )}
-          </ButtonsContainer>
-        ) : null}
-      </Container>
-    </>
-  );
-};
+const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting }) => (
+  <Container>
+    <div>
+      <CoalitionName>{cause.coalition.name}</CoalitionName>
+      <CauseName>{cause.name}</CauseName>
+      <AuthorAndSupportsWrapper>
+        <AuthorAndSupports cause={cause} showAuthor />
+      </AuthorAndSupportsWrapper>
+    </div>
+    <HeaderButtons cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
+  </Container>
+);
 
 export default Header;

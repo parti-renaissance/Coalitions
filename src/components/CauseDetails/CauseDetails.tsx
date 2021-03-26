@@ -17,6 +17,7 @@ import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import Header from './components/Header';
 import { Supported } from 'components/Cause/Cause.style';
+import HeaderButtons from './components/HeaderButtons';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;
@@ -79,10 +80,11 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
         </TabsWrapper>
       </Container>
       {!isPreview ? (
-        <CreateCauseCTAWrapper isSupported={isSupported}>
+        <CreateCauseCTAWrapper>
           <CreateCauseCTA displayLinkToCauseList />
         </CreateCauseCTAWrapper>
       ) : null}
+      <HeaderButtons cause={cause} onSupport={onSupport} isSupporting={isSupporting} isMobile />
     </>
   );
 };

@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { IntlProvider } from 'react-intl';
 
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 import { flattenMessages } from 'services/i18n/intl';
 import frMessages from 'translations/fr.json';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
@@ -36,6 +37,7 @@ const Root: React.FunctionComponent<Props> = ({ children }) => (
         <RootContainer>
           <Header />
           <PageContent>{children}</PageContent>
+          <Footer />
         </RootContainer>
       </ThemeProvider>
     </StylesProvider>

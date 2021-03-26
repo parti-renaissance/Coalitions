@@ -9,6 +9,12 @@
     "profile": "Profil",
     "home": "Accueil"
   },
+  "footer": {
+    "legal-notice": "Mentions Légales",
+    "cookies-policy": "Politique de Cookies",
+    "data-protection-policy": "Politique de Protection des Données",
+    "charter-of-values": "Charte des valeurs"
+  },
   "home": {
     "support-causes": "Soutenez des causes"
   },

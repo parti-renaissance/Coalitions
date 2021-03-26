@@ -1,10 +1,9 @@
 import React, { FunctionComponent, ChangeEvent } from 'react';
-import { InputFieldWrapper, ValidateButtonContainer } from './CreateAccountForm.style';
+import { InputFieldWrapper, ValidateButtonContainer, StyledForm } from './CreateAccountForm.style';
 import { CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
-import FixedBottomButton from 'components/FixedBottomButton';
 import { Formik } from 'formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
 import {
@@ -13,6 +12,7 @@ import {
   getCityOrCountryLabel,
 } from './lib/useCityAndCountryAutocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { FullWidthButton } from 'components/Button/Button';
 
 interface CreateAccountFormProps<OtherFormValues> {
   AdditionalFields?: FunctionComponent<{
@@ -48,7 +48,7 @@ const CreateAccountForm = <OtherFormValues,>({
         setFieldValue,
         setFieldTouched,
       }) => (
-        <form onSubmit={handleSubmit}>
+        <StyledForm onSubmit={handleSubmit}>
           <InputFieldWrapper>
             <InputField
               placeholder={intl.formatMessage({ id: 'login_modal.first-name' })}
@@ -111,7 +111,7 @@ const CreateAccountForm = <OtherFormValues,>({
             <AdditionalFields onChange={handleChange} values={values} />
           ) : null}
           <ValidateButtonContainer>
-            <FixedBottomButton
+            <FullWidthButton
               disabled={
                 isSubmitting ||
                 Object.keys(errors).length > 0 ||
@@ -120,11 +120,14 @@ const CreateAccountForm = <OtherFormValues,>({
                 touched.cityId !== true
               }
               type="submit"
+              size="small"
+              variant="contained"
+              color="primary"
             >
               {intl.formatMessage({ id: 'login_modal.validate' })}
-            </FixedBottomButton>
+            </FullWidthButton>
           </ValidateButtonContainer>
-        </form>
+        </StyledForm>
       )}
     </Formik>
   );

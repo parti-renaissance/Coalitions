@@ -35,6 +35,22 @@ export const PATHS = {
     route: '/cause-preview',
     url: () => '/cause-preview',
   },
+  LEGAL_NOTICE: {
+    route: '/legal-notice',
+    url: () => '/legal-notice',
+  },
+  COOKIES_POLICY: {
+    route: '/cookies-policy',
+    url: () => '/cookies-policy',
+  },
+  DATA_PROTECTION_POLICY: {
+    route: '/data-protection-policy',
+    url: () => '/data-protection-policy',
+  },
+  CHARTER_OF_VALUES: {
+    route: '/charter-of-values',
+    url: () => '/charter-of-values',
+  },
 };
 
 const routes: FunctionComponent<{}> = () => (
@@ -47,6 +63,10 @@ const routes: FunctionComponent<{}> = () => (
         <Route path={PATHS.OUR_MISSION.route} component={OurMission}></Route>
         <Route path={PATHS.CREATE_CAUSE.route} component={CreateCause}></Route>
         <Route path={PATHS.CAUSE_PREVIEW.route} component={CausePreview}></Route>
+        <Route path={PATHS.LEGAL_NOTICE.route} component={() => <div />}></Route>
+        <Route path={PATHS.COOKIES_POLICY.route} component={() => <div />}></Route>
+        <Route path={PATHS.DATA_PROTECTION_POLICY.route} component={() => <div />}></Route>
+        <Route path={PATHS.CHARTER_OF_VALUES.route} component={() => <div />}></Route>
       </Switch>
     </Suspense>
     <Snackbar />

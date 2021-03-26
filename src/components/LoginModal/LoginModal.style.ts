@@ -19,7 +19,7 @@ export const StyledCloseButton = styled(IconButton)`
   align-self: flex-end;
   padding: ${getSpacing(3)};
   ${media.desktop(`
-    padding: ${getSpacing(5)} ${getSpacing(8)};
+    margin: ${getSpacing(2)} ${getSpacing(5)};
   `)}
 `;
 

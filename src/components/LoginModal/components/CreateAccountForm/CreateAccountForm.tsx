@@ -13,28 +13,37 @@ import {
 } from './lib/useCityAndCountryAutocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { FullWidthButton } from 'components/Button/Button';
+import { useCreateAccount } from './useCreateAccount';
 
 interface CreateAccountFormProps<OtherFormValues> {
   AdditionalFields?: FunctionComponent<{
     onChange: (e: ChangeEvent) => void;
     values: OtherFormValues & FormValues;
   }>;
-  onValidate: () => void;
+  onCreateAccount: () => Promise<void>;
+  isCreatingAccount?: boolean;
 }
 
 const CreateAccountForm = <OtherFormValues,>({
   AdditionalFields,
-  onValidate,
+  onCreateAccount: onCreateAccountProp,
+  isCreatingAccount,
 }: CreateAccountFormProps<OtherFormValues>) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm<OtherFormValues>();
   const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
+  const { loading, createAccount } = useCreateAccount();
+
+  const onCreateAccount = async () => {
+    await createAccount();
+    await onCreateAccountProp();
+  };
 
   return (
     <Formik
       initialValues={{} as FormValues & OtherFormValues}
       validate={validateForm}
-      onSubmit={onValidate}
+      onSubmit={onCreateAccount}
     >
       {// eslint-disable-next-line complexity
       ({
@@ -123,6 +132,7 @@ const CreateAccountForm = <OtherFormValues,>({
               size="small"
               variant="contained"
               color="primary"
+              isLoading={loading || isCreatingAccount}
             >
               {intl.formatMessage({ id: 'login_modal.validate' })}
             </FullWidthButton>

@@ -7,6 +7,7 @@ import { FormControlLabelWrapper, Label } from './LoginAndSupportModal.style';
 import { Cause as CauseType } from 'redux/Cause/types';
 import { FormValues } from 'components/LoginModal/components/CreateAccountForm/lib/useValidateForm';
 import { setAfterAuthFollowCause, setAfterAuthRedirect } from 'redux/Login/slice';
+import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 
 interface LoginAndSupportModalProps {
   isOpened: boolean;
@@ -28,6 +29,7 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
 }) => {
   const intl = useIntl();
   const dispatch = useDispatch();
+  const { loading: isFollowingCause, followCause } = useCauseFollow(cause.uuid);
 
   const renderAdditionalFields: FunctionComponent<{
     onChange: (event: ChangeEvent) => void;
@@ -90,6 +92,8 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
       onConnect={onConnect}
       title={intl.formatMessage({ id: 'cause.confirm-support' })}
       AdditionalFields={renderAdditionalFields}
+      onCreateAccount={followCause}
+      isCreatingAccount={isFollowingCause}
     />
   );
 };

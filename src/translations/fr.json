@@ -70,6 +70,9 @@
     "success_screen": {
       "title": "Nous vous avons envoyé un email",
       "text": "Afin de finaliser votre inscription, veuillez suivre les instructions dans l'email que nous vous avons envoyé."
+    },
+    "create_account": {
+      "success": "Vous avez reçu un email de confirmation"
     }
   },
   "general": {

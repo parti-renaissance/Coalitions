@@ -52,6 +52,8 @@ export const StyledButton = styled(MediumLargeButton)`
   `)}
 `;
 
+const DESKTOP_LOGO_FONT_SIZE = '19px';
+
 export const HeaderTitle = styled.div`
   ${fonts.input};
   color: ${colorPalette.black};
@@ -62,6 +64,7 @@ export const HeaderTitle = styled.div`
   padding: 0 ${getSpacing(2)};
   ${media.desktop(`
     padding: 0 ${getSpacing(5)};
+    font-size: ${DESKTOP_LOGO_FONT_SIZE};
   `)}
 `;
 

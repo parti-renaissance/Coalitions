@@ -73,13 +73,7 @@ export const DesktopHeaderWrapper = styled.div`
   `)}
 `;
 
-export const CreateCauseCTAWrapper = styled.div<{ isSupported: boolean }>`
-  ${({ isSupported }) =>
-    !isSupported
-      ? css`
-          margin-bottom: calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(6)});
-        `
-      : css``}
+export const CreateCauseCTAWrapper = styled.div`
   ${media.desktop(`
     margin: 0 ${getSpacing(18)} ${getSpacing(18)} ${getSpacing(18)};
   `)}

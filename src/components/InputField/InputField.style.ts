@@ -56,6 +56,9 @@ export const StyledFormControl = styled(FormControl)`
     background-color: ${colorPalette.blueLight};
     border-radius: ${borderRadius.medium};
   }
+  .MuiOutlinedInput-adornedEnd {
+    padding-right: 0;
+  }
   .MuiFormHelperText-root {
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};

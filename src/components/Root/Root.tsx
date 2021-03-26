@@ -36,8 +36,12 @@ const Root: React.FunctionComponent<Props> = ({ children }) => (
       <ThemeProvider theme={theme}>
         <RootContainer>
           <Header />
-          <PageContent>{children}</PageContent>
-          <Footer />
+          <PageContent>
+            <>
+              {children}
+              <Footer />
+            </>
+          </PageContent>
         </RootContainer>
       </ThemeProvider>
     </StylesProvider>

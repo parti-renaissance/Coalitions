@@ -11,6 +11,7 @@ export const Container = styled.div`
   padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
   background-color: ${colorPalette.white};
   z-index: ${zIndex};
+  display: flex;
   ${media.desktop(`
     display: none;
   `)}

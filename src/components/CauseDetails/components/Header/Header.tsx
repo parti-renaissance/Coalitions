@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import {
-  Container,
-  CoalitionName,
-  AuthorAndSupportsWrapper,
-  CauseName,
-  DesktopButtonsContainer,
-} from './Header.style';
+import { Container, CoalitionName, AuthorAndSupportsWrapper, CauseName } from './Header.style';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import HeaderButtons from '../HeaderButtons';
@@ -25,9 +19,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
         <AuthorAndSupports cause={cause} showAuthor />
       </AuthorAndSupportsWrapper>
     </div>
-    <DesktopButtonsContainer>
-      <HeaderButtons cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
-    </DesktopButtonsContainer>
+    <HeaderButtons cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
   </Container>
 );
 

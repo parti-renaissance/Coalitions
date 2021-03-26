@@ -17,3 +17,15 @@ export const Button = styled(MediumLargeButton)`
 export const Link = styled(DefaultLink)`
   width: 100%;
 `;
+
+const DESKTOP_BUTTONS_WIDTH = '300px';
+
+export const DesktopContainer = styled.div`
+  display: none;
+  ${media.desktop(`
+    display: flex;
+    flex-direction: column;
+    min-width: ${DESKTOP_BUTTONS_WIDTH};
+    margin-left: ${getSpacing(6)};
+  `)}
+`;

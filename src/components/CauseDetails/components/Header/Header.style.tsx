@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { getSpacing, colorPalette, media, fonts } from 'stylesheet';
 
-const DESKTOP_BUTTONS_WIDTH = '300px';
-
 export const Container = styled.div`
   padding: ${getSpacing(3)} ${getSpacing(3)} ${getSpacing(2)} ${getSpacing(3)};
   ${media.desktop(`
@@ -26,14 +24,4 @@ export const AuthorAndSupportsWrapper = styled.div`
 export const CauseName = styled.h1`
   ${fonts.h1Small};
   color: ${colorPalette.greyDark};
-`;
-
-export const DesktopButtonsContainer = styled.div`
-  display: none;
-  ${media.desktop(`
-    display: flex;
-    flex-direction: column;
-    min-width: ${DESKTOP_BUTTONS_WIDTH};
-    margin-left: ${getSpacing(6)};
-  `)}
 `;

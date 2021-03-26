@@ -107,8 +107,8 @@ export const fontFamily = {
 };
 
 export const fontWeight = {
-  bold: '700',
-  normal: '400',
+  bold: '500',
+  normal: '300',
 };
 
 export const defaultMargins = {

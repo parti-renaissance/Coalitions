@@ -75,6 +75,14 @@
       "success": "Vous avez reçu un email de confirmation"
     }
   },
+  "password_modal": {
+    "title": "Créer un mot de passe",
+    "password": "Mot de passe",
+    "password-placeholder": "Mot de passe",
+    "password-confirm": "Confirmer le nouveau mot de passe",
+    "password-confirm-placeholder": "Mot de passe",
+    "submit": "Enregistrer"
+  },
   "general": {
     "see-more": "Voir plus"
   },
@@ -127,7 +135,8 @@
   },
   "form_errors": {
     "required": "Champ requis",
-    "invalid-email": "Email invalide"
+    "invalid-email": "Email invalide",
+    "unmatched-password": "Les mots de passe ne sont pas identiques"
   },
   "cause_preview": {
     "update": "Modifier",

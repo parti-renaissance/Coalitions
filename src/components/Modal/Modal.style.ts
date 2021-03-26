@@ -38,3 +38,10 @@ export const Title = styled.h3`
   color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(5)};
 `;
+
+export const ValidateButtonContainer = styled.div`
+margin-top: auto;
+  ${media.desktop(`
+    margin-top: ${getSpacing(10)};
+  `)}
+`;

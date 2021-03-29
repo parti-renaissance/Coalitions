@@ -33,6 +33,9 @@ export const TabsWrapper = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(5)};
   `)}
+  .MuiTabs-flexContainer {
+    border-bottom: 2px solid ${colorPalette.greyLight};
+  }
 `;
 
 export const StyledTab = styled(Tab)`
@@ -42,7 +45,6 @@ export const StyledTab = styled(Tab)`
   ${({ selected }) =>
     css`
       opacity: ${Boolean(selected) ? 1 : 0.6};
-      border-bottom: 2px solid ${colorPalette.greyLight};
       font-weight: ${selected ? fontWeight.bold : fontWeight.normal};
     `};
 `;

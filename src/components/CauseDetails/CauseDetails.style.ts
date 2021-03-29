@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { fontWeight, getSpacing, colorPalette, media, fonts } from 'stylesheet';
+import { fontWeight, getSpacing, colorPalette, media, fonts, defaultMargins } from 'stylesheet';
 import { Tab } from '@material-ui/core';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
@@ -7,8 +7,7 @@ const CONTAINER_MAX_WIDTH = '960px';
 
 export const Container = styled.div`
   ${media.desktop(`
-    padding: ${getSpacing(12)};
-    padding-bottom: 0;
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
     max-width: ${CONTAINER_MAX_WIDTH};
     margin: auto;
   `)}
@@ -30,18 +29,9 @@ export const CauseImage = styled.div<{ backgroundImage: string }>`
     `};
 `;
 
-export const TabsWrapper = styled.div<{ isPreview: boolean }>`
-  ${({ isPreview }) =>
-    isPreview
-      ? css`
-          margin-bottom: calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(6)});
-        `
-      : css`
-          margin-bottom: ${getSpacing(5)};
-        `}
+export const TabsWrapper = styled.div`
   ${media.desktop(`
-    margin-top: ${getSpacing(10)};
-    margin-bottom: ${getSpacing(18)};
+    margin-top: ${getSpacing(5)};
   `)}
 `;
 
@@ -70,11 +60,5 @@ export const DesktopHeaderWrapper = styled.div`
     position: sticky;
     top: 0;
     z-index: 1;
-  `)}
-`;
-
-export const CreateCauseCTAWrapper = styled.div`
-  ${media.desktop(`
-    margin: 0 ${getSpacing(18)} ${getSpacing(18)} ${getSpacing(18)};
   `)}
 `;

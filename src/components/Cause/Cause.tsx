@@ -53,9 +53,11 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
         ) : null}
         <StyledMedia backgroundImage={cause.image_url} />
         <StyledContent>
-          {cause.coalition !== undefined && <CoalitionName>{cause.coalition.name}</CoalitionName>}
+          {cause.coalition !== undefined ? (
+            <CoalitionName>{cause.coalition.name}</CoalitionName>
+          ) : null}
           <CauseName>{cause.name}</CauseName>
-          {cause.author !== undefined && (
+          {cause.author !== undefined ? (
             <Author>
               <FormattedMessage
                 id="cause.author"
@@ -65,7 +67,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
                 }}
               />
             </Author>
-          )}
+          ) : null}
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
             {Boolean(cause.supported) || (

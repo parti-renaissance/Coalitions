@@ -111,7 +111,6 @@
     "description": {
       "title": "2. Description de votre cause",
       "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre.",
-      "short-description-placeholder": "Chapeau de votre cause (optionnel)",
       "description-placeholder": "Description de votre cause (optionnel)"
     },
     "image": {

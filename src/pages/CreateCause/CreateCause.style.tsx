@@ -36,13 +36,6 @@ export const TopImage = styled.img`
   `)}
 `;
 
-export const StyledInputDescription = styled(InputField)`
-  margin-top: ${getSpacing(3)};
-  ${media.desktop(`
-    margin-top: ${getSpacing(6)};
-  `)}
-`;
-
 export const ValidateButton = styled(FullWidthButton)`
   margin-top: ${getSpacing(6)};
   ${media.desktop(`

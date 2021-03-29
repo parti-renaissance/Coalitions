@@ -3,12 +3,12 @@ import { Title } from 'components/Modal/Modal.style';
 import { useFormik } from 'formik';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { InputFieldWrapper, StyledFormControl } from 'components/InputField/InputField.style';
-import { useValidatePasswordForm } from './services';
+import { useValidatePasswordForm, useConfirmPassword } from './services';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { IconButton, InputAdornment } from '@material-ui/core';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-//import { useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { PasswordContainer, PasswordFormWrapper, SubmitButtonContainer } from './Password.style';
 import { FullWidthButton } from 'components/Button/Button';
 
@@ -28,12 +28,13 @@ export const Password: React.FunctionComponent = () => {
   const { formatMessage } = useIntl();
   const { validateForm } = useValidatePasswordForm();
   const [showPassword, setShowPassword] = useState(false);
-  //const { identifier, token } = useParams<PasswordQueryParams>();
+  const { identifier, token } = useParams<PasswordQueryParams>();
+  const { loading, confirmPasswordAndLogin } = useConfirmPassword();
   const formik = useFormik<PasswordForm>({
     initialValues: { password: '', passwordConfirmation: '' },
     validate: validateForm,
-    onSubmit: () => {
-      console.log('submit');
+    onSubmit: (values: PasswordForm) => {
+      confirmPasswordAndLogin(values.password, values.passwordConfirmation, identifier, token);
     },
   });
 
@@ -114,6 +115,7 @@ export const Password: React.FunctionComponent = () => {
               size="small"
               variant="contained"
               color="primary"
+              isLoading={loading}
             >
               {formatMessage({ id: 'password_modal.submit' })}
             </FullWidthButton>

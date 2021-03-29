@@ -75,6 +75,12 @@
       "success": "Vous avez reçu un email de confirmation"
     }
   },
+  "password_modal": {
+    "title": "Créer un mot de passe",
+    "password": "Mot de passe",
+    "password-confirm": "Confirmer le mot de passe",
+    "submit": "Enregistrer"
+  },
   "general": {
     "see-more": "Voir plus"
   },
@@ -127,7 +133,9 @@
   },
   "form_errors": {
     "required": "Champ requis",
-    "invalid-email": "Email invalide"
+    "invalid-email": "Email invalide",
+    "unmatched-password": "Les mots de passe ne sont pas identiques",
+    "not-long-enough-password": "Votre mot de passe doit faire au minimum 8 caractères"
   },
   "cause_preview": {
     "update": "Modifier",

@@ -9,6 +9,7 @@ const OurMission = lazy(() => import('./pages/OurMission'));
 const CreateCause = lazy(() => import('./pages/CreateCause'));
 const CausePreview = lazy(() => import('./pages/CausePreview'));
 const CauseList = lazy(() => import('./pages/CauseList'));
+const Password = lazy(() => import('./pages/Password'));
 
 export const PATHS = {
   HOME: {
@@ -51,6 +52,11 @@ export const PATHS = {
     route: '/charter-of-values',
     url: () => '/charter-of-values',
   },
+  CONFIRM_PASSWORD: {
+    route: '/confirm-password/:identifier/:token',
+    url: ({ identifier, token }: { identifier: string; token: string }) =>
+      `/confirm-password/${identifier}/${token}`,
+  },
 };
 
 const routes: FunctionComponent<{}> = () => (
@@ -67,6 +73,7 @@ const routes: FunctionComponent<{}> = () => (
         <Route path={PATHS.COOKIES_POLICY.route} component={() => <div />}></Route>
         <Route path={PATHS.DATA_PROTECTION_POLICY.route} component={() => <div />}></Route>
         <Route path={PATHS.CHARTER_OF_VALUES.route} component={() => <div />}></Route>
+        <Route path={PATHS.CONFIRM_PASSWORD.route} component={Password}></Route>
       </Switch>
     </Suspense>
     <Snackbar />

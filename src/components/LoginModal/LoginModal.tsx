@@ -1,30 +1,18 @@
-import React, {
-  FunctionComponent,
-  forwardRef,
-  ForwardRefRenderFunction,
-  ChangeEvent,
-  useState,
-} from 'react';
-import { getIsMobile } from 'services/mobile/mobile';
+import React, { FunctionComponent, ChangeEvent, useState } from 'react';
 import {
-  StyledCloseButton,
-  StyledCloseIcon,
-  ContentContainer,
-  Title,
   Connect,
   ConnectLink,
-  StyledDialog,
   SuccessImage,
   SuccessText,
   SuccessContainer,
 } from './LoginModal.style';
-import { SlideProps } from '@material-ui/core/Slide';
-import { Slide } from '@material-ui/core';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { FormValues } from './components/CreateAccountForm/lib/useValidateForm';
 import { oauthUrl } from 'services/networking/auth';
 import CreateAccountForm from './components/CreateAccountForm';
 import HandleErrorService from 'services/HandleErrorService';
+import { Modal } from 'components/Modal/Modal';
+import { Title } from 'components/Modal/Modal.style';
 
 interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
@@ -40,12 +28,6 @@ interface LoginModalProps<OtherFormValues> {
   }>;
 }
 
-const SlideUpComponent: ForwardRefRenderFunction<{}, SlideProps> = (props, ref) => (
-  <Slide direction="up" ref={ref} {...props} />
-);
-
-const SlideUp = forwardRef<{}, SlideProps>(SlideUpComponent);
-
 const LoginModal = <OtherFormValues,>({
   isOpened,
   onClose,
@@ -56,7 +38,6 @@ const LoginModal = <OtherFormValues,>({
   doAfterAccountCreation: doAfterAccountCreationProp,
   doingAfterAccountCreation,
 }: LoginModalProps<OtherFormValues>) => {
-  const isMobile = getIsMobile();
   const intl = useIntl();
   const [showSuccessScreen, setShowSuccessScreen] = useState<boolean>(false);
 
@@ -110,16 +91,9 @@ const LoginModal = <OtherFormValues,>({
   };
 
   return (
-    <StyledDialog
-      fullScreen={isMobile}
-      open={isOpened}
-      TransitionComponent={isMobile ? SlideUp : undefined}
-    >
-      <StyledCloseButton onClick={onClose}>
-        <StyledCloseIcon />
-      </StyledCloseButton>
-      <ContentContainer>{renderContent()}</ContentContainer>
-    </StyledDialog>
+    <Modal isOpened={isOpened} onClose={onClose}>
+      {renderContent()}
+    </Modal>
   );
 };
 

@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl';
 import {
   InputContainer,
   HiddenInput,
-  BottomContainer,
   UpdateButton,
   PlusIconContainer,
   ImportLabel,
@@ -122,13 +121,11 @@ const ImageCropper: FunctionComponent<ImageCropperProps> = ({ setImage, image })
     <>
       {renderTopPart()}
       {(image !== undefined && imageToCrop === undefined) || imageToCrop !== undefined ? (
-        <BottomContainer>
-          <UpdateButton variant="outlined" color="primary" onClick={onGenerateOrUpdateClick}>
-            {image !== undefined && imageToCrop === undefined
-              ? intl.formatMessage({ id: 'create_cause.image.update' })
-              : intl.formatMessage({ id: 'create_cause.image.save' })}
-          </UpdateButton>
-        </BottomContainer>
+        <UpdateButton variant="outlined" color="primary" onClick={onGenerateOrUpdateClick}>
+          {image !== undefined && imageToCrop === undefined
+            ? intl.formatMessage({ id: 'create_cause.image.update' })
+            : intl.formatMessage({ id: 'create_cause.image.save' })}
+        </UpdateButton>
       ) : null}
       <HiddenInput type="file" ref={inputRef} onChange={onChange} />
     </>

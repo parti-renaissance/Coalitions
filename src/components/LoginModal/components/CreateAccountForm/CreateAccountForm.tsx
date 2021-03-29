@@ -20,30 +20,30 @@ interface CreateAccountFormProps<OtherFormValues> {
     onChange: (e: ChangeEvent) => void;
     values: OtherFormValues & FormValues;
   }>;
-  onCreateAccount: () => Promise<void>;
-  isCreatingAccount?: boolean;
+  doAfterAccountCreation: () => Promise<void>;
+  doingAfterAccountCreation?: boolean;
 }
 
 const CreateAccountForm = <OtherFormValues,>({
   AdditionalFields,
-  onCreateAccount: onCreateAccountProp,
-  isCreatingAccount,
+  doAfterAccountCreation,
+  doingAfterAccountCreation,
 }: CreateAccountFormProps<OtherFormValues>) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm<OtherFormValues>();
   const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
   const { loading, createAccount } = useCreateAccount();
 
-  const onCreateAccount = async () => {
+  const handleAccountCreation = async () => {
     await createAccount();
-    await onCreateAccountProp();
+    await doAfterAccountCreation();
   };
 
   return (
     <Formik
       initialValues={{} as FormValues & OtherFormValues}
       validate={validateForm}
-      onSubmit={onCreateAccount}
+      onSubmit={handleAccountCreation}
     >
       {// eslint-disable-next-line complexity
       ({
@@ -132,7 +132,7 @@ const CreateAccountForm = <OtherFormValues,>({
               size="small"
               variant="contained"
               color="primary"
-              isLoading={loading || isCreatingAccount}
+              isLoading={loading || doingAfterAccountCreation}
             >
               {intl.formatMessage({ id: 'login_modal.validate' })}
             </FullWidthButton>

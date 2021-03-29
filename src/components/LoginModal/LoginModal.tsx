@@ -30,8 +30,8 @@ interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
   onClose: () => void;
   onConnect: () => void;
-  onCreateAccount?: () => Promise<void>;
-  isCreatingAccount?: boolean;
+  doAfterAccountCreation?: () => Promise<void>;
+  doingAfterAccountCreation?: boolean;
   title: string;
   showSuccessScreenOnValidate?: boolean;
   AdditionalFields?: FunctionComponent<{
@@ -53,17 +53,17 @@ const LoginModal = <OtherFormValues,>({
   title,
   AdditionalFields,
   showSuccessScreenOnValidate,
-  onCreateAccount: onCreateAccountProp,
-  isCreatingAccount,
+  doAfterAccountCreation: doAfterAccountCreationProp,
+  doingAfterAccountCreation,
 }: LoginModalProps<OtherFormValues>) => {
   const isMobile = getIsMobile();
   const intl = useIntl();
   const [showSuccessScreen, setShowSuccessScreen] = useState<boolean>(false);
 
-  const onCreateAccount = async () => {
-    if (onCreateAccountProp !== undefined) {
+  const doAfterAccountCreation = async () => {
+    if (doAfterAccountCreationProp !== undefined) {
       try {
-        await onCreateAccountProp();
+        await doAfterAccountCreationProp();
       } catch (e) {
         HandleErrorService.showErrorSnackbar(e);
       }
@@ -101,8 +101,8 @@ const LoginModal = <OtherFormValues,>({
           </ConnectLink>
         </Connect>
         <CreateAccountForm<OtherFormValues>
-          onCreateAccount={onCreateAccount}
-          isCreatingAccount={isCreatingAccount}
+          doAfterAccountCreation={doAfterAccountCreation}
+          doingAfterAccountCreation={doingAfterAccountCreation}
           AdditionalFields={AdditionalFields}
         />
       </>

@@ -92,8 +92,8 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
       onConnect={onConnect}
       title={intl.formatMessage({ id: 'cause.confirm-support' })}
       AdditionalFields={renderAdditionalFields}
-      onCreateAccount={followCause}
-      isCreatingAccount={isFollowingCause}
+      doAfterAccountCreation={followCause}
+      doingAfterAccountCreation={isFollowingCause}
     />
   );
 };

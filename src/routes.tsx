@@ -1,5 +1,5 @@
-import React, { FunctionComponent, lazy, Suspense } from 'react';
-import { Route, Switch } from 'react-router';
+import React, { FunctionComponent, lazy, Suspense, useEffect } from 'react';
+import { Route, Switch, useHistory } from 'react-router';
 import Loader from './components/Loader/Loader';
 import Snackbar from 'components/Snackbar';
 
@@ -59,25 +59,37 @@ export const PATHS = {
   },
 };
 
-const routes: FunctionComponent<{}> = () => (
-  <>
-    <Suspense fallback={<Loader />}>
-      <Switch>
-        <Route exact path={PATHS.HOME.route} component={Home} />
-        <Route exact path={PATHS.CAUSE_LIST.route} component={CauseList} />
-        <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
-        <Route path={PATHS.OUR_MISSION.route} component={OurMission}></Route>
-        <Route path={PATHS.CREATE_CAUSE.route} component={CreateCause}></Route>
-        <Route path={PATHS.CAUSE_PREVIEW.route} component={CausePreview}></Route>
-        <Route path={PATHS.LEGAL_NOTICE.route} component={() => <div />}></Route>
-        <Route path={PATHS.COOKIES_POLICY.route} component={() => <div />}></Route>
-        <Route path={PATHS.DATA_PROTECTION_POLICY.route} component={() => <div />}></Route>
-        <Route path={PATHS.CHARTER_OF_VALUES.route} component={() => <div />}></Route>
-        <Route path={PATHS.CONFIRM_PASSWORD.route} component={Password}></Route>
-      </Switch>
-    </Suspense>
-    <Snackbar />
-  </>
-);
+const Routes: FunctionComponent<{}> = () => {
+  const history = useHistory();
 
-export default routes;
+  useEffect(() => {
+    return history.listen((_, action) => {
+      if (action === 'PUSH') {
+        window.scrollTo(0, 0);
+      }
+    });
+  }, []);
+
+  return (
+    <>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route exact path={PATHS.HOME.route} component={Home} />
+          <Route exact path={PATHS.CAUSE_LIST.route} component={CauseList} />
+          <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
+          <Route path={PATHS.OUR_MISSION.route} component={OurMission}></Route>
+          <Route path={PATHS.CREATE_CAUSE.route} component={CreateCause}></Route>
+          <Route path={PATHS.CAUSE_PREVIEW.route} component={CausePreview}></Route>
+          <Route path={PATHS.LEGAL_NOTICE.route} component={() => <div />}></Route>
+          <Route path={PATHS.COOKIES_POLICY.route} component={() => <div />}></Route>
+          <Route path={PATHS.DATA_PROTECTION_POLICY.route} component={() => <div />}></Route>
+          <Route path={PATHS.CHARTER_OF_VALUES.route} component={() => <div />}></Route>
+          <Route path={PATHS.CONFIRM_PASSWORD.route} component={Password}></Route>
+        </Switch>
+      </Suspense>
+      <Snackbar />
+    </>
+  );
+};
+
+export default Routes;

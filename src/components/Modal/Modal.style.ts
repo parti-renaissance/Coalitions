@@ -40,7 +40,7 @@ export const Title = styled.h3`
 `;
 
 export const ValidateButtonContainer = styled.div`
-margin-top: auto;
+  margin-top: auto;
   ${media.desktop(`
     margin-top: ${getSpacing(10)};
   `)}

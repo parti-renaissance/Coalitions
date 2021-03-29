@@ -29,6 +29,7 @@ import { isUserLogged } from 'redux/Login';
 import Loader from 'components/Loader';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { useHistory } from 'react-router';
+import { usePublishedCause } from './usePublishedCause';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
@@ -38,6 +39,7 @@ const Home: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const { loading, fetchFirstPage } = useFetchCauses(10);
+  const { renderSuccessModal } = usePublishedCause();
 
   React.useEffect(() => {
     fetchFirstPage([], isUserLoggedIn);
@@ -101,6 +103,7 @@ const Home: React.FunctionComponent = () => {
         </CoalitionCardsWrapper>
       </Block>
       <CreateCauseCTA displayLinkToCauseList />
+      {renderSuccessModal()}
     </>
   );
 };

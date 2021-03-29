@@ -30,7 +30,7 @@ export const usePublishCause = () => {
     const response = await doPublishCause();
     if (response instanceof Error) return;
 
-    push(PATHS.HOME.url());
+    push({ pathname: PATHS.HOME.url(), search: `?publishedCause=true` });
     dispatch(
       updateSnackbar({
         message: formatMessage({ id: 'create_cause.success' }),

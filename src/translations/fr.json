@@ -16,7 +16,11 @@
     "charter-of-values": "Charte des valeurs"
   },
   "home": {
-    "support-causes": "Soutenez des causes"
+    "support-causes": "Soutenez des causes",
+    "published_cause_modal": {
+      "title": "Cause enregistrée !",
+      "content": "Votre cause a été enregistrée. Nous vous avertirons par email dès qu’elle sera validée."
+    }
   },
   "page": {
     "back": "Retour",

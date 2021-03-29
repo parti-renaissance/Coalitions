@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import { Title } from 'components/Modal/Modal.style';
 import { useFormik } from 'formik';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { InputFieldWrapper, StyledFormControl } from 'components/InputField/InputField.style';
 import { useValidatePasswordForm, useConfirmPassword } from './services';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import { IconButton, InputAdornment } from '@material-ui/core';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { useParams } from 'react-router';
 import { PasswordContainer, PasswordFormWrapper, SubmitButtonContainer } from './Password.style';
 import { FullWidthButton } from 'components/Button/Button';
+import { PasswordField } from './PasswordField/PasswordField';
 
 export type PasswordForm = {
   password: string;
@@ -22,8 +18,6 @@ type PasswordQueryParams = {
   token: string;
 };
 
-//Todo Bastien : In next ticket refacto in an InputFieldWrapperPassword components do decrease complexity
-// eslint-disable-next-line complexity
 export const Password: React.FunctionComponent = () => {
   const { formatMessage } = useIntl();
   const { validateForm } = useValidatePasswordForm();
@@ -38,6 +32,10 @@ export const Password: React.FunctionComponent = () => {
     },
   });
 
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <PasswordContainer>
       <PasswordFormWrapper>
@@ -45,64 +43,28 @@ export const Password: React.FunctionComponent = () => {
           <FormattedMessage id="password_modal.title" />
         </Title>
         <form onSubmit={formik.handleSubmit}>
-          <InputFieldWrapper>
-            <StyledFormControl
-              error={formik.touched.password === true && formik.errors.password !== undefined}
-            >
-              <OutlinedInput
-                placeholder={formatMessage({ id: 'password_modal.password' })}
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-              {formik.touched.password === true && formik.errors.password !== undefined ? (
-                <FormHelperText>{formik.errors.password}</FormHelperText>
-              ) : null}
-            </StyledFormControl>
-          </InputFieldWrapper>
-          <InputFieldWrapper>
-            <StyledFormControl
-              error={
-                formik.touched.passwordConfirmation === true &&
-                formik.errors.passwordConfirmation !== undefined
-              }
-            >
-              <OutlinedInput
-                placeholder={formatMessage({ id: 'password_modal.password-confirm' })}
-                type={showPassword ? 'text' : 'password'}
-                name="passwordConfirmation"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.passwordConfirmation}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-              {formik.touched.passwordConfirmation === true &&
-              formik.errors.passwordConfirmation !== undefined ? (
-                <FormHelperText>{formik.errors.passwordConfirmation}</FormHelperText>
-              ) : null}
-            </StyledFormControl>
-          </InputFieldWrapper>
+          <PasswordField
+            name="password"
+            touched={formik.touched.password}
+            errors={formik.errors.password}
+            placeholder={formatMessage({ id: 'password_modal.password' })}
+            value={formik.values.password}
+            showPassword={showPassword}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            togglePassword={togglePassword}
+          />
+          <PasswordField
+            name="passwordConfirmation"
+            touched={formik.touched.passwordConfirmation}
+            errors={formik.errors.passwordConfirmation}
+            placeholder={formatMessage({ id: 'password_modal.password-confirm' })}
+            value={formik.values.passwordConfirmation}
+            showPassword={showPassword}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            togglePassword={togglePassword}
+          />
           <SubmitButtonContainer>
             <FullWidthButton
               disabled={

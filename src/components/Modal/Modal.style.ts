@@ -26,11 +26,13 @@ export const ContentContainer = styled.div`
   `)}
 `;
 
+const CLOSE_BUTTON_Z_INDEX = 2;
+
 export const StyledCloseButton = styled(IconButton)`
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 2;
+  z-index: ${CLOSE_BUTTON_Z_INDEX};
   align-self: flex-end;
   padding: ${getSpacing(3)};
   ${media.desktop(`

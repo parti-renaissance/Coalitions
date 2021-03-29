@@ -63,6 +63,7 @@ export const ValidateButtonContainer = styled.div`
   right: 0;
   ${media.desktop(`
     position: relative;
+    padding: unset;
     margin-top: ${getSpacing(10)};
   `)}
 `;

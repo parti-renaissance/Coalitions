@@ -4,7 +4,7 @@ import { styledTags, DESKTOP_BREAK_POINT, defaultMargins } from 'stylesheet';
 export const RootContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   ${styledTags}
   max-width: calc(${DESKTOP_BREAK_POINT}px + 2 * ${defaultMargins.horizontal.desktop});
   margin: 0 auto;

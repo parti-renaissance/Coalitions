@@ -27,10 +27,15 @@ export const ContentContainer = styled.div`
 `;
 
 export const StyledCloseButton = styled(IconButton)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
   align-self: flex-end;
   padding: ${getSpacing(3)};
   ${media.desktop(`
-    padding: ${getSpacing(5)} ${getSpacing(8)};
+    position: relative;
+    margin: ${getSpacing(2)} ${getSpacing(5)};
   `)}
 `;
 

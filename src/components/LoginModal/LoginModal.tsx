@@ -1,11 +1,5 @@
 import React, { FunctionComponent, ChangeEvent, useState } from 'react';
-import {
-  Connect,
-  ConnectLink,
-  SuccessImage,
-  SuccessText,
-  SuccessContainer,
-} from './LoginModal.style';
+import { Connect, ConnectLink } from './LoginModal.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { FormValues } from './components/CreateAccountForm/lib/useValidateForm';
 import { oauthUrl } from 'services/networking/auth';
@@ -13,6 +7,7 @@ import CreateAccountForm from './components/CreateAccountForm';
 import HandleErrorService from 'services/HandleErrorService';
 import { Modal } from 'components/Modal/Modal';
 import { Title } from 'components/Modal/Modal.style';
+import SuccessModalContent from 'components/SuccessModalContent';
 
 interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
@@ -64,11 +59,11 @@ const LoginModal = <OtherFormValues,>({
   const renderContent = () => {
     if (showSuccessScreen) {
       return (
-        <SuccessContainer>
-          <SuccessImage src="/images/createCause.jpg" />
-          <Title>{intl.formatMessage({ id: 'login_modal.success_screen.title' })}</Title>
-          <SuccessText>{intl.formatMessage({ id: 'login_modal.success_screen.text' })}</SuccessText>
-        </SuccessContainer>
+        <SuccessModalContent
+          imageUrl="/images/createCause.jpg"
+          titleKey="login_modal.success_screen.title"
+          contentKey="login_modal.success_screen.text"
+        />
       );
     }
 

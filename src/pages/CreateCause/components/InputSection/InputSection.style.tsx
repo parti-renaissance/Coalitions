@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { getSpacing, colorPalette, media, fonts, fontWeight } from 'stylesheet';
+import { getSpacing, colorPalette, media, fonts, fontWeight, borderRadius } from 'stylesheet';
 
 export const Container = styled.div`
   margin-top: ${getSpacing(10)};
@@ -19,6 +19,7 @@ export const Title = styled.div`
 `;
 
 export const TipsContainer = styled.p<{ hasMiddleChildren: boolean }>`
+  border-radius: ${borderRadius.medium};
   padding: ${getSpacing(3)};
   background-color: ${colorPalette.greyLight};
   ${media.desktop(`

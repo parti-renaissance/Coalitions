@@ -7,7 +7,6 @@ import {
   StyledTab,
   DesktopHeaderWrapper,
   MobileHeaderWrapper,
-  CreateCauseCTAWrapper,
 } from './CauseDetails.style';
 import { FormattedMessage } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -66,7 +65,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
           ) : null}
           <MobileHeaderWrapper>{renderHeader()}</MobileHeaderWrapper>
         </HeaderContainer>
-        <TabsWrapper isPreview={isPreview}>
+        <TabsWrapper>
           <Tabs
             value={tabIndex}
             onChange={onTabIndexChange}
@@ -79,11 +78,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
           {renderTabPanel()}
         </TabsWrapper>
       </Container>
-      {!isPreview ? (
-        <CreateCauseCTAWrapper>
-          <CreateCauseCTA displayLinkToCauseList />
-        </CreateCauseCTAWrapper>
-      ) : null}
+      {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}
       <HeaderButtons cause={cause} onSupport={onSupport} isSupporting={isSupporting} isMobile />
     </>
   );

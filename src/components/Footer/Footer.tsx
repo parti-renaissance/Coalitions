@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { Container, Link } from './Footer.style';
+import { Container, Link, LinkContainer, Separator } from './Footer.style';
 import { PATHS } from 'routes';
-import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 const LEGAL_LINKS: {
   to: string;
@@ -26,12 +26,16 @@ const LEGAL_LINKS: {
 ];
 
 const Footer: FunctionComponent<{}> = () => {
+  const intl = useIntl();
   return (
     <Container>
-      {LEGAL_LINKS.map(({ labelKey, to }) => (
-        <Link key={labelKey} to={to}>
-          <FormattedMessage id={labelKey} />
-        </Link>
+      {LEGAL_LINKS.map(({ labelKey, to }, index) => (
+        <LinkContainer key={labelKey}>
+          {index > 0 ? <Separator>{'•'}</Separator> : undefined}
+          <Link key={labelKey} to={to}>
+            {`${intl.formatMessage({ id: labelKey })}`}
+          </Link>
+        </LinkContainer>
       ))}
     </Container>
   );

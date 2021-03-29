@@ -1,11 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import {
-  Container,
-  SubContainer,
-  TopImage,
-  StyledInputDescription,
-  ValidateButton,
-} from './CreateCause.style';
+import { Container, SubContainer, TopImage, ValidateButton } from './CreateCause.style';
 import InputSection from './components/InputSection';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
@@ -92,29 +86,12 @@ const CreateCause: FunctionComponent = () => {
                 >
                   <InputField
                     placeholder={intl.formatMessage({
-                      id: 'create_cause.description.short-description-placeholder',
-                    })}
-                    type="text"
-                    name="shortDescription"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.shortDescription}
-                    error={
-                      touched.shortDescription === true && errors.shortDescription !== undefined
-                    }
-                    helperText={
-                      touched.shortDescription === true ? errors.shortDescription : undefined
-                    }
-                    inputProps={{ maxLength: 500 }}
-                  />
-                  <StyledInputDescription
-                    placeholder={intl.formatMessage({
                       id: 'create_cause.description.description-placeholder',
                     })}
                     type="text"
                     name="description"
                     multiline
-                    rows={5}
+                    rows={10}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.description}

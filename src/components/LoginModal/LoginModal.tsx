@@ -76,7 +76,7 @@ const LoginModal = <OtherFormValues,>({
       <>
         <Title>{title}</Title>
         <Connect>
-          <p>{intl.formatMessage({ id: 'login_modal.signed-up' })}</p>
+          <div>{intl.formatMessage({ id: 'login_modal.signed-up' })}</div>
           <ConnectLink onClick={onConnectClick}>
             <FormattedMessage id="login_modal.connect" />
           </ConnectLink>

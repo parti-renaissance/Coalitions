@@ -3,7 +3,6 @@ import { Coalition } from 'redux/Coalition/types';
 
 export interface FormValues {
   title?: string;
-  shortDescription?: string;
   description?: string;
   coalitions?: Coalition[];
   image?: string;
@@ -11,7 +10,6 @@ export interface FormValues {
 
 export interface FormErrors {
   title?: string;
-  shortDescription?: string;
   description?: string;
   coalitions?: string;
   image?: string;

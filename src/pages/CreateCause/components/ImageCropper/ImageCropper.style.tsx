@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colorPalette, fontWeight, getSpacing, media } from 'stylesheet';
-import { MediumLargeButton } from 'components/Button/Button';
+import { FullWidthButton } from 'components/Button/Button';
 import Cropper from 'react-cropper';
 
 const INPUT_BORDER_WIDTH = '1px';
@@ -23,19 +23,10 @@ export const HiddenInput = styled.input`
   display: none;
 `;
 
-export const BottomContainer = styled.div`
+export const UpdateButton = styled(FullWidthButton)`
   margin-top: ${getSpacing(3)};
   ${media.desktop(`
-    display: flex;
-    justify-content: flex-end;
     margin-top: ${getSpacing(6)};
-  `)}
-`;
-
-export const UpdateButton = styled(MediumLargeButton)`
-  width: 100%;
-  ${media.desktop(`
-    width: 50%;
   `)}
 `;
 

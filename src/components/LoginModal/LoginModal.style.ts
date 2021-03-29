@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { colorPalette, media, getSpacing, fonts } from 'stylesheet';
 
 export const Connect = styled.div`
+  ${fonts.input};
   display: flex;
   margin-top: ${getSpacing(3)};
 `;
 
 export const ConnectLink = styled.a`
-  ${fonts.p};
   color: ${colorPalette.mintGreen};
   text-decoration: underline;
   margin-left: ${getSpacing(1)};

@@ -4,8 +4,7 @@ import { useFormik } from 'formik';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useValidatePasswordForm, useConfirmPassword } from './services';
 import { useParams } from 'react-router';
-import { PasswordContainer, PasswordFormWrapper, SubmitButtonContainer } from './Password.style';
-import { FullWidthButton } from 'components/Button/Button';
+import { PasswordContainer, PasswordFormWrapper, ConfirmPasswordButton } from './Password.style';
 import { PasswordField } from './PasswordField/PasswordField';
 
 export type PasswordForm = {
@@ -65,23 +64,21 @@ export const Password: React.FunctionComponent = () => {
             handleBlur={formik.handleBlur}
             togglePassword={togglePassword}
           />
-          <SubmitButtonContainer>
-            <FullWidthButton
-              disabled={
-                formik.isSubmitting ||
-                Object.keys(formik.errors).length > 0 ||
-                formik.touched.password !== true ||
-                formik.touched.passwordConfirmation !== true
-              }
-              type="submit"
-              size="small"
-              variant="contained"
-              color="primary"
-              isLoading={loading}
-            >
-              {formatMessage({ id: 'password_modal.submit' })}
-            </FullWidthButton>
-          </SubmitButtonContainer>
+          <ConfirmPasswordButton
+            disabled={
+              formik.isSubmitting ||
+              Object.keys(formik.errors).length > 0 ||
+              formik.touched.password !== true ||
+              formik.touched.passwordConfirmation !== true
+            }
+            type="submit"
+            size="small"
+            variant="contained"
+            color="primary"
+            isLoading={loading}
+          >
+            {formatMessage({ id: 'password_modal.submit' })}
+          </ConfirmPasswordButton>
         </form>
       </PasswordFormWrapper>
     </PasswordContainer>

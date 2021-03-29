@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { getSpacing, media } from 'stylesheet';
+import { FullWidthButton } from 'components/Button/Button';
 
 export const PasswordFormWrapper = styled.div`
   max-width: ${getSpacing(85)};
@@ -15,7 +16,7 @@ export const PasswordContainer = styled.div`
   `)};
 `;
 
-export const SubmitButtonContainer = styled.div`
+export const ConfirmPasswordButton = styled(FullWidthButton)`
   margin: ${getSpacing(4)} 0;
   ${media.desktop(`
     margin: ${getSpacing(10)} 0;

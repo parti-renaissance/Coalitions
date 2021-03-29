@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { colorPalette, media, getSpacing, fonts } from 'stylesheet';
-import { colorPalette, media, getSpacing, fonts } from 'stylesheet';
 
 export const Connect = styled.div`
   display: flex;

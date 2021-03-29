@@ -13,7 +13,6 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { FullWidthButton } from 'components/Button/Button';
 import { useCreateAccount } from './useCreateAccount';
-import { StyledForm } from './CreateAccountForm.style';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { ValidateButtonContainer } from 'components/Modal/Modal.style';
 
@@ -59,7 +58,7 @@ const CreateAccountForm = <OtherFormValues,>({
         setFieldValue,
         setFieldTouched,
       }) => (
-        <StyledForm onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <InputFieldWrapper>
             <InputField
               placeholder={intl.formatMessage({ id: 'login_modal.first-name' })}
@@ -139,7 +138,7 @@ const CreateAccountForm = <OtherFormValues,>({
               {intl.formatMessage({ id: 'login_modal.validate' })}
             </FullWidthButton>
           </ValidateButtonContainer>
-        </StyledForm>
+        </form>
       )}
     </Formik>
   );

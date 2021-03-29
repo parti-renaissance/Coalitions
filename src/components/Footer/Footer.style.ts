@@ -26,17 +26,32 @@ export const Container = styled.footer`
 
 const LINK_FONT_SIZE = '14px';
 
+export const LinkContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: ${getSpacing(1.5)} 0;
+`;
+
 export const Link = styled(DefaultLink)`
   font-family: ${fontFamily.primary};
   font-size: ${LINK_FONT_SIZE};
   font-weight: ${fontWeight.normal};
   line-height: ${lineHeight.primary};
   color: ${colorPalette.greyDark};
-  margin: ${getSpacing(1.5)} 0;
-  ${media.desktop(`
-    margin: 0 ${getSpacing(1.5)};
-  `)};
   :hover {
     text-decoration: underline;
   }
+`;
+
+export const Separator = styled.div`
+  display: none;
+  ${media.desktop(`
+    display: flex;
+    font-family: ${fontFamily.primary};
+    font-size: ${LINK_FONT_SIZE};
+    font-weight: ${fontWeight.normal};
+    line-height: ${lineHeight.primary};
+    color: ${colorPalette.greyDark};
+    margin: 0 ${getSpacing(1.5)};
+  `)};
 `;

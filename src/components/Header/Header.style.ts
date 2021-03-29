@@ -52,7 +52,7 @@ export const StyledButton = styled(MediumLargeButton)`
   `)}
 `;
 
-const DESKTOP_LOGO_FONT_SIZE = '19px';
+const DESKTOP_LOGO_FONT_SIZE = '21px';
 
 export const HeaderTitle = styled.div`
   ${fonts.input};

@@ -11,6 +11,11 @@ interface AuthorAndSupportsProps {
 
 const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, showAuthor }) => {
   const intl = useIntl();
+
+  if (cause.author === undefined) {
+    return null;
+  }
+
   return (
     <Container>
       {showAuthor === true ? (

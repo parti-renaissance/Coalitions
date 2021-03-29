@@ -13,7 +13,7 @@ interface HeaderProps {
 const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting }) => (
   <Container>
     <div>
-      <CoalitionName>{cause.coalition.name}</CoalitionName>
+      {cause.coalition !== undefined ? <CoalitionName>{cause.coalition.name}</CoalitionName> : null}
       <CauseName>{cause.name}</CauseName>
       <AuthorAndSupportsWrapper>
         <AuthorAndSupports cause={cause} showAuthor />

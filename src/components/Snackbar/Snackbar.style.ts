@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { getSpacing, media, fontFamily, lineHeight, fontSize } from 'stylesheet';
+import { getSpacing, media, fontFamily, lineHeight, fontSize, fontWeight } from 'stylesheet';
 import Alert from '@material-ui/lab/Alert';
 import { getColorsFromSeverity } from './lib/getColorsFromSeverity';
 import { Severity } from 'redux/Snackbar/types';
@@ -34,6 +34,7 @@ export const StyledAlert = styled(Alert)`
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-size: ${fontSize.p.mobile};
+    font-weight: ${fontWeight.normal};
   }
 
   ${({ severity }) => {

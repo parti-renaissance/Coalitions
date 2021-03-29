@@ -24,11 +24,14 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { FormValues } from './components/CreateAccountForm/lib/useValidateForm';
 import { oauthUrl } from 'services/networking/auth';
 import CreateAccountForm from './components/CreateAccountForm';
+import HandleErrorService from 'services/HandleErrorService';
 
 interface LoginModalProps<OtherFormValues> {
   isOpened: boolean;
   onClose: () => void;
   onConnect: () => void;
+  doAfterAccountCreation?: () => Promise<void>;
+  doingAfterAccountCreation?: boolean;
   title: string;
   showSuccessScreenOnValidate?: boolean;
   AdditionalFields?: FunctionComponent<{
@@ -50,12 +53,21 @@ const LoginModal = <OtherFormValues,>({
   title,
   AdditionalFields,
   showSuccessScreenOnValidate,
+  doAfterAccountCreation: doAfterAccountCreationProp,
+  doingAfterAccountCreation,
 }: LoginModalProps<OtherFormValues>) => {
   const isMobile = getIsMobile();
   const intl = useIntl();
   const [showSuccessScreen, setShowSuccessScreen] = useState<boolean>(false);
 
-  const onValidate = () => {
+  const doAfterAccountCreation = async () => {
+    if (doAfterAccountCreationProp !== undefined) {
+      try {
+        await doAfterAccountCreationProp();
+      } catch (e) {
+        HandleErrorService.showErrorSnackbar(e);
+      }
+    }
     if (showSuccessScreenOnValidate === true) {
       setShowSuccessScreen(true);
     } else {
@@ -89,7 +101,8 @@ const LoginModal = <OtherFormValues,>({
           </ConnectLink>
         </Connect>
         <CreateAccountForm<OtherFormValues>
-          onValidate={onValidate}
+          doAfterAccountCreation={doAfterAccountCreation}
+          doingAfterAccountCreation={doingAfterAccountCreation}
           AdditionalFields={AdditionalFields}
         />
       </>

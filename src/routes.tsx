@@ -10,6 +10,7 @@ const CreateCause = lazy(() => import('./pages/CreateCause'));
 const CausePreview = lazy(() => import('./pages/CausePreview'));
 const CauseList = lazy(() => import('./pages/CauseList'));
 const Password = lazy(() => import('./pages/Password'));
+const Inscription = lazy(() => import('./pages/Inscription'));
 
 export const PATHS = {
   HOME: {
@@ -57,6 +58,10 @@ export const PATHS = {
     url: ({ identifier, token }: { identifier: string; token: string }) =>
       `/confirm-password/${identifier}/${token}`,
   },
+  INSCRIPTION: {
+    route: '/inscription',
+    url: () => '/inscription',
+  },
 };
 
 const Routes: FunctionComponent<{}> = () => {
@@ -85,6 +90,7 @@ const Routes: FunctionComponent<{}> = () => {
           <Route path={PATHS.DATA_PROTECTION_POLICY.route} component={() => <div />}></Route>
           <Route path={PATHS.CHARTER_OF_VALUES.route} component={() => <div />}></Route>
           <Route path={PATHS.CONFIRM_PASSWORD.route} component={Password}></Route>
+          <Route path={PATHS.INSCRIPTION.route} component={Inscription}></Route>
         </Switch>
       </Suspense>
       <Snackbar />

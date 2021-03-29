@@ -31,7 +31,6 @@ export const CauseName = styled.div`
   display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
   -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
   -webkit-line-clamp: 2;
-  margin-bottom: ${getSpacing(3)};
   overflow: hidden;
   flex-grow: 1;
   max-height: ${getSpacing(10)};
@@ -45,6 +44,7 @@ CauseName.displayName = 'CauseName';
 export const Author = styled.div`
   color: ${colorPalette.grey};
   margin-bottom: ${getSpacing(1)};
+  margin-top: ${getSpacing(3)};
   max-width: min(75vw, ${getSpacing(60)});
   white-space: nowrap;
   overflow: hidden;

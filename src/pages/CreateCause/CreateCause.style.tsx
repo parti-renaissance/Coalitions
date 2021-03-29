@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { media, getSpacing, defaultMargins } from 'stylesheet';
-import InputField from 'components/InputField';
 import { FullWidthButton } from 'components/Button/Button';
 
 export const Container = styled.div`

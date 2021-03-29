@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { fontWeight, getSpacing, colorPalette, media, fonts, defaultMargins } from 'stylesheet';
 import { Tab } from '@material-ui/core';
-import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
 const CONTAINER_MAX_WIDTH = '960px';
 

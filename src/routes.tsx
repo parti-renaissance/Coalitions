@@ -68,7 +68,7 @@ const Routes: FunctionComponent<{}> = () => {
         window.scrollTo(0, 0);
       }
     });
-  }, []);
+  }, [history]);
 
   return (
     <>

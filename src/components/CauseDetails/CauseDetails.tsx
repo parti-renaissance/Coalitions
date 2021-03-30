@@ -7,6 +7,9 @@ import {
   StyledTab,
   DesktopHeaderWrapper,
   MobileHeaderWrapper,
+  EmptySectionContainer,
+  EmptySectionImage,
+  EmptySectionText,
 } from './CauseDetails.style';
 import { FormattedMessage } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -30,6 +33,15 @@ const TAB_INDICATOR_PROPS = {
   },
 };
 
+const EmptySection: FunctionComponent<{}> = () => (
+  <EmptySectionContainer>
+    <EmptySectionImage src="/images/eventsPlaceholder.svg" />
+    <EmptySectionText>
+      <FormattedMessage id="cause.coming-feature" />
+    </EmptySectionText>
+  </EmptySectionContainer>
+);
+
 const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, isSupporting }) => {
   const [tabIndex, setTabIndex] = useState<number>(0);
   const isPreview = Boolean(!onSupport);
@@ -44,7 +56,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
       case 0:
         return <AboutThisCause cause={cause} />;
       default:
-        return null;
+        return <EmptySection />;
     }
   };
 

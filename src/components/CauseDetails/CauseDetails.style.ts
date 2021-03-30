@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { fontWeight, getSpacing, colorPalette, media, fonts, defaultMargins } from 'stylesheet';
 import { Tab } from '@material-ui/core';
+import { Container as SectionContainer } from './components/AboutThisCause/AboutThisCause.style';
 
 const CONTAINER_MAX_WIDTH = '960px';
 
@@ -62,4 +63,21 @@ export const DesktopHeaderWrapper = styled.div`
     top: 0;
     z-index: 1;
   `)}
+`;
+
+export const EmptySectionContainer = styled(SectionContainer)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const EmptySectionImage = styled.img`
+  width: ${getSpacing(43)};
+  height: ${getSpacing(45)};
+`;
+
+export const EmptySectionText = styled.p`
+  text-align: center;
+  font-style: italic;
+  margin-top: ${getSpacing(6)};
 `;

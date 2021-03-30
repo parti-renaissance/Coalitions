@@ -1,5 +1,5 @@
 export interface InCreationCauseWithoutAuthor {
-  coalition?: Coalition;
+  coalition?: Coalition | null;
   name: string;
   description?: string;
   image_url: string;
@@ -8,7 +8,7 @@ export interface InCreationCauseWithoutAuthor {
 }
 
 export type InCreationCause = InCreationCauseWithoutAuthor & {
-  author?: Author;
+  author?: Author | null;
 };
 
 export type Cause = {

@@ -12,7 +12,7 @@ interface AuthorAndSupportsProps {
 const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, showAuthor }) => {
   const intl = useIntl();
 
-  if (cause.author === undefined) {
+  if (cause.author === undefined || cause.author === null) {
     return null;
   }
 

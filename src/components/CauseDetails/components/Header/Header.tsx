@@ -39,7 +39,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
       <div>
         <NameAndShareWrapper>
           <div>
-            {cause.coalition !== undefined ? (
+            {cause.coalition !== undefined && cause.coalition !== null ? (
               <CoalitionName>{cause.coalition.name}</CoalitionName>
             ) : null}
             <CauseName>{cause.name}</CauseName>

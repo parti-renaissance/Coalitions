@@ -68,7 +68,10 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
                   id: 'cause.join-coalition',
                 },
                 {
-                  coalitionName: cause.coalition !== undefined ? `${cause.coalition.name} ` : '',
+                  coalitionName:
+                    cause.coalition !== undefined && cause.coalition !== null
+                      ? `${cause.coalition.name} `
+                      : '',
                 },
               )}
             </Label>

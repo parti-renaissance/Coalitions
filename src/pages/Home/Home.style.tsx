@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { colorPalette, fonts, getSpacing, media, defaultMargins } from 'stylesheet';
-import { MediumLargeButton } from 'components/Button/Button';
 
 export const Block = styled.div`
   padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
@@ -9,57 +8,31 @@ export const Block = styled.div`
   `)}
 `;
 
-export const MobileCreateCauseButtonContainer = styled.div`
-  margin: ${getSpacing(7)} 0;
-  display: flex;
-  justify-content: center;
-  ${media.desktop(`
-  display: none;
-  `)}
-`;
-
 export const TopPartContainer = styled.div`
-  display: flex;
-  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    background-color: ${colorPalette.greyLight};
-    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+    ${media.largeDesktop(`
+      display: flex;
+      background-color: ${colorPalette.greyLight};
+      padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+    `)}
   `)}
 `;
 
 export const TopPartSubContainer = styled.div`
+  background-color: ${colorPalette.greyLight};
+  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
+    ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    max-width: ${getSpacing(108)};
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+    ${media.largeDesktop(`
+      padding: unset;
+    `)}
   `)}
 `;
 
 export const Content = styled.p`
   color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(2)};
-`;
-
-export const Image = styled.img`
-  display: none;
-  ${media.desktop(`
-    display: flex;
-    background-color: ${colorPalette.grey2};
-    margin-left: ${getSpacing(16)};
-    flex: 1;
-`)}
-`;
-
-export const DesktopCreateCauseButton = styled(MediumLargeButton)`
-  display: none;
-  ${media.desktop(`
-    display: flex;
-    margin-top: ${getSpacing(5)};
-  `)}
-`;
-
-export const MobileSupportButtonWrapper = styled.div`
-  ${media.desktop(`
-    display: none;
-  `)}
 `;
 
 export const Title = styled.h1`
@@ -118,4 +91,28 @@ export const SeeAllButton = styled.p`
   color: ${colorPalette.blueCoalition};
   cursor: pointer;
   margin-left: ${getSpacing(1)};
+`;
+
+export const VideoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+    ${media.largeDesktop(`
+      margin-left: ${getSpacing(16)};
+      padding: unset;
+    `)}
+  `)}
+`;
+
+export const CreateCauseButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: ${getSpacing(7)};
+  ${media.desktop(`
+    justify-content: flex-start;
+    margin-top: ${getSpacing(5)};
+`)}
 `;

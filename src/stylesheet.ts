@@ -93,12 +93,15 @@ export const theme = createMuiTheme({
 export const PHONE_BREAK_POINT = 425;
 export const TABLET_BREAK_POINT = 768;
 // Beyond this breakpoint screen are considered as large desktop
+export const SMALL_DESKTOP_BREAK_POINT = 1250;
 export const DESKTOP_BREAK_POINT = 1540;
 
 export const media = {
   tablet: (styles: string) => `@media (min-width: ${PHONE_BREAK_POINT}px) {${styles}}`,
   desktop: (styles: string) => `@media (min-width: ${TABLET_BREAK_POINT}px) {${styles}}`,
-  largeDesktop: (styles: string) => `@media (min-width: ${DESKTOP_BREAK_POINT}px) {${styles}}`,
+  largeDesktop: (styles: string) =>
+    `@media (min-width: ${SMALL_DESKTOP_BREAK_POINT}px) {${styles}}`,
+  veryLargeDesktop: (styles: string) => `@media (min-width: ${DESKTOP_BREAK_POINT}px) {${styles}}`,
 };
 
 export const fontFamily = {
@@ -111,14 +114,25 @@ export const fontWeight = {
   normal: '300',
 };
 
-export const defaultMargins = {
+export const defaultMarginsAsNumber = {
   horizontal: {
-    desktop: '60px',
-    mobile: '15px',
+    desktop: 60,
+    mobile: 15,
   },
   vertical: {
-    desktop: '60px',
-    mobile: '35px',
+    desktop: 60,
+    mobile: 35,
+  },
+};
+
+export const defaultMargins = {
+  horizontal: {
+    desktop: `${defaultMarginsAsNumber.horizontal.desktop}px`,
+    mobile: `${defaultMarginsAsNumber.horizontal.mobile}px`,
+  },
+  vertical: {
+    desktop: `${defaultMarginsAsNumber.vertical.desktop}px`,
+    mobile: `${defaultMarginsAsNumber.vertical.mobile}px`,
   },
 };
 

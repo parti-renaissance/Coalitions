@@ -39,10 +39,10 @@ export const CoalitionsFilter: React.FunctionComponent<Props> = ({
   useEffect(() => {
     const params = new URLSearchParams(search);
     const coalitionId = params.get('coalitionId');
-    if (coalitionId !== null) {
+    if (selectedCoalitions.length === 0) {
       handleClickOnChips(coalitionId);
     }
-  }, [search, handleCoalitionsFilterClick, handleClickOnChips]);
+  }, [search, handleCoalitionsFilterClick, handleClickOnChips, selectedCoalitions]);
 
   if (coalitions.length === 0) {
     return null;

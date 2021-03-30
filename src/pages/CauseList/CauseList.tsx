@@ -42,11 +42,13 @@ const defineCtaPositionInList = (): number => {
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const [filteredByCoalitionIds, setFilteredByCoalitionIds] = useState<string[]>([]);
+  const [filteredByCoalitionIds, setFilteredByCoalitionIds] = useState<string[] | null>(null);
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
 
   useEffect(() => {
-    fetchFirstPage(filteredByCoalitionIds, isUserLoggedIn);
+    if (filteredByCoalitionIds !== null) {
+      fetchFirstPage(filteredByCoalitionIds, isUserLoggedIn);
+    }
   }, [fetchFirstPage, filteredByCoalitionIds, isUserLoggedIn]);
 
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
@@ -82,7 +84,12 @@ const CauseList: React.FunctionComponent = () => {
         <>
           <InfiniteScroll
             dataLength={causes.length}
-            next={() => fetchNextPage(filteredByCoalitionIds, isUserLoggedIn)}
+            next={() =>
+              fetchNextPage(
+                filteredByCoalitionIds !== null ? filteredByCoalitionIds : [],
+                isUserLoggedIn,
+              )
+            }
             hasMore={hasMore}
             loader={<Loader />}
           >

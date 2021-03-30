@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { useHistory } from 'react-router';
 
 export const useCoalitionsFilter = (handleCoalitionsFilterClick: (ids: string[]) => void) => {
-  const [allSelected, setAllSelected] = useState(true);
+  const [allSelected, setAllSelected] = useState(false);
   const [selectedCoalitions, setSelectedCoalitions] = useState<string[]>([]);
   const { replace } = useHistory();
 

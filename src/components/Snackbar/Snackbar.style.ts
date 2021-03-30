@@ -19,7 +19,7 @@ export const StyledSnackbar = styled(Snackbar)`
 `;
 
 export const StyledAlert = styled(Alert)`
-  padding: 0;
+  padding: 0 ${getSpacing(2)};
   height: ${getSpacing(13)};
   width: 100%;
   border-radius: unset;

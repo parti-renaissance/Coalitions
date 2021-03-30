@@ -9,7 +9,7 @@ interface AboutThisCauseProps {
 }
 
 const AboutThisCause: FunctionComponent<AboutThisCauseProps> = ({ cause }) => {
-  if (cause.description === undefined) {
+  if (cause.description === undefined || cause.description.length === 0) {
     return (
       <EmptySection
         labelKey="cause.empty-description"

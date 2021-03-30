@@ -11,7 +11,7 @@ import { COALITIONS_STORE } from 'redux/Coalition/fixtures';
 
 jest.mock('react-router', () => ({
   useLocation: jest.fn().mockReturnValue({
-    pathname: '/cause-list',
+    pathname: '/causes',
     search: '',
   }),
   useHistory: jest.fn().mockReturnValue({

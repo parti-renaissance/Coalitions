@@ -53,11 +53,11 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
         ) : null}
         <StyledMedia backgroundImage={cause.image_url} />
         <StyledContent>
-          {cause.coalition !== undefined ? (
+          {cause.coalition !== undefined && cause.coalition !== null ? (
             <CoalitionName>{cause.coalition.name}</CoalitionName>
           ) : null}
           <CauseName>{cause.name}</CauseName>
-          {cause.author !== undefined ? (
+          {cause.author !== undefined && cause.author !== null ? (
             <Author>
               <FormattedMessage
                 id="cause.author"

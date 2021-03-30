@@ -7,6 +7,7 @@ import {
   StyledTab,
   DesktopHeaderWrapper,
   MobileHeaderWrapper,
+  TabPanelContainer,
 } from './CauseDetails.style';
 import { FormattedMessage } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -17,6 +18,7 @@ import { InCreationCause, Cause } from 'redux/Cause/types';
 import Header from './components/Header';
 import { Supported } from 'components/Cause/Cause.style';
 import HeaderButtons from './components/HeaderButtons';
+import EmptySection from './components/EmptySection';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;
@@ -44,7 +46,9 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
       case 0:
         return <AboutThisCause cause={cause} />;
       default:
-        return null;
+        return (
+          <EmptySection labelKey="cause.coming-feature" imageSrc="/images/eventsPlaceholder.svg" />
+        );
     }
   };
 
@@ -75,7 +79,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
             <StyledTab label={<FormattedMessage id="cause.events.title" />} />
             <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
           </Tabs>
-          {renderTabPanel()}
+          <TabPanelContainer>{renderTabPanel()}</TabPanelContainer>
         </TabsWrapper>
       </Container>
       {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}

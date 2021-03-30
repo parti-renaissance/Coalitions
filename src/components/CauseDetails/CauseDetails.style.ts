@@ -63,3 +63,14 @@ export const DesktopHeaderWrapper = styled.div`
     z-index: 1;
   `)}
 `;
+
+export const TabPanelContainer = styled.div`
+  padding: ${getSpacing(3)};
+  margin-top: ${getSpacing(2)};
+  margin-bottom: ${getSpacing(2)};
+  ${media.desktop(`
+    padding: 0;
+    margin-top: ${getSpacing(5)};
+    margin-bottom: unset;
+  `)}
+`;

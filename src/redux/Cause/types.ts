@@ -1,7 +1,7 @@
 export interface InCreationCauseWithoutAuthor {
   coalition?: Coalition;
   name: string;
-  description: string;
+  description?: string;
   image_url: string;
   followers_count: number;
   supported?: boolean;

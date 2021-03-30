@@ -63,7 +63,8 @@
     },
     "what-is-it": "Qu’est-ce qu’une cause ?",
     "definition": "C’est un combat, un cri de ralliement, presqu’un slogan. C’est un appel qu’on lance à la société et aux politiques pour mobiliser autour d’une bonne idée. La vôtre.",
-    "coming-feature": "Cette fonctionnalité arrive prochainement\u00A0!"
+    "coming-feature": "Cette fonctionnalité arrive prochainement\u00A0!",
+    "empty-description": "Le porteur de cause n’a pas encore ajouté de contenu, soutenez la cause pour qu’elle aille plus loin\u00A0!"
   },
   "login_modal": {
     "first-name": "Prénom",

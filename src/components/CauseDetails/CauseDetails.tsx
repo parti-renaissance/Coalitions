@@ -7,9 +7,7 @@ import {
   StyledTab,
   DesktopHeaderWrapper,
   MobileHeaderWrapper,
-  EmptySectionContainer,
-  EmptySectionImage,
-  EmptySectionText,
+  TabPanelContainer,
 } from './CauseDetails.style';
 import { FormattedMessage } from 'react-intl';
 import { colorPalette } from 'stylesheet';
@@ -20,6 +18,7 @@ import { InCreationCause, Cause } from 'redux/Cause/types';
 import Header from './components/Header';
 import { Supported } from 'components/Cause/Cause.style';
 import HeaderButtons from './components/HeaderButtons';
+import EmptySection from './components/EmptySection';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;
@@ -32,15 +31,6 @@ const TAB_INDICATOR_PROPS = {
     backgroundColor: colorPalette.mintGreen2,
   },
 };
-
-const EmptySection: FunctionComponent<{}> = () => (
-  <EmptySectionContainer>
-    <EmptySectionImage src="/images/eventsPlaceholder.svg" />
-    <EmptySectionText>
-      <FormattedMessage id="cause.coming-feature" />
-    </EmptySectionText>
-  </EmptySectionContainer>
-);
 
 const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, isSupporting }) => {
   const [tabIndex, setTabIndex] = useState<number>(0);
@@ -56,7 +46,9 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
       case 0:
         return <AboutThisCause cause={cause} />;
       default:
-        return <EmptySection />;
+        return (
+          <EmptySection labelKey="cause.coming-feature" imageSrc="/images/eventsPlaceholder.svg" />
+        );
     }
   };
 
@@ -87,7 +79,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
             <StyledTab label={<FormattedMessage id="cause.events.title" />} />
             <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
           </Tabs>
-          {renderTabPanel()}
+          <TabPanelContainer>{renderTabPanel()}</TabPanelContainer>
         </TabsWrapper>
       </Container>
       {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}

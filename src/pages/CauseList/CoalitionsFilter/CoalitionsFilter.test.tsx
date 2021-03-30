@@ -8,7 +8,7 @@ import { CoalitionsFilter } from './CoalitionsFilter';
 
 jest.mock('react-router', () => ({
   useLocation: jest.fn().mockReturnValue({
-    pathname: '/cause-list',
+    pathname: '/causes',
     search: '',
   }),
   useHistory: jest.fn().mockReturnValue({

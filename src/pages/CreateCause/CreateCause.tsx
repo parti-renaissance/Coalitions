@@ -50,7 +50,7 @@ const CreateCause: FunctionComponent = () => {
     <>
       <Container>
         <SubContainer>
-          <TopImage src="/images/createCause.jpg" />
+          <TopImage src="/images/createCause.svg" />
           <Formik initialValues={initialValues} validate={validateForm} onSubmit={onSubmit}>
             {// eslint-disable-next-line complexity
             ({

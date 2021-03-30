@@ -21,41 +21,41 @@ export const PATHS = {
     url: (causeId: string) => `/cause/${causeId}`,
   },
   CAUSE_LIST: {
-    route: '/cause-list',
-    url: () => '/cause-list',
+    route: '/causes',
+    url: () => '/causes',
   },
   OUR_MISSION: {
-    route: '/our-mission',
-    url: () => '/our-mission',
+    route: '/pourquoi-creer-une-cause',
+    url: () => '/pourquoi-creer-une-cause',
   },
   CREATE_CAUSE: {
-    route: '/create-cause',
-    url: () => '/create-cause',
+    route: '/creer-une-cause',
+    url: () => '/creer-une-cause',
   },
   CAUSE_PREVIEW: {
-    route: '/cause-preview',
-    url: () => '/cause-preview',
+    route: '/apercu',
+    url: () => '/apercu',
   },
   LEGAL_NOTICE: {
-    route: '/legal-notice',
-    url: () => '/legal-notice',
+    route: '/mentions-legales',
+    url: () => '/mentions-legales',
   },
   COOKIES_POLICY: {
-    route: '/cookies-policy',
-    url: () => '/cookies-policy',
+    route: '/politique-cookies',
+    url: () => '/politique-cookies',
   },
   DATA_PROTECTION_POLICY: {
-    route: '/data-protection-policy',
-    url: () => '/data-protection-policy',
+    route: '/politique-protection-donnees',
+    url: () => '/politique-protection-donnees',
   },
   CHARTER_OF_VALUES: {
-    route: '/charter-of-values',
-    url: () => '/charter-of-values',
+    route: '/charte-des-valeurs',
+    url: () => '/charte-des-valeurs',
   },
   CONFIRM_PASSWORD: {
-    route: '/confirm-password/:identifier/:token',
+    route: '/confirmation/:identifier/:token',
     url: ({ identifier, token }: { identifier: string; token: string }) =>
-      `/confirm-password/${identifier}/${token}`,
+      `/confirmation/${identifier}/${token}`,
   },
 };
 

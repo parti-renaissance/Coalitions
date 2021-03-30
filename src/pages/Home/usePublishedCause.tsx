@@ -24,7 +24,7 @@ export const usePublishedCause = () => {
   const renderSuccessModal = () => (
     <Modal isOpened={isOpened} onClose={onClose}>
       <SuccessModalContent
-        imageUrl="/images/createCause.jpg"
+        imageUrl="/images/createCause.svg"
         titleKey="home.published_cause_modal.title"
         contentKey="home.published_cause_modal.content"
       />

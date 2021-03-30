@@ -26,11 +26,11 @@ export const SubContainer = styled.div`
 
 export const TopImage = styled.img`
   margin-bottom: -${getSpacing(5)};
-  height: ${getSpacing(24)};
-  width: ${getSpacing(24)};
+  height: ${getSpacing(30)};
+  width: ${getSpacing(30)};
   ${media.desktop(`
-    height: ${getSpacing(33)};
-    width: ${getSpacing(33)};
+    height: ${getSpacing(40)};
+    width: ${getSpacing(40)};
     margin-bottom: -${getSpacing(10)};
   `)}
 `;

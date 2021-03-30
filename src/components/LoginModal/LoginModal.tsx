@@ -60,7 +60,7 @@ const LoginModal = <OtherFormValues,>({
     if (showSuccessScreen) {
       return (
         <SuccessModalContent
-          imageUrl="/images/createCause.jpg"
+          imageUrl="/images/createCause.svg"
           titleKey="login_modal.success_screen.title"
           contentKey="login_modal.success_screen.text"
         />

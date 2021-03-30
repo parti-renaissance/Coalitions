@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import {
   Container,
   CoalitionName,
@@ -10,8 +10,8 @@ import {
 } from './Header.style';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
-import { getIsMobile } from 'services/mobile/mobile';
 import HeaderButtons from '../HeaderButtons';
+import { Menu, MenuItem } from '@material-ui/core';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -20,15 +20,17 @@ interface HeaderProps {
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting }) => {
-  let nav: any;
-  nav = navigator;
-  const isMobile = getIsMobile();
+  const [openShareMenu, setOpenShareMenu] = useState(false);
+  // To fix with a global type definition, once behaviour is validated
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const nav: any = navigator;
   const isAbleToUseShareApi = nav?.share !== undefined;
 
   const handleShareClick = () => {
     if (isAbleToUseShareApi) {
       nav.share({ url: window.location.href, title: cause.name, text: cause.name });
     } else {
+      setOpenShareMenu(!openShareMenu);
     }
   };
 
@@ -42,11 +44,33 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
             ) : null}
             <CauseName>{cause.name}</CauseName>
           </div>
-          {isMobile && (
-            <ShareButtonContainer>
-              <ShareButton onClick={handleShareClick} src="/images/share.svg" />
-            </ShareButtonContainer>
-          )}
+          <ShareButtonContainer>
+            <ShareButton onClick={handleShareClick} src="/images/share.svg" />
+            <Menu open={openShareMenu}>
+              <MenuItem>
+                <a
+                  href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(
+                    window.location.href,
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Facebook
+                </a>
+              </MenuItem>
+              <MenuItem>
+                <a
+                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                    window.location.href,
+                  )}&text=${cause.name}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Twitter
+                </a>
+              </MenuItem>
+            </Menu>
+          </ShareButtonContainer>
         </NameAndShareWrapper>
         <AuthorAndSupportsWrapper>
           <AuthorAndSupports cause={cause} showAuthor />

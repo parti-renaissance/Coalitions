@@ -25,3 +25,20 @@ export const CauseName = styled.h1`
   ${fonts.h1Small};
   color: ${colorPalette.greyDark};
 `;
+
+export const NameAndShareWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const ShareButtonContainer = styled.div`
+  padding-left: ${getSpacing(9)};
+`;
+
+const SHARE_BUTTON_SIZE = '24px';
+
+export const ShareButton = styled.img`
+  height: ${SHARE_BUTTON_SIZE};
+  width: ${SHARE_BUTTON_SIZE};
+`;

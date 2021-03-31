@@ -8,7 +8,7 @@ interface VideoProps {
 }
 
 const PLAYER_DIMENSIONS = {
-  height: 390,
+  height: 360,
   width: 640,
 };
 

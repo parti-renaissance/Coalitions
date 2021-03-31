@@ -3,8 +3,8 @@ import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import debounce from 'lodash/debounce';
 
-type APIErrorsType = Response | Error;
-type DefaultHandlerType = (error?: APIErrorsType) => string;
+export type APIErrorsType = Response | Error;
+type DefaultHandlerType = (error?: APIErrorsType) => string | null;
 
 const ERROR_MESSAGES = {
   default: "Une erreur s'est produite. Merci de réessayer plus tard.",
@@ -27,7 +27,8 @@ export default class HandleErrorService {
     if (!defaultHandler) {
       return defaultMessage;
     }
-    return defaultHandler(error) || defaultMessage;
+    const errorMessage = defaultHandler(error);
+    return errorMessage !== null ? errorMessage : defaultMessage;
   }
 
   static getErrorMessage(error?: APIErrorsType, defaultHandler?: DefaultHandlerType) {

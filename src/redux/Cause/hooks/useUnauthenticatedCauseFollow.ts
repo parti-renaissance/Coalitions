@@ -5,9 +5,29 @@ import { useDispatch } from 'react-redux';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
-import HandleErrorService from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
 import { coalitionApiClient } from 'services/networking/client';
 import { optimisticallyIncrementCauseFollower } from '../slice';
+
+const useUnauthenticatedCauseFollowErrorHandler = () => {
+  const { formatMessage } = useIntl();
+
+  return useCallback(
+    (error?: APIErrorsType) => {
+      if (error instanceof Response || error === undefined || error.message === undefined) {
+        return null;
+      }
+      if (error.message.includes('Vous avez déjà soutenu cette cause')) {
+        return formatMessage({ id: 'errors.already-followed-cause' });
+      }
+      if (error.message.includes('utilisateur avec cette adresse e-mail existe déjà')) {
+        return formatMessage({ id: 'errors.mail-of-existing-account' });
+      }
+      return null;
+    },
+    [formatMessage],
+  );
+};
 
 type UnauthenticatedCauseFollowPayload = {
   email_address: string;
@@ -21,6 +41,7 @@ type UnauthenticatedCauseFollowPayload = {
 export const useUnauthenticatedCauseFollow = (causeId: string) => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
+  const errorHandler = useUnauthenticatedCauseFollowErrorHandler();
 
   const [{ loading, error }, doUnauthenticatedCauseFollow] = useTypedAsyncFn(
     async (payload: UnauthenticatedCauseFollowPayload) => {
@@ -31,9 +52,9 @@ export const useUnauthenticatedCauseFollow = (causeId: string) => {
 
   useEffect(() => {
     if (error !== undefined) {
-      HandleErrorService.showErrorSnackbar(error);
+      HandleErrorService.showErrorSnackbar(error, errorHandler);
     }
-  }, [error]);
+  }, [error, errorHandler]);
 
   const unauthenticatedCauseFollow = useCallback(
     async (values: InscriptionFormValues) => {

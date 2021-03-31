@@ -177,5 +177,9 @@
   },
   "legal_notice": {
     "title": "Mentions légales"
+  },
+  "errors": {
+    "already-followed-cause": "Vous avez déjà soutenu cette cause.",
+    "mail-of-existing-account": "L'utilisateur avec cette adresse e-mail existe déjà. Veuillez vous connecter pour soutenir la cause."
   }
 }

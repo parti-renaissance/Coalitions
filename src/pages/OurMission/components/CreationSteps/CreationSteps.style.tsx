@@ -14,8 +14,7 @@ const DESKTOP_MARGIN_BETWEEN_STEPS = SPACING_UNIT * 10;
 
 export const Container = styled.div`
   background-color: ${colorPalette.mintGreen};
-  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile} ${getSpacing(3)}
-    ${defaultMargins.horizontal.mobile};
+  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)}

@@ -12,6 +12,7 @@ import {
   DesktopVideoWrapper,
   CreateCauseButtonWrapper,
   Bold,
+  OurCommitmentsWrapper,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
 import Cause from 'components/Cause';
@@ -31,6 +32,7 @@ import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { useHistory } from 'react-router';
 import { usePublishedCause } from './usePublishedCause';
 import Video from 'components/Video';
+import OurCommitments from 'components/OurCommitments';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
@@ -106,6 +108,9 @@ const Home: React.FunctionComponent = () => {
         <CoalitionCardsWrapper>
           <CoalitionCards onCoalitionClick={onCoalitionClick} responsiveNbOfCardsByLine />
         </CoalitionCardsWrapper>
+        <OurCommitmentsWrapper>
+          <OurCommitments />
+        </OurCommitmentsWrapper>
       </Block>
       <CreateCauseCTA displayLinkToCauseList />
       {renderSuccessModal()}

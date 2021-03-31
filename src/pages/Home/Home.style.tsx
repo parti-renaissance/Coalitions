@@ -126,3 +126,10 @@ export const CreateCauseButtonWrapper = styled.div`
 export const Bold = styled.span`
   font-weight: ${fontWeight.bold};
 `;
+
+export const OurCommitmentsWrapper = styled.div`
+  margin-top: ${defaultMargins.vertical.mobile};
+  ${media.desktop(`
+    margin-top: ${defaultMargins.vertical.desktop};
+  `)}
+`;

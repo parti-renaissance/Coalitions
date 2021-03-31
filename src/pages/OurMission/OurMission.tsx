@@ -5,7 +5,8 @@ import FixedBottomButton from 'components/FixedBottomButton';
 import { PATHS } from 'routes';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router';
-// import { VideoWrapper } from './OurMission.style';
+import OurCommitments from 'components/OurCommitments';
+import { OurCommitmentsWrapper } from './OurMission.style';
 // import Video from 'components/Video';
 
 const OurMission: FunctionComponent = () => {
@@ -22,6 +23,9 @@ const OurMission: FunctionComponent = () => {
         <Video videoId="KD6egRRsZ_Q" />
       </VideoWrapper> */}
       <CreationSteps />
+      <OurCommitmentsWrapper>
+        <OurCommitments />
+      </OurCommitmentsWrapper>
       <FixedBottomButton onClick={onCreateCauseClick}>
         <FormattedMessage id="cause-cta.cause-creation" />
       </FixedBottomButton>

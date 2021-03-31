@@ -10,3 +10,10 @@ export const VideoWrapper = styled.div`
     padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)}
 `;
+
+export const OurCommitmentsWrapper = styled.div`
+  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile}};
+  ${media.desktop(`
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+  `)};
+`;

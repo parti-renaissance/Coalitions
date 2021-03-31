@@ -3,10 +3,10 @@ import { colorPalette, media, getSpacing, fonts, defaultMargins } from 'styleshe
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`
-  background-color: ${colorPalette.greyLight};
   padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
     ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
+    background-color: ${colorPalette.greyLight};
     padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)};
 `;

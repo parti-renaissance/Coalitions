@@ -21,3 +21,7 @@ export const Label = styled.div`
   color: ${colorPalette.greyDark};
   font-weight: ${fontWeight.normal};
 `;
+
+export const Asterisk = styled.span`
+  color: ${colorPalette.red};
+`;

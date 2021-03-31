@@ -76,10 +76,9 @@ const LoginModal = <OtherFormValues,>({
             <FormattedMessage id="login_modal.connect" />
           </ConnectLink>
         </Connect>
-        <CreateAccountForm<OtherFormValues>
+        <CreateAccountForm
           doAfterAccountCreation={doAfterAccountCreation}
           doingAfterAccountCreation={doingAfterAccountCreation}
-          AdditionalFields={AdditionalFields}
         />
       </>
     );

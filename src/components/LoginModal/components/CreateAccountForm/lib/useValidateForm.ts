@@ -4,27 +4,43 @@ export interface FormValues {
   firstName?: string;
   email?: string;
   cityId?: string;
+  cguAgreement?: boolean;
+  causeMailAgreement?: boolean;
+  coalitionMailAgreement?: boolean;
 }
 
-export const useValidateForm = <OtherFormValues>() => {
+type ErrorForm = {
+  firstName?: string;
+  email?: string;
+  cityId?: string;
+  cguAgreement?: string;
+};
+
+const isFieldEmpty = (value: string | undefined) => value === undefined || value.length === 0;
+
+export const useValidateForm = () => {
   const intl = useIntl();
 
-  const validateForm = ({ firstName, email, cityId }: FormValues & OtherFormValues) => {
-    const errors = {} as FormValues & OtherFormValues;
+  const validateForm = ({ firstName, email, cityId, cguAgreement }: FormValues) => {
+    const errors = {} as ErrorForm;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
 
-    if (firstName === undefined || firstName.length === 0) {
+    if (isFieldEmpty(firstName)) {
       errors.firstName = requiredErrorMessage;
     }
 
-    if (email === undefined || email.length === 0) {
+    if (isFieldEmpty(email)) {
       errors.email = requiredErrorMessage;
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+    } else if (email !== undefined && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
       errors.email = intl.formatMessage({ id: 'form_errors.invalid-email' });
     }
 
-    if (cityId === undefined || cityId.length === 0) {
+    if (isFieldEmpty(cityId)) {
       errors.cityId = requiredErrorMessage;
+    }
+
+    if (cguAgreement === undefined || cguAgreement === false) {
+      errors.cguAgreement = requiredErrorMessage;
     }
 
     return errors;

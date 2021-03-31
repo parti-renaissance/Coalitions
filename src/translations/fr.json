@@ -28,13 +28,12 @@
     "fetch-github-avatar": "Affiche l'avatar github",
     "add-github-username": "Entrer un username github"
   },
-  "login": {
-    "title": "Démarrer un projet Theodo en quelques secondes",
-    "login-button": "Connexion",
-    "email": "E-mail",
-    "email-placeholder": "ex: comes@theodo.fr",
-    "password": "Mot de passe",
-    "password-placeholder": "xxxxxxxxxxx"
+  "inscription": {
+    "title": "Inscription",
+    "submit-button": "M'inscrire",
+    "agree-cgu": "J'adhère à la charte des valeurs, ainsi qu'aux conditions générales d'utilisation et à la politique de protection des données à caractère personnel de la Plateforme.",
+    "agree-mail-cause": "Tenez-moi informé(e) par email de l'actualité des causes que je soutiens.",
+    "agree-mail-coalition": "Tenez-moi informé(e) par email de l'actualité des coalitions que je suis."
   },
   "cause_list": {
     "title": "Liste des causes ",

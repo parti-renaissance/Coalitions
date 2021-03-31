@@ -1,5 +1,5 @@
-import React, { FunctionComponent, ChangeEvent } from 'react';
-import { CircularProgress } from '@material-ui/core';
+import React from 'react';
+import { Checkbox, CircularProgress, FormControlLabel } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
@@ -15,34 +15,33 @@ import { FullWidthButton } from 'components/Button/Button';
 import { useCreateAccount } from './useCreateAccount';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { ValidateButtonContainer } from 'components/Modal/Modal.style';
+import { Label, Asterisk } from 'components/IconAndLabel/IconAndLabel.style';
+import { FormControlLabelWrapper } from 'components/LoginAndSupportModal/LoginAndSupportModal.style';
 
-interface CreateAccountFormProps<OtherFormValues> {
-  AdditionalFields?: FunctionComponent<{
-    onChange: (e: ChangeEvent) => void;
-    values: OtherFormValues & FormValues;
-  }>;
-  doAfterAccountCreation: () => Promise<void>;
+interface CreateAccountFormProps {
+  doAfterAccountCreation?: () => Promise<void>;
   doingAfterAccountCreation?: boolean;
 }
 
-const CreateAccountForm = <OtherFormValues,>({
-  AdditionalFields,
+const CreateAccountForm = ({
   doAfterAccountCreation,
   doingAfterAccountCreation,
-}: CreateAccountFormProps<OtherFormValues>) => {
+}: CreateAccountFormProps) => {
   const intl = useIntl();
-  const { validateForm } = useValidateForm<OtherFormValues>();
+  const { validateForm } = useValidateForm();
   const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
   const { loading, createAccount } = useCreateAccount();
 
   const handleAccountCreation = async () => {
     await createAccount();
-    await doAfterAccountCreation();
+    if (doAfterAccountCreation !== undefined) {
+      await doAfterAccountCreation();
+    }
   };
 
   return (
     <Formik
-      initialValues={{} as FormValues & OtherFormValues}
+      initialValues={{} as FormValues}
       validate={validateForm}
       onSubmit={handleAccountCreation}
     >
@@ -117,9 +116,61 @@ const CreateAccountForm = <OtherFormValues,>({
               )}
             />
           </InputFieldWrapper>
-          {AdditionalFields !== undefined ? (
-            <AdditionalFields onChange={handleChange} values={values} />
-          ) : null}
+          <FormControlLabelWrapper>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  color="primary"
+                  onChange={handleChange}
+                  checked={values.cguAgreement}
+                  size="small"
+                  name="cguAgreement"
+                />
+              }
+              label={
+                <Label>
+                  {intl.formatMessage({ id: 'inscription.agree-cgu' })}
+                  <Asterisk>*</Asterisk>
+                </Label>
+              }
+            />
+          </FormControlLabelWrapper>
+          <FormControlLabelWrapper>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  color="primary"
+                  onChange={handleChange}
+                  checked={values.causeMailAgreement}
+                  size="small"
+                  name="causeMailAgreement"
+                />
+              }
+              label={
+                <Label>
+                  {<Label>{intl.formatMessage({ id: 'inscription.agree-mail-cause' })}</Label>}
+                </Label>
+              }
+            />
+          </FormControlLabelWrapper>
+          <FormControlLabelWrapper>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  color="primary"
+                  onChange={handleChange}
+                  checked={values.coalitionMailAgreement}
+                  size="small"
+                  name="coalitionMailAgreement"
+                />
+              }
+              label={
+                <Label>
+                  {<Label>{intl.formatMessage({ id: 'inscription.agree-mail-coalition' })}</Label>}
+                </Label>
+              }
+            />
+          </FormControlLabelWrapper>
           <ValidateButtonContainer>
             <FullWidthButton
               disabled={

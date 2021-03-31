@@ -1,6 +1,7 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import * as coalitionsHooks from 'redux/Coalition/hooks';
+import * as service from './service';
 
 import { TestProvider } from 'services/test/TestProvider';
 import { COALITIONS_STORE } from 'redux/Coalition/fixtures';
@@ -86,5 +87,25 @@ describe('<CoalitionsFilter />', () => {
     expect(handleCoalitionsFilterClickMock).toHaveBeenCalledWith([
       '76f36b12-76ab-11eb-8125-42010a840071',
     ]);
+  });
+
+  it('should initialize filter without search params', async () => {
+    const mockUseCoalitionsFilter = {
+      allSelected: false,
+      selectedCoalitions: [],
+      handleClickOnChips: jest.fn(),
+      onClickOnChips: jest.fn(),
+    };
+    const handleCoalitionsFilterClickMock = jest.fn();
+    jest
+      .spyOn(coalitionsHooks, 'useFetchCoalitions')
+      .mockImplementation(() => mockUseFetchCoalitions);
+    jest.spyOn(service, 'useCoalitionsFilter').mockImplementation(() => mockUseCoalitionsFilter);
+    mount(
+      <TestProvider partialState={{ coalition: COALITIONS_STORE }}>
+        <CoalitionsFilter handleCoalitionsFilterClick={handleCoalitionsFilterClickMock} />
+      </TestProvider>,
+    );
+    expect(mockUseCoalitionsFilter.handleClickOnChips).toHaveBeenCalledWith(null);
   });
 });

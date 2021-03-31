@@ -21,7 +21,7 @@ export const Inscription: React.FunctionComponent = () => {
             <FormattedMessage id="login_modal.connect" />
           </ConnectLink>
         </Connect>
-        <CreateAccountForm />
+        <CreateAccountForm isInPage />
       </InscriptionFormWrapper>
     </InscriptionContainer>
   );

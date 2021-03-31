@@ -21,17 +21,18 @@ import { FormControlLabelWrapper } from 'components/LoginAndSupportModal/LoginAn
 interface CreateAccountFormProps {
   doAfterAccountCreation?: () => Promise<void>;
   doingAfterAccountCreation?: boolean;
+  isInPage?: boolean;
 }
 
 const CreateAccountForm = ({
   doAfterAccountCreation,
   doingAfterAccountCreation,
+  isInPage = false,
 }: CreateAccountFormProps) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
   const { loading, createAccount } = useCreateAccount();
-
   const handleAccountCreation = async () => {
     await createAccount();
     if (doAfterAccountCreation !== undefined) {
@@ -171,7 +172,7 @@ const CreateAccountForm = ({
               }
             />
           </FormControlLabelWrapper>
-          <ValidateButtonContainer>
+          <ValidateButtonContainer isInPage={isInPage}>
             <FullWidthButton
               disabled={
                 isSubmitting ||
@@ -194,5 +195,4 @@ const CreateAccountForm = ({
     </Formik>
   );
 };
-
 export default CreateAccountForm;

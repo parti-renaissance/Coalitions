@@ -1,7 +1,7 @@
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import { Close } from '@material-ui/icons';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colorPalette, media, getSpacing, styledTags } from 'stylesheet';
 
 export const StyledDialog = styled(Dialog)`
@@ -55,15 +55,25 @@ export const Title = styled.h3`
   `)}
 `;
 
-export const ValidateButtonContainer = styled.div`
-  position: fixed;
-  padding: ${getSpacing(3)};
-  bottom: 0;
-  left: 0;
-  right: 0;
-  ${media.desktop(`
+export const ValidateButtonContainer = styled.div<{ isInPage: boolean }>`
+  ${({ isInPage }) =>
+    isInPage
+      ? css`
+          margin: ${getSpacing(4)} 0;
+          ${media.desktop(`
+    margin: ${getSpacing(10)} 0;
+  `)}
+        `
+      : css`
+          position: fixed;
+          padding: ${getSpacing(3)};
+          bottom: 0;
+          left: 0;
+          right: 0;
+          ${media.desktop(`
     position: relative;
     padding: unset;
     margin-top: ${getSpacing(10)};
   `)}
+        `}
 `;

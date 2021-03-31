@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { coalitionApiClient } from 'services/networking/client';
@@ -14,6 +14,12 @@ export const useFetchCoalitions = () => {
     [],
   );
 
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error);
+    }
+  }, [error]);
+
   const fetchCoalitions = useCallback(async () => {
     const coalitions: Coalition[] = await doFetchCoalitions();
 
@@ -23,10 +29,6 @@ export const useFetchCoalitions = () => {
 
     dispatch(updateCoalitions(coalitions));
   }, [dispatch, doFetchCoalitions]);
-
-  if (error) {
-    HandleErrorService.showErrorSnackbar(error);
-  }
 
   return { fetchCoalitions, isFetchingCoalitions };
 };

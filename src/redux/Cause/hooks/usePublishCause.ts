@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -26,6 +26,12 @@ export const usePublishCause = () => {
     await new Promise(resolve => setTimeout(resolve, 1000));
   }, []);
 
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error);
+    }
+  }, [error]);
+
   const publishCause = useCallback(async () => {
     const response = await doPublishCause();
     if (response instanceof Error) return;
@@ -40,8 +46,5 @@ export const usePublishCause = () => {
     dispatch(cleanInCreationCause());
   }, [dispatch, doPublishCause, formatMessage, push]);
 
-  if (error !== undefined) {
-    HandleErrorService.showErrorSnackbar(error);
-  }
   return { loading, error, publishCause };
 };

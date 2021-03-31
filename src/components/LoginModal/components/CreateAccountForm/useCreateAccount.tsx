@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { updateSnackbar } from 'redux/Snackbar';
@@ -15,6 +15,12 @@ export const useCreateAccount = () => {
     await new Promise(resolve => setTimeout(resolve, 1000));
   }, []);
 
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error);
+    }
+  }, [error]);
+
   const createAccount = useCallback(async () => {
     const response = await doCreateAccount();
 
@@ -27,10 +33,6 @@ export const useCreateAccount = () => {
       }),
     );
   }, [dispatch, doCreateAccount, formatMessage]);
-
-  if (error !== undefined) {
-    HandleErrorService.showErrorSnackbar(error);
-  }
 
   return { loading, error, createAccount };
 };

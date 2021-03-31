@@ -2,7 +2,7 @@ import { coalitionApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
 import { markCausesAsSupported, resetCauses, updateCauses, updateOneCause } from '../slice';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { Cause } from '../types';
 import { useFetchFollowedCauses } from './useFetchFollowedCauses';
 import HandleErrorService from 'services/HandleErrorService';
@@ -28,6 +28,12 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
       await coalitionApiClient.get(`causes?page_size=${pageSize}&page=${page}${coalitionsFilter}`),
     [],
   );
+
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error);
+    }
+  }, [error]);
 
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 
@@ -71,10 +77,6 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
     [hasMore, fetch, page],
   );
 
-  if (error) {
-    HandleErrorService.showErrorSnackbar(error);
-  }
-
   return {
     hasMore,
     loading: loadingFetch || loadingFollowed,
@@ -90,6 +92,12 @@ export const useFetchOneCause = (id: string) => {
     async () => await coalitionApiClient.get(`causes/${id}`),
     [],
   );
+
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error);
+    }
+  }, [error]);
 
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 
@@ -110,10 +118,6 @@ export const useFetchOneCause = (id: string) => {
     },
     [dispatch, doFetchCause, doFetchFollowedCauses],
   );
-
-  if (error) {
-    HandleErrorService.showErrorSnackbar(error);
-  }
 
   return { loading: loading || loadingFollowed, fetchCause };
 };

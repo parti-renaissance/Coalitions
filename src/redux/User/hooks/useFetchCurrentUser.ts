@@ -1,7 +1,7 @@
 import { authenticatedApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { updateCurrentUser } from '../slice';
 import HandleErrorService from 'services/HandleErrorService';
 
@@ -12,6 +12,12 @@ export const useFetchCurrentUser = () => {
     async () => await authenticatedApiClient.get('me'),
     [],
   );
+
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error);
+    }
+  }, [error]);
 
   const fetch = useCallback(async () => {
     const currentUser = await doFetchCurrentUser();
@@ -28,10 +34,6 @@ export const useFetchCurrentUser = () => {
       }),
     );
   }, [dispatch, doFetchCurrentUser]);
-
-  if (error) {
-    HandleErrorService.showErrorSnackbar(error);
-  }
 
   return {
     isFetchingCurrentUser: loading,

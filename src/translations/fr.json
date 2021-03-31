@@ -179,7 +179,8 @@
     "title": "Mentions légales"
   },
   "errors": {
-    "already-followed-cause": "Vous avez déjà soutenu cette cause.",
+    "already-followed-cause-for-unauthenticated": "Vous soutenez déjà cette cause, connectez-vous ou créez un compte pour aller plus loin",
+    "already-followed-cause": "Vous soutenez déjà cette cause.",
     "mail-of-existing-account": "L'utilisateur avec cette adresse e-mail existe déjà. Veuillez vous connecter pour soutenir la cause."
   }
 }

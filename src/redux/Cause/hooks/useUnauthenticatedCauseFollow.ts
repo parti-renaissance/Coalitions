@@ -18,7 +18,7 @@ const useUnauthenticatedCauseFollowErrorHandler = () => {
         return null;
       }
       if (error.message.includes('Vous avez déjà soutenu cette cause')) {
-        return formatMessage({ id: 'errors.already-followed-cause' });
+        return formatMessage({ id: 'errors.already-followed-cause-for-unauthenticated' });
       }
       if (error.message.includes('utilisateur avec cette adresse e-mail existe déjà')) {
         return formatMessage({ id: 'errors.mail-of-existing-account' });

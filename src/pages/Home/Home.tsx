@@ -2,14 +2,14 @@ import * as React from 'react';
 import {
   Block,
   TopPartContainer,
-  TopPartSubContainer,
   Title,
   Content,
   CoalitionCardsWrapper,
   CauseCardsWrapper,
   CausesHeader,
   SeeAllButton,
-  VideoWrapper,
+  MobileVideoWrapper,
+  DesktopVideoWrapper,
   CreateCauseButtonWrapper,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
@@ -45,13 +45,16 @@ const Home: React.FunctionComponent = () => {
     fetchFirstPage([], isUserLoggedIn);
   }, [fetchFirstPage, isUserLoggedIn]);
 
+  const renderVideo = () => <Video videoId="KD6egRRsZ_Q" />;
+
   return (
     <>
       <TopPartContainer>
-        <TopPartSubContainer>
+        <div>
           <Title>
             <FormattedMessage id="our_mission.title" />
           </Title>
+          <MobileVideoWrapper>{renderVideo()}</MobileVideoWrapper>
           <h3>
             <FormattedMessage id="our_mission.our-mission" />
           </h3>
@@ -65,10 +68,8 @@ const Home: React.FunctionComponent = () => {
               </MediumLargeButton>
             </DefaultLink>
           </CreateCauseButtonWrapper>
-        </TopPartSubContainer>
-        <VideoWrapper>
-          <Video videoId="KD6egRRsZ_Q" />
-        </VideoWrapper>
+        </div>
+        <DesktopVideoWrapper>{renderVideo()}</DesktopVideoWrapper>
       </TopPartContainer>
       <CauseDefinition />
       <Block>

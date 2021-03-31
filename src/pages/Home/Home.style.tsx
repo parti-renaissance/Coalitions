@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { colorPalette, fonts, getSpacing, media, defaultMargins } from 'stylesheet';
 
+const TEXT_MAX_WIDTH = getSpacing(140);
+
 export const Block = styled.div`
   padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
@@ -9,23 +11,14 @@ export const Block = styled.div`
 `;
 
 export const TopPartContainer = styled.div`
-  ${media.desktop(`
-    ${media.largeDesktop(`
-      display: flex;
-      background-color: ${colorPalette.greyLight};
-      padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
-    `)}
-  `)}
-`;
-
-export const TopPartSubContainer = styled.div`
-  background-color: ${colorPalette.greyLight};
   padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
     ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
+    background-color: ${colorPalette.greyLight};
     padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
     ${media.largeDesktop(`
-      padding: unset;
+      display: flex;
+      align-items: center;
     `)}
   `)}
 `;
@@ -33,12 +26,24 @@ export const TopPartSubContainer = styled.div`
 export const Content = styled.p`
   color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(2)};
+  ${media.desktop(`
+    max-width: ${TEXT_MAX_WIDTH};
+    ${media.largeDesktop(`
+      max-width: unset;
+    `)}
+  `)}
 `;
 
 export const Title = styled.h1`
   ${fonts.h1};
   color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(7)};
+  ${media.desktop(`
+    max-width: ${TEXT_MAX_WIDTH};
+    ${media.largeDesktop(`
+      max-width: unset;
+    `)}
+  `)}
 `;
 
 export const CoalitionCardsWrapper = styled.div`
@@ -93,17 +98,20 @@ export const SeeAllButton = styled.p`
   margin-left: ${getSpacing(1)};
 `;
 
-export const VideoWrapper = styled.div`
+export const DesktopVideoWrapper = styled.div`
+  display: none;
+  ${media.largeDesktop(`
+    display: flex;
+    margin-left: ${getSpacing(16)};
+  `)}
+`;
+
+export const MobileVideoWrapper = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
-  ${media.desktop(`
-    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
-    ${media.largeDesktop(`
-      margin-left: ${getSpacing(16)};
-      padding: unset;
-    `)}
+  margin-bottom: ${defaultMargins.vertical.mobile};
+  ${media.largeDesktop(`
+      display: none;
   `)}
 `;
 

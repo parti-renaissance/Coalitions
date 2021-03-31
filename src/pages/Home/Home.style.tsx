@@ -108,7 +108,6 @@ export const DesktopVideoWrapper = styled.div`
 
 export const MobileVideoWrapper = styled.div`
   display: flex;
-  justify-content: center;
   margin-bottom: ${defaultMargins.vertical.mobile};
   ${media.largeDesktop(`
       display: none;

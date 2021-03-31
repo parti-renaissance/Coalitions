@@ -43,7 +43,8 @@ export const BurgerIcon = styled.img`
 `;
 
 export const StyledButton = styled(MediumLargeButton)`
-  ${fonts.input};
+  ${fonts.button};
+  font-weight: ${fontWeight.normal};
   color: ${colorPalette.black};
   padding: 0 ${getSpacing(2)};
   min-width: unset;
@@ -52,19 +53,21 @@ export const StyledButton = styled(MediumLargeButton)`
   `)}
 `;
 
-const DESKTOP_LOGO_FONT_SIZE = '21px';
+const DESKTOP_LOGO_FONT_WEIGHT = 700;
+const LOGO_LETTER_SPACING = '1.5px';
 
 export const HeaderTitle = styled.div`
-  ${fonts.input};
+  ${fonts.button};
   color: ${colorPalette.black};
   min-height: ${FULL_WIDTH_BUTTON_HEIGHT};
-  font-family: ${fontFamily.secondary};
+  font-family: ${fontFamily.primary};
+  font-weight: ${DESKTOP_LOGO_FONT_WEIGHT};
   display: flex;
   align-items: center;
   padding: 0 ${getSpacing(2)};
+  letter-spacing: ${LOGO_LETTER_SPACING};
   ${media.desktop(`
     padding: 0 ${getSpacing(5)};
-    font-size: ${DESKTOP_LOGO_FONT_SIZE};
   `)}
 `;
 

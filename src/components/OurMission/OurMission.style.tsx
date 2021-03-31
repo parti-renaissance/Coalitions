@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing, fontWeight, fonts, defaultMargins } from 'stylesheet';
+import { colorPalette, media, getSpacing, fonts, defaultMargins } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`
@@ -17,15 +17,9 @@ export const SubContainer = styled.div`
   `)}
 `;
 
-export const SubTitle = styled.h3`
-  color: ${colorPalette.greyDark};
-  margin-top: ${getSpacing(7)};
-  font-weight: ${fontWeight.bold};
-`;
-
 export const Content = styled.p`
   color: ${colorPalette.greyDark};
-  margin-top: ${getSpacing(2)};
+  margin-top: ${getSpacing(7)};
 `;
 
 export const Image = styled.img`

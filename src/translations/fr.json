@@ -1,12 +1,12 @@
 {
   "header": {
-    "login": "Connexion",
-    "logout": "Déconnexion",
+    "login": "Me connecter",
+    "logout": "Me déconnecter",
     "app-name": "Pourunecause.fr",
     "causes": "Causes",
     "coalitions": "Coalitions",
     "cause-creation": "Je crée ma cause",
-    "profile": "Profil",
+    "profile": "Mon profil",
     "home": "Accueil"
   },
   "footer": {
@@ -16,29 +16,41 @@
     "charter-of-values": "Charte des valeurs"
   },
   "home": {
-    "support-causes": "Soutenez des causes",
+    "support-causes": "Soutenez les causes",
+    "title": "Faire des causes de chacun le moteur de notre action collective",
+    "explanation": "Citoyens, collectifs, associations, nous avons tous à coeur d’agir pour construire un monde meilleur. Nous avons tous des idées, des combats, des causes qui nous sont chères.",
+    "explanation-part-2": "Nos engagements ?",
+    "explanation-part-3": "Vous donner les moyens de les faire grandir et les rendre concrètes.",
     "published_cause_modal": {
-      "title": "Cause enregistrée !",
+      "title": "Cause enregistrée\u00A0!",
       "content": "Votre cause a été enregistrée. Nous vous avertirons par email dès qu’elle sera validée."
     }
   },
   "page": {
     "back": "Retour",
-    "api-to-translate-example": "Ce message est traduit en utilisant directement l'API react-intl",
-    "fetch-github-avatar": "Affiche l'avatar github",
+    "api-to-translate-example": "Ce message est traduit en utilisant directement l’API react-intl",
+    "fetch-github-avatar": "Affiche l’avatar github",
     "add-github-username": "Entrer un username github"
   },
+  "login": {
+    "title": "Démarrer un projet Theodo en quelques secondes",
+    "login-button": "Connexion",
+    "email": "E-mail",
+    "email-placeholder": "ex: comes@theodo.fr",
+    "password": "Mot de passe",
+    "password-placeholder": "xxxxxxxxxxx"
+  },
   "inscription": {
-    "title": "Inscription",
-    "submit-button": "M'inscrire",
-    "agree-cgu": "J'adhère à la charte des valeurs, ainsi qu'aux conditions générales d'utilisation et à la politique de protection des données à caractère personnel de la Plateforme.",
-    "agree-mail-cause": "Tenez-moi informé(e) par email de l'actualité des causes que je soutiens.",
-    "agree-mail-coalition": "Tenez-moi informé(e) par email de l'actualité des coalitions que je suis."
+    "title": "Créez un compte",
+    "submit-button": "M’inscrire",
+    "agree-cgu": "J’adhère à la charte des valeurs, ainsi qu’aux conditions générales d’utilisation et à la politique de protection des données à caractère personnel de la Plateforme.",
+    "agree-mail-cause": "Tenez-moi informé(e) par email de l’actualité des causes que je soutiens.",
+    "agree-mail-coalition": "Tenez-moi informé(e) par email de l’actualité des coalitions que je suis."
   },
   "cause_list": {
     "title": "Liste des causes ",
-    "description": "Voici la liste des causes recensées sur la plateforme, vous pouvez soutenir chacune d’entre elles ou créer la vôtre.",
-    "no_cause": "Aucune cause n'a été trouvée"
+    "description": "Vous pouvez soutenir une cause existante ou créer la vôtre.",
+    "no_cause": "Aucune cause ne correspond à votre filtre."
   },
   "cause": {
     "author": "Par {firstName} {lastNameInitial}",
@@ -48,8 +60,8 @@
     "supported": "Soutenue",
     "see-button": "Voir",
     "confirm-support": "Confirmez votre soutien",
-    "accept-evolution-email": "J’accepte d’être tenu au courant par email de l’évolution de cette cause",
-    "join-coalition": "Je rejoins la Coalition {coalitionName}et j’accepte de recevoir les actualités de la coalition",
+    "accept-evolution-email": "Tenez-moi informé(e) par email de l’actualité des causes que je soutiens.",
+    "join-coalition": "Tenez-moi informé(e) par email de l’actualité des coalitions que je suis.",
     "about": {
       "title": "À propos",
       "by": "Par"
@@ -60,21 +72,21 @@
     "discussions": {
       "title": "Discussions"
     },
-    "what-is-it": "Qu’est-ce qu’une cause ?",
-    "definition": "C’est un combat, un cri de ralliement, presqu’un slogan. C’est un appel qu’on lance à la société et aux politiques pour mobiliser autour d’une bonne idée. La vôtre.",
+    "what-is-it": "Qu’est-ce qu’une cause\u00A0?",
+    "definition": "C’est un combat, un cri de ralliement, un appel qu’on lance à la société pour mobiliser autour d’une idée qui peut changer les choses. La vôtre.",
     "coming-feature": "Cette fonctionnalité arrive prochainement\u00A0!",
-    "empty-description": "Le porteur de cause n’a pas encore ajouté de contenu, soutenez la cause pour qu’elle aille plus loin\u00A0!"
+    "empty-description": "Le porteur de cause n’a pas encore ajouté de contenu, soutenez la cause pour la faire grandir\u00A0!"
   },
   "login_modal": {
     "first-name": "Prénom",
     "email-address": "Adresse email",
     "city-or-country": "Ville ou Pays hors France",
     "validate": "Valider",
-    "signed-up": "Déjà inscrit ?",
+    "signed-up": "Déjà inscrit\u00A0?",
     "connect": "Connectez-vous",
     "success_screen": {
       "title": "Nous vous avons envoyé un email",
-      "text": "Afin de finaliser votre inscription, veuillez suivre les instructions dans l'email que nous vous avons envoyé."
+      "text": "Afin de finaliser votre inscription, veuillez suivre les instructions dans l’email que nous vous avons envoyé."
     },
     "create_account": {
       "success": "Vous avez reçu un email de confirmation"
@@ -90,19 +102,18 @@
     "see-more": "Voir plus"
   },
   "cause-cta": {
-    "title": "Vous aussi, agissez",
+    "title": "Vous aussi, agissez\u00A0!",
     "description": "Rejoignez les {numberOfCauses} causes déjà créées.",
     "cause-creation": "Je crée ma cause",
-    "go-to-cause-list": "Je soutiens l'une des {numberOfCauses} existantes"
+    "go-to-cause-list": "Je soutiens l’une des {numberOfCauses} existantes."
   },
   "our_mission": {
-    "title": "Faire des idées de chacun une solution pour notre avenir commun",
-    "our-mission": "Notre mission",
-    "explanation": "Citoyens, associations, politiques, nous avons tous à coeur d’agir pour construire un monde meilleur. Nous avons tous des idées, des combats, des causes qui nous sont chères. Et si on se donnait les moyens de les concrétiser ?",
+    "title": "Créez votre cause en quelques minutes\u00A0!",
+    "explanation": "Parce que vous souhaitez résoudre un problème ou défendre un sujet qui vous tient à coeur. Parce qu’il faut agir maintenant pour changer les choses. Votre cause doit être entendue\u00A0!",
     "creation-steps-title": "Créer et faire connaitre sa cause c’est simple et rapide :",
-    "creation-step-one": "Je complète la page de ma cause sur la plateforme",
-    "creation-step-two": "Je reçois des conseils pour faire grandir ma communauté",
-    "creation-step-three": "Je lance une pétition, un événement, une campagne de sensibilisation pour faire vivre ma cause"
+    "creation-step-one": "Je crée ma cause sur la plateforme.",
+    "creation-step-two": "Je reçois des conseils pour mobiliser autour de ma cause et obtenir un maximum de soutiens.",
+    "creation-step-three": "Je lance des actions (pétition, consultation, événement, rencontre, action terrain) pour faire grandir ma cause."
   },
   "create_cause": {
     "validate": "Enregistrer et voir l’aperçu",
@@ -110,25 +121,25 @@
     "tips": "Conseil :",
     "title": {
       "title": "1. Quel est l’objectif de votre cause\u00A0?",
-      "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre.",
-      "placeholder": "Mon titre de cause (80 carac max.)"
+      "tips": "le titre est la première chose que les gens verront à propos de votre cause. Choisissez donc un titre accrocheur, concis avec des verbes d’action, simple à comprendre, mémorisable.",
+      "placeholder": "En une phrase de 100 caractères maximum."
     },
     "description": {
       "title": "2. Description de votre cause",
-      "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre.",
-      "description-placeholder": "Description de votre cause (optionnel)"
+      "tips": "présentez le problème que vous voulez résoudre ou le sujet que vous voulez défendre. Pourquoi cette cause compte pour vous et pourquoi il faut agir.",
+      "description-placeholder": "Description de votre cause."
     },
     "image": {
-      "title": "3. Ajouter une image",
-      "tips": "Ajoutez une image représentative de votre cause pour lui permettre d’avoir plus d’impact lorsque vous la partagerez.",
+      "title": "3. Ajoutez une image à votre cause",
+      "tips": "choisissez une photo en haute définition qui donnera envie aux autres de soutenir votre cause.",
       "update": "Modifier mon image",
       "save": "Enregistrer",
-      "importFromGallery": "Importer une photo depuis votre pellicule",
+      "importFromGallery": "Importer une photo depuis votre appareil",
       "importFromComputer": "Importer une photo depuis votre ordinateur"
     },
     "coalitions": {
-      "title": "4. Quelle est la coalition dans laquelle vous souhaitez créer cette cause\u00A0?",
-      "tips": "Essayez d’avoir un titre concis avec des verbes d’actions, votre titre doit être accrocheur et simple à comprendre.",
+      "title": "4. Quel est le thème principal de votre cause\u00A0?",
+      "tips": "le choix du thème permet de recommander aux personnes intéressées par les mêmes sujets que vous de soutenir votre cause.",
       "zero-or-one-selected-coalition": "{numberOfSelectedCoalitions} sélectionnée",
       "more-than-one-selected-coalitions": "{numberOfSelectedCoalitions} sélectionnées",
       "max-number-of-selected-coalitions": "(vous pouvez en sélectionner jusqu’à deux)"
@@ -136,18 +147,18 @@
     "success": "Votre cause a été enregistrée. Nous vous avertirons par email dès qu’elle sera validée."
   },
   "form_errors": {
-    "required": "Champ requis",
-    "invalid-email": "Email invalide",
-    "unmatched-password": "Les mots de passe ne sont pas identiques",
-    "not-long-enough-password": "Votre mot de passe doit faire au minimum 8 caractères"
+    "required": "Le champ est requis.",
+    "invalid-email": "Votre email est invalide.",
+    "unmatched-password": "Les mots de passe ne sont pas identiques.",
+    "not-long-enough-password": "Votre mot de passe doit faire au minimum 8 caractères."
   },
   "cause_preview": {
     "update": "Modifier",
     "publish": "Publier"
   },
   "coalition": {
-    "title": "Les coalitions",
+    "title": "Les coalitions thématiques",
     "what-is-it": "Qu’est-ce qu’une coalition ?",
-    "definition": "Les coalitions sont des thèmes regroupant un ensemble de causes."
+    "definition": "C’est l’ensemble des citoyens et acteurs engagés dans des causes d’une même thématique et tous ceux que la thématique intéresse. Parce qu’unis, on est plus forts\u00A0!"
   }
 }

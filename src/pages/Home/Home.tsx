@@ -11,6 +11,7 @@ import {
   MobileVideoWrapper,
   DesktopVideoWrapper,
   CreateCauseButtonWrapper,
+  Bold,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
 import Cause from 'components/Cause';
@@ -52,14 +53,20 @@ const Home: React.FunctionComponent = () => {
       <TopPartContainer>
         <div>
           <Title>
-            <FormattedMessage id="our_mission.title" />
+            <FormattedMessage id="home.title" />
           </Title>
           <MobileVideoWrapper>{renderVideo()}</MobileVideoWrapper>
-          <h3>
-            <FormattedMessage id="our_mission.our-mission" />
-          </h3>
           <Content>
-            <FormattedMessage id="our_mission.explanation" />
+            <p>
+              <FormattedMessage id="home.explanation" />
+            </p>
+            <br />
+            <p>
+              <Bold>
+                <FormattedMessage id="home.explanation-part-2" />
+              </Bold>{' '}
+              <FormattedMessage id="home.explanation-part-3" />
+            </p>
           </Content>
           <CreateCauseButtonWrapper>
             <DefaultLink to={PATHS.OUR_MISSION.url()}>

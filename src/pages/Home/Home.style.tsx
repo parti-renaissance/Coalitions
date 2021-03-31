@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, fonts, getSpacing, media, defaultMargins } from 'stylesheet';
+import { colorPalette, fonts, getSpacing, media, defaultMargins, fontWeight } from 'stylesheet';
 
 const TEXT_MAX_WIDTH = getSpacing(140);
 
@@ -23,9 +23,8 @@ export const TopPartContainer = styled.div`
   `)}
 `;
 
-export const Content = styled.p`
+export const Content = styled.div`
   color: ${colorPalette.greyDark};
-  margin-top: ${getSpacing(2)};
   ${media.desktop(`
     max-width: ${TEXT_MAX_WIDTH};
     ${media.largeDesktop(`
@@ -122,4 +121,8 @@ export const CreateCauseButtonWrapper = styled.div`
     justify-content: flex-start;
     margin-top: ${getSpacing(5)};
 `)}
+`;
+
+export const Bold = styled.span`
+  font-weight: ${fontWeight.bold};
 `;

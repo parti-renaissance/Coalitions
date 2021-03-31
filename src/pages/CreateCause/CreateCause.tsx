@@ -77,7 +77,7 @@ const CreateCause: FunctionComponent = () => {
                     value={values.title}
                     error={touched.title === true && errors.title !== undefined}
                     helperText={touched.title === true ? errors.title : undefined}
-                    inputProps={{ maxLength: 80 }}
+                    inputProps={{ maxLength: 100 }}
                   />
                 </InputSection>
                 <InputSection

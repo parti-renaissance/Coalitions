@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { authenticatedApiClient } from 'services/networking/client';
@@ -13,6 +13,12 @@ export const useCauseFollow = (id: string) => {
     [],
   );
 
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error);
+    }
+  }, [error]);
+
   const followCause = useCallback(async () => {
     const response = await doFollowCause();
 
@@ -24,10 +30,6 @@ export const useCauseFollow = (id: string) => {
       dispatch(optimisticallyMarkCauseAsSupported(id));
     }
   }, [dispatch, doFollowCause, id]);
-
-  if (error) {
-    HandleErrorService.showErrorSnackbar(error);
-  }
 
   return { loading, followCause };
 };

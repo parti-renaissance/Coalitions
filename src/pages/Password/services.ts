@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -61,6 +61,12 @@ export const useConfirmPassword = () => {
     [],
   );
 
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error);
+    }
+  }, [error]);
+
   const confirmPasswordAndLogin = useCallback(
     async (password: string, passwordConfirmation: string, identifier: string, token: string) => {
       const response = await doConfirmPassword({
@@ -82,8 +88,5 @@ export const useConfirmPassword = () => {
     [causeToPublish, dispatch, doConfirmPassword, push],
   );
 
-  if (error !== undefined) {
-    HandleErrorService.showErrorSnackbar(error);
-  }
   return { loading, error, confirmPasswordAndLogin };
 };

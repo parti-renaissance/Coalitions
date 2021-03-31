@@ -1,10 +1,10 @@
 import React from 'react';
-import { Checkbox, CircularProgress, FormControlLabel } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import { Formik } from 'formik';
-import { useValidateForm, FormValues } from './lib/useValidateForm';
+import { useValidateForm, InscriptionFormValues } from './lib/useValidateForm';
 import {
   useCityAndCountryAutocomplete,
   CityOrCountry,
@@ -16,10 +16,11 @@ import { useCreateAccount } from './useCreateAccount';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { ValidateButtonContainer } from 'components/Modal/Modal.style';
 import { Label, Asterisk } from 'components/IconAndLabel/IconAndLabel.style';
-import { FormControlLabelWrapper } from 'components/LoginAndSupportModal/LoginAndSupportModal.style';
+import { ModalCheckbox } from 'components/Modal/ModalCheckbox';
 
 interface CreateAccountFormProps {
   doAfterAccountCreation?: () => Promise<void>;
+  onAccountFormSubmit?: (values: InscriptionFormValues) => Promise<void>;
   doingAfterAccountCreation?: boolean;
   isInPage?: boolean;
 }
@@ -28,13 +29,18 @@ const CreateAccountForm = ({
   doAfterAccountCreation,
   doingAfterAccountCreation,
   isInPage = false,
+  onAccountFormSubmit,
 }: CreateAccountFormProps) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
   const { loading, createAccount } = useCreateAccount();
-  const handleAccountCreation = async () => {
-    await createAccount();
+  const handleAccountCreation = async (values: InscriptionFormValues) => {
+    if (onAccountFormSubmit !== undefined) {
+      onAccountFormSubmit(values);
+    } else {
+      await createAccount();
+    }
     if (doAfterAccountCreation !== undefined) {
       await doAfterAccountCreation();
     }
@@ -42,7 +48,7 @@ const CreateAccountForm = ({
 
   return (
     <Formik
-      initialValues={{} as FormValues}
+      initialValues={{} as InscriptionFormValues}
       validate={validateForm}
       onSubmit={handleAccountCreation}
     >
@@ -117,61 +123,29 @@ const CreateAccountForm = ({
               )}
             />
           </InputFieldWrapper>
-          <FormControlLabelWrapper>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange}
-                  checked={values.cguAgreement}
-                  size="small"
-                  name="cguAgreement"
-                />
-              }
-              label={
-                <Label>
-                  {intl.formatMessage({ id: 'inscription.agree-cgu' })}
-                  <Asterisk>*</Asterisk>
-                </Label>
-              }
-            />
-          </FormControlLabelWrapper>
-          <FormControlLabelWrapper>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange}
-                  checked={values.causeMailAgreement}
-                  size="small"
-                  name="causeMailAgreement"
-                />
-              }
-              label={
-                <Label>
-                  {<Label>{intl.formatMessage({ id: 'inscription.agree-mail-cause' })}</Label>}
-                </Label>
-              }
-            />
-          </FormControlLabelWrapper>
-          <FormControlLabelWrapper>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange}
-                  checked={values.coalitionMailAgreement}
-                  size="small"
-                  name="coalitionMailAgreement"
-                />
-              }
-              label={
-                <Label>
-                  {<Label>{intl.formatMessage({ id: 'inscription.agree-mail-coalition' })}</Label>}
-                </Label>
-              }
-            />
-          </FormControlLabelWrapper>
+          <ModalCheckbox
+            handleChange={handleChange}
+            value={values.cguAgreement}
+            name="cguAgreement"
+            label={
+              <Label>
+                {intl.formatMessage({ id: 'inscription.agree-cgu' })}
+                <Asterisk>*</Asterisk>
+              </Label>
+            }
+          />
+          <ModalCheckbox
+            handleChange={handleChange}
+            value={values.causeMailAgreement}
+            name="causeMailAgreement"
+            label={<Label>{intl.formatMessage({ id: 'inscription.agree-mail-cause' })}</Label>}
+          />
+          <ModalCheckbox
+            handleChange={handleChange}
+            value={values.coalitionMailAgreement}
+            name="coalitionMailAgreement"
+            label={<Label>{intl.formatMessage({ id: 'inscription.agree-mail-coalition' })}</Label>}
+          />
           <ValidateButtonContainer isInPage={isInPage}>
             <FullWidthButton
               disabled={

@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 
-export interface FormValues {
+export interface InscriptionFormValues {
   firstName?: string;
   email?: string;
   cityId?: string;
@@ -21,7 +21,7 @@ const isFieldEmpty = (value: string | undefined) => value === undefined || value
 export const useValidateForm = () => {
   const intl = useIntl();
 
-  const validateForm = ({ firstName, email, cityId, cguAgreement }: FormValues) => {
+  const validateForm = ({ firstName, email, cityId, cguAgreement }: InscriptionFormValues) => {
     const errors = {} as ErrorForm;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
 

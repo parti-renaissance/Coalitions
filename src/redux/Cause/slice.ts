@@ -53,6 +53,10 @@ const causeSlice = createSlice({
       state.causes[action.payload].followers_count =
         state.causes[action.payload].followers_count + 1;
     },
+    optimisticallyIncrementCauseFollower: (state, action: PayloadAction<string>) => {
+      state.causes[action.payload].followers_count =
+        state.causes[action.payload].followers_count + 1;
+    },
     markCausesAsSupported: (state, action: PayloadAction<string[]>) => {
       state.causes = action.payload.reduce(
         (causes, supportedCauseId) => {
@@ -77,6 +81,7 @@ export const {
   updateOneCause,
   markCausesAsSupported,
   optimisticallyMarkCauseAsSupported,
+  optimisticallyIncrementCauseFollower,
   updateInCreationCause,
   cleanInCreationCause,
 } = causeSlice.actions;

@@ -167,7 +167,7 @@ export const fontSize = {
   },
   button: {
     mobile: '16px',
-    desktop: '18px',
+    desktop: '20px',
   },
 };
 

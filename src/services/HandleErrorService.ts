@@ -7,10 +7,10 @@ type APIErrorsType = Response | Error;
 type DefaultHandlerType = (error?: APIErrorsType) => string;
 
 const ERROR_MESSAGES = {
-  default: "Une erreur s'est produite",
-  noNetwork: 'Connexion réseau insuffisante',
-  unableToJoinServer: 'Le serveur ne répond pas',
-  error500: "Une erreur serveur s'est produite",
+  default: "Une erreur s'est produite. Merci de réessayer plus tard.",
+  noNetwork: 'Votre connexion réseau est insuffisante.',
+  unableToJoinServer: 'Le serveur ne répond pas. Merci de réessayer plus tard.',
+  error500: "Une erreur serveur s'est produite. Merci de réessayer plus tard.",
 };
 
 export default class HandleErrorService {

@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import {
   Container,
-  SubTitle,
   Content,
   DesktopCreateCauseButton,
   Title,
@@ -18,7 +17,6 @@ const OurMissionHeader: FunctionComponent = () => {
     <Container>
       <SubContainer>
         <Title>{intl.formatMessage({ id: 'our_mission.title' })}</Title>
-        <SubTitle>{intl.formatMessage({ id: 'our_mission.our-mission' })}</SubTitle>
         <Content>{intl.formatMessage({ id: 'our_mission.explanation' })}</Content>
         <Link to={PATHS.CREATE_CAUSE.url()}>
           <DesktopCreateCauseButton size="small" variant="contained" color="primary">

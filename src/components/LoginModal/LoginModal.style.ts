@@ -18,4 +18,9 @@ export const ConnectLink = styled.a`
 export const ContentContainer = styled.div`
   overflow: scroll;
   padding-bottom: calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(5)});
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

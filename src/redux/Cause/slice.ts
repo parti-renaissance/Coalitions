@@ -34,7 +34,16 @@ const causeSlice = createSlice({
       state.numberOfCauses = action.payload.numberOfCauses;
     },
     updateOneCause: (state, action: PayloadAction<Cause>) => {
-      state.causes[action.payload.uuid] = action.payload;
+      state.causes[action.payload.uuid] = {
+        ...action.payload,
+        followers_count:
+          state.causes[action.payload.uuid]?.followers_count !== undefined
+            ? Math.max(
+                state.causes[action.payload.uuid].followers_count,
+                action.payload.followers_count,
+              )
+            : action.payload.followers_count,
+      };
       if (!state.ids.includes(action.payload.uuid)) {
         state.ids = [...state.ids, action.payload.uuid];
       }

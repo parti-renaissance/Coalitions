@@ -1,4 +1,12 @@
-import { getSpacing, colorPalette, fonts, media, defaultMargins, fontFamily } from 'stylesheet';
+import {
+  getSpacing,
+  colorPalette,
+  fonts,
+  media,
+  defaultMargins,
+  fontFamily,
+  fontWeight,
+} from 'stylesheet';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -16,10 +24,15 @@ export const Title = styled.h1`
   color: ${colorPalette.greyDark};
 `;
 
-export const SubTitle = styled.div`
-  ${fonts.h2};
-  font-family: ${fontFamily.secondary};
+export const SubTitle = styled.h3`
   margin-top: ${getSpacing(6)};
+  color: ${colorPalette.greyDark};
+`;
+
+export const SubSubTitle = styled.div`
+  ${fonts.p};
+  font-weight: ${fontWeight.bold};
+  margin-top: ${getSpacing(4)};
   color: ${colorPalette.greyDark};
 `;
 

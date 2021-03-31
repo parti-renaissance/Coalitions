@@ -1,16 +1,17 @@
 import React, { FunctionComponent } from 'react';
-import { Container, Title, SubTitle, ArticleTitle, Text } from './LegalPage.style';
+import { Container, Title, SubTitle, ArticleTitle, Text, SubSubTitle } from './LegalPage.style';
 import { FormattedMessage } from 'react-intl';
 
 export enum ContentType {
   SUB_TITLE = 'SUB_TITLE',
+  SUB_SUB_TITLE = 'SUB_SUB_TITLE',
   ARTICLE_TITLE = 'ARTICLE_TITLE',
   TEXT = 'TEXT',
 }
 
 type Content = {
   type: ContentType;
-  textKey: string;
+  text: string;
 };
 
 interface LegalPageProps {
@@ -19,32 +20,31 @@ interface LegalPageProps {
 }
 
 const LegalPage: FunctionComponent<LegalPageProps> = ({ titleKey, contents }) => {
-  const renderContent = ({ type, textKey }: Content) => {
-    let Container = null;
+  const renderContent = ({ type, text }: Content) => {
+    let ContentContainer = null;
 
     switch (type) {
       case ContentType.SUB_TITLE:
-        Container = SubTitle;
+        ContentContainer = SubTitle;
+        break;
+      case ContentType.SUB_SUB_TITLE:
+        ContentContainer = SubSubTitle;
         break;
       case ContentType.ARTICLE_TITLE:
-        Container = ArticleTitle;
+        ContentContainer = ArticleTitle;
         break;
       case ContentType.TEXT:
-        Container = Text;
+        ContentContainer = Text;
         break;
       default:
         break;
     }
 
-    if (Container === null) {
+    if (ContentContainer === null) {
       return null;
     }
 
-    return (
-      <Container>
-        <FormattedMessage id={textKey} />
-      </Container>
-    );
+    return <ContentContainer>{text}</ContentContainer>;
   };
 
   return (

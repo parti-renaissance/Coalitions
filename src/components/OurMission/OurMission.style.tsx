@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing, fontWeight, fonts, defaultMargins } from 'stylesheet';
+import { colorPalette, media, getSpacing, fonts, defaultMargins } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`

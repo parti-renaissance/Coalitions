@@ -11,6 +11,9 @@ const CausePreview = lazy(() => import('./pages/CausePreview'));
 const CauseList = lazy(() => import('./pages/CauseList'));
 const Password = lazy(() => import('./pages/Password'));
 const Inscription = lazy(() => import('./pages/Inscription'));
+const CookiesPolicy = lazy(() => import('./pages/CookiesPolicy'));
+const LegalNotice = lazy(() => import('./pages/LegalNotice'));
+const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'));
 
 export const PATHS = {
   HOME: {
@@ -85,9 +88,9 @@ const Routes: FunctionComponent<{}> = () => {
           <Route path={PATHS.OUR_MISSION.route} component={OurMission}></Route>
           <Route path={PATHS.CREATE_CAUSE.route} component={CreateCause}></Route>
           <Route path={PATHS.CAUSE_PREVIEW.route} component={CausePreview}></Route>
-          <Route path={PATHS.LEGAL_NOTICE.route} component={() => <div />}></Route>
-          <Route path={PATHS.COOKIES_POLICY.route} component={() => <div />}></Route>
-          <Route path={PATHS.DATA_PROTECTION_POLICY.route} component={() => <div />}></Route>
+          <Route path={PATHS.LEGAL_NOTICE.route} component={LegalNotice}></Route>
+          <Route path={PATHS.COOKIES_POLICY.route} component={CookiesPolicy}></Route>
+          <Route path={PATHS.DATA_PROTECTION_POLICY.route} component={DataProtectionPolicy}></Route>
           <Route path={PATHS.CHARTER_OF_VALUES.route} component={() => <div />}></Route>
           <Route path={PATHS.CONFIRM_PASSWORD.route} component={Password}></Route>
           <Route path={PATHS.INSCRIPTION.route} component={Inscription}></Route>

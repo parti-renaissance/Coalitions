@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox, CircularProgress, FormControlLabel } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
@@ -16,7 +16,7 @@ import { useCreateAccount } from './useCreateAccount';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { ValidateButtonContainer } from 'components/Modal/Modal.style';
 import { Label, Asterisk } from 'components/IconAndLabel/IconAndLabel.style';
-import { FormControlLabelWrapper } from 'components/LoginAndSupportModal/LoginAndSupportModal.style';
+import { ModalCheckbox } from 'components/Modal/ModalCheckbox';
 
 interface CreateAccountFormProps {
   doAfterAccountCreation?: () => Promise<void>;
@@ -123,55 +123,29 @@ const CreateAccountForm = ({
               )}
             />
           </InputFieldWrapper>
-          <FormControlLabelWrapper>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange}
-                  checked={values.cguAgreement}
-                  size="small"
-                  name="cguAgreement"
-                />
-              }
-              label={
-                <Label>
-                  {intl.formatMessage({ id: 'inscription.agree-cgu' })}
-                  <Asterisk>*</Asterisk>
-                </Label>
-              }
-            />
-          </FormControlLabelWrapper>
-          <FormControlLabelWrapper>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange}
-                  checked={values.causeMailAgreement}
-                  size="small"
-                  name="causeMailAgreement"
-                />
-              }
-              label={<Label>{intl.formatMessage({ id: 'inscription.agree-mail-cause' })}</Label>}
-            />
-          </FormControlLabelWrapper>
-          <FormControlLabelWrapper>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange}
-                  checked={values.coalitionMailAgreement}
-                  size="small"
-                  name="coalitionMailAgreement"
-                />
-              }
-              label={
-                <Label>{intl.formatMessage({ id: 'inscription.agree-mail-coalition' })}</Label>
-              }
-            />
-          </FormControlLabelWrapper>
+          <ModalCheckbox
+            handleChange={handleChange}
+            value={values.cguAgreement}
+            name="cguAgreement"
+            label={
+              <Label>
+                {intl.formatMessage({ id: 'inscription.agree-cgu' })}
+                <Asterisk>*</Asterisk>
+              </Label>
+            }
+          />
+          <ModalCheckbox
+            handleChange={handleChange}
+            value={values.causeMailAgreement}
+            name="causeMailAgreement"
+            label={<Label>{intl.formatMessage({ id: 'inscription.agree-mail-cause' })}</Label>}
+          />
+          <ModalCheckbox
+            handleChange={handleChange}
+            value={values.coalitionMailAgreement}
+            name="coalitionMailAgreement"
+            label={<Label>{intl.formatMessage({ id: 'inscription.agree-mail-coalition' })}</Label>}
+          />
           <ValidateButtonContainer isInPage={isInPage}>
             <FullWidthButton
               disabled={

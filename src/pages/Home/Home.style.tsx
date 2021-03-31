@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { colorPalette, fonts, getSpacing, media, defaultMargins } from 'stylesheet';
-import { MediumLargeButton } from 'components/Button/Button';
+
+const TEXT_MAX_WIDTH = getSpacing(140);
 
 export const Block = styled.div`
   padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
@@ -9,56 +10,27 @@ export const Block = styled.div`
   `)}
 `;
 
-export const MobileCreateCauseButtonContainer = styled.div`
-  margin: ${getSpacing(7)} 0;
-  display: flex;
-  justify-content: center;
-  ${media.desktop(`
-  display: none;
-  `)}
-`;
-
 export const TopPartContainer = styled.div`
-  display: flex;
-  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
+  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
+    ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     background-color: ${colorPalette.greyLight};
     padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
-  `)}
-`;
-
-export const TopPartSubContainer = styled.div`
-  ${media.desktop(`
-    max-width: ${getSpacing(108)};
+    ${media.largeDesktop(`
+      display: flex;
+      align-items: center;
+    `)}
   `)}
 `;
 
 export const Content = styled.p`
   color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(2)};
-`;
-
-export const Image = styled.img`
-  display: none;
   ${media.desktop(`
-    display: flex;
-    background-color: ${colorPalette.grey2};
-    margin-left: ${getSpacing(16)};
-    flex: 1;
-`)}
-`;
-
-export const DesktopCreateCauseButton = styled(MediumLargeButton)`
-  display: none;
-  ${media.desktop(`
-    display: flex;
-    margin-top: ${getSpacing(5)};
-  `)}
-`;
-
-export const MobileSupportButtonWrapper = styled.div`
-  ${media.desktop(`
-    display: none;
+    max-width: ${TEXT_MAX_WIDTH};
+    ${media.largeDesktop(`
+      max-width: unset;
+    `)}
   `)}
 `;
 
@@ -66,6 +38,12 @@ export const Title = styled.h1`
   ${fonts.h1};
   color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(7)};
+  ${media.desktop(`
+    max-width: ${TEXT_MAX_WIDTH};
+    ${media.largeDesktop(`
+      max-width: unset;
+    `)}
+  `)}
 `;
 
 export const CoalitionCardsWrapper = styled.div`
@@ -118,4 +96,31 @@ export const SeeAllButton = styled.p`
   color: ${colorPalette.blueCoalition};
   cursor: pointer;
   margin-left: ${getSpacing(1)};
+`;
+
+export const DesktopVideoWrapper = styled.div`
+  display: none;
+  ${media.largeDesktop(`
+    display: flex;
+    margin-left: ${getSpacing(16)};
+  `)}
+`;
+
+export const MobileVideoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: ${defaultMargins.vertical.mobile};
+  ${media.largeDesktop(`
+      display: none;
+  `)}
+`;
+
+export const CreateCauseButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: ${getSpacing(7)};
+  ${media.desktop(`
+    justify-content: flex-start;
+    margin-top: ${getSpacing(5)};
+`)}
 `;

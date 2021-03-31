@@ -2,12 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import {
   Container,
-  SubContainer,
   SubTitle,
   Content,
-  Image,
   DesktopCreateCauseButton,
   Title,
+  SubContainer,
 } from './OurMission.style';
 import { DefaultLink as Link } from 'components/Link/Link';
 import { PATHS } from 'routes';
@@ -27,7 +26,6 @@ const OurMissionHeader: FunctionComponent = () => {
           </DesktopCreateCauseButton>
         </Link>
       </SubContainer>
-      <Image />
     </Container>
   );
 };

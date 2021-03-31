@@ -30,7 +30,7 @@ export const CoalitionContainer = styled.div<{ responsiveNbOfCardsByLine?: boole
               width: calc(
                 (100% - 4 * ${MARGIN_BETWEEN_CARDS}) / 4
               );
-              ${media.largeDesktop(`
+              ${media.veryLargeDesktop(`
                 width: calc(
                   (100% - 5 * ${MARGIN_BETWEEN_CARDS}) / 5
                 );

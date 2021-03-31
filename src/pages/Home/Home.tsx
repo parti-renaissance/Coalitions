@@ -1,17 +1,16 @@
 import * as React from 'react';
 import {
   Block,
-  MobileCreateCauseButtonContainer,
   TopPartContainer,
-  TopPartSubContainer,
   Title,
   Content,
-  DesktopCreateCauseButton,
-  Image,
   CoalitionCardsWrapper,
   CauseCardsWrapper,
   CausesHeader,
   SeeAllButton,
+  MobileVideoWrapper,
+  DesktopVideoWrapper,
+  CreateCauseButtonWrapper,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
 import Cause from 'components/Cause';
@@ -30,6 +29,7 @@ import Loader from 'components/Loader';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { useHistory } from 'react-router';
 import { usePublishedCause } from './usePublishedCause';
+import Video from 'components/Video';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
@@ -45,34 +45,32 @@ const Home: React.FunctionComponent = () => {
     fetchFirstPage([], isUserLoggedIn);
   }, [fetchFirstPage, isUserLoggedIn]);
 
+  const renderVideo = () => <Video videoId="KD6egRRsZ_Q" />;
+
   return (
     <>
       <TopPartContainer>
-        <TopPartSubContainer>
+        <div>
           <Title>
             <FormattedMessage id="our_mission.title" />
           </Title>
+          <MobileVideoWrapper>{renderVideo()}</MobileVideoWrapper>
           <h3>
             <FormattedMessage id="our_mission.our-mission" />
           </h3>
           <Content>
             <FormattedMessage id="our_mission.explanation" />
           </Content>
-          <DefaultLink to={PATHS.OUR_MISSION.url()}>
-            <DesktopCreateCauseButton size="small" variant="contained" color="primary">
-              <FormattedMessage id="cause-cta.cause-creation" />
-            </DesktopCreateCauseButton>
-          </DefaultLink>
-        </TopPartSubContainer>
-        <Image />
+          <CreateCauseButtonWrapper>
+            <DefaultLink to={PATHS.OUR_MISSION.url()}>
+              <MediumLargeButton size="small" variant="contained" color="primary">
+                <FormattedMessage id="cause-cta.cause-creation" />
+              </MediumLargeButton>
+            </DefaultLink>
+          </CreateCauseButtonWrapper>
+        </div>
+        <DesktopVideoWrapper>{renderVideo()}</DesktopVideoWrapper>
       </TopPartContainer>
-      <MobileCreateCauseButtonContainer>
-        <DefaultLink to={PATHS.OUR_MISSION.url()}>
-          <MediumLargeButton variant="contained" color="primary">
-            <FormattedMessage id="cause-cta.cause-creation" />
-          </MediumLargeButton>
-        </DefaultLink>
-      </MobileCreateCauseButtonContainer>
       <CauseDefinition />
       <Block>
         <CausesHeader>

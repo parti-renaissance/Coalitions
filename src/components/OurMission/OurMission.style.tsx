@@ -3,18 +3,17 @@ import { colorPalette, media, getSpacing, fontWeight, fonts, defaultMargins } fr
 import { MediumLargeButton } from 'components/Button/Button';
 
 export const Container = styled.div`
-  display: flex;
+  background-color: ${colorPalette.greyLight};
   padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
     ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    background-color: ${colorPalette.greyLight};
     padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)};
 `;
 
 export const SubContainer = styled.div`
   ${media.desktop(`
-    max-width: ${getSpacing(108)};
+    max-width: ${getSpacing(140)};
   `)}
 `;
 

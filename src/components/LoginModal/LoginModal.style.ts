@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colorPalette, getSpacing, fonts } from 'stylesheet';
+import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
 export const Connect = styled.div`
   ${fonts.input};
@@ -12,4 +13,9 @@ export const ConnectLink = styled.a`
   text-decoration: underline;
   margin-left: ${getSpacing(1)};
   cursor: pointer;
+`;
+
+export const ContentContainer = styled.div`
+  overflow: scroll;
+  padding-bottom: calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(5)});
 `;

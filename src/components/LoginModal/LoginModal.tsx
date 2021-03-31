@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ChangeEvent, useState } from 'react';
-import { Connect, ConnectLink } from './LoginModal.style';
+import { Connect, ConnectLink, ContentContainer } from './LoginModal.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { FormValues } from './components/CreateAccountForm/lib/useValidateForm';
 import { oauthUrl } from 'services/networking/auth';
@@ -68,7 +68,7 @@ const LoginModal = <OtherFormValues,>({
     }
 
     return (
-      <>
+      <ContentContainer>
         <Title>{title}</Title>
         <Connect>
           <div>{intl.formatMessage({ id: 'login_modal.signed-up' })}</div>
@@ -80,7 +80,7 @@ const LoginModal = <OtherFormValues,>({
           doAfterAccountCreation={doAfterAccountCreation}
           doingAfterAccountCreation={doingAfterAccountCreation}
         />
-      </>
+      </ContentContainer>
     );
   };
 

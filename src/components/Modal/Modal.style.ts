@@ -5,7 +5,10 @@ import styled, { css } from 'styled-components';
 import { colorPalette, media, getSpacing, styledTags } from 'stylesheet';
 
 export const StyledDialog = styled(Dialog)`
-  ${styledTags}
+  ${styledTags};
+  .MuiPaper-root {
+    overflow: unset;
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -13,7 +16,7 @@ export const ContentContainer = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  padding: ${getSpacing(3)};
+  padding: ${getSpacing(12)} ${getSpacing(3)} ${getSpacing(3)} ${getSpacing(3)};
   position: absolute;
   top: 0;
   bottom: 0;
@@ -22,6 +25,7 @@ export const ContentContainer = styled.div`
   ${media.desktop(`
     position: relative;
     width: ${getSpacing(74)};
+    max-height: ${getSpacing(124)}
     padding: 0 ${getSpacing(8)} ${getSpacing(8)} ${getSpacing(8)};
   `)}
 `;
@@ -50,9 +54,6 @@ export const StyledCloseIcon = styled(Close)`
 
 export const Title = styled.h3`
   color: ${colorPalette.greyDark};
-  ${media.desktop(`
-    margin-top: ${getSpacing(5)};
-  `)}
 `;
 
 export const ValidateButtonContainer = styled.div<{ isInPage: boolean }>`
@@ -61,19 +62,18 @@ export const ValidateButtonContainer = styled.div<{ isInPage: boolean }>`
       ? css`
           margin: ${getSpacing(4)} 0;
           ${media.desktop(`
-    margin: ${getSpacing(10)} 0;
-  `)}
+            margin: ${getSpacing(10)} 0;
+          `)}
         `
       : css`
-          position: fixed;
+          position: absolute;
+          background-color: ${colorPalette.white};
           padding: ${getSpacing(3)};
+          ${media.desktop(`
+            padding: ${getSpacing(3)} ${getSpacing(8)} ${getSpacing(8)} ${getSpacing(8)};
+          `)}
           bottom: 0;
           left: 0;
           right: 0;
-          ${media.desktop(`
-    position: relative;
-    padding: unset;
-    margin-top: ${getSpacing(10)};
-  `)}
         `}
 `;

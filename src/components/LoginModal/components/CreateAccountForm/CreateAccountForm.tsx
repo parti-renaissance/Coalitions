@@ -4,7 +4,7 @@ import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import { Formik } from 'formik';
-import { useValidateForm, FormValues } from './lib/useValidateForm';
+import { useValidateForm, InscriptionFormValues } from './lib/useValidateForm';
 import {
   useCityAndCountryAutocomplete,
   CityOrCountry,
@@ -20,6 +20,7 @@ import { FormControlLabelWrapper } from 'components/LoginAndSupportModal/LoginAn
 
 interface CreateAccountFormProps {
   doAfterAccountCreation?: () => Promise<void>;
+  onAccountFormSubmit?: (values: InscriptionFormValues) => Promise<void>;
   doingAfterAccountCreation?: boolean;
   isInPage?: boolean;
 }
@@ -28,13 +29,18 @@ const CreateAccountForm = ({
   doAfterAccountCreation,
   doingAfterAccountCreation,
   isInPage = false,
+  onAccountFormSubmit,
 }: CreateAccountFormProps) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
   const { loading, createAccount } = useCreateAccount();
-  const handleAccountCreation = async () => {
-    await createAccount();
+  const handleAccountCreation = async (values: InscriptionFormValues) => {
+    if (onAccountFormSubmit !== undefined) {
+      onAccountFormSubmit(values);
+    } else {
+      await createAccount();
+    }
     if (doAfterAccountCreation !== undefined) {
       await doAfterAccountCreation();
     }
@@ -42,7 +48,7 @@ const CreateAccountForm = ({
 
   return (
     <Formik
-      initialValues={{} as FormValues}
+      initialValues={{} as InscriptionFormValues}
       validate={validateForm}
       onSubmit={handleAccountCreation}
     >
@@ -147,11 +153,7 @@ const CreateAccountForm = ({
                   name="causeMailAgreement"
                 />
               }
-              label={
-                <Label>
-                  {<Label>{intl.formatMessage({ id: 'inscription.agree-mail-cause' })}</Label>}
-                </Label>
-              }
+              label={<Label>{intl.formatMessage({ id: 'inscription.agree-mail-cause' })}</Label>}
             />
           </FormControlLabelWrapper>
           <FormControlLabelWrapper>
@@ -166,9 +168,7 @@ const CreateAccountForm = ({
                 />
               }
               label={
-                <Label>
-                  {<Label>{intl.formatMessage({ id: 'inscription.agree-mail-coalition' })}</Label>}
-                </Label>
+                <Label>{intl.formatMessage({ id: 'inscription.agree-mail-coalition' })}</Label>
               }
             />
           </FormControlLabelWrapper>

@@ -22,7 +22,7 @@ const LoginAndPreviewModal: FunctionComponent<LoginAndPreviewModalProps> = ({
   };
 
   return (
-    <LoginModal<{}>
+    <LoginModal
       isOpened={isOpened}
       onClose={onClose}
       onConnect={onConnect}

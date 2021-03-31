@@ -1,7 +1,7 @@
-import React, { FunctionComponent, ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { Connect, ConnectLink, ContentContainer } from './LoginModal.style';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { FormValues } from './components/CreateAccountForm/lib/useValidateForm';
+import { InscriptionFormValues } from './components/CreateAccountForm/lib/useValidateForm';
 import { oauthUrl } from 'services/networking/auth';
 import CreateAccountForm from './components/CreateAccountForm';
 import HandleErrorService from 'services/HandleErrorService';
@@ -9,30 +9,27 @@ import { Modal } from 'components/Modal/Modal';
 import { Title } from 'components/Modal/Modal.style';
 import SuccessModalContent from 'components/SuccessModalContent';
 
-interface LoginModalProps<OtherFormValues> {
+interface LoginModalProps {
   isOpened: boolean;
   onClose: () => void;
   onConnect: () => void;
   doAfterAccountCreation?: () => Promise<void>;
+  onAccountFormSubmit?: (values: InscriptionFormValues) => Promise<void>;
   doingAfterAccountCreation?: boolean;
   title: string;
   showSuccessScreenOnValidate?: boolean;
-  AdditionalFields?: FunctionComponent<{
-    onChange: (e: ChangeEvent) => void;
-    values: OtherFormValues & FormValues;
-  }>;
 }
 
-const LoginModal = <OtherFormValues,>({
+const LoginModal: React.FunctionComponent<LoginModalProps> = ({
   isOpened,
   onClose,
   onConnect,
   title,
-  AdditionalFields,
   showSuccessScreenOnValidate,
   doAfterAccountCreation: doAfterAccountCreationProp,
   doingAfterAccountCreation,
-}: LoginModalProps<OtherFormValues>) => {
+  onAccountFormSubmit,
+}) => {
   const intl = useIntl();
   const [showSuccessScreen, setShowSuccessScreen] = useState<boolean>(false);
 
@@ -79,6 +76,7 @@ const LoginModal = <OtherFormValues,>({
         <CreateAccountForm
           doAfterAccountCreation={doAfterAccountCreation}
           doingAfterAccountCreation={doingAfterAccountCreation}
+          onAccountFormSubmit={onAccountFormSubmit}
         />
       </ContentContainer>
     );

@@ -11,6 +11,12 @@ export const Container = styled.div`
   `)};
 `;
 
+export const SubContainer = styled.div`
+  ${media.desktop(`
+    max-width: ${getSpacing(140)};
+  `)}
+`;
+
 export const SubTitle = styled.h3`
   color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(7)};

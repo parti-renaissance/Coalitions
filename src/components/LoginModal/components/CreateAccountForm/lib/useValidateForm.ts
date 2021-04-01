@@ -1,4 +1,5 @@
 import { useIntl } from 'react-intl';
+import { hasEmoji } from 'services/formik/hasEmoji';
 
 export interface InscriptionFormValues {
   firstName?: string;
@@ -24,15 +25,20 @@ export const useValidateForm = () => {
   const validateForm = ({ firstName, email, cityId, cguAgreement }: InscriptionFormValues) => {
     const errors = {} as ErrorForm;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
+    const emojiErrorMessage = intl.formatMessage({ id: 'form_errors.emoji-forbidden' });
 
     if (isFieldEmpty(firstName)) {
       errors.firstName = requiredErrorMessage;
+    } else if (hasEmoji(firstName)) {
+      errors.firstName = emojiErrorMessage;
     }
 
     if (isFieldEmpty(email)) {
       errors.email = requiredErrorMessage;
     } else if (email !== undefined && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
       errors.email = intl.formatMessage({ id: 'form_errors.invalid-email' });
+    } else if (hasEmoji(email)) {
+      errors.email = emojiErrorMessage;
     }
 
     if (isFieldEmpty(cityId)) {

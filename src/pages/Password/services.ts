@@ -8,6 +8,7 @@ import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService from 'services/HandleErrorService';
 import { PasswordForm } from './Password';
+import { hasEmoji } from 'services/formik/hasEmoji';
 
 export const useValidatePasswordForm = () => {
   const intl = useIntl();
@@ -15,21 +16,22 @@ export const useValidatePasswordForm = () => {
   const validateForm = ({ password, passwordConfirmation }: PasswordForm) => {
     const errors = {} as PasswordForm;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
+    const emojiErrorMessage = intl.formatMessage({ id: 'form_errors.emoji-forbidden' });
 
     if (password === undefined || password.length === 0) {
       errors.password = requiredErrorMessage;
-    }
-
-    if (password !== undefined && password.length < 8) {
+    } else if (password !== undefined && password.length < 8) {
       errors.password = intl.formatMessage({ id: 'form_errors.not-long-enough-password' });
+    } else if (hasEmoji(password)) {
+      errors.password = emojiErrorMessage;
     }
 
     if (passwordConfirmation === undefined || passwordConfirmation.length === 0) {
       errors.passwordConfirmation = requiredErrorMessage;
-    }
-
-    if (password !== passwordConfirmation) {
+    } else if (password !== passwordConfirmation) {
       errors.passwordConfirmation = intl.formatMessage({ id: 'form_errors.unmatched-password' });
+    } else if (hasEmoji(passwordConfirmation)) {
+      errors.passwordConfirmation = emojiErrorMessage;
     }
 
     return errors;

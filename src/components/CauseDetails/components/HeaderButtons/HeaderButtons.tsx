@@ -9,6 +9,7 @@ import { usePublishCause } from 'redux/Cause/hooks/usePublishCause';
 interface HeaderProps {
   cause: Cause | InCreationCause;
   onSupport?: () => void;
+  onShare?: () => void;
   isSupporting?: boolean;
   isMobile?: boolean;
 }
@@ -16,6 +17,7 @@ interface HeaderProps {
 const HeaderButtons: FunctionComponent<HeaderProps> = ({
   cause,
   onSupport,
+  onShare,
   isSupporting,
   isMobile,
 }) => {
@@ -50,26 +52,27 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
       );
     }
 
-    if (!isSupported) {
-      return (
-        <Button
-          size="small"
-          variant="contained"
-          color="primary"
-          onClick={onSupport}
-          isLoading={isSupporting}
-        >
-          {intl.formatMessage({ id: 'cause.support-button' })}
-        </Button>
-      );
-    }
-
-    return null;
+    return (
+      <>
+        {isSupported || (
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            onClick={onSupport}
+            isLoading={isSupporting}
+          >
+            {intl.formatMessage({ id: 'cause.support-button' })}
+          </Button>
+        )}
+        {isMobile || (
+          <Button size="small" variant="outlined" color="primary" onClick={onShare}>
+            {intl.formatMessage({ id: 'cause.share-button' })}
+          </Button>
+        )}
+      </>
+    );
   };
-
-  if (!isPreview && isSupported) {
-    return null;
-  }
 
   const Container = isMobile === true ? StickyMobileButtonsContainer : DesktopContainer;
   return <Container>{renderContent()}</Container>;

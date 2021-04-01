@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   Container,
   CoalitionName,
@@ -11,7 +11,11 @@ import {
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import HeaderButtons from '../HeaderButtons';
-import { Menu, MenuItem } from '@material-ui/core';
+import { getIsMobile } from 'services/mobile/mobile';
+import { useIntl } from 'react-intl';
+import { useDispatch } from 'react-redux';
+import { updateSnackbar } from 'redux/Snackbar';
+import { Severity } from 'redux/Snackbar/types';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -20,17 +24,25 @@ interface HeaderProps {
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting }) => {
-  const [openShareMenu, setOpenShareMenu] = useState(false);
   // To fix with a global type definition, once behaviour is validated
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nav: any = navigator;
   const isAbleToUseShareApi = nav?.share !== undefined;
+  const isMobile = getIsMobile();
+  const dispatch = useDispatch();
+  const { formatMessage } = useIntl();
 
   const handleShareClick = () => {
-    if (isAbleToUseShareApi) {
+    if (isAbleToUseShareApi && isMobile) {
       nav.share({ url: window.location.href, title: cause.name, text: cause.name });
     } else {
-      setOpenShareMenu(!openShareMenu);
+      navigator.clipboard.writeText(window.location.href);
+      dispatch(
+        updateSnackbar({
+          message: formatMessage({ id: 'cause.copy-to-clipboard' }),
+          severity: Severity.success,
+        }),
+      );
     }
   };
 
@@ -44,39 +56,22 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
             ) : null}
             <CauseName>{cause.name}</CauseName>
           </div>
-          <ShareButtonContainer>
-            <ShareButton onClick={handleShareClick} src="/images/share.svg" />
-            <Menu open={openShareMenu}>
-              <MenuItem>
-                <a
-                  href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-                    window.location.href,
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Facebook
-                </a>
-              </MenuItem>
-              <MenuItem>
-                <a
-                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                    window.location.href,
-                  )}&text=${cause.name}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Twitter
-                </a>
-              </MenuItem>
-            </Menu>
-          </ShareButtonContainer>
+          {isMobile && (
+            <ShareButtonContainer>
+              <ShareButton onClick={handleShareClick} src="/images/share.svg" />
+            </ShareButtonContainer>
+          )}
         </NameAndShareWrapper>
         <AuthorAndSupportsWrapper>
           <AuthorAndSupports cause={cause} showAuthor />
         </AuthorAndSupportsWrapper>
       </div>
-      <HeaderButtons cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
+      <HeaderButtons
+        cause={cause}
+        onSupport={onSupport}
+        isSupporting={isSupporting}
+        onShare={handleShareClick}
+      />
     </Container>
   );
 };

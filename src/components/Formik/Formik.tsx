@@ -10,12 +10,12 @@ const Formik = <Values,>({ validate, ...restOfProps }: FormikConfig<Values>) => 
   const validateWithEmojiCheck = (values?: any) => {
     let errors = {} as FormikErrors<Values>;
 
-    if (validate !== undefined) {
-      errors = validate(values) as FormikErrors<Values>;
+    if (values === undefined) {
+      return errors;
     }
 
-    if (values === undefined) {
-      return Promise.resolve(errors);
+    if (validate !== undefined) {
+      errors = validate(values) as FormikErrors<Values>;
     }
 
     Object.keys(values).forEach(key => {

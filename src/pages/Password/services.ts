@@ -13,6 +13,7 @@ import { hasEmoji } from 'services/formik/hasEmoji';
 export const useValidatePasswordForm = () => {
   const intl = useIntl();
 
+  // eslint-disable-next-line complexity
   const validateForm = ({ password, passwordConfirmation }: PasswordForm) => {
     const errors = {} as PasswordForm;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });

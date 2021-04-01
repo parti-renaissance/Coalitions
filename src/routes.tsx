@@ -52,10 +52,6 @@ export const PATHS = {
     route: '/politique-protection-donnees',
     url: () => '/politique-protection-donnees',
   },
-  CHARTER_OF_VALUES: {
-    route: '/charte-des-valeurs',
-    url: () => '/charte-des-valeurs',
-  },
   CONFIRM_PASSWORD: {
     route: '/confirmation/:identifier/:token',
     url: ({ identifier, token }: { identifier: string; token: string }) =>
@@ -91,7 +87,6 @@ const Routes: FunctionComponent<{}> = () => {
           <Route path={PATHS.LEGAL_NOTICE.route} component={LegalNotice}></Route>
           <Route path={PATHS.COOKIES_POLICY.route} component={CookiesPolicy}></Route>
           <Route path={PATHS.DATA_PROTECTION_POLICY.route} component={DataProtectionPolicy}></Route>
-          <Route path={PATHS.CHARTER_OF_VALUES.route} component={() => <div />}></Route>
           <Route path={PATHS.CONFIRM_PASSWORD.route} component={Password}></Route>
           <Route path={PATHS.INSCRIPTION.route} component={Inscription}></Route>
         </Switch>

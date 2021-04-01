@@ -57,6 +57,8 @@
     "support": "{supportsNumber} soutien",
     "supports": "{supportsNumber} soutiens",
     "support-button": "Soutenir",
+    "share-button": "Partager",
+    "copy-to-clipboard": "Le lien a été copié",
     "supported": "Soutenue",
     "see-button": "Voir",
     "confirm-support": "Confirmez votre soutien",

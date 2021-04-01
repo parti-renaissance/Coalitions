@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   media,
   defaultMargins,
@@ -32,15 +32,24 @@ export const LinkContainer = styled.div`
   margin: ${getSpacing(1.5)} 0;
 `;
 
-export const Link = styled(DefaultLink)`
+const LINK_STYLE = css`
   font-family: ${fontFamily.primary};
   font-size: ${LINK_FONT_SIZE};
   font-weight: ${fontWeight.normal};
   line-height: ${lineHeight.primary};
   color: ${colorPalette.greyDark};
+  text-decoration: unset;
   :hover {
     text-decoration: underline;
   }
+`;
+
+export const Link = styled(DefaultLink)`
+  ${LINK_STYLE}
+`;
+
+export const ExternalLink = styled.a`
+  ${LINK_STYLE}
 `;
 
 export const Separator = styled.div`

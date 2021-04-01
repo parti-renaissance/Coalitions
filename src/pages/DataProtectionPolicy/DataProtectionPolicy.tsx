@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import LegalPage from 'components/LegalPage';
 
 const DataProtectionPolicy: FunctionComponent = () => (
-  <LegalPage titleKey="data_protection_policy.title" contents={[]} />
+  <LegalPage title="data_protection_policy.title" />
 );
 
 export default DataProtectionPolicy;

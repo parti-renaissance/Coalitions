@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { Container, Link, LinkContainer, Separator } from './Footer.style';
+import { Container, Link, LinkContainer, Separator, ExternalLink } from './Footer.style';
 import { PATHS } from 'routes';
 import { useIntl } from 'react-intl';
 
 const LEGAL_LINKS: {
   to: string;
   labelKey: string;
+  isExternalLink?: boolean;
 }[] = [
   {
     to: PATHS.LEGAL_NOTICE.url(),
@@ -20,8 +21,9 @@ const LEGAL_LINKS: {
     labelKey: 'footer.data-protection-policy',
   },
   {
-    to: PATHS.CHARTER_OF_VALUES.url(),
+    to: 'https://storage.googleapis.com/pourunecause/charte_des_valeurs.pdf',
     labelKey: 'footer.charter-of-values',
+    isExternalLink: true,
   },
 ];
 
@@ -29,14 +31,23 @@ const Footer: FunctionComponent<{}> = () => {
   const intl = useIntl();
   return (
     <Container>
-      {LEGAL_LINKS.map(({ labelKey, to }, index) => (
-        <LinkContainer key={labelKey}>
-          {index > 0 ? <Separator>{'•'}</Separator> : undefined}
-          <Link key={labelKey} to={to}>
-            {`${intl.formatMessage({ id: labelKey })}`}
-          </Link>
-        </LinkContainer>
-      ))}
+      {LEGAL_LINKS.map(({ labelKey, to, isExternalLink }, index) => {
+        const label = intl.formatMessage({ id: labelKey });
+        return (
+          <LinkContainer key={labelKey}>
+            {index > 0 ? <Separator>{'•'}</Separator> : undefined}
+            {isExternalLink !== undefined && isExternalLink ? (
+              <ExternalLink href={to} target="_blank">
+                {label}
+              </ExternalLink>
+            ) : (
+              <Link key={labelKey} to={to} href={to}>
+                {label}
+              </Link>
+            )}
+          </LinkContainer>
+        );
+      })}
     </Container>
   );
 };

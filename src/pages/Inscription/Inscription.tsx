@@ -5,8 +5,18 @@ import CreateAccountForm from 'components/LoginModal/components/CreateAccountFor
 import { FormattedMessage } from 'react-intl';
 import { InscriptionContainer, InscriptionFormWrapper } from './Inscription.style';
 import { Connect, ConnectLink } from 'components/LoginModal/LoginModal.style';
+import { useHistory } from 'react-router';
+import { PATHS } from 'routes';
 
 export const Inscription: React.FunctionComponent = () => {
+  const history = useHistory();
+
+  const doAfterAccountCreation = () => {
+    return Promise.resolve(
+      history.push({ pathname: PATHS.HOME.url(), search: '?didCreateAccount' }),
+    );
+  };
+
   return (
     <InscriptionContainer>
       <InscriptionFormWrapper>
@@ -21,7 +31,7 @@ export const Inscription: React.FunctionComponent = () => {
             <FormattedMessage id="login_modal.connect" />
           </ConnectLink>
         </Connect>
-        <CreateAccountForm isInPage />
+        <CreateAccountForm isInPage doAfterAccountCreation={doAfterAccountCreation} />
       </InscriptionFormWrapper>
     </InscriptionContainer>
   );

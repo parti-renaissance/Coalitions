@@ -3,7 +3,7 @@ import { Container, SubContainer, TopImage, ValidateButton } from './CreateCause
 import InputSection from './components/InputSection';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
-import { Formik } from 'formik';
+import Formik from 'components/Formik';
 import { useValidateForm, FormValues } from './lib/useValidateForm';
 import CoalitionCards from './components/CoalitionCards';
 import ImageCropper from './components/ImageCropper';
@@ -51,7 +51,11 @@ const CreateCause: FunctionComponent = () => {
       <Container>
         <SubContainer>
           <TopImage src="/images/createCause.svg" />
-          <Formik initialValues={initialValues} validate={validateForm} onSubmit={onSubmit}>
+          <Formik<FormValues>
+            initialValues={initialValues}
+            validate={validateForm}
+            onSubmit={onSubmit}
+          >
             {// eslint-disable-next-line complexity
             ({
               values,

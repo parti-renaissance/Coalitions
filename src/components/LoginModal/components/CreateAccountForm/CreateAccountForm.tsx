@@ -5,7 +5,7 @@ import { CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl, FormattedMessage } from 'react-intl';
 import InputField from 'components/InputField';
-import { Formik } from 'formik';
+import Formik from 'components/Formik';
 import { useValidateForm, InscriptionFormValues } from './lib/useValidateForm';
 import {
   useCityAndCountryAutocomplete,
@@ -76,7 +76,7 @@ const CreateAccountForm = ({
           <FormattedMessage id="login_modal.connect" />
         </ConnectLink>
       </Connect>
-      <Formik
+      <Formik<InscriptionFormValues>
         initialValues={{} as InscriptionFormValues}
         validate={validateForm}
         onSubmit={handleAccountCreation}

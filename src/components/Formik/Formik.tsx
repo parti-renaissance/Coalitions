@@ -27,7 +27,6 @@ const Formik = <Values,>({ validate, ...restOfProps }: FormikConfig<Values>) => 
       }
     });
 
-    console.log({ errors });
     return errors;
   };
 

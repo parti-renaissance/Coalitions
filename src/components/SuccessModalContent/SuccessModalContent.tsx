@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Image, Content, Container } from './SuccessModalContent.style';
+import { Image, Content, Container, Title } from './SuccessModalContent.style';
 import { useIntl } from 'react-intl';
-import { Title } from 'components/Modal/Modal.style';
 
 interface SuccessModalContentProps {
   titleKey: string;

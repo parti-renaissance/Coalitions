@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { Connect, ConnectLink, ContentContainer } from './LoginModal.style';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { InscriptionFormValues } from './components/CreateAccountForm/lib/useValidateForm';
-import { oauthUrl } from 'services/networking/auth';
 import CreateAccountForm from './components/CreateAccountForm';
 import HandleErrorService from 'services/HandleErrorService';
 import { Modal } from 'components/Modal/Modal';
-import { Title } from 'components/Modal/Modal.style';
 import SuccessModalContent from 'components/SuccessModalContent';
 
 interface LoginModalProps {
@@ -30,7 +26,6 @@ const LoginModal: React.FunctionComponent<LoginModalProps> = ({
   doingAfterAccountCreation,
   onAccountFormSubmit,
 }) => {
-  const intl = useIntl();
   const [showSuccessScreen, setShowSuccessScreen] = useState<boolean>(false);
 
   const doAfterAccountCreation = async () => {
@@ -48,11 +43,6 @@ const LoginModal: React.FunctionComponent<LoginModalProps> = ({
     }
   };
 
-  const onConnectClick = () => {
-    onConnect();
-    window.location.href = oauthUrl;
-  };
-
   const renderContent = () => {
     if (showSuccessScreen) {
       return (
@@ -65,20 +55,13 @@ const LoginModal: React.FunctionComponent<LoginModalProps> = ({
     }
 
     return (
-      <ContentContainer>
-        <Title>{title}</Title>
-        <Connect>
-          <div>{intl.formatMessage({ id: 'login_modal.signed-up' })}</div>
-          <ConnectLink onClick={onConnectClick}>
-            <FormattedMessage id="login_modal.connect" />
-          </ConnectLink>
-        </Connect>
-        <CreateAccountForm
-          doAfterAccountCreation={doAfterAccountCreation}
-          doingAfterAccountCreation={doingAfterAccountCreation}
-          onAccountFormSubmit={onAccountFormSubmit}
-        />
-      </ContentContainer>
+      <CreateAccountForm
+        doAfterAccountCreation={doAfterAccountCreation}
+        doingAfterAccountCreation={doingAfterAccountCreation}
+        onAccountFormSubmit={onAccountFormSubmit}
+        onConnect={onConnect}
+        title={title}
+      />
     );
   };
 

@@ -9,7 +9,7 @@ import { PATHS } from 'routes';
 import HandleErrorService from 'services/HandleErrorService';
 import { getInCreationCause } from '../selectors';
 import { cleanInCreationCause } from '../slice';
-//import { authenticatedApiClient } from 'services/networking/client';
+import { authenticatedApiClient } from 'services/networking/client';
 
 export const usePublishCause = () => {
   const causeWithoutAuthor = useSelector(getInCreationCause);
@@ -18,12 +18,11 @@ export const usePublishCause = () => {
   const { formatMessage } = useIntl();
 
   const [{ loading, error }, doPublishCause] = useTypedAsyncFn(async () => {
-    //await authenticatedApiClient.post('v3/causes/publish', { causeWithoutAuthor });
-    console.log(causeWithoutAuthor);
-    if (causeWithoutAuthor === undefined || causeWithoutAuthor.name.includes('error')) {
-      throw new Error(causeWithoutAuthor === undefined ? 'Pas de cause' : causeWithoutAuthor.name);
-    }
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await authenticatedApiClient.post('v3/causes', {
+      name: causeWithoutAuthor?.name,
+      description: causeWithoutAuthor?.description,
+      coalition: causeWithoutAuthor?.coalition?.uuid,
+    });
   }, []);
 
   useEffect(() => {

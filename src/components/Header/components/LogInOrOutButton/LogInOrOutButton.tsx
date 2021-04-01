@@ -67,9 +67,6 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
           <MenuItem onClick={logout}>
             <FormattedMessage id="header.logout" />
           </MenuItem>
-          <MenuItem>
-            <FormattedMessage id="header.profile" />
-          </MenuItem>
         </StyledDesktopUserMenu>
       </>
     );

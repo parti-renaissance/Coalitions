@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
@@ -200,3 +202,5 @@ const CreateAccountForm = ({
   );
 };
 export default CreateAccountForm;
+
+/* eslint-enable max-lines */

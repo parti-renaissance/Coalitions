@@ -7,7 +7,7 @@ import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
 import { CauseListContainer, CTAContainer, Title, TitleContainer } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
-import { getAllCauses } from 'redux/Cause/selectors';
+import { getAllCauses, getNumberOfCauses } from 'redux/Cause/selectors';
 import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
 import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
 import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
@@ -44,6 +44,7 @@ const CauseList: React.FunctionComponent = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const [filteredByCoalitionIds, setFilteredByCoalitionIds] = useState<string[] | null>(null);
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
+  const numberOfCauses = useSelector(getNumberOfCauses);
 
   useEffect(() => {
     if (filteredByCoalitionIds !== null) {
@@ -72,7 +73,7 @@ const CauseList: React.FunctionComponent = () => {
     <>
       <TitleContainer>
         <Title>
-          <FormattedMessage id="cause_list.title" />
+          <FormattedMessage id="cause_list.title" values={{ numberOfCauses }} />
         </Title>
         <p>
           <FormattedMessage id="cause_list.description" />

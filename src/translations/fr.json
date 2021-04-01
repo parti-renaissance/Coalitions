@@ -15,7 +15,7 @@
     "charter-of-values": "Charte des valeurs"
   },
   "home": {
-    "support-causes": "Soutenez les causes",
+    "support-causes": "Soutenez des causes",
     "title": "Faire des causes de chacun le moteur de notre action collective",
     "explanation": "Citoyens, collectifs, associations, nous avons tous à coeur d’agir pour construire un monde meilleur. Nous avons tous des idées, des combats, des causes qui nous sont chères.",
     "explanation-part-2": "Nos engagements ?",
@@ -47,7 +47,7 @@
     "agree-mail-coalition": "Tenez-moi informé(e) par email de l’actualité des coalitions que je suis."
   },
   "cause_list": {
-    "title": "Liste des causes ",
+    "title": "{numberOfCauses} causes à soutenir",
     "description": "Vous pouvez soutenir une cause existante ou créer la vôtre.",
     "no_cause": "Aucune cause ne correspond à votre filtre."
   },
@@ -77,7 +77,7 @@
     "empty-description": "Le porteur de cause n’a pas encore ajouté de contenu, soutenez la cause pour la faire grandir\u00A0!"
   },
   "login_modal": {
-    "first-name": "Prénom",
+    "first-name": "Prénom / Pseudo",
     "email-address": "Adresse email",
     "city-or-country": "Ville ou Pays hors France",
     "validate": "Valider",
@@ -126,15 +126,15 @@
     "description": {
       "title": "2. Description de votre cause",
       "tips": "présentez le problème que vous voulez résoudre ou le sujet que vous voulez défendre. Pourquoi cette cause compte pour vous et pourquoi il faut agir.",
-      "description-placeholder": "Description de votre cause."
+      "description-placeholder": "Description de votre cause (optionnel)."
     },
     "image": {
       "title": "3. Ajoutez une image à votre cause",
       "tips": "choisissez une photo en haute définition qui donnera envie aux autres de soutenir votre cause.",
       "update": "Modifier mon image",
       "save": "Enregistrer",
-      "importFromGallery": "Importer une photo depuis votre appareil",
-      "importFromComputer": "Importer une photo depuis votre ordinateur"
+      "importFromGallery": "Importez une photo depuis votre appareil",
+      "importFromComputer": "Importez une photo depuis votre ordinateur"
     },
     "coalitions": {
       "title": "4. Quel est le thème principal de votre cause\u00A0?",
@@ -156,7 +156,7 @@
     "publish": "Publier"
   },
   "coalition": {
-    "title": "Les coalitions thématiques",
+    "title": "Retrouvez les coalitions",
     "what-is-it": "Qu’est-ce qu’une coalition ?",
     "definition": "C’est l’ensemble des citoyens et acteurs engagés dans des causes d’une même thématique et tous ceux que la thématique intéresse. Parce qu’unis, on est plus forts\u00A0!"
   },

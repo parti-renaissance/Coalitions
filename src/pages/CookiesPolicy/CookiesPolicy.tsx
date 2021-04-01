@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React, { FunctionComponent } from 'react';
 import LegalPage from 'components/LegalPage';
 
@@ -88,8 +90,8 @@ const CookiesPolicy: FunctionComponent = () => (
         la Plateforme (inscription ou messages envoy&eacute;s via les formulaires ad&eacute;quats) ;
       </li>
       <li>
-        permettre aux Utilisateurs d'acc&eacute;der &agrave; des espaces personnels sur la
-        Plateforme, tel que l'historique de navigation&#8239;;
+        permettre aux Utilisateurs d’acc&eacute;der &agrave; des espaces personnels sur la
+        Plateforme, tel que l’historique de navigation&#8239;;
       </li>
     </ul>
     <p>
@@ -246,7 +248,7 @@ const CookiesPolicy: FunctionComponent = () => (
       </li>
       <li>6 mois &agrave; partir de leur activation pour les autres Cookies. </li>
     </ul>
-    <h2>Article 6. Mise &agrave; jour de la politique d'utilisation des cookies</h2>
+    <h2>Article 6. Mise &agrave; jour de la politique d’utilisation des cookies</h2>
     <p>
       LaREM se r&eacute;serve le droit d&rsquo;apporter tous changements et corrections &agrave; la
       pr&eacute;sente Politique d&rsquo;utilisation des Cookies.
@@ -265,3 +267,5 @@ const CookiesPolicy: FunctionComponent = () => (
 );
 
 export default CookiesPolicy;
+
+/* eslint-enable max-lines */

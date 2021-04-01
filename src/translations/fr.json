@@ -165,13 +165,13 @@
     "title": "Nos engagements",
     "bullet-one": "100 porteurs de causes rencontreront chaque mois des responsables politiques (ministres, députés, élus locaux…) pour défendre leurs causes et trouver des solutions.",
     "bullet-two": "1 émission en direct sur les réseaux sociaux sera organisée chaque mois pour présenter en exclusivité plusieurs causes aux Français.",
-    "bullet-three": "1 accompagnement personnalisé sera proposé à chaque porteur de cause (formations, conseils d'experts, ateliers d'accélération, mise à disposition d'outils…).",
-    "bullet-four": "1 action collective sea proposée à l'ensemble des utilisateurs de la plateforme à chaque franchissement de seuil (1 000, 10 000, …).",
-    "last-paragraph": "Il sera également proposé à des porteurs de causes d'éditer un ouvrage avec le soutien d'une maison d'édition pour présenter leurs initiatives."
+    "bullet-three": "1 accompagnement personnalisé sera proposé à chaque porteur de cause (formations, conseils d’experts, ateliers d’accélération, mise à disposition d’outils…).",
+    "bullet-four": "1 action collective sea proposée à l’ensemble des utilisateurs de la plateforme à chaque franchissement de seuil (1 000, 10 000, …).",
+    "last-paragraph": "Il sera également proposé à des porteurs de causes d’éditer un ouvrage avec le soutien d’une maison d’édition pour présenter leurs initiatives."
   },
   "errors": {
     "already-followed-cause-for-unauthenticated": "Vous soutenez déjà cette cause, connectez-vous ou créez un compte pour aller plus loin",
     "already-followed-cause": "Vous soutenez déjà cette cause.",
-    "mail-of-existing-account": "L'utilisateur avec cette adresse e-mail existe déjà. Veuillez vous connecter pour soutenir la cause."
+    "mail-of-existing-account": "L’utilisateur avec cette adresse e-mail existe déjà. Veuillez vous connecter pour soutenir la cause."
   }
 }

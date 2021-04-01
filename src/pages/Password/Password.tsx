@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Title } from 'components/Modal/Modal.style';
 import { useFormik } from 'formik';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useValidatePasswordForm, useConfirmPassword } from './services';
 import { useParams } from 'react-router';
-import { PasswordContainer, PasswordFormWrapper, ConfirmPasswordButton } from './Password.style';
+import {
+  PasswordContainer,
+  PasswordFormWrapper,
+  ConfirmPasswordButton,
+  Title,
+} from './Password.style';
 import { PasswordField } from './PasswordField/PasswordField';
 
 export type PasswordForm = {

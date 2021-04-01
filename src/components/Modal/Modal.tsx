@@ -1,7 +1,7 @@
 import Slide, { SlideProps } from '@material-ui/core/Slide';
 import React, { forwardRef, ForwardRefRenderFunction } from 'react';
 import { getIsMobile } from 'services/mobile/mobile';
-import { StyledDialog, StyledCloseButton, StyledCloseIcon, ContentContainer } from './Modal.style';
+import { Container, CloseButton, CloseIcon } from './Modal.style';
 
 type ModalProps = {
   isOpened: boolean;
@@ -18,15 +18,15 @@ export const Modal: React.FunctionComponent<ModalProps> = ({ children, isOpened,
   const isMobile = getIsMobile();
 
   return (
-    <StyledDialog
+    <Container
       fullScreen={isMobile}
       open={isOpened}
       TransitionComponent={isMobile ? SlideUp : undefined}
     >
-      <StyledCloseButton onClick={onClose}>
-        <StyledCloseIcon />
-      </StyledCloseButton>
-      <ContentContainer>{children}</ContentContainer>
-    </StyledDialog>
+      <CloseButton onClick={onClose}>
+        <CloseIcon />
+      </CloseButton>
+      {children}
+    </Container>
   );
 };

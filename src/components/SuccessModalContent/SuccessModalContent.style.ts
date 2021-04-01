@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { media, getSpacing } from 'stylesheet';
+import { media, getSpacing, colorPalette } from 'stylesheet';
+
+export const Title = styled.h3`
+  color: ${colorPalette.greyDark};
+`;
 
 export const Image = styled.img`
   align-self: center;

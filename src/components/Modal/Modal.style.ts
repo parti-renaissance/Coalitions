@@ -1,79 +1,34 @@
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import { Close } from '@material-ui/icons';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { colorPalette, media, getSpacing, styledTags } from 'stylesheet';
 
-export const StyledDialog = styled(Dialog)`
+export const Container = styled(Dialog)`
   ${styledTags};
   .MuiPaper-root {
-    overflow: unset;
+    padding: ${getSpacing(3)};
+    ${media.desktop(`
+      padding: ${getSpacing(8)};
+      max-width: ${getSpacing(75)};
+      max-height: ${getSpacing(150)}
+    `)}
   }
 `;
 
-export const ContentContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  padding: ${getSpacing(12)} ${getSpacing(3)} ${getSpacing(3)} ${getSpacing(3)};
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  ${media.desktop(`
-    position: relative;
-    width: ${getSpacing(74)};
-    max-height: ${getSpacing(124)}
-    padding: 0 ${getSpacing(8)} ${getSpacing(8)} ${getSpacing(8)};
-  `)}
-`;
-
-const CLOSE_BUTTON_Z_INDEX = 2;
-
-export const StyledCloseButton = styled(IconButton)`
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: ${CLOSE_BUTTON_Z_INDEX};
+export const CloseButton = styled(IconButton)`
   align-self: flex-end;
   padding: ${getSpacing(3)};
+  margin-right: -${getSpacing(3)};
   ${media.desktop(`
-    position: relative;
-    margin: ${getSpacing(2)} ${getSpacing(5)};
+    margin-top: -${getSpacing(6)};
+    margin-right: -${getSpacing(3)};
   `)}
 `;
 
 const CLOSE_ICON_FONT_SIZE = '24px';
 
-export const StyledCloseIcon = styled(Close)`
+export const CloseIcon = styled(Close)`
   font-size: ${CLOSE_ICON_FONT_SIZE};
   color: ${colorPalette.greyDark};
-`;
-
-export const Title = styled.h3`
-  color: ${colorPalette.greyDark};
-`;
-
-export const ValidateButtonContainer = styled.div<{ isInPage: boolean }>`
-  ${({ isInPage }) =>
-    isInPage
-      ? css`
-          margin: ${getSpacing(4)} 0;
-          ${media.desktop(`
-            margin: ${getSpacing(10)} 0;
-          `)}
-        `
-      : css`
-          position: absolute;
-          background-color: ${colorPalette.white};
-          padding: ${getSpacing(3)};
-          ${media.desktop(`
-            padding: ${getSpacing(3)} ${getSpacing(8)} ${getSpacing(8)} ${getSpacing(8)};
-          `)}
-          bottom: 0;
-          left: 0;
-          right: 0;
-        `}
 `;

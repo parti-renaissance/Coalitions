@@ -1,6 +1,10 @@
 import styled from 'styled-components';
-import { getSpacing, media } from 'stylesheet';
+import { getSpacing, media, colorPalette } from 'stylesheet';
 import { FullWidthButton } from 'components/Button/Button';
+
+export const Title = styled.h3`
+  color: ${colorPalette.greyDark};
+`;
 
 export const PasswordFormWrapper = styled.div`
   max-width: ${getSpacing(85)};

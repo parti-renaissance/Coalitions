@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import SuccessModalContent from 'components/SuccessModalContent';
 import { Modal } from 'components/Modal/Modal';
 import { useHistory, useLocation } from 'react-router';
 
-export const useSuccessModal = () => {
+const SuccessModal: FunctionComponent<{}> = () => {
   const location = useLocation();
   const history = useHistory();
   const [config, setConfig] = useState<
@@ -36,7 +36,7 @@ export const useSuccessModal = () => {
     history.replace({ search: '' });
   };
 
-  const renderSuccessModal = () => (
+  return (
     <Modal isOpened={config !== undefined} onClose={onClose}>
       {config !== undefined && (
         <SuccessModalContent
@@ -47,6 +47,6 @@ export const useSuccessModal = () => {
       )}
     </Modal>
   );
-
-  return { renderSuccessModal };
 };
+
+export default SuccessModal;

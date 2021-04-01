@@ -13,7 +13,7 @@ export const Inscription: React.FunctionComponent = () => {
 
   const doAfterAccountCreation = () => {
     return Promise.resolve(
-      history.push({ pathname: PATHS.HOME.url(), search: '?didCreateAccount' }),
+      history.push({ pathname: PATHS.HOME.url(), search: '?didCreateAccount=true' }),
     );
   };
 

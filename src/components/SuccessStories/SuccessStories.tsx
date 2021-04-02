@@ -11,8 +11,8 @@ const SuccessStories: FunctionComponent<{}> = () => (
     </Title>
     <SubContainer>
       {SUCCESS_STORIES.map((successStory, index) => (
-        <SuccessStoryCardWrapper isFirst={index === 0} show={index <= 1}>
-          <SuccessStoryCard key={successStory.title} {...successStory} />
+        <SuccessStoryCardWrapper key={successStory.title} isFirst={index === 0} show={index <= 1}>
+          <SuccessStoryCard {...successStory} />
         </SuccessStoryCardWrapper>
       ))}
     </SubContainer>

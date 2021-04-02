@@ -7,7 +7,6 @@ import {
   Title,
   Description,
   ByAuthor,
-  Bold,
 } from './SuccessStoryCard.style';
 import { SuccessStory } from '../../data';
 
@@ -16,7 +15,6 @@ const SuccessStoryCard: FunctionComponent<SuccessStory> = ({
   title,
   description,
   author,
-  commitment,
   imageSrc,
 }) => (
   <Container>

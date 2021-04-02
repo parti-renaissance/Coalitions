@@ -53,7 +53,7 @@ const CreateAccountForm = ({
     if (onAccountFormSubmit !== undefined) {
       onAccountFormSubmit(values);
     } else {
-      await createAccount();
+      await createAccount(values);
     }
     if (doAfterAccountCreation !== undefined) {
       await doAfterAccountCreation();

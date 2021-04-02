@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Container, Link, LinkContainer, Separator, ExternalLink } from './Footer.style';
-import { PATHS } from 'routes';
+import { PATHS, CHARTER_OF_VALUES_URL } from 'routes';
 import { useIntl } from 'react-intl';
 
 const LEGAL_LINKS: {
@@ -21,7 +21,7 @@ const LEGAL_LINKS: {
     labelKey: 'footer.data-protection-policy',
   },
   {
-    to: 'https://storage.googleapis.com/pourunecause/charte_des_valeurs.pdf',
+    to: CHARTER_OF_VALUES_URL,
     labelKey: 'footer.charter-of-values',
     isExternalLink: true,
   },

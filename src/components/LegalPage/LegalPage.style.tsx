@@ -1,4 +1,4 @@
-import { getSpacing, colorPalette, fonts, media, defaultMargins } from 'stylesheet';
+import { getSpacing, colorPalette, fonts, media, defaultMargins, fontWeight } from 'stylesheet';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -11,12 +11,15 @@ export const Container = styled.div`
   `)}
   h2 {
     margin-top: ${getSpacing(6)};
+    color: ${colorPalette.greyDark};
   }
   h3 {
     margin-top: ${getSpacing(4)};
+    color: ${colorPalette.greyDark};
   }
   p {
     margin-top: ${getSpacing(3)};
+    color: ${colorPalette.greyDark};
   }
   ul {
     ${fonts.p};
@@ -24,7 +27,11 @@ export const Container = styled.div`
     margin-left: ${getSpacing(4)};
     li {
       margin-top: ${getSpacing(3)};
+      color: ${colorPalette.greyDark};
     }
+  }
+  a {
+    color: ${colorPalette.greyDark};
   }
 `;
 
@@ -32,4 +39,9 @@ export const Title = styled.h1`
   ${fonts.h1Small};
   color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(3)};
+`;
+
+export const Bold = styled.span`
+  color: ${colorPalette.greyDark};
+  font-weight: ${fontWeight.bold};
 `;

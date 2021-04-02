@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Container, Title } from './LegalPage.style';
+import { Container, Title, Bold } from './LegalPage.style';
 
 interface LegalPageProps {
   title: string;
@@ -13,3 +13,5 @@ const LegalPage: FunctionComponent<LegalPageProps> = ({ title, children }) => (
 );
 
 export default LegalPage;
+
+export { Bold, Title };

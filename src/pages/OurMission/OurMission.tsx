@@ -19,7 +19,6 @@ const OurMission: FunctionComponent = () => {
 
   return (
     <>
-      <SuccessStories />
       <OurMissionHeader />
       {/* <VideoWrapper>
         <Video videoId="KD6egRRsZ_Q" />
@@ -28,6 +27,7 @@ const OurMission: FunctionComponent = () => {
       <OurCommitmentsWrapper>
         <OurCommitments />
       </OurCommitmentsWrapper>
+      <SuccessStories />
       <FixedBottomButton onClick={onCreateCauseClick}>
         <FormattedMessage id="cause-cta.cause-creation" />
       </FixedBottomButton>

@@ -5,9 +5,9 @@ export const DESKTOP_MARGIN_BETWEEN_CARDS = getSpacing(10);
 export const MOBILE_MARGIN_BETWEEN_CARDS = getSpacing(3);
 
 export const Container = styled.div`
-  padding: calc(${defaultMargins.vertical.mobile} - ${getSpacing(3)}) 0;
+  padding-bottom: calc(${defaultMargins.vertical.mobile} - ${getSpacing(3)});
   ${media.desktop(`
-    padding: calc(${defaultMargins.vertical.desktop} - ${getSpacing(3)}) 0;
+    padding-bottom: calc(${defaultMargins.vertical.desktop} - ${getSpacing(3)});
   `)}
 `;
 

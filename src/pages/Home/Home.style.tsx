@@ -63,7 +63,7 @@ export const CauseCardsWrapper = styled.div`
   overflow: scroll;
   margin: ${getSpacing(1)} -${getSpacing(3)} 0 -${getSpacing(3)};
   ${media.desktop(`
-    height: ${getSpacing(95)};
+    height: ${getSpacing(97)};
     flex-wrap: wrap;
     overflow: hidden;
     justify-content: center;

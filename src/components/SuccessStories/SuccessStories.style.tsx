@@ -5,24 +5,30 @@ export const DESKTOP_MARGIN_BETWEEN_CARDS = getSpacing(10);
 export const MOBILE_MARGIN_BETWEEN_CARDS = getSpacing(3);
 
 export const Container = styled.div`
-  padding-bottom: calc(${defaultMargins.vertical.mobile} - ${getSpacing(3)});
+  overflow: hidden;
+  padding-bottom: ${defaultMargins.vertical.mobile};
   ${media.desktop(`
-    padding-bottom: calc(${defaultMargins.vertical.desktop} - ${getSpacing(3)});
+    padding-bottom: ${defaultMargins.vertical.desktop};
   `)}
 `;
 
 export const Title = styled.h3`
   margin-left: ${defaultMargins.horizontal.mobile};
+  margin-bottom: ${getSpacing(3)};
   ${media.desktop(`
-    margin-bottom: ${getSpacing(3)};
     margin-left: ${defaultMargins.horizontal.desktop};
+    margin-bottom: ${getSpacing(6)};
   `)}
 `;
 
 export const SubContainer = styled.div`
+  margin: -${getSpacing(3)};
+`;
+
+export const SubSubContainer = styled.div`
   display: flex;
-  overflow: scroll;
-  padding: ${getSpacing(3)} 0;
+  overflow-y: scroll;
+  padding: ${getSpacing(3)};
 `;
 
 export const SuccessStoryCardWrapper = styled.div<{ isFirst: boolean; show: boolean }>`

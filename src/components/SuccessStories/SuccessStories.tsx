@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { Container, SubContainer, SuccessStoryCardWrapper, Title } from './SuccessStories.style';
+import {
+  Container,
+  SubContainer,
+  SubSubContainer,
+  SuccessStoryCardWrapper,
+  Title,
+} from './SuccessStories.style';
 import SuccessStoryCard from './components/SuccessStoryCard';
 import { SUCCESS_STORIES } from './data';
 import { FormattedMessage } from 'react-intl';
@@ -10,11 +16,13 @@ const SuccessStories: FunctionComponent<{}> = () => (
       <FormattedMessage id="success_stories.title" />
     </Title>
     <SubContainer>
-      {SUCCESS_STORIES.map((successStory, index) => (
-        <SuccessStoryCardWrapper key={successStory.title} isFirst={index === 0} show={index <= 1}>
-          <SuccessStoryCard {...successStory} />
-        </SuccessStoryCardWrapper>
-      ))}
+      <SubSubContainer>
+        {SUCCESS_STORIES.map((successStory, index) => (
+          <SuccessStoryCardWrapper key={successStory.title} isFirst={index === 0} show={index <= 1}>
+            <SuccessStoryCard {...successStory} />
+          </SuccessStoryCardWrapper>
+        ))}
+      </SubSubContainer>
     </SubContainer>
   </Container>
 );

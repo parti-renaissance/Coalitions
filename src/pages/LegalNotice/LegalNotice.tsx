@@ -104,8 +104,9 @@ const LegalNotice: FunctionComponent = () => (
       </li>
       <li>
         <Bold>Compte personnel :</Bold> d&eacute;signe le compte ouvert par un Utilisateur &agrave;
-        partir du site web de la Plateforme accessible &agrave; l&rsquo;adresse URL ____ ou &agrave;
-        partir du site web de LaREM (https://en-marche.fr) s&rsquo;il est Adh&eacute;rent.
+        partir du site web de la Plateforme accessible &agrave; l&rsquo;adresse URL pourunecause.fr
+        ou &agrave; partir du site web de LaREM (https://en-marche.fr) s&rsquo;il est
+        Adh&eacute;rent.
       </li>
       <li>
         <Bold>Contenus et services sp&eacute;cifiques :</Bold> d&eacute;signent les contenus et

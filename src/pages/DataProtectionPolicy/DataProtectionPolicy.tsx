@@ -67,9 +67,9 @@ const DataProtectionPolicy: FunctionComponent = () => (
       </li>
       <li>
         <Bold>Compte personnel :</Bold> d&eacute;signe le compte ouvert par un Utilisateur &agrave;
-        partir du site web de la Plateforme accessible &agrave; l&rsquo;adresse URL ____ ou &agrave;
-        partir du site web de La R&eacute;publique en Marche (https://en-marche.fr) s&rsquo;il est
-        Adh&eacute;rent.
+        partir du site web de la Plateforme accessible &agrave; l&rsquo;adresse URL pourunecause.fr
+        ou &agrave; partir du site web de La R&eacute;publique en Marche (https://en-marche.fr)
+        s&rsquo;il est Adh&eacute;rent.
       </li>
       <li>
         <Bold>Contact occasionnel :</Bold> d&eacute;signe toute personne sollicit&eacute;e ou qui

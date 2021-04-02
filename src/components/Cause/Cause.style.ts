@@ -1,4 +1,3 @@
-import { Card, CardContent } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 import {
   boxShadow,
@@ -56,17 +55,21 @@ export const Author = styled.div`
 `;
 Author.displayName = 'Author';
 
-export const StyledCard = styled(Card)`
+export const StyledCard = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
   max-width: ${getSpacing(75)};
   margin-bottom: ${getSpacing(4)};
   box-shadow: ${boxShadow.card};
+  border-radius: ${borderRadius.medium};
+  overflow: hidden;
   ${media.desktop(`
     width: ${getSpacing(68)};
     margin-bottom: ${getSpacing(6)};
     margin-left: ${getSpacing(4)};
     margin-right: ${getSpacing(4)};
-  `)}
+  `)};
 `;
 
 export const StyledMedia = styled.div<{ backgroundImage: string }>`
@@ -81,11 +84,11 @@ export const StyledMedia = styled.div<{ backgroundImage: string }>`
     `};
 `;
 
-export const StyledContent = styled(CardContent)`
+export const StyledContent = styled.div`
   padding: ${getSpacing(6)} ${getSpacing(4)};
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
 `;
 
 export const ButtonContainer = styled.div`

@@ -128,8 +128,10 @@ export const Bold = styled.span`
 `;
 
 export const OurCommitmentsWrapper = styled.div`
-  margin-top: ${defaultMargins.vertical.mobile};
+  margin: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
+  margin-top: 0;
   ${media.desktop(`
-    margin-top: ${defaultMargins.vertical.desktop};
+    margin: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+    margin-top: 0;
   `)}
 `;

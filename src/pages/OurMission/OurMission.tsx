@@ -8,6 +8,7 @@ import { useHistory } from 'react-router';
 import OurCommitments from 'components/OurCommitments';
 import { OurCommitmentsWrapper } from './OurMission.style';
 // import Video from 'components/Video';
+import SuccessStories from 'components/SuccessStories';
 
 const OurMission: FunctionComponent = () => {
   const history = useHistory();
@@ -26,6 +27,7 @@ const OurMission: FunctionComponent = () => {
       <OurCommitmentsWrapper>
         <OurCommitments />
       </OurCommitmentsWrapper>
+      <SuccessStories />
       <FixedBottomButton onClick={onCreateCauseClick}>
         <FormattedMessage id="cause-cta.cause-creation" />
       </FixedBottomButton>

@@ -33,6 +33,7 @@ import { useHistory } from 'react-router';
 import Video from 'components/Video';
 import OurCommitments from 'components/OurCommitments';
 import SuccessModal from './components/SuccessModal';
+import SuccessStories from 'components/SuccessStories';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
@@ -107,10 +108,11 @@ const Home: React.FunctionComponent = () => {
         <CoalitionCardsWrapper>
           <CoalitionCards onCoalitionClick={onCoalitionClick} responsiveNbOfCardsByLine />
         </CoalitionCardsWrapper>
-        <OurCommitmentsWrapper>
-          <OurCommitments />
-        </OurCommitmentsWrapper>
       </Block>
+      <OurCommitmentsWrapper>
+        <OurCommitments />
+      </OurCommitmentsWrapper>
+      <SuccessStories />
       <CreateCauseCTA displayLinkToCauseList />
       <SuccessModal />
     </>

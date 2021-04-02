@@ -20,11 +20,14 @@ export const Container = styled.div`
   border-radius: ${borderRadius.medium};
   box-shadow: ${boxShadow.card};
   overflow: hidden;
+  width: 75vw;
+  height: ${getSpacing(98)};
   ${media.desktop(`
     flex-direction: row;
-    min-width: calc(
-        calc(100vw - 2 * ${defaultMargins.horizontal.desktop} - ${DESKTOP_MARGIN_BETWEEN_CARDS}) / 2
+    width: calc(
+      calc(100vw - 2 * ${defaultMargins.horizontal.desktop} - ${DESKTOP_MARGIN_BETWEEN_CARDS}) / 2
       );
+    height: ${getSpacing(68)};
   `)}
 `;
 
@@ -33,7 +36,7 @@ export const Image = styled.img`
   width: 100%;
   object-fit: cover;
   ${media.desktop(`
-    height: ${getSpacing(68)};
+    height: 100%;
     width: 50%;
   `)}
 `;

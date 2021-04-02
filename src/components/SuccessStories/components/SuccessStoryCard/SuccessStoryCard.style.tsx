@@ -20,7 +20,7 @@ export const Container = styled.div`
   border-radius: ${borderRadius.medium};
   box-shadow: ${boxShadow.card};
   overflow: hidden;
-  width: 75vw;
+  width: min(75vw, ${getSpacing(60)});
   height: ${getSpacing(98)};
   ${media.desktop(`
     flex-direction: row;

@@ -173,8 +173,10 @@
   "errors": {
     "already-followed-cause-for-unauthenticated": "Vous soutenez déjà cette cause, connectez-vous ou créez un compte pour aller plus loin",
     "already-followed-cause": "Vous soutenez déjà cette cause.",
-    "mail-of-existing-account": "L’utilisateur avec cette adresse e-mail existe déjà. Veuillez vous connecter pour soutenir la cause.",
-    "already-used-cause-name": "Ce nom de cause existe déjà."
+    "mail-of-existing-account-for-support": "L’utilisateur avec cette adresse e-mail existe déjà. Veuillez vous connecter pour soutenir la cause.",
+    "mail-of-existing-account": "L’utilisateur avec cette adresse e-mail existe déjà.",
+    "already-used-cause-name": "Ce nom de cause existe déjà.",
+    "incorrect-password-token": "Une erreur s'est produite : ce lien n'est plus valide."
   },
   "success_stories": {
     "title": "Ils ont créé leur cause",

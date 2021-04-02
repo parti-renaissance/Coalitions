@@ -9,6 +9,7 @@ export const REFRESH_TOKEN_KEY = 'refresh_token';
 const oauthBaseUrl = process.env.REACT_APP_OAUTH_URL;
 const oauthClientId = process.env.REACT_APP_OAUTH_CLIENT_ID;
 export const oauthUrl = `${oauthBaseUrl}?response_type=code&client_id=${oauthClientId}`;
+export const OAUTH_SOURCE = 'coalitions';
 
 type oauthPayload = {
   client_id?: string;

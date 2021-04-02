@@ -21,7 +21,7 @@ const useUnauthenticatedCauseFollowErrorHandler = () => {
         return formatMessage({ id: 'errors.already-followed-cause-for-unauthenticated' });
       }
       if (error.message.includes('utilisateur avec cette adresse e-mail existe déjà')) {
-        return formatMessage({ id: 'errors.mail-of-existing-account' });
+        return formatMessage({ id: 'errors.mail-of-existing-account-for-support' });
       }
       return null;
     },
@@ -38,7 +38,7 @@ type UnauthenticatedCauseFollowPayload = {
   coalition_subscription: boolean;
 };
 
-export const useUnauthenticatedCauseFollow = (causeId: string) => {
+export const useUnauthenticatedCauseFollow = (causeId: string, onClose?: () => void) => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
   const errorHandler = useUnauthenticatedCauseFollowErrorHandler();
@@ -69,6 +69,10 @@ export const useUnauthenticatedCauseFollow = (causeId: string) => {
 
       if (response instanceof Error) return;
 
+      if (onClose !== undefined) {
+        onClose();
+      }
+
       dispatch(optimisticallyIncrementCauseFollower(causeId));
       dispatch(
         updateSnackbar({
@@ -77,7 +81,7 @@ export const useUnauthenticatedCauseFollow = (causeId: string) => {
         }),
       );
     },
-    [causeId, dispatch, doUnauthenticatedCauseFollow, formatMessage],
+    [causeId, dispatch, doUnauthenticatedCauseFollow, formatMessage, onClose],
   );
 
   return { loading, error, unauthenticatedCauseFollow };

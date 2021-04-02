@@ -23,6 +23,7 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
   const dispatch = useDispatch();
   const { loading: isFollowingCause, unauthenticatedCauseFollow } = useUnauthenticatedCauseFollow(
     cause.uuid,
+    onClose,
   );
 
   const onConnect = () => {

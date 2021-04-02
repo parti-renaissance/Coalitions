@@ -47,16 +47,13 @@ const CreateAccountForm = ({
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
-  const { loading, createAccount } = useCreateAccount();
+  const { loading, createAccount } = useCreateAccount(doAfterAccountCreation);
 
   const handleAccountCreation = async (values: InscriptionFormValues) => {
     if (onAccountFormSubmit !== undefined) {
       onAccountFormSubmit(values);
     } else {
       await createAccount(values);
-    }
-    if (doAfterAccountCreation !== undefined) {
-      await doAfterAccountCreation();
     }
   };
 

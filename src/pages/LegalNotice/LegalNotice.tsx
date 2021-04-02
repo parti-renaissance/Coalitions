@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import LegalPage, { Bold, Title } from 'components/LegalPage/LegalPage';
 
 const LegalNotice: FunctionComponent = () => (
-  <LegalPage title="Mentions Légales">
+  <LegalPage title="MENTIONS L&Eacute;GALES">
     <p>
       <Bold>Editeur&#8239;:</Bold>
     </p>
@@ -190,7 +190,7 @@ const LegalNotice: FunctionComponent = () => (
       Les pr&eacute;sentes CGU s&rsquo;appliquent au Visiteur et &agrave; l&rsquo;Utilisateur qui
       consulte et/ou publie les Contenus et Services mis &agrave; disposition sur la Plateforme.
     </p>
-    <h2>Article 3. Champ d&rsquo;application&#8239;: </h2>
+    <h2>Article 3. Champ d&rsquo;application&#8239;</h2>
     <p>
       Les CGU de la Plateforme s&rsquo;appliquent, sans restriction ni r&eacute;serve, &agrave; tous
       les Services propos&eacute;s par la Plateforme. Elles prennent effet &agrave; compter de leur
@@ -401,7 +401,7 @@ const LegalNotice: FunctionComponent = () => (
       personnel sur la Plateforme s&rsquo;il souhaite participer aux discussions ou aux
       &eacute;v&eacute;nements propos&eacute;s.
     </p>
-    <h3>9.2. Le Porteur de Cause&#8239;:</h3>
+    <h3>9.2. Le Porteur de Cause&#8239;</h3>
     <p>
       L&rsquo;Utilisateur &agrave; l&rsquo;origine de la cr&eacute;ation de la Cause en est son
       Porteur. L&rsquo;Utilisateur qui cr&eacute;e plusieurs Causes est ainsi Porteur de plusieurs
@@ -421,13 +421,13 @@ const LegalNotice: FunctionComponent = () => (
       contraires &agrave; cette Charte des valeurs, &agrave; la Charte de Bonnes Pratiques, aux
       pr&eacute;sentes CGU, ainsi qu&rsquo;&agrave; la Politique de Protection des Donn&eacute;es.
     </p>
-    <h3>9.3. Modification d&rsquo;une Cause&#8239;:</h3>
+    <h3>9.3. Modification d&rsquo;une Cause&#8239;</h3>
     <p>
       Une fois cr&eacute;&eacute;e, le titre d&rsquo;une Cause ne pourra &ecirc;tre modifi&eacute;
       que par un Administrateur de la Plateforme. Toutefois, le Porteur de la Cause peut en modifier
       la description ou l&rsquo;image choisie pour son illustration.
     </p>
-    <h3>9.4. Cl&ocirc;ture d&rsquo;une Cause&#8239;:</h3>
+    <h3>9.4. Cl&ocirc;ture d&rsquo;une Cause&#8239;</h3>
     <p>
       Une Cause est close sur demande de l&rsquo;auteur &agrave; l&rsquo;adresse
       contact@pourunecause.fr
@@ -528,7 +528,7 @@ const LegalNotice: FunctionComponent = () => (
         </ul>
       </li>
     </ul>
-    <h2>Article 17. Mod&eacute;ration des contenus&#8239;: </h2>
+    <h2>Article 11. Mod&eacute;ration des contenus&#8239;:</h2>
     <p>
       Il est de la responsabilit&eacute; de l&rsquo;Utilisateur contributeur de veiller &agrave; ce
       que les contenus qu&rsquo;il publie sur la Plateforme ne portent pas atteinte aux droits et
@@ -571,7 +571,7 @@ const LegalNotice: FunctionComponent = () => (
       LaREM d&eacute;cide de la sanction &agrave; appliquer envers la ou les personnes
       concern&eacute;es.
     </p>
-    <h2>Article 18. Les droits de propri&eacute;t&eacute; intellectuelle de LaREM </h2>
+    <h2>Article 12. Les droits de propri&eacute;t&eacute; intellectuelle de LaREM</h2>
     <p>
       A l'exception des Contenus tiers accessibles sur la Plateforme, tout autre contenu disponible
       sur la Plateforme est la propri&eacute;t&eacute; exclusive de LaREM.
@@ -609,7 +609,7 @@ const LegalNotice: FunctionComponent = () => (
       ult&eacute;rieurement, pour une dur&eacute;e de 5 ans &agrave; compter de la publication du
       Contenu sur la Plateforme et pour le monde entier.
     </p>
-    <p>Donn&eacute;es personnelles </p>
+    <h2>Article 13. Donn&eacute;es personnelles</h2>
     <p>
       Le Visiteur, comme l&rsquo;Utilisateur, est inform&eacute; que, lors de sa navigation sur la
       Plateforme, des donn&eacute;es &agrave; caract&egrave;re personnel le concernant peuvent
@@ -637,7 +637,7 @@ const LegalNotice: FunctionComponent = () => (
       droits, nous vous invitons &agrave; consulter la Politique de protection des donn&eacute;es
       ici : https://pourunecause.fr /politique-protection-donnees.
     </p>
-    <h2>Article 19. S&eacute;curit&eacute; et confidentialit&eacute; </h2>
+    <h2>Article 14. S&eacute;curit&eacute; et confidentialit&eacute;</h2>
     <p>
       LaREM s&rsquo;engage &agrave; fournir ses meilleurs efforts afin de garantir au mieux la
       s&eacute;curit&eacute;, l&rsquo;int&eacute;grit&eacute;, la disponibilit&eacute; et la
@@ -649,27 +649,24 @@ const LegalNotice: FunctionComponent = () => (
         A conscience que les donn&eacute;es circulant sur internet ne sont pas n&eacute;cessairement
         prot&eacute;g&eacute;es, notamment contre les d&eacute;tournements &eacute;ventuels ;
       </li>
-
       <li>
         Accepte de prendre toutes les mesures appropri&eacute;es de fa&ccedil;on &agrave;
         prot&eacute;ger ses propres contenus et donn&eacute;es de la contamination par
         d&rsquo;&eacute;ventuelles intrusions, virus ou logiciels malveillants sur le r&eacute;seau
         de l&rsquo;internet&#8239;;
       </li>
-
       <li>
         D&eacute;clare conna&icirc;tre et accepter les caract&eacute;ristiques et limites
         d&rsquo;internet, la nature du r&eacute;seau d&rsquo;internet, et en particulier, des temps
         de r&eacute;ponse pour consulter, interroger ou transf&eacute;rer des donn&eacute;es ;
       </li>
-
       <li>
         S&rsquo;engage &agrave; informer LaREM de toute d&eacute;faillance de la Plateforme dont il
         aurait connaissance.
       </li>
     </ul>
-    <h2>Article 20. Exclusion de responsabilit&eacute; de LaREM </h2>
-    <p>Contenus publi&eacute;s sur la Plateforme </p>
+    <h2>Article 15. Exclusion de responsabilit&eacute; de LaREM</h2>
+    <h3>15.1. Contenus publi&eacute;s sur la Plateforme</h3>
     <p>
       LaREM n&rsquo;est pas responsable des Contenus publi&eacute;s sur la Plateforme par les
       Utilisateurs et/ou les Visiteurs. Ces derniers sont enti&egrave;rement et seuls responsables
@@ -691,31 +688,35 @@ const LegalNotice: FunctionComponent = () => (
       Les Contenus sont r&eacute;dig&eacute;s librement et spontan&eacute;ment par les Utilisateurs
       et les Visiteurs et ne repr&eacute;sentent pas les prises de position officielles de LaREM.
     </p>
-    <p>Fonctionnement et maintenance de la Plateforme </p>
+    <h3>15.2. Fonctionnement et maintenance de la Plateforme</h3>
     <p>LaREM&#8239; : </p>
-    <p>
-      ne sera pas tenue responsable envers l&rsquo;Utilisateur ou le Visiteur ou tout tiers de tout
-      dommage direct ou indirect r&eacute;sultant de l&rsquo;utilisation de la Plateforme par
-      l&rsquo;Utilisateur ou le Visiteur &#8239;;
-    </p>
-    <p>Propose un service de Plateforme participative sans aucune garantie de r&eacute;sultat ; </p>
-    <p>
-      Ne peut garantir le Visiteur ou l&rsquo;Utilisateur que les informations auxquelles ils le
-      Visiteur ou l&rsquo;Utilisateur acc&egrave;dent seraient exactes ou fiables ;
-    </p>
-    <p>
-      D&eacute;cline toute responsabilit&eacute; s&rsquo;agissant du fonctionnement et de la
-      maintenance de la Plateforme et ne garantit pas un fonctionnement sans erreurs, sans bogues ou
-      sans interruption de la Plateforme&#8239;;
-    </p>
-    <p>
-      Ne pourra pas &ecirc;tre tenue responsable envers l&rsquo;Utilisateur ou le Visiteur ou tout
-      tiers d&rsquo;une &eacute;ventuelle d&eacute;gradation, suspension ou interruption des
-      services imputable &agrave; la force majeure, au fait d&rsquo;un Utilisateur, d&rsquo;un
-      Visiteur ou d&rsquo;un tiers, ainsi qu&rsquo;aux al&eacute;as in&eacute;vitables pouvant
-      d&eacute;couler de la technique.
-    </p>
-    <h2>Article 21. Liens hypertextes </h2>
+    <ul>
+      <li>
+        ne sera pas tenue responsable envers l&rsquo;Utilisateur ou le Visiteur ou tout tiers de
+        tout dommage direct ou indirect r&eacute;sultant de l&rsquo;utilisation de la Plateforme par
+        l&rsquo;Utilisateur ou le Visiteur &#8239;;
+      </li>
+      <li>
+        Propose un service de Plateforme participative sans aucune garantie de r&eacute;sultat ;{' '}
+      </li>
+      <li>
+        Ne peut garantir le Visiteur ou l&rsquo;Utilisateur que les informations auxquelles ils le
+        Visiteur ou l&rsquo;Utilisateur acc&egrave;dent seraient exactes ou fiables ;
+      </li>
+      <li>
+        D&eacute;cline toute responsabilit&eacute; s&rsquo;agissant du fonctionnement et de la
+        maintenance de la Plateforme et ne garantit pas un fonctionnement sans erreurs, sans bogues
+        ou sans interruption de la Plateforme&#8239;;
+      </li>
+      <li>
+        Ne pourra pas &ecirc;tre tenue responsable envers l&rsquo;Utilisateur ou le Visiteur ou tout
+        tiers d&rsquo;une &eacute;ventuelle d&eacute;gradation, suspension ou interruption des
+        services imputable &agrave; la force majeure, au fait d&rsquo;un Utilisateur, d&rsquo;un
+        Visiteur ou d&rsquo;un tiers, ainsi qu&rsquo;aux al&eacute;as in&eacute;vitables pouvant
+        d&eacute;couler de la technique.
+      </li>
+    </ul>
+    <h2>Article 16. Liens hypertextes</h2>
     <p>
       La Plateforme contient des liens hypertextes donnant acc&egrave;s &agrave; des sites web de
       tiers.
@@ -733,7 +734,7 @@ const LegalNotice: FunctionComponent = () => (
       invoquer la responsabilit&eacute; de LaREM en cas de perte ou de dommage de quelque sorte que
       ce soit du fait de l&rsquo;activation de liens hypertextes.
     </p>
-    <h2>Article 22. Modification des CGU </h2>
+    <h2>Article 17. Modification des CGU </h2>
     <p>
       LaREM est susceptible de modifier, unilat&eacute;ralement et &agrave; tout moment, les
       pr&eacute;sentes CGU notamment pour les adapter aux modifications l&eacute;gislatives ou
@@ -755,7 +756,7 @@ const LegalNotice: FunctionComponent = () => (
       d'utiliser les Services apr&egrave;s la date de publication des nouvelles CGU, il est
       r&eacute;put&eacute; en avoir pris connaissance et les avoir accept&eacute;es.
     </p>
-    <h2>Article 23. Dispositions diverses </h2>
+    <h2>Article 18. Dispositions diverses </h2>
     <p>
       Si un ou plusieurs des termes des pr&eacute;sentes CGU sont tenus pour nuls ou
       d&eacute;clar&eacute;s comme tel en application d&rsquo;une loi, d&rsquo;un r&egrave;glement
@@ -766,7 +767,7 @@ const LegalNotice: FunctionComponent = () => (
       La l&eacute;gislation fran&ccedil;aise s&rsquo;applique aux pr&eacute;sentes CGU, quel que
       soit le lieu d'ex&eacute;cution des obligations des parties.
     </p>
-    <p>Derni&egrave;re mise &agrave; jour : 01/04/2021 &ndash; </p>
+    <p>Derni&egrave;re mise &agrave; jour : 01/04/2021 &ndash;</p>
   </LegalPage>
 );
 

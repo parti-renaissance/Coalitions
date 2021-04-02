@@ -5,6 +5,7 @@ import {
   SubSubContainer,
   SuccessStoryCardWrapper,
   Title,
+  EmptyDiv,
 } from './SuccessStories.style';
 import SuccessStoryCard from './components/SuccessStoryCard';
 import { SUCCESS_STORIES } from './data';
@@ -22,6 +23,7 @@ const SuccessStories: FunctionComponent<{}> = () => (
             <SuccessStoryCard {...successStory} />
           </SuccessStoryCardWrapper>
         ))}
+        <EmptyDiv />
       </SubSubContainer>
     </SubContainer>
   </Container>

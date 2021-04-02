@@ -54,3 +54,7 @@ export const SuccessStoryCardWrapper = styled.div<{ isFirst: boolean; show: bool
           `)}
         `};
 `;
+
+export const EmptyDiv = styled.div`
+  min-width: ${getSpacing(3)};
+`;

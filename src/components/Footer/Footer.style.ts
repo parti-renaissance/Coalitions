@@ -32,7 +32,7 @@ export const LinkContainer = styled.div`
   margin: ${getSpacing(1.5)} 0;
 `;
 
-const LINK_STYLE = css`
+export const Link = styled(DefaultLink)`
   font-family: ${fontFamily.primary};
   font-size: ${LINK_FONT_SIZE};
   font-weight: ${fontWeight.normal};
@@ -42,14 +42,6 @@ const LINK_STYLE = css`
   :hover {
     text-decoration: underline;
   }
-`;
-
-export const Link = styled(DefaultLink)`
-  ${LINK_STYLE}
-`;
-
-export const ExternalLink = styled.a`
-  ${LINK_STYLE}
 `;
 
 export const Separator = styled.div`

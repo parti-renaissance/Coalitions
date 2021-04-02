@@ -62,7 +62,7 @@ const LegalNotice: FunctionComponent = () => (
       <li>
         <Bold>Adh&eacute;rent :</Bold> d&eacute;signe toute personne de plus de quinze (15) ans
         ayant adh&eacute;r&eacute; &agrave; LaREM et notamment &agrave; la{' '}
-        <a href={CHARTER_OF_VALUES_URL} target="_blank">
+        <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
           Charte des valeurs
         </a>{' '}
         et &agrave; la Politique de protection des donn&eacute;es personnelles du Mouvement et
@@ -216,7 +216,7 @@ const LegalNotice: FunctionComponent = () => (
       la Plateforme sont les pr&eacute;sentes Conditions G&eacute;n&eacute;rales
       d&rsquo;Utilisation, la Politique de protection des donn&eacute;es &agrave; caract&egrave;re
       personnel et la{' '}
-      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+      <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
         Charte des valeurs
       </a>
       . Le Porteur de Cause et le Responsable de la coalition sont &eacute;galement soumis &agrave;
@@ -388,7 +388,7 @@ const LegalNotice: FunctionComponent = () => (
       Lorsqu&rsquo;une personne cr&eacute;e une Cause sur la Plateforme, avant toute publication sur
       la Plateforme, cette Cause est soumise &agrave; un Administrateur qui, v&eacute;rifie sa
       conformit&eacute; &agrave; la{' '}
-      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+      <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
         Charte des valeurs
       </a>{' '}
       que vous pouvez consulter ici.
@@ -430,11 +430,11 @@ const LegalNotice: FunctionComponent = () => (
       cr&eacute;&eacute;s. Il ne peut cependant avoir un acc&egrave;s direct aux donn&eacute;es
       personnelles des soutiens. Le Porteur de Cause s&rsquo;engage &agrave; respecter
       rigoureusement la{' '}
-      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+      <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
         Charte des valeurs
       </a>
       , et s&rsquo;interdit d&rsquo;adresser des communications contraires &agrave; cette{' '}
-      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+      <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
         Charte des valeurs
       </a>
       , &agrave; la Charte de Bonnes Pratiques, aux pr&eacute;sentes CGU, ainsi qu&rsquo;&agrave; la
@@ -456,7 +456,7 @@ const LegalNotice: FunctionComponent = () => (
       L&rsquo;Utilisateur est seul responsable de son utilisation des Services de la Plateforme. Il
       s&rsquo;engage &agrave; n'utiliser la Plateforme que dans les seules conditions
       d&eacute;finies par les pr&eacute;sentes CGU, par la{' '}
-      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+      <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
         Charte des valeurs
       </a>{' '}
       et la Politique de protection des donn&eacute;es personnelles. Il s&rsquo;engage ainsi&#8239;:
@@ -503,7 +503,7 @@ const LegalNotice: FunctionComponent = () => (
       </li>
       <li>
         &agrave; respecter la{' '}
-        <a href={CHARTER_OF_VALUES_URL} target="_blank">
+        <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
           Charte des valeurs
         </a>{' '}
         &#8239;;
@@ -570,7 +570,7 @@ const LegalNotice: FunctionComponent = () => (
       LaREM se r&eacute;serve le droit de retirer/supprimer un Contenu publi&eacute; sur la
       Plateforme, qui ne serait pas conforme aux lois et r&egrave;glements, aux pr&eacute;sentes
       CGU, &agrave; la{' '}
-      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+      <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
         Charte des valeurs
       </a>
       , et aux r&egrave;gles &eacute;l&eacute;mentaires de respect et de courtoisie.
@@ -581,7 +581,7 @@ const LegalNotice: FunctionComponent = () => (
       pr&eacute;venir pr&eacute;alablement l&rsquo;Utilisateur contributeur &agrave; son origine.
       Ces actions de mod&eacute;ration sont r&eacute;alis&eacute;es lorsque les Contenus ne
       respectent pas les pr&eacute;sentes CGU, la{' '}
-      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+      <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
         Charte des valeurs
       </a>{' '}
       ou la Politique de protection des donn&eacute;es de la Plateforme et notamment

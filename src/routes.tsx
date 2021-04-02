@@ -15,6 +15,9 @@ const CookiesPolicy = lazy(() => import('./pages/CookiesPolicy'));
 const LegalNotice = lazy(() => import('./pages/LegalNotice'));
 const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'));
 
+export const CHARTER_OF_VALUES_URL =
+  'https://storage.googleapis.com/pourunecause/charte_des_valeurs.pdf';
+
 export const PATHS = {
   HOME: {
     route: '/',

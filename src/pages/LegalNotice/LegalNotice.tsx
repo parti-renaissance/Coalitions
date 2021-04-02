@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import LegalPage, { Bold, Title } from 'components/LegalPage/LegalPage';
+import { CHARTER_OF_VALUES_URL } from 'routes';
 
 const LegalNotice: FunctionComponent = () => (
   <LegalPage title="MENTIONS L&Eacute;GALES">
@@ -60,8 +61,11 @@ const LegalNotice: FunctionComponent = () => (
     <ul>
       <li>
         <Bold>Adh&eacute;rent :</Bold> d&eacute;signe toute personne de plus de quinze (15) ans
-        ayant adh&eacute;r&eacute; &agrave; LaREM et notamment &agrave; la Charte des valeurs et
-        &agrave; la Politique de protection des donn&eacute;es personnelles du Mouvement et
+        ayant adh&eacute;r&eacute; &agrave; LaREM et notamment &agrave; la{' '}
+        <a href={CHARTER_OF_VALUES_URL} target="_blank">
+          Charte des valeurs
+        </a>{' '}
+        et &agrave; la Politique de protection des donn&eacute;es personnelles du Mouvement et
         cr&eacute;&eacute; un Compte Personnel par lequel elle se connecte &agrave; l&rsquo;aide
         d&rsquo;un identifiant et mot de passe qui lui sont strictement personnels et confidentiels.
         L&rsquo;Adh&eacute;rent utilise la Plateforme en se connectant via son Compte Personnel
@@ -211,8 +215,12 @@ const LegalNotice: FunctionComponent = () => (
       Les documents contractuels qui s&rsquo;imposent au Visiteur et &agrave; l&rsquo;Utilisateur de
       la Plateforme sont les pr&eacute;sentes Conditions G&eacute;n&eacute;rales
       d&rsquo;Utilisation, la Politique de protection des donn&eacute;es &agrave; caract&egrave;re
-      personnel et la Charte des valeurs. Le Porteur de Cause et le Responsable de la coalition sont
-      &eacute;galement soumis &agrave; la Charte de Bonnes Pratiques [LIEN].
+      personnel et la{' '}
+      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+        Charte des valeurs
+      </a>
+      . Le Porteur de Cause et le Responsable de la coalition sont &eacute;galement soumis &agrave;
+      la Charte de Bonnes Pratiques [LIEN].
     </p>
     <h2>Article 6. Acc&egrave;s &agrave; la Plateforme </h2>
     <p>
@@ -379,7 +387,11 @@ const LegalNotice: FunctionComponent = () => (
     <p>
       Lorsqu&rsquo;une personne cr&eacute;e une Cause sur la Plateforme, avant toute publication sur
       la Plateforme, cette Cause est soumise &agrave; un Administrateur qui, v&eacute;rifie sa
-      conformit&eacute; &agrave; la Charte des valeurs que vous pouvez consulter ici.
+      conformit&eacute; &agrave; la{' '}
+      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+        Charte des valeurs
+      </a>{' '}
+      que vous pouvez consulter ici.
     </p>
     <ul>
       <li>
@@ -417,9 +429,16 @@ const LegalNotice: FunctionComponent = () => (
       Le Porteur de Cause peut adresser des communications aux soutiens de la Cause qu&rsquo;il a
       cr&eacute;&eacute;s. Il ne peut cependant avoir un acc&egrave;s direct aux donn&eacute;es
       personnelles des soutiens. Le Porteur de Cause s&rsquo;engage &agrave; respecter
-      rigoureusement la Charte des valeurs, et s&rsquo;interdit d&rsquo;adresser des communications
-      contraires &agrave; cette Charte des valeurs, &agrave; la Charte de Bonnes Pratiques, aux
-      pr&eacute;sentes CGU, ainsi qu&rsquo;&agrave; la Politique de Protection des Donn&eacute;es.
+      rigoureusement la{' '}
+      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+        Charte des valeurs
+      </a>
+      , et s&rsquo;interdit d&rsquo;adresser des communications contraires &agrave; cette{' '}
+      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+        Charte des valeurs
+      </a>
+      , &agrave; la Charte de Bonnes Pratiques, aux pr&eacute;sentes CGU, ainsi qu&rsquo;&agrave; la
+      Politique de Protection des Donn&eacute;es.
     </p>
     <h3>9.3. Modification d&rsquo;une Cause&#8239;</h3>
     <p>
@@ -436,8 +455,11 @@ const LegalNotice: FunctionComponent = () => (
     <p>
       L&rsquo;Utilisateur est seul responsable de son utilisation des Services de la Plateforme. Il
       s&rsquo;engage &agrave; n'utiliser la Plateforme que dans les seules conditions
-      d&eacute;finies par les pr&eacute;sentes CGU, par la Charte des valeurs et la Politique de
-      protection des donn&eacute;es personnelles. Il s&rsquo;engage ainsi&#8239;:
+      d&eacute;finies par les pr&eacute;sentes CGU, par la{' '}
+      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+        Charte des valeurs
+      </a>{' '}
+      et la Politique de protection des donn&eacute;es personnelles. Il s&rsquo;engage ainsi&#8239;:
     </p>
     <ul>
       <li>
@@ -479,7 +501,13 @@ const LegalNotice: FunctionComponent = () => (
         des donn&eacute;es - RGPD) et de la Loi n&deg; 78-17 du 6 janvier 1978 relative &agrave;
         l'informatique, aux fichiers et aux libert&eacute;s.
       </li>
-      <li>&agrave; respecter la Charte des valeurs &#8239;; </li>
+      <li>
+        &agrave; respecter la{' '}
+        <a href={CHARTER_OF_VALUES_URL} target="_blank">
+          Charte des valeurs
+        </a>{' '}
+        &#8239;;
+      </li>
       <li>
         &agrave; respecter les droits de la Propri&eacute;t&eacute; intellectuelle aff&eacute;rents
         aux Services de la Plateforme&#8239;;
@@ -541,20 +569,27 @@ const LegalNotice: FunctionComponent = () => (
       l&rsquo;Utilisateur fait l&rsquo;objet d&rsquo;une mod&eacute;ration a posteriori par LaREM.
       LaREM se r&eacute;serve le droit de retirer/supprimer un Contenu publi&eacute; sur la
       Plateforme, qui ne serait pas conforme aux lois et r&egrave;glements, aux pr&eacute;sentes
-      CGU, &agrave; la Charte des valeurs, et aux r&egrave;gles &eacute;l&eacute;mentaires de
-      respect et de courtoisie.
+      CGU, &agrave; la{' '}
+      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+        Charte des valeurs
+      </a>
+      , et aux r&egrave;gles &eacute;l&eacute;mentaires de respect et de courtoisie.
     </p>
     <p>
       Plus pr&eacute;cis&eacute;ment, l&rsquo;&eacute;quipe de mod&eacute;ration a la
       possibilit&eacute; de retirer/supprimer totalement ou partiellement un Contenu sans
       pr&eacute;venir pr&eacute;alablement l&rsquo;Utilisateur contributeur &agrave; son origine.
       Ces actions de mod&eacute;ration sont r&eacute;alis&eacute;es lorsque les Contenus ne
-      respectent pas les pr&eacute;sentes CGU, la Charte des valeurs ou la Politique de protection
-      des donn&eacute;es de la Plateforme et notamment lorsqu&rsquo;ils ne sont pas en relation avec
-      la Cause ou la Coalition concern&eacute;e, ne respectent pas la r&egrave;glementation en
-      vigueur et notamment s&rsquo;av&egrave;rent &ecirc;tre des contenus illicites, diffamatoires
-      ou injurieux ou ne respectent pas les obligations de l&rsquo;Utilisateur vis&eacute;es
-      &agrave; l&rsquo;article 10 des pr&eacute;sentes.
+      respectent pas les pr&eacute;sentes CGU, la{' '}
+      <a href={CHARTER_OF_VALUES_URL} target="_blank">
+        Charte des valeurs
+      </a>{' '}
+      ou la Politique de protection des donn&eacute;es de la Plateforme et notamment
+      lorsqu&rsquo;ils ne sont pas en relation avec la Cause ou la Coalition concern&eacute;e, ne
+      respectent pas la r&egrave;glementation en vigueur et notamment s&rsquo;av&egrave;rent
+      &ecirc;tre des contenus illicites, diffamatoires ou injurieux ou ne respectent pas les
+      obligations de l&rsquo;Utilisateur vis&eacute;es &agrave; l&rsquo;article 10 des
+      pr&eacute;sentes.
     </p>
     <p>
       L&rsquo;Utilisateur et le Visiteur sont invit&eacute;s &agrave; signaler &agrave; LaREM en
@@ -697,7 +732,7 @@ const LegalNotice: FunctionComponent = () => (
         l&rsquo;Utilisateur ou le Visiteur &#8239;;
       </li>
       <li>
-        Propose un service de Plateforme participative sans aucune garantie de r&eacute;sultat ;{' '}
+        Propose un service de Plateforme participative sans aucune garantie de r&eacute;sultat ;
       </li>
       <li>
         Ne peut garantir le Visiteur ou l&rsquo;Utilisateur que les informations auxquelles ils le

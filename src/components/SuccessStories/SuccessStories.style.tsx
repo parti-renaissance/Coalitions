@@ -11,6 +11,14 @@ export const Container = styled.div`
   `)}
 `;
 
+export const Title = styled.h3`
+  margin-left: ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    margin-bottom: ${getSpacing(3)};
+    margin-left: ${defaultMargins.horizontal.desktop};
+  `)}
+`;
+
 export const SubContainer = styled.div`
   display: flex;
   overflow: scroll;

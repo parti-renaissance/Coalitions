@@ -182,9 +182,7 @@ const DataProtectionPolicy: FunctionComponent = () => (
       https://en-marche.fr, ainsi que par la Politique de protection des donn&eacute;es personnelles
       applicables aux &eacute;lus et anciens &eacute;lus.
     </p>
-
-    <h2>Finalit&eacute;s et bases l&eacute;gales des traitements de donn&eacute;es </h2>
-
+    <h2>Finalit&eacute;s et bases l&eacute;gales des traitements de donn&eacute;es</h2>
     <p>
       Les informations recueillies sont enregistr&eacute;es dans un fichier informatique par LaREM.
       Les Donn&eacute;es &agrave; caract&egrave;re personnel vous concernant seront trait&eacute;es
@@ -278,7 +276,6 @@ const DataProtectionPolicy: FunctionComponent = () => (
         ces traitements reposent sur le consentement des personnes.
       </li>
     </ul>
-
     <p>
       Le consentement est notamment obtenu via des cases &agrave; cocher, dont certaines sont
       obligatoires pour utiliser la Plateforme, comme la case &agrave; cocher relatives &agrave;
@@ -287,7 +284,6 @@ const DataProtectionPolicy: FunctionComponent = () => (
       d&eacute;faut de fournir les informations n&eacute;cessaires, LaREM ne pourra pas vous
       permettre d&rsquo;utiliser la Plateforme.
     </p>
-
     <p>
       En tout &eacute;tat de cause, LaREM, en tant qu&rsquo;association politique, est
       autoris&eacute;e &agrave; traiter les donn&eacute;es vous concernant et susceptibles de
@@ -295,15 +291,12 @@ const DataProtectionPolicy: FunctionComponent = () => (
       permettant le traitement des telles donn&eacute;es lorsque celles-ci sont relatives aux
       Adh&eacute;rents, anciens Adh&eacute;rents, et Contacts r&eacute;guliers de LaREM.
     </p>
-
     <p>
       Toutes les fois o&ugrave; un traitement est mis en &#339;uvre en raison du consentement des
       personnes concern&eacute;es, ces derni&egrave;res ont la facult&eacute; de le retirer &agrave;
       tout moment en adressant leur demande &agrave; l&rsquo;adresse mes-donnees@en-marche.fr.
     </p>
-
-    <h2>Dur&eacute;e de conservation des Donn&eacute;es &agrave; caract&egrave;re personnel </h2>
-
+    <h2>Dur&eacute;e de conservation des Donn&eacute;es &agrave; caract&egrave;re personnel</h2>
     <p>
       Conform&eacute;ment &agrave; la r&egrave;glementation en vigueur, LaREM conserve les
       donn&eacute;es &agrave; caract&egrave;re personnel pour la dur&eacute;e strictement
@@ -347,9 +340,7 @@ const DataProtectionPolicy: FunctionComponent = () => (
         p&eacute;tition ou de la consultation&#8239;;
       </li>
     </ul>
-
-    <h2>Communication des donn&eacute;es &agrave; caract&egrave;re personnel </h2>
-
+    <h2>Communication des donn&eacute;es &agrave; caract&egrave;re personnel</h2>
     <p>
       Les informations relatives aux Utilisateurs, Visiteurs, Contacts r&eacute;guliers ou
       occasionnels peuvent &ecirc;tre communiqu&eacute;es aux personnes suivantes :
@@ -386,12 +377,10 @@ const DataProtectionPolicy: FunctionComponent = () => (
         s&eacute;curit&eacute;.
       </li>
     </ul>
-
     <h2>
       Transfert de donn&eacute;es &agrave; caract&egrave;re personnel hors de l&rsquo;Union
       Europ&eacute;enne
     </h2>
-
     <p>
       Certains de nos partenaires peuvent avoir des activit&eacute;s dans des pays situ&eacute;s en
       dehors de l&rsquo;Union Europ&eacute;enne, notamment aux fins d&rsquo;h&eacute;bergement des
@@ -401,30 +390,25 @@ const DataProtectionPolicy: FunctionComponent = () => (
       regard de la r&eacute;glementation en vigueur dans le cadre d&rsquo;un acte juridique
       contraignant.
     </p>
-
     <p>
       Dans les autres cas, le transfert de Donn&eacute;es &agrave; caract&egrave;re personnel sera
       op&eacute;r&eacute; gr&acirc;ce &agrave; des outils juridiques tels que les Clauses
       Contractuelles Types publi&eacute;es par la Commission Europ&eacute;enne et reconnues comme
       garantie suffisante de protection des Donn&eacute;es &agrave; caract&egrave;re personnel.
     </p>
-
-    <h2>Vos droits </h2>
-
+    <h2>Vos droits</h2>
     <p>
       Conform&eacute;ment &agrave; la r&egrave;glementation en vigueur, vous disposez d&rsquo;un
       droit d&rsquo;opposition et d&rsquo;un droit &agrave; la limitation du traitement des
       donn&eacute;es vous concernant, ainsi que d&rsquo;un droit d&rsquo;acc&egrave;s, de
       rectification, de portabilit&eacute; et d&rsquo;effacement de vos donn&eacute;es.
     </p>
-
     <p>
       Vous disposez &eacute;galement de la facult&eacute; de retirer votre consentement &agrave;
       tout moment lorsque vos donn&eacute;es ont &eacute;t&eacute; collect&eacute;es sur un tel
       fondement et de donner des instructions &agrave; LaREM sur le sort de vos donn&eacute;es
       apr&egrave;s votre d&eacute;c&egrave;s.
     </p>
-
     <p>
       Vous &ecirc;tes inform&eacute;s que l&rsquo;exercice des droits d&rsquo;opposition,
       d&rsquo;effacement et de portabilit&eacute; des donn&eacute;es, ainsi que le droit &agrave; la
@@ -433,14 +417,12 @@ const DataProtectionPolicy: FunctionComponent = () => (
       pr&eacute;vues par la r&egrave;glementation en mati&egrave;re de Donn&eacute;es &agrave;
       caract&egrave;re personnel.
     </p>
-
     <p>
       Vous pouvez &eacute;galement exercer vos droits en nous adressant votre demande &agrave;
       l&rsquo;adresse postale 63, rue Sainte-Anne 75002 Paris ou &eacute;lectronique suivante :
       mes-donnees@en-marche.fr. Dans certaines hypoth&egrave;ses, une copie de votre pi&egrave;ce
       d&rsquo;identit&eacute; pourra &ecirc;tre demand&eacute;e.
     </p>
-
     <p>
       Le traitement d&rsquo;une telle demande sera effectu&eacute; dans les meilleurs d&eacute;lais,
       et au plus tard dans un d&eacute;lai d&rsquo;un (1) mois &agrave; compter de votre demande. Ce
@@ -450,14 +432,12 @@ const DataProtectionPolicy: FunctionComponent = () => (
       r&eacute;clamation aupr&egrave;s d&rsquo;une autorit&eacute; de protection des Donn&eacute;es
       &agrave; caract&egrave;re personnel, &agrave; savoir la CNIL.
     </p>
-
     <p>
       LaREM a d&eacute;sign&eacute; un D&eacute;l&eacute;gu&eacute; &agrave; la Protection des
       Donn&eacute;es (DPO). Pour toute question relative aux engagements de LaREM concernant la
       protection de vos donn&eacute;es, ou pour toutes r&eacute;clamations, vous pouvez contacter le
       DPO de LaREM &agrave; l&rsquo;adresse suivante : dpo@en-marche.fr.
     </p>
-
     <p>Derni&egrave;re mise &agrave; jour : 31/03/2021</p>
   </LegalPage>
 );

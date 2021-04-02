@@ -8,6 +8,7 @@ import { useHistory } from 'react-router';
 import OurCommitments from 'components/OurCommitments';
 import { OurCommitmentsWrapper } from './OurMission.style';
 // import Video from 'components/Video';
+import SuccessStories from 'components/SuccessStories';
 
 const OurMission: FunctionComponent = () => {
   const history = useHistory();
@@ -18,6 +19,7 @@ const OurMission: FunctionComponent = () => {
 
   return (
     <>
+      <SuccessStories />
       <OurMissionHeader />
       {/* <VideoWrapper>
         <Video videoId="KD6egRRsZ_Q" />

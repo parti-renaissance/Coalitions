@@ -42,7 +42,7 @@
   "inscription": {
     "title": "Créez un compte",
     "submit-button": "M’inscrire",
-    "agree-cgu": "J’adhère à la charte des valeurs, ainsi qu’aux conditions générales d’utilisation et à la politique de protection des données à caractère personnel de la Plateforme.",
+    "agree-cgu": "J’adhère aux conditions générales d’utilisation, à la politique de protection des données à caractère personnel de la Plateforme et je confirme que ma cause n’est pas raciste, injurieuse et est conforme à la charte des valeurs.",
     "agree-mail-cause": "Tenez-moi informé(e) par email de l’actualité des causes que je soutiens.",
     "agree-mail-coalition": "Tenez-moi informé(e) par email de l’actualité des coalitions que je suis."
   },
@@ -152,7 +152,7 @@
     "invalid-email": "Votre email est invalide.",
     "unmatched-password": "Les mots de passe ne sont pas identiques.",
     "not-long-enough-password": "Votre mot de passe doit faire au minimum 8 caractères.",
-    "emoji-forbidden": "Merci de ne pas utiliser d'emoji ou de caractères spéciaux."
+    "emoji-forbidden": "Merci de ne pas utiliser d’emoji ou de caractères spéciaux."
   },
   "cause_preview": {
     "update": "Modifier",
@@ -165,7 +165,7 @@
   },
   "our_commitments": {
     "title": "Nos engagements",
-    "bullet-one": "Vous former et vous accompagner dans le développement de votre cause (masterclass, conseils d'experts, ateliers d'accélération…).",
+    "bullet-one": "Vous former et vous accompagner dans le développement de votre cause (masterclass, conseils d’experts, ateliers d’accélération…).",
     "bullet-two": "Vous mettre à disposition des outils et des ressources pour mobiliser autour de votre cause (tuto, outils de consultation, espaces de discussion…).",
     "bullet-three": "Vous mettre en relation, chaque mois, avec des responsables politiques et associatifs investis sur les thèmes concernés, pour les causes les plus soutenues.",
     "bullet-four": "Vous donner des moyens de mettre en avant votre cause sur les réseaux sociaux ou via des publications (ouvrage collectif, tribunes, …)."

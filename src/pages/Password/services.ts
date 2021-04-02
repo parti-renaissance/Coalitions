@@ -1,12 +1,13 @@
 import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
 import { getInCreationCause } from 'redux/Cause/selectors';
-import { userLoggedIn } from 'redux/Login';
+import { setAfterAuthRedirect } from 'redux/Login';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
-import HandleErrorService from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
+import { oauthUrl } from 'services/networking/auth';
+import { coalitionApiClient } from 'services/networking/client';
 import { PasswordForm } from './Password';
 
 export const useValidatePasswordForm = () => {
@@ -38,6 +39,24 @@ export const useValidatePasswordForm = () => {
   return { validateForm };
 };
 
+const useConfirmPasswordErrorHandler = () => {
+  const { formatMessage } = useIntl();
+
+  return useCallback(
+    (error?: APIErrorsType) => {
+      console.log('error', error);
+      if (error instanceof Response || error === undefined || error.message === undefined) {
+        return null;
+      }
+      if (error.message.includes('404')) {
+        return formatMessage({ id: 'errors.incorrect-password-token' });
+      }
+      return null;
+    },
+    [formatMessage],
+  );
+};
+
 type ConfirmPasswordPayload = {
   password: string;
   passwordConfirmation: string;
@@ -47,25 +66,27 @@ type ConfirmPasswordPayload = {
 
 export const useConfirmPassword = () => {
   const causeToPublish = useSelector(getInCreationCause);
-  const { push } = useHistory();
   const dispatch = useDispatch();
+  const errorHandler = useConfirmPasswordErrorHandler();
   //const [, login] = useLogin();
 
   const [{ loading, error }, doConfirmPassword] = useTypedAsyncFn(
     async (payload: ConfirmPasswordPayload) => {
-      //await authenticatedApiClient.post('v3/confirm-password', { payload });
-      console.log('payload', payload);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      return { code: 'authorizationCode' };
+      return await coalitionApiClient.post(
+        `profile/mot-de-passe/${payload.identifier}/${payload.token}`,
+        {
+          password: payload.password,
+        },
+      );
     },
     [],
   );
 
   useEffect(() => {
     if (error !== undefined) {
-      HandleErrorService.showErrorSnackbar(error);
+      HandleErrorService.showErrorSnackbar(error, errorHandler);
     }
-  }, [error]);
+  }, [error, errorHandler]);
 
   const confirmPasswordAndLogin = useCallback(
     async (password: string, passwordConfirmation: string, identifier: string, token: string) => {
@@ -78,14 +99,13 @@ export const useConfirmPassword = () => {
       if (response instanceof Error) return;
 
       //await login(response.code)
-      dispatch(userLoggedIn({ accessToken: 'accessToken', refreshToken: 'refreshToken' }));
+      //dispatch(userLoggedIn({ accessToken: 'accessToken', refreshToken: 'refreshToken' }));
       if (causeToPublish !== undefined) {
-        push(PATHS.CAUSE_PREVIEW.url());
-      } else {
-        push(PATHS.HOME.url());
+        dispatch(setAfterAuthRedirect(PATHS.CAUSE_PREVIEW.url()));
       }
+      window.location.href = oauthUrl;
     },
-    [causeToPublish, dispatch, doConfirmPassword, push],
+    [causeToPublish, dispatch, doConfirmPassword],
   );
 
   return { loading, error, confirmPasswordAndLogin };

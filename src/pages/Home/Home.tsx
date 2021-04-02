@@ -100,6 +100,10 @@ const Home: React.FunctionComponent = () => {
           </CauseCardsWrapper>
         )}
       </Block>
+      <OurCommitmentsWrapper>
+        <OurCommitments />
+      </OurCommitmentsWrapper>
+      <SuccessStories />
       <CoalitionDefinition />
       <Block>
         <h3 id="coalitions">
@@ -109,10 +113,6 @@ const Home: React.FunctionComponent = () => {
           <CoalitionCards onCoalitionClick={onCoalitionClick} responsiveNbOfCardsByLine />
         </CoalitionCardsWrapper>
       </Block>
-      <OurCommitmentsWrapper>
-        <OurCommitments />
-      </OurCommitmentsWrapper>
-      <SuccessStories />
       <CreateCauseCTA displayLinkToCauseList />
       <SuccessModal />
     </>

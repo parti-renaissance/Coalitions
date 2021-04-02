@@ -178,6 +178,7 @@
     "already-used-cause-name": "Ce nom de cause existe déjà."
   },
   "success_stories": {
-    "title": "Ils ont créé leur cause"
+    "title": "Ils ont créé leur cause",
+    "by": "Par"
   }
 }

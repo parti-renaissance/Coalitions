@@ -21,7 +21,7 @@ export const Container = styled.div`
   box-shadow: ${boxShadow.card};
   overflow: hidden;
   width: min(75vw, ${getSpacing(60)});
-  height: ${getSpacing(98)};
+  height: ${getSpacing(107)};
   ${media.desktop(`
     flex-direction: row;
     width: calc(
@@ -48,20 +48,12 @@ export const SubContainer = styled.div`
   padding: ${getSpacing(5)};
 `;
 
-export const TopTag = styled.div`
+export const Coalition = styled.div`
   font-family: ${fontFamily.primary};
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};
   font-weight: ${fontWeight.normal};
-  color: ${colorPalette.grey};
-`;
-
-export const Title = styled.div`
-  margin-top: ${getSpacing(1)};
-  font-family: ${fontFamily.secondary};
-  font-size: ${fontSize.h1Small.mobile};
-  line-height: ${lineHeight.secondary};
-  color: ${colorPalette.greyDark};
+  color: ${colorPalette.blueCoalition};
 `;
 
 export const Description = styled.div`
@@ -75,10 +67,14 @@ export const Description = styled.div`
 
 export const ByAuthor = styled.div`
   font-family: ${fontFamily.primary};
-  font-size: ${fontSize.p.mobile};
+  font-size: ${fontSize.smallButton.mobile};
   line-height: ${lineHeight.primary};
   font-weight: ${fontWeight.normal};
   color: ${colorPalette.greyDark};
+`;
+
+export const Commitment = styled(ByAuthor)`
+  margin-top: ${getSpacing(1)};
 `;
 
 export const Bold = styled.span`

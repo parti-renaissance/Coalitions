@@ -6,30 +6,52 @@ import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
-import HandleErrorService from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
 import { getInCreationCause } from '../selectors';
 import { cleanInCreationCause } from '../slice';
 import { authenticatedApiClient } from 'services/networking/client';
+import { Cause } from '../types';
+
+const usePublishCauseErrorHandler = () => {
+  const { formatMessage } = useIntl();
+
+  return useCallback(
+    (error?: APIErrorsType) => {
+      if (error instanceof Response || error === undefined || error.message === undefined) {
+        return null;
+      }
+      if (error.message.includes('name: Cette valeur est déjà utilisée')) {
+        return formatMessage({ id: 'errors.already-used-cause-name' });
+      }
+      return null;
+    },
+    [formatMessage],
+  );
+};
 
 export const usePublishCause = () => {
   const causeWithoutAuthor = useSelector(getInCreationCause);
   const { push } = useHistory();
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
+  const errorHandler = usePublishCauseErrorHandler();
 
   const [{ loading, error }, doPublishCause] = useTypedAsyncFn(async () => {
-    await authenticatedApiClient.post('v3/causes', {
+    const publishedCause: Cause = await authenticatedApiClient.post('v3/causes', {
       name: causeWithoutAuthor?.name,
       description: causeWithoutAuthor?.description,
       coalition: causeWithoutAuthor?.coalition?.uuid,
+    });
+    return await authenticatedApiClient.post(`v3/causes/${publishedCause.uuid}/image`, {
+      content: causeWithoutAuthor?.image_url,
     });
   }, []);
 
   useEffect(() => {
     if (error !== undefined) {
-      HandleErrorService.showErrorSnackbar(error);
+      HandleErrorService.showErrorSnackbar(error, errorHandler);
     }
-  }, [error]);
+  }, [error, errorHandler]);
 
   const publishCause = useCallback(async () => {
     const response = await doPublishCause();

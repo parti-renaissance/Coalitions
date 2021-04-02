@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 
 import React, { FunctionComponent } from 'react';
-import LegalPage from 'components/LegalPage';
+import LegalPage, { Bold } from 'components/LegalPage/LegalPage';
 
 const CookiesPolicy: FunctionComponent = () => (
   <LegalPage
@@ -14,42 +14,43 @@ const CookiesPolicy: FunctionComponent = () => (
       Cause&#8239;&raquo; &eacute;dit&eacute;e par La R&eacute;publique en Marche (ci-apr&egrave;s
       &laquo;&#8239;LaREM&#8239;&raquo;) et leurs finalit&eacute;s d&rsquo;utilisation.
     </p>
-    <h2>Article 1. D&eacute;finitions </h2>
+    <h2>Article 1. D&eacute;finitions</h2>
     <p>
-      Cookies&#8239;: d&eacute;signent les fichiers texte non ex&eacute;cutables qui sont
+      <Bold>Cookies :</Bold> d&eacute;signent les fichiers texte non ex&eacute;cutables qui sont
       d&eacute;pos&eacute;s et stock&eacute;s par le serveur d&rsquo;un site web sur le Terminal de
       l&rsquo;Utilisateur de la Plateforme ;
     </p>
     <p>
-      RGPD&#8239;: d&eacute;signe le R&egrave;glement (UE) 2016/679 du Parlement europ&eacute;en et
-      du Conseil du 27 avril 2016, relatif &agrave; la protection des personnes physique &agrave;
-      l&rsquo;&eacute;gard du traitement des donn&eacute;es &agrave; caract&egrave;re personnel et
-      &agrave; la libre circulation de ces donn&eacute;es dit R&egrave;glement G&eacute;n&eacute;ral
-      sur la Protection des Donn&eacute;es&#8239;;
+      <Bold>RGPD :</Bold> d&eacute;signe le R&egrave;glement (UE) 2016/679 du Parlement
+      europ&eacute;en et du Conseil du 27 avril 2016, relatif &agrave; la protection des personnes
+      physique &agrave; l&rsquo;&eacute;gard du traitement des donn&eacute;es &agrave;
+      caract&egrave;re personnel et &agrave; la libre circulation de ces donn&eacute;es dit
+      R&egrave;glement G&eacute;n&eacute;ral sur la Protection des Donn&eacute;es&#8239;;
     </p>
     <p>
-      Services&#8239;: d&eacute;signent l&rsquo;ensemble des fonctionnalit&eacute;s et contenus
-      accessibles sur la Plateforme&#8239;;
+      <Bold>Services :</Bold> d&eacute;signent l&rsquo;ensemble des fonctionnalit&eacute;s et
+      contenus accessibles sur la Plateforme&#8239;;
     </p>
     <p>
-      Plateforme&#8239;: d&eacute;signe le site web &laquo;&#8239;Pour une Cause&#8239;&raquo;
-      d&eacute;di&eacute; &agrave; la cr&eacute;ation et l&rsquo;animation de causes,
-      d&eacute;ploy&eacute;e par LaREM et accessible &agrave; l&rsquo;adresse url pourunecause.fr ;
+      <Bold>Plateforme :</Bold> d&eacute;signe le site web &laquo;&#8239;Pour une
+      Cause&#8239;&raquo; d&eacute;di&eacute; &agrave; la cr&eacute;ation et l&rsquo;animation de
+      causes, d&eacute;ploy&eacute;e par LaREM et accessible &agrave; l&rsquo;adresse url
+      pourunecause.fr ;
     </p>
     <p>
-      Terminal&#8239;: d&eacute;signe l&rsquo;appareil par lequel l&rsquo;Utilisateur navigue sur le
-      web (ordinateur, smartphone, tablette etc.)&#8239;;
+      <Bold>Terminal :</Bold> d&eacute;signe l&rsquo;appareil par lequel l&rsquo;Utilisateur navigue
+      sur le web (ordinateur, smartphone, tablette etc.)&#8239;;
     </p>
     <p>
-      Tiers&#8239;: d&eacute;signent les personnes physiques ou morales distinctes de LaREM dont la
-      technologie est utilis&eacute;e par la Plateforme ou vers lequel un lien est accessible sur la
-      Plateforme&#8239;;
+      <Bold>Tiers :</Bold> d&eacute;signent les personnes physiques ou morales distinctes de LaREM
+      dont la technologie est utilis&eacute;e par la Plateforme ou vers lequel un lien est
+      accessible sur la Plateforme&#8239;;
     </p>
     <p>
-      Utilisateur&#8239;: d&eacute;signe toute personne acc&eacute;dant et/ou utilisant les Services
-      de la Plateforme.
+      <Bold>Utilisateur :</Bold> d&eacute;signe toute personne acc&eacute;dant et/ou utilisant les
+      Services de la Plateforme.
     </p>
-    <h2>Article 2 : &Agrave; propos des cookies </h2>
+    <h2>Article 2 : &Agrave; propos des cookies</h2>
     <p>
       Lorsque l&rsquo;Utilisateur visite la Plateforme, des Cookies peuvent &ecirc;tre
       d&eacute;pos&eacute;s sur son Terminal. Ces Cookies peuvent impliquer la transmission
@@ -66,11 +67,11 @@ const CookiesPolicy: FunctionComponent = () => (
       personnaliser la navigation de l&rsquo;Utilisateur sur la Plateforme et de rendre sa prochaine
       visite plus agr&eacute;able et intuitive.
     </p>
-    <p>Les Cookies &eacute;mis sur cette Plateforme ont de multiples usages&#8239;: </p>
-    <h3>3.1. Cookies strictement n&eacute;cessaires &agrave; la Plateforme&#8239;: </h3>
+    <p>Les Cookies &eacute;mis sur cette Plateforme ont de multiples usages : </p>
+    <h3>3.1. Cookies strictement n&eacute;cessaires &agrave; la Plateforme : </h3>
     <p>
       Ces Cookies permettent d&rsquo;enregistrer des informations entre deux consultations de la
-      Plateforme sur un m&ecirc;me Terminal. Ils sont utilis&eacute;s pour&#8239;:
+      Plateforme sur un m&ecirc;me Terminal. Ils sont utilis&eacute;s pour :
     </p>
     <ul>
       <li>fournir le contenu de la Plateforme&#8239;;</li>
@@ -103,7 +104,7 @@ const CookiesPolicy: FunctionComponent = () => (
       express&eacute;ment demand&eacute; par l&rsquo;Utilisateur.
     </p>
     <h3>
-      3.2. Cookies de fonctionnalit&eacute;s&#8239;: &laquo;&#8239;Exp&eacute;riences et
+      3.2. Cookies de fonctionnalit&eacute;s : &laquo;&#8239;Exp&eacute;riences et
       relations&#8239;&raquo;
     </h3>
     <p>
@@ -136,7 +137,7 @@ const CookiesPolicy: FunctionComponent = () => (
       La R&eacute;publique en Marche utilise des cookies pour&#8239;conna&icirc;tre
       l&rsquo;utilisation et les performances de sa Plateforme et ainsi adapter et am&eacute;liorer
       l&rsquo;int&eacute;r&ecirc;t et l&rsquo;ergonomie des Services de la Plateforme ainsi que
-      leurs contenus. Ces Cookies sont utilis&eacute;s pour&#8239;:
+      leurs contenus. Ces Cookies sont utilis&eacute;s pour :
     </p>
     <ul>
       <li>
@@ -184,7 +185,7 @@ const CookiesPolicy: FunctionComponent = () => (
       <li>de fournir des annonces cibl&eacute;es aux Utilisateurs ; </li>
       <li>
         de vous permettre de faire conna&icirc;tre votre opinion &agrave; d&rsquo;autres personnes
-        du site tiers choisi&#8239;(ex&#8239;: lorsque vous &laquo;&#8239;aimez&#8239;&raquo; des
+        du site tiers choisi&#8239;(ex : lorsque vous &laquo;&#8239;aimez&#8239;&raquo; des
         publications, &laquo;&#8239;suivez&#8239;&raquo; des personnes sur les r&eacute;seaux
         sociaux, etc.) ;
       </li>
@@ -240,7 +241,7 @@ const CookiesPolicy: FunctionComponent = () => (
     </p>
     <p>
       La p&eacute;riode de validit&eacute; du consentement au d&eacute;p&ocirc;t de Cookies sur le
-      terminal du Visiteur ou de l&rsquo;Utilisateur varie. Elle correspond &agrave;&#8239;:
+      terminal du Visiteur ou de l&rsquo;Utilisateur varie. Elle correspond &agrave; :
     </p>
     <ul>
       <li>
@@ -263,6 +264,7 @@ const CookiesPolicy: FunctionComponent = () => (
       consulter la Politique de protection des donn&eacute;es personnelles dans le cadre de cette
       Plateforme, en cliquant ici
     </p>
+    <p>Derni&egrave;re mise &agrave; jour : 31/03/2021</p>
   </LegalPage>
 );
 

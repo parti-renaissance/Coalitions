@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React, { FunctionComponent } from 'react';
 import LegalPage, { Bold, Title } from 'components/LegalPage/LegalPage';
 import { CHARTER_OF_VALUES_URL } from 'routes';
@@ -203,7 +205,7 @@ const LegalNotice: FunctionComponent = () => (
     </p>
     <h2>Article 4. Acceptation et opposabilit&eacute; des CGU </h2>
     <p>
-      L'utilisation de la Plateforme par les Visiteurs et Utilisateurs signifie leur acceptation des
+      L’utilisation de la Plateforme par les Visiteurs et Utilisateurs signifie leur acceptation des
       pr&eacute;sentes CGU. Les CGU sont r&eacute;put&eacute;es lues, accept&eacute;es et opposables
       &agrave; tous les Visiteurs et Utilisateurs &agrave; la date de la premi&egrave;re utilisation
       de la Plateforme par ceux-ci. Les Visiteurs et Utilisateurs peuvent &agrave; tout moment
@@ -244,7 +246,7 @@ const LegalNotice: FunctionComponent = () => (
       indemnisation/compensation, suite &agrave; l&rsquo;interruption, &agrave; la suspension ou
       &agrave; la modification de la Plateforme, que celles-ci soient temporaires et/ou
       d&eacute;finitives. Le Visiteur ou l&rsquo;Utilisateur a la possibilit&eacute; de contacter
-      les services de la Plateforme par messagerie &eacute;lectronique &agrave; l'adresse
+      les services de la Plateforme par messagerie &eacute;lectronique &agrave; l’adresse
       contact@pourunecause.fr.
     </p>
     <p>
@@ -454,7 +456,7 @@ const LegalNotice: FunctionComponent = () => (
     <h2>Article 10. Obligations de l&rsquo;Utilisateur</h2>
     <p>
       L&rsquo;Utilisateur est seul responsable de son utilisation des Services de la Plateforme. Il
-      s&rsquo;engage &agrave; n'utiliser la Plateforme que dans les seules conditions
+      s&rsquo;engage &agrave; n’utiliser la Plateforme que dans les seules conditions
       d&eacute;finies par les pr&eacute;sentes CGU, par la{' '}
       <a href={CHARTER_OF_VALUES_URL} rel="noopener noreferrer" target="_blank">
         Charte des valeurs
@@ -489,17 +491,17 @@ const LegalNotice: FunctionComponent = () => (
       </li>
       <li>
         &agrave; ne pas perturber le bon fonctionnement de la Plateforme, et notamment par
-        l'introduction de virus&#8239;;
+        l’introduction de virus&#8239;;
       </li>
       <li>
         &agrave; ne pas collecter et traiter de donn&eacute;es &agrave; caract&egrave;re personnel
         en violation de la r&egrave;glementation en vigueur, et notamment du R&egrave;glement (UE)
         2016/679 du Parlement europ&eacute;en et du Conseil du 27 avril 2016, relatif &agrave; la
-        protection des personnes physiques &agrave; l'&eacute;gard du traitement des donn&eacute;es
+        protection des personnes physiques &agrave; l’&eacute;gard du traitement des donn&eacute;es
         &agrave; caract&egrave;re personnel et &agrave; la libre circulation de ces donn&eacute;es,
         et abrogeant la directive 95/46/CE (r&egrave;glement g&eacute;n&eacute;ral sur la protection
         des donn&eacute;es - RGPD) et de la Loi n&deg; 78-17 du 6 janvier 1978 relative &agrave;
-        l'informatique, aux fichiers et aux libert&eacute;s.
+        l’informatique, aux fichiers et aux libert&eacute;s.
       </li>
       <li>
         &agrave; respecter la{' '}
@@ -608,7 +610,7 @@ const LegalNotice: FunctionComponent = () => (
     </p>
     <h2>Article 12. Les droits de propri&eacute;t&eacute; intellectuelle de LaREM</h2>
     <p>
-      A l'exception des Contenus tiers accessibles sur la Plateforme, tout autre contenu disponible
+      A l’exception des Contenus tiers accessibles sur la Plateforme, tout autre contenu disponible
       sur la Plateforme est la propri&eacute;t&eacute; exclusive de LaREM.
     </p>
     <p>
@@ -616,7 +618,7 @@ const LegalNotice: FunctionComponent = () => (
       photos, des logos, des chartes graphiques, des logiciels et programmes, des bases de
       donn&eacute;es, des sons, des vid&eacute;os, des noms de domaines, design ou tout autre
       &eacute;l&eacute;ment composant la Plateforme. Ces contenus sont prot&eacute;g&eacute;s par le
-      droit d'auteur, le droit des marques et tous les autres droits de propri&eacute;t&eacute;
+      droit d’auteur, le droit des marques et tous les autres droits de propri&eacute;t&eacute;
       intellectuelle d&eacute;tenus par LaREM ou ses conc&eacute;dants.
     </p>
     <p>
@@ -631,7 +633,7 @@ const LegalNotice: FunctionComponent = () => (
       intellectuelle est interdite et constituerait une contrefa&ccedil;on punie par la loi.
     </p>
     <p>
-      En cons&eacute;quence, le Visiteur, comme l&rsquo;Utilisateur s'interdit tout agissement et
+      En cons&eacute;quence, le Visiteur, comme l&rsquo;Utilisateur s’interdit tout agissement et
       tout acte susceptible de porter atteinte directement ou indirectement aux droits de
       propri&eacute;t&eacute; intellectuelle de LaREM.
     </p>
@@ -783,12 +785,12 @@ const LegalNotice: FunctionComponent = () => (
     <p>
       Les Visiteurs ou Utilisateurs sont &eacute;galement invit&eacute;s &agrave;
       r&eacute;guli&egrave;rement consulter les CGU pour &ecirc;tre inform&eacute;s des
-      modifications. La version modifi&eacute;e des CGU sera accessible &agrave; l'adresse suivante
+      modifications. La version modifi&eacute;e des CGU sera accessible &agrave; l’adresse suivante
       https://pourunecause.fr/mentions-legales.
     </p>
     <p>
       Si le Visiteur continue d&rsquo;acc&eacute;der au Site ou l&rsquo;Utilisateur continue
-      d'utiliser les Services apr&egrave;s la date de publication des nouvelles CGU, il est
+      d’utiliser les Services apr&egrave;s la date de publication des nouvelles CGU, il est
       r&eacute;put&eacute; en avoir pris connaissance et les avoir accept&eacute;es.
     </p>
     <h2>Article 18. Dispositions diverses </h2>
@@ -800,10 +802,12 @@ const LegalNotice: FunctionComponent = () => (
     </p>
     <p>
       La l&eacute;gislation fran&ccedil;aise s&rsquo;applique aux pr&eacute;sentes CGU, quel que
-      soit le lieu d'ex&eacute;cution des obligations des parties.
+      soit le lieu d’ex&eacute;cution des obligations des parties.
     </p>
     <p>Derni&egrave;re mise &agrave; jour : 01/04/2021 &ndash;</p>
   </LegalPage>
 );
 
 export default LegalNotice;
+
+/* eslint-enable max-lines */

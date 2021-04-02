@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React, { FunctionComponent } from 'react';
 import LegalPage, { Bold } from 'components/LegalPage/LegalPage';
 
@@ -265,8 +267,8 @@ const DataProtectionPolicy: FunctionComponent = () => (
         ce traitement est bas&eacute; sur le consentement des personnes&#8239;;
       </li>
       <li>
-        L'&eacute;tablissement d'&eacute;tudes statistiques et de consultations publiques, &agrave;
-        l'exception des sondages d'opinion&#8239;: la base l&eacute;gale de ces traitements repose
+        L’&eacute;tablissement d’&eacute;tudes statistiques et de consultations publiques, &agrave;
+        l’exception des sondages d’opinion&#8239;: la base l&eacute;gale de ces traitements repose
         sur le consentement des personnes&#8239;;
       </li>
       <li>
@@ -443,3 +445,5 @@ const DataProtectionPolicy: FunctionComponent = () => (
 );
 
 export default DataProtectionPolicy;
+
+/* eslint-enable max-lines */

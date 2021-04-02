@@ -14,7 +14,6 @@ const useCreateAccountErrorHandler = () => {
 
   return useCallback(
     (error?: APIErrorsType) => {
-      console.log('error', error);
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }

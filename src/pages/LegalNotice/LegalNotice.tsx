@@ -298,20 +298,22 @@ const LegalNotice: FunctionComponent = () => (
       </li>
     </ul>
     <h2>Article 8. Compte Personnel </h2>
-    <h2>Article 9. Cr&eacute;ation du Compte personnel </h2>
+    <h3>8.1. Cr&eacute;ation du Compte personnel</h3>
     <p>
       Toute personne voulant utiliser les Services de la Plateforme en tant qu&rsquo;Utilisateur
       doit se connecter &agrave; la Plateforme via son Compte personnel au moyen de ses identifiants
       et mots de passe. Ainsi, le Visiteur peut&#8239;:
     </p>
-    <p>
-      S&rsquo;il est Adh&eacute;rent de LaREM, se connecter en utilisant les identifiants et mot de
-      passe de son Compte Personnel en-marche.fr ;
-    </p>
-    <p>
-      S&rsquo;il n&rsquo;est pas Adh&eacute;rent de LaREM, se connecter en cr&eacute;ant un Compte
-      personnel non adh&eacute;rent en remplissant un formulaire sur la Plateforme.
-    </p>
+    <ul>
+      <li>
+        S&rsquo;il est Adh&eacute;rent de LaREM, se connecter en utilisant les identifiants et mot
+        de passe de son Compte Personnel en-marche.fr ;
+      </li>
+      <li>
+        S&rsquo;il n&rsquo;est pas Adh&eacute;rent de LaREM, se connecter en cr&eacute;ant un Compte
+        personnel non adh&eacute;rent en remplissant un formulaire sur la Plateforme.
+      </li>
+    </ul>
     <p>
       Pour Adh&eacute;rer et cr&eacute;er un Compte Personnel d&rsquo;Adh&eacute;rent, la Plateforme
       offre un lien externe vers le formulaire d&rsquo;adh&eacute;sion de La R&eacute;publique en
@@ -319,7 +321,7 @@ const LegalNotice: FunctionComponent = () => (
       https://en-marche.fr/. Le Visiteur ne peut pas adh&eacute;rer et cr&eacute;er un Compte
       Personnel d&rsquo;Adh&eacute;rent directement sur la Plateforme.
     </p>
-    <h2>Article 10. Fermeture d&rsquo;un Compte personnel </h2>
+    <h3>8.2. Fermeture d&rsquo;un Compte personnel</h3>
     <p>
       De la m&ecirc;me mani&egrave;re, que la cr&eacute;ation de son Compte Personnel,
       l&rsquo;Adh&eacute;rent qui le souhaite ne peut pas proc&eacute;der &agrave; la fermeture de
@@ -361,8 +363,8 @@ const LegalNotice: FunctionComponent = () => (
       Plateforme &agrave; l&rsquo;aide de l&rsquo;identifiant et du mot de passe de son Compte
       personnel et ne pourra utiliser la Plateforme qu&rsquo;en tant que Visiteur.
     </p>
-    <h2>Article 11. Les Causes </h2>
-    <p>Article 12. Cr&eacute;ation et r&eacute;f&eacute;rencement des Causes </p>
+    <h2>Article 9. Les Causes </h2>
+    <h3>9.1. Cr&eacute;ation et r&eacute;f&eacute;rencement des Causes</h3>
     <p>
       Si vous souhaitez cr&eacute;er une Cause, en remplissant le formulaire pr&eacute;vu &agrave;
       cet effet, vous devez en donner un titre, un descriptif et si vous le souhaitez, vous pouvez
@@ -386,7 +388,6 @@ const LegalNotice: FunctionComponent = () => (
         la Plateforme par tous les Utilisateurs et Visiteurs qui peuvent choisir de la soutenir. Il
         est &eacute;galement possible de consulter la pr&eacute;sentation de la Cause.
       </li>
-
       <li>
         Si la Cause n&rsquo;est pas valid&eacute;e, la personne qui l&rsquo;a propos&eacute;e en est
         notifi&eacute;e par email.
@@ -400,7 +401,7 @@ const LegalNotice: FunctionComponent = () => (
       personnel sur la Plateforme s&rsquo;il souhaite participer aux discussions ou aux
       &eacute;v&eacute;nements propos&eacute;s.
     </p>
-    <h2>Article 13. Le Porteur de Cause&#8239;: </h2>
+    <h3>9.2. Le Porteur de Cause&#8239;:</h3>
     <p>
       L&rsquo;Utilisateur &agrave; l&rsquo;origine de la cr&eacute;ation de la Cause en est son
       Porteur. L&rsquo;Utilisateur qui cr&eacute;e plusieurs Causes est ainsi Porteur de plusieurs
@@ -420,46 +421,41 @@ const LegalNotice: FunctionComponent = () => (
       contraires &agrave; cette Charte des valeurs, &agrave; la Charte de Bonnes Pratiques, aux
       pr&eacute;sentes CGU, ainsi qu&rsquo;&agrave; la Politique de Protection des Donn&eacute;es.
     </p>
-    <h2>Article 14. Modification d&rsquo;une Cause&#8239;: </h2>
+    <h3>9.3. Modification d&rsquo;une Cause&#8239;:</h3>
     <p>
       Une fois cr&eacute;&eacute;e, le titre d&rsquo;une Cause ne pourra &ecirc;tre modifi&eacute;
       que par un Administrateur de la Plateforme. Toutefois, le Porteur de la Cause peut en modifier
       la description ou l&rsquo;image choisie pour son illustration.
     </p>
-    <h2>Article 15. Cl&ocirc;ture d&rsquo;une Cause&#8239;: </h2>
+    <h3>9.4. Cl&ocirc;ture d&rsquo;une Cause&#8239;:</h3>
     <p>
       Une Cause est close sur demande de l&rsquo;auteur &agrave; l&rsquo;adresse
       contact@pourunecause.fr
     </p>
-    <h2>Article 16. Obligations de l&rsquo;Utilisateur </h2>
+    <h2>Article 10. Obligations de l&rsquo;Utilisateur</h2>
+    <p>
+      L&rsquo;Utilisateur est seul responsable de son utilisation des Services de la Plateforme. Il
+      s&rsquo;engage &agrave; n'utiliser la Plateforme que dans les seules conditions
+      d&eacute;finies par les pr&eacute;sentes CGU, par la Charte des valeurs et la Politique de
+      protection des donn&eacute;es personnelles. Il s&rsquo;engage ainsi&#8239;:
+    </p>
     <ul>
-      <li>
-        L&rsquo;Utilisateur est seul responsable de son utilisation des Services de la Plateforme.
-        Il s&rsquo;engage &agrave; n'utiliser la Plateforme que dans les seules conditions
-        d&eacute;finies par les pr&eacute;sentes CGU, par la Charte des valeurs et la Politique de
-        protection des donn&eacute;es personnelles. Il s&rsquo;engage ainsi&#8239;:
-      </li>
-
       <li>
         &agrave; se comporter de fa&ccedil;on respectueuse et courtoise dans le cadre de ses
         communications et publications sur la Plateforme&#8239;;
       </li>
-
       <li>
         &agrave; communiquer des donn&eacute;es exactes et &agrave; jour relative &agrave; son
         identit&eacute; et ses coordonn&eacute;es&#8239;;
       </li>
-
       <li>
         &agrave; ne pas d&eacute;tourner l&rsquo;utilisation des contenus &agrave; des fins
         personnelles ou publicitaires ;
       </li>
-
       <li>
         &agrave; ne pas tenter de modifier le code source ou l&rsquo;API, qui appartiennent &agrave;
         LaREM&#8239;;
       </li>
-
       <li>
         &agrave; ne pas acc&eacute;der et/ou se maintenir frauduleusement dans la Plateforme entendu
         comme un syst&egrave;me de traitement automatis&eacute; de donn&eacute;es. Tout acc&egrave;s
@@ -469,12 +465,10 @@ const LegalNotice: FunctionComponent = () => (
         d&rsquo;introduction, de suppression ou de modification des donn&eacute;es qui y sont
         contenues ;
       </li>
-
       <li>
         &agrave; ne pas perturber le bon fonctionnement de la Plateforme, et notamment par
         l'introduction de virus&#8239;;
       </li>
-
       <li>
         &agrave; ne pas collecter et traiter de donn&eacute;es &agrave; caract&egrave;re personnel
         en violation de la r&egrave;glementation en vigueur, et notamment du R&egrave;glement (UE)
@@ -485,9 +479,7 @@ const LegalNotice: FunctionComponent = () => (
         des donn&eacute;es - RGPD) et de la Loi n&deg; 78-17 du 6 janvier 1978 relative &agrave;
         l'informatique, aux fichiers et aux libert&eacute;s.
       </li>
-
       <li>&agrave; respecter la Charte des valeurs &#8239;; </li>
-
       <li>
         &agrave; respecter les droits de la Propri&eacute;t&eacute; intellectuelle aff&eacute;rents
         aux Services de la Plateforme&#8239;;
@@ -508,36 +500,33 @@ const LegalNotice: FunctionComponent = () => (
       publications, il s&rsquo;engage&#8239;:
     </p>
     <ul>
-      <li>&agrave; respecter la vie priv&eacute;e&#8239;; </li>
-
+      <li>&agrave; respecter la vie priv&eacute;e&#8239;;</li>
       <li>&agrave; respecter les droits de la propri&eacute;t&eacute; intellectuelle&#8239;; </li>
-
       <li>
         &agrave; ne pas porter atteinte aux personnes (notamment par des actes de diffamation,
         d&rsquo;insultes ou d&rsquo;injures)&#8239;;
       </li>
-
-      <li>&agrave; respecter l&rsquo;ordre public et les bonnes m&#339;urs et ainsi&#8239;: </li>
-
       <li>
-        ne pas faire l&rsquo;apologie des crimes contre l&rsquo;humanit&eacute;, des actes
-        terroristes, ni inciter &agrave; leur provocation&#8239;;
+        &agrave; respecter l&rsquo;ordre public et les bonnes m&#339;urs et ainsi&#8239;:
+        <ul>
+          <li>
+            ne pas faire l&rsquo;apologie des crimes contre l&rsquo;humanit&eacute;, des actes
+            terroristes, ni inciter &agrave; leur provocation&#8239;;
+          </li>
+          <li>
+            ne pas inciter &agrave; la haine raciale, &agrave; la haine ou &agrave; la
+            discrimination &agrave; l&rsquo;&eacute;gard de personnes &agrave; raison de leur genre,
+            de leur sexe, de leur orientation ou identit&eacute; sexuelle ou de leur
+            handicap&#8239;;
+          </li>
+          <li>ne pas inciter &agrave; la pornographie&#8239;; </li>
+          <li>
+            ne pas inciter &agrave; la violence, notamment &agrave; celles faites aux femmes, ni aux
+            atteintes &agrave; la dignit&eacute; humaine&#8239;;
+          </li>
+          <li>ne pas faire une utilisation commerciale des Contenus. </li>
+        </ul>
       </li>
-
-      <li>
-        ne pas inciter &agrave; la haine raciale, &agrave; la haine ou &agrave; la discrimination
-        &agrave; l&rsquo;&eacute;gard de personnes &agrave; raison de leur genre, de leur sexe, de
-        leur orientation ou identit&eacute; sexuelle ou de leur handicap&#8239;;
-      </li>
-
-      <li>ne pas inciter &agrave; la pornographie&#8239;; </li>
-
-      <li>
-        ne pas inciter &agrave; la violence, notamment &agrave; celles faites aux femmes, ni aux
-        atteintes &agrave; la dignit&eacute; humaine&#8239;;
-      </li>
-
-      <li>ne pas faire une utilisation commerciale des Contenus. </li>
     </ul>
     <h2>Article 17. Mod&eacute;ration des contenus&#8239;: </h2>
     <p>

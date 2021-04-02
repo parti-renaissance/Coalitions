@@ -11,7 +11,7 @@ export const Container = styled(Dialog)`
     ${media.desktop(`
       padding: ${getSpacing(8)};
       max-width: ${getSpacing(75)};
-      max-height: ${getSpacing(150)}
+      max-height: min(${getSpacing(150)}, calc(100vh - 2 * ${getSpacing(8)}));
     `)}
   }
 `;

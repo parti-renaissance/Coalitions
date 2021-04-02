@@ -1,4 +1,4 @@
-import { getSpacing, colorPalette, fonts, media, defaultMargins } from 'stylesheet';
+import { getSpacing, colorPalette, fonts, media, defaultMargins, fontWeight } from 'stylesheet';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -32,4 +32,8 @@ export const Title = styled.h1`
   ${fonts.h1Small};
   color: ${colorPalette.greyDark};
   margin-bottom: ${getSpacing(3)};
+`;
+
+export const Bold = styled.span`
+  font-weight: ${fontWeight.bold};
 `;

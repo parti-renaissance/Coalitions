@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import LegalPage from 'components/LegalPage';
+import LegalPage, { Bold, Title } from 'components/LegalPage/LegalPage';
 
 const LegalNotice: FunctionComponent = () => (
-  <LegalPage title="MENTIONS L&Eacute;GALES">
-    <p>Editeur&#8239;: </p>
+  <LegalPage title="Mentions Légales">
+    <p>
+      <Bold>Editeur&#8239;:</Bold>
+    </p>
     <p>
       La R&eacute;publique en Marche (LaREM), association r&eacute;gie par la loi du 1er juillet
       1901 relative au contrat d&rsquo;association et par le d&eacute;cret du 16 ao&ucirc;t 1901,
@@ -11,11 +13,17 @@ const LegalNotice: FunctionComponent = () => (
       W943004354, dont le si&egrave;ge social est situ&eacute; au 63, rue Sainte-Anne, 75002 Paris.
       Email &#8239;: contact@en-marche.fr, T&eacute;l&eacute;phone&#8239;: 0186950286
     </p>
-    <p>Directeur de publication : </p>
+    <p>
+      <Bold>Directeur de publication :</Bold>
+    </p>
     <p>Stanislas Gu&eacute;rini, Directeur de la publication. </p>
-    <p>Co-directrice de la publication&#8239;: </p>
+    <p>
+      <Bold>Co-directrice de la publication&#8239;:</Bold>
+    </p>
     <p>&Eacute;milie Prade, Co-directrice de la publication. </p>
-    <p>Contenu du site : </p>
+    <p>
+      <Bold>Contenu du site :</Bold>
+    </p>
     <p>
       Les informations contenues dans ce site sont fournies &agrave; titre indicatif et
       n&rsquo;impliquent aucun engagement contractuel de la part de La R&eacute;publique en
@@ -24,20 +32,24 @@ const LegalNotice: FunctionComponent = () => (
       &ecirc;tre adress&eacute;e par le formulaire de contact du site ou tout autre moyen de
       communication.
     </p>
-    <p>H&eacute;bergeur : </p>
+    <p>
+      <Bold>H&eacute;bergeur :</Bold>
+    </p>
     <p>
       Google Ireland Limited &ndash; Gordon House, Barrow Street, Dublin 4 Irlande. <br />
       T&eacute;l&eacute;phone : +353 1 436 1000
     </p>
     <p>
-      A noter&#8239;: LaREM n&rsquo;est pas responsable des liens pointant vers des sites
-      ext&eacute;rieurs. LaREM n&rsquo;est pas responsable des liens hypertextes pointant vers
+      <Bold>A noter&#8239;:</Bold> LaREM n&rsquo;est pas responsable des liens pointant vers des
+      sites ext&eacute;rieurs. LaREM n&rsquo;est pas responsable des liens hypertextes pointant vers
       d&rsquo;autres sites/blogs/plateformes.
     </p>
-    <h1>
+    <br />
+    <br />
+    <Title>
       CONDITIONS GENERALES D&rsquo;UTILISATION DE LA PLATEFORME &laquo;&#8239;POUR UNE
       CAUSE&#8239;&raquo;
-    </h1>
+    </Title>
     <h2>Article 1. D&eacute;finitions </h2>
     <p>
       Pour l&rsquo;interpr&eacute;tation des pr&eacute;sentes Conditions G&eacute;n&eacute;rales
@@ -45,105 +57,108 @@ const LegalNotice: FunctionComponent = () => (
       employ&eacute;s ci-apr&egrave;s, au pluriel ou au singulier, sont d&eacute;finis de la
       mani&egrave;re suivante&#8239;:
     </p>
-    <p>
-      Adh&eacute;rent : d&eacute;signe toute personne de plus de quinze (15) ans ayant
-      adh&eacute;r&eacute; &agrave; LaREM et notamment &agrave; la Charte des valeurs et &agrave; la
-      Politique de protection des donn&eacute;es personnelles du Mouvement et cr&eacute;&eacute; un
-      Compte Personnel par lequel elle se connecte &agrave; l&rsquo;aide d&rsquo;un identifiant et
-      mot de passe qui lui sont strictement personnels et confidentiels. L&rsquo;Adh&eacute;rent
-      utilise la Plateforme en se connectant via son Compte Personnel d&rsquo;adh&eacute;rent.
-      L&rsquo;Adh&eacute;rent qui se connecte sur la Plateforme est consid&eacute;r&eacute; dans le
-      cadre des pr&eacute;sentes comme un Utilisateur.
-    </p>
-    <p>
-      Administrateur de Plateforme&#8239;: d&eacute;signe l&rsquo;ensemble des personnes
-      charg&eacute;es de la gestion des r&ocirc;les d&rsquo;Utilisateurs et des contenus
-      publi&eacute;s sur la Plateforme. Les Administrateurs de Plateforme sont des membres de LaREM
-      et habilit&eacute;s &agrave; traiter des donn&eacute;es collect&eacute;es gr&acirc;ce &agrave;
-      la Plateforme&#8239;;
-    </p>
-    <p>
-      CGU : d&eacute;signent les pr&eacute;sentes Conditions G&eacute;n&eacute;rales
-      d&rsquo;Utilisation r&eacute;gissant les obligations respectives des Visiteurs et des
-      Utilisateurs ainsi que de LaREM dans le cadre de l&rsquo;acc&egrave;s et de
-      l&rsquo;utilisation de la Plateforme.
-    </p>
-    <p>
-      Cause : d&eacute;signe le sujet cr&eacute;&eacute; sur la Plateforme sur proposition de
-      l&rsquo;Utilisateur apr&egrave;s validation d&rsquo;un Administrateur de la Plateforme. Chaque
-      Cause est obligatoirement rattach&eacute;e, au moins, &agrave; une Coalition. Une fois
-      cr&eacute;&eacute;e, elle est accessible librement par les Visiteurs et Utilisateurs de la
-      Plateforme dans la page de la Cause ou de la Coalition &agrave; laquelle elle est
-      rattach&eacute;e et est le c&#339;ur des &eacute;changes entre les Utilisateurs.
-    </p>
-    <p>
-      Coalition : d&eacute;signe une des th&eacute;matiques pr&eacute;alablement d&eacute;finies par
-      LaREM. Chaque Coalition est g&eacute;r&eacute;e par des membres de l&rsquo;&eacute;quipe de
-      LaREM qu&rsquo;elle aura habilit&eacute; et un Responsable de Coalition qu&rsquo;elle aura
-      d&eacute;sign&eacute;. Chaque Coalition regroupe les Causes de sa th&eacute;matique.
-    </p>
-    <p>
-      Compte personnel : d&eacute;signe le compte ouvert par un Utilisateur &agrave; partir du site
-      web de la Plateforme accessible &agrave; l&rsquo;adresse URL ____ ou &agrave; partir du site
-      web de LaREM (https://en-marche.fr) s&rsquo;il est Adh&eacute;rent.
-    </p>
-    <p>
-      Contenus et services sp&eacute;cifiques : d&eacute;signent les contenus et services
-      accessibles uniquement par l&rsquo;Utilisateur via son Compte personnel, suivant
-      l&rsquo;habilitation qui lui est donn&eacute;e.
-    </p>
-    <p>
-      Contenu tiers&#8239;: d&eacute;signe les contenus &eacute;dit&eacute;s par des tiers
-      accessibles sur la Plateforme pour lesquels LaREM ne dispose d&rsquo;aucun droit de
-      propri&eacute;t&eacute;, et n&rsquo;encourt donc aucune responsabilit&eacute;.
-    </p>
-    <p>
-      Contenu&#8239;: d&eacute;signe les contenus publi&eacute;s par les &eacute;quipes de LaREM, ou
-      par les Utilisateurs sur la Plateforme.
-    </p>
-    <p>
-      Espace personnel : d&eacute;signe l&rsquo;interface de la Plateforme par laquelle
-      l&rsquo;Utilisateur acc&egrave;de &agrave; son Compte personnel, &agrave; des Contenus et
-      services sp&eacute;cifiques et permettant de cr&eacute;er du Contenu sur la Plateforme.
-    </p>
-    <p>
-      Identifiant et mot de passe : d&eacute;signent l&rsquo;ensemble des informations
-      n&eacute;cessaires &agrave; l&rsquo;identification d&rsquo;un Utilisateur &agrave; la
-      Plateforme. L&rsquo;identifiant et le mot de passe permet &agrave; l&rsquo;Utilisateur
-      d&rsquo;acc&eacute;der &agrave; des contenus sp&eacute;cifiques via son Espace personnel.
-      L&rsquo;identifiant et le mot de passe sont strictement personnels et confidentiels, et ne
-      doivent jamais &ecirc;tre transmis &agrave; un tiers.
-    </p>
-    <p>
-      LaREM&#8239; : d&eacute;signe La R&eacute;publique en Marche, association r&eacute;gie par la
-      loi du 1er juillet 1901 relative au contrat d&rsquo;association et parti politique au sens de
-      la loi n&deg;88-227 du 11 mars 1988 modifi&eacute;e, immatricul&eacute;e au R&eacute;pertoire
-      National des Associations (RNA) sous le num&eacute;ro W943004354, dont le si&egrave;ge social
-      est situ&eacute; au 63, rue Sainte-Anne 75002 Paris.
-    </p>
-    <p>
-      Plateforme : d&eacute;signe le site web d&eacute;di&eacute; &agrave; la cr&eacute;ation et
-      &agrave; l&rsquo;animation de causes, d&eacute;ploy&eacute;e par LaREM et accessible sur
-      internet sous l&rsquo;url pourunecause.fr par tout terminal ayant acc&egrave;s &agrave;
-      Internet.
-    </p>
-    <p>
-      Porteur de Cause : d&eacute;signe l&rsquo;utilisateur qui s&rsquo;inscrit sur la plateforme
-      pour cr&eacute;er et animer une Cause.
-    </p>
-    <p>
-      Profil : d&eacute;signe les donn&eacute;es individuelles et personnalis&eacute;es
-      d&rsquo;utilisation de la Plateforme par un Utilisateur qu&rsquo;il soit Adh&eacute;rent
-      &agrave; LaREM ou non. Chaque Utilisateur est libre de modifier et param&eacute;trer ces
-      donn&eacute;es.
-    </p>
-    <p>
-      Services : d&eacute;signent l&rsquo;ensemble des contenus et fonctionnalit&eacute;s
-      accessibles sur la Plateforme.
-    </p>
     <ul>
       <li>
-        Utilisateur : d&eacute;signe toute personne physique de plus de 15 ans ou tout
+        <Bold>Adh&eacute;rent :</Bold> d&eacute;signe toute personne de plus de quinze (15) ans
+        ayant adh&eacute;r&eacute; &agrave; LaREM et notamment &agrave; la Charte des valeurs et
+        &agrave; la Politique de protection des donn&eacute;es personnelles du Mouvement et
+        cr&eacute;&eacute; un Compte Personnel par lequel elle se connecte &agrave; l&rsquo;aide
+        d&rsquo;un identifiant et mot de passe qui lui sont strictement personnels et confidentiels.
+        L&rsquo;Adh&eacute;rent utilise la Plateforme en se connectant via son Compte Personnel
+        d&rsquo;adh&eacute;rent. L&rsquo;Adh&eacute;rent qui se connecte sur la Plateforme est
+        consid&eacute;r&eacute; dans le cadre des pr&eacute;sentes comme un Utilisateur.
+      </li>
+      <li>
+        <Bold>Administrateur de Plateforme&#8239;:</Bold> d&eacute;signe l&rsquo;ensemble des
+        personnes charg&eacute;es de la gestion des r&ocirc;les d&rsquo;Utilisateurs et des contenus
+        publi&eacute;s sur la Plateforme. Les Administrateurs de Plateforme sont des membres de
+        LaREM et habilit&eacute;s &agrave; traiter des donn&eacute;es collect&eacute;es gr&acirc;ce
+        &agrave; la Plateforme&#8239;;
+      </li>
+      <li>
+        <Bold>CGU :</Bold> d&eacute;signent les pr&eacute;sentes Conditions G&eacute;n&eacute;rales
+        d&rsquo;Utilisation r&eacute;gissant les obligations respectives des Visiteurs et des
+        Utilisateurs ainsi que de LaREM dans le cadre de l&rsquo;acc&egrave;s et de
+        l&rsquo;utilisation de la Plateforme.
+      </li>
+      <li>
+        <Bold>Cause :</Bold> d&eacute;signe le sujet cr&eacute;&eacute; sur la Plateforme sur
+        proposition de l&rsquo;Utilisateur apr&egrave;s validation d&rsquo;un Administrateur de la
+        Plateforme. Chaque Cause est obligatoirement rattach&eacute;e, au moins, &agrave; une
+        Coalition. Une fois cr&eacute;&eacute;e, elle est accessible librement par les Visiteurs et
+        Utilisateurs de la Plateforme dans la page de la Cause ou de la Coalition &agrave; laquelle
+        elle est rattach&eacute;e et est le c&#339;ur des &eacute;changes entre les Utilisateurs.
+      </li>
+      <li>
+        <Bold>Coalition :</Bold> d&eacute;signe une des th&eacute;matiques pr&eacute;alablement
+        d&eacute;finies par LaREM. Chaque Coalition est g&eacute;r&eacute;e par des membres de
+        l&rsquo;&eacute;quipe de LaREM qu&rsquo;elle aura habilit&eacute; et un Responsable de
+        Coalition qu&rsquo;elle aura d&eacute;sign&eacute;. Chaque Coalition regroupe les Causes de
+        sa th&eacute;matique.
+      </li>
+      <li>
+        <Bold>Compte personnel :</Bold> d&eacute;signe le compte ouvert par un Utilisateur &agrave;
+        partir du site web de la Plateforme accessible &agrave; l&rsquo;adresse URL ____ ou &agrave;
+        partir du site web de LaREM (https://en-marche.fr) s&rsquo;il est Adh&eacute;rent.
+      </li>
+      <li>
+        <Bold>Contenus et services sp&eacute;cifiques :</Bold> d&eacute;signent les contenus et
+        services accessibles uniquement par l&rsquo;Utilisateur via son Compte personnel, suivant
+        l&rsquo;habilitation qui lui est donn&eacute;e.
+      </li>
+      <li>
+        <Bold>Contenu tiers&#8239;:</Bold> d&eacute;signe les contenus &eacute;dit&eacute;s par des
+        tiers accessibles sur la Plateforme pour lesquels LaREM ne dispose d&rsquo;aucun droit de
+        propri&eacute;t&eacute;, et n&rsquo;encourt donc aucune responsabilit&eacute;.
+      </li>
+      <li>
+        <Bold>Contenu&#8239;:</Bold> d&eacute;signe les contenus publi&eacute;s par les
+        &eacute;quipes de LaREM, ou par les Utilisateurs sur la Plateforme.
+      </li>
+      <li>
+        <Bold>Espace personnel :</Bold> d&eacute;signe l&rsquo;interface de la Plateforme par
+        laquelle l&rsquo;Utilisateur acc&egrave;de &agrave; son Compte personnel, &agrave; des
+        Contenus et services sp&eacute;cifiques et permettant de cr&eacute;er du Contenu sur la
+        Plateforme.
+      </li>
+      <li>
+        <Bold>Identifiant et mot de passe :</Bold> d&eacute;signent l&rsquo;ensemble des
+        informations n&eacute;cessaires &agrave; l&rsquo;identification d&rsquo;un Utilisateur
+        &agrave; la Plateforme. L&rsquo;identifiant et le mot de passe permet &agrave;
+        l&rsquo;Utilisateur d&rsquo;acc&eacute;der &agrave; des contenus sp&eacute;cifiques via son
+        Espace personnel. L&rsquo;identifiant et le mot de passe sont strictement personnels et
+        confidentiels, et ne doivent jamais &ecirc;tre transmis &agrave; un tiers.
+      </li>
+      <li>
+        <Bold>LaREM&#8239; :</Bold> d&eacute;signe La R&eacute;publique en Marche, association
+        r&eacute;gie par la loi du 1er juillet 1901 relative au contrat d&rsquo;association et parti
+        politique au sens de la loi n&deg;88-227 du 11 mars 1988 modifi&eacute;e,
+        immatricul&eacute;e au R&eacute;pertoire National des Associations (RNA) sous le
+        num&eacute;ro W943004354, dont le si&egrave;ge social est situ&eacute; au 63, rue
+        Sainte-Anne 75002 Paris.
+      </li>
+      <li>
+        <Bold>Plateforme :</Bold> d&eacute;signe le site web d&eacute;di&eacute; &agrave; la
+        cr&eacute;ation et &agrave; l&rsquo;animation de causes, d&eacute;ploy&eacute;e par LaREM et
+        accessible sur internet sous l&rsquo;url pourunecause.fr par tout terminal ayant
+        acc&egrave;s &agrave; Internet.
+      </li>
+      <li>
+        <Bold>Porteur de Cause :</Bold> d&eacute;signe l&rsquo;utilisateur qui s&rsquo;inscrit sur
+        la plateforme pour cr&eacute;er et animer une Cause.
+      </li>
+      <li>
+        <Bold>Profil :</Bold> d&eacute;signe les donn&eacute;es individuelles et
+        personnalis&eacute;es d&rsquo;utilisation de la Plateforme par un Utilisateur qu&rsquo;il
+        soit Adh&eacute;rent &agrave; LaREM ou non. Chaque Utilisateur est libre de modifier et
+        param&eacute;trer ces donn&eacute;es.
+      </li>
+      <li>
+        <Bold>Services :</Bold> d&eacute;signent l&rsquo;ensemble des contenus et
+        fonctionnalit&eacute;s accessibles sur la Plateforme.
+      </li>
+      <li>
+        <Bold>Utilisateur :</Bold> d&eacute;signe toute personne physique de plus de 15 ans ou tout
         repr&eacute;sentant l&eacute;gal agissant au nom d&rsquo;une association ou d&rsquo;une
         fondation, ayant cr&eacute;&eacute; un compte personnel sur la Plateforme ou ayant un compte
         personnel en tant qu&rsquo;Adh&eacute;rent et utilisant les Services de la Plateforme en ce
@@ -152,11 +167,11 @@ const LegalNotice: FunctionComponent = () => (
       </li>
 
       <li>
-        Visiteur : d&eacute;signe toute personne physique qui acc&egrave;de &agrave; la Plateforme
-        sans se connecter via un Compte personnel n&eacute;cessitant un identifiant et un mot de
-        passe qui lui sont strictement personnels et confidentiels. C&rsquo;est le cas des personnes
-        qui soutiennent une Cause sur la Plateforme. Les Visiteurs doivent avoir plus de 15
-        ans&#8239;; &agrave; d&eacute;faut, ils doivent se d&eacute;connecter de la Plateforme.
+        <Bold>Visiteur :</Bold> d&eacute;signe toute personne physique qui acc&egrave;de &agrave; la
+        Plateforme sans se connecter via un Compte personnel n&eacute;cessitant un identifiant et un
+        mot de passe qui lui sont strictement personnels et confidentiels. C&rsquo;est le cas des
+        personnes qui soutiennent une Cause sur la Plateforme. Les Visiteurs doivent avoir plus de
+        15 ans&#8239;; &agrave; d&eacute;faut, ils doivent se d&eacute;connecter de la Plateforme.
       </li>
     </ul>
     <h2>Article 2. Objet </h2>

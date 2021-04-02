@@ -1,11 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import {
-  BulletPointsContainer,
-  ListItem,
-  BulletPointsWrapper,
-  BottomParagraph,
-} from './OurCommitments.style';
+import { BulletPointsContainer, ListItem } from './OurCommitments.style';
 
 const COMMITMENT_TWO_FIRST_KEYS = ['our_commitments.bullet-one', 'our_commitments.bullet-two'];
 
@@ -16,29 +11,24 @@ const OurCommitments: FunctionComponent<{}> = () => (
     <h3>
       <FormattedMessage id="our_commitments.title" />
     </h3>
-    <BulletPointsWrapper>
-      <BulletPointsContainer>
-        {COMMITMENT_TWO_FIRST_KEYS.map(translationKey => (
-          <ListItem key={translationKey}>
-            <p>
-              <FormattedMessage id={translationKey} />
-            </p>
-          </ListItem>
-        ))}
-      </BulletPointsContainer>
-      <BulletPointsContainer>
-        {COMMITMENT_TWO_LAST_KEYS.map(translationKey => (
-          <ListItem key={translationKey}>
-            <p>
-              <FormattedMessage id={translationKey} />
-            </p>
-          </ListItem>
-        ))}
-      </BulletPointsContainer>
-    </BulletPointsWrapper>
-    <BottomParagraph>
-      <FormattedMessage id="our_commitments.last-paragraph" />
-    </BottomParagraph>
+    <BulletPointsContainer>
+      {COMMITMENT_TWO_FIRST_KEYS.map(translationKey => (
+        <ListItem key={translationKey}>
+          <p>
+            <FormattedMessage id={translationKey} />
+          </p>
+        </ListItem>
+      ))}
+    </BulletPointsContainer>
+    <BulletPointsContainer>
+      {COMMITMENT_TWO_LAST_KEYS.map(translationKey => (
+        <ListItem key={translationKey}>
+          <p>
+            <FormattedMessage id={translationKey} />
+          </p>
+        </ListItem>
+      ))}
+    </BulletPointsContainer>
   </>
 );
 

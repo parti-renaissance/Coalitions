@@ -19,7 +19,11 @@ const SuccessStories: FunctionComponent<{}> = () => (
     <SubContainer>
       <SubSubContainer>
         {SUCCESS_STORIES.map((successStory, index) => (
-          <SuccessStoryCardWrapper key={successStory.title} isFirst={index === 0} show={index <= 1}>
+          <SuccessStoryCardWrapper
+            key={successStory.author}
+            isFirst={index === 0}
+            show={index <= 1}
+          >
             <SuccessStoryCard {...successStory} />
           </SuccessStoryCardWrapper>
         ))}

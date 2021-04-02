@@ -3,27 +3,32 @@ import {
   Container,
   Image,
   SubContainer,
-  TopTag,
-  Title,
+  Coalition,
   Description,
   ByAuthor,
+  Commitment,
+  Bold,
 } from './SuccessStoryCard.style';
 import { SuccessStory } from '../../data';
+import { FormattedMessage } from 'react-intl';
 
 const SuccessStoryCard: FunctionComponent<SuccessStory> = ({
-  topTag,
-  title,
+  coalition,
   description,
   author,
   imageSrc,
+  commitment,
 }) => (
   <Container>
     <Image src={imageSrc} />
     <SubContainer>
-      <TopTag>{topTag}</TopTag>
-      <Title>{title}</Title>
+      <Coalition>{coalition}</Coalition>
       <Description>{description}</Description>
-      <ByAuthor>{author}</ByAuthor>
+      <ByAuthor>
+        <FormattedMessage id="success_stories.by" />
+        <Bold>{` ${author}`}</Bold>
+      </ByAuthor>
+      <Commitment>{commitment}</Commitment>
     </SubContainer>
   </Container>
 );

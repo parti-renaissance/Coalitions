@@ -10,6 +10,7 @@ import HandleErrorService from 'services/HandleErrorService';
 import { getInCreationCause } from '../selectors';
 import { cleanInCreationCause } from '../slice';
 import { authenticatedApiClient } from 'services/networking/client';
+import { Cause } from '../types';
 
 export const usePublishCause = () => {
   const causeWithoutAuthor = useSelector(getInCreationCause);
@@ -18,10 +19,13 @@ export const usePublishCause = () => {
   const { formatMessage } = useIntl();
 
   const [{ loading, error }, doPublishCause] = useTypedAsyncFn(async () => {
-    await authenticatedApiClient.post('v3/causes', {
+    const publishedCause: Cause = await authenticatedApiClient.post('v3/causes', {
       name: causeWithoutAuthor?.name,
       description: causeWithoutAuthor?.description,
       coalition: causeWithoutAuthor?.coalition?.uuid,
+    });
+    return await authenticatedApiClient.post(`v3/causes/${publishedCause.uuid}/image`, {
+      content: causeWithoutAuthor?.image_url,
     });
   }, []);
 

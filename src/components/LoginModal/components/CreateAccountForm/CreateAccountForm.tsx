@@ -177,7 +177,7 @@ const CreateAccountForm = ({
                     { id: 'inscription.agree-cgu' },
                     {
                       charterOfValue: (
-                        <a href={CHARTER_OF_VALUES_URL} target="_blank">
+                        <a href={CHARTER_OF_VALUES_URL} target="_blank" rel="noopener noreferrer">
                           <FormattedMessage id="inscription.charter-of-values" />
                         </a>
                       ),

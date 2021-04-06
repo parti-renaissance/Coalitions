@@ -27,6 +27,7 @@ import {
   LegalText,
 } from './CreateAccountForm.style';
 import { oauthUrl } from 'services/networking/auth';
+import { CHARTER_OF_VALUES_URL } from 'routes';
 
 interface CreateAccountFormProps {
   doAfterAccountCreation?: () => Promise<void>;
@@ -172,7 +173,16 @@ const CreateAccountForm = ({
               name="cguAgreement"
               label={
                 <Label>
-                  {intl.formatMessage({ id: 'inscription.agree-cgu' })}
+                  {intl.formatMessage(
+                    { id: 'inscription.agree-cgu' },
+                    {
+                      charterOfValue: (
+                        <a href={CHARTER_OF_VALUES_URL} target="_blank">
+                          <FormattedMessage id="inscription.charter-of-values" />
+                        </a>
+                      ),
+                    },
+                  )}
                   <Asterisk>*</Asterisk>
                 </Label>
               }

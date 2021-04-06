@@ -21,7 +21,7 @@ export const Container = styled.div`
   box-shadow: ${boxShadow.card};
   overflow: hidden;
   width: min(75vw, ${getSpacing(60)});
-  height: ${getSpacing(107)};
+  height: ${getSpacing(102)};
   ${media.desktop(`
     flex-direction: row;
     width: calc(
@@ -71,10 +71,6 @@ export const ByAuthor = styled.div`
   line-height: ${lineHeight.primary};
   font-weight: ${fontWeight.normal};
   color: ${colorPalette.greyDark};
-`;
-
-export const Commitment = styled(ByAuthor)`
-  margin-top: ${getSpacing(1)};
 `;
 
 export const Bold = styled.span`

@@ -141,6 +141,7 @@ export const EmptyDiv = styled.div`
 `;
 
 export const CauseWrapper = styled.div`
+  display: flex;
   max-width: ${getSpacing(75)};
   ${media.desktop(`
     max-width: unset;

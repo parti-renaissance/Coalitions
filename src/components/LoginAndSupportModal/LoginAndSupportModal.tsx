@@ -41,6 +41,7 @@ const LoginAndSupportModal: FunctionComponent<LoginAndSupportModalProps> = ({
       title={intl.formatMessage({ id: 'cause.confirm-support' })}
       doingAfterAccountCreation={isFollowingCause}
       onAccountFormSubmit={unauthenticatedCauseFollow}
+      legalTextKey="cause.legal-inscription-text"
     />
   );
 };

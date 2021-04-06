@@ -28,6 +28,7 @@ const LoginAndPreviewModal: FunctionComponent<LoginAndPreviewModalProps> = ({
       onConnect={onConnect}
       title={intl.formatMessage({ id: 'create_cause.create-account' })}
       showSuccessScreenOnValidate
+      legalTextKey="inscription.legal-text"
     />
   );
 };

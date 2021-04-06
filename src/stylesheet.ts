@@ -169,6 +169,10 @@ export const fontSize = {
     mobile: '16px',
     desktop: '20px',
   },
+  pVerySmall: {
+    mobile: '12px',
+    desktop: '12px',
+  },
 };
 
 export const lineHeight = {
@@ -246,6 +250,15 @@ export const fonts = {
     ${media.desktop(`
       font-size: ${fontSize.button.desktop};
     `)}
+  `,
+  pVerySmall: css`
+    font-family: ${fontFamily.primary};
+    line-height: ${lineHeight.primary};
+    font-weight: ${fontWeight.normal};
+    font-size: ${fontSize.pVerySmall.mobile};
+    ${media.desktop(`
+    font-size: ${fontSize.pVerySmall.desktop};
+  `)}
   `,
 };
 

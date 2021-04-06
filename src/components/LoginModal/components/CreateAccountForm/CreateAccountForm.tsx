@@ -24,6 +24,7 @@ import {
   Connect,
   ConnectLink,
   ValidateButtonContainer,
+  LegalText,
 } from './CreateAccountForm.style';
 import { oauthUrl } from 'services/networking/auth';
 
@@ -34,6 +35,7 @@ interface CreateAccountFormProps {
   isInPage?: boolean;
   title: string;
   onConnect?: () => void;
+  legalTextKey: string;
 }
 
 const CreateAccountForm = ({
@@ -43,6 +45,7 @@ const CreateAccountForm = ({
   onAccountFormSubmit,
   title,
   onConnect,
+  legalTextKey,
 }: CreateAccountFormProps) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
@@ -174,6 +177,7 @@ const CreateAccountForm = ({
                 </Label>
               }
             />
+            <LegalText>{intl.formatMessage({ id: legalTextKey })}</LegalText>
             <ValidateButtonContainer isInPage={isInPage}>
               <FullWidthButton
                 disabled={

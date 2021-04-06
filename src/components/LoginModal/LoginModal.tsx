@@ -14,6 +14,7 @@ interface LoginModalProps {
   doingAfterAccountCreation?: boolean;
   title: string;
   showSuccessScreenOnValidate?: boolean;
+  legalTextKey: string;
 }
 
 const LoginModal: React.FunctionComponent<LoginModalProps> = ({
@@ -25,6 +26,7 @@ const LoginModal: React.FunctionComponent<LoginModalProps> = ({
   doAfterAccountCreation: doAfterAccountCreationProp,
   doingAfterAccountCreation,
   onAccountFormSubmit,
+  legalTextKey,
 }) => {
   const [showSuccessScreen, setShowSuccessScreen] = useState<boolean>(false);
 
@@ -61,6 +63,7 @@ const LoginModal: React.FunctionComponent<LoginModalProps> = ({
         onAccountFormSubmit={onAccountFormSubmit}
         onConnect={onConnect}
         title={title}
+        legalTextKey={legalTextKey}
       />
     );
   };

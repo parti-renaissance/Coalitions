@@ -19,9 +19,9 @@ declare global {
 }
 
 if (
-  window.config.sentry.environment !== 'local' &&
   window.config &&
   window.config.sentry &&
+  window.config.sentry.environment !== 'local' &&
   window.config.sentry.dsn
 ) {
   Sentry.init({

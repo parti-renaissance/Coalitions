@@ -29,6 +29,11 @@ export const SubSubContainer = styled.div`
   display: flex;
   overflow-y: scroll;
   padding: ${getSpacing(3)};
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const SuccessStoryCardWrapper = styled.div<{ isFirst: boolean; show: boolean }>`

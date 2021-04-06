@@ -22,6 +22,7 @@ export const Inscription: React.FunctionComponent = () => {
           isInPage
           doAfterAccountCreation={doAfterAccountCreation}
           title={intl.formatMessage({ id: 'inscription.title' })}
+          legalTextKey="inscription.legal-text"
         />
       </InscriptionFormWrapper>
     </InscriptionContainer>

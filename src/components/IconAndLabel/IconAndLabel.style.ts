@@ -20,6 +20,9 @@ export const Label = styled.div`
   line-height: ${lineHeight.primary};
   color: ${colorPalette.greyDark};
   font-weight: ${fontWeight.normal};
+  a {
+    color: ${colorPalette.greyDark};
+  }
 `;
 
 export const Asterisk = styled.span`

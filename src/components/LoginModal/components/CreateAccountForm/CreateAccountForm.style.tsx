@@ -58,3 +58,9 @@ export const ValidateButtonContainer = styled.div<{ isInPage: boolean }>`
           `)}
         `}
 `;
+
+export const LegalText = styled.div`
+  ${fonts.smallButton};
+  color: ${colorPalette.grey};
+  margin-top: ${getSpacing(5)};
+`;

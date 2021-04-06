@@ -5,6 +5,7 @@ function showCookieBanner() {
   var dialogHeight = parseInt(cookiebanner.offsetHeight);
   cookiebanner.style.bottom = (cookieBannerSliderPos - dialogHeight) + "px";
   cookieBannerSliderPos += 4;
+
   if (cookieBannerSliderPos < dialogHeight) {
     setTimeout(function () {
       showCookieBanner();
@@ -14,31 +15,30 @@ function showCookieBanner() {
     cookiebanner.style.bottom = "0px";
   }
 
-  const cookieBlock = document.getElementById("cookie_block");
-  const cookieDetails = document.getElementById("cookie_details");
-  const cookieHideDetails = document.getElementById("cookie_hide_details");
-  const cookieShowDetails = document.getElementById("cookie_show_details");
+  var cookieDetails = document.getElementById("cookie_details");
+  var cookieHideDetails = document.getElementById("cookie_hide_details");
+  var cookieShowDetails = document.getElementById("cookie_show_details");
 
-  const buttonAllowAll = document.getElementById("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll");
+  var buttonAllowAll = document.getElementById("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll");
 
-  cookieShowDetails.onclick = function() {
+  cookieShowDetails.onclick = function () {
     cookieDetails.classList.remove("visually-hidden");
     cookieHideDetails.classList.remove("visually-hidden");
     cookieShowDetails.classList.add("visually-hidden");
   };
 
-  cookieHideDetails.onclick = function() {
+  cookieHideDetails.onclick = function () {
     cookieDetails.classList.add("visually-hidden");
     cookieHideDetails.classList.add("visually-hidden");
     cookieShowDetails.classList.remove("visually-hidden");
   };
 
-  buttonAllowAll.onclick = function() {
-    const cookieCheckboxes = document.getElementsByClassName('cookie-checkbox');
+  buttonAllowAll.onclick = function () {
+    var cookieCheckboxes = document.getElementsByClassName('cookie-checkbox');
 
-    cookieCheckboxes.forEach(function(cookieCheckbox) {
-      cookieCheckbox.checked = true;
-    });
+    for (var i = 0; i < cookieCheckboxes.length; ++i) {
+      cookieCheckboxes[i].checked = true;
+    }
 
     Cookiebot.dialog.submitConsent();
   }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   colorPalette,
   defaultMargins,
@@ -27,16 +27,21 @@ export const Container = styled.div`
     width: calc(
       calc(100vw - 2 * ${defaultMargins.horizontal.desktop} - ${DESKTOP_MARGIN_BETWEEN_CARDS}) / 2
       );
-    height: ${getSpacing(68)};
+    min-height: ${getSpacing(68)};
+    height: fit-content;
   `)}
 `;
 
-export const Image = styled.img`
+export const Image = styled.img<{ height: number }>`
   height: ${getSpacing(32)};
   width: 100%;
   object-fit: cover;
+  ${({ height }) => css`
+    ${media.desktop(`
+      height: ${height}px;
+    `)}
+  `}
   ${media.desktop(`
-    height: 100%;
     width: 50%;
   `)}
 `;
@@ -44,6 +49,7 @@ export const Image = styled.img`
 export const SubContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   flex: 1;
   padding: ${getSpacing(5)};
 `;
@@ -57,7 +63,7 @@ export const Coalition = styled.div`
 `;
 
 export const Description = styled.div`
-  margin: auto 0;
+  margin: ${getSpacing(3)} 0;
   font-family: ${fontFamily.primary};
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};

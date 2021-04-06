@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
 import {
   Container,
   Image,
@@ -16,18 +16,30 @@ const SuccessStoryCard: FunctionComponent<SuccessStory> = ({
   description,
   author,
   imageSrc,
-}) => (
-  <Container>
-    <Image src={imageSrc} />
-    <SubContainer>
-      <Coalition>{coalition}</Coalition>
-      <Description>{description}</Description>
-      <ByAuthor>
-        <FormattedMessage id="success_stories.by" />
-        <Bold>{` ${author}`}</Bold>
-      </ByAuthor>
-    </SubContainer>
-  </Container>
-);
+}) => {
+  const contentContainerRef = useRef<HTMLDivElement | null>(null);
+  const [imageHeight, setImageHeight] = useState(0);
+
+  useEffect(() => {
+    if (contentContainerRef !== null && contentContainerRef.current !== null) {
+      console.log({ hh: contentContainerRef.current.clientHeight });
+      setImageHeight(contentContainerRef.current.clientHeight);
+    }
+  }, [contentContainerRef]);
+
+  return (
+    <Container>
+      <Image src={imageSrc} height={imageHeight} />
+      <SubContainer ref={contentContainerRef}>
+        <Coalition>{coalition}</Coalition>
+        <Description>{description}</Description>
+        <ByAuthor>
+          <FormattedMessage id="success_stories.by" />
+          <Bold>{` ${author}`}</Bold>
+        </ByAuthor>
+      </SubContainer>
+    </Container>
+  );
+};
 
 export default SuccessStoryCard;

@@ -139,3 +139,10 @@ export const EmptyDiv = styled.div`
   min-width: ${getSpacing(3)};
   margin-left: -${getSpacing(3)};
 `;
+
+export const CauseWrapper = styled.div`
+  max-width: ${getSpacing(75)};
+  ${media.desktop(`
+    max-width: unset;
+  `)}
+`;

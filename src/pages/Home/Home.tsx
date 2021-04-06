@@ -14,6 +14,7 @@ import {
   Bold,
   OurCommitmentsWrapper,
   EmptyDiv,
+  CauseWrapper,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
 import Cause from 'components/Cause';
@@ -96,7 +97,9 @@ const Home: React.FunctionComponent = () => {
         ) : (
           <CauseCardsWrapper>
             {causes.map(cause => (
-              <Cause key={cause.uuid} cause={cause} />
+              <CauseWrapper key={cause.uuid}>
+                <Cause cause={cause} />
+              </CauseWrapper>
             ))}
             <EmptyDiv />
           </CauseCardsWrapper>

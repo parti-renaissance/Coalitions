@@ -44,7 +44,6 @@ export const Author = styled.div`
   color: ${colorPalette.grey};
   margin-bottom: ${getSpacing(1)};
   margin-top: ${getSpacing(3)};
-  max-width: min(75vw, ${getSpacing(60)});
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -59,7 +58,7 @@ export const StyledCard = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  max-width: ${getSpacing(75)};
+  width: 100%;
   margin-bottom: ${getSpacing(4)};
   box-shadow: ${boxShadow.card};
   border-radius: ${borderRadius.medium};

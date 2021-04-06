@@ -29,7 +29,7 @@ export const useCityAndCountryAutocomplete = () => {
     setisFetchingCities(true);
     try {
       const { items } = await coalitionApiClient.get(
-        `zones?type[]=city&type[]=country&page_size=20&name=${searchText}`,
+        `zones?type[]=city&type[]=country&type[]=borough&page_size=20&name=${searchText}`,
       );
       setCities((items as CityOrCountry[]).filter(({ code }) => code !== 'FR'));
     } catch (e) {

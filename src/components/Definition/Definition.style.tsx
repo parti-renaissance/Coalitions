@@ -23,6 +23,9 @@ export const Definition = styled.p`
     margin-top: ${getSpacing(7)};
     max-width: ${getSpacing(108)};
   `)}
+  a {
+    color: ${colorPalette.greyDark};
+  }
 `;
 
 export const Title = styled.div`

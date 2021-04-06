@@ -16,7 +16,7 @@
   "home": {
     "support-causes": "Soutenez des causes",
     "title": "Faire de nos combats personnels des actions collectives",
-    "explanation": "Citoyens, collectifs, associations, nous avons tous à coeur d’agir pour construire un monde meilleur. Nous avons tous des idées, des combats, des causes qui nous sont chères.",
+    "explanation": "Citoyens, collectifs, associations, nous avons tous à coeur d’agir pour construire un monde meilleur. Nous avons tous des idées, des combats, des causes qui nous sont chers.",
     "explanation-part-2": "Nos engagements ?",
     "explanation-part-3": "Vous donner les moyens de les faire grandir et les rendre concrètes.",
     "published_cause_modal": {
@@ -75,7 +75,8 @@
       "title": "Discussions"
     },
     "what-is-it": "Qu’est-ce qu’une cause\u00A0?",
-    "definition": "C’est un combat, un cri de ralliement, un appel qu’on lance à la société pour mobiliser autour d’une idée qui peut changer les choses. La vôtre.",
+    "definition": "C’est un combat, un cri de ralliement, un appel qu’on lance à la société pour mobiliser autour d’une idée qui peut changer les choses.\nTout cela, dans le respect de notre {charteValue} !",
+    "charte-value": "charte des valeurs",
     "coming-feature": "Cette fonctionnalité arrive prochainement\u00A0!",
     "empty-description": "Le porteur de cause n’a pas encore ajouté de contenu, soutenez la cause pour la faire grandir\u00A0!",
     "legal-inscription-text": "Les données recueillies dans ce formulaire sont traitées par La République en Marche (LaREM) dans le cadre de la Plateforme « Pour une Cause ». Les informations marquées d'un astérisque sont obligatoires. L'absence de réponse dans ces champs ne permettra pas à LaREM de traiter votre demande. Ces données permettront à LaREM de gérer le recensement des soutiens à une Cause, l'instruction des demandes de contact et de renseignements, l'évaluation statistique de la fréquentation de la Plateforme, la gestion des inscriptions à la Plateforme, la création et le maintien d'un espace personnel, le suivi de la mission des Responsables de Coalitions, le suivi de la mission des Porteurs de Causes, la gestion des Contacts réguliers et le suivi de la relation avec LaREM, la gestion des Contacts occasionnels et le suivi de la relation avec LaREM, la gestion des opérations de communication, de consultation et d'organisation d'événements de LaREM, des Responsables de Coalitions et des Porteurs de Causes, la gestion des signalements , le partage des Causes et des Coalitions sur le web , la mise en ligne, la publication et l'animation des Causes et des Coalitions, l'établissement d'études statistiques et de consultations publiques, le référencement des évènements. Elles permettront également à LaREM, aux Porteurs des Causes que vous soutenez et/ou aux Responsables des Coalitions auxquelles ces Causes sont rattachées, si vous le souhaitez, de vous envoyer des communications relatives aux Causes que vous soutenez et/ou aux Coalitions auxquelles elles sont rattachées. En envoyant ce formulaire, vous autorisez LaREM à utiliser vos données pour ces finalités. Conformément à la réglementation en vigueur sur la protection des données, vous disposez d'un droit d'opposition et d'un droit à la limitation du traitement, ainsi que d'un droit d'accès, de rectification, de portabilité et d'effacement de vos données. Vous disposez également de la faculté de retirer votre consentement lorsque celui-ci est la base du traitement et de donner des directives sur le sort de vos données après votre décès. Vous pouvez exercer vos droits en nous adressant votre demande à l'adresse postale La République En Marche, 63 rue Sainte-Anne, 75002 Paris ou à l'adresse électronique mes-donnees@en-marche.fr. Pour toute information concernant le traitement de vos données, consultez la politique de protection des données personnelles de La République en Marche qui vous correspond en cliquant ici ou contacter notre délégué à la protection des données à l'adresse dpo@en-marche.fr."
@@ -114,9 +115,10 @@
     "title": "Créez votre cause en quelques minutes\u00A0!",
     "explanation": "Parce que vous souhaitez résoudre un problème ou défendre un sujet qui vous tient à coeur. Parce qu’il faut agir maintenant pour changer les choses. Votre cause doit être entendue\u00A0!",
     "creation-steps-title": "Créer et faire connaitre sa cause c’est simple et rapide :",
-    "creation-step-one": "Je crée ma cause sur la plateforme.",
+    "creation-step-one": "Je crée ma cause sur la plateforme dans le respect de la charte des valeurs.",
     "creation-step-two": "Je reçois des conseils pour mobiliser autour de ma cause et obtenir un maximum de soutiens.",
-    "creation-step-three": "Je lance des actions (pétition, consultation, événement, rencontre, action terrain) pour faire grandir ma cause."
+    "creation-step-three": "Je lance des actions (pétition, consultation, événement, rencontre, action terrain) pour convaincre et faire grandir ma cause.",
+    "creation-step-four": "Ma cause est entendue ! Des Français s'engagent, des associations vous accompagnent, et des élus s'impliquent."
   },
   "create_cause": {
     "validate": "Enregistrer et voir l’aperçu",
@@ -125,7 +127,7 @@
     "title": {
       "title": "1. Quel est l’objectif de votre cause\u00A0?",
       "tips": "le titre est la première chose que les gens verront à propos de votre cause. Choisissez donc un titre accrocheur, concis avec des verbes d’action, simple à comprendre, mémorisable.",
-      "placeholder": "En une phrase de 100 caractères maximum."
+      "placeholder": "100 caractères maximum. Par exemple : « Pour mener des actions de prévention en santé mentale dès le collège »."
     },
     "description": {
       "title": "2. Description de votre cause",
@@ -167,10 +169,10 @@
   },
   "our_commitments": {
     "title": "Nos engagements",
-    "bullet-one": "Vous former et vous accompagner dans le développement de votre cause (masterclass, conseils d’experts, ateliers d’accélération…).",
-    "bullet-two": "Vous mettre à disposition des outils et des ressources pour mobiliser autour de votre cause (tuto, outils de consultation, espaces de discussion…).",
-    "bullet-three": "Vous mettre en relation, chaque mois, avec des responsables politiques et associatifs investis sur les thèmes concernés, pour les causes les plus soutenues.",
-    "bullet-four": "Vous donner des moyens de mettre en avant votre cause sur les réseaux sociaux ou via des publications (ouvrage collectif, tribunes, …)."
+    "bullet-one": "Un accompagnement personnalisé pour mobiliser autour de votre cause (formations, conseils, ateliers…).",
+    "bullet-two": "Des outils et des ressources pratiques (création d'événements, forums de discussion, pétitions…).",
+    "bullet-three": "Des mises en relation chaque mois avec des responsables politiques et associatifs pour faire entendre et aboutir votre cause.",
+    "bullet-four": "Des moyens pour mettre en avant votre cause sur les réseaux sociaux et peut-être publier par une maison d'édition un texte en faveur de votre cause !"
   },
   "errors": {
     "already-followed-cause-for-unauthenticated": "Vous soutenez déjà cette cause, connectez-vous ou créez un compte pour aller plus loin",

@@ -21,12 +21,17 @@ const isFieldEmpty = (value: string | undefined) => value === undefined || value
 export const useValidateForm = () => {
   const intl = useIntl();
 
+  // eslint-disable-next-line complexity
   const validateForm = ({ firstName, email, cityId, cguAgreement }: InscriptionFormValues) => {
     const errors = {} as ErrorForm;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
 
     if (isFieldEmpty(firstName)) {
       errors.firstName = requiredErrorMessage;
+    }
+
+    if (firstName !== undefined && firstName.length < 2) {
+      errors.firstName = intl.formatMessage({ id: 'form_errors.too-short-name' });
     }
 
     if (isFieldEmpty(email)) {

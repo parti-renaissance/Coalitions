@@ -3,7 +3,6 @@ import {
   media,
   getSpacing,
   colorPalette,
-  SPACING_UNIT,
   fonts,
   fontFamily,
   fontSize,

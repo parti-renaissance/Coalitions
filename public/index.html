@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -72,9 +72,9 @@
     <script type="text/javascript">
       window.config = {
         sentry: {
-          dsn: 'https://ea5b81a440f74d229fc93d111cf84b71@sentry.theo.do/14',
+          dsn: '<%= process.env.SENTRY_DSN %>',
           environment: '<%= process.env.REACT_APP_ENV %>',
-          version: '',
+          release: '<%= process.env.APP_VERSION %>',
         },
       };
     </script>

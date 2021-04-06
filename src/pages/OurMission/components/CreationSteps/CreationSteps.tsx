@@ -13,6 +13,7 @@ const CREATION_STEPS_TRANSLATION_KEYS = [
   'our_mission.creation-step-one',
   'our_mission.creation-step-two',
   'our_mission.creation-step-three',
+  'our_mission.creation-step-four',
 ];
 
 const CreationSteps: FunctionComponent = () => {

@@ -1,13 +1,26 @@
 import React, { FunctionComponent } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+import { CHARTER_OF_VALUES_URL } from 'routes';
 import { CauseContainer, Definition, Title } from './Definition.style';
 
 export const CauseDefinition: FunctionComponent = () => {
-  const intl = useIntl();
   return (
     <CauseContainer>
-      <Title>{intl.formatMessage({ id: 'cause.what-is-it' })}</Title>
-      <Definition>{intl.formatMessage({ id: 'cause.definition' })}</Definition>
+      <Title>
+        <FormattedMessage id="cause.what-is-it" />
+      </Title>
+      <Definition>
+        <FormattedMessage
+          id="cause.definition"
+          values={{
+            charteValue: (
+              <a href={CHARTER_OF_VALUES_URL} target="_blank" rel="noopener noreferrer">
+                <FormattedMessage id="cause.charte-value" />
+              </a>
+            ),
+          }}
+        />
+      </Definition>
     </CauseContainer>
   );
 };

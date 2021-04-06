@@ -85,7 +85,7 @@ export const StyledMedia = styled.div<{ backgroundImage: string }>`
 `;
 
 export const StyledContent = styled.div`
-  padding: ${getSpacing(6)} ${getSpacing(4)};
+  padding: ${getSpacing(5)};
   display: flex;
   flex-direction: column;
   flex: 1;

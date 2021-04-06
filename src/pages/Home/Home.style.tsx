@@ -55,7 +55,6 @@ export const CoalitionCardsWrapper = styled.div`
 `;
 
 export const CauseCardsWrapper = styled.div`
-  height: ${getSpacing(85)};
   display: flex;
   flex-direction: row;
   flex: 1;
@@ -128,10 +127,15 @@ export const Bold = styled.span`
 `;
 
 export const OurCommitmentsWrapper = styled.div`
-  margin: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
-  margin-top: 0;
+  margin: -${getSpacing(4)} ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    margin: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
-    margin-top: 0;
+    margin: -${getSpacing(6)} ${defaultMargins.horizontal.desktop} ${
+    defaultMargins.vertical.desktop
+  } ${defaultMargins.horizontal.desktop};
   `)}
+`;
+
+export const EmptyDiv = styled.div`
+  min-width: ${getSpacing(3)};
+  margin-left: -${getSpacing(3)};
 `;

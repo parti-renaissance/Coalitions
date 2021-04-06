@@ -6,7 +6,6 @@ import {
   Coalition,
   Description,
   ByAuthor,
-  Commitment,
   Bold,
 } from './SuccessStoryCard.style';
 import { SuccessStory } from '../../data';
@@ -17,7 +16,6 @@ const SuccessStoryCard: FunctionComponent<SuccessStory> = ({
   description,
   author,
   imageSrc,
-  commitment,
 }) => (
   <Container>
     <Image src={imageSrc} />
@@ -28,7 +26,6 @@ const SuccessStoryCard: FunctionComponent<SuccessStory> = ({
         <FormattedMessage id="success_stories.by" />
         <Bold>{` ${author}`}</Bold>
       </ByAuthor>
-      <Commitment>{commitment}</Commitment>
     </SubContainer>
   </Container>
 );

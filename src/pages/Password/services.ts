@@ -47,7 +47,7 @@ const useConfirmPasswordErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (error.message.includes('404')) {
+      if (error.message.includes('404') || error.message.includes('Pas de Token')) {
         return formatMessage({ id: 'errors.incorrect-password-token' });
       }
       return null;

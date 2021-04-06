@@ -10,8 +10,6 @@ import {
   defaultMargins,
 } from 'stylesheet';
 
-const DESKTOP_MARGIN_BETWEEN_STEPS = SPACING_UNIT * 10;
-
 export const Container = styled.div`
   background-color: ${colorPalette.mintGreen};
   padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
@@ -39,9 +37,7 @@ export const StepContainer = styled.div`
   margin-top: ${getSpacing(7)};
   ${media.desktop(`
     margin-top: 0;
-    width: calc(${(window.innerWidth - 2 * DESKTOP_MARGIN_BETWEEN_STEPS) / 3}px - (2 / 3) * ${
-    defaultMargins.horizontal.desktop
-  });
+    width: calc(calc(100% - 3 * ${getSpacing(10)}) / 4);
   `)}
 `;
 

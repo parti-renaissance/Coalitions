@@ -60,4 +60,7 @@ export const StepText = styled.p`
   ${media.desktop(`
     margin-left: ${getSpacing(6)};
   `)}
+  a {
+    color: ${colorPalette.greyDark};
+  }
 `;

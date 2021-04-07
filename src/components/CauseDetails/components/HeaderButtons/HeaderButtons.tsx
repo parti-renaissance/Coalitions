@@ -5,6 +5,8 @@ import { InCreationCause, Cause } from 'redux/Cause/types';
 import { PATHS } from 'routes';
 import { Container as StickyMobileButtonsContainer } from 'components/FixedBottomButton/FixedBottomButton.style';
 import { usePublishCause } from 'redux/Cause/hooks/usePublishCause';
+import { useCauseOwner } from 'redux/Cause/hooks/useCauseOwner';
+import { useFeatureToggling } from 'services/useFeatureToggling';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -25,9 +27,15 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
   const isSupported = Boolean(cause.supported);
   const intl = useIntl();
   const { loading, publishCause } = usePublishCause();
+  const isCauseOwner = useCauseOwner(cause);
+  const { isCauseUpdateEnable } = useFeatureToggling();
 
   const onPublishInCreationCause = () => {
     publishCause();
+  };
+
+  const updateCause = () => {
+    // TODO
   };
 
   const renderContent = () => {
@@ -54,7 +62,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
 
     return (
       <>
-        {isSupported || (
+        {!isSupported ? (
           <Button
             size="small"
             variant="contained"
@@ -64,7 +72,11 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           >
             {intl.formatMessage({ id: 'cause.support-button' })}
           </Button>
-        )}
+        ) : isCauseOwner && isCauseUpdateEnable ? (
+          <Button size="small" variant="contained" color="primary" onClick={updateCause}>
+            {intl.formatMessage({ id: 'cause.update' })}
+          </Button>
+        ) : null}
         {isMobile || (
           <Button size="small" variant="outlined" color="primary" onClick={onShare}>
             {intl.formatMessage({ id: 'cause.share-button' })}

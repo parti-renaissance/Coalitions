@@ -50,7 +50,7 @@ const Home: React.FunctionComponent = () => {
     fetchFirstPage([], isUserLoggedIn);
   }, [fetchFirstPage, isUserLoggedIn]);
 
-  const renderVideo = () => <Video videoId="X314pmE-__o" />;
+  const renderVideo = () => <Video videoId="FIGfylYPLb8" />;
 
   return (
     <>

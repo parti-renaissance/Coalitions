@@ -63,6 +63,7 @@ export const StyledCard = styled.div`
   box-shadow: ${boxShadow.card};
   border-radius: ${borderRadius.medium};
   overflow: hidden;
+  cursor: pointer;
   ${media.desktop(`
     width: ${getSpacing(68)};
     margin-bottom: ${getSpacing(6)};

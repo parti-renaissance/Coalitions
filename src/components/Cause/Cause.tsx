@@ -1,4 +1,6 @@
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState, FunctionComponent, MouseEvent } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { useHistory } from 'react-router';
 import { SmallButton, DefaultButton } from 'components/Button/Button';
 import { Cause as CauseType } from 'redux/Cause/types';
 import useSelector from 'redux/useSelector';
@@ -14,7 +16,6 @@ import {
   Supported,
 } from './Cause.style';
 
-import { FormattedMessage } from 'react-intl';
 import { DefaultLink as Link } from 'components/Link/Link';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import LoginAndSupportModal from 'components/LoginAndSupportModal';
@@ -30,8 +31,11 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const { loading, followCause } = useCauseFollow(cause.uuid);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const history = useHistory();
 
-  const onSupportClick = () => {
+  const onSupportClick = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     if (isUserLoggedIn) {
       followCause();
     } else {
@@ -45,7 +49,11 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
 
   return (
     <>
-      <StyledCard>
+      <StyledCard
+        onClick={() => {
+          history.push(PATHS.CAUSE.url(cause.uuid));
+        }}
+      >
         {Boolean(cause.supported) ? (
           <Supported>
             <FormattedMessage id="cause.supported" />

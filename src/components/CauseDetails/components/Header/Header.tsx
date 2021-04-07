@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import {
   Container,
-  CoalitionName,
   AuthorAndSupportsWrapper,
   CauseName,
   NameAndShareWrapper,
@@ -16,6 +15,7 @@ import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
+import { CoalitionsDisplay } from '../CoalitionsDisplay';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -51,9 +51,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
       <div>
         <NameAndShareWrapper>
           <div>
-            {cause.coalition !== undefined && cause.coalition !== null ? (
-              <CoalitionName>{cause.coalition.name}</CoalitionName>
-            ) : null}
+            <CoalitionsDisplay cause={cause} />
             <CauseName>{cause.name}</CauseName>
           </div>
           {isMobile && (

@@ -12,11 +12,6 @@ export const Container = styled.div`
   `)}
 `;
 
-export const CoalitionName = styled.p`
-  color: ${colorPalette.blueCoalition};
-  margin-bottom: ${getSpacing(2)};
-`;
-
 export const AuthorAndSupportsWrapper = styled.div`
   margin-top: ${getSpacing(2)};
 `;

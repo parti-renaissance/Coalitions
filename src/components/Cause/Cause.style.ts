@@ -12,16 +12,6 @@ import {
   fontWeight,
 } from 'stylesheet';
 
-export const CoalitionName = styled.div`
-  color: ${colorPalette.blueCoalition};
-  margin-bottom: ${getSpacing(2)};
-  font-family: ${fontFamily.primary};
-  font-size: ${fontSize.p.mobile};
-  line-height: ${lineHeight.primary};
-  font-weight: ${fontWeight.normal};
-`;
-CoalitionName.displayName = 'CoalitionName';
-
 export const CauseName = styled.div`
   /*
      OK for all browser except IE which is not maintained anymore since Nov 2020

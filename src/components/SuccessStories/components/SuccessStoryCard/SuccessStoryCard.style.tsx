@@ -1,7 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   colorPalette,
-  defaultMargins,
   getSpacing,
   media,
   borderRadius,
@@ -10,10 +9,13 @@ import {
   fontSize,
   lineHeight,
   fontWeight,
+  defaultMargins,
 } from 'stylesheet';
-import { DESKTOP_MARGIN_BETWEEN_CARDS } from '../../SuccessStories.style';
 
-export const Container = styled.div`
+const DESKTOP_MARGIN_BETWEEN_CARDS = getSpacing(10);
+const MOBILE_MARGIN_BETWEEN_CARDS = getSpacing(3);
+
+export const Container = styled.div<{ isFirst: boolean; show: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: ${colorPalette.white};
@@ -21,14 +23,37 @@ export const Container = styled.div`
   box-shadow: ${boxShadow.card};
   overflow: hidden;
   width: min(75vw, ${getSpacing(60)});
+  min-width: min(75vw, ${getSpacing(60)});
   height: ${getSpacing(102)};
   ${media.desktop(`
     flex-direction: row;
+    min-width: unset;
     width: calc(
-      calc(100vw - 2 * ${defaultMargins.horizontal.desktop} - ${DESKTOP_MARGIN_BETWEEN_CARDS}) / 2
+      calc(100% - ${DESKTOP_MARGIN_BETWEEN_CARDS}) / 2
       );
     height: ${getSpacing(68)};
   `)}
+  margin-right: ${MOBILE_MARGIN_BETWEEN_CARDS};
+  ${media.desktop(`
+    margin-right: ${DESKTOP_MARGIN_BETWEEN_CARDS};
+  `)};
+  ${({ isFirst }) =>
+    isFirst
+      ? css`
+          margin-left: ${defaultMargins.horizontal.mobile};
+          ${media.desktop(`
+            margin-left: ${defaultMargins.horizontal.desktop};
+          `)}
+        `
+      : css``};
+  ${({ show }) =>
+    show
+      ? css``
+      : css`
+          ${media.desktop(`
+            display: none;
+          `)}
+        `};
 `;
 
 export const Image = styled.img`

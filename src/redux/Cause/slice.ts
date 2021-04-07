@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Cause, InCreationCauseWithoutAuthor } from './types';
+import { Cause, InCreationCause } from './types';
 
 export type CauseState = Readonly<{
   causes: { [id: string]: Cause };
   ids: string[];
   numberOfCauses: number | null;
-  inCreationCause?: InCreationCauseWithoutAuthor;
+  inCreationCause?: InCreationCause;
 }>;
 
 const initialState: CauseState = {
@@ -66,7 +66,7 @@ const causeSlice = createSlice({
         { ...state.causes },
       );
     },
-    updateInCreationCause: (state, action: PayloadAction<InCreationCauseWithoutAuthor>) => {
+    updateInCreationCause: (state, action: PayloadAction<InCreationCause>) => {
       state.inCreationCause = action.payload;
     },
     cleanInCreationCause: state => {

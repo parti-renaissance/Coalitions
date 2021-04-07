@@ -16,17 +16,16 @@ import { updateInCreationCause } from 'redux/Cause/slice';
 import { convertFormValuesToCause } from './lib/convertFormValuesToCause';
 import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
-import { getInCreationCause } from 'redux/Cause/selectors';
-import { convertCauseToFormValues } from './lib/convertCauseToFormValues';
+import { useInitialFormValues } from './lib/useInitialFormValues';
 
 const CreateCause: FunctionComponent = () => {
-  const inCreationCause = useSelector(getInCreationCause);
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const [isLoginModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const dispatch = useDispatch();
   const history = useHistory();
+  const { initialFormValues, loading } = useInitialFormValues();
 
   const onSubmit = (values: FormValues) => {
     dispatch(updateInCreationCause(convertFormValuesToCause(values)));
@@ -41,9 +40,8 @@ const CreateCause: FunctionComponent = () => {
     setIsLoginModalOpened(false);
   };
 
-  let initialValues = {} as FormValues;
-  if (inCreationCause !== undefined) {
-    initialValues = convertCauseToFormValues(inCreationCause);
+  if (loading && initialFormValues === undefined) {
+    return null;
   }
 
   return (
@@ -52,7 +50,7 @@ const CreateCause: FunctionComponent = () => {
         <SubContainer>
           <TopImage src="/images/createCause.svg" />
           <Formik<FormValues>
-            initialValues={initialValues}
+            initialValues={initialFormValues}
             validate={validateForm}
             onSubmit={onSubmit}
           >
@@ -68,6 +66,9 @@ const CreateCause: FunctionComponent = () => {
               setFieldTouched,
             }) => (
               <form onSubmit={handleSubmit}>
+                {initialFormValues.uuid !== undefined ? (
+                  <input type="text" hidden value={initialFormValues.uuid} />
+                ) : null}
                 <InputSection
                   title={intl.formatMessage({ id: 'create_cause.title.title' })}
                   tips={intl.formatMessage({ id: 'create_cause.title.tips' })}
@@ -153,7 +154,7 @@ const CreateCause: FunctionComponent = () => {
                 <ValidateButton
                   disabled={
                     Object.keys(errors).length > 0 ||
-                    (inCreationCause === undefined && touched.title !== true)
+                    (initialFormValues.title === undefined && touched.title !== true)
                   }
                   type="submit"
                   size="small"

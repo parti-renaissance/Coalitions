@@ -7,6 +7,7 @@ import { Container as StickyMobileButtonsContainer } from 'components/FixedBotto
 import { usePublishCause } from 'redux/Cause/hooks/usePublishCause';
 import { useCauseOwner } from 'redux/Cause/hooks/useCauseOwner';
 import { useFeatureToggling } from 'services/useFeatureToggling';
+import { useHistory } from 'react-router';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -23,6 +24,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
   isSupporting,
   isMobile,
 }) => {
+  const history = useHistory();
   const isPreview = Boolean(!onSupport);
   const isSupported = Boolean(cause.supported);
   const intl = useIntl();
@@ -35,7 +37,10 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
   };
 
   const updateCause = () => {
-    // TODO
+    history.push({
+      pathname: PATHS.CREATE_CAUSE.url(),
+      search: `?causeId=${(cause as Cause).uuid}`,
+    });
   };
 
   const renderContent = () => {

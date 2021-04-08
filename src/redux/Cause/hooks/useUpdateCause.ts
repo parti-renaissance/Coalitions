@@ -6,32 +6,14 @@ import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
-import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
+import HandleErrorService from 'services/HandleErrorService';
 import { authenticatedApiClient } from 'services/networking/client';
 import { Cause } from '../types';
-
-const useUpdateCauseErrorHandler = () => {
-  const { formatMessage } = useIntl();
-
-  return useCallback(
-    (error?: APIErrorsType) => {
-      if (error instanceof Response || error === undefined || error.message === undefined) {
-        return null;
-      }
-      if (error.message.includes('name: Cette valeur est déjà utilisée')) {
-        return formatMessage({ id: 'errors.already-used-cause-name' });
-      }
-      return null;
-    },
-    [formatMessage],
-  );
-};
 
 export const useUpdateCause = () => {
   const { push } = useHistory();
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
-  const errorHandler = useUpdateCauseErrorHandler();
 
   const [{ loading, error }, doUpdateCause] = useTypedAsyncFn(async (cause: Cause) => {
     await authenticatedApiClient.put(`v3/causes/${cause.uuid}`, {
@@ -45,9 +27,9 @@ export const useUpdateCause = () => {
 
   useEffect(() => {
     if (error !== undefined) {
-      HandleErrorService.showErrorSnackbar(error, errorHandler);
+      HandleErrorService.showErrorSnackbar(error);
     }
-  }, [error, errorHandler]);
+  }, [error]);
 
   const updateCause = useCallback(
     async (cause: Cause) => {

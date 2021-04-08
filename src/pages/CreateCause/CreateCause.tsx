@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { useIntl } from 'react-intl';
 import useSelector from 'redux/useSelector';
 import { useDispatch } from 'react-redux';
 import { updateInCreationCause } from 'redux/Cause/slice';
@@ -11,7 +10,6 @@ import { InCreationCause } from 'redux/Cause/types';
 
 const CreateCause: FunctionComponent = () => {
   const inCreationCause = useSelector(getInCreationCause);
-  const intl = useIntl();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -24,12 +22,7 @@ const CreateCause: FunctionComponent = () => {
   };
 
   return (
-    <CauseForm
-      onSubmitBegin={onSubmitBegin}
-      onSubmit={onSubmit}
-      validateButtonLabel={intl.formatMessage({ id: 'create_cause.validate' })}
-      initialCause={inCreationCause}
-    />
+    <CauseForm onSubmitBegin={onSubmitBegin} onSubmit={onSubmit} initialCause={inCreationCause} />
   );
 };
 

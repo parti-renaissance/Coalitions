@@ -15,7 +15,7 @@ import { Coalition } from 'redux/Coalition/types';
 import Loader from 'components/Loader';
 
 interface CoalitionCardsProps {
-  onCoalitionClick: (coalition: Coalition) => void;
+  onCoalitionClick?: (coalition: Coalition) => void;
   selectedCoalitionUuids?: string[];
   responsiveNbOfCardsByLine?: boolean;
 }
@@ -36,11 +36,15 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
   }, [fetchCoalitions]);
 
   const renderCoalitionCard = (coalition: Coalition) => {
-    const onClick = () => onCoalitionClick(coalition);
+    const onClick = () => {
+      if (onCoalitionClick !== undefined) {
+        onCoalitionClick(coalition);
+      }
+    };
     return (
       <CoalitionContainer
         key={coalition.uuid}
-        onClick={onClick}
+        onClick={onCoalitionClick !== undefined ? onClick : undefined}
         responsiveNbOfCardsByLine={responsiveNbOfCardsByLine}
       >
         <CoalitionImage backgroundImage={coalition.image_url}>
@@ -70,9 +74,15 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
     return null;
   }
 
+  let filteredCoalitions = coalitions;
+  if (onCoalitionClick === undefined) {
+    filteredCoalitions = coalitions.filter(
+      ({ uuid }) => selectedCoalitionUuids !== undefined && selectedCoalitionUuids.includes(uuid),
+    );
+  }
   return (
     <Container>
-      <SubContainer>{coalitions.map(renderCoalitionCard)}</SubContainer>
+      <SubContainer>{filteredCoalitions.map(renderCoalitionCard)}</SubContainer>
     </Container>
   );
 };

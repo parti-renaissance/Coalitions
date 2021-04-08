@@ -18,7 +18,7 @@ export const SubContainer = styled.div`
   padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
   padding-top: ${getSpacing(7)};
   ${media.desktop(`
-    max-width: ${getSpacing(136)};
+    max-width: ${getSpacing(138)};
     padding: unset;
     padding-top: unset;
   `)}

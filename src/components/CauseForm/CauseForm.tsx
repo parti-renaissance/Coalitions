@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React, { FunctionComponent, useState } from 'react';
 import { Container, SubContainer, TopImage, ValidateButton } from './CauseForm.style';
 import InputSection from './components/InputSection';
@@ -19,14 +21,12 @@ interface CauseFormProps {
   initialCause?: InCreationCause | Cause;
   onSubmitBegin?: (cause: InCreationCause | Cause) => void;
   onSubmit: (cause: InCreationCause | Cause) => void;
-  validateButtonLabel: string;
 }
 
 const CauseForm: FunctionComponent<CauseFormProps> = ({
   initialCause,
   onSubmitBegin,
   onSubmit: onSubmitFromProps,
-  validateButtonLabel,
 }) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
@@ -51,7 +51,39 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
     setIsLoginModalOpened(false);
   };
 
+  const getOnCoalitionClick = ({
+    values,
+    setFieldValue,
+    setFieldTouched,
+  }: {
+    values: FormValues;
+    setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+    setFieldTouched: (
+      field: string,
+      isTouched?: boolean | undefined,
+      shouldValidate?: boolean | undefined,
+    ) => void;
+  }) => (coalition: Coalition) => {
+    if (values.coalitions !== undefined) {
+      const selectedCoalitionUuids = values.coalitions.map(({ uuid }) => uuid);
+      if (selectedCoalitionUuids.includes(coalition.uuid)) {
+        const indexToRemove = selectedCoalitionUuids.indexOf(coalition.uuid);
+        const newValues = [...values.coalitions];
+        newValues.splice(indexToRemove, 1);
+        setFieldValue('coalitions', newValues);
+      } else if (values.coalitions.length < 2) {
+        setFieldValue('coalitions', [...values.coalitions, coalition]);
+      }
+    } else {
+      setFieldTouched('coalitions');
+      setFieldValue('coalitions', [coalition]);
+    }
+  };
+
+  const renderEmail = () => <a href="mailto:contact@pourunecause.fr">contact@pourunecause.fr</a>;
+
   const initialValues = convertCauseToFormValues(initialCause);
+  const isAPublishedCause = initialValues.uuid !== undefined;
   return (
     <>
       <Container>
@@ -75,12 +107,18 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
               setFieldTouched,
             }) => (
               <form onSubmit={handleSubmit}>
-                {initialValues.uuid !== undefined ? (
-                  <input type="text" hidden value={initialValues.uuid} />
-                ) : null}
+                {isAPublishedCause ? <input type="text" hidden value={initialValues.uuid} /> : null}
                 <InputSection
+                  hideTips={isAPublishedCause}
                   title={intl.formatMessage({ id: 'create_cause.title.title' })}
-                  tips={intl.formatMessage({ id: 'create_cause.title.tips' })}
+                  tips={
+                    isAPublishedCause
+                      ? (intl.formatMessage(
+                          { id: 'update_cause.title.tips' },
+                          { email: renderEmail() },
+                        ) as string)
+                      : intl.formatMessage({ id: 'create_cause.title.tips' })
+                  }
                 >
                   <InputField
                     placeholder={intl.formatMessage({ id: 'create_cause.title.placeholder' })}
@@ -92,6 +130,7 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                     error={touched.title === true && errors.title !== undefined}
                     helperText={touched.title === true ? errors.title : undefined}
                     inputProps={{ maxLength: 100 }}
+                    disabled={isAPublishedCause}
                   />
                 </InputSection>
                 <InputSection
@@ -127,37 +166,31 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                   />
                 </InputSection>
                 <InputSection
+                  hideTips={isAPublishedCause}
                   title={intl.formatMessage({ id: 'create_cause.coalitions.title' })}
-                  tips={intl.formatMessage({ id: 'create_cause.coalitions.tips' })}
+                  tips={
+                    isAPublishedCause
+                      ? (intl.formatMessage(
+                          { id: 'update_cause.coalitions.tips' },
+                          { email: renderEmail() },
+                        ) as string)
+                      : intl.formatMessage({ id: 'create_cause.coalitions.tips' })
+                  }
                   BottomChildren={
-                    (() => {
-                      const selectedCoalitionUuids =
-                        values.coalitions !== undefined
-                          ? values.coalitions.map(({ uuid }) => uuid)
-                          : [];
-                      return (
-                        <CoalitionCards
-                          selectedCoalitionUuids={selectedCoalitionUuids}
-                          onCoalitionClick={(coalition: Coalition) => {
-                            if (values.coalitions !== undefined) {
-                              if (selectedCoalitionUuids.includes(coalition.uuid)) {
-                                const indexToRemove = selectedCoalitionUuids.indexOf(
-                                  coalition.uuid,
-                                );
-                                const newValues = [...values.coalitions];
-                                newValues.splice(indexToRemove, 1);
-                                setFieldValue('coalitions', newValues);
-                              } else if (values.coalitions.length < 2) {
-                                setFieldValue('coalitions', [...values.coalitions, coalition]);
-                              }
-                            } else {
-                              setFieldTouched('coalitions');
-                              setFieldValue('coalitions', [coalition]);
-                            }
-                          }}
-                        />
-                      );
-                    }) as FunctionComponent<{}>
+                    (() => (
+                      <CoalitionCards
+                        selectedCoalitionUuids={
+                          values.coalitions !== undefined
+                            ? values.coalitions.map(({ uuid }) => uuid)
+                            : []
+                        }
+                        onCoalitionClick={
+                          isAPublishedCause
+                            ? undefined
+                            : getOnCoalitionClick({ values, setFieldValue, setFieldTouched })
+                        }
+                      />
+                    )) as FunctionComponent<{}>
                   }
                 />
                 <ValidateButton
@@ -170,7 +203,9 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                   variant="contained"
                   color="primary"
                 >
-                  {validateButtonLabel}
+                  {isAPublishedCause
+                    ? intl.formatMessage({ id: 'update_cause.validate' })
+                    : intl.formatMessage({ id: 'create_cause.validate' })}
                 </ValidateButton>
               </form>
             )}
@@ -183,3 +218,5 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
 };
 
 export default CauseForm;
+
+/* eslint-enable max-lines */

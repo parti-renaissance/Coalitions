@@ -22,6 +22,7 @@ export const TipsContainer = styled.p<{ hasMiddleChildren: boolean }>`
   border-radius: ${borderRadius.medium};
   padding: ${getSpacing(3)};
   background-color: ${colorPalette.greyLight};
+  color: ${colorPalette.greyDark};
   ${media.desktop(`
     padding: ${getSpacing(4)};
   `)}
@@ -34,6 +35,9 @@ export const TipsContainer = styled.p<{ hasMiddleChildren: boolean }>`
           `)}
         `
       : css``};
+  a {
+    color: ${colorPalette.blueCoalition};
+  }
 `;
 
 export const Tips = styled.span`

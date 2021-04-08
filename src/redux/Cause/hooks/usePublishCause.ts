@@ -41,6 +41,7 @@ export const usePublishCause = () => {
       name: causeWithoutAuthor?.name,
       description: causeWithoutAuthor?.description,
       coalition: causeWithoutAuthor?.coalition?.uuid,
+      second_coalition: causeWithoutAuthor?.second_coalition?.uuid,
     });
     return await authenticatedApiClient.post(`v3/causes/${publishedCause.uuid}/image`, {
       content: causeWithoutAuthor?.image_url,

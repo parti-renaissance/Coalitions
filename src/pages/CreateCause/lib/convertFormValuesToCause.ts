@@ -9,4 +9,5 @@ export const convertFormValuesToCause = (formValues: FormValues): InCreationCaus
   followers_count: 1,
   supported: true,
   coalition: (formValues.coalitions as Coalition[])[0],
+  second_coalition: (formValues.coalitions as Coalition[])[1],
 });

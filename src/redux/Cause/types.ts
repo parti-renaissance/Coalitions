@@ -1,5 +1,6 @@
 export interface InCreationCauseWithoutAuthor {
   coalition?: Coalition | null;
+  second_coalition?: Coalition | null;
   name: string;
   description?: string;
   image_url: string;

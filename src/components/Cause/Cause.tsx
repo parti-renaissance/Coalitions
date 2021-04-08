@@ -9,7 +9,6 @@ import {
   Author,
   ButtonContainer,
   CauseName,
-  CoalitionName,
   StyledCard,
   StyledContent,
   StyledMedia,
@@ -22,6 +21,7 @@ import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 import { PATHS } from 'routes';
 import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
+import { CoalitionsDisplay } from 'components/CauseDetails/components/CoalitionsDisplay';
 
 interface CauseProps {
   cause: CauseType;
@@ -61,9 +61,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
         ) : null}
         <StyledMedia backgroundImage={cause.image_url} />
         <StyledContent>
-          {cause.coalition !== undefined && cause.coalition !== null ? (
-            <CoalitionName>{cause.coalition.name}</CoalitionName>
-          ) : null}
+          <CoalitionsDisplay cause={cause} small />
           <CauseName>{cause.name}</CauseName>
           {cause.author !== undefined && cause.author !== null ? (
             <Author>

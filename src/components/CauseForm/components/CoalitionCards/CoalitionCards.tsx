@@ -19,7 +19,7 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
     selectedCoalitionUuids !== undefined ? selectedCoalitionUuids.length : 0;
   return (
     <Container>
-      {onCoalitionClick !== undefined && (
+      {onCoalitionClick !== undefined ? (
         <NumberOfSelectedCauses>
           <Bold>
             {numberOfSelectedCoalitions <= 1
@@ -38,7 +38,7 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
             id: `create_cause.coalitions.max-number-of-selected-coalitions`,
           })}`}
         </NumberOfSelectedCauses>
-      )}
+      ) : null}
       <GenericCoalitionCards
         onCoalitionClick={onCoalitionClick}
         selectedCoalitionUuids={selectedCoalitionUuids}

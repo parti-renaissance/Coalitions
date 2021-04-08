@@ -22,11 +22,11 @@ const InputSection: FunctionComponent<InputSectionProps> = ({
       <Title>{title}</Title>
       {children}
       <TipsContainer hasMiddleChildren={children !== undefined}>
-        {!Boolean(hideTips) && (
+        {!Boolean(hideTips) ? (
           <>
             <Tips>{intl.formatMessage({ id: 'create_cause.tips' })}</Tips>{' '}
           </>
-        )}
+        ) : null}
         {tips}
       </TipsContainer>
       {BottomChildren !== undefined ? <BottomChildren /> : null}

@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React, { FunctionComponent, useState } from 'react';
 import { Container, SubContainer, TopImage, ValidateButton } from './CauseForm.style';
 import InputSection from './components/InputSection';
@@ -175,22 +177,20 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                       : intl.formatMessage({ id: 'create_cause.coalitions.tips' })
                   }
                   BottomChildren={
-                    (() => {
-                      const selectedCoalitionUuids =
-                        values.coalitions !== undefined
-                          ? values.coalitions.map(({ uuid }) => uuid)
-                          : [];
-                      return (
-                        <CoalitionCards
-                          selectedCoalitionUuids={selectedCoalitionUuids}
-                          onCoalitionClick={
-                            isAPublishedCause
-                              ? undefined
-                              : getOnCoalitionClick({ values, setFieldValue, setFieldTouched })
-                          }
-                        />
-                      );
-                    }) as FunctionComponent<{}>
+                    (() => (
+                      <CoalitionCards
+                        selectedCoalitionUuids={
+                          values.coalitions !== undefined
+                            ? values.coalitions.map(({ uuid }) => uuid)
+                            : []
+                        }
+                        onCoalitionClick={
+                          isAPublishedCause
+                            ? undefined
+                            : getOnCoalitionClick({ values, setFieldValue, setFieldTouched })
+                        }
+                      />
+                    )) as FunctionComponent<{}>
                   }
                 />
                 <ValidateButton
@@ -218,3 +218,5 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
 };
 
 export default CauseForm;
+
+/* eslint-enable max-lines */

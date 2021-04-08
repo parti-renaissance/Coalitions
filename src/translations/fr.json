@@ -122,6 +122,9 @@
     "creation-step-four": "Ma cause est entendue\u00A0! Des Français s’engagent, des associations vous accompagnent, et des élus s’impliquent.",
     "charter-of-values": "Charte des valeurs"
   },
+  "update_cause": {
+    "validate": "Enregistrer et publier"
+  },
   "create_cause": {
     "validate": "Enregistrer et voir l’aperçu",
     "create-account": "Créez un compte pour continuer",

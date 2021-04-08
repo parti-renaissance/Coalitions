@@ -85,13 +85,15 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
   };
 };
 
-export const useFetchOneCause = (id: string) => {
+export const useFetchOneCause = (id: string | null) => {
   const dispatch = useDispatch();
 
-  const [{ loading, error }, doFetchCause] = useTypedAsyncFn(
-    async () => await coalitionApiClient.get(`causes/${id}`),
-    [],
-  );
+  const [{ loading, error }, doFetchCause] = useTypedAsyncFn(async () => {
+    if (id === null) {
+      return;
+    }
+    return await coalitionApiClient.get(`causes/${id}`);
+  }, []);
 
   useEffect(() => {
     if (error !== undefined) {
@@ -103,9 +105,9 @@ export const useFetchOneCause = (id: string) => {
 
   const fetchCause = useCallback(
     async (isUserLoggedIn = false) => {
-      const cause: Cause = await doFetchCause();
+      const cause: Cause | undefined = await doFetchCause();
 
-      if (cause instanceof Error) {
+      if (cause === undefined || cause instanceof Error) {
         return;
       }
 

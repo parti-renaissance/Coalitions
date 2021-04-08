@@ -2,6 +2,7 @@ import { useIntl } from 'react-intl';
 import { Coalition } from 'redux/Coalition/types';
 
 export interface FormValues {
+  uuid?: string;
   title?: string;
   description?: string;
   coalitions?: Coalition[];
@@ -9,6 +10,7 @@ export interface FormValues {
 }
 
 export interface FormErrors {
+  uuid?: string;
   title?: string;
   description?: string;
   coalitions?: string;

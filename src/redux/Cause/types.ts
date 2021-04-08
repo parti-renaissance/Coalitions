@@ -1,4 +1,4 @@
-export interface InCreationCauseWithoutAuthor {
+export interface InCreationCause {
   coalition?: Coalition | null;
   second_coalition?: Coalition | null;
   name: string;
@@ -6,11 +6,8 @@ export interface InCreationCauseWithoutAuthor {
   image_url: string;
   followers_count: number;
   supported?: boolean;
-}
-
-export type InCreationCause = InCreationCauseWithoutAuthor & {
   author?: Author | null;
-};
+}
 
 export type Cause = {
   uuid: string;

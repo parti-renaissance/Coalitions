@@ -125,10 +125,10 @@
   "update_cause": {
     "validate": "Enregistrer et publier",
     "title": {
-      "tips": "Si vous souhaitez modifier le titre de votre cause, écrivez-nous à l'adresse e-mail contact@pourunecause.fr"
+      "tips": "Si vous souhaitez modifier le titre de votre cause, écrivez-nous à l'adresse e-mail {email}"
     },
     "coalitions": {
-      "tips": "Si vous souhaitez modifier les coalitions associées de votre cause, écrivez-nous à l'adresse e-mail contact@pourunecause.fr"
+      "tips": "Si vous souhaitez modifier les coalitions associées à votre cause, écrivez-nous à l'adresse e-mail {email}"
     }
   },
   "create_cause": {

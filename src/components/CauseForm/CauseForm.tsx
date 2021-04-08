@@ -78,6 +78,8 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
     }
   };
 
+  const renderEmail = () => <a href="mailto:contact@pourunecause.fr">contact@pourunecause.fr</a>;
+
   const initialValues = convertCauseToFormValues(initialCause);
   const isAPublishedCause = initialValues.uuid !== undefined;
   return (
@@ -109,7 +111,10 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                   title={intl.formatMessage({ id: 'create_cause.title.title' })}
                   tips={
                     isAPublishedCause
-                      ? intl.formatMessage({ id: 'update_cause.title.tips' })
+                      ? (intl.formatMessage(
+                          { id: 'update_cause.title.tips' },
+                          { email: renderEmail() },
+                        ) as string)
                       : intl.formatMessage({ id: 'create_cause.title.tips' })
                   }
                 >
@@ -163,7 +168,10 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                   title={intl.formatMessage({ id: 'create_cause.coalitions.title' })}
                   tips={
                     isAPublishedCause
-                      ? intl.formatMessage({ id: 'update_cause.coalitions.tips' })
+                      ? (intl.formatMessage(
+                          { id: 'update_cause.coalitions.tips' },
+                          { email: renderEmail() },
+                        ) as string)
                       : intl.formatMessage({ id: 'create_cause.coalitions.tips' })
                   }
                   BottomChildren={

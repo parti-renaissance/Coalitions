@@ -38,7 +38,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
 
   const updateCause = () => {
     history.push({
-      pathname: PATHS.CREATE_CAUSE.url(),
+      pathname: PATHS.UPDATE_CAUSE.url(),
       search: `?causeId=${(cause as Cause).uuid}`,
     });
   };

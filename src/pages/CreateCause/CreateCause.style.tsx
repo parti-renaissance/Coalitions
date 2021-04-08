@@ -41,3 +41,10 @@ export const ValidateButton = styled(FullWidthButton)`
     margin-top: ${getSpacing(8)};
   `)}
 `;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;

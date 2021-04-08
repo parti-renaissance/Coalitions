@@ -1,5 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Container, SubContainer, TopImage, ValidateButton } from './CreateCause.style';
+import {
+  Container,
+  SubContainer,
+  TopImage,
+  ValidateButton,
+  LoaderContainer,
+} from './CreateCause.style';
 import InputSection from './components/InputSection';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
@@ -17,6 +23,7 @@ import { convertFormValuesToCause } from './lib/convertFormValuesToCause';
 import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
 import { useInitialFormValues } from './lib/useInitialFormValues';
+import Loader from 'components/Loader';
 
 const CreateCause: FunctionComponent = () => {
   const intl = useIntl();
@@ -25,7 +32,7 @@ const CreateCause: FunctionComponent = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const dispatch = useDispatch();
   const history = useHistory();
-  const { initialFormValues, loading } = useInitialFormValues();
+  const { initialFormValues, loadingInitialFormValues } = useInitialFormValues();
 
   const onSubmit = (values: FormValues) => {
     dispatch(updateInCreationCause(convertFormValuesToCause(values)));
@@ -40,8 +47,12 @@ const CreateCause: FunctionComponent = () => {
     setIsLoginModalOpened(false);
   };
 
-  if (loading && initialFormValues === undefined) {
-    return null;
+  if (loadingInitialFormValues && initialFormValues === undefined) {
+    return (
+      <LoaderContainer>
+        <Loader />
+      </LoaderContainer>
+    );
   }
 
   return (
@@ -53,6 +64,7 @@ const CreateCause: FunctionComponent = () => {
             initialValues={initialFormValues}
             validate={validateForm}
             onSubmit={onSubmit}
+            enableReinitialize
           >
             {// eslint-disable-next-line complexity
             ({

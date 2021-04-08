@@ -105,9 +105,9 @@ export const useFetchOneCause = (id: string | null) => {
 
   const fetchCause = useCallback(
     async (isUserLoggedIn = false) => {
-      const cause: Cause = await doFetchCause();
+      const cause: Cause | undefined = await doFetchCause();
 
-      if (cause instanceof Error) {
+      if (cause === undefined || cause instanceof Error) {
         return;
       }
 

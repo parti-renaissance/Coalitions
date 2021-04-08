@@ -92,6 +92,10 @@ class Client {
   put(endpoint: string, data: object | null) {
     return this.request('put', endpoint, data);
   }
+
+  delete(endpoint: string, data: object | null) {
+    return this.request('delete', endpoint, data);
+  }
 }
 
 const client = new Client(backendBaseUrl);

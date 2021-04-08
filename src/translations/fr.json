@@ -197,5 +197,11 @@
   "success_stories": {
     "title": "Ils ont créé leur cause",
     "by": "Par"
+  },
+  "unfollow_modal": {
+    "title": "Êtes-vous sûr de votre choix ?",
+    "text": "En retirant votre soutien, la cause a moins de chance d'aboutir.",
+    "confirm": "Ne plus soutenir",
+    "cancel": "Rester"
   }
 }

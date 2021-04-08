@@ -1,8 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import {
   Container,
   AuthorAndSupportsWrapper,
   CauseName,
+  MoreIcon,
+  MoreIconContainer,
   NameAndShareWrapper,
   ShareButtonContainer,
   ShareButton,
@@ -16,6 +18,8 @@ import { useDispatch } from 'react-redux';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { CoalitionsDisplay } from '../CoalitionsDisplay';
+import { UnfollowModal } from '../UnfollowModal/UnfollowModal';
+import { useCauseUnfollow } from 'redux/Cause/hooks/useCauseFollow';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -31,6 +35,8 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
   const isMobile = getIsMobile();
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
+  const [isUnfollowModalOpened, setIsUnfollowModalOpened] = useState(false);
+  const { loading, unfollowCause } = useCauseUnfollow((cause as Cause).uuid);
 
   const handleShareClick = () => {
     if (isAbleToUseShareApi && isMobile) {
@@ -47,30 +53,50 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
   };
 
   return (
-    <Container>
-      <div>
-        <NameAndShareWrapper>
-          <div>
-            <CoalitionsDisplay cause={cause} />
-            <CauseName>{cause.name}</CauseName>
-          </div>
-          {isMobile && (
-            <ShareButtonContainer>
-              <ShareButton onClick={handleShareClick} src="/images/share.svg" />
-            </ShareButtonContainer>
-          )}
-        </NameAndShareWrapper>
-        <AuthorAndSupportsWrapper>
-          <AuthorAndSupports cause={cause} showAuthor />
-        </AuthorAndSupportsWrapper>
-      </div>
-      <HeaderButtons
-        cause={cause}
-        onSupport={onSupport}
-        isSupporting={isSupporting}
-        onShare={handleShareClick}
+    <>
+      <Container>
+        <div>
+          <NameAndShareWrapper>
+            <div>
+              <CoalitionsDisplay cause={cause} />
+              <CauseName>{cause.name}</CauseName>
+            </div>
+            {isMobile ? (
+              <ShareButtonContainer>
+                <ShareButton onClick={handleShareClick} src="/images/share.svg" />
+              </ShareButtonContainer>
+            ) : null}
+          </NameAndShareWrapper>
+          <AuthorAndSupportsWrapper>
+            <AuthorAndSupports cause={cause} showAuthor />
+            {(cause as Cause).uuid !== undefined && cause.supported === true ? (
+              <MoreIconContainer>
+                <MoreIcon
+                  src="/images/more_vertical.svg"
+                  onClick={() => {
+                    setIsUnfollowModalOpened(true);
+                  }}
+                />
+              </MoreIconContainer>
+            ) : null}
+          </AuthorAndSupportsWrapper>
+        </div>
+        <HeaderButtons
+          cause={cause}
+          onSupport={onSupport}
+          isSupporting={isSupporting}
+          onShare={handleShareClick}
+        />
+      </Container>
+      <UnfollowModal
+        isOpened={isUnfollowModalOpened}
+        onClose={() => {
+          setIsUnfollowModalOpened(false);
+        }}
+        loading={loading}
+        unfollowCause={unfollowCause}
       />
-    </Container>
+    </>
   );
 };
 

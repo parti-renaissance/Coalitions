@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { authenticatedApiClient } from 'services/networking/client';
-import { optimisticallyMarkCauseAsSupported } from '..';
+import { optimisticallyMarkCauseAsSupported, optimisticallyRemoveSupport } from '..';
 import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
 import { useIntl } from 'react-intl';
 
@@ -51,4 +51,32 @@ export const useCauseFollow = (id: string) => {
   }, [dispatch, doFollowCause, id]);
 
   return { loading, followCause };
+};
+
+export const useCauseUnfollow = (id: string) => {
+  const dispatch = useDispatch();
+  const errorHandler = useCauseFollowErrorHandler();
+
+  const [{ loading, error }, doUnfollowCause] = useTypedAsyncFn(
+    async () => await authenticatedApiClient.delete(`v3/causes/${id}/follower`, null),
+    [],
+  );
+
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error, errorHandler);
+    }
+  }, [error, errorHandler]);
+
+  const unfollowCause = useCallback(async () => {
+    const response = await doUnfollowCause();
+
+    if (response instanceof Error) {
+      return;
+    }
+
+    dispatch(optimisticallyRemoveSupport(id));
+  }, [dispatch, doUnfollowCause, id]);
+
+  return { loading, unfollowCause };
 };

@@ -16,7 +16,11 @@ export const StyledButtonBase = styled(Button)`
 
 export const ButtonBase: FunctionComponent<ButtonProps & { isLoading?: boolean }> = props => (
   <StyledButtonBase {...props}>
-    {props.isLoading === true ? <CircularProgress size={24} color="secondary" /> : props.children}
+    {props.isLoading === true ? (
+      <CircularProgress size={24} customVariant={props.variant} />
+    ) : (
+      props.children
+    )}
   </StyledButtonBase>
 );
 

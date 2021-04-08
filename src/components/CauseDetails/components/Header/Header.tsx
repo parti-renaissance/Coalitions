@@ -19,6 +19,7 @@ import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { CoalitionsDisplay } from '../CoalitionsDisplay';
 import { UnfollowModal } from '../UnfollowModal/UnfollowModal';
+import { useCauseUnfollow } from 'redux/Cause/hooks/useCauseFollow';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -35,6 +36,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
   const [isUnfollowModalOpened, setIsUnfollowModalOpened] = useState(false);
+  const { loading, unfollowCause } = useCauseUnfollow((cause as Cause).uuid);
 
   const handleShareClick = () => {
     if (isAbleToUseShareApi && isMobile) {
@@ -59,15 +61,15 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
               <CoalitionsDisplay cause={cause} />
               <CauseName>{cause.name}</CauseName>
             </div>
-            {isMobile && (
+            {isMobile ? (
               <ShareButtonContainer>
                 <ShareButton onClick={handleShareClick} src="/images/share.svg" />
               </ShareButtonContainer>
-            )}
+            ) : null}
           </NameAndShareWrapper>
           <AuthorAndSupportsWrapper>
             <AuthorAndSupports cause={cause} showAuthor />
-            {cause.supported === true && (
+            {(cause as Cause).uuid !== undefined && cause.supported === true ? (
               <MoreIconContainer>
                 <MoreIcon
                   src="/images/more_vertical.svg"
@@ -76,7 +78,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
                   }}
                 />
               </MoreIconContainer>
-            )}
+            ) : null}
           </AuthorAndSupportsWrapper>
         </div>
         <HeaderButtons
@@ -91,6 +93,8 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
         onClose={() => {
           setIsUnfollowModalOpened(false);
         }}
+        loading={loading}
+        unfollowCause={unfollowCause}
       />
     </>
   );

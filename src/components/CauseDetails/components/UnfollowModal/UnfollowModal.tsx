@@ -7,11 +7,15 @@ import { MediumLargeButton as Button } from 'components/Button/Button';
 interface UnfollowModalProps {
   isOpened: boolean;
   onClose: () => void;
+  loading: boolean;
+  unfollowCause: () => Promise<void>;
 }
 
 export const UnfollowModal: React.FunctionComponent<UnfollowModalProps> = ({
   isOpened,
   onClose,
+  loading,
+  unfollowCause,
 }) => {
   return (
     <Modal isOpened={isOpened} onClose={onClose}>
@@ -22,10 +26,19 @@ export const UnfollowModal: React.FunctionComponent<UnfollowModalProps> = ({
         <FormattedMessage id="unfollow_modal.text" />
       </Description>
       <ButtonContainer>
-        <Button size="small" variant="outlined" color="primary">
+        <Button
+          size="small"
+          variant="outlined"
+          color="primary"
+          isLoading={loading}
+          onClick={async () => {
+            await unfollowCause();
+            onClose();
+          }}
+        >
           <FormattedMessage id="unfollow_modal.confirm" />
         </Button>
-        <Button size="small" variant="contained" color="primary" isLoading={false}>
+        <Button size="small" variant="contained" color="primary" onClick={onClose}>
           <FormattedMessage id="unfollow_modal.cancel" />
         </Button>
       </ButtonContainer>

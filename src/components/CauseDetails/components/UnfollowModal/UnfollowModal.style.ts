@@ -11,9 +11,16 @@ export const ButtonContainer = styled.div`
   > * {
     margin-bottom: ${getSpacing(2)};
   }
+
   ${media.desktop(`
-      flex-direction: row;
-      justify-content: space-between;
+    flex-direction: row;
+    > * {
+      flex: 1 1 content;
+      :first-child {
+        flex: 1 0 auto;
+        margin-right: ${getSpacing(3)};
+      }
+    }
     `)}
 `;
 

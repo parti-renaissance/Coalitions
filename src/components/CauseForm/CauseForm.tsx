@@ -168,7 +168,7 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                 <ValidateButton
                   isLoading={isSubmitting}
                   disabled={
-                    isSubmitting ||
+                    Boolean(isSubmitting) ||
                     getIsValidateButtonDisabled({
                       errors,
                       initialValues,

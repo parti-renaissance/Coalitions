@@ -129,7 +129,8 @@
     },
     "coalitions": {
       "tips": "Si vous souhaitez modifier les coalitions associées à votre cause, écrivez-nous à l'adresse e-mail {email}"
-    }
+    },
+    "success": "Votre cause a été modifiée avec succès."
   },
   "create_cause": {
     "validate": "Enregistrer et voir l’aperçu",

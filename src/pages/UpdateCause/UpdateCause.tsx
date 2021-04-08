@@ -7,6 +7,8 @@ import Loader from 'components/Loader';
 import CauseForm from 'components/CauseForm';
 import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
 import { getCause } from 'redux/Cause/selectors';
+import { useUpdateCause } from 'redux/Cause/hooks/useUpdateCause';
+import { Cause, InCreationCause } from 'redux/Cause/types';
 
 const CreateCause: FunctionComponent = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
@@ -14,7 +16,8 @@ const CreateCause: FunctionComponent = () => {
   const params = new URLSearchParams(location.search);
   const toUpdateCauseId = params.get('causeId');
   const toUpdateCause = useSelector(getCause(toUpdateCauseId));
-  const { loading, fetchCause } = useFetchOneCause(toUpdateCauseId);
+  const { loading: isFetchingCause, fetchCause } = useFetchOneCause(toUpdateCauseId);
+  const { loading: isUpdatingCause, updateCause } = useUpdateCause();
 
   useEffect(() => {
     if (toUpdateCauseId !== null) {
@@ -22,11 +25,7 @@ const CreateCause: FunctionComponent = () => {
     }
   }, [fetchCause, isUserLoggedIn, toUpdateCauseId]);
 
-  const onSubmit = () => {
-    // TODO
-  };
-
-  if (loading && toUpdateCause === undefined) {
+  if (isFetchingCause && toUpdateCause === undefined) {
     return (
       <LoaderContainer>
         <Loader />
@@ -34,7 +33,13 @@ const CreateCause: FunctionComponent = () => {
     );
   }
 
-  return <CauseForm onSubmit={onSubmit} initialCause={toUpdateCause} />;
+  return (
+    <CauseForm
+      onSubmit={updateCause as (cause: InCreationCause | Cause) => void}
+      initialCause={toUpdateCause}
+      isSubmitting={isUpdatingCause}
+    />
+  );
 };
 
 export default CreateCause;

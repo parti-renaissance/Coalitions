@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { LoaderContainer } from './UpdateCause.style';
-import { useIntl } from 'react-intl';
 import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login';
 import { useLocation } from 'react-router';
@@ -10,7 +9,6 @@ import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
 import { getCause } from 'redux/Cause/selectors';
 
 const CreateCause: FunctionComponent = () => {
-  const intl = useIntl();
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const location = useLocation();
   const params = new URLSearchParams(location.search);

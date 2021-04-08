@@ -6,6 +6,7 @@ interface InputSectionProps {
   title: string;
   tips: string;
   BottomChildren?: FunctionComponent<{}>;
+  hideTips?: boolean;
 }
 
 const InputSection: FunctionComponent<InputSectionProps> = ({
@@ -13,6 +14,7 @@ const InputSection: FunctionComponent<InputSectionProps> = ({
   tips,
   BottomChildren,
   children,
+  hideTips,
 }) => {
   const intl = useIntl();
   return (
@@ -20,8 +22,12 @@ const InputSection: FunctionComponent<InputSectionProps> = ({
       <Title>{title}</Title>
       {children}
       <TipsContainer hasMiddleChildren={children !== undefined}>
-        <Tips>{intl.formatMessage({ id: 'create_cause.tips' })}</Tips>
-        {` ${tips}`}
+        {!Boolean(hideTips) && (
+          <>
+            <Tips>{intl.formatMessage({ id: 'create_cause.tips' })}</Tips>{' '}
+          </>
+        )}
+        {tips}
       </TipsContainer>
       {BottomChildren !== undefined ? <BottomChildren /> : null}
     </Container>

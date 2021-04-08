@@ -123,7 +123,13 @@
     "charter-of-values": "Charte des valeurs"
   },
   "update_cause": {
-    "validate": "Enregistrer et publier"
+    "validate": "Enregistrer et publier",
+    "title": {
+      "tips": "Si vous souhaitez modifier le titre de votre cause, écrivez-nous à l'adresse e-mail contact@pourunecause.fr"
+    },
+    "coalitions": {
+      "tips": "Si vous souhaitez modifier les coalitions associées de votre cause, écrivez-nous à l'adresse e-mail contact@pourunecause.fr"
+    }
   },
   "create_cause": {
     "validate": "Enregistrer et voir l’aperçu",

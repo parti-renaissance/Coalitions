@@ -24,12 +24,7 @@ const CreateCause: FunctionComponent = () => {
   };
 
   return (
-    <CauseForm
-      onSubmitBegin={onSubmitBegin}
-      onSubmit={onSubmit}
-      validateButtonLabel={intl.formatMessage({ id: 'create_cause.validate' })}
-      initialCause={inCreationCause}
-    />
+    <CauseForm onSubmitBegin={onSubmitBegin} onSubmit={onSubmit} initialCause={inCreationCause} />
   );
 };
 

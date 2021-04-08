@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-
 import React, { FunctionComponent, useState } from 'react';
 import { Container, SubContainer, TopImage, ValidateButton } from './CauseForm.style';
 import InputSection from './components/InputSection';
@@ -10,23 +8,26 @@ import { useValidateForm, FormValues } from './lib/useValidateForm';
 import CoalitionCards from './components/CoalitionCards';
 import ImageCropper from './components/ImageCropper';
 import LoginAndPreviewModal from './components/LoginAndPreviewModal';
-import { Coalition } from 'redux/Coalition/types';
 import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login';
 import { Cause, InCreationCause } from 'redux/Cause/types';
 import { convertCauseToFormValues } from './lib/convertCauseToFormValues';
 import { convertFormValuesToCause } from './lib/convertFormValuesToCause';
+import { getOnCoalitionClick } from './lib/getOnCoalitionClick';
+import { getIsValidateButtonDisabled } from './lib/getIsValidateButtonDisabled';
 
 interface CauseFormProps {
   initialCause?: InCreationCause | Cause;
   onSubmitBegin?: (cause: InCreationCause | Cause) => void;
   onSubmit: (cause: InCreationCause | Cause) => void;
+  isSubmitting?: boolean;
 }
 
 const CauseForm: FunctionComponent<CauseFormProps> = ({
   initialCause,
   onSubmitBegin,
   onSubmit: onSubmitFromProps,
+  isSubmitting,
 }) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
@@ -49,35 +50,6 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
 
   const closeLoginModal = () => {
     setIsLoginModalOpened(false);
-  };
-
-  const getOnCoalitionClick = ({
-    values,
-    setFieldValue,
-    setFieldTouched,
-  }: {
-    values: FormValues;
-    setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
-    setFieldTouched: (
-      field: string,
-      isTouched?: boolean | undefined,
-      shouldValidate?: boolean | undefined,
-    ) => void;
-  }) => (coalition: Coalition) => {
-    if (values.coalitions !== undefined) {
-      const selectedCoalitionUuids = values.coalitions.map(({ uuid }) => uuid);
-      if (selectedCoalitionUuids.includes(coalition.uuid)) {
-        const indexToRemove = selectedCoalitionUuids.indexOf(coalition.uuid);
-        const newValues = [...values.coalitions];
-        newValues.splice(indexToRemove, 1);
-        setFieldValue('coalitions', newValues);
-      } else if (values.coalitions.length < 2) {
-        setFieldValue('coalitions', [...values.coalitions, coalition]);
-      }
-    } else {
-      setFieldTouched('coalitions');
-      setFieldValue('coalitions', [coalition]);
-    }
   };
 
   const renderEmail = () => <a href="mailto:contact@pourunecause.fr">contact@pourunecause.fr</a>;
@@ -194,9 +166,16 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                   }
                 />
                 <ValidateButton
+                  isLoading={isSubmitting}
                   disabled={
-                    Object.keys(errors).length > 0 ||
-                    (initialValues.title === undefined && touched.title !== true)
+                    Boolean(isSubmitting) ||
+                    getIsValidateButtonDisabled({
+                      errors,
+                      initialValues,
+                      touched,
+                      isAPublishedCause,
+                      values,
+                    })
                   }
                   type="submit"
                   size="small"
@@ -218,5 +197,3 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
 };
 
 export default CauseForm;
-
-/* eslint-enable max-lines */

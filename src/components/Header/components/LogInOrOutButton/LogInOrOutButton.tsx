@@ -14,12 +14,17 @@ import { getCurrentUser } from 'redux/User/selectors';
 import MenuItem from '@material-ui/core/MenuItem';
 import { getIsMobile } from 'services/mobile/mobile';
 import { StyledButton } from '../../Header.style';
+import { useFeatureToggling } from 'services/useFeatureToggling';
+import { useHistory } from 'react-router';
+import { PATHS } from 'routes';
 
 const LogInOrOutButton: FunctionComponent<{}> = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
   const [desktopUserMenu, setDesktopUserMenu] = useState<null | HTMLAnchorElement>(null);
+  const { isProfilePageEnable } = useFeatureToggling();
+  const history = useHistory();
 
   const login = () => {
     window.location.href = oauthUrl;
@@ -35,6 +40,11 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
 
   const closeDesktopUserMenu = () => {
     setDesktopUserMenu(null);
+  };
+
+  const goToProfilePage = () => {
+    closeDesktopUserMenu();
+    history.push(PATHS.PROFILE.url());
   };
 
   if (!isUserLoggedIn) {
@@ -67,6 +77,11 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
           <MenuItem onClick={logout}>
             <FormattedMessage id="header.logout" />
           </MenuItem>
+          {isProfilePageEnable && (
+            <MenuItem onClick={goToProfilePage}>
+              <FormattedMessage id="header.profile" />
+            </MenuItem>
+          )}
         </StyledDesktopUserMenu>
       </>
     );

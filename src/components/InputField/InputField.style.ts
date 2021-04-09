@@ -31,6 +31,10 @@ export const StyledTextField = styled(TextField)`
           `
         : css``};
   }
+  .MuiSelect-select {
+    ${fonts.input};
+    color: ${colorPalette.greyDark};
+  }
   .MuiInputBase-root {
     ${fonts.h3};
     color: ${colorPalette.greyDark};
@@ -74,7 +78,15 @@ export const StyledFormControl = styled(FormControl)`
   }
 `;
 
-export const InputFieldWrapper = styled.div`
+export const InputFieldWrapper = styled.div<{ isSelectPlaceholder?: boolean }>`
   margin-top: ${getSpacing(3)};
   width: 100%;
+  .MuiSelect-select {
+    ${({ isSelectPlaceholder }) =>
+      isSelectPlaceholder === true
+        ? css`
+            color: ${colorPalette.grey};
+          `
+        : css``};
+  }
 `;

@@ -30,6 +30,7 @@ export const useFetchCurrentUser = () => {
       updateCurrentUser({
         uuid: currentUser.uuid,
         firstName: currentUser.first_name,
+        lastName: currentUser.last_name,
         email: currentUser.email_address,
       }),
     );

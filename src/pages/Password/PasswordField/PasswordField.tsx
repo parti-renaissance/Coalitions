@@ -31,6 +31,7 @@ export const PasswordField: React.FunctionComponent<PasswordFieldProps> = ({
   <InputFieldWrapper>
     <StyledFormControl error={touched === true && errors !== undefined}>
       <OutlinedInput
+        required
         placeholder={placeholder}
         type={showPassword ? 'text' : 'password'}
         name={name}

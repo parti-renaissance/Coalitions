@@ -1,18 +1,8 @@
-/* eslint-disable max-lines */
-
 import React from 'react';
-import { CircularProgress } from '@material-ui/core';
-import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl, FormattedMessage } from 'react-intl';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
 import { useValidateForm, InscriptionFormValues } from './lib/useValidateForm';
-import {
-  useCityAndCountryAutocomplete,
-  CityOrCountry,
-  getCityOrCountryLabel,
-} from './lib/useCityAndCountryAutocomplete';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import { FullWidthButton } from 'components/Button/Button';
 import { useCreateAccount } from './useCreateAccount';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
@@ -28,6 +18,7 @@ import {
 } from './CreateAccountForm.style';
 import { oauthUrl } from 'services/networking/auth';
 import { CHARTER_OF_VALUES_URL } from 'routes';
+import CityAutocomplete from 'components/CityAutocomplete';
 
 interface CreateAccountFormProps {
   doAfterAccountCreation?: () => Promise<void>;
@@ -50,7 +41,6 @@ const CreateAccountForm = ({
 }: CreateAccountFormProps) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
-  const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
   const { loading, createAccount } = useCreateAccount(doAfterAccountCreation);
 
   const handleAccountCreation = async (values: InscriptionFormValues) => {
@@ -97,6 +87,7 @@ const CreateAccountForm = ({
           <form onSubmit={handleSubmit}>
             <InputFieldWrapper>
               <InputField
+                required
                 placeholder={intl.formatMessage({ id: 'login_modal.first-name' })}
                 type="text"
                 name="firstName"
@@ -109,6 +100,7 @@ const CreateAccountForm = ({
             </InputFieldWrapper>
             <InputFieldWrapper>
               <InputField
+                required
                 placeholder={intl.formatMessage({ id: 'login_modal.email-address' })}
                 type="email"
                 name="email"
@@ -120,37 +112,13 @@ const CreateAccountForm = ({
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
-              <Autocomplete
-                freeSolo
-                options={cities}
-                getOptionLabel={getCityOrCountryLabel}
-                onBlur={() => setFieldTouched('cityId', true)}
-                onChange={(e, value) => {
-                  setFieldValue('cityId', (value as CityOrCountry)?.uuid || '');
-                }}
-                renderInput={(params: TextFieldProps) => (
-                  <InputField
-                    {...params}
-                    placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
-                    error={touched.cityId === true && errors.cityId !== undefined}
-                    helperText={touched.cityId === true ? errors.cityId : undefined}
-                    onChange={e => {
-                      handleChange(e);
-                      setFieldValue('cityId', '');
-                      fetchCities(e.target.value);
-                    }}
-                    onBlur={handleBlur}
-                    InputProps={{
-                      ...params.InputProps,
-                      endAdornment: (
-                        <>
-                          {isFetchingCities ? <CircularProgress color="primary" size={20} /> : null}
-                          {params?.InputProps?.endAdornment}
-                        </>
-                      ),
-                    }}
-                  />
-                )}
+              <CityAutocomplete
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                setFieldTouched={setFieldTouched}
+                setFieldValue={setFieldValue}
+                touched={touched}
+                errors={errors}
               />
             </InputFieldWrapper>
             <ModalCheckbox
@@ -201,7 +169,7 @@ const CreateAccountForm = ({
                 size="small"
                 variant="contained"
                 color="primary"
-                isLoading={loading || doingAfterAccountCreation}
+                isLoading={loading || Boolean(doingAfterAccountCreation)}
               >
                 {intl.formatMessage({ id: 'login_modal.validate' })}
               </FullWidthButton>
@@ -213,5 +181,3 @@ const CreateAccountForm = ({
   );
 };
 export default CreateAccountForm;
-
-/* eslint-enable max-lines */

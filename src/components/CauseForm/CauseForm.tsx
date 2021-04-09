@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React, { FunctionComponent, useState } from 'react';
 import { Container, SubContainer, TopImage, ValidateButton } from './CauseForm.style';
 import InputSection from './components/InputSection';
@@ -93,6 +95,7 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                   }
                 >
                   <InputField
+                    required
                     placeholder={intl.formatMessage({ id: 'create_cause.title.placeholder' })}
                     type="text"
                     name="title"
@@ -197,3 +200,5 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
 };
 
 export default CauseForm;
+
+/* eslint-enable max-lines */

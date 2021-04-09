@@ -83,20 +83,13 @@ export const InputFieldWrapper = styled.div<{
 }>`
   margin-top: ${getSpacing(3)};
   width: 100%;
-  .MuiSelect-select {
-    ${({ isPlaceholder }) =>
-      isPlaceholder === true
-        ? css`
+  ${({ isPlaceholder }) =>
+    isPlaceholder === true
+      ? css`
+          .MuiSelect-select,
+          input {
             color: ${colorPalette.grey};
-          `
-        : css``};
-  }
-  input {
-    ${({ isPlaceholder }) =>
-      isPlaceholder === true
-        ? css`
-            color: ${colorPalette.grey};
-          `
-        : css``};
-  }
+          }
+        `
+      : css``};
 `;

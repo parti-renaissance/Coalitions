@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { getSpacing, colorPalette, media, fonts } from 'stylesheet';
+import Menu from '@material-ui/core/Menu';
 
 export const Container = styled.div`
   padding: ${getSpacing(3)} ${getSpacing(3)} ${getSpacing(2)} ${getSpacing(3)};
@@ -50,4 +51,11 @@ export const MoreIcon = styled.img`
 
 export const MoreIconContainer = styled.div`
   margin-left: ${getSpacing(3)};
+`;
+
+export const MoreOptionsMenu = styled(Menu)`
+  margin-top: ${getSpacing(8)};
+  li {
+    ${fonts.input};
+  }
 `;

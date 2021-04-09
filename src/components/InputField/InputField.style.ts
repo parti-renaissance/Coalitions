@@ -23,6 +23,13 @@ export const StyledTextField = styled(TextField)`
         : css`
             border: none;
           `};
+    ${({ disabled }) =>
+      disabled === true
+        ? css`
+            background-color: ${colorPalette.greyLight};
+            opacity: 0.5;
+          `
+        : css``};
   }
   .MuiInputBase-root {
     ${fonts.h3};

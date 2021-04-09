@@ -19,10 +19,9 @@ export const useUpdateCause = () => {
     await authenticatedApiClient.put(`v3/causes/${cause.uuid}`, {
       description: cause.description,
     });
-    return;
-    // return await authenticatedApiClient.put(`v3/causes/${cause.uuid}/image`, {
-    //   content: cause?.image_url,
-    // });
+    return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
+      content: cause?.image_url,
+    });
   }, []);
 
   useEffect(() => {

@@ -13,8 +13,8 @@ import {
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import HeaderButtons from '../HeaderButtons';
-import { getIsMobile } from 'services/mobile/mobile';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { getIsDesktop, getIsMobile } from 'services/mobile/mobile';
 import { useDispatch } from 'react-redux';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
@@ -35,6 +35,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nav: any = navigator;
   const isAbleToUseShareApi = nav?.share !== undefined;
+  const isDesktop = getIsDesktop();
   const isMobile = getIsMobile();
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
@@ -52,7 +53,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
   };
 
   const handleShareClick = () => {
-    if (isAbleToUseShareApi && isMobile) {
+    if (isAbleToUseShareApi && !isDesktop) {
       nav.share({ url: window.location.href, title: cause.name, text: cause.name });
     } else {
       navigator.clipboard.writeText(window.location.href);

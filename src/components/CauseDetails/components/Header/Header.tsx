@@ -87,8 +87,10 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
           <AuthorAndSupportsWrapper>
             <AuthorAndSupports cause={cause} showAuthor />
             {shouldDisplayMoreIcon() ? (
-              <MoreIconContainer onClick={showMoreOptionsMenu}>
-                <MoreIcon src="/images/more_vertical.svg" />
+              <>
+                <MoreIconContainer onClick={showMoreOptionsMenu}>
+                  <MoreIcon src="/images/more_vertical.svg" />
+                </MoreIconContainer>
                 <MoreOptionsMenu
                   anchorEl={moreOptionsMenu}
                   keepMounted
@@ -104,7 +106,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
                     <FormattedMessage id="cause.more-options.unfollow" />
                   </MenuItem>
                 </MoreOptionsMenu>
-              </MoreIconContainer>
+              </>
             ) : null}
           </AuthorAndSupportsWrapper>
         </div>

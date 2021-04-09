@@ -91,6 +91,18 @@ export const Profile: React.FunctionComponent = () => {
                 errors={errors}
               />
             </InputFieldWrapper>
+            <InputFieldWrapper>
+              <InputField
+                placeholder={intl.formatMessage({ id: 'profile.phone-number' })}
+                type="tel"
+                name="phoneNumber"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.phoneNumber}
+                error={touched.phoneNumber === true && errors.phoneNumber !== undefined}
+                helperText={touched.phoneNumber === true ? errors.phoneNumber : undefined}
+              />
+            </InputFieldWrapper>
             <ValidateButtonContainer isInPage>
               <FullWidthButton
                 disabled={

@@ -13,6 +13,7 @@
     "first-name": "Prénom / Pseudo",
     "last-name": "Nom",
     "email-address": "Adresse email",
+    "phone-number": "Numéro de téléphone",
     "save": "Enregistrer"
   },
   "footer": {

@@ -88,6 +88,9 @@
     "discussions": {
       "title": "Discussions"
     },
+    "more-options": {
+      "unfollow": "Ne plus soutenir"
+    },
     "what-is-it": "Qu’est-ce qu’une cause\u00A0?",
     "definition": "C’est un combat, un cri de ralliement, un appel qu’on lance à la société pour mobiliser autour d’une idée qui peut changer les choses.\nTout cela, dans le respect de notre {charteValue} !",
     "charte-value": "charte des valeurs",

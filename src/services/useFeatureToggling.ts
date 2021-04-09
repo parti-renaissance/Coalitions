@@ -1,18 +1,18 @@
 interface FeatureToggles {
   isCauseUpdateEnable: boolean;
-  isProfilePageEnalbe: boolean;
+  isProfilePageEnable: boolean;
 }
 
 export const useFeatureToggling = (): FeatureToggles => {
   if (process.env.REACT_APP_ENV === 'production') {
     return {
       isCauseUpdateEnable: false,
-      isProfilePageEnalbe: false,
+      isProfilePageEnable: false,
     };
   }
 
   return {
     isCauseUpdateEnable: true,
-    isProfilePageEnalbe: true,
+    isProfilePageEnable: true,
   };
 };

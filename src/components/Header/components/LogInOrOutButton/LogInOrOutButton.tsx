@@ -23,7 +23,7 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
   const [desktopUserMenu, setDesktopUserMenu] = useState<null | HTMLAnchorElement>(null);
-  const { isProfilePageEnalbe } = useFeatureToggling();
+  const { isProfilePageEnable } = useFeatureToggling();
   const history = useHistory();
 
   const login = () => {
@@ -77,7 +77,7 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
           <MenuItem onClick={logout}>
             <FormattedMessage id="header.logout" />
           </MenuItem>
-          {isProfilePageEnalbe && (
+          {isProfilePageEnable && (
             <MenuItem onClick={goToProfilePage}>
               <FormattedMessage id="header.profile" />
             </MenuItem>

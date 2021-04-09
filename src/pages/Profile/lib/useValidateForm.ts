@@ -13,6 +13,7 @@ export interface ProfileFormValues {
   cityId?: string;
   phoneNumber?: string;
   gender?: string;
+  birthday?: string;
 }
 
 type ErrorForm = {
@@ -22,6 +23,7 @@ type ErrorForm = {
   cityId?: string;
   phoneNumber?: string;
   gender?: string;
+  birthday?: string;
 };
 
 const isFieldEmpty = (value: string | undefined) => value === undefined || value.length === 0;

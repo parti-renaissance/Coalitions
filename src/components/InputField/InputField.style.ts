@@ -78,12 +78,22 @@ export const StyledFormControl = styled(FormControl)`
   }
 `;
 
-export const InputFieldWrapper = styled.div<{ isSelectPlaceholder?: boolean }>`
+export const InputFieldWrapper = styled.div<{
+  isPlaceholder?: boolean;
+}>`
   margin-top: ${getSpacing(3)};
   width: 100%;
   .MuiSelect-select {
-    ${({ isSelectPlaceholder }) =>
-      isSelectPlaceholder === true
+    ${({ isPlaceholder }) =>
+      isPlaceholder === true
+        ? css`
+            color: ${colorPalette.grey};
+          `
+        : css``};
+  }
+  input {
+    ${({ isPlaceholder }) =>
+      isPlaceholder === true
         ? css`
             color: ${colorPalette.grey};
           `

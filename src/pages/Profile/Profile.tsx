@@ -87,7 +87,7 @@ export const Profile: React.FunctionComponent = () => {
                 helperText={touched.lastName === true ? errors.lastName : undefined}
               />
             </InputFieldWrapper>
-            <InputFieldWrapper isSelectPlaceholder={values.gender === GENDERS[0].value}>
+            <InputFieldWrapper isPlaceholder={values.gender === GENDERS[0].value}>
               <InputField
                 select
                 type="text"
@@ -117,6 +117,18 @@ export const Profile: React.FunctionComponent = () => {
                 setFieldValue={setFieldValue}
                 touched={touched}
                 errors={errors}
+              />
+            </InputFieldWrapper>
+            <InputFieldWrapper isPlaceholder={values.birthday === undefined}>
+              <InputField
+                type="date"
+                name="birthday"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                defaultValue="1993-01-04"
+                value={values.birthday}
+                error={touched.birthday === true && errors.birthday !== undefined}
+                helperText={touched.birthday === true ? errors.birthday : undefined}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>

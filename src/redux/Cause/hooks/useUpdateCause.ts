@@ -10,7 +10,7 @@ import HandleErrorService from 'services/HandleErrorService';
 import { authenticatedApiClient } from 'services/networking/client';
 import { Cause } from '../types';
 
-export const useUpdateCause = () => {
+export const useUpdateCause = (initialCause?: Cause) => {
   const { push } = useHistory();
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
@@ -19,6 +19,9 @@ export const useUpdateCause = () => {
     await authenticatedApiClient.put(`v3/causes/${cause.uuid}`, {
       description: cause.description,
     });
+    if (initialCause !== undefined && initialCause.image_url === cause.image_url) {
+      return;
+    }
     return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
       content: cause?.image_url,
     });

@@ -17,7 +17,7 @@ const CreateCause: FunctionComponent = () => {
   const toUpdateCauseId = params.get('causeId');
   const toUpdateCause = useSelector(getCause(toUpdateCauseId));
   const { loading: isFetchingCause, fetchCause } = useFetchOneCause(toUpdateCauseId);
-  const { loading: isUpdatingCause, updateCause } = useUpdateCause();
+  const { loading: isUpdatingCause, updateCause } = useUpdateCause(toUpdateCause);
 
   useEffect(() => {
     if (toUpdateCauseId !== null) {

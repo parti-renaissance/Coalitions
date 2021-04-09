@@ -14,7 +14,12 @@
     "last-name": "Nom",
     "email-address": "Adresse email",
     "phone-number": "Numéro de téléphone",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "gender": {
+      "placeholder": "Genre",
+      "male": "Homme",
+      "female": "Femme"
+    }
   },
   "footer": {
     "legal-notice": "Mentions Légales",

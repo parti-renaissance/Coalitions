@@ -6,11 +6,12 @@ import Formik from 'components/Formik';
 import { FullWidthButton } from 'components/Button/Button';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { ValidateButtonContainer } from 'components/LoginModal/components/CreateAccountForm/CreateAccountForm.style';
-import { useValidateForm, ProfileFormValues } from './lib/useValidateForm';
+import { useValidateForm, ProfileFormValues, GENDERS } from './lib/useValidateForm';
 import CityAutocomplete from 'components/CityAutocomplete';
 import { useSelector } from 'react-redux';
 import { getCurrentUser } from 'redux/User/selectors';
 import isMatch from 'lodash/isMatch';
+import MenuItem from '@material-ui/core/MenuItem';
 
 export const Profile: React.FunctionComponent = () => {
   const intl = useIntl();
@@ -25,8 +26,13 @@ export const Profile: React.FunctionComponent = () => {
     return null;
   }
 
-  const { email, firstName } = currentUser;
-  const initialValues = { email, firstName } as ProfileFormValues;
+  const { email, firstName, lastName } = currentUser;
+  const initialValues = {
+    email,
+    firstName,
+    lastName,
+    gender: GENDERS[0].value,
+  } as ProfileFormValues;
   return (
     <Container>
       <Formik<ProfileFormValues>
@@ -80,6 +86,28 @@ export const Profile: React.FunctionComponent = () => {
                 error={touched.lastName === true && errors.lastName !== undefined}
                 helperText={touched.lastName === true ? errors.lastName : undefined}
               />
+            </InputFieldWrapper>
+            <InputFieldWrapper>
+              <InputField
+                select
+                type="text"
+                name="gender"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.gender}
+                error={touched.gender === true && errors.gender !== undefined}
+                helperText={touched.gender === true ? errors.gender : undefined}
+              >
+                {GENDERS.map((gender, index) => (
+                  <MenuItem
+                    key={gender.value}
+                    value={gender.value}
+                    style={gender.isPlaceholder === true ? { display: 'none' } : {}}
+                  >
+                    {intl.formatMessage({ id: gender.labelKey })}
+                  </MenuItem>
+                ))}
+              </InputField>
             </InputFieldWrapper>
             <InputFieldWrapper>
               <CityAutocomplete

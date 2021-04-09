@@ -31,6 +31,10 @@ export const StyledTextField = styled(TextField)`
           `
         : css``};
   }
+  .MuiSelect-select {
+    ${fonts.input};
+    color: ${colorPalette.greyDark};
+  }
   .MuiInputBase-root {
     ${fonts.h3};
     color: ${colorPalette.greyDark};

@@ -1,11 +1,18 @@
 import { useIntl } from 'react-intl';
 
+export const GENDERS: { labelKey: string; value: string; isPlaceholder?: boolean }[] = [
+  { labelKey: 'profile.gender.placeholder', value: 'none', isPlaceholder: true },
+  { labelKey: 'profile.gender.male', value: 'male' },
+  { labelKey: 'profile.gender.female', value: 'female' },
+];
+
 export interface ProfileFormValues {
   firstName?: string;
   lastName?: string;
   email?: string;
   cityId?: string;
   phoneNumber?: string;
+  gender?: string;
 }
 
 type ErrorForm = {
@@ -14,6 +21,7 @@ type ErrorForm = {
   email?: string;
   cityId?: string;
   phoneNumber?: string;
+  gender?: string;
 };
 
 const isFieldEmpty = (value: string | undefined) => value === undefined || value.length === 0;

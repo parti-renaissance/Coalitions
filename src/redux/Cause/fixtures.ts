@@ -69,6 +69,7 @@ export const CAUSES_MOCK_STORE = {
     },
   },
   ids: ['cause1Uuid', 'cause2Uuid'],
+  statistics: null,
 };
 
 export const CAUSE_MOCK = CAUSES_MOCK[0];

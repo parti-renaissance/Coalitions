@@ -1,4 +1,5 @@
 import { RootState } from 'redux/types';
+import { CauseStatistics } from './slice';
 import { Cause, InCreationCause } from './types';
 
 export const getAllCauses = (store: RootState) => {
@@ -18,4 +19,8 @@ export const getNumberOfCauses = (store: RootState) => {
 
 export const getInCreationCause = (store: RootState): InCreationCause | undefined => {
   return store.cause.inCreationCause;
+};
+
+export const getCauseStatistics = (store: RootState): CauseStatistics | null => {
+  return store.cause.statistics;
 };

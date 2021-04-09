@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getNumberOfCauses } from 'redux/Cause/selectors';
+import { getCauseStatistics } from 'redux/Cause/selectors';
 import { DefaultLink as Link } from 'components/Link/Link';
 import {
   CTABlock,
@@ -13,11 +13,17 @@ import {
 
 import { PATHS } from 'routes';
 import { FormattedMessage } from 'react-intl';
+import { useFetchCauseStatistics } from './services';
 
 export const CreateCauseCTA: React.FunctionComponent<{ displayLinkToCauseList?: boolean }> = ({
   displayLinkToCauseList = false,
 }) => {
-  const numberOfCauses = useSelector(getNumberOfCauses);
+  const { fetchCauseStatistics } = useFetchCauseStatistics();
+  const causeStatistics = useSelector(getCauseStatistics);
+
+  useEffect(() => {
+    fetchCauseStatistics();
+  }, [fetchCauseStatistics]);
 
   return (
     <CTAContainer>
@@ -29,7 +35,7 @@ export const CreateCauseCTA: React.FunctionComponent<{ displayLinkToCauseList?: 
           <FormattedMessage
             id="cause-cta.description"
             values={{
-              numberOfCauses,
+              numberOfCauses: causeStatistics !== null ? causeStatistics.total : '',
             }}
           />
         </DescriptionText>
@@ -44,7 +50,7 @@ export const CreateCauseCTA: React.FunctionComponent<{ displayLinkToCauseList?: 
               <FormattedMessage
                 id="cause-cta.go-to-cause-list"
                 values={{
-                  numberOfCauses,
+                  numberOfCauses: causeStatistics !== null ? causeStatistics.total : '',
                 }}
               />
             </CauseListButton>

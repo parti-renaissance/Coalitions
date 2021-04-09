@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { LoaderContainer } from './UpdateCause.style';
 import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login';
@@ -17,13 +17,24 @@ const CreateCause: FunctionComponent = () => {
   const toUpdateCauseId = params.get('causeId');
   const toUpdateCause = useSelector(getCause(toUpdateCauseId));
   const { loading: isFetchingCause, fetchCause } = useFetchOneCause(toUpdateCauseId);
-  const { loading: isUpdatingCause, updateCause } = useUpdateCause(toUpdateCause);
+  const { loading: isUpdatingCause, updateCause } = useUpdateCause();
 
   useEffect(() => {
     if (toUpdateCauseId !== null) {
       fetchCause(isUserLoggedIn);
     }
   }, [fetchCause, isUserLoggedIn, toUpdateCauseId]);
+
+  const onSubmit = useCallback(
+    (cause: InCreationCause | Cause) => {
+      updateCause({
+        cause: cause as Cause,
+        shouldUpdateImage:
+          toUpdateCause === undefined || toUpdateCause.image_url !== cause.image_url,
+      });
+    },
+    [toUpdateCause, updateCause],
+  );
 
   if (isFetchingCause && toUpdateCause === undefined) {
     return (
@@ -34,11 +45,7 @@ const CreateCause: FunctionComponent = () => {
   }
 
   return (
-    <CauseForm
-      onSubmit={updateCause as (cause: InCreationCause | Cause) => void}
-      initialCause={toUpdateCause}
-      isSubmitting={isUpdatingCause}
-    />
+    <CauseForm onSubmit={onSubmit} initialCause={toUpdateCause} isSubmitting={isUpdatingCause} />
   );
 };
 

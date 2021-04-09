@@ -10,22 +10,27 @@ import HandleErrorService from 'services/HandleErrorService';
 import { authenticatedApiClient } from 'services/networking/client';
 import { Cause } from '../types';
 
-export const useUpdateCause = (initialCause?: Cause) => {
+export const useUpdateCause = () => {
   const { push } = useHistory();
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
 
-  const [{ loading, error }, doUpdateCause] = useTypedAsyncFn(async (cause: Cause) => {
-    await authenticatedApiClient.put(`v3/causes/${cause.uuid}`, {
-      description: cause.description,
-    });
-    if (initialCause !== undefined && initialCause.image_url === cause.image_url) {
-      return;
-    }
-    return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
-      content: cause?.image_url,
-    });
-  }, []);
+  const [{ loading, error }, doUpdateCause] = useTypedAsyncFn(
+    async ({ shouldUpdateImage, ...cause }: Cause & { shouldUpdateImage: boolean }) => {
+      await authenticatedApiClient.put(`v3/causes/${cause.uuid}`, {
+        description: cause.description,
+      });
+
+      if (!shouldUpdateImage) {
+        return;
+      }
+
+      return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
+        content: cause?.image_url,
+      });
+    },
+    [],
+  );
 
   useEffect(() => {
     if (error !== undefined) {
@@ -34,8 +39,8 @@ export const useUpdateCause = (initialCause?: Cause) => {
   }, [error]);
 
   const updateCause = useCallback(
-    async (cause: Cause) => {
-      const response = await doUpdateCause(cause);
+    async ({ cause, shouldUpdateImage }: { cause: Cause; shouldUpdateImage: boolean }) => {
+      const response = await doUpdateCause({ ...cause, shouldUpdateImage });
 
       if (response instanceof Error) return;
 

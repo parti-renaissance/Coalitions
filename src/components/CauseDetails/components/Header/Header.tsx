@@ -20,6 +20,7 @@ import { Severity } from 'redux/Snackbar/types';
 import { CoalitionsDisplay } from '../CoalitionsDisplay';
 import { UnfollowModal } from '../UnfollowModal/UnfollowModal';
 import { useCauseUnfollow } from 'redux/Cause/hooks/useCauseFollow';
+import { useCauseOwner } from 'redux/Cause/hooks/useCauseOwner';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -37,6 +38,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
   const { formatMessage } = useIntl();
   const [isUnfollowModalOpened, setIsUnfollowModalOpened] = useState(false);
   const { loading, unfollowCause } = useCauseUnfollow((cause as Cause).uuid);
+  const isCauseOwner = useCauseOwner(cause);
 
   const handleShareClick = () => {
     if (isAbleToUseShareApi && isMobile) {
@@ -51,6 +53,9 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
       );
     }
   };
+
+  const shouldDisplayMoreIcon = () =>
+    (cause as Cause).uuid !== undefined && cause.supported === true && !isCauseOwner;
 
   return (
     <>
@@ -69,7 +74,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
           </NameAndShareWrapper>
           <AuthorAndSupportsWrapper>
             <AuthorAndSupports cause={cause} showAuthor />
-            {(cause as Cause).uuid !== undefined && cause.supported === true ? (
+            {shouldDisplayMoreIcon() ? (
               <MoreIconContainer>
                 <MoreIcon
                   src="/images/more_vertical.svg"

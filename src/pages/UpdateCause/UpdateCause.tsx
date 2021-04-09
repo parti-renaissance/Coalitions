@@ -33,7 +33,7 @@ const CreateCause: FunctionComponent = () => {
           toUpdateCause === undefined || toUpdateCause.image_url !== cause.image_url,
       });
     },
-    [toUpdateCause],
+    [toUpdateCause, updateCause],
   );
 
   if (isFetchingCause && toUpdateCause === undefined) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Container } from './Profile.style';
+import { Container, GenderItem } from './Profile.style';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
 import { FullWidthButton } from 'components/Button/Button';
@@ -11,7 +11,6 @@ import CityAutocomplete from 'components/CityAutocomplete';
 import { useSelector } from 'react-redux';
 import { getCurrentUser } from 'redux/User/selectors';
 import isMatch from 'lodash/isMatch';
-import MenuItem from '@material-ui/core/MenuItem';
 
 export const Profile: React.FunctionComponent = () => {
   const intl = useIntl();
@@ -98,14 +97,14 @@ export const Profile: React.FunctionComponent = () => {
                 error={touched.gender === true && errors.gender !== undefined}
                 helperText={touched.gender === true ? errors.gender : undefined}
               >
-                {GENDERS.map((gender, index) => (
-                  <MenuItem
+                {GENDERS.map(gender => (
+                  <GenderItem
                     key={gender.value}
                     value={gender.value}
                     style={gender.isPlaceholder === true ? { display: 'none' } : {}}
                   >
                     {intl.formatMessage({ id: gender.labelKey })}
-                  </MenuItem>
+                  </GenderItem>
                 ))}
               </InputField>
             </InputFieldWrapper>

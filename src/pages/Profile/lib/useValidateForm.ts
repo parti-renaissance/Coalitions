@@ -2,12 +2,14 @@ import { useIntl } from 'react-intl';
 
 export interface ProfileFormValues {
   firstName?: string;
+  lastName?: string;
   email?: string;
   cityId?: string;
 }
 
 type ErrorForm = {
   firstName?: string;
+  lastName?: string;
   email?: string;
   cityId?: string;
 };

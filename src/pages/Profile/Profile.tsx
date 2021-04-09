@@ -48,8 +48,9 @@ export const Profile: React.FunctionComponent = () => {
           <form onSubmit={handleSubmit}>
             <InputFieldWrapper>
               <InputField
+                required
                 disabled
-                placeholder={intl.formatMessage({ id: 'login_modal.email-address' })}
+                placeholder={intl.formatMessage({ id: 'profile.email-address' })}
                 type="email"
                 name="email"
                 value={values.email}
@@ -57,7 +58,8 @@ export const Profile: React.FunctionComponent = () => {
             </InputFieldWrapper>
             <InputFieldWrapper>
               <InputField
-                placeholder={intl.formatMessage({ id: 'login_modal.first-name' })}
+                required
+                placeholder={intl.formatMessage({ id: 'profile.first-name' })}
                 type="text"
                 name="firstName"
                 onChange={handleChange}
@@ -65,6 +67,18 @@ export const Profile: React.FunctionComponent = () => {
                 value={values.firstName}
                 error={touched.firstName === true && errors.firstName !== undefined}
                 helperText={touched.firstName === true ? errors.firstName : undefined}
+              />
+            </InputFieldWrapper>
+            <InputFieldWrapper>
+              <InputField
+                placeholder={intl.formatMessage({ id: 'profile.last-name' })}
+                type="text"
+                name="lastName"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.lastName}
+                error={touched.lastName === true && errors.lastName !== undefined}
+                helperText={touched.lastName === true ? errors.lastName : undefined}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>

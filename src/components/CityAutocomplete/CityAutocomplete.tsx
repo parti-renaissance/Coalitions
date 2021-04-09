@@ -47,6 +47,7 @@ const CityAutocomplete: FunctionComponent<CityAutocompleteProps> = ({
       renderInput={(params: TextFieldProps) => (
         <InputField
           {...params}
+          required
           placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
           error={touched.cityId === true && errors.cityId !== undefined}
           helperText={touched.cityId === true ? errors.cityId : undefined}

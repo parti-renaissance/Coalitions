@@ -93,6 +93,7 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
                   }
                 >
                   <InputField
+                    required
                     placeholder={intl.formatMessage({ id: 'create_cause.title.placeholder' })}
                     type="text"
                     name="title"

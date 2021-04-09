@@ -10,6 +10,9 @@
     "profile": "Mon profil"
   },
   "profile": {
+    "first-name": "Prénom / Pseudo",
+    "last-name": "Nom",
+    "email-address": "Adresse email",
     "save": "Enregistrer"
   },
   "footer": {
@@ -148,7 +151,7 @@
     "description": {
       "title": "2. Description de votre cause",
       "tips": "présentez le problème que vous voulez résoudre ou le sujet que vous voulez défendre. Pourquoi cette cause compte pour vous et pourquoi il faut agir.",
-      "description-placeholder": "Description de votre cause (optionnel)."
+      "description-placeholder": "Description de votre cause."
     },
     "image": {
       "title": "3. Ajoutez une image à votre cause",
@@ -174,6 +177,9 @@
     "not-long-enough-password": "Votre mot de passe doit faire au minimum 8 caractères.",
     "emoji-forbidden": "Merci de ne pas utiliser d’emoji ou de caractères spéciaux.",
     "too-short-name": "Longueur minimum 2 caractères."
+  },
+  "form": {
+    "optional": "optionnel"
   },
   "cause_preview": {
     "update": "Modifier",

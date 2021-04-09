@@ -87,6 +87,7 @@ const CreateAccountForm = ({
           <form onSubmit={handleSubmit}>
             <InputFieldWrapper>
               <InputField
+                required
                 placeholder={intl.formatMessage({ id: 'login_modal.first-name' })}
                 type="text"
                 name="firstName"
@@ -99,6 +100,7 @@ const CreateAccountForm = ({
             </InputFieldWrapper>
             <InputFieldWrapper>
               <InputField
+                required
                 placeholder={intl.formatMessage({ id: 'login_modal.email-address' })}
                 type="email"
                 name="email"

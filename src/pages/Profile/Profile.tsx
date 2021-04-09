@@ -86,7 +86,13 @@ export const Profile: React.FunctionComponent = () => {
                 helperText={touched.lastName === true ? errors.lastName : undefined}
               />
             </InputFieldWrapper>
-            <InputFieldWrapper>
+            <InputFieldWrapper
+              isSelectPlaceholder={
+                values.gender ===
+                (GENDERS.find(({ isPlaceholder }) => isPlaceholder === true) as { value: string })
+                  .value
+              }
+            >
               <InputField
                 select
                 type="text"

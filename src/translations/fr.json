@@ -16,7 +16,7 @@
     "phone-number": "Numéro de téléphone",
     "save": "Enregistrer",
     "gender": {
-      "placeholder": "Genre",
+      "placeholder": "Genre (optionnel)",
       "male": "Homme",
       "female": "Femme"
     }

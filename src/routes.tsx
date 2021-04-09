@@ -15,6 +15,7 @@ const Inscription = lazy(() => import('./pages/Inscription'));
 const CookiesPolicy = lazy(() => import('./pages/CookiesPolicy'));
 const LegalNotice = lazy(() => import('./pages/LegalNotice'));
 const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'));
+const Profile = lazy(() => import('./pages/Profile'));
 
 export const CHARTER_OF_VALUES_URL =
   'https://storage.googleapis.com/pourunecause/charte_des_valeurs.pdf';
@@ -69,6 +70,10 @@ export const PATHS = {
     route: '/inscription',
     url: () => '/inscription',
   },
+  PROFILE: {
+    route: '/profile',
+    url: () => '/profile',
+  },
 };
 
 const Routes: FunctionComponent<{}> = () => {
@@ -98,6 +103,7 @@ const Routes: FunctionComponent<{}> = () => {
           <Route path={PATHS.DATA_PROTECTION_POLICY.route} component={DataProtectionPolicy}></Route>
           <Route path={PATHS.CONFIRM_PASSWORD.route} component={Password}></Route>
           <Route path={PATHS.INSCRIPTION.route} component={Inscription}></Route>
+          <Route path={PATHS.PROFILE.route} component={Profile}></Route>
         </Switch>
       </Suspense>
       <Snackbar />

@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-
 import React, { FunctionComponent, ChangeEvent, FocusEvent } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';

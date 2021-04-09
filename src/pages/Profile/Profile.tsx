@@ -1,0 +1,100 @@
+import React from 'react';
+import { useIntl } from 'react-intl';
+import { Container } from './Profile.style';
+import InputField from 'components/InputField';
+import Formik from 'components/Formik';
+import { FullWidthButton } from 'components/Button/Button';
+import { InputFieldWrapper } from 'components/InputField/InputField.style';
+import { ValidateButtonContainer } from 'components/LoginModal/components/CreateAccountForm/CreateAccountForm.style';
+import { useValidateForm, ProfileFormValues } from './lib/useValidateForm';
+import CityAutocomplete from 'components/CityAutocomplete';
+import { useSelector } from 'react-redux';
+import { getCurrentUser } from 'redux/User/selectors';
+import isMatch from 'lodash/isMatch';
+
+export const Profile: React.FunctionComponent = () => {
+  const intl = useIntl();
+  const { validateForm } = useValidateForm();
+  const currentUser = useSelector(getCurrentUser);
+
+  const onSubmit = () => {
+    // TODO
+  };
+
+  if (currentUser === undefined) {
+    return null;
+  }
+
+  const { email, firstName } = currentUser;
+  const initialValues = { email, firstName } as ProfileFormValues;
+  return (
+    <Container>
+      <Formik<ProfileFormValues>
+        initialValues={initialValues}
+        validate={validateForm}
+        onSubmit={onSubmit}
+      >
+        {({
+          values,
+          errors,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          touched,
+          setFieldValue,
+          setFieldTouched,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <InputFieldWrapper>
+              <InputField
+                disabled
+                placeholder={intl.formatMessage({ id: 'login_modal.email-address' })}
+                type="email"
+                name="email"
+                value={values.email}
+              />
+            </InputFieldWrapper>
+            <InputFieldWrapper>
+              <InputField
+                placeholder={intl.formatMessage({ id: 'login_modal.first-name' })}
+                type="text"
+                name="firstName"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.firstName}
+                error={touched.firstName === true && errors.firstName !== undefined}
+                helperText={touched.firstName === true ? errors.firstName : undefined}
+              />
+            </InputFieldWrapper>
+            <InputFieldWrapper>
+              <CityAutocomplete
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                setFieldTouched={setFieldTouched}
+                setFieldValue={setFieldValue}
+                touched={touched}
+                errors={errors}
+              />
+            </InputFieldWrapper>
+            <ValidateButtonContainer isInPage>
+              <FullWidthButton
+                disabled={
+                  isSubmitting || Object.keys(errors).length > 0 || isMatch(initialValues, values)
+                }
+                type="submit"
+                size="small"
+                variant="contained"
+                color="primary"
+              >
+                {intl.formatMessage({ id: 'profile.save' })}
+              </FullWidthButton>
+            </ValidateButtonContainer>
+          </form>
+        )}
+      </Formik>
+    </Container>
+  );
+};
+
+export default Profile;

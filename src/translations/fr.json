@@ -6,7 +6,11 @@
     "causes": "Causes",
     "coalitions": "Coalitions",
     "cause-creation": "Je crée ma cause",
-    "home": "Accueil"
+    "home": "Accueil",
+    "profile": "Mon profil"
+  },
+  "profile": {
+    "save": "Enregistrer"
   },
   "footer": {
     "legal-notice": "Mentions Légales",

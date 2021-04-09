@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { styledTags, DESKTOP_BREAK_POINT, defaultMargins } from 'stylesheet';
+import { styledTags, LARGE_DESKTOP_BREAK_POINT, defaultMargins } from 'stylesheet';
 
 export const RootContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100%;
   ${styledTags}
-  max-width: calc(${DESKTOP_BREAK_POINT}px + 2 * ${defaultMargins.horizontal.desktop});
+  max-width: calc(${LARGE_DESKTOP_BREAK_POINT}px + 2 * ${defaultMargins.horizontal.desktop});
   margin: 0 auto;
 `;
 RootContainer.displayName = 'RootContainer';

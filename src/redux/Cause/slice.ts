@@ -1,11 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Cause, InCreationCause } from './types';
 
+export type CauseStatistics = {
+  total: number;
+  totalFollowers: number;
+};
+
 export type CauseState = Readonly<{
   causes: { [id: string]: Cause };
   ids: string[];
   numberOfCauses: number | null;
   inCreationCause?: InCreationCause;
+  statistics: CauseStatistics | null;
 }>;
 
 const initialState: CauseState = {
@@ -13,6 +19,7 @@ const initialState: CauseState = {
   ids: [],
   numberOfCauses: null,
   inCreationCause: undefined,
+  statistics: null,
 };
 
 const causeSlice = createSlice({
@@ -79,6 +86,9 @@ const causeSlice = createSlice({
     cleanInCreationCause: state => {
       state.inCreationCause = initialState.inCreationCause;
     },
+    updateCauseStatistics: (state, action: PayloadAction<CauseStatistics>) => {
+      state.statistics = action.payload;
+    },
   },
 });
 
@@ -92,5 +102,6 @@ export const {
   optimisticallyRemoveSupport,
   updateInCreationCause,
   cleanInCreationCause,
+  updateCauseStatistics,
 } = causeSlice.actions;
 export default causeSlice.reducer;

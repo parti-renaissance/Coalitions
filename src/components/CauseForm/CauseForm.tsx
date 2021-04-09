@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React, { FunctionComponent, useState } from 'react';
 import { Container, SubContainer, TopImage, ValidateButton } from './CauseForm.style';
 import InputSection from './components/InputSection';
@@ -198,3 +200,5 @@ const CauseForm: FunctionComponent<CauseFormProps> = ({
 };
 
 export default CauseForm;
+
+/* eslint-enable max-lines */

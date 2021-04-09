@@ -7,7 +7,7 @@ export interface FormValues {
 
 export const validateForm = (values: FormValues): FormikErrors<FormValues> => {
   const errors: FormikErrors<FormValues> = {};
-  if (!values.email) {
+  if (values.email.length === 0) {
     errors.email = 'Email required';
   }
   return errors;

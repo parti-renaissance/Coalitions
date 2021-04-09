@@ -39,7 +39,8 @@ export const Profile: React.FunctionComponent = () => {
         validate={validateForm}
         onSubmit={onSubmit}
       >
-        {({
+        {// eslint-disable-next-line complexity
+        ({
           values,
           errors,
           handleChange,

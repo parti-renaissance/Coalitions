@@ -167,7 +167,7 @@ const CreateAccountForm = ({
                 size="small"
                 variant="contained"
                 color="primary"
-                isLoading={loading || doingAfterAccountCreation}
+                isLoading={loading || Boolean(doingAfterAccountCreation)}
               >
                 {intl.formatMessage({ id: 'login_modal.validate' })}
               </FullWidthButton>

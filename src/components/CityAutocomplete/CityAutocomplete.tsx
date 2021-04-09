@@ -20,8 +20,8 @@ interface CityAutocompleteProps {
     isTouched?: boolean | undefined,
     shouldValidate?: boolean | undefined,
   ) => void;
-  handleChange: (e: ChangeEvent<any>) => void;
-  handleBlur: (e: FocusEvent<any>) => void;
+  handleChange: (e: ChangeEvent) => void;
+  handleBlur: (e: FocusEvent) => void;
 }
 
 const CityAutocomplete: FunctionComponent<CityAutocompleteProps> = ({

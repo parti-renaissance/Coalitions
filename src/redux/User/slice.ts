@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ProfileFormValues, GENDERS } from 'pages/Profile/hooks/useValidateForm';
 import { User } from './types';
 
 export type UserState = Readonly<{
@@ -16,11 +17,27 @@ const userSlice = createSlice({
     updateCurrentUser: (state, action: PayloadAction<User>) => {
       state.currentUser = action.payload;
     },
+    optimisticallyUpdateCurrentUser: (state, action: PayloadAction<ProfileFormValues>) => {
+      if (state.currentUser === undefined) {
+        return;
+      }
+      state.currentUser = {
+        ...state.currentUser,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        gender: action.payload.gender === GENDERS[0].value ? undefined : action.payload.gender,
+        birthdate: action.payload.birthday,
+      };
+    },
     deleteCurrentUser: state => {
       state.currentUser = undefined;
     },
   },
 });
 
-export const { updateCurrentUser, deleteCurrentUser } = userSlice.actions;
+export const {
+  updateCurrentUser,
+  deleteCurrentUser,
+  optimisticallyUpdateCurrentUser,
+} = userSlice.actions;
 export default userSlice.reducer;

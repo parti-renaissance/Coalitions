@@ -14,6 +14,7 @@
     "last-name": "Nom",
     "email-address": "Adresse email",
     "phone-number": "Numéro de téléphone",
+    "birthday": "Date de naissance",
     "save": "Enregistrer",
     "gender": {
       "placeholder": "Genre (optionnel)",

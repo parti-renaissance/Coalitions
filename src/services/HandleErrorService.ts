@@ -1,7 +1,8 @@
+import debounce from 'lodash/debounce';
+import * as Sentry from '@sentry/browser';
 import { store } from 'redux/store';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
-import debounce from 'lodash/debounce';
 
 export type APIErrorsType = Response | Error;
 type DefaultHandlerType = (error?: APIErrorsType) => string | null;
@@ -28,7 +29,11 @@ export default class HandleErrorService {
       return defaultMessage;
     }
     const errorMessage = defaultHandler(error);
-    return errorMessage !== null ? errorMessage : defaultMessage;
+    if (errorMessage !== null) {
+      return errorMessage;
+    }
+    Sentry.captureException(error);
+    return defaultMessage;
   }
 
   static getErrorMessage(error?: APIErrorsType, defaultHandler?: DefaultHandlerType) {
@@ -41,6 +46,7 @@ export default class HandleErrorService {
     } else if (error instanceof Response && HandleErrorService.isNoBackConnectionError(error)) {
       return ERROR_MESSAGES.unableToJoinServer;
     } else if (error instanceof Response && error.status >= 500) {
+      Sentry.captureException(error);
       return ERROR_MESSAGES.error500;
     }
 

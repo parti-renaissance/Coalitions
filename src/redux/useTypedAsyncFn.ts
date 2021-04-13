@@ -1,5 +1,4 @@
 import { useAsyncFn } from 'react-use';
-import * as Sentry from '@sentry/browser';
 
 /**
  * A wrapper around useAsyncFn until its arguments can be properly typed
@@ -12,11 +11,6 @@ import * as Sentry from '@sentry/browser';
 
 export function useTypedAsyncFn<T>(callback: (input: T) => Promise<any>, deps: any[]) {
   return useAsyncFn(async (...args: T[]) => {
-    try {
-      return await callback(args[0]);
-    } catch (err) {
-      Sentry.captureException(err);
-      throw err;
-    }
+    return await callback(args[0]);
   }, deps);
 }

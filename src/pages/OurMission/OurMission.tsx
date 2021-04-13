@@ -6,8 +6,8 @@ import { PATHS } from 'routes';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router';
 import OurCommitments from 'components/OurCommitments';
-import { OurCommitmentsWrapper } from './OurMission.style';
-// import Video from 'components/Video';
+import { OurCommitmentsWrapper, VideoWrapper } from './OurMission.style';
+import Video from 'components/Video';
 import SuccessStories from 'components/SuccessStories';
 
 const OurMission: FunctionComponent = () => {
@@ -20,9 +20,9 @@ const OurMission: FunctionComponent = () => {
   return (
     <>
       <OurMissionHeader />
-      {/* <VideoWrapper>
-        <Video videoId="KD6egRRsZ_Q" />
-      </VideoWrapper> */}
+      <VideoWrapper>
+        <Video videoId="GU4HFw4zFiU" />
+      </VideoWrapper>
       <CreationSteps />
       <OurCommitmentsWrapper>
         <OurCommitments />

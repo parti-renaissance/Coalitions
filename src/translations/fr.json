@@ -138,6 +138,10 @@
     "creation-step-four": "Ma cause est entendue\u00A0! Des Français s’engagent, des associations vous accompagnent, et des élus s’impliquent.",
     "charter-of-values": "Charte des valeurs"
   },
+  "admin_cause": {
+    "update-cause": "Général",
+    "quick-action": "Actions de soutien"
+  },
   "update_cause": {
     "validate": "Enregistrer et publier",
     "title": {
@@ -147,6 +151,14 @@
       "tips": "Si vous souhaitez modifier les coalitions associées à votre cause, écrivez-nous à l'adresse e-mail {email}"
     },
     "success": "Votre cause a été modifiée avec succès."
+  },
+  "quick_actions": {
+    "title": "Ajouter des actions de soutien",
+    "description": "Mobilisez vos soutiens à travers des actions rapides personnalisables. Elles s’afficheront sur la page de votre cause et dans l’email de félicitations que recevront vos nouveaux soutiens.",
+    "action-title": "Action n°{number}",
+    "label": "Label",
+    "link": "Lien de l'action",
+    "validate": "Enregistrer"
   },
   "create_cause": {
     "validate": "Enregistrer et voir l’aperçu",

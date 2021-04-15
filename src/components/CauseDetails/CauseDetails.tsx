@@ -1,22 +1,18 @@
-import React, { useState, ChangeEvent, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   Container,
   HeaderContainer,
   CauseImage,
-  TabsWrapper,
-  StyledTab,
   DesktopHeaderWrapper,
   MobileHeaderWrapper,
-  TabPanelContainer,
 } from './CauseDetails.style';
 import { FormattedMessage } from 'react-intl';
-import { colorPalette } from 'stylesheet';
-import { Tabs } from '@material-ui/core';
-import AboutThisCause from './components/AboutThisCause';
-import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { InCreationCause, Cause } from 'redux/Cause/types';
-import Header from './components/Header';
+import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
+import { TabsWrapper } from 'components/TabsWrapper/TabsWrapper';
 import { Supported } from 'components/Cause/Cause.style';
+import AboutThisCause from './components/AboutThisCause';
+import Header from './components/Header';
 import HeaderButtons from './components/HeaderButtons';
 import EmptySection from './components/EmptySection';
 
@@ -26,22 +22,11 @@ interface CauseDetailsProps {
   isSupporting?: boolean;
 }
 
-const TAB_INDICATOR_PROPS = {
-  style: {
-    backgroundColor: colorPalette.mintGreen2,
-  },
-};
-
 const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, isSupporting }) => {
-  const [tabIndex, setTabIndex] = useState<number>(0);
   const isPreview = Boolean(!onSupport);
   const isSupported = Boolean(cause.supported);
 
-  const onTabIndexChange = (_: ChangeEvent<{}>, value: number) => {
-    setTabIndex(value);
-  };
-
-  const renderTabPanel = () => {
+  const renderTabPanel = (tabIndex: number) => {
     switch (tabIndex) {
       case 0:
         return <AboutThisCause cause={cause} />;
@@ -69,18 +54,14 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
           ) : null}
           <MobileHeaderWrapper>{renderHeader()}</MobileHeaderWrapper>
         </HeaderContainer>
-        <TabsWrapper>
-          <Tabs
-            value={tabIndex}
-            onChange={onTabIndexChange}
-            TabIndicatorProps={TAB_INDICATOR_PROPS}
-          >
-            <StyledTab label={<FormattedMessage id="cause.about.title" />} />
-            <StyledTab label={<FormattedMessage id="cause.events.title" />} />
-            <StyledTab label={<FormattedMessage id="cause.discussions.title" />} />
-          </Tabs>
-          <TabPanelContainer>{renderTabPanel()}</TabPanelContainer>
-        </TabsWrapper>
+        <TabsWrapper
+          renderTabPanel={renderTabPanel}
+          tabsLabel={[
+            <FormattedMessage id="cause.about.title" key="cause.about.title" />,
+            <FormattedMessage id="cause.events.title" key="cause.events.title" />,
+            <FormattedMessage id="cause.discussions.title" key="cause.discussions.title" />,
+          ]}
+        />
       </Container>
       {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}
       <HeaderButtons cause={cause} onSupport={onSupport} isSupporting={isSupporting} isMobile />

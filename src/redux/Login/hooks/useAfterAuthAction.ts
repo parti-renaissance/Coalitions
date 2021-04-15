@@ -13,13 +13,13 @@ export const useAfterAuthAction = () => {
   const { push } = useHistory();
 
   const performAfterAuthAction = useCallback(async () => {
+    if (causeToFollow !== '') {
+      await followCause();
+    }
     if (redirectTo !== '') {
       push(redirectTo, { search: '' });
     } else {
       push(PATHS.HOME.url(), { search: '' });
-    }
-    if (causeToFollow !== '') {
-      await followCause();
     }
     dispatch(cleanAfterAuthAction);
   }, [causeToFollow, dispatch, followCause, push, redirectTo]);

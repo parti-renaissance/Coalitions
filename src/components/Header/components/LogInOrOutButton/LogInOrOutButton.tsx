@@ -17,6 +17,7 @@ import { StyledButton } from '../../Header.style';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
+import { deleteCurrentUser } from 'redux/User';
 
 const LogInOrOutButton: FunctionComponent<{}> = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
@@ -32,6 +33,7 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
 
   const logout = () => {
     dispatch(userLoggedOut());
+    dispatch(deleteCurrentUser());
   };
 
   const showDesktopUserMenu = (event: MouseEvent<HTMLAnchorElement>) => {

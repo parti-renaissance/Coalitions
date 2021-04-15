@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router';
 import { useLogin } from 'redux/Login/hooks/useLogin';
 import { DesktopHeader } from './DesktopHeader';
@@ -7,11 +7,13 @@ import { useFetchCurrentUser } from 'redux/User/hooks/useFetchCurrentUser';
 import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login';
 import { getCurrentUser } from 'redux/User/selectors';
+import { getIsDesktop } from 'services/mobile/mobile';
+const CGUModal = lazy(() => import('../CGUModal/CGUModal'));
 
 const Header: React.FC = () => {
   const { search } = useLocation();
   const [, login] = useLogin();
-  const { fetchCurrentUser } = useFetchCurrentUser();
+  const { fetchCurrentUser, shouldDisplayCGU, acceptCGU } = useFetchCurrentUser();
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const currentUser = useSelector(getCurrentUser);
 
@@ -29,10 +31,14 @@ const Header: React.FC = () => {
     }
   }, [login, search]);
 
-  if (window.innerWidth < 1000) {
-    return <MobileHeader />;
-  }
-  return <DesktopHeader />;
+  return (
+    <>
+      {getIsDesktop() ? <DesktopHeader /> : <MobileHeader />};
+      <Suspense fallback={null}>
+        <CGUModal isOpened={shouldDisplayCGU} onClose={acceptCGU} />
+      </Suspense>
+    </>
+  );
 };
 
 export default Header;

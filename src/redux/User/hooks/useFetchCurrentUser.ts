@@ -1,15 +1,16 @@
 import { authenticatedApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { updateCurrentUser } from '../slice';
 import HandleErrorService from 'services/HandleErrorService';
 
 export const useFetchCurrentUser = () => {
   const dispatch = useDispatch();
+  const [shouldDisplayCGU, setShouldDisplayCGU] = useState(false);
 
   const [{ loading, error }, doFetchCurrentUser] = useTypedAsyncFn(
-    async () => await authenticatedApiClient.get('me'),
+    async () => await authenticatedApiClient.get('v3/profile/me'),
     [],
   );
 
@@ -19,7 +20,7 @@ export const useFetchCurrentUser = () => {
     }
   }, [error]);
 
-  const fetch = useCallback(async () => {
+  const fetchCurrentUser = useCallback(async () => {
     const currentUser = await doFetchCurrentUser();
 
     if (currentUser instanceof Error) {
@@ -34,10 +35,17 @@ export const useFetchCurrentUser = () => {
         email: currentUser.email_address,
       }),
     );
+    setShouldDisplayCGU(currentUser.adherent);
   }, [dispatch, doFetchCurrentUser]);
+
+  const acceptCGU = () => {
+    setShouldDisplayCGU(false);
+  };
 
   return {
     isFetchingCurrentUser: loading,
-    fetchCurrentUser: fetch,
+    fetchCurrentUser,
+    shouldDisplayCGU,
+    acceptCGU,
   };
 };

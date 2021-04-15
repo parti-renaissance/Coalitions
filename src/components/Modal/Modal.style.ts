@@ -32,3 +32,10 @@ export const CloseIcon = styled(Close)`
   font-size: ${CLOSE_ICON_FONT_SIZE};
   color: ${colorPalette.greyDark};
 `;
+
+export const Title = styled.h3`
+  color: ${colorPalette.greyDark};
+`;
+export const Description = styled.p`
+  margin: ${getSpacing(5)} 0;
+`;

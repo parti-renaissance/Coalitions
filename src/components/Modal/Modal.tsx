@@ -6,6 +6,7 @@ import { Container, CloseButton, CloseIcon } from './Modal.style';
 type ModalProps = {
   isOpened: boolean;
   onClose: () => void;
+  shouldDisplayCloseIcon?: boolean;
 };
 
 const SlideUpComponent: ForwardRefRenderFunction<{}, SlideProps> = (props, ref) => (
@@ -14,7 +15,12 @@ const SlideUpComponent: ForwardRefRenderFunction<{}, SlideProps> = (props, ref) 
 
 const SlideUp = forwardRef<{}, SlideProps>(SlideUpComponent);
 
-export const Modal: React.FunctionComponent<ModalProps> = ({ children, isOpened, onClose }) => {
+export const Modal: React.FunctionComponent<ModalProps> = ({
+  children,
+  isOpened,
+  onClose,
+  shouldDisplayCloseIcon = true,
+}) => {
   const isMobile = getIsMobile();
 
   return (
@@ -23,9 +29,11 @@ export const Modal: React.FunctionComponent<ModalProps> = ({ children, isOpened,
       open={isOpened}
       TransitionComponent={isMobile ? SlideUp : undefined}
     >
-      <CloseButton onClick={onClose}>
-        <CloseIcon />
-      </CloseButton>
+      {shouldDisplayCloseIcon ? (
+        <CloseButton onClick={onClose}>
+          <CloseIcon />
+        </CloseButton>
+      ) : null}
       {children}
     </Container>
   );

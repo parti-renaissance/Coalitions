@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal } from 'components/Modal/Modal';
-import { Title, Description, ButtonContainer } from './UnfollowModal.style';
+import { Title, Description } from 'components/Modal/Modal.style';
+import { ButtonContainer } from './UnfollowModal.style';
 import { FormattedMessage } from 'react-intl';
 import { MediumLargeButton as Button } from 'components/Button/Button';
 

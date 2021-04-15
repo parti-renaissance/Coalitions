@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, getSpacing, media } from 'stylesheet';
-
-export const Title = styled.h3`
-  color: ${colorPalette.greyDark};
-`;
+import { getSpacing, media } from 'stylesheet';
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -22,8 +18,4 @@ export const ButtonContainer = styled.div`
       }
     }
     `)}
-`;
-
-export const Description = styled.p`
-  margin: ${getSpacing(5)} 0;
 `;

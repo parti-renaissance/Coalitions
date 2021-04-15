@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-import { fontWeight, getSpacing, colorPalette, media, fonts, defaultMargins } from 'stylesheet';
-import { Tab } from '@material-ui/core';
+import { media, defaultMargins } from 'stylesheet';
 
 const CONTAINER_MAX_WIDTH = '960px';
 
@@ -28,26 +27,6 @@ export const CauseImage = styled.div<{ backgroundImage: string }>`
     `};
 `;
 
-export const TabsWrapper = styled.div`
-  ${media.desktop(`
-    margin-top: ${getSpacing(5)};
-  `)}
-  .MuiTabs-flexContainer {
-    border-bottom: 2px solid ${colorPalette.greyLight};
-  }
-`;
-
-export const StyledTab = styled(Tab)`
-  ${fonts.p};
-  padding: ${getSpacing(2)} ${getSpacing(3)};
-  text-transform: capitalize;
-  ${({ selected }) =>
-    css`
-      opacity: ${Boolean(selected) ? 1 : 0.6};
-      font-weight: ${selected ? fontWeight.bold : fontWeight.normal};
-    `};
-`;
-
 export const MobileHeaderWrapper = styled.div`
   ${media.desktop(`
     display: none;
@@ -61,16 +40,5 @@ export const DesktopHeaderWrapper = styled.div`
     position: sticky;
     top: 0;
     z-index: 1;
-  `)}
-`;
-
-export const TabPanelContainer = styled.div`
-  padding: ${getSpacing(3)};
-  margin-top: ${getSpacing(2)};
-  margin-bottom: ${getSpacing(2)};
-  ${media.desktop(`
-    padding: 0;
-    margin-top: ${getSpacing(5)};
-    margin-bottom: unset;
   `)}
 `;

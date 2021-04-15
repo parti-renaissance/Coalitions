@@ -36,10 +36,16 @@ export const StyledTextField = styled(TextField)`
     color: ${colorPalette.greyDark};
   }
   .MuiInputBase-root {
-    ${fonts.h3};
+    ${fonts.p};
     color: ${colorPalette.greyDark};
     background-color: ${colorPalette.blueLight};
     border-radius: ${borderRadius.medium};
+  }
+  .MuiFormLabel-root {
+    ${fonts.p};
+    color: ${({ error }) => (error === true ? colorPalette.red : colorPalette.greyDark)};
+    position: absolute;
+    top: -2px;
   }
   .MuiFormHelperText-root {
     font-family: ${fontFamily.primary};
@@ -81,7 +87,7 @@ export const StyledFormControl = styled(FormControl)`
 export const InputFieldWrapper = styled.div<{
   isPlaceholder?: boolean;
 }>`
-  margin-top: ${getSpacing(3)};
+  margin-top: ${getSpacing(4)};
   width: 100%;
   ${({ isPlaceholder }) =>
     isPlaceholder === true

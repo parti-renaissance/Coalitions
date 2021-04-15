@@ -20,7 +20,7 @@ const InputField: FunctionComponent<TextFieldProps> = ({
       {...restOfProps}
       required={required}
       variant="outlined"
-      placeholder={newPlaceholder}
+      label={newPlaceholder}
     />
   );
 };

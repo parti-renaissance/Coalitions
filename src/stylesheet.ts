@@ -236,6 +236,14 @@ export const fonts = {
       font-size: ${fontSize.input.desktop};
     `)}
   `,
+  label: css`
+    font-family: ${fontFamily.primary};
+    font-weight: ${fontWeight.bold};
+    font-size: ${fontSize.h3.mobile};
+    ${media.desktop(`
+      font-size: ${fontSize.h3.desktop};
+    `)}
+  `,
   smallButton: css`
     font-family: ${fontFamily.primary};
     font-weight: ${fontWeight.normal};

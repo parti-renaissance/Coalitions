@@ -7,11 +7,13 @@ import { useFetchCurrentUser } from 'redux/User/hooks/useFetchCurrentUser';
 import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login';
 import { getCurrentUser } from 'redux/User/selectors';
+import { CGUModal } from './components/CGUModal/CGUModal';
+import { getIsDesktop } from 'services/mobile/mobile';
 
 const Header: React.FC = () => {
   const { search } = useLocation();
   const [, login] = useLogin();
-  const { fetchCurrentUser } = useFetchCurrentUser();
+  const { fetchCurrentUser, shouldDisplayCGU, acceptCGU } = useFetchCurrentUser();
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const currentUser = useSelector(getCurrentUser);
 
@@ -29,10 +31,12 @@ const Header: React.FC = () => {
     }
   }, [login, search]);
 
-  if (window.innerWidth < 1000) {
-    return <MobileHeader />;
-  }
-  return <DesktopHeader />;
+  return (
+    <>
+      {getIsDesktop() ? <DesktopHeader /> : <MobileHeader />};
+      <CGUModal isOpened={shouldDisplayCGU} onClose={acceptCGU} />
+    </>
+  );
 };
 
 export default Header;

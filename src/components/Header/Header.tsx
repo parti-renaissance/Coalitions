@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router';
 import { useLogin } from 'redux/Login/hooks/useLogin';
 import { DesktopHeader } from './DesktopHeader';
@@ -7,8 +7,8 @@ import { useFetchCurrentUser } from 'redux/User/hooks/useFetchCurrentUser';
 import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login';
 import { getCurrentUser } from 'redux/User/selectors';
-import { CGUModal } from './components/CGUModal/CGUModal';
 import { getIsDesktop } from 'services/mobile/mobile';
+const CGUModal = lazy(() => import('../CGUModal/CGUModal'));
 
 const Header: React.FC = () => {
   const { search } = useLocation();
@@ -34,7 +34,9 @@ const Header: React.FC = () => {
   return (
     <>
       {getIsDesktop() ? <DesktopHeader /> : <MobileHeader />};
-      <CGUModal isOpened={shouldDisplayCGU} onClose={acceptCGU} />
+      <Suspense fallback={null}>
+        <CGUModal isOpened={shouldDisplayCGU} onClose={acceptCGU} />
+      </Suspense>
     </>
   );
 };

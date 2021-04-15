@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'components/Modal/Modal';
 import { FormattedMessage } from 'react-intl';
-import Formik from 'components/Formik';
+import { Formik } from 'components/Formik/Formik';
 import { FullWidthButton } from 'components/Button/Button';
 import { Label, Asterisk } from 'components/IconAndLabel/IconAndLabel.style';
 import { ModalCheckbox } from 'components/Modal/ModalCheckbox';
@@ -102,3 +102,5 @@ export const CGUModal: React.FunctionComponent<CGUModalProps> = ({ isOpened, onC
     </Modal>
   );
 };
+
+export default CGUModal;

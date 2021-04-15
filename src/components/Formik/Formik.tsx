@@ -3,7 +3,7 @@ import { Formik as OriginalFormik, FormikErrors, FormikConfig } from 'formik';
 import { useIntl } from 'react-intl';
 import { hasEmoji } from 'services/formik/hasEmoji';
 
-const Formik = <Values,>({ validate, ...restOfProps }: FormikConfig<Values>) => {
+export const Formik = <Values,>({ validate, ...restOfProps }: FormikConfig<Values>) => {
   const intl = useIntl();
   const emojiErrorMessage = intl.formatMessage({ id: 'form_errors.emoji-forbidden' });
 

@@ -158,6 +158,7 @@
     "action-title": "Action n°{number}",
     "label": "Label",
     "link": "Lien de l'action",
+    "add": "Ajouter une action rapide",
     "validate": "Enregistrer"
   },
   "create_cause": {

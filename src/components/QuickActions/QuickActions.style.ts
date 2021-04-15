@@ -28,3 +28,21 @@ export const ValidateButton = styled(FullWidthButton)`
     margin-top: ${getSpacing(8)};
   `)}
 `;
+
+const ADD_ICON_SIZE = '20px';
+
+export const AddIcon = styled.img`
+  height: ${ADD_ICON_SIZE};
+  width: ${ADD_ICON_SIZE};
+  padding-right: ${getSpacing(2)};
+`;
+
+export const AddButton = styled(FullWidthButton)`
+  ${media.desktop(`
+    max-width: ${getSpacing(80)};
+  `)}
+`;
+
+export const QuickActionContainer = styled.div`
+  margin-bottom: ${getSpacing(8)};
+`;

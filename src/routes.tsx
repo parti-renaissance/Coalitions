@@ -8,6 +8,7 @@ const CausePage = lazy(() => import('./pages/CausePage'));
 const OurMission = lazy(() => import('./pages/OurMission'));
 const CreateCause = lazy(() => import('./pages/CreateCause'));
 const UpdateCause = lazy(() => import('./pages/UpdateCause'));
+const CauseAdmin = lazy(() => import('./pages/CauseAdmin'));
 const CausePreview = lazy(() => import('./pages/CausePreview'));
 const CauseList = lazy(() => import('./pages/CauseList'));
 const Password = lazy(() => import('./pages/Password'));
@@ -44,6 +45,10 @@ export const PATHS = {
   UPDATE_CAUSE: {
     route: '/modifier-une-cause',
     url: () => '/modifier-une-cause',
+  },
+  CAUSE_ADMIN: {
+    route: '/administrer-une-cause',
+    url: () => '/administrer-une-cause',
   },
   CAUSE_PREVIEW: {
     route: '/apercu',
@@ -93,6 +98,7 @@ const Routes: FunctionComponent<{}> = () => {
         <Switch>
           <Route exact path={PATHS.HOME.route} component={Home} />
           <Route exact path={PATHS.CAUSE_LIST.route} component={CauseList} />
+          <Route path={PATHS.CAUSE_ADMIN.route} component={CauseAdmin}></Route>
           <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
           <Route path={PATHS.OUR_MISSION.route} component={OurMission}></Route>
           <Route path={PATHS.CREATE_CAUSE.route} component={CreateCause}></Route>

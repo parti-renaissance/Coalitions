@@ -14,7 +14,7 @@ export const TabsContainer = styled.div`
 export const StyledTab = styled(Tab)`
   ${fonts.p};
   padding: ${getSpacing(2)} ${getSpacing(3)};
-  text-transform: capitalize;
+  text-transform: none;
   ${({ selected }) =>
     css`
       opacity: ${Boolean(selected) ? 1 : 0.6};

@@ -9,6 +9,8 @@ import {
   AddIcon,
   AddButton,
   QuickActionContainer,
+  QuickActionDeleteButton,
+  QuickActionHeadLineContainer,
 } from './QuickActions.style';
 import Formik from 'components/Formik';
 import { FieldArray } from 'formik';
@@ -36,7 +38,7 @@ export const QuickActions: FunctionComponent = () => {
       </QuickActionsDescription>
       <Formik<QuickActionsForms> initialValues={initialValues} onSubmit={onSubmit}>
         {// eslint-disable-next-line complexity
-        ({ values }) => (
+        ({ values, handleChange, handleBlur }) => (
           <form>
             <FieldArray
               name="quickActions"
@@ -46,18 +48,26 @@ export const QuickActions: FunctionComponent = () => {
                     <QuickActionContainer
                       key={quickAction.id !== undefined ? quickAction.id : index}
                     >
-                      <h3>
-                        <FormattedMessage
-                          id="quick_actions.action-title"
-                          values={{ number: index + 1 }}
-                        />
-                      </h3>
+                      <QuickActionHeadLineContainer>
+                        <h3>
+                          <FormattedMessage
+                            id="quick_actions.action-title"
+                            values={{ number: index + 1 }}
+                          />
+                        </h3>
+                        <QuickActionDeleteButton onClick={() => arrayHelpers.remove(index)}>
+                          <FormattedMessage id="quick_actions.action-delete" />
+                        </QuickActionDeleteButton>
+                      </QuickActionHeadLineContainer>
                       <InputFieldWrapper>
                         <InputField
                           required
                           placeholder={formatMessage({ id: 'quick_actions.label' })}
                           type="text"
-                          name={`label.${index}`}
+                          name={`quickActions[${index}].label`}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={quickAction.label}
                         />
                       </InputFieldWrapper>
                       <InputFieldWrapper>
@@ -65,7 +75,10 @@ export const QuickActions: FunctionComponent = () => {
                           required
                           placeholder={formatMessage({ id: 'quick_actions.link' })}
                           type="text"
-                          name={`link.${index}`}
+                          name={`quickActions[${index}].link`}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={quickAction.link}
                         />
                       </InputFieldWrapper>
                     </QuickActionContainer>

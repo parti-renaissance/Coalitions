@@ -1,6 +1,6 @@
-import { FullWidthButton } from 'components/Button/Button';
+import { DefaultButton, FullWidthButton } from 'components/Button/Button';
 import styled from 'styled-components';
-import { fonts, getSpacing, media } from 'stylesheet';
+import { colorPalette, fonts, getSpacing, media } from 'stylesheet';
 
 export const QuickActionsContainer = styled.div``;
 
@@ -45,4 +45,16 @@ export const AddButton = styled(FullWidthButton)`
 
 export const QuickActionContainer = styled.div`
   margin-bottom: ${getSpacing(8)};
+`;
+
+export const QuickActionHeadLineContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+`;
+
+export const QuickActionDeleteButton = styled(DefaultButton)`
+  ${fonts.p}
+  border: none;
+  color: ${colorPalette.blueCoalition};
 `;

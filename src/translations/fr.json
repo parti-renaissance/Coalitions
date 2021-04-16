@@ -159,6 +159,7 @@
     "label": "Label",
     "link": "Lien de l'action",
     "add": "Ajouter une action rapide",
+    "action-delete": "(supprimer)",
     "validate": "Enregistrer"
   },
   "create_cause": {

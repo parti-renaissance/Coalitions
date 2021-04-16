@@ -21,21 +21,26 @@ export const useValidateQuickActionsForm = () => {
 
   const validateForm = ({ quickActions }: QuickActionsForms) => {
     const requiredErrorMessage = formatMessage({ id: 'form_errors.required' });
-    return {
+    let hasErrors = false;
+    const errorsList = {
       quickActions: quickActions.map(quickAction => {
         const errors = {} as QuickActionError;
         if (isFieldEmpty(quickAction.label)) {
           errors.label = requiredErrorMessage;
+          hasErrors = true;
         }
         if (isFieldEmpty(quickAction.link)) {
           errors.link = requiredErrorMessage;
+          hasErrors = true;
         }
         if (isURLValid(quickAction.link)) {
           errors.link = formatMessage({ id: 'form_errors.not-valid-url' });
+          hasErrors = true;
         }
         return errors;
       }),
     };
+    return hasErrors ? errorsList : {};
   };
 
   return { validateForm };

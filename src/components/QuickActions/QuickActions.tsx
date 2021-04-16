@@ -19,13 +19,22 @@ import {
   useValidateQuickActionsForm,
 } from './useValidateQuickActionsForm';
 import { AddButton } from './components/AddButton/AddButton';
+import { usePublishQuickActions } from './usePublishQuickActions';
 
-export const QuickActions: FunctionComponent = () => {
+type QuickActionsProps = {
+  causeId: string;
+};
+
+export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) => {
   const { formatMessage } = useIntl();
   const { validateForm } = useValidateQuickActionsForm();
+  const { loading, publishQuickActions } = usePublishQuickActions(causeId);
 
   const initialValues = { quickActions: [{ label: '', link: '' }] };
-  const onSubmit = (values: QuickActionsForms) => console.log('values', values);
+  const onSubmit = async (values: QuickActionsForms) => {
+    console.log('values', values);
+    await publishQuickActions(values.quickActions);
+  };
   return (
     <>
       <QuickActionsTitle>
@@ -41,8 +50,8 @@ export const QuickActions: FunctionComponent = () => {
         validateOnMount={true}
       >
         {// eslint-disable-next-line complexity
-        ({ values, handleChange, handleBlur, touched, errors }) => (
-          <form>
+        ({ values, handleChange, handleBlur, handleSubmit, touched, errors }) => (
+          <form onSubmit={handleSubmit}>
             <FieldArray
               name="quickActions"
               render={arrayHelpers => (
@@ -102,7 +111,7 @@ export const QuickActions: FunctionComponent = () => {
                   <AddButton
                     disabled={
                       errors.quickActions === undefined
-                        ? true
+                        ? false
                         : hasFormErrors(errors.quickActions as QuickActionError[])
                     }
                     push={arrayHelpers.push}
@@ -113,13 +122,14 @@ export const QuickActions: FunctionComponent = () => {
             <ValidateButton
               disabled={
                 errors.quickActions === undefined
-                  ? true
+                  ? false
                   : hasFormErrors(errors.quickActions as QuickActionError[])
               }
               type="submit"
               size="small"
               variant="contained"
               color="primary"
+              isLoading={loading}
             >
               <FormattedMessage id="quick_actions.validate" />
             </ValidateButton>

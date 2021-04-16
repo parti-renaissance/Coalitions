@@ -199,7 +199,8 @@
     "unmatched-password": "Les mots de passe ne sont pas identiques.",
     "not-long-enough-password": "Votre mot de passe doit faire au minimum 8 caractères.",
     "emoji-forbidden": "Merci de ne pas utiliser d’emoji ou de caractères spéciaux.",
-    "too-short-name": "Longueur minimum 2 caractères."
+    "too-short-name": "Longueur minimum 2 caractères.",
+    "not-valid-url": "L'URL entrée n'est pas valide"
   },
   "form": {
     "optional": "optionnel"

@@ -1,4 +1,5 @@
 import { useIntl } from 'react-intl';
+import { isFieldEmpty } from 'services/formik/form';
 
 export const GENDERS: { labelKey: string; value: string; isPlaceholder?: boolean }[] = [
   { labelKey: 'profile.gender.placeholder', value: 'none', isPlaceholder: true },
@@ -25,8 +26,6 @@ type ErrorForm = {
   gender?: string;
   birthday?: string;
 };
-
-const isFieldEmpty = (value: string | undefined) => value === undefined || value.length === 0;
 
 export const useValidateForm = () => {
   const intl = useIntl();

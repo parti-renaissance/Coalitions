@@ -1,4 +1,5 @@
 import { useIntl } from 'react-intl';
+import { isFieldEmpty } from 'services/formik/form';
 
 export interface InscriptionFormValues {
   firstName?: string;
@@ -15,8 +16,6 @@ type ErrorForm = {
   cityId?: string;
   cguAgreement?: string;
 };
-
-const isFieldEmpty = (value: string | undefined) => value === undefined || value.length === 0;
 
 export const useValidateForm = () => {
   const intl = useIntl();

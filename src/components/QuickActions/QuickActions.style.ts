@@ -1,6 +1,6 @@
-import { FullWidthButton } from 'components/Button/Button';
+import { DefaultButton, FullWidthButton } from 'components/Button/Button';
 import styled from 'styled-components';
-import { fonts, getSpacing, media } from 'stylesheet';
+import { colorPalette, fonts, getSpacing, media } from 'stylesheet';
 
 export const QuickActionsContainer = styled.div``;
 
@@ -27,4 +27,34 @@ export const ValidateButton = styled(FullWidthButton)`
   ${media.desktop(`
     margin-top: ${getSpacing(8)};
   `)}
+`;
+
+const ADD_ICON_SIZE = '20px';
+
+export const AddIcon = styled.img`
+  height: ${ADD_ICON_SIZE};
+  width: ${ADD_ICON_SIZE};
+  padding-right: ${getSpacing(2)};
+`;
+
+export const AddButton = styled(FullWidthButton)`
+  ${media.desktop(`
+    max-width: ${getSpacing(80)};
+  `)}
+`;
+
+export const QuickActionContainer = styled.div`
+  margin-bottom: ${getSpacing(8)};
+`;
+
+export const QuickActionHeadLineContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+`;
+
+export const QuickActionDeleteButton = styled(DefaultButton)`
+  ${fonts.p}
+  border: none;
+  color: ${colorPalette.blueCoalition};
 `;

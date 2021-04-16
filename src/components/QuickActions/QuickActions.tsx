@@ -2,10 +2,31 @@ import InputField from 'components/InputField';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { QuickActionsTitle, QuickActionsDescription, ValidateButton } from './QuickActions.style';
+import {
+  QuickActionsTitle,
+  QuickActionsDescription,
+  ValidateButton,
+  AddIcon,
+  AddButton,
+  QuickActionContainer,
+  QuickActionDeleteButton,
+  QuickActionHeadLineContainer,
+} from './QuickActions.style';
+import Formik from 'components/Formik';
+import { FieldArray, getIn } from 'formik';
+import {
+  hasFormErrors,
+  QuickActionError,
+  QuickActionsForms,
+  useValidateQuickActionsForm,
+} from './services';
 
 export const QuickActions: FunctionComponent = () => {
   const { formatMessage } = useIntl();
+  const { validateForm } = useValidateQuickActionsForm();
+
+  const initialValues = { quickActions: [{ label: '', link: '' }] };
+  const onSubmit = (values: QuickActionsForms) => console.log('values', values);
   return (
     <>
       <QuickActionsTitle>
@@ -14,36 +35,104 @@ export const QuickActions: FunctionComponent = () => {
       <QuickActionsDescription>
         <FormattedMessage id="quick_actions.description" />
       </QuickActionsDescription>
-      <form>
-        <h3>
-          <FormattedMessage id="quick_actions.action-title" values={{ number: 1 }} />
-        </h3>
-        <InputFieldWrapper>
-          <InputField
-            required
-            placeholder={formatMessage({ id: 'quick_actions.label' })}
-            type="text"
-            name="label_1"
-          />
-        </InputFieldWrapper>
-        <InputFieldWrapper>
-          <InputField
-            required
-            placeholder={formatMessage({ id: 'quick_actions.link' })}
-            type="text"
-            name="link_1"
-          />
-        </InputFieldWrapper>
-        <ValidateButton
-          disabled={true}
-          type="submit"
-          size="small"
-          variant="contained"
-          color="primary"
-        >
-          <FormattedMessage id="quick_actions.validate" />
-        </ValidateButton>
-      </form>
+      <Formik<QuickActionsForms>
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validate={validateForm}
+        validateOnMount={true}
+      >
+        {// eslint-disable-next-line complexity
+        ({ values, handleChange, handleBlur, touched, errors }) => (
+          <form>
+            <FieldArray
+              name="quickActions"
+              render={arrayHelpers => (
+                <>
+                  {values.quickActions.map((quickAction, index) => {
+                    const labelFieldName = `quickActions[${index}].label`;
+                    const labelFieldTouched = getIn(touched, labelFieldName);
+                    const labelFieldError = getIn(errors, labelFieldName);
+
+                    const linkFieldName = `quickActions[${index}].link`;
+                    const linkFieldTouched = getIn(touched, linkFieldName);
+                    const linkFieldError = getIn(errors, linkFieldName);
+                    return (
+                      <QuickActionContainer
+                        key={quickAction.id !== undefined ? quickAction.id : index}
+                      >
+                        <QuickActionHeadLineContainer>
+                          <h3>
+                            <FormattedMessage
+                              id="quick_actions.action-title"
+                              values={{ number: index + 1 }}
+                            />
+                          </h3>
+                          <QuickActionDeleteButton onClick={() => arrayHelpers.remove(index)}>
+                            <FormattedMessage id="quick_actions.action-delete" />
+                          </QuickActionDeleteButton>
+                        </QuickActionHeadLineContainer>
+                        <InputFieldWrapper>
+                          <InputField
+                            required
+                            placeholder={formatMessage({ id: 'quick_actions.label' })}
+                            type="text"
+                            name={labelFieldName}
+                            error={labelFieldTouched === true && labelFieldError !== undefined}
+                            helperText={labelFieldTouched === true ? labelFieldError : null}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={quickAction.label}
+                          />
+                        </InputFieldWrapper>
+                        <InputFieldWrapper>
+                          <InputField
+                            required
+                            placeholder={formatMessage({ id: 'quick_actions.link' })}
+                            type="text"
+                            name={linkFieldName}
+                            error={linkFieldTouched === true && linkFieldError !== undefined}
+                            helperText={linkFieldTouched === true ? linkFieldError : null}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={quickAction.link}
+                          />
+                        </InputFieldWrapper>
+                      </QuickActionContainer>
+                    );
+                  })}
+                  <AddButton
+                    disabled={
+                      errors.quickActions === undefined
+                        ? false
+                        : hasFormErrors(errors.quickActions as QuickActionError[])
+                    }
+                    size="small"
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => arrayHelpers.push({ label: '', link: '' })}
+                  >
+                    <AddIcon src="/images/add.svg" />
+                    <FormattedMessage id="quick_actions.add" />
+                  </AddButton>
+                </>
+              )}
+            />
+            <ValidateButton
+              disabled={
+                errors.quickActions === undefined
+                  ? false
+                  : hasFormErrors(errors.quickActions as QuickActionError[])
+              }
+              type="submit"
+              size="small"
+              variant="contained"
+              color="primary"
+            >
+              <FormattedMessage id="quick_actions.validate" />
+            </ValidateButton>
+          </form>
+        )}
+      </Formik>
     </>
   );
 };

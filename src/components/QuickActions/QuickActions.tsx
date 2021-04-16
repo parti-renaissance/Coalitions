@@ -6,8 +6,6 @@ import {
   QuickActionsTitle,
   QuickActionsDescription,
   ValidateButton,
-  AddIcon,
-  AddButton,
   QuickActionContainer,
   QuickActionDeleteButton,
   QuickActionHeadLineContainer,
@@ -20,6 +18,7 @@ import {
   QuickActionsForms,
   useValidateQuickActionsForm,
 } from './useValidateQuickActionsForm';
+import { AddButton } from './components/AddButton/AddButton';
 
 export const QuickActions: FunctionComponent = () => {
   const { formatMessage } = useIntl();
@@ -103,24 +102,18 @@ export const QuickActions: FunctionComponent = () => {
                   <AddButton
                     disabled={
                       errors.quickActions === undefined
-                        ? false
+                        ? true
                         : hasFormErrors(errors.quickActions as QuickActionError[])
                     }
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => arrayHelpers.push({ label: '', link: '' })}
-                  >
-                    <AddIcon src="/images/add.svg" />
-                    <FormattedMessage id="quick_actions.add" />
-                  </AddButton>
+                    push={arrayHelpers.push}
+                  />
                 </>
               )}
             />
             <ValidateButton
               disabled={
                 errors.quickActions === undefined
-                  ? false
+                  ? true
                   : hasFormErrors(errors.quickActions as QuickActionError[])
               }
               type="submit"

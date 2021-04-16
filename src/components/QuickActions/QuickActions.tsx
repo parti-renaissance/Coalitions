@@ -19,7 +19,7 @@ import {
   QuickActionError,
   QuickActionsForms,
   useValidateQuickActionsForm,
-} from './services';
+} from './useValidateQuickActionsForm';
 
 export const QuickActions: FunctionComponent = () => {
   const { formatMessage } = useIntl();

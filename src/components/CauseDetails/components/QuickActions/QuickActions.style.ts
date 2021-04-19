@@ -1,15 +1,18 @@
 import styled from 'styled-components';
-import { colorPalette, getSpacing } from 'stylesheet';
-import { FullWidthButton } from 'components/Button/Button';
+import { colorPalette, fonts, getSpacing, media } from 'stylesheet';
 
 export const Title = styled.h3`
-  color: ${colorPalette.greyDark};
-  margin-bottom: ${getSpacing(5)};
+  display: none;
+  ${media.desktop(`
+    display: flex;
+    color: ${colorPalette.greyDark};
+    margin-bottom: ${getSpacing(5)};
+  `)}
 `;
 
-export const QuickActionContainer = styled(FullWidthButton)`
+export const QuickActionContainer = styled.div`
   margin-bottom: ${getSpacing(5)};
-  padding: 0;
+  cursor: pointer;
 `;
 
 export const QuickActionContentContainer = styled.div`
@@ -20,6 +23,7 @@ export const QuickActionContentContainer = styled.div`
 `;
 
 export const QuickActionLabel = styled.div`
+  ${fonts.button};
   color: ${colorPalette.blueCoalition};
   text-decoration: underline;
 `;

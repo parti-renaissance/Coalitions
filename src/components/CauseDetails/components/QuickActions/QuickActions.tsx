@@ -10,21 +10,27 @@ import {
   QuickActionLabel,
   QuickActionArrowRight,
 } from './QuickActions.style';
-import { QuickAction } from 'redux/Cause/types';
+import { QuickAction as QuickActionType } from 'redux/Cause/types';
 import { useIntl } from 'react-intl';
 
 interface QuickActionsProps {
   causeId: string;
 }
 
-const renderQuickAction = (quickAction: QuickAction) => (
-  <QuickActionContainer>
-    <QuickActionContentContainer>
-      <QuickActionLabel>{quickAction.label}</QuickActionLabel>
-      <QuickActionArrowRight src="/images/arrowRight.svg" />
-    </QuickActionContentContainer>
-  </QuickActionContainer>
-);
+const QuickAction: FunctionComponent<{ quickAction: QuickActionType }> = ({ quickAction }) => {
+  const onClick = () => {
+    window.open(quickAction.link);
+  };
+
+  return (
+    <QuickActionContainer onClick={onClick}>
+      <QuickActionContentContainer>
+        <QuickActionLabel>{quickAction.label}</QuickActionLabel>
+        <QuickActionArrowRight src="/images/arrowRight.svg" />
+      </QuickActionContentContainer>
+    </QuickActionContainer>
+  );
+};
 
 const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) => {
   const quickActions = useSelector(getCauseQuickActions(causeId));
@@ -46,7 +52,12 @@ const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) => {
   return (
     <div>
       <Title>{intl.formatMessage({ id: 'cause.grow-the-cause' })}</Title>
-      {quickActions.map(renderQuickAction)}
+      {quickActions.map((quickAction: QuickActionType) => (
+        <QuickAction
+          quickAction={quickAction}
+          key={quickAction.id !== undefined ? quickAction.id : ''}
+        />
+      ))}
     </div>
   );
 };

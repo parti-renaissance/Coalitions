@@ -64,3 +64,10 @@ export const GrowModalContentContainer = styled.div`
   justify-content: center;
   margin-bottom: ${getSpacing(16)};
 `;
+
+export const MobileQuickActionsWrapper = styled.div`
+  margin-top: ${getSpacing(5)};
+  ${media.desktop(`
+    display: none;
+  `)}
+`;

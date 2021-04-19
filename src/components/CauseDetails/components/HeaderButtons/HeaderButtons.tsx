@@ -6,6 +6,7 @@ import {
   Chevron,
   GrowModalContentContainer,
   GrowButtonWrapper,
+  MobileQuickActionsWrapper,
 } from './HeaderButtons.style';
 import { useIntl } from 'react-intl';
 import { InCreationCause, Cause } from 'redux/Cause/types';
@@ -17,6 +18,7 @@ import { useFeatureToggling } from 'services/useFeatureToggling';
 import { useHistory } from 'react-router';
 import { Modal } from 'components/Modal/Modal';
 import { FullWidthButton } from 'components/Button/Button';
+import QuickActions from '../QuickActions';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -133,7 +135,12 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
             onClose={toggleGrowTheCauseModal}
             shouldDisplayCloseIcon
           >
-            <GrowModalContentContainer>{renderUpdateAndShareButtons()}</GrowModalContentContainer>
+            <GrowModalContentContainer>
+              {renderUpdateAndShareButtons()}
+              <MobileQuickActionsWrapper>
+                <QuickActions causeId={(cause as Cause).uuid} />
+              </MobileQuickActionsWrapper>
+            </GrowModalContentContainer>
             {renderGrowModalButton({ inModal: true })}
           </Modal>
         </>

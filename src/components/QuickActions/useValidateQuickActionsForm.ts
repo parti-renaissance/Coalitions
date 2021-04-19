@@ -1,11 +1,6 @@
 import { useIntl } from 'react-intl';
+import { QuickAction } from 'redux/Cause/types';
 import { isFieldEmpty, isURLValid } from 'services/formik/form';
-
-export type QuickAction = {
-  id?: number;
-  label: string;
-  link: string;
-};
 
 export type QuickActionsForms = {
   quickActions: QuickAction[];
@@ -27,6 +22,10 @@ export const useValidateQuickActionsForm = () => {
         const errors = {} as QuickActionError;
         if (isFieldEmpty(quickAction.label)) {
           errors.label = requiredErrorMessage;
+          hasErrors = true;
+        }
+        if (quickAction.label.length <= 2) {
+          errors.label = formatMessage({ id: 'form_errors.too-short-name' });
           hasErrors = true;
         }
         if (isFieldEmpty(quickAction.link)) {

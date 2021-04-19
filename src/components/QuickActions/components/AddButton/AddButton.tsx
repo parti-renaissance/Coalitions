@@ -1,4 +1,4 @@
-import { QuickAction } from 'components/QuickActions/useValidateQuickActionsForm';
+import { QuickAction } from 'redux/Cause/types';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AddButtonContainer, AddIcon } from './AddButton.style';

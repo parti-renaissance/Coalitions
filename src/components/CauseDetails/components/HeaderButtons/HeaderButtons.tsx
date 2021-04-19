@@ -77,7 +77,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
       <GrowButtonWrapper inModal={inModal}>
         <FullWidthButton size="small" color="primary" onClick={toggleGrowTheCauseModal}>
           <GrowButtonContent>
-            <Chevron src="/images/blueDownChevron.svg" isUp={!isGrowModalOpened} />
+            <Chevron src="/images/chevronDownBlue.svg" isUp={!isGrowModalOpened} />
             {intl.formatMessage({ id: 'cause.grow-the-cause' })}
           </GrowButtonContent>
         </FullWidthButton>

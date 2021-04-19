@@ -24,20 +24,25 @@ export const DesktopContainer = styled.div`
   `)}
 `;
 
-export const GrowButton = styled(FullWidthButton)`
-  padding: 0;
+export const GrowButtonWrapper = styled.div<{ inModal?: boolean }>`
+  margin: -${getSpacing(2)} 0;
+  ${({ inModal }) =>
+    inModal === true
+      ? css`
+          position: absolute;
+          bottom: ${getSpacing(6)};
+          left: 0;
+          right: 0;
+        `
+      : css`
+          width: 100%;
+        `};
 `;
 
-export const GrowButtonContent = styled.div<{ inModal?: boolean }>`
+export const GrowButtonContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${({ inModal }) =>
-    inModal !== true
-      ? css`
-          margin: -${getSpacing(3)};
-        `
-      : css``};
 `;
 
 export const Chevron = styled.img<{ isUp: boolean }>`
@@ -57,5 +62,5 @@ export const GrowModalContentContainer = styled.div`
   flex-direction: column;
   flex: 1;
   justify-content: flex-end;
-  padding-bottom: ${getSpacing(3)};
+  margin-bottom: ${getSpacing(16)};
 `;

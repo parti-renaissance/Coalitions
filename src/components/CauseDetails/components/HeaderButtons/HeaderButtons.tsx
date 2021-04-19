@@ -2,10 +2,10 @@ import React, { FunctionComponent, useState } from 'react';
 import {
   Button,
   DesktopContainer,
-  GrowButton,
   GrowButtonContent,
   Chevron,
   GrowModalContentContainer,
+  GrowButtonWrapper,
 } from './HeaderButtons.style';
 import { useIntl } from 'react-intl';
 import { InCreationCause, Cause } from 'redux/Cause/types';
@@ -16,6 +16,7 @@ import { useCauseOwner } from 'redux/Cause/hooks/useCauseOwner';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import { useHistory } from 'react-router';
 import { Modal } from 'components/Modal/Modal';
+import { FullWidthButton } from 'components/Button/Button';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -69,14 +70,18 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
     </>
   );
 
-  const renderGrowModalButton = ({ inModal }: { inModal?: boolean }) => (
-    <GrowButton size="small" color="primary" onClick={toggleGrowTheCauseModal}>
-      <GrowButtonContent inModal={inModal}>
-        <Chevron src="/images/blueDownChevron.svg" isUp={!isGrowModalOpened} />
-        {intl.formatMessage({ id: 'cause.grow-the-cause' })}
-      </GrowButtonContent>
-    </GrowButton>
-  );
+  const renderGrowModalButton = ({ inModal }: { inModal?: boolean }) => {
+    return (
+      <GrowButtonWrapper inModal={inModal}>
+        <FullWidthButton size="small" color="primary" onClick={toggleGrowTheCauseModal}>
+          <GrowButtonContent>
+            <Chevron src="/images/blueDownChevron.svg" isUp={!isGrowModalOpened} />
+            {intl.formatMessage({ id: 'cause.grow-the-cause' })}
+          </GrowButtonContent>
+        </FullWidthButton>
+      </GrowButtonWrapper>
+    );
+  };
 
   const renderContent = () => {
     if (isPreview) {
@@ -128,14 +133,8 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
             onClose={toggleGrowTheCauseModal}
             shouldDisplayCloseIcon
           >
-            <GrowModalContentContainer>
-              {
-                <>
-                  {renderUpdateAndShareButtons()}
-                  {renderGrowModalButton({ inModal: true })}
-                </>
-              }
-            </GrowModalContentContainer>
+            <GrowModalContentContainer>{renderUpdateAndShareButtons()}</GrowModalContentContainer>
+            {renderGrowModalButton({ inModal: true })}
           </Modal>
         </>
       );

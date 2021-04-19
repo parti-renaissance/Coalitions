@@ -1,5 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { Button, Link, DesktopContainer, DesktopButton, MobileButton } from './HeaderButtons.style';
+import {
+  Button,
+  Link,
+  DesktopContainer,
+  GrowButton,
+  GrowButtonContent,
+  Chevron,
+} from './HeaderButtons.style';
 import { useIntl } from 'react-intl';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import { PATHS } from 'routes';
@@ -81,26 +88,36 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           >
             {intl.formatMessage({ id: 'cause.support-button' })}
           </Button>
-          <DesktopButton size="small" variant="outlined" color="primary" onClick={onShare}>
-            {intl.formatMessage({ id: 'cause.share-button' })}
-          </DesktopButton>
+          {isMobile || (
+            <Button size="small" variant="outlined" color="primary" onClick={onShare}>
+              {intl.formatMessage({ id: 'cause.share-button' })}
+            </Button>
+          )}
         </>
+      );
+    }
+
+    if (isMobile) {
+      return (
+        <GrowButton size="small" color="primary" onClick={onGrowTheCauseClick}>
+          <GrowButtonContent>
+            <Chevron src="/images/blueDownChevron.svg" isUp />
+            {intl.formatMessage({ id: 'cause.grow-the-cause' })}
+          </GrowButtonContent>
+        </GrowButton>
       );
     }
 
     return (
       <>
         {!isCauseOwner || !isCauseUpdateEnable || (
-          <DesktopButton size="small" variant="contained" color="primary" onClick={updateCause}>
+          <Button size="small" variant="contained" color="primary" onClick={updateCause}>
             {intl.formatMessage({ id: 'cause.update' })}
-          </DesktopButton>
+          </Button>
         )}
-        <DesktopButton size="small" variant="outlined" color="primary" onClick={onShare}>
+        <Button size="small" variant="outlined" color="primary" onClick={onShare}>
           {intl.formatMessage({ id: 'cause.share-button' })}
-        </DesktopButton>
-        <MobileButton size="small" variant="outlined" color="primary" onClick={onGrowTheCauseClick}>
-          {intl.formatMessage({ id: 'cause.grow-the-cause' })}
-        </MobileButton>
+        </Button>
       </>
     );
   };

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { getSpacing, media } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
 import { DefaultLink } from 'components/Link/Link';
@@ -12,19 +12,6 @@ export const Button = styled(MediumLargeButton)`
       margin-top: ${getSpacing(3)};
     `)}
   }
-`;
-
-export const DesktopButton = styled(Button)`
-  display: none;
-  ${media.desktop(`
-    display: flex;
-  `)}
-`;
-
-export const MobileButton = styled(Button)`
-  ${media.desktop(`
-    display: none;
-  `)}
 `;
 
 export const Link = styled(DefaultLink)`
@@ -41,4 +28,26 @@ export const DesktopContainer = styled.div`
     min-width: ${DESKTOP_BUTTONS_WIDTH};
     margin-left: ${getSpacing(6)};
   `)}
+`;
+
+export const GrowButton = styled(Button)`
+  padding: 0;
+`;
+
+export const GrowButtonContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Chevron = styled.img<{ isUp: boolean }>`
+  height: ${getSpacing(2)};
+  width: ${getSpacing(4)};
+  margin-bottom: 15px;
+  ${({ isUp }) =>
+    isUp
+      ? css`
+          transform: rotate(180deg);
+        `
+      : css``};
 `;

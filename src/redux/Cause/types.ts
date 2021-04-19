@@ -11,6 +11,7 @@ export interface InCreationCause {
 
 export type Cause = {
   uuid: string;
+  quickActions?: QuickAction[];
 } & InCreationCause;
 
 interface Author {
@@ -22,4 +23,10 @@ interface Author {
 interface Coalition {
   name: string;
   uuid: string;
+}
+
+export interface QuickAction {
+  id?: string;
+  label: string;
+  link: string;
 }

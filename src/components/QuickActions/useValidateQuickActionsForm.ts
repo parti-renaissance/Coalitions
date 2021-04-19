@@ -1,11 +1,6 @@
 import { useIntl } from 'react-intl';
+import { QuickAction } from 'redux/Cause/types';
 import { isFieldEmpty, isURLValid } from 'services/formik/form';
-
-export type QuickAction = {
-  id?: number;
-  label: string;
-  link: string;
-};
 
 export type QuickActionsForms = {
   quickActions: QuickAction[];

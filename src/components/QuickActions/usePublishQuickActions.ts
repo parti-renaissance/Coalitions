@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
+import { QuickAction } from 'redux/Cause/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
 import { authenticatedApiClient } from 'services/networking/client';
-import { QuickAction } from './useValidateQuickActionsForm';
 
 const usePublishQuickActionsErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -60,7 +60,7 @@ export const usePublishQuickActions = (causeId: string) => {
       push({ pathname: PATHS.CAUSE.url(causeId) });
       dispatch(
         updateSnackbar({
-          message: formatMessage({ id: 'create_cause.success' }),
+          message: formatMessage({ id: 'update_cause.success' }),
           severity: Severity.success,
         }),
       );

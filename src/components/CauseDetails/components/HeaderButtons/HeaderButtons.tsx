@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Button, Link, DesktopContainer } from './HeaderButtons.style';
+import { Button, Link, DesktopContainer, DesktopButton, MobileButton } from './HeaderButtons.style';
 import { useIntl } from 'react-intl';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import { PATHS } from 'routes';
@@ -43,6 +43,10 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
     });
   };
 
+  const onGrowTheCauseClick = () => {
+    // TODO
+  };
+
   const renderContent = () => {
     if (isPreview) {
       return (
@@ -65,9 +69,9 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
       );
     }
 
-    return (
-      <>
-        {!isSupported ? (
+    if (!isSupported) {
+      return (
+        <>
           <Button
             size="small"
             variant="contained"
@@ -77,16 +81,26 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           >
             {intl.formatMessage({ id: 'cause.support-button' })}
           </Button>
-        ) : isCauseOwner && isCauseUpdateEnable ? (
-          <Button size="small" variant="contained" color="primary" onClick={updateCause}>
-            {intl.formatMessage({ id: 'cause.update' })}
-          </Button>
-        ) : null}
-        {isMobile || (
-          <Button size="small" variant="outlined" color="primary" onClick={onShare}>
+          <DesktopButton size="small" variant="outlined" color="primary" onClick={onShare}>
             {intl.formatMessage({ id: 'cause.share-button' })}
-          </Button>
+          </DesktopButton>
+        </>
+      );
+    }
+
+    return (
+      <>
+        {!isCauseOwner || !isCauseUpdateEnable || (
+          <DesktopButton size="small" variant="contained" color="primary" onClick={updateCause}>
+            {intl.formatMessage({ id: 'cause.update' })}
+          </DesktopButton>
         )}
+        <DesktopButton size="small" variant="outlined" color="primary" onClick={onShare}>
+          {intl.formatMessage({ id: 'cause.share-button' })}
+        </DesktopButton>
+        <MobileButton size="small" variant="outlined" color="primary" onClick={onGrowTheCauseClick}>
+          {intl.formatMessage({ id: 'cause.grow-the-cause' })}
+        </MobileButton>
       </>
     );
   };

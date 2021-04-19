@@ -14,6 +14,19 @@ export const Button = styled(MediumLargeButton)`
   }
 `;
 
+export const DesktopButton = styled(Button)`
+  display: none;
+  ${media.desktop(`
+    display: flex;
+  `)}
+`;
+
+export const MobileButton = styled(Button)`
+  ${media.desktop(`
+    display: none;
+  `)}
+`;
+
 export const Link = styled(DefaultLink)`
   width: 100%;
 `;

@@ -33,7 +33,7 @@ const MenuLink: FunctionComponent<{
   return (
     <Container to={linkTo} onClick={onClick}>
       <MenuLinkLabel>{label}</MenuLinkLabel>
-      <ChevronRight src="/images/chevronDown.svg" />
+      <ChevronRight src="/images/chevronDownBlack.svg" />
     </Container>
   );
 };

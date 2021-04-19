@@ -68,7 +68,7 @@ export const CoalitionsFilter: React.FunctionComponent<Props> = ({
         <Chevron
           displayAll={displayAll}
           onClick={() => setDisplayAll(!displayAll)}
-          src="/images/chevronDown.svg"
+          src="/images/chevronDownBlack.svg"
         />
       )}
     </CoalitionFiltersContainer>

@@ -20,7 +20,7 @@ import {
 } from './useValidateQuickActionsForm';
 import { AddButton } from './components/AddButton/AddButton';
 import { usePublishQuickActions } from './usePublishQuickActions';
-import { useFetchQuickActions } from './useFetchQuickActions';
+import { useFetchQuickActions } from 'redux/Cause/hooks/useFetchQuickActions';
 import { useSelector } from 'react-redux';
 import { getCauseQuickActions } from 'redux/Cause/selectors';
 import Loader from 'components/Loader';

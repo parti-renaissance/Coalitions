@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import {
   Container,
+  SubContainer,
   HeaderContainer,
   CauseImage,
   DesktopHeaderWrapper,
   MobileHeaderWrapper,
+  DesktopQuickActionsWrapper,
 } from './CauseDetails.style';
 import { FormattedMessage } from 'react-intl';
 import { InCreationCause, Cause } from 'redux/Cause/types';
@@ -15,6 +17,8 @@ import AboutThisCause from './components/AboutThisCause';
 import Header from './components/Header';
 import HeaderButtons from './components/HeaderButtons';
 import EmptySection from './components/EmptySection';
+import { useCauseOwner } from 'redux/Cause/hooks/useCauseOwner';
+import QuickActions from './components/QuickActions';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;
@@ -25,6 +29,7 @@ interface CauseDetailsProps {
 const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, isSupporting }) => {
   const isPreview = Boolean(!onSupport);
   const isSupported = Boolean(cause.supported);
+  const isCauseOwner = useCauseOwner(cause);
 
   const renderTabPanel = (tabIndex: number) => {
     switch (tabIndex) {
@@ -41,27 +46,35 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
     <Header cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
   );
 
+  const showQuickActions = !isPreview && (isCauseOwner || isSupported);
   return (
     <>
       <DesktopHeaderWrapper>{renderHeader()}</DesktopHeaderWrapper>
       <Container>
-        <HeaderContainer>
-          <CauseImage backgroundImage={cause.image_url} />
-          {isSupported ? (
-            <Supported>
-              <FormattedMessage id="cause.supported" />
-            </Supported>
-          ) : null}
-          <MobileHeaderWrapper>{renderHeader()}</MobileHeaderWrapper>
-        </HeaderContainer>
-        <TabsWrapper
-          renderTabPanel={renderTabPanel}
-          tabsLabel={[
-            <FormattedMessage id="cause.about.title" key="cause.about.title" />,
-            <FormattedMessage id="cause.events.title" key="cause.events.title" />,
-            <FormattedMessage id="cause.discussions.title" key="cause.discussions.title" />,
-          ]}
-        />
+        <SubContainer center={!showQuickActions}>
+          <HeaderContainer>
+            <CauseImage backgroundImage={cause.image_url} />
+            {isSupported ? (
+              <Supported>
+                <FormattedMessage id="cause.supported" />
+              </Supported>
+            ) : null}
+            <MobileHeaderWrapper>{renderHeader()}</MobileHeaderWrapper>
+          </HeaderContainer>
+          <TabsWrapper
+            renderTabPanel={renderTabPanel}
+            tabsLabel={[
+              <FormattedMessage id="cause.about.title" key="cause.about.title" />,
+              <FormattedMessage id="cause.events.title" key="cause.events.title" />,
+              <FormattedMessage id="cause.discussions.title" key="cause.discussions.title" />,
+            ]}
+          />
+        </SubContainer>
+        {showQuickActions && (
+          <DesktopQuickActionsWrapper>
+            <QuickActions causeId={(cause as Cause).uuid} />
+          </DesktopQuickActionsWrapper>
+        )}
       </Container>
       {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}
       <HeaderButtons cause={cause} onSupport={onSupport} isSupporting={isSupporting} isMobile />

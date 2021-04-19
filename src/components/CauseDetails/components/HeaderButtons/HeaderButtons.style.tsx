@@ -12,7 +12,7 @@ export const Button = styled(FullWidthButton)`
   }
 `;
 
-const DESKTOP_BUTTONS_WIDTH = '300px';
+export const DESKTOP_BUTTONS_WIDTH = '300px';
 
 export const DesktopContainer = styled.div`
   display: none;

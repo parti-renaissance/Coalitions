@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import {
   Button,
-  Link,
   DesktopContainer,
   GrowButton,
   GrowButtonContent,
@@ -41,15 +40,15 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
   const { isCauseUpdateEnable } = useFeatureToggling();
   const [isGrowModalOpened, setIsGrowModalOpened] = useState(false);
 
-  const onPublishInCreationCause = () => {
-    publishCause();
-  };
-
   const updateCause = () => {
     history.push({
       pathname: PATHS.UPDATE_CAUSE.url(),
       search: `?causeId=${(cause as Cause).uuid}`,
     });
+  };
+
+  const updatePreview = () => {
+    history.push(PATHS.CREATE_CAUSE.url());
   };
 
   const toggleGrowTheCauseModal = () => {
@@ -60,16 +59,14 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
     if (isPreview) {
       return (
         <>
-          <Link to={PATHS.CREATE_CAUSE.url()}>
-            <Button size="small" variant="outlined" color="primary">
-              {intl.formatMessage({ id: 'cause_preview.update' })}
-            </Button>
-          </Link>
+          <Button size="small" variant="outlined" color="primary" onClick={updatePreview}>
+            {intl.formatMessage({ id: 'cause_preview.update' })}
+          </Button>
           <Button
             size="small"
             variant="contained"
             color="primary"
-            onClick={onPublishInCreationCause}
+            onClick={publishCause}
             isLoading={loading}
           >
             {intl.formatMessage({ id: 'cause_preview.publish' })}

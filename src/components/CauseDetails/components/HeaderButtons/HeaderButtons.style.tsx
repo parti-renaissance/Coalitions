@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getSpacing, media } from 'stylesheet';
 import { MediumLargeButton } from 'components/Button/Button';
-import { DefaultLink } from 'components/Link/Link';
 
 export const Button = styled(MediumLargeButton)`
   width: 100%;
@@ -12,10 +11,6 @@ export const Button = styled(MediumLargeButton)`
       margin-top: ${getSpacing(3)};
     `)}
   }
-`;
-
-export const Link = styled(DefaultLink)`
-  width: 100%;
 `;
 
 const DESKTOP_BUTTONS_WIDTH = '300px';

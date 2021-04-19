@@ -18,8 +18,8 @@ const usePublishQuickActionsErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (error.message.includes('name: Cette valeur est déjà utilisée')) {
-        return formatMessage({ id: 'errors.already-used-cause-name' });
+      if (error.message.includes('Access Denied')) {
+        return formatMessage({ id: 'errors.cannot-edit-this-cause' });
       }
       return null;
     },

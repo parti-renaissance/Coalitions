@@ -61,6 +61,6 @@ export const GrowModalContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  justify-content: flex-end;
+  justify-content: center;
   margin-bottom: ${getSpacing(16)};
 `;

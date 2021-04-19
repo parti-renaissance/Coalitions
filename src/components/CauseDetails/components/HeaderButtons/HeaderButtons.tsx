@@ -5,6 +5,7 @@ import {
   GrowButton,
   GrowButtonContent,
   Chevron,
+  GrowModalContentContainer,
 } from './HeaderButtons.style';
 import { useIntl } from 'react-intl';
 import { InCreationCause, Cause } from 'redux/Cause/types';
@@ -55,6 +56,28 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
     setIsGrowModalOpened(!isGrowModalOpened);
   };
 
+  const renderUpdateAndShareButtons = () => (
+    <>
+      {!isCauseOwner || !isCauseUpdateEnable || (
+        <Button size="small" variant="contained" color="primary" onClick={updateCause}>
+          {intl.formatMessage({ id: 'cause.update' })}
+        </Button>
+      )}
+      <Button size="small" variant="outlined" color="primary" onClick={onShare}>
+        {intl.formatMessage({ id: 'cause.share-button' })}
+      </Button>
+    </>
+  );
+
+  const renderGrowModalButton = ({ inModal }: { inModal?: boolean }) => (
+    <GrowButton size="small" color="primary" onClick={toggleGrowTheCauseModal}>
+      <GrowButtonContent inModal={inModal}>
+        <Chevron src="/images/blueDownChevron.svg" isUp={!isGrowModalOpened} />
+        {intl.formatMessage({ id: 'cause.grow-the-cause' })}
+      </GrowButtonContent>
+    </GrowButton>
+  );
+
   const renderContent = () => {
     if (isPreview) {
       return (
@@ -99,35 +122,26 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
     if (isMobile) {
       return (
         <>
-          <GrowButton size="small" color="primary" onClick={toggleGrowTheCauseModal}>
-            <GrowButtonContent>
-              <Chevron src="/images/blueDownChevron.svg" isUp={!isGrowModalOpened} />
-              {intl.formatMessage({ id: 'cause.grow-the-cause' })}
-            </GrowButtonContent>
-          </GrowButton>
+          {renderGrowModalButton({})}
           <Modal
             isOpened={isGrowModalOpened}
             onClose={toggleGrowTheCauseModal}
             shouldDisplayCloseIcon
           >
-            <div />
+            <GrowModalContentContainer>
+              {
+                <>
+                  {renderUpdateAndShareButtons()}
+                  {renderGrowModalButton({ inModal: true })}
+                </>
+              }
+            </GrowModalContentContainer>
           </Modal>
         </>
       );
     }
 
-    return (
-      <>
-        {!isCauseOwner || !isCauseUpdateEnable || (
-          <Button size="small" variant="contained" color="primary" onClick={updateCause}>
-            {intl.formatMessage({ id: 'cause.update' })}
-          </Button>
-        )}
-        <Button size="small" variant="outlined" color="primary" onClick={onShare}>
-          {intl.formatMessage({ id: 'cause.share-button' })}
-        </Button>
-      </>
-    );
+    return renderUpdateAndShareButtons();
   };
 
   const Container = isMobile === true ? StickyMobileButtonsContainer : DesktopContainer;

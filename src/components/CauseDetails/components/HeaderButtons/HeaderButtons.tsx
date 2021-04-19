@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import {
   Button,
   Link,
@@ -15,6 +15,7 @@ import { usePublishCause } from 'redux/Cause/hooks/usePublishCause';
 import { useCauseOwner } from 'redux/Cause/hooks/useCauseOwner';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import { useHistory } from 'react-router';
+import { Modal } from 'components/Modal/Modal';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -38,6 +39,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
   const { loading, publishCause } = usePublishCause();
   const isCauseOwner = useCauseOwner(cause);
   const { isCauseUpdateEnable } = useFeatureToggling();
+  const [isGrowModalOpened, setIsGrowModalOpened] = useState(false);
 
   const onPublishInCreationCause = () => {
     publishCause();
@@ -50,8 +52,8 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
     });
   };
 
-  const onGrowTheCauseClick = () => {
-    // TODO
+  const toggleGrowTheCauseModal = () => {
+    setIsGrowModalOpened(!isGrowModalOpened);
   };
 
   const renderContent = () => {
@@ -99,12 +101,21 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
 
     if (isMobile) {
       return (
-        <GrowButton size="small" color="primary" onClick={onGrowTheCauseClick}>
-          <GrowButtonContent>
-            <Chevron src="/images/blueDownChevron.svg" isUp />
-            {intl.formatMessage({ id: 'cause.grow-the-cause' })}
-          </GrowButtonContent>
-        </GrowButton>
+        <>
+          <GrowButton size="small" color="primary" onClick={toggleGrowTheCauseModal}>
+            <GrowButtonContent>
+              <Chevron src="/images/blueDownChevron.svg" isUp={!isGrowModalOpened} />
+              {intl.formatMessage({ id: 'cause.grow-the-cause' })}
+            </GrowButtonContent>
+          </GrowButton>
+          <Modal
+            isOpened={isGrowModalOpened}
+            onClose={toggleGrowTheCauseModal}
+            shouldDisplayCloseIcon
+          >
+            <div />
+          </Modal>
+        </>
       );
     }
 

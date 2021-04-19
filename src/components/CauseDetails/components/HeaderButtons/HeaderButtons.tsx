@@ -61,11 +61,11 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
 
   const renderUpdateAndShareButtons = () => (
     <>
-      {!isCauseOwner || !isCauseUpdateEnable || (
+      {isCauseOwner && isCauseUpdateEnable ? (
         <Button size="small" variant="contained" color="primary" onClick={updateCause}>
           {intl.formatMessage({ id: 'cause.update' })}
         </Button>
-      )}
+      ) : null}
       <Button size="small" variant="outlined" color="primary" onClick={onShare}>
         {intl.formatMessage({ id: 'cause.share-button' })}
       </Button>

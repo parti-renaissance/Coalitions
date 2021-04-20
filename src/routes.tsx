@@ -7,7 +7,6 @@ const Home = lazy(() => import('./pages/Home'));
 const CausePage = lazy(() => import('./pages/CausePage'));
 const OurMission = lazy(() => import('./pages/OurMission'));
 const CreateCause = lazy(() => import('./pages/CreateCause'));
-const UpdateCause = lazy(() => import('./pages/UpdateCause'));
 const CauseAdmin = lazy(() => import('./pages/CauseAdmin'));
 const CausePreview = lazy(() => import('./pages/CausePreview'));
 const CauseList = lazy(() => import('./pages/CauseList'));
@@ -42,10 +41,6 @@ export const PATHS = {
   CREATE_CAUSE: {
     route: '/creer-une-cause',
     url: () => '/creer-une-cause',
-  },
-  UPDATE_CAUSE: {
-    route: '/modifier-une-cause',
-    url: () => '/modifier-une-cause',
   },
   CAUSE_ADMIN: {
     route: '/administrer-une-cause',
@@ -107,7 +102,6 @@ const Routes: FunctionComponent<{}> = () => {
           <Route path={PATHS.CAUSE.route} component={CausePage}></Route>
           <Route path={PATHS.OUR_MISSION.route} component={OurMission}></Route>
           <Route path={PATHS.CREATE_CAUSE.route} component={CreateCause}></Route>
-          <Route path={PATHS.UPDATE_CAUSE.route} component={UpdateCause}></Route>
           <Route path={PATHS.CAUSE_PREVIEW.route} component={CausePreview}></Route>
           <Route path={PATHS.LEGAL_NOTICE.route} component={LegalNotice}></Route>
           <Route path={PATHS.COOKIES_POLICY.route} component={CookiesPolicy}></Route>

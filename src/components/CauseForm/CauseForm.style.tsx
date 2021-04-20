@@ -2,15 +2,6 @@ import styled from 'styled-components';
 import { media, getSpacing, defaultMargins } from 'stylesheet';
 import { FullWidthButton } from 'components/Button/Button';
 
-export const Container = styled.div`
-  ${media.desktop(`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
-  `)}
-`;
-
 export const SubContainer = styled.div`
   display: flex;
   flex-direction: column;

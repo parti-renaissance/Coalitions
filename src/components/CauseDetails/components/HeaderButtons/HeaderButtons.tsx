@@ -24,7 +24,7 @@ import QuickActions from '../QuickActions';
 interface HeaderProps {
   cause: Cause | InCreationCause;
   onSupport?: () => void;
-  onShare?: () => void;
+  share: () => void;
   isSupporting?: boolean;
   isMobile?: boolean;
 }
@@ -32,7 +32,7 @@ interface HeaderProps {
 const HeaderButtons: FunctionComponent<HeaderProps> = ({
   cause,
   onSupport,
-  onShare,
+  share,
   isSupporting,
   isMobile,
 }) => {
@@ -67,11 +67,9 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           {intl.formatMessage({ id: 'cause.update' })}
         </Button>
       ) : null}
-      {isMobile === true ? (
-        <Button size="small" variant="outlined" color="primary" onClick={onShare}>
-          {intl.formatMessage({ id: 'cause.share-button' })}
-        </Button>
-      ) : null}
+      <Button size="small" variant="outlined" color="primary" onClick={share}>
+        {intl.formatMessage({ id: 'cause.share-button' })}
+      </Button>
     </>
   );
 
@@ -121,7 +119,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
             {intl.formatMessage({ id: 'cause.support-button' })}
           </Button>
           {isMobile || (
-            <Button size="small" variant="outlined" color="primary" onClick={onShare}>
+            <Button size="small" variant="outlined" color="primary" onClick={share}>
               {intl.formatMessage({ id: 'cause.share-button' })}
             </Button>
           )}

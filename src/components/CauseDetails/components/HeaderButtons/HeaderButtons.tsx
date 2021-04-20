@@ -8,6 +8,7 @@ import {
   GrowModalContentContainer,
   GrowButtonWrapper,
   MobileQuickActionsWrapper,
+  ButtonWrapper,
 } from './HeaderButtons.style';
 import { useIntl } from 'react-intl';
 import { InCreationCause, Cause } from 'redux/Cause/types';
@@ -20,11 +21,11 @@ import { useHistory } from 'react-router';
 import { Modal } from 'components/Modal/Modal';
 import { FullWidthButton } from 'components/Button/Button';
 import QuickActions from '../QuickActions';
+import ShareButton from 'components/ShareButton';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
   onSupport?: () => void;
-  share: () => void;
   isSupporting?: boolean;
   isMobile?: boolean;
 }
@@ -32,7 +33,6 @@ interface HeaderProps {
 const HeaderButtons: FunctionComponent<HeaderProps> = ({
   cause,
   onSupport,
-  share,
   isSupporting,
   isMobile,
 }) => {
@@ -67,9 +67,9 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           {intl.formatMessage({ id: 'cause.update' })}
         </Button>
       ) : null}
-      <Button size="small" variant="outlined" color="primary" onClick={share}>
-        {intl.formatMessage({ id: 'cause.share-button' })}
-      </Button>
+      <ButtonWrapper>
+        <ShareButton shareContent={{ title: cause.name, text: cause.name }} />
+      </ButtonWrapper>
     </>
   );
 
@@ -119,9 +119,9 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
             {intl.formatMessage({ id: 'cause.support-button' })}
           </Button>
           {isMobile || (
-            <Button size="small" variant="outlined" color="primary" onClick={share}>
-              {intl.formatMessage({ id: 'cause.share-button' })}
-            </Button>
+            <ButtonWrapper>
+              <ShareButton shareContent={{ title: cause.name, text: cause.name }} />
+            </ButtonWrapper>
           )}
         </>
       );

@@ -31,14 +31,7 @@ export const NameAndShareWrapper = styled.div`
 `;
 
 export const ShareButtonContainer = styled.div`
-  padding-left: ${getSpacing(9)};
-`;
-
-const SHARE_BUTTON_SIZE = '24px';
-
-export const ShareButton = styled.img`
-  height: ${SHARE_BUTTON_SIZE};
-  width: ${SHARE_BUTTON_SIZE};
+  margin-left: ${getSpacing(9)};
 `;
 
 const MORE_ICON_SIZE = '18px';

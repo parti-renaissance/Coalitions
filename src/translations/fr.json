@@ -66,14 +66,16 @@
     "description": "Vous pouvez soutenir une cause existante ou créer la vôtre.",
     "no_cause": "Aucune cause ne correspond à votre filtre."
   },
+  "share": {
+    "label": "Partager",
+    "copy-to-clipboard": "Le lien a été copié"
+  },
   "cause": {
     "author": "Par {firstName} {lastNameInitial}",
     "support": "{supportsNumber} soutien",
     "supports": "{supportsNumber} soutiens",
     "support-button": "Soutenir",
-    "share-button": "Partager",
     "update": "Modifier",
-    "copy-to-clipboard": "Le lien a été copié",
     "supported": "Soutenue",
     "see-button": "Voir",
     "confirm-support": "Confirmez votre soutien",

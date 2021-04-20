@@ -1,14 +1,10 @@
-import React, { useEffect, useState, FunctionComponent } from 'react';
+import React, { useEffect, FunctionComponent, useState } from 'react';
 import Loader from 'components/Loader';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
-import { getCause } from 'redux/Cause/selectors';
-import { isUserLogged } from 'redux/Login';
-import LoginAndSupportModal from 'components/LoginAndSupportModal';
-import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
-import { PATHS } from 'routes';
-import CauseDetails from 'components/CauseDetails';
+import { useFetchCoalitions } from 'redux/Coalition/hooks';
+import { getCoalitions } from 'redux/Coalition/selectors';
+import { Coalition as CoalitionType } from 'redux/Coalition/types';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -16,8 +12,33 @@ interface CoalitionNavParams {
 
 const Coalition: FunctionComponent = () => {
   const { coalitionId } = useParams<CoalitionNavParams>();
+  const coalitions = useSelector(getCoalitions);
+  const [coalition, setCoalition] = useState<CoalitionType | undefined>(
+    coalitions.find(({ uuid }) => uuid === coalitionId),
+  );
 
-  console.log({ coalitionId });
+  const { fetchCoalitions, isFetchingCoalitions } = useFetchCoalitions();
+
+  useEffect(() => {
+    if (coalitions.length === 0) {
+      fetchCoalitions();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchCoalitions]);
+
+  useEffect(() => {
+    setCoalition(coalitions.find(({ uuid }) => uuid === coalitionId));
+  }, [coalitions, coalitionId]);
+
+  if (isFetchingCoalitions && coalition === undefined) {
+    return <Loader />;
+  }
+
+  if (coalition === undefined) {
+    return null;
+  }
+
+  console.log({ coalition });
 
   return <div />;
 };

@@ -4,4 +4,5 @@ export interface User {
   lastName?: string;
   email: string;
   isAdherent: boolean;
+  hasAcceptedCGU: boolean;
 }

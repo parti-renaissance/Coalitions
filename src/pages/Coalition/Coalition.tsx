@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { useFetchCoalitions } from 'redux/Coalition/hooks';
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { Coalition as CoalitionType } from 'redux/Coalition/types';
+import { Image } from './Coalition.style';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -38,9 +39,11 @@ const Coalition: FunctionComponent = () => {
     return null;
   }
 
-  console.log({ coalition });
-
-  return <div />;
+  return (
+    <>
+      <Image src={coalition.image_url} />
+    </>
+  );
 };
 
 export default Coalition;

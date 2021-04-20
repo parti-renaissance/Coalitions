@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, colorPalette, media, fonts } from 'stylesheet';
+import { getSpacing, colorPalette, media, fonts, defaultMargins } from 'stylesheet';
 import Menu from '@material-ui/core/Menu';
 
 export const Container = styled.div`
@@ -8,7 +8,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: ${getSpacing(8)} ${getSpacing(12)};
+    padding: ${getSpacing(8)} ${defaultMargins.horizontal.desktop};
     background-color: ${colorPalette.greyLight};
   `)}
 `;

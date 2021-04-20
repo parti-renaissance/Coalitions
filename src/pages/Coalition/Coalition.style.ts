@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, media } from 'stylesheet';
+import { getSpacing, media, fonts, colorPalette } from 'stylesheet';
 
 export const Image = styled.img`
   width: 100%;
@@ -8,4 +8,9 @@ export const Image = styled.img`
   ${media.desktop(`
     height: ${getSpacing(63)};
   `)};
+`;
+
+export const Title = styled.h1`
+  ${fonts.h1Small};
+  color: ${colorPalette.greyDark};
 `;

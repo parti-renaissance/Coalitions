@@ -5,7 +5,8 @@ import { useParams } from 'react-router';
 import { useFetchCoalitions } from 'redux/Coalition/hooks';
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { Coalition as CoalitionType } from 'redux/Coalition/types';
-import { Image } from './Coalition.style';
+import { Image, Title } from './Coalition.style';
+import { Container as HeaderContainer } from 'components/CauseDetails/components/Header/Header.style';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -42,6 +43,9 @@ const Coalition: FunctionComponent = () => {
   return (
     <>
       <Image src={coalition.image_url} />
+      <HeaderContainer>
+        <Title>{coalition.name}</Title>
+      </HeaderContainer>
     </>
   );
 };

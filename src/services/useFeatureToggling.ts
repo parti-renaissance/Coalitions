@@ -1,6 +1,7 @@
 interface FeatureToggles {
   isCauseUpdateEnable: boolean;
   isProfilePageEnable: boolean;
+  isCoalitionPageEnable: boolean;
 }
 
 export const useFeatureToggling = (): FeatureToggles => {
@@ -8,11 +9,13 @@ export const useFeatureToggling = (): FeatureToggles => {
     return {
       isCauseUpdateEnable: true,
       isProfilePageEnable: false,
+      isCoalitionPageEnable: false,
     };
   }
 
   return {
     isCauseUpdateEnable: true,
     isProfilePageEnable: true,
+    isCoalitionPageEnable: true,
   };
 };

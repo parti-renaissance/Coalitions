@@ -1,7 +1,6 @@
 import { SeeMore } from 'components/SeeMore/SeeMore';
 import React, { FunctionComponent } from 'react';
 import { InCreationCause, Cause } from 'redux/Cause/types';
-import { Description } from './AboutThisCause.style';
 import EmptySection from '../EmptySection';
 
 interface AboutThisCauseProps {
@@ -18,11 +17,7 @@ const AboutThisCause: FunctionComponent<AboutThisCauseProps> = ({ cause }) => {
     );
   }
 
-  return (
-    <Description>
-      <SeeMore text={cause.description} />
-    </Description>
-  );
+  return <SeeMore text={cause.description} />;
 };
 
 export default AboutThisCause;

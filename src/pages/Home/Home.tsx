@@ -36,19 +36,26 @@ import Video from 'components/Video';
 import OurCommitments from 'components/OurCommitments';
 import SuccessModal from './components/SuccessModal';
 import SuccessStories from 'components/SuccessStories';
+import { useFeatureToggling } from 'services/useFeatureToggling';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
-  const onCoalitionClick = (coalition: Coalition) => {
-    history.push({ pathname: PATHS.CAUSE_LIST.url(), search: `?coalitionId=${coalition.uuid}` });
-  };
   const causes = useSelector(getAllCauses);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const { loading, fetchFirstPage } = useFetchCauses(10);
+  const { isCoalitionPageEnable } = useFeatureToggling();
 
   React.useEffect(() => {
     fetchFirstPage([], isUserLoggedIn);
   }, [fetchFirstPage, isUserLoggedIn]);
+
+  const onCoalitionClick = (coalition: Coalition) => {
+    if (isCoalitionPageEnable) {
+      history.push(PATHS.COALITION.url(coalition.uuid));
+    } else {
+      history.push({ pathname: PATHS.CAUSE_LIST.url(), search: `?coalitionId=${coalition.uuid}` });
+    }
+  };
 
   const renderVideo = () => <Video videoId="KkDsxQLM3Ao" />;
 

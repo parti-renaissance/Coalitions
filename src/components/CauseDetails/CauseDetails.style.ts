@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { media, defaultMargins, getSpacing } from 'stylesheet';
+import { media, defaultMargins, getSpacing, contentMaxWidth } from 'stylesheet';
 import { DESKTOP_BUTTONS_WIDTH } from './components/HeaderButtons/HeaderButtons.style';
 
 export const Container = styled.div`
@@ -8,8 +8,6 @@ export const Container = styled.div`
     padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)}
 `;
-
-const SUB_CONTAINER_MAX_WIDTH = '960px';
 
 export const SubContainer = styled.div<{ center: boolean }>`
   ${media.desktop(`
@@ -20,7 +18,7 @@ export const SubContainer = styled.div<{ center: boolean }>`
       ? css`
           ${media.desktop(`
             margin: auto;
-            max-width: ${SUB_CONTAINER_MAX_WIDTH};
+            max-width: ${contentMaxWidth};
           `)}
         `
       : css``}

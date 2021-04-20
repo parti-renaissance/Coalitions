@@ -17,6 +17,7 @@ const CookiesPolicy = lazy(() => import('./pages/CookiesPolicy'));
 const LegalNotice = lazy(() => import('./pages/LegalNotice'));
 const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'));
 const Profile = lazy(() => import('./pages/Profile'));
+const Coalition = lazy(() => import('./pages/Coalition'));
 
 export const CHARTER_OF_VALUES_URL =
   'https://storage.googleapis.com/pourunecause/charte_des_valeurs.pdf';
@@ -79,6 +80,10 @@ export const PATHS = {
     route: '/profile',
     url: () => '/profile',
   },
+  COALITION: {
+    route: '/coalition/:coalitionId',
+    url: (coalitionId: string) => `/coalition/${coalitionId}`,
+  },
 };
 
 const Routes: FunctionComponent<{}> = () => {
@@ -110,6 +115,7 @@ const Routes: FunctionComponent<{}> = () => {
           <Route path={PATHS.CONFIRM_PASSWORD.route} component={Password}></Route>
           <Route path={PATHS.INSCRIPTION.route} component={Inscription}></Route>
           <Route path={PATHS.PROFILE.route} component={Profile}></Route>
+          <Route path={PATHS.COALITION.route} component={Coalition}></Route>
         </Switch>
       </Suspense>
       <Snackbar />

@@ -1,6 +1,12 @@
 import styled from 'styled-components';
-import { getSpacing, media, fonts, colorPalette, defaultMargins } from 'stylesheet';
-import { SUB_CONTAINER_MAX_WIDTH } from 'components/CauseDetails/CauseDetails.style';
+import {
+  getSpacing,
+  media,
+  fonts,
+  colorPalette,
+  defaultMargins,
+  contentMaxWidth,
+} from 'stylesheet';
 
 export const Image = styled.img`
   width: 100%;
@@ -25,6 +31,6 @@ export const ContentContainer = styled.div`
 
 export const DescriptionWrapper = styled.div`
   ${media.desktop(`
-    max-width: ${SUB_CONTAINER_MAX_WIDTH};
+    max-width: ${contentMaxWidth};
   `)};
 `;

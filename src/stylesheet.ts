@@ -271,6 +271,8 @@ export const fonts = {
   `,
 };
 
+export const contentMaxWidth = '960px';
+
 export const styledTags = css`
   color: ${colorPalette.greyDark};
   h2 {

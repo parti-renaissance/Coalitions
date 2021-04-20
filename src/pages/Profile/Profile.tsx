@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Container, GenderItem } from './Profile.style';
+import { Container, GenderItem, AdherentText, Form } from './Profile.style';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
 import { FullWidthButton } from 'components/Button/Button';
@@ -12,7 +12,17 @@ import { useSelector } from 'react-redux';
 import { getCurrentUser } from 'redux/User/selectors';
 import isMatch from 'lodash/isMatch';
 
-export const Profile: React.FunctionComponent = () => {
+const UpdateEmProfileLink: FunctionComponent<{}> = () => (
+  <a
+    href="https://en-marche.fr/parametres/mon-compte/modifier"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {'en-marche.fr'}
+  </a>
+);
+
+export const Profile: FunctionComponent = () => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const currentUser = useSelector(getCurrentUser);
@@ -25,15 +35,24 @@ export const Profile: React.FunctionComponent = () => {
     return null;
   }
 
-  const { email, firstName, lastName } = currentUser;
+  const { email, firstName, lastName, isAdherent } = currentUser;
   const initialValues = {
     email,
     firstName,
     lastName,
     gender: GENDERS[0].value,
   } as ProfileFormValues;
+
   return (
     <Container>
+      {isAdherent ? (
+        <AdherentText>
+          {intl.formatMessage(
+            { id: 'profile.update_for_adherent' },
+            { link: <UpdateEmProfileLink /> },
+          )}
+        </AdherentText>
+      ) : null}
       <Formik<ProfileFormValues>
         initialValues={initialValues}
         validate={validateForm}
@@ -51,7 +70,7 @@ export const Profile: React.FunctionComponent = () => {
           setFieldValue,
           setFieldTouched,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} isAdherent={isAdherent}>
             <InputFieldWrapper>
               <InputField
                 required
@@ -156,7 +175,7 @@ export const Profile: React.FunctionComponent = () => {
                 {intl.formatMessage({ id: 'profile.save' })}
               </FullWidthButton>
             </ValidateButtonContainer>
-          </form>
+          </Form>
         )}
       </Formik>
     </Container>

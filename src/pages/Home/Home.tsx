@@ -40,7 +40,7 @@ import SuccessStories from 'components/SuccessStories';
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
   const onCoalitionClick = (coalition: Coalition) => {
-    history.push({ pathname: PATHS.CAUSE_LIST.url(), search: `?coalitionId=${coalition.uuid}` });
+    history.push(PATHS.COALITION.url(coalition.uuid));
   };
   const causes = useSelector(getAllCauses);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));

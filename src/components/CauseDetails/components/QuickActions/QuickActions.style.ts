@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { colorPalette, fonts, getSpacing, media } from 'stylesheet';
 
+export const Container = styled.div`
+  width: 100%;
+`;
+
 export const Title = styled.h3`
   display: none;
   ${media.desktop(`

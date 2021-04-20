@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { getCauseQuickActions } from 'redux/Cause/selectors';
 import Loader from 'components/Loader';
 import {
+  Container,
   Title,
   QuickActionContainer,
   QuickActionContentContainer,
@@ -50,7 +51,7 @@ const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) => {
   }
 
   return (
-    <div>
+    <Container>
       <Title>{intl.formatMessage({ id: 'cause.grow-the-cause' })}</Title>
       {quickActions.map((quickAction: QuickActionType) => (
         <QuickAction
@@ -58,7 +59,7 @@ const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) => {
           key={quickAction.id !== undefined ? quickAction.id : ''}
         />
       ))}
-    </div>
+    </Container>
   );
 };
 

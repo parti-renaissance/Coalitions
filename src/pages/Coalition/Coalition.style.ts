@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { getSpacing, media, fonts, colorPalette } from 'stylesheet';
+import { getSpacing, media, fonts, colorPalette, defaultMargins } from 'stylesheet';
+import { SUB_CONTAINER_MAX_WIDTH } from 'components/CauseDetails/CauseDetails.style';
 
 export const Image = styled.img`
   width: 100%;
@@ -13,4 +14,17 @@ export const Image = styled.img`
 export const Title = styled.h1`
   ${fonts.h1Small};
   color: ${colorPalette.greyDark};
+`;
+
+export const ContentContainer = styled.div`
+  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+  `)};
+`;
+
+export const DescriptionWrapper = styled.div`
+  ${media.desktop(`
+    max-width: ${SUB_CONTAINER_MAX_WIDTH};
+  `)};
 `;

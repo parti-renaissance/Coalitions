@@ -9,7 +9,7 @@ export const Container = styled.div`
   `)}
 `;
 
-const SUB_CONTAINER_MAX_WIDTH = '960px';
+export const SUB_CONTAINER_MAX_WIDTH = '960px';
 
 export const SubContainer = styled.div<{ center: boolean }>`
   ${media.desktop(`

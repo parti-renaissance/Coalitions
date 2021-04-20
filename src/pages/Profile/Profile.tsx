@@ -13,7 +13,11 @@ import { getCurrentUser } from 'redux/User/selectors';
 import isMatch from 'lodash/isMatch';
 
 const UpdateEmProfileLink: FunctionComponent<{}> = () => (
-  <a href="https://en-marche.fr/parametres/mon-compte/modifier" target="_blank">
+  <a
+    href="https://en-marche.fr/parametres/mon-compte/modifier"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     {'en-marche.fr'}
   </a>
 );

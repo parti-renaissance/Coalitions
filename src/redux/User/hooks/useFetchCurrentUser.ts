@@ -33,6 +33,7 @@ export const useFetchCurrentUser = () => {
         firstName: currentUser.first_name,
         lastName: currentUser.last_name,
         email: currentUser.email_address,
+        isAdherent: currentUser.adherent,
       }),
     );
     setShouldDisplayCGU(currentUser.adherent);

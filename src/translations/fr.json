@@ -19,7 +19,8 @@
       "placeholder": "Genre (optionnel)",
       "male": "Homme",
       "female": "Femme"
-    }
+    },
+    "update_for_adherent": "Pour modifier votre profil adhérent, connectez-vous à {link}."
   },
   "footer": {
     "legal-notice": "Mentions Légales",

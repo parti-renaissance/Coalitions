@@ -2,7 +2,6 @@ import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { LoaderContainer } from './UpdateCause.style';
 import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login';
-import { useLocation } from 'react-router';
 import Loader from 'components/Loader';
 import CauseForm from 'components/CauseForm';
 import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
@@ -10,20 +9,21 @@ import { getCause } from 'redux/Cause/selectors';
 import { useUpdateCause } from 'redux/Cause/hooks/useUpdateCause';
 import { Cause, InCreationCause } from 'redux/Cause/types';
 
-const CreateCause: FunctionComponent = () => {
+type UpdateCauseProps = {
+  causeId: string;
+};
+
+const UpdateCause: FunctionComponent<UpdateCauseProps> = ({ causeId }) => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const toUpdateCauseId = params.get('causeId');
-  const toUpdateCause = useSelector(getCause(toUpdateCauseId));
-  const { loading: isFetchingCause, fetchCause } = useFetchOneCause(toUpdateCauseId);
+  const toUpdateCause = useSelector(getCause(causeId));
+  const { loading: isFetchingCause, fetchCause } = useFetchOneCause(causeId);
   const { loading: isUpdatingCause, updateCause } = useUpdateCause();
 
   useEffect(() => {
-    if (toUpdateCauseId !== null) {
+    if (causeId !== null) {
       fetchCause(isUserLoggedIn);
     }
-  }, [fetchCause, isUserLoggedIn, toUpdateCauseId]);
+  }, [fetchCause, isUserLoggedIn, causeId]);
 
   const onSubmit = useCallback(
     (cause: InCreationCause | Cause) => {
@@ -49,4 +49,4 @@ const CreateCause: FunctionComponent = () => {
   );
 };
 
-export default CreateCause;
+export default UpdateCause;

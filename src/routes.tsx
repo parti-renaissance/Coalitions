@@ -43,8 +43,8 @@ export const PATHS = {
     url: () => '/creer-une-cause',
   },
   CAUSE_ADMIN: {
-    route: '/administrer-une-cause',
-    url: () => '/administrer-une-cause',
+    route: '/administrer-une-cause/:causeId',
+    url: (causeId: string) => `/administrer-une-cause/${causeId}`,
   },
   CAUSE_PREVIEW: {
     route: '/apercu',

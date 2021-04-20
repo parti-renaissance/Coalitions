@@ -1,15 +1,17 @@
 import { QuickActions } from 'components/QuickActions/QuickActions';
 import { TabsWrapper } from 'components/TabsWrapper/TabsWrapper';
-import { useLocation } from 'react-router';
-import UpdateCause from 'pages/UpdateCause';
+import UpdateCause from 'components/UpdateCause';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useParams } from 'react-router';
 import { CauseAdminContainer } from './CauseAdmin.style';
 
+interface CausePageNavParams {
+  causeId: string;
+}
+
 const CauseAdmin: FunctionComponent = () => {
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const causeId = params.get('causeId');
+  const { causeId } = useParams<CausePageNavParams>();
 
   const renderTabPanel = (tabIndex: number) => {
     if (causeId === null) {
@@ -17,7 +19,7 @@ const CauseAdmin: FunctionComponent = () => {
     }
     switch (tabIndex) {
       case 0:
-        return <UpdateCause />;
+        return <UpdateCause causeId={causeId} />;
       case 1:
         return <QuickActions causeId={causeId} />;
       default:

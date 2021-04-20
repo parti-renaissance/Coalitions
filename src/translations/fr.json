@@ -201,6 +201,7 @@
     "not-long-enough-password": "Votre mot de passe doit faire au minimum 8 caractères.",
     "emoji-forbidden": "Merci de ne pas utiliser d’emoji ou de caractères spéciaux.",
     "too-short-name": "Longueur minimum 2 caractères.",
+    "too-short-value": "Longueur minimum 3 caractères.",
     "not-valid-url": "L'URL entrée n'est pas valide"
   },
   "form": {

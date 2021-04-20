@@ -8,8 +8,12 @@ export const FirstNameContainer = styled.div`
 `;
 
 export const FirstName = styled.div`
-  margin-left: ${getSpacing(2)};
-  color: ${colorPalette.black};
+  display: none;
+  ${media.desktop(`
+    display: flex;
+    margin-left: ${getSpacing(2)};
+    color: ${colorPalette.black};
+  `)}
 `;
 
 const USER_ICON_WIDTH = '20px';

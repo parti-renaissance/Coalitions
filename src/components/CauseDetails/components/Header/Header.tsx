@@ -13,11 +13,8 @@ import {
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import HeaderButtons from '../HeaderButtons';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { getIsDesktop, getIsMobile } from 'services/mobile/mobile';
-import { useDispatch } from 'react-redux';
-import { updateSnackbar } from 'redux/Snackbar';
-import { Severity } from 'redux/Snackbar/types';
+import { FormattedMessage } from 'react-intl';
+import { getIsMobile } from 'services/mobile/mobile';
 import { CoalitionsDisplay } from '../CoalitionsDisplay';
 import { UnfollowModal } from '../UnfollowModal/UnfollowModal';
 import { useCauseUnfollow } from 'redux/Cause/hooks/useCauseFollow';
@@ -28,17 +25,11 @@ interface HeaderProps {
   cause: Cause | InCreationCause;
   onSupport?: () => void;
   isSupporting?: boolean;
+  share: () => void;
 }
 
-const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting }) => {
-  // To fix with a global type definition, once behaviour is validated
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const nav: any = navigator;
-  const isAbleToUseShareApi = nav?.share !== undefined;
-  const isDesktop = getIsDesktop();
+const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting, share }) => {
   const isMobile = getIsMobile();
-  const dispatch = useDispatch();
-  const { formatMessage } = useIntl();
   const [isUnfollowModalOpened, setIsUnfollowModalOpened] = useState(false);
   const { loading, unfollowCause } = useCauseUnfollow((cause as Cause).uuid);
   const isCauseOwner = useCauseOwner(cause);
@@ -50,20 +41,6 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
 
   const closeMoreOptionsMenu = () => {
     setMoreOptionsMenu(null);
-  };
-
-  const handleShareClick = () => {
-    if (isAbleToUseShareApi && !isDesktop) {
-      nav.share({ url: window.location.href, title: cause.name, text: cause.name });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      dispatch(
-        updateSnackbar({
-          message: formatMessage({ id: 'cause.copy-to-clipboard' }),
-          severity: Severity.success,
-        }),
-      );
-    }
   };
 
   const shouldDisplayMoreIcon = () =>
@@ -80,7 +57,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
             </div>
             {isMobile ? (
               <ShareButtonContainer>
-                <ShareButton onClick={handleShareClick} src="/images/share.svg" />
+                <ShareButton onClick={share} src="/images/share.svg" />
               </ShareButtonContainer>
             ) : null}
           </NameAndShareWrapper>
@@ -114,7 +91,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
           cause={cause}
           onSupport={onSupport}
           isSupporting={isSupporting}
-          onShare={handleShareClick}
+          share={share}
         />
       </Container>
       <UnfollowModal

@@ -33,7 +33,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      {getIsDesktop() ? <DesktopHeader /> : <MobileHeader />};
+      {getIsDesktop() ? <DesktopHeader /> : <MobileHeader />}
       <Suspense fallback={null}>
         <CGUModal isOpened={shouldDisplayCGU} onClose={acceptCGU} />
       </Suspense>

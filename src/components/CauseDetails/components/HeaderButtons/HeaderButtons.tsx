@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import {
+  PreviewButton,
   Button,
   DesktopContainer,
   GrowButtonContent,
@@ -23,7 +24,7 @@ import QuickActions from '../QuickActions';
 interface HeaderProps {
   cause: Cause | InCreationCause;
   onSupport?: () => void;
-  onShare?: () => void;
+  share: () => void;
   isSupporting?: boolean;
   isMobile?: boolean;
 }
@@ -31,7 +32,7 @@ interface HeaderProps {
 const HeaderButtons: FunctionComponent<HeaderProps> = ({
   cause,
   onSupport,
-  onShare,
+  share,
   isSupporting,
   isMobile,
 }) => {
@@ -66,7 +67,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           {intl.formatMessage({ id: 'cause.update' })}
         </Button>
       ) : null}
-      <Button size="small" variant="outlined" color="primary" onClick={onShare}>
+      <Button size="small" variant="outlined" color="primary" onClick={share}>
         {intl.formatMessage({ id: 'cause.share-button' })}
       </Button>
     </>
@@ -89,10 +90,10 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
     if (isPreview) {
       return (
         <>
-          <Button size="small" variant="outlined" color="primary" onClick={updatePreview}>
+          <PreviewButton size="small" variant="outlined" color="primary" onClick={updatePreview}>
             {intl.formatMessage({ id: 'cause_preview.update' })}
-          </Button>
-          <Button
+          </PreviewButton>
+          <PreviewButton
             size="small"
             variant="contained"
             color="primary"
@@ -100,7 +101,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
             isLoading={loading}
           >
             {intl.formatMessage({ id: 'cause_preview.publish' })}
-          </Button>
+          </PreviewButton>
         </>
       );
     }
@@ -118,7 +119,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
             {intl.formatMessage({ id: 'cause.support-button' })}
           </Button>
           {isMobile || (
-            <Button size="small" variant="outlined" color="primary" onClick={onShare}>
+            <Button size="small" variant="outlined" color="primary" onClick={share}>
               {intl.formatMessage({ id: 'cause.share-button' })}
             </Button>
           )}

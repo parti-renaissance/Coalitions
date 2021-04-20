@@ -67,11 +67,11 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           {intl.formatMessage({ id: 'cause.update' })}
         </Button>
       ) : null}
-      {isMobile || (
+      {isMobile === true ? (
         <Button size="small" variant="outlined" color="primary" onClick={onShare}>
           {intl.formatMessage({ id: 'cause.share-button' })}
         </Button>
-      )}
+      ) : null}
     </>
   );
 

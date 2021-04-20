@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { authenticatedApiClient } from 'services/networking/client';
 import { optimisticallyMarkCauseAsSupported, optimisticallyRemoveSupport } from '..';
-import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { useIntl } from 'react-intl';
 
 const useCauseFollowErrorHandler = () => {
@@ -14,7 +14,7 @@ const useCauseFollowErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (error.message.includes('Cette valeur est déjà utilisée')) {
+      if (doesErrorIncludes(error, 'Cette valeur est déjà utilisée')) {
         return formatMessage({ id: 'errors.already-followed-cause' });
       }
       return null;

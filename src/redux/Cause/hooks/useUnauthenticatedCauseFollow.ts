@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
-import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { coalitionApiClient } from 'services/networking/client';
 import { optimisticallyIncrementCauseFollower } from '../slice';
 
@@ -17,10 +17,10 @@ const useUnauthenticatedCauseFollowErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (error.message.includes('Vous avez déjà soutenu cette cause')) {
+      if (doesErrorIncludes(error, 'Vous avez déjà soutenu cette cause')) {
         return formatMessage({ id: 'errors.already-followed-cause-for-unauthenticated' });
       }
-      if (error.message.includes('utilisateur avec cette adresse e-mail existe déjà')) {
+      if (doesErrorIncludes(error, 'utilisateur avec cette adresse e-mail existe déjà')) {
         return formatMessage({ id: 'errors.mail-of-existing-account-for-support' });
       }
       return null;

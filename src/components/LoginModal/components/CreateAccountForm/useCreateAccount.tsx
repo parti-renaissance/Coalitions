@@ -5,7 +5,7 @@ import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { InscriptionFormValues } from 'components/LoginModal/components/CreateAccountForm/lib/useValidateForm';
-import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { coalitionApiClient } from 'services/networking/client';
 import { OAUTH_SOURCE } from 'services/networking/auth';
 
@@ -17,7 +17,7 @@ const useCreateAccountErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (error.message.includes('email_address: Cette adresse e-mail existe')) {
+      if (doesErrorIncludes(error, 'email_address: Cette adresse e-mail existe')) {
         return formatMessage({ id: 'errors.mail-of-existing-account' });
       }
       return null;

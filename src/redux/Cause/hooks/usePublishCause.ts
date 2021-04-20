@@ -6,7 +6,7 @@ import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
-import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { getInCreationCause } from '../selectors';
 import { cleanInCreationCause } from '../slice';
 import { authenticatedApiClient } from 'services/networking/client';
@@ -20,7 +20,7 @@ const usePublishCauseErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (error.message.includes('name: Cette valeur est déjà utilisée')) {
+      if (doesErrorIncludes(error, 'name: Cette valeur est déjà utilisée')) {
         return formatMessage({ id: 'errors.already-used-cause-name' });
       }
       return null;

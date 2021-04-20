@@ -64,3 +64,12 @@ export default class HandleErrorService {
 
   static showErrorSnackbar = debounce(HandleErrorService.showErrorSnackbarBounced, 2000);
 }
+
+export const doesErrorIncludes = (error: Error, message: string) => {
+  return Boolean(
+    error.message.includes(message) ||
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      Boolean(error.response?.body?.detail?.includes(message)),
+  );
+};

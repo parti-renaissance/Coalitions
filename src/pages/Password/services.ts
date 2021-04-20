@@ -5,7 +5,7 @@ import { getInCreationCause } from 'redux/Cause/selectors';
 import { setAfterAuthRedirect } from 'redux/Login';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
-import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { oauthUrl } from 'services/networking/auth';
 import { coalitionApiClient } from 'services/networking/client';
 import { PasswordForm } from './Password';
@@ -47,7 +47,7 @@ const useConfirmPasswordErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (error.message.includes('404') || error.message.includes('Pas de Token')) {
+      if (doesErrorIncludes(error, '404') || doesErrorIncludes(error, 'Pas de Token')) {
         return formatMessage({ id: 'errors.incorrect-password-token' });
       }
       return null;

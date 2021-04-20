@@ -7,7 +7,7 @@ import { Severity } from 'redux/Snackbar/types';
 import { QuickAction } from 'redux/Cause/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
-import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { authenticatedApiClient } from 'services/networking/client';
 
 const usePublishQuickActionsErrorHandler = () => {
@@ -18,7 +18,7 @@ const usePublishQuickActionsErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (error.message.includes('Access Denied')) {
+      if (doesErrorIncludes(error, 'Access Denied')) {
         return formatMessage({ id: 'errors.cannot-edit-this-cause' });
       }
       return null;

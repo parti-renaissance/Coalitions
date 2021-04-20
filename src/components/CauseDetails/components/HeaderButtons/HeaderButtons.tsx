@@ -67,9 +67,11 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           {intl.formatMessage({ id: 'cause.update' })}
         </Button>
       ) : null}
-      <Button size="small" variant="outlined" color="primary" onClick={onShare}>
-        {intl.formatMessage({ id: 'cause.share-button' })}
-      </Button>
+      {isMobile || (
+        <Button size="small" variant="outlined" color="primary" onClick={onShare}>
+          {intl.formatMessage({ id: 'cause.share-button' })}
+        </Button>
+      )}
     </>
   );
 

@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import {
+  PreviewButton,
   Button,
   DesktopContainer,
   GrowButtonContent,
@@ -89,10 +90,10 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
     if (isPreview) {
       return (
         <>
-          <Button size="small" variant="outlined" color="primary" onClick={updatePreview}>
+          <PreviewButton size="small" variant="outlined" color="primary" onClick={updatePreview}>
             {intl.formatMessage({ id: 'cause_preview.update' })}
-          </Button>
-          <Button
+          </PreviewButton>
+          <PreviewButton
             size="small"
             variant="contained"
             color="primary"
@@ -100,7 +101,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
             isLoading={loading}
           >
             {intl.formatMessage({ id: 'cause_preview.publish' })}
-          </Button>
+          </PreviewButton>
         </>
       );
     }

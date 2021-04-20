@@ -2,13 +2,19 @@ import styled, { css } from 'styled-components';
 import { getSpacing, media } from 'stylesheet';
 import { FullWidthButton } from 'components/Button/Button';
 
-export const Button = styled(FullWidthButton)`
-  :nth-child(2) {
+export const PreviewButton = styled(FullWidthButton)`
+  :not(:first-child) {
     margin-left: ${getSpacing(3)};
     ${media.desktop(`
       margin-left: unset;
       margin-top: ${getSpacing(3)};
     `)}
+  }
+`;
+
+export const Button = styled(FullWidthButton)`
+  :not(:first-child) {
+    margin-top: ${getSpacing(3)};
   }
 `;
 

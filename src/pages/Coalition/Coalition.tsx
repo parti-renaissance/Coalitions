@@ -1,4 +1,4 @@
-import React, { useEffect, FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import Loader from 'components/Loader';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
@@ -11,6 +11,7 @@ import {
   ContentContainer,
   ContentSubContainer,
   HeaderSubContainer,
+  FollowButton,
 } from './Coalition.style';
 import { SeeMore } from 'components/SeeMore/SeeMore';
 import ShareButton from 'components/ShareButton';
@@ -19,6 +20,9 @@ import { useFeatureToggling } from 'services/useFeatureToggling';
 import Video from 'components/Video';
 import { VIDEO_ID as HOME_VIDEO_ID } from 'pages/Home/Home';
 import { getIsMobile } from 'services/mobile/mobile';
+import { useIntl } from 'react-intl';
+import { isUserLogged } from 'redux/Login';
+import { useCoalitionFollow } from 'redux/Coalition/hooks/useCoalitionFollow';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -30,6 +34,9 @@ const Coalition: FunctionComponent = () => {
   const { fetchCoalitions, isFetchingCoalitions } = useFetchCoalitions();
   const { isCoalitionVideoPlaceholderEnable } = useFeatureToggling();
   const isMobile = getIsMobile();
+  const { loading: isFollowing, followCoalition } = useCoalitionFollow(coalitionId);
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const intl = useIntl();
 
   useEffect(() => {
     fetchCoalitions();
@@ -67,6 +74,17 @@ const Coalition: FunctionComponent = () => {
       <HeaderContainer>
         <Title>{coalition.name}</Title>
         <HeaderSubContainer>
+          {isUserLoggedIn && Boolean(!coalition.followed) ? (
+            <FollowButton
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={followCoalition}
+              isLoading={isFollowing}
+            >
+              {intl.formatMessage({ id: 'coalition.follow' })}
+            </FollowButton>
+          ) : null}
           <ShareButton
             displayMobileIcon
             shareContent={{ title: coalition.name, text: coalition.name }}

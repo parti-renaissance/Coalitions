@@ -30,8 +30,15 @@ const coalitionSlice = createSlice({
   initialState,
   reducers: {
     updateCoalitions: updateCoalitionsReducer,
+    optimisticallyMarkCoalitionAsFollowed: (state, action: PayloadAction<string>) => {
+      if (state.coalitions[action.payload] !== undefined) {
+        state.coalitions[action.payload].followed = true;
+        state.coalitions[action.payload].followers_count =
+          state.coalitions[action.payload].followers_count + 1;
+      }
+    },
   },
 });
 
-export const { updateCoalitions } = coalitionSlice.actions;
+export const { updateCoalitions, optimisticallyMarkCoalitionAsFollowed } = coalitionSlice.actions;
 export default coalitionSlice.reducer;

@@ -10,7 +10,6 @@ import {
   Title,
   ContentContainer,
   ContentSubContainer,
-  DescriptionWrapper,
   HeaderSubContainer,
 } from './Coalition.style';
 import { SeeMore } from 'components/SeeMore/SeeMore';
@@ -22,6 +21,7 @@ import { isUserLogged } from 'redux/Login/selectors';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import Video from 'components/Video';
 import { VIDEO_ID as HOME_VIDEO_ID } from 'pages/Home/Home';
+import { getIsMobile } from 'services/mobile/mobile';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -35,6 +35,7 @@ const Coalition: FunctionComponent = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const { loading: isFetchingCauses, fetchFirstPage: fetchCauses } = useFetchCauses();
   const { isCoalitionVideoPlaceholderEnable } = useFeatureToggling();
+  const isMobile = getIsMobile();
 
   useEffect(() => {
     fetchCauses([coalitionId], isUserLoggedIn);
@@ -52,12 +53,23 @@ const Coalition: FunctionComponent = () => {
     return null;
   }
 
-  let videoId = undefined;
-  if (Boolean(coalition.youtube_id)) {
-    videoId = coalition.youtube_id;
-  } else if (isCoalitionVideoPlaceholderEnable) {
-    videoId = HOME_VIDEO_ID;
-  }
+  const renderVideo = () => {
+    let videoId = undefined;
+    if (Boolean(coalition.youtube_id)) {
+      videoId = coalition.youtube_id;
+    } else if (isCoalitionVideoPlaceholderEnable) {
+      videoId = HOME_VIDEO_ID;
+    }
+
+    if (videoId === undefined) {
+      return null;
+    }
+    return (
+      <ContentSubContainer center>
+        <Video videoId={videoId as string} />
+      </ContentSubContainer>
+    );
+  };
 
   return (
     <>
@@ -72,14 +84,11 @@ const Coalition: FunctionComponent = () => {
         </HeaderSubContainer>
       </HeaderContainer>
       <ContentContainer>
-        <DescriptionWrapper>
+        {isMobile ? renderVideo() : null}
+        <ContentSubContainer maxWidth>
           <SeeMore text={coalition.description} />
-        </DescriptionWrapper>
-        {videoId !== undefined ? (
-          <ContentSubContainer center>
-            <Video videoId={videoId as string} />
-          </ContentSubContainer>
-        ) : null}
+        </ContentSubContainer>
+        {!isMobile ? renderVideo() : null}
         <ContentSubContainer>
           <HorizontalCausesList isLoading={isFetchingCauses} causes={causes} />
         </ContentSubContainer>

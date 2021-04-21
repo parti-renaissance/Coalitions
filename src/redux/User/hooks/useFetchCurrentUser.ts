@@ -34,9 +34,12 @@ export const useFetchCurrentUser = () => {
         lastName: currentUser.last_name,
         email: currentUser.email_address,
         isAdherent: currentUser.adherent,
+        hasAcceptedCGU: currentUser.coalitions_cgu_accepted,
       }),
     );
-    setShouldDisplayCGU(currentUser.adherent);
+    setShouldDisplayCGU(
+      currentUser.adherent === true && !Boolean(currentUser.coalitions_cgu_accepted),
+    );
   }, [dispatch, doFetchCurrentUser]);
 
   const acceptCGU = () => {

@@ -1,25 +1,29 @@
 import { useCallback, useEffect } from 'react';
-//import { useIntl } from 'react-intl';
-//import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getCurrentUser } from 'redux/User/selectors';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService from 'services/HandleErrorService';
-//import { authenticatedApiClient } from 'services/networking/client';
+import { authenticatedApiClient } from 'services/networking/client';
 import { CGUFormValues } from './CGUModal';
 
 type SubmitCGUPayload = {
-  cguAgreement?: boolean;
-  causeMailAgreement?: boolean;
-  coalitionMailAgreement?: boolean;
+  coalition_subscription?: boolean;
+  cause_subscription?: boolean;
+  coalitions_cgu_accepted?: boolean;
 };
 
-export const useSubmitCGU = (userId?: string) => {
-  //const dispatch = useDispatch();
-  //const { formatMessage } = useIntl();
+export const useSubmitCGU = () => {
+  const currentUser = useSelector(getCurrentUser);
 
-  const [{ loading, error }, doSubmitCGU] = useTypedAsyncFn(async (payload: SubmitCGUPayload) => {
-    //await authenticatedApiClient.put(`v3/profile/${userId}`, { ...payload });
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  }, []);
+  const [{ loading, error }, doSubmitCGU] = useTypedAsyncFn(
+    async (payload: SubmitCGUPayload) => {
+      await authenticatedApiClient.put(
+        `v3/profile/${currentUser !== undefined ? currentUser.uuid : ''}`,
+        { ...payload },
+      );
+    },
+    [currentUser],
+  );
 
   useEffect(() => {
     if (error !== undefined) {
@@ -29,7 +33,11 @@ export const useSubmitCGU = (userId?: string) => {
 
   const submitCGU = useCallback(
     async (values: CGUFormValues) => {
-      await doSubmitCGU(values);
+      await doSubmitCGU({
+        coalition_subscription: values.coalitionMailAgreement,
+        cause_subscription: values.causeMailAgreement,
+        coalitions_cgu_accepted: values.cguAgreement,
+      });
     },
     [doSubmitCGU],
   );

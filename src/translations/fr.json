@@ -68,7 +68,8 @@
   },
   "share": {
     "label": "Partager",
-    "copy-to-clipboard": "Le lien a été copié"
+    "copy-to-clipboard": "Copier le lien",
+    "copy-to-clipboard-success": "Le lien a été copié"
   },
   "cause": {
     "author": "Par {firstName} {lastNameInitial}",

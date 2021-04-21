@@ -1,6 +1,6 @@
 import { DefaultButton, FullWidthButton } from 'components/Button/Button';
 import styled from 'styled-components';
-import { colorPalette, fonts, getSpacing, media } from 'stylesheet';
+import { colorPalette, fonts, getSpacing, media, defaultMargins, borderRadius } from 'stylesheet';
 
 export const QuickActionsContainer = styled.div``;
 
@@ -15,11 +15,15 @@ export const QuickActionsTitle = styled.h1`
 `;
 
 export const QuickActionsDescription = styled.p`
-  padding: 0 ${getSpacing(3)};
-  margin-bottom: ${getSpacing(8)};
+  border-radius: ${borderRadius.medium};
+  background-color: ${colorPalette.greyLight};
+  color: ${colorPalette.greyDark};
+  padding: ${getSpacing(3)};
+  margin-bottom: ${defaultMargins.vertical.mobile};
   ${media.desktop(`
-    padding: 0;
-  `)};
+    padding: ${getSpacing(4)};
+    margin-bottom: ${defaultMargins.vertical.desktop};
+  `)}
 `;
 
 export const ValidateButton = styled(FullWidthButton)`

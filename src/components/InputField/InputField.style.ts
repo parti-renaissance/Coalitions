@@ -30,7 +30,7 @@ export const StyledTextField = styled(TextField)`
   }
   .MuiInputBase-root {
     ${fonts.p};
-    color: ${({ disabled }) => (disabled === true ? colorPalette.grey2 : colorPalette.greyDark)}
+    color: ${({ disabled }) => (disabled === true ? colorPalette.grey2 : colorPalette.greyDark)};
     background-color: ${colorPalette.blueLight};
     border-radius: ${borderRadius.medium};
   }

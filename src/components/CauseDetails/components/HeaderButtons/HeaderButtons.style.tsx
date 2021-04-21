@@ -12,10 +12,18 @@ export const PreviewButton = styled(FullWidthButton)`
   }
 `;
 
-export const Button = styled(FullWidthButton)`
+const BUTTON_STYLE = css`
   :not(:first-child) {
     margin-top: ${getSpacing(3)};
   }
+`;
+
+export const ButtonWrapper = styled.div`
+  ${BUTTON_STYLE};
+`;
+
+export const Button = styled(FullWidthButton)`
+  ${BUTTON_STYLE};
 `;
 
 export const DESKTOP_BUTTONS_WIDTH = '300px';

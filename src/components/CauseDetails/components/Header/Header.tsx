@@ -8,7 +8,6 @@ import {
   MoreOptionsMenu,
   NameAndShareWrapper,
   ShareButtonContainer,
-  ShareButton,
 } from './Header.style';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
@@ -20,15 +19,15 @@ import { UnfollowModal } from '../UnfollowModal/UnfollowModal';
 import { useCauseUnfollow } from 'redux/Cause/hooks/useCauseFollow';
 import { useCauseOwner } from 'redux/Cause/hooks/useCauseOwner';
 import { MenuItem } from '@material-ui/core';
+import ShareButton from 'components/ShareButton';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
   onSupport?: () => void;
   isSupporting?: boolean;
-  share: () => void;
 }
 
-const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting, share }) => {
+const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting }) => {
   const isMobile = getIsMobile();
   const [isUnfollowModalOpened, setIsUnfollowModalOpened] = useState(false);
   const { loading, unfollowCause } = useCauseUnfollow((cause as Cause).uuid);
@@ -57,7 +56,10 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
             </div>
             {isMobile ? (
               <ShareButtonContainer>
-                <ShareButton onClick={share} src="/images/share.svg" />
+                <ShareButton
+                  displayMobileIcon
+                  shareContent={{ title: cause.name, text: cause.name }}
+                />
               </ShareButtonContainer>
             ) : null}
           </NameAndShareWrapper>
@@ -87,12 +89,7 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
             ) : null}
           </AuthorAndSupportsWrapper>
         </div>
-        <HeaderButtons
-          cause={cause}
-          onSupport={onSupport}
-          isSupporting={isSupporting}
-          share={share}
-        />
+        <HeaderButtons cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
       </Container>
       <UnfollowModal
         isOpened={isUnfollowModalOpened}

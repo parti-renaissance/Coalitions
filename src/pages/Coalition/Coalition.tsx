@@ -4,9 +4,16 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useFetchCoalitions } from 'redux/Coalition/hooks';
 import { getCoalition } from 'redux/Coalition/selectors';
-import { Image, Title, ContentContainer, DescriptionWrapper } from './Coalition.style';
-import { Container as HeaderContainer } from 'components/CauseDetails/components/Header/Header.style';
+import {
+  HeaderContainer,
+  Image,
+  Title,
+  ContentContainer,
+  DescriptionWrapper,
+  HeaderSubContainer,
+} from './Coalition.style';
 import { SeeMore } from 'components/SeeMore/SeeMore';
+import ShareButton from 'components/ShareButton';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -34,6 +41,12 @@ const Coalition: FunctionComponent = () => {
       <Image src={coalition.image_url} />
       <HeaderContainer>
         <Title>{coalition.name}</Title>
+        <HeaderSubContainer>
+          <ShareButton
+            displayMobileIcon
+            shareContent={{ title: coalition.name, text: coalition.name }}
+          />
+        </HeaderSubContainer>
       </HeaderContainer>
       <ContentContainer>
         <DescriptionWrapper>

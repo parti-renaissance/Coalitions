@@ -7,6 +7,7 @@ import { PATHS } from 'routes';
 import { getInCreationCause } from 'redux/Cause/selectors';
 import CauseForm from 'components/CauseForm';
 import { InCreationCause } from 'redux/Cause/types';
+import { Container } from './CreateCause.style';
 
 const CreateCause: FunctionComponent = () => {
   const inCreationCause = useSelector(getInCreationCause);
@@ -22,7 +23,9 @@ const CreateCause: FunctionComponent = () => {
   };
 
   return (
-    <CauseForm onSubmitBegin={onSubmitBegin} onSubmit={onSubmit} initialCause={inCreationCause} />
+    <Container>
+      <CauseForm onSubmitBegin={onSubmitBegin} onSubmit={onSubmit} initialCause={inCreationCause} />
+    </Container>
   );
 };
 

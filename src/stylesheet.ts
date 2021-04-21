@@ -111,6 +111,7 @@ export const fontFamily = {
 };
 
 export const fontWeight = {
+  veryBold: '700',
   bold: '500',
   normal: '300',
 };

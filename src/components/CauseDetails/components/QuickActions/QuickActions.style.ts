@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, fonts, getSpacing, media } from 'stylesheet';
+import { colorPalette, fonts, fontWeight, getSpacing, lineHeight, media } from 'stylesheet';
 
 export const Container = styled.div`
   width: 100%;
@@ -26,10 +26,17 @@ export const QuickActionContentContainer = styled.div`
   justify-content: space-between;
 `;
 
+const LABEL_DESCORATION_THICKNESS = '1px';
+const LABEL_LETTER_SPACING = '0.25px';
+
 export const QuickActionLabel = styled.div`
   ${fonts.button};
+  line-height: ${lineHeight.primary};
+  font-weight: ${fontWeight.veryBold};
   color: ${colorPalette.blueCoalition};
   text-decoration: underline;
+  text-decoration-thickness: ${LABEL_DESCORATION_THICKNESS};
+  letter-spacing: ${LABEL_LETTER_SPACING};
 `;
 
 export const QuickActionArrowRight = styled.img`

@@ -4,7 +4,7 @@ import UpdateCause from 'components/UpdateCause';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router';
-import { CauseAdminContainer } from './CauseAdmin.style';
+import { CauseAdminContainer, UpdateCauseWrapper, QuickActionsWrapper } from './CauseAdmin.style';
 
 interface CausePageNavParams {
   causeId: string;
@@ -19,9 +19,17 @@ const CauseAdmin: FunctionComponent = () => {
     }
     switch (tabIndex) {
       case 0:
-        return <UpdateCause causeId={causeId} />;
+        return (
+          <UpdateCauseWrapper>
+            <UpdateCause causeId={causeId} />
+          </UpdateCauseWrapper>
+        );
       case 1:
-        return <QuickActions causeId={causeId} />;
+        return (
+          <QuickActionsWrapper>
+            <QuickActions causeId={causeId} />
+          </QuickActionsWrapper>
+        );
       default:
         return <></>;
     }

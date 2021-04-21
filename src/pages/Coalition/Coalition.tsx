@@ -24,6 +24,7 @@ import { useIntl } from 'react-intl';
 import { isUserLogged } from 'redux/Login';
 import { useCoalitionFollow } from 'redux/Coalition/hooks/useCoalitionFollow';
 import FixedBottomButton from 'components/FixedBottomButton';
+import FollowTag, { FOLLOW_TAG_TYPE } from 'components/FollowTag/FollowTag';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -73,6 +74,9 @@ const Coalition: FunctionComponent = () => {
   return (
     <>
       <Image src={coalition.image_url} />
+      {Boolean(coalition.followed) ? (
+        <FollowTag labelKey="coalition.followed" type={FOLLOW_TAG_TYPE.coalition} />
+      ) : null}
       <HeaderContainer>
         <Title>{coalition.name}</Title>
         <HeaderSubContainer>

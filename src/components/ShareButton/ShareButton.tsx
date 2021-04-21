@@ -37,14 +37,29 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, displa
   };
 
   const copyToClipBoard = () => {
-    navigator.clipboard.writeText(window.location.href);
-    dispatch(
-      updateSnackbar({
-        message: intl.formatMessage({ id: 'share.copy-to-clipboard-success' }),
-        severity: Severity.success,
-      }),
-    );
-    closeShareMenu();
+    try {
+      navigator.clipboard.writeText(window.location.href);
+      dispatch(
+        updateSnackbar({
+          message: intl.formatMessage({ id: 'share.copy-to-clipboard-success' }),
+          severity: Severity.success,
+        }),
+      );
+      closeShareMenu();
+    } catch (error) {
+      if (error instanceof Error && error.toString().includes('AbortError')) {
+        // Do nothing: iOS send this error when the user does not perform the full share process
+      }
+      if (error instanceof Error && error.toString().includes('NotAllowedError')) {
+        dispatch(
+          updateSnackbar({
+            message: intl.formatMessage({ id: 'share.copy-to-clipboard-not-allowed' }),
+            severity: Severity.warning,
+          }),
+        );
+      }
+      throw error;
+    }
   };
 
   const share = (event: MouseEvent<HTMLButtonElement | HTMLImageElement>) => {
@@ -97,9 +112,11 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, displa
         open={Boolean(shareMenu)}
         onClose={closeShareMenu}
       >
-        <MenuItem onClick={copyToClipBoard}>
-          <FormattedMessage id="share.copy-to-clipboard" />
-        </MenuItem>
+        {navigator.clipboard?.writeText !== undefined ? (
+          <MenuItem onClick={copyToClipBoard}>
+            <FormattedMessage id="share.copy-to-clipboard" />
+          </MenuItem>
+        ) : null}
         {shareLinks.map(shareLink => (
           <MenuItem
             key={shareLink.link}

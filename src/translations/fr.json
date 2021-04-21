@@ -70,11 +70,12 @@
     "label": "Partager",
     "copy-to-clipboard": "Copier le lien",
     "copy-to-clipboard-success": "Le lien a été copié",
+    "copy-to-clipboard-not-allowed": "Permissions insuffisantes : impossible de copier le lien.",
     "facebook": "Facebook",
     "twitter": "Twitter",
     "telegram": "Telegram",
     "whatsapp": "WhatsApp",
-    "linkedin": "Linkedin"
+    "linkedin": "LinkedIn"
   },
   "cause": {
     "author": "Par {firstName} {lastNameInitial}",

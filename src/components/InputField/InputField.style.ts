@@ -36,13 +36,19 @@ export const StyledTextField = styled(TextField)`
   }
   .MuiFormLabel-root {
     ${fonts.p};
-    color: ${({ error, disabled }) => {
+    ${({ error, disabled }) => {
       if (error === true) {
-        return colorPalette.red;
+        return css`
+          color: ${colorPalette.red};
+        `;
       } else if (disabled === true) {
-        return colorPalette.grey2;
+        return css`
+          color: ${colorPalette.grey2};
+        `;
       }
-      return colorPalette.grey;
+      return css`
+        color: ${colorPalette.grey};
+      `;
     }};
     position: absolute;
     top: -2px;

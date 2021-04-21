@@ -17,7 +17,7 @@
     "birthday": "Date de naissance",
     "save": "Enregistrer",
     "gender": {
-      "placeholder": "Genre (optionnel)",
+      "placeholder": "Genre",
       "male": "Homme",
       "female": "Femme"
     },

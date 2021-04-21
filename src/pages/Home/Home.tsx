@@ -5,19 +5,13 @@ import {
   Title,
   Content,
   CoalitionCardsWrapper,
-  CauseCardsWrapper,
-  CausesHeader,
-  SeeAllButton,
   MobileVideoWrapper,
   DesktopVideoWrapper,
   CreateCauseButtonWrapper,
   Bold,
   OurCommitmentsWrapper,
-  EmptyDiv,
-  CauseWrapper,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
-import Cause from 'components/Cause';
 import { CoalitionDefinition } from 'components/Definition/CoalitionDefinition';
 import { DefaultLink } from 'components/Link/Link';
 import { FormattedMessage } from 'react-intl';
@@ -29,7 +23,6 @@ import { useSelector } from 'react-redux';
 import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
 import { getAllCauses } from 'redux/Cause/selectors';
 import { isUserLogged } from 'redux/Login';
-import Loader from 'components/Loader';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { useHistory } from 'react-router';
 import Video from 'components/Video';
@@ -37,6 +30,7 @@ import OurCommitments from 'components/OurCommitments';
 import SuccessModal from './components/SuccessModal';
 import SuccessStories from 'components/SuccessStories';
 import { useFeatureToggling } from 'services/useFeatureToggling';
+import HorizontalCausesList from 'components/HorizontalCausesList';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
@@ -91,26 +85,7 @@ const Home: React.FunctionComponent = () => {
       </TopPartContainer>
       <CauseDefinition />
       <Block>
-        <CausesHeader>
-          <h3>
-            <FormattedMessage id="home.support-causes" />
-          </h3>
-          <DefaultLink to={PATHS.CAUSE_LIST.url()}>
-            <SeeAllButton>Voir tout</SeeAllButton>
-          </DefaultLink>
-        </CausesHeader>
-        {loading && causes === [] ? (
-          <Loader />
-        ) : (
-          <CauseCardsWrapper>
-            {causes.map(cause => (
-              <CauseWrapper key={cause.uuid}>
-                <Cause cause={cause} />
-              </CauseWrapper>
-            ))}
-            <EmptyDiv />
-          </CauseCardsWrapper>
-        )}
+        <HorizontalCausesList causes={causes} isLoading={loading} />
       </Block>
       <OurCommitmentsWrapper>
         <OurCommitments />

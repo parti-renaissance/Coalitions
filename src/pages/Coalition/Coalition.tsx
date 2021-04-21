@@ -30,6 +30,7 @@ interface CoalitionNavParams {
   coalitionId: string;
 }
 
+// eslint-disable-next-line complexity
 const Coalition: FunctionComponent = () => {
   const { coalitionId } = useParams<CoalitionNavParams>();
   const coalition = useSelector(getCoalition(coalitionId));
@@ -70,7 +71,7 @@ const Coalition: FunctionComponent = () => {
     );
   };
 
-  const showFollowButton = isUserLoggedIn && Boolean(!coalition.followed);
+  const showFollowButton = isUserLoggedIn && !Boolean(coalition.followed);
   return (
     <>
       <Image src={coalition.image_url} />

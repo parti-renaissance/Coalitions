@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { colorPalette, fonts, fontWeight, getSpacing, media } from 'stylesheet';
-import { DefaultLink } from 'components/Link/Link';
 
 export const Header = styled.div`
   display: flex;
@@ -8,7 +7,7 @@ export const Header = styled.div`
   align-items: center;
 `;
 
-export const SeeAllButton = styled(DefaultLink)`
+export const SeeAllButton = styled.div`
   ${fonts.button};
   font-weight: ${fontWeight.normal};
   color: ${colorPalette.blueCoalition};

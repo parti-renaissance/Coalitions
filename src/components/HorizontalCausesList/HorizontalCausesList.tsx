@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import {
   Header,
   SubContainer,
@@ -10,20 +10,36 @@ import Cause from 'components/Cause';
 import { useIntl } from 'react-intl';
 import { PATHS } from 'routes';
 import Loader from 'components/Loader';
-import { Cause as CauseType } from 'redux/Cause/types';
+import { useSelector } from 'react-redux';
+import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
+import { getAllCauses } from 'redux/Cause/selectors';
+import { isUserLogged } from 'redux/Login/selectors';
+import { useHistory } from 'react-router';
 
 interface HorizontalCausesListProps {
-  causes: CauseType[];
-  isLoading: boolean;
+  coalitionId?: string;
 }
 
-const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({
-  causes,
-  isLoading,
-}) => {
+const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ coalitionId }) => {
   const intl = useIntl();
+  const causes = useSelector(getAllCauses);
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const { loading: isFetchingCauses, fetchFirstPage: fetchCauses } = useFetchCauses();
+  const history = useHistory();
 
-  if (!isLoading && causes.length === 0) {
+  useEffect(() => {
+    fetchCauses(coalitionId !== undefined ? [coalitionId] : [], isUserLoggedIn);
+  }, [fetchCauses, coalitionId, isUserLoggedIn]);
+
+  const onSeeAllClick = () => {
+    if (coalitionId !== undefined) {
+      history.push({ pathname: PATHS.CAUSE_LIST.url(), search: `?coalitionId=${coalitionId}` });
+    } else {
+      history.push(PATHS.CAUSE_LIST.url());
+    }
+  };
+
+  if (!isFetchingCauses && causes.length === 0) {
     return null;
   }
 
@@ -31,11 +47,11 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({
     <div>
       <Header>
         <h3>{intl.formatMessage({ id: 'horizontal_causes_list.title' })}</h3>
-        <SeeAllButton to={PATHS.CAUSE_LIST.url()}>
+        <SeeAllButton onClick={onSeeAllClick}>
           {intl.formatMessage({ id: 'horizontal_causes_list.see-all' })}
         </SeeAllButton>
       </Header>
-      {isLoading && causes.length === 0 ? (
+      {isFetchingCauses && causes.length === 0 ? (
         <Loader />
       ) : (
         <SubContainer>

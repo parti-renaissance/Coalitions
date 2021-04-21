@@ -19,10 +19,6 @@ import { PATHS } from 'routes';
 import { MediumLargeButton } from 'components/Button/Button';
 import CoalitionCards from 'components/CoalitionCards';
 import { Coalition } from 'redux/Coalition/types';
-import { useSelector } from 'react-redux';
-import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
-import { getAllCauses } from 'redux/Cause/selectors';
-import { isUserLogged } from 'redux/Login';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { useHistory } from 'react-router';
 import Video from 'components/Video';
@@ -36,14 +32,7 @@ export const VIDEO_ID = 'KkDsxQLM3Ao';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
-  const causes = useSelector(getAllCauses);
-  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const { loading, fetchFirstPage } = useFetchCauses(10);
   const { isCoalitionPageEnable } = useFeatureToggling();
-
-  React.useEffect(() => {
-    fetchFirstPage([], isUserLoggedIn);
-  }, [fetchFirstPage, isUserLoggedIn]);
 
   const onCoalitionClick = (coalition: Coalition) => {
     if (isCoalitionPageEnable) {
@@ -87,7 +76,7 @@ const Home: React.FunctionComponent = () => {
       </TopPartContainer>
       <CauseDefinition />
       <Block>
-        <HorizontalCausesList causes={causes} isLoading={loading} />
+        <HorizontalCausesList />
       </Block>
       <OurCommitmentsWrapper>
         <OurCommitments />

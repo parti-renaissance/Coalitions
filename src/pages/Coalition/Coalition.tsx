@@ -15,9 +15,6 @@ import {
 import { SeeMore } from 'components/SeeMore/SeeMore';
 import ShareButton from 'components/ShareButton';
 import HorizontalCausesList from 'components/HorizontalCausesList';
-import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
-import { getAllCauses } from 'redux/Cause/selectors';
-import { isUserLogged } from 'redux/Login/selectors';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import Video from 'components/Video';
 import { VIDEO_ID as HOME_VIDEO_ID } from 'pages/Home/Home';
@@ -31,15 +28,8 @@ const Coalition: FunctionComponent = () => {
   const { coalitionId } = useParams<CoalitionNavParams>();
   const coalition = useSelector(getCoalition(coalitionId));
   const { fetchCoalitions, isFetchingCoalitions } = useFetchCoalitions();
-  const causes = useSelector(getAllCauses);
-  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const { loading: isFetchingCauses, fetchFirstPage: fetchCauses } = useFetchCauses();
   const { isCoalitionVideoPlaceholderEnable } = useFeatureToggling();
   const isMobile = getIsMobile();
-
-  useEffect(() => {
-    fetchCauses([coalitionId], isUserLoggedIn);
-  }, [fetchCauses, coalitionId, isUserLoggedIn]);
 
   useEffect(() => {
     fetchCoalitions();
@@ -90,7 +80,7 @@ const Coalition: FunctionComponent = () => {
         </ContentSubContainer>
         {!isMobile ? renderVideo() : null}
         <ContentSubContainer>
-          <HorizontalCausesList isLoading={isFetchingCauses} causes={causes} />
+          <HorizontalCausesList coalitionId={coalitionId} />
         </ContentSubContainer>
       </ContentContainer>
     </>

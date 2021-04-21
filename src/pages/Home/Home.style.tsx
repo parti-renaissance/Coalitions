@@ -54,48 +54,6 @@ export const CoalitionCardsWrapper = styled.div`
   `)}
 `;
 
-export const CauseCardsWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  flex-wrap: nowrap;
-  overflow: scroll;
-  margin: ${getSpacing(1)} -${getSpacing(3)} 0 -${getSpacing(3)};
-  ${media.desktop(`
-    height: ${getSpacing(97)};
-    flex-wrap: wrap;
-    overflow: hidden;
-    justify-content: center;
-    margin-top: ${getSpacing(6)};
-  `)}
-
-  > :first-child {
-    margin-left: ${getSpacing(3)};
-  }
-
-  > * {
-    min-width: ${getSpacing(50)};
-    margin-right: ${getSpacing(3)};
-    margin-top: ${getSpacing(3)};
-    ${media.desktop(`
-    min-width: ${getSpacing(62)};
-  `)}
-  }
-`;
-
-export const CausesHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-export const SeeAllButton = styled.p`
-  ${fonts.button};
-  color: ${colorPalette.blueCoalition};
-  cursor: pointer;
-  margin-left: ${getSpacing(1)};
-`;
-
 export const DesktopVideoWrapper = styled.div`
   display: none;
   ${media.largeDesktop(`
@@ -132,18 +90,5 @@ export const OurCommitmentsWrapper = styled.div`
     margin: -${getSpacing(6)} ${defaultMargins.horizontal.desktop} ${
     defaultMargins.vertical.desktop
   } ${defaultMargins.horizontal.desktop};
-  `)}
-`;
-
-export const EmptyDiv = styled.div`
-  min-width: ${getSpacing(3)};
-  margin-left: -${getSpacing(3)};
-`;
-
-export const CauseWrapper = styled.div`
-  display: flex;
-  max-width: ${getSpacing(75)};
-  ${media.desktop(`
-    max-width: unset;
   `)}
 `;

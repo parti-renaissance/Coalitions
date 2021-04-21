@@ -5,19 +5,13 @@ import {
   Title,
   Content,
   CoalitionCardsWrapper,
-  CauseCardsWrapper,
-  CausesHeader,
-  SeeAllButton,
   MobileVideoWrapper,
   DesktopVideoWrapper,
   CreateCauseButtonWrapper,
   Bold,
   OurCommitmentsWrapper,
-  EmptyDiv,
-  CauseWrapper,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
-import Cause from 'components/Cause';
 import { CoalitionDefinition } from 'components/Definition/CoalitionDefinition';
 import { DefaultLink } from 'components/Link/Link';
 import { FormattedMessage } from 'react-intl';
@@ -25,11 +19,6 @@ import { PATHS } from 'routes';
 import { MediumLargeButton } from 'components/Button/Button';
 import CoalitionCards from 'components/CoalitionCards';
 import { Coalition } from 'redux/Coalition/types';
-import { useSelector } from 'react-redux';
-import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
-import { getAllCauses } from 'redux/Cause/selectors';
-import { isUserLogged } from 'redux/Login';
-import Loader from 'components/Loader';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { useHistory } from 'react-router';
 import Video from 'components/Video';
@@ -37,17 +26,13 @@ import OurCommitments from 'components/OurCommitments';
 import SuccessModal from './components/SuccessModal';
 import SuccessStories from 'components/SuccessStories';
 import { useFeatureToggling } from 'services/useFeatureToggling';
+import HorizontalCausesList from 'components/HorizontalCausesList';
+
+export const VIDEO_ID = 'KkDsxQLM3Ao';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
-  const causes = useSelector(getAllCauses);
-  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const { loading, fetchFirstPage } = useFetchCauses(10);
   const { isCoalitionPageEnable } = useFeatureToggling();
-
-  React.useEffect(() => {
-    fetchFirstPage([], isUserLoggedIn);
-  }, [fetchFirstPage, isUserLoggedIn]);
 
   const onCoalitionClick = (coalition: Coalition) => {
     if (isCoalitionPageEnable) {
@@ -57,7 +42,7 @@ const Home: React.FunctionComponent = () => {
     }
   };
 
-  const renderVideo = () => <Video videoId="KkDsxQLM3Ao" />;
+  const renderVideo = () => <Video videoId={VIDEO_ID} />;
 
   return (
     <>
@@ -91,26 +76,7 @@ const Home: React.FunctionComponent = () => {
       </TopPartContainer>
       <CauseDefinition />
       <Block>
-        <CausesHeader>
-          <h3>
-            <FormattedMessage id="home.support-causes" />
-          </h3>
-          <DefaultLink to={PATHS.CAUSE_LIST.url()}>
-            <SeeAllButton>Voir tout</SeeAllButton>
-          </DefaultLink>
-        </CausesHeader>
-        {loading && causes === [] ? (
-          <Loader />
-        ) : (
-          <CauseCardsWrapper>
-            {causes.map(cause => (
-              <CauseWrapper key={cause.uuid}>
-                <Cause cause={cause} />
-              </CauseWrapper>
-            ))}
-            <EmptyDiv />
-          </CauseCardsWrapper>
-        )}
+        <HorizontalCausesList />
       </Block>
       <OurCommitmentsWrapper>
         <OurCommitments />

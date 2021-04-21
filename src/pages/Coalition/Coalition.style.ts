@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   getSpacing,
   media,
@@ -13,7 +13,8 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
+  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile} 0
+    ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     padding: ${getSpacing(8)} ${defaultMargins.horizontal.desktop};
     background-color: ${colorPalette.greyLight};
@@ -35,15 +36,33 @@ export const Title = styled.h1`
 `;
 
 export const ContentContainer = styled.div`
-  padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
+  padding: 0 ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
+    ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+    padding: 0 ${defaultMargins.horizontal.desktop} ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)};
 `;
 
-export const DescriptionWrapper = styled.div`
+export const ContentSubContainer = styled.div<{ center?: boolean; maxWidth?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  ${({ center }) =>
+    center === true
+      ? css`
+          align-items: center;
+        `
+      : css``};
+  ${({ maxWidth }) =>
+    maxWidth === true
+      ? css`
+          ${media.desktop(`
+            max-width: ${contentMaxWidth};
+          `)};
+        `
+      : css``};
+  margin-top: ${defaultMargins.vertical.mobile};
   ${media.desktop(`
-    max-width: ${contentMaxWidth};
+    margin-top: ${defaultMargins.vertical.desktop};
   `)};
 `;
 

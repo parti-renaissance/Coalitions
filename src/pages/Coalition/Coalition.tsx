@@ -9,11 +9,16 @@ import {
   Image,
   Title,
   ContentContainer,
-  DescriptionWrapper,
+  ContentSubContainer,
   HeaderSubContainer,
 } from './Coalition.style';
 import { SeeMore } from 'components/SeeMore/SeeMore';
 import ShareButton from 'components/ShareButton';
+import HorizontalCausesList from 'components/HorizontalCausesList';
+import { useFeatureToggling } from 'services/useFeatureToggling';
+import Video from 'components/Video';
+import { VIDEO_ID as HOME_VIDEO_ID } from 'pages/Home/Home';
+import { getIsMobile } from 'services/mobile/mobile';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -23,6 +28,8 @@ const Coalition: FunctionComponent = () => {
   const { coalitionId } = useParams<CoalitionNavParams>();
   const coalition = useSelector(getCoalition(coalitionId));
   const { fetchCoalitions, isFetchingCoalitions } = useFetchCoalitions();
+  const { isCoalitionVideoPlaceholderEnable } = useFeatureToggling();
+  const isMobile = getIsMobile();
 
   useEffect(() => {
     fetchCoalitions();
@@ -35,6 +42,24 @@ const Coalition: FunctionComponent = () => {
   if (coalition === undefined) {
     return null;
   }
+
+  const renderVideo = () => {
+    let videoId = undefined;
+    if (Boolean(coalition.youtube_id)) {
+      videoId = coalition.youtube_id;
+    } else if (isCoalitionVideoPlaceholderEnable) {
+      videoId = HOME_VIDEO_ID;
+    }
+
+    if (videoId === undefined) {
+      return null;
+    }
+    return (
+      <ContentSubContainer center>
+        <Video videoId={videoId as string} />
+      </ContentSubContainer>
+    );
+  };
 
   return (
     <>
@@ -49,9 +74,14 @@ const Coalition: FunctionComponent = () => {
         </HeaderSubContainer>
       </HeaderContainer>
       <ContentContainer>
-        <DescriptionWrapper>
+        {isMobile ? renderVideo() : null}
+        <ContentSubContainer maxWidth>
           <SeeMore text={coalition.description} />
-        </DescriptionWrapper>
+        </ContentSubContainer>
+        {!isMobile ? renderVideo() : null}
+        <ContentSubContainer>
+          <HorizontalCausesList coalitionId={coalitionId} />
+        </ContentSubContainer>
       </ContentContainer>
     </>
   );

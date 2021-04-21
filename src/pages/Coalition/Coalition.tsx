@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect } from 'react';
 import Loader from 'components/Loader';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { useFetchCoalitions } from 'redux/Coalition/hooks';
+import { useFetchCoalitions } from 'redux/Coalition/hooks/useFetchCoalitions';
 import { getCoalition } from 'redux/Coalition/selectors';
 import {
   HeaderContainer,

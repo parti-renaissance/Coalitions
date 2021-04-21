@@ -8,7 +8,7 @@ import {
   SelectedCoalitionContainer,
   SelectedCoalitionIndex,
 } from './CoalitionCards.style';
-import { useFetchCoalitions } from 'redux/Coalition/hooks';
+import { useFetchCoalitions } from 'redux/Coalition/hooks/useFetchCoalitions';
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
 import { Coalition } from 'redux/Coalition/types';

@@ -2,8 +2,8 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { coalitionApiClient } from 'services/networking/client';
-import { updateCoalitions } from './slice';
-import { Coalition } from './types';
+import { updateCoalitions } from '../slice';
+import { Coalition } from '../types';
 import HandleErrorService from 'services/HandleErrorService';
 
 export const useFetchCoalitions = () => {

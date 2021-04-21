@@ -9,7 +9,6 @@ export const QuickActionsTitle = styled.h1`
   text-align: center;
   margin-bottom: ${getSpacing(10)};
   ${media.desktop(`
-    margin-top: ${getSpacing(10)};
     margin-bottom: ${getSpacing(14)};
   `)};
 `;

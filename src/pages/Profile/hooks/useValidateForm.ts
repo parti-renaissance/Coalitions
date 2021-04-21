@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl';
 import { isFieldEmpty } from 'services/formik/form';
+import { PhoneCountry } from './useFetchPhoneCountries';
 
 export const GENDERS: { labelKey: string; value: string; isPlaceholder?: boolean }[] = [
   { labelKey: 'profile.gender.placeholder', value: 'none', isPlaceholder: true },
@@ -12,6 +13,7 @@ export interface ProfileFormValues {
   lastName?: string;
   email?: string;
   phoneNumber?: string;
+  phoneCountry?: PhoneCountry;
   gender?: string;
   birthday?: string;
 }

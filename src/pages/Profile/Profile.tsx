@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react';
+/* eslint-disable max-lines */
+import React, { FunctionComponent, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { format } from 'date-fns';
 import { Container, GenderItem, AdherentText, Form } from './Profile.style';
@@ -11,6 +12,8 @@ import { useValidateForm, ProfileFormValues, GENDERS } from './hooks/useValidate
 import { useSelector } from 'react-redux';
 import { getCurrentUser } from 'redux/User/selectors';
 import { useUpdateUserProfile } from './hooks/useUpdateUserProfile';
+import { Autocomplete } from '@material-ui/lab';
+import { useFetchPhoneCountries, PhoneCountry } from './hooks/useFetchPhoneCountries';
 
 const UpdateEmProfileLink: FunctionComponent<{}> = () => (
   <a
@@ -22,17 +25,32 @@ const UpdateEmProfileLink: FunctionComponent<{}> = () => (
   </a>
 );
 
+const formatPhoneCountryInput = (phoneCountry: PhoneCountry) =>
+  `${phoneCountry.name} (+ ${phoneCountry.code})`;
+
+const DEFAULT_COUNTRY_REGION = 'FR';
+
+const findPhoneCountryByRegion = (phoneCountries: PhoneCountry[], region: string) => {
+  return phoneCountries.find(phoneCountry => phoneCountry.region === region);
+};
+
+// eslint-disable-next-line complexity
 export const Profile: FunctionComponent = () => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const currentUser = useSelector(getCurrentUser);
   const { loading, updateUserProfile } = useUpdateUserProfile(currentUser?.uuid);
+  const { phoneCountries, fetchPhoneCountries } = useFetchPhoneCountries();
+
+  useEffect(() => {
+    fetchPhoneCountries();
+  }, [fetchPhoneCountries]);
 
   const onSubmit = (values: ProfileFormValues) => {
     updateUserProfile(values);
   };
 
-  if (currentUser === undefined) {
+  if (currentUser === undefined || phoneCountries.length === 0) {
     return null;
   }
 
@@ -47,7 +65,11 @@ export const Profile: FunctionComponent = () => {
       birthdate === undefined || birthdate === null
         ? null
         : format(new Date(birthdate), 'yyyy-MM-dd'),
-    phoneNumber: phone,
+    phoneNumber: phone !== null && phone !== undefined ? phone.number : null,
+    phoneCountry: findPhoneCountryByRegion(
+      phoneCountries,
+      phone !== null && phone !== undefined ? phone.country : DEFAULT_COUNTRY_REGION,
+    ),
   } as ProfileFormValues;
 
   return (
@@ -66,7 +88,7 @@ export const Profile: FunctionComponent = () => {
         onSubmit={onSubmit}
       >
         {// eslint-disable-next-line complexity
-        ({ values, errors, handleChange, handleBlur, handleSubmit, touched, dirty }) => (
+        ({ values, errors, handleChange, handleBlur, handleSubmit, touched, dirty, setValues }) => (
           <Form onSubmit={handleSubmit} isAdherent={isAdherent}>
             <InputFieldWrapper>
               <InputField
@@ -149,7 +171,22 @@ export const Profile: FunctionComponent = () => {
                 helperText={touched.birthday === true ? errors.birthday : undefined}
               />
             </InputFieldWrapper>
-            {/* <InputFieldWrapper>
+            <InputFieldWrapper>
+              <Autocomplete
+                options={phoneCountries}
+                value={values.phoneCountry}
+                onChange={(_, newValue: PhoneCountry | null) => {
+                  if (newValue !== null) setValues({ ...values, phoneCountry: newValue });
+                }}
+                getOptionLabel={formatPhoneCountryInput}
+                renderInput={params => (
+                  <InputField
+                    {...params}
+                    placeholder={intl.formatMessage({ id: 'profile.country' })}
+                    variant="outlined"
+                  />
+                )}
+              />
               <InputField
                 placeholder={intl.formatMessage({ id: 'profile.phone-number' })}
                 type="tel"
@@ -160,7 +197,7 @@ export const Profile: FunctionComponent = () => {
                 error={touched.phoneNumber === true && errors.phoneNumber !== undefined}
                 helperText={touched.phoneNumber === true ? errors.phoneNumber : undefined}
               />
-            </InputFieldWrapper> */}
+            </InputFieldWrapper>
             <ValidateButtonContainer isInPage>
               <FullWidthButton
                 disabled={!dirty || Object.keys(errors).length > 0}
@@ -181,3 +218,4 @@ export const Profile: FunctionComponent = () => {
 };
 
 export default Profile;
+/* eslint-enable max-lines */

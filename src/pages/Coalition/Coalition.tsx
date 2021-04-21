@@ -23,6 +23,7 @@ import { getIsMobile } from 'services/mobile/mobile';
 import { useIntl } from 'react-intl';
 import { isUserLogged } from 'redux/Login';
 import { useCoalitionFollow } from 'redux/Coalition/hooks/useCoalitionFollow';
+import FixedBottomButton from 'components/FixedBottomButton';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -68,13 +69,14 @@ const Coalition: FunctionComponent = () => {
     );
   };
 
+  const showFollowButton = isUserLoggedIn && Boolean(!coalition.followed);
   return (
     <>
       <Image src={coalition.image_url} />
       <HeaderContainer>
         <Title>{coalition.name}</Title>
         <HeaderSubContainer>
-          {isUserLoggedIn && Boolean(!coalition.followed) ? (
+          {showFollowButton ? (
             <FollowButton
               size="small"
               variant="contained"
@@ -101,6 +103,11 @@ const Coalition: FunctionComponent = () => {
           <HorizontalCausesList coalitionId={coalitionId} />
         </ContentSubContainer>
       </ContentContainer>
+      {showFollowButton ? (
+        <FixedBottomButton onClick={followCoalition} isLoading={isFollowing}>
+          {intl.formatMessage({ id: 'coalition.follow' })}
+        </FixedBottomButton>
+      ) : null}
     </>
   );
 };

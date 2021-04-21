@@ -74,5 +74,9 @@ export const HeaderSubContainer = styled.div`
 `;
 
 export const FollowButton = styled(FullWidthButton)`
-  margin-bottom: ${getSpacing(3)};
+  display: none;
+  ${media.desktop(`
+    display: flex;
+    margin-bottom: ${getSpacing(3)};
+  `)};
 `;

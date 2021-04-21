@@ -23,13 +23,6 @@ export const StyledTextField = styled(TextField)`
         : css`
             border: none;
           `};
-    ${({ disabled }) =>
-      disabled === true
-        ? css`
-            background-color: ${colorPalette.greyLight};
-            opacity: 0.5;
-          `
-        : css``};
   }
   .MuiSelect-select {
     ${fonts.input};
@@ -37,13 +30,20 @@ export const StyledTextField = styled(TextField)`
   }
   .MuiInputBase-root {
     ${fonts.p};
-    color: ${colorPalette.greyDark};
+    color: ${({ disabled }) => (disabled === true ? colorPalette.grey2 : colorPalette.greyDark)}
     background-color: ${colorPalette.blueLight};
     border-radius: ${borderRadius.medium};
   }
   .MuiFormLabel-root {
     ${fonts.p};
-    color: ${({ error }) => (error === true ? colorPalette.red : colorPalette.greyDark)};
+    color: ${({ error, disabled }) => {
+      if (error === true) {
+        return colorPalette.red;
+      } else if (disabled === true) {
+        return colorPalette.grey2;
+      }
+      return colorPalette.grey;
+    }};
     position: absolute;
     top: -2px;
   }

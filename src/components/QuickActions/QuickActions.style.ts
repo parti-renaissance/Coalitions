@@ -1,6 +1,6 @@
 import { DefaultButton, FullWidthButton } from 'components/Button/Button';
 import styled from 'styled-components';
-import { colorPalette, fonts, getSpacing, media, defaultMargins, borderRadius } from 'stylesheet';
+import { colorPalette, fonts, getSpacing, media, borderRadius } from 'stylesheet';
 
 export const QuickActionsContainer = styled.div``;
 

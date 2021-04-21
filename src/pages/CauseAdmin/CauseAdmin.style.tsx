@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { media, getSpacing, defaultMargins, contentMaxWidth } from 'stylesheet';
+import { media, getSpacing, defaultMargins } from 'stylesheet';
 
 export const CauseAdminContainer = styled.div`
   ${media.desktop(`
-    max-width: ${contentMaxWidth};
+    max-width: ${getSpacing(138)};
     margin: 0 auto;
     padding-bottom: ${defaultMargins.vertical.desktop};
   `)}

@@ -18,10 +18,9 @@ export const QuickActionsDescription = styled.p`
   background-color: ${colorPalette.greyLight};
   color: ${colorPalette.greyDark};
   padding: ${getSpacing(3)};
-  margin-bottom: ${defaultMargins.vertical.mobile};
+  margin-bottom: ${getSpacing(8)};
   ${media.desktop(`
     padding: ${getSpacing(4)};
-    margin-bottom: ${defaultMargins.vertical.desktop};
   `)}
 `;
 

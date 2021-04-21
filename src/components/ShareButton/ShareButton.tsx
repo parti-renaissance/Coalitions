@@ -8,14 +8,14 @@ import { Severity } from 'redux/Snackbar/types';
 import { FullWidthButton } from 'components/Button/Button';
 
 interface ShareButtonProps {
-  useMobileIcon?: boolean;
+  displayMobileIcon?: boolean;
   shareContent: {
     title: string;
     text: string;
   };
 }
 
-const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, useMobileIcon }) => {
+const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, displayMobileIcon }) => {
   // To fix with a global type definition, once behaviour is validated
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nav: any = navigator;
@@ -39,7 +39,7 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, useMob
     }
   };
 
-  if (isMobile && useMobileIcon) {
+  if (isMobile && displayMobileIcon) {
     return <MobileShareIcon onClick={share} src="/images/share.svg" />;
   }
 

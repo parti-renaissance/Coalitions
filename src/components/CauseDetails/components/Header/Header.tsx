@@ -56,7 +56,10 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
             </div>
             {isMobile ? (
               <ShareButtonContainer>
-                <ShareButton useMobileIcon shareContent={{ title: cause.name, text: cause.name }} />
+                <ShareButton
+                  displayMobileIcon
+                  shareContent={{ title: cause.name, text: cause.name }}
+                />
               </ShareButtonContainer>
             ) : null}
           </NameAndShareWrapper>

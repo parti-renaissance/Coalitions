@@ -43,7 +43,7 @@ const Coalition: FunctionComponent = () => {
         <Title>{coalition.name}</Title>
         <HeaderSubContainer>
           <ShareButton
-            useMobileIcon
+            displayMobileIcon
             shareContent={{ title: coalition.name, text: coalition.name }}
           />
         </HeaderSubContainer>

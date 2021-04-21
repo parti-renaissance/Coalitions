@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   getSpacing,
   media,
@@ -38,6 +38,21 @@ export const ContentContainer = styled.div`
   padding: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+  `)};
+`;
+
+export const ContentSubContainer = styled.div<{ center?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  ${({ center }) =>
+    center === true
+      ? css`
+          align-items: center;
+        `
+      : css``};
+  margin-top: ${defaultMargins.vertical.mobile};
+  ${media.desktop(`
+    margin-top: ${defaultMargins.vertical.desktop};
   `)};
 `;
 

@@ -5,4 +5,5 @@ export interface Coalition {
   followers_count: number;
   image_url: string;
   filtered_by?: boolean;
+  youtube_id?: string | null;
 }

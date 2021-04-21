@@ -32,6 +32,8 @@ import SuccessStories from 'components/SuccessStories';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import HorizontalCausesList from 'components/HorizontalCausesList';
 
+export const VIDEO_ID = 'KkDsxQLM3Ao';
+
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
   const causes = useSelector(getAllCauses);
@@ -51,7 +53,7 @@ const Home: React.FunctionComponent = () => {
     }
   };
 
-  const renderVideo = () => <Video videoId="KkDsxQLM3Ao" />;
+  const renderVideo = () => <Video videoId={VIDEO_ID} />;
 
   return (
     <>

@@ -14,6 +14,8 @@ export const SubContainer = styled.div`
 `;
 
 export const CoalitionContainer = styled.div<{ responsiveNbOfCardsByLine?: boolean }>`
+  border-radius: ${borderRadius.medium};
+  overflow: hidden;
   cursor: pointer;
   position: relative;
   margin-bottom: ${getSpacing(3)};

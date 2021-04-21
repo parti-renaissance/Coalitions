@@ -8,10 +8,9 @@ export const GENDERS: { labelKey: string; value: string; isPlaceholder?: boolean
 ];
 
 export interface ProfileFormValues {
-  firstName?: string;
+  firstName: string;
   lastName?: string;
   email?: string;
-  cityId?: string;
   phoneNumber?: string;
   gender?: string;
   birthday?: string;
@@ -21,7 +20,6 @@ type ErrorForm = {
   firstName?: string;
   lastName?: string;
   email?: string;
-  cityId?: string;
   phoneNumber?: string;
   gender?: string;
   birthday?: string;
@@ -30,7 +28,7 @@ type ErrorForm = {
 export const useValidateForm = () => {
   const intl = useIntl();
 
-  const validateForm = ({ firstName, cityId }: ProfileFormValues) => {
+  const validateForm = ({ firstName }: ProfileFormValues) => {
     const errors = {} as ErrorForm;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
 
@@ -42,9 +40,9 @@ export const useValidateForm = () => {
       errors.firstName = intl.formatMessage({ id: 'form_errors.too-short-name' });
     }
 
-    if (isFieldEmpty(cityId)) {
+    /* if (isFieldEmpty(cityId)) {
       errors.cityId = requiredErrorMessage;
-    }
+    } */
 
     return errors;
   };

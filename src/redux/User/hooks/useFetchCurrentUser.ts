@@ -35,6 +35,9 @@ export const useFetchCurrentUser = () => {
         email: currentUser.email_address,
         isAdherent: currentUser.adherent,
         hasAcceptedCGU: currentUser.coalitions_cgu_accepted,
+        gender: currentUser.gender,
+        birthdate: currentUser.birthdate,
+        phone: currentUser.phone,
       }),
     );
     setShouldDisplayCGU(

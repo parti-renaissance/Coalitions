@@ -37,6 +37,7 @@ export const login = async (code: string) => {
     client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
     code,
     grant_type: 'authorization_code',
+    scope: 'read:profile write:profile',
   };
   return authCall(payload);
 };
@@ -48,6 +49,7 @@ export const refresh = async () => {
     client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
     refresh_token: refreshToken,
     grant_type: 'refresh_token',
+    scope: 'read:profile write:profile',
   };
   try {
     const { accessToken, refreshToken } = await authCall(payload);

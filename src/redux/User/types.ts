@@ -3,6 +3,9 @@ export interface User {
   firstName: string;
   lastName?: string;
   email: string;
+  gender?: string | null;
+  birthdate?: string | null;
+  phone?: string | null;
   isAdherent: boolean;
   hasAcceptedCGU: boolean;
 }

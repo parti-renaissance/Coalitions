@@ -6,11 +6,10 @@ import Formik from 'components/Formik';
 import { FullWidthButton } from 'components/Button/Button';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { ValidateButtonContainer } from 'components/LoginModal/components/CreateAccountForm/CreateAccountForm.style';
-import { useValidateForm, ProfileFormValues, GENDERS } from './lib/useValidateForm';
-import CityAutocomplete from 'components/CityAutocomplete';
+import { useValidateForm, ProfileFormValues, GENDERS } from './hooks/useValidateForm';
 import { useSelector } from 'react-redux';
 import { getCurrentUser } from 'redux/User/selectors';
-import isMatch from 'lodash/isMatch';
+import { useUpdateUserProfile } from './hooks/useUpdateUserProfile';
 
 const UpdateEmProfileLink: FunctionComponent<{}> = () => (
   <a
@@ -22,25 +21,37 @@ const UpdateEmProfileLink: FunctionComponent<{}> = () => (
   </a>
 );
 
+const formatBirthdate = (isoDate?: string | null) => {
+  if (isoDate === undefined || isoDate === null) {
+    return isoDate;
+  }
+  const date = new Date(isoDate);
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+};
+
 export const Profile: FunctionComponent = () => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
   const currentUser = useSelector(getCurrentUser);
+  const { loading, updateUserProfile } = useUpdateUserProfile(currentUser?.uuid);
 
-  const onSubmit = () => {
-    // TODO
+  const onSubmit = (values: ProfileFormValues) => {
+    updateUserProfile(values);
   };
 
   if (currentUser === undefined) {
     return null;
   }
 
-  const { email, firstName, lastName, isAdherent } = currentUser;
+  const { email, firstName, lastName, gender, birthdate, phone, isAdherent } = currentUser;
+
   const initialValues = {
     email,
     firstName,
     lastName,
-    gender: GENDERS[0].value,
+    gender: gender === null ? GENDERS[0].value : gender,
+    birthday: formatBirthdate(birthdate),
+    phoneNumber: phone,
   } as ProfileFormValues;
 
   return (
@@ -59,17 +70,7 @@ export const Profile: FunctionComponent = () => {
         onSubmit={onSubmit}
       >
         {// eslint-disable-next-line complexity
-        ({
-          values,
-          errors,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-          touched,
-          setFieldValue,
-          setFieldTouched,
-        }) => (
+        ({ values, errors, handleChange, handleBlur, handleSubmit, touched, dirty }) => (
           <Form onSubmit={handleSubmit} isAdherent={isAdherent}>
             <InputFieldWrapper>
               <InputField
@@ -111,6 +112,7 @@ export const Profile: FunctionComponent = () => {
                 select
                 type="text"
                 name="gender"
+                placeholder={intl.formatMessage({ id: 'profile.gender.placeholder' })}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.gender}
@@ -128,7 +130,7 @@ export const Profile: FunctionComponent = () => {
                 ))}
               </InputField>
             </InputFieldWrapper>
-            <InputFieldWrapper>
+            {/* <InputFieldWrapper>
               <CityAutocomplete
                 handleChange={handleChange}
                 handleBlur={handleBlur}
@@ -137,11 +139,12 @@ export const Profile: FunctionComponent = () => {
                 touched={touched}
                 errors={errors}
               />
-            </InputFieldWrapper>
-            <InputFieldWrapper isPlaceholder={values.birthday === undefined}>
+            </InputFieldWrapper> */}
+            <InputFieldWrapper isPlaceholder={values.birthday === null}>
               <InputField
                 type="date"
                 name="birthday"
+                placeholder={intl.formatMessage({ id: 'profile.birthday' })}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 defaultValue="1993-01-04"
@@ -150,7 +153,7 @@ export const Profile: FunctionComponent = () => {
                 helperText={touched.birthday === true ? errors.birthday : undefined}
               />
             </InputFieldWrapper>
-            <InputFieldWrapper>
+            {/* <InputFieldWrapper>
               <InputField
                 placeholder={intl.formatMessage({ id: 'profile.phone-number' })}
                 type="tel"
@@ -161,16 +164,15 @@ export const Profile: FunctionComponent = () => {
                 error={touched.phoneNumber === true && errors.phoneNumber !== undefined}
                 helperText={touched.phoneNumber === true ? errors.phoneNumber : undefined}
               />
-            </InputFieldWrapper>
+            </InputFieldWrapper> */}
             <ValidateButtonContainer isInPage>
               <FullWidthButton
-                disabled={
-                  isSubmitting || Object.keys(errors).length > 0 || isMatch(initialValues, values)
-                }
+                disabled={!dirty || Object.keys(errors).length > 0}
                 type="submit"
                 size="small"
                 variant="contained"
                 color="primary"
+                isLoading={loading}
               >
                 {intl.formatMessage({ id: 'profile.save' })}
               </FullWidthButton>

@@ -55,6 +55,33 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, displa
     }
   };
 
+  const shareLinks = [
+    {
+      label: <FormattedMessage id="share.facebook" />,
+      link: `https://www.facebook.com/sharer.php?u=${encodeURIComponent(window.location.href)}`,
+    },
+    {
+      label: <FormattedMessage id="share.twitter" />,
+      link: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+        window.location.href,
+      )}&text=${shareContent.text}`,
+    },
+    {
+      label: <FormattedMessage id="share.linkedin" />,
+      link: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+        window.location.href,
+      )}&title=${shareContent.title}`,
+    },
+    {
+      label: <FormattedMessage id="share.whatsapp" />,
+      link: `https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href)}`,
+    },
+    {
+      label: <FormattedMessage id="share.telegram" />,
+      link: `https://telegram.me/share/url?url=${encodeURIComponent(window.location.href)}`,
+    },
+  ];
+
   return (
     <>
       {isMobile && displayMobileIcon ? (
@@ -73,6 +100,17 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, displa
         <MenuItem onClick={copyToClipBoard}>
           <FormattedMessage id="share.copy-to-clipboard" />
         </MenuItem>
+        {shareLinks.map(shareLink => (
+          <MenuItem
+            key={shareLink.link}
+            component="a"
+            href={shareLink.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {shareLink.label}
+          </MenuItem>
+        ))}
       </ShareMenu>
     </>
   );

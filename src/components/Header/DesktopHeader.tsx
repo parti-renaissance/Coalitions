@@ -37,13 +37,13 @@ export const DesktopHeader: FunctionComponent<{}> = () => {
         </DefaultHashLink>
       </HeaderSubContainer>
       <HeaderSubContainer>
-        {showCreateCauseButton && (
+        {showCreateCauseButton ? (
           <CreateCauseButton to={PATHS.OUR_MISSION.url()}>
             <MediumLargeButton variant="contained" color="primary">
               <FormattedMessage id="header.cause-creation" />
             </MediumLargeButton>
           </CreateCauseButton>
-        )}
+        ) : null}
         <LogInOrOutButton />
       </HeaderSubContainer>
     </HeaderContainer>

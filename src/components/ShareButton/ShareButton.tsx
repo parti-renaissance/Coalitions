@@ -113,7 +113,7 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, displa
         onClose={closeShareMenu}
       >
         {navigator.clipboard?.writeText !== undefined ? (
-          <MenuItem onClick={copyToClipBoard}>
+          <MenuItem component="a" onClick={copyToClipBoard}>
             <FormattedMessage id="share.copy-to-clipboard" />
           </MenuItem>
         ) : null}

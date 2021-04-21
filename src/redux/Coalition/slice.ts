@@ -37,8 +37,21 @@ const coalitionSlice = createSlice({
           state.coalitions[action.payload].followers_count + 1;
       }
     },
+    markCoalitionsAsFollowed: (state, action: PayloadAction<string[]>) => {
+      state.coalitions = action.payload.reduce(
+        (coalitions, followedCoalitionId) => {
+          coalitions[followedCoalitionId].followed = true;
+          return coalitions;
+        },
+        { ...state.coalitions },
+      );
+    },
   },
 });
 
-export const { updateCoalitions, optimisticallyMarkCoalitionAsFollowed } = coalitionSlice.actions;
+export const {
+  updateCoalitions,
+  optimisticallyMarkCoalitionAsFollowed,
+  markCoalitionsAsFollowed,
+} = coalitionSlice.actions;
 export default coalitionSlice.reducer;

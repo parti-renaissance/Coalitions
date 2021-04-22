@@ -27,12 +27,14 @@ import SuccessModal from './components/SuccessModal';
 import SuccessStories from 'components/SuccessStories';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import HorizontalCausesList from 'components/HorizontalCausesList';
+import { getIsMobile } from 'services/mobile/mobile';
 
 export const VIDEO_ID = 'KkDsxQLM3Ao';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
   const { isCoalitionPageEnable } = useFeatureToggling();
+  const isMobile = getIsMobile();
 
   const onCoalitionClick = (coalition: Coalition) => {
     if (isCoalitionPageEnable) {
@@ -51,7 +53,7 @@ const Home: React.FunctionComponent = () => {
           <Title>
             <FormattedMessage id="home.title" />
           </Title>
-          <MobileVideoWrapper>{renderVideo()}</MobileVideoWrapper>
+          {isMobile ? <MobileVideoWrapper>{renderVideo()}</MobileVideoWrapper> : null}
           <Content>
             <p>
               <FormattedMessage id="home.explanation" />
@@ -72,7 +74,7 @@ const Home: React.FunctionComponent = () => {
             </DefaultLink>
           </CreateCauseButtonWrapper>
         </div>
-        <DesktopVideoWrapper>{renderVideo()}</DesktopVideoWrapper>
+        {!isMobile ? <DesktopVideoWrapper>{renderVideo()}</DesktopVideoWrapper> : null}
       </TopPartContainer>
       <CauseDefinition />
       <Block>

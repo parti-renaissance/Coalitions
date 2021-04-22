@@ -17,6 +17,7 @@ const DEFAULT_OPTIONS: Options = {
   width: PLAYER_DIMENSIONS.width.toString(),
   playerVars: {
     mute: 1,
+    autoplay: 1,
   },
 };
 
@@ -32,11 +33,7 @@ const Video: FunctionComponent<VideoProps> = ({ videoId }) => {
     };
   }
 
-  const onReady = (event: { target: { playVideo: () => void } }) => {
-    event.target.playVideo();
-  };
-
-  return <YouTube videoId={videoId} opts={options} onReady={onReady} />;
+  return <YouTube videoId={videoId} opts={options} />;
 };
 
 export default Video;

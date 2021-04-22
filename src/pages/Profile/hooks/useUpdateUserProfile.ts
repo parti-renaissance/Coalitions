@@ -73,7 +73,7 @@ export const useUpdateUserProfile = (userId?: string) => {
       dispatch(optimisticallyUpdateCurrentUser(values));
       dispatch(
         updateSnackbar({
-          message: formatMessage({ id: 'login_modal.create_account.success' }),
+          message: formatMessage({ id: 'profile.update_success' }),
           severity: Severity.success,
         }),
       );

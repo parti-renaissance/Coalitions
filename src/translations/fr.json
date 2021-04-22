@@ -22,7 +22,8 @@
       "male": "Homme",
       "female": "Femme"
     },
-    "update_for_adherent": "Pour modifier votre profil adhérent, connectez-vous à {link}."
+    "update_for_adherent": "Pour modifier votre profil adhérent, connectez-vous à {link}.",
+    "update_success": "Vos nouvelles informations ont été enregistrées avec succès"
   },
   "footer": {
     "legal-notice": "Mentions Légales",

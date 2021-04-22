@@ -1,7 +1,24 @@
+import React, { FunctionComponent } from 'react';
 import * as Sentry from '@sentry/browser';
-import React from 'react';
+import {
+  Wrapper,
+  Container,
+  Button,
+  SubContainer,
+  Image,
+  Description,
+} from './AppCrashFallback.style';
+import { FormattedMessage } from 'react-intl';
+import { PATHS } from 'routes';
+import { IntlProvider } from 'react-intl';
+import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
+import { flattenMessages } from 'services/i18n/intl';
+import frMessages from 'translations/fr.json';
+import { theme } from 'stylesheet';
 
-import { Button, Container, HelperList, PageContent } from './AppCrashFallback.style';
+const locales = {
+  fr: flattenMessages(frMessages),
+};
 
 /**
  * Error page inspiration https://medium.com/design-ideas-thoughts/designing-error-pages-8d82e16e3472
@@ -13,28 +30,44 @@ export interface IFallbackProps {
 
 const reportDialog = (eventId: string) => () => Sentry.showReportDialog({ eventId });
 
-const AppCrashFallback: React.FunctionComponent<IFallbackProps> = ({ eventId }) => {
+const AppCrashFallback: FunctionComponent<IFallbackProps> = ({ eventId }) => {
+  const goToHomePage = () => {
+    window.location.href = PATHS.HOME.url();
+  };
+
   return (
-    <main>
-      {/* The <main> tag needs to wrap this component because with redux errors,
-      style is not applied to the root tag of this component */}
-      <Container>
-        <PageContent>
-          <h1>Sorry, this is not working properly.</h1>
-          <br />
-          <p>We know about this issue and are working to fix it.</p>
-          <br />
-          <p>In the meantime, here is what you can do:</p>
-          <HelperList>
-            <li>Refresh the page (sometimes it helps).</li>
-            <li>Try again in 30 minutes.</li>
-            <li>
-              <Button onClick={reportDialog(eventId)}>Tell us what happened</Button>
-            </li>
-          </HelperList>
-        </PageContent>
-      </Container>
-    </main>
+    <IntlProvider locale="fr" messages={locales.fr}>
+      <StylesProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <Wrapper>
+            <Container>
+              <div />
+              <SubContainer>
+                <Image src="/images/appCrashFallback.svg" />
+                <Description>
+                  <FormattedMessage id="app_crash_fallback.description-title" />
+                  <br />
+                  <FormattedMessage id="app_crash_fallback.description" />
+                </Description>
+              </SubContainer>
+              <div>
+                <Button size="small" variant="contained" color="primary" onClick={goToHomePage}>
+                  <FormattedMessage id="app_crash_fallback.go-to-home-page" />
+                </Button>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  color="primary"
+                  onClick={reportDialog(eventId)}
+                >
+                  <FormattedMessage id="app_crash_fallback.report-dialog" />
+                </Button>
+              </div>
+            </Container>
+          </Wrapper>
+        </ThemeProvider>
+      </StylesProvider>
+    </IntlProvider>
   );
 };
 

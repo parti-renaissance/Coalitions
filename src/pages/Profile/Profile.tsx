@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
+import { format } from 'date-fns';
 import { Container, GenderItem, AdherentText, Form } from './Profile.style';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
@@ -20,14 +21,6 @@ const UpdateEmProfileLink: FunctionComponent<{}> = () => (
     {'en-marche.fr'}
   </a>
 );
-
-const formatBirthdate = (isoDate?: string | null) => {
-  if (isoDate === undefined || isoDate === null) {
-    return isoDate;
-  }
-  const date = new Date(isoDate);
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-};
 
 export const Profile: FunctionComponent = () => {
   const intl = useIntl();
@@ -50,7 +43,10 @@ export const Profile: FunctionComponent = () => {
     firstName,
     lastName,
     gender: gender === null ? GENDERS[0].value : gender,
-    birthday: formatBirthdate(birthdate),
+    birthday:
+      birthdate === undefined || birthdate === null
+        ? null
+        : format(new Date(birthdate), 'yyyy-MM-dd'),
     phoneNumber: phone,
   } as ProfileFormValues;
 

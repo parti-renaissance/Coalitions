@@ -231,7 +231,9 @@
     "what-is-it": "Qu’est-ce qu’une coalition ?",
     "definition": "C’est l’ensemble des citoyens et acteurs engagés dans des causes d’une même thématique et tous ceux que la thématique intéresse. Parce qu’unis, on est plus forts\u00A0!",
     "follow": "Suivre",
-    "followed": "Suivie"
+    "followed": "Suivie",
+    "follower": "{followersNumber} soutien recueilli",
+    "followers": "{followersNumber} soutiens recueillis"
   },
   "our_commitments": {
     "title": "Nos engagements",

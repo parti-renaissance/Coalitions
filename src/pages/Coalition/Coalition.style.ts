@@ -12,11 +12,11 @@ import { FullWidthButton } from 'components/Button/Button';
 
 export const HeaderContainer = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
   padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile} 0
     ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
+    align-items: center;
     padding: ${getSpacing(8)} ${defaultMargins.horizontal.desktop};
     background-color: ${colorPalette.greyLight};
   `)}
@@ -34,6 +34,7 @@ export const Image = styled.img`
 export const Title = styled.h1`
   ${fonts.h1Small};
   color: ${colorPalette.greyDark};
+  margin-bottom: ${getSpacing(2)};
 `;
 
 export const ContentContainer = styled.div`

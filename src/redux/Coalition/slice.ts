@@ -33,8 +33,8 @@ const coalitionSlice = createSlice({
     optimisticallyMarkCoalitionAsFollowed: (state, action: PayloadAction<string>) => {
       if (state.coalitions[action.payload] !== undefined) {
         state.coalitions[action.payload].followed = true;
-        state.coalitions[action.payload].followers_count =
-          state.coalitions[action.payload].followers_count + 1;
+        state.coalitions[action.payload].cause_followers_count =
+          state.coalitions[action.payload].cause_followers_count + 1;
       }
     },
     markCoalitionsAsFollowed: (state, action: PayloadAction<string[]>) => {

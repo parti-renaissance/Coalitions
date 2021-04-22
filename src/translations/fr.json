@@ -160,7 +160,8 @@
   },
   "admin_cause": {
     "update-cause": "Général",
-    "quick-action": "Actions de soutien"
+    "quick-action": "Actions de soutien",
+    "send-mails": "Envoi de mails"
   },
   "update_cause": {
     "validate": "Enregistrer et publier",
@@ -283,5 +284,11 @@
     "description": "Une erreur est survenue, merci de ré-essayer ou revenir d’ici quelques minutes.",
     "go-to-home-page": "Retour à l’accueil",
     "report-dialog": "Déclarer l’incident"
+  },
+  "send_mails": {
+    "title": "Envoyer un mail à mes soutiens",
+    "description": "Faites grandir votre cause en activant vos soutiens.",
+    "object": "Objet",
+    "body": "Contenu"
   }
 }

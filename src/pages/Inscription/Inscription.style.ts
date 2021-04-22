@@ -1,16 +1,13 @@
 import styled from 'styled-components';
-import { getSpacing, media } from 'stylesheet';
+import { defaultMargins, getSpacing, media } from 'stylesheet';
 
-export const InscriptionFormWrapper = styled.div`
-  max-width: ${getSpacing(85)};
-  width: 100%;
-  padding: 0 ${getSpacing(3)};
-`;
-
-export const InscriptionContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   justify-content: center;
+  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    margin-top: ${getSpacing(20)};
+    padding: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+    max-width: ${getSpacing(85)};
+    margin: 0 auto;
   `)};
 `;

@@ -155,7 +155,6 @@ const CreateAccountForm = ({
                 </Label>
               }
             />
-            <LegalText>{intl.formatMessage({ id: legalTextKey })}</LegalText>
             <ValidateButtonContainer isInPage={isInPage}>
               <FullWidthButton
                 disabled={
@@ -174,6 +173,7 @@ const CreateAccountForm = ({
                 {intl.formatMessage({ id: 'login_modal.validate' })}
               </FullWidthButton>
             </ValidateButtonContainer>
+            <LegalText>{intl.formatMessage({ id: legalTextKey })}</LegalText>
           </form>
         )}
       </Formik>

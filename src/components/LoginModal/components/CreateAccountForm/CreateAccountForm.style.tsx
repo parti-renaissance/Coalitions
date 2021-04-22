@@ -41,9 +41,9 @@ export const ValidateButtonContainer = styled.div<{ isInPage: boolean }>`
   ${({ isInPage }) =>
     isInPage
       ? css`
-          margin: ${getSpacing(4)} 0;
+          margin-top: ${getSpacing(4)};
           ${media.desktop(`
-            margin: ${getSpacing(10)} 0;
+            margin-top: ${getSpacing(10)};
           `)}
         `
       : css`

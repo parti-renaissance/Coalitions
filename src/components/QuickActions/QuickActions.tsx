@@ -33,7 +33,7 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
   const { formatMessage } = useIntl();
   const { validateForm } = useValidateQuickActionsForm();
   const { loading, publishQuickActions } = usePublishQuickActions(causeId);
-  const { fetchCause } = useFetchOneCause(causeId);
+  const { loading: isFetchingCause, fetchCause } = useFetchOneCause(causeId);
   const quickActions = useSelector(getCauseQuickActions(causeId));
 
   useEffect(() => {
@@ -44,6 +44,11 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
     await publishQuickActions(values.quickActions);
   };
 
+  const initialValues =
+    quickActions !== undefined && quickActions.length > 0
+      ? { quickActions }
+      : { quickActions: [{ label: '', link: '' }] };
+
   return (
     <>
       <QuickActionsTitle>
@@ -52,18 +57,15 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
       <QuickActionsDescription>
         <FormattedMessage id="quick_actions.description" />
       </QuickActionsDescription>
-      {quickActions === undefined ? (
+      {quickActions === undefined && isFetchingCause ? (
         <Loader />
       ) : (
         <Formik<QuickActionsForms>
-          initialValues={
-            quickActions !== undefined && quickActions.length > 0
-              ? { quickActions }
-              : { quickActions: [{ label: '', link: '' }] }
-          }
+          initialValues={initialValues}
           onSubmit={onSubmit}
           validate={validateForm}
-          validateOnMount={true}
+          enableReinitialize
+          isInitialValid={Object.keys(validateForm(initialValues)).length === 0}
         >
           {// eslint-disable-next-line complexity
           ({ values, handleChange, handleBlur, handleSubmit, touched, errors }) => (
@@ -137,9 +139,7 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
               />
               <ValidateButton
                 disabled={
-                  errors.quickActions === undefined
-                    ? false
-                    : hasFormErrors(errors.quickActions as QuickActionError[])
+                  loading || touched.quickActions === undefined || Object.keys(errors).length > 0
                 }
                 type="submit"
                 size="small"

@@ -16,30 +16,39 @@ export const useValidateQuickActionsForm = () => {
 
   const validateForm = ({ quickActions }: QuickActionsForms) => {
     const requiredErrorMessage = formatMessage({ id: 'form_errors.required' });
-    let hasErrors = false;
-    const errorsList = {
-      quickActions: quickActions.map(quickAction => {
-        const errors = {} as QuickActionError;
-        if (isFieldEmpty(quickAction.label)) {
-          errors.label = requiredErrorMessage;
-          hasErrors = true;
-        }
-        if (quickAction.label.length <= 2) {
-          errors.label = formatMessage({ id: 'form_errors.too-short-value' });
-          hasErrors = true;
-        }
-        if (isFieldEmpty(quickAction.link)) {
-          errors.link = requiredErrorMessage;
-          hasErrors = true;
-        }
-        if (isURLValid(quickAction.link)) {
-          errors.link = formatMessage({ id: 'form_errors.not-valid-url' });
-          hasErrors = true;
-        }
-        return errors;
-      }),
-    };
-    return hasErrors ? errorsList : {};
+
+    let errorsList = {};
+
+    let hasQuickActionsErros = false;
+    const quickActionsErrors = quickActions.map(quickAction => {
+      const errors = {} as QuickActionError;
+      if (isFieldEmpty(quickAction.label)) {
+        errors.label = requiredErrorMessage;
+        hasQuickActionsErros = true;
+      }
+      if (quickAction.label.length <= 2) {
+        errors.label = formatMessage({ id: 'form_errors.too-short-value' });
+        hasQuickActionsErros = true;
+      }
+      if (isFieldEmpty(quickAction.link)) {
+        errors.link = requiredErrorMessage;
+        hasQuickActionsErros = true;
+      }
+      if (isURLValid(quickAction.link)) {
+        errors.link = formatMessage({ id: 'form_errors.not-valid-url' });
+        hasQuickActionsErros = true;
+      }
+      return errors;
+    });
+
+    if (hasQuickActionsErros) {
+      errorsList = {
+        ...errorsList,
+        quickActions: quickActionsErrors,
+      };
+    }
+
+    return errorsList;
   };
 
   return { validateForm };

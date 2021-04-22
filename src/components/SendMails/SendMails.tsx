@@ -3,6 +3,7 @@ import InputField from 'components/InputField';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useSendMails } from './hooks/useSendMails';
 import { useValidateSendMailsForm, SendMailForm } from './hooks/useValidateSendMailsForm';
 import { SendMailsDescription, SendMailsTitle, ValidateButton } from './SendMails.style';
 
@@ -10,12 +11,10 @@ type SendMailsProps = {
   causeId: string;
 };
 
-export const SendMails: FunctionComponent<SendMailsProps> = () => {
+export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
   const { formatMessage } = useIntl();
   const { validateForm } = useValidateSendMailsForm();
-  const onSubmit = (values: SendMailForm) => {
-    console.log('values', values);
-  };
+  const { loading, sendMails } = useSendMails(causeId);
   return (
     <>
       <SendMailsTitle>
@@ -26,7 +25,7 @@ export const SendMails: FunctionComponent<SendMailsProps> = () => {
       </SendMailsDescription>
       <Formik<SendMailForm>
         initialValues={{} as SendMailForm}
-        onSubmit={onSubmit}
+        onSubmit={sendMails}
         validate={validateForm}
         validateOnMount
       >
@@ -66,11 +65,12 @@ export const SendMails: FunctionComponent<SendMailsProps> = () => {
               />
             </InputFieldWrapper>
             <ValidateButton
-              disabled={Object.keys(errors).length > 0}
+              disabled={loading || Object.keys(errors).length > 0}
               type="submit"
               size="small"
               variant="contained"
               color="primary"
+              isLoading={loading}
             >
               <FormattedMessage id="send_mails.validate" />
             </ValidateButton>

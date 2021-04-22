@@ -7,12 +7,12 @@ export const Title = styled.h3`
 
 export const Image = styled.img`
   align-self: center;
-  height: ${getSpacing(24)};
-  width: ${getSpacing(24)};
+  height: ${getSpacing(40)};
+  width: ${getSpacing(40)};
   margin-bottom: ${getSpacing(3)};
   ${media.desktop(`
-    height: ${getSpacing(33)};
-    width: ${getSpacing(33)};
+    height: ${getSpacing(50)};
+    width: ${getSpacing(50)};
     margin-bottom: ${getSpacing(3)};
   `)}
 `;

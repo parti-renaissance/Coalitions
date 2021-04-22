@@ -20,10 +20,10 @@ import {
 } from './useValidateQuickActionsForm';
 import { AddButton } from './components/AddButton/AddButton';
 import { usePublishQuickActions } from './usePublishQuickActions';
-import { useFetchQuickActions } from 'redux/Cause/hooks/useFetchQuickActions';
 import { useSelector } from 'react-redux';
 import { getCauseQuickActions } from 'redux/Cause/selectors';
 import Loader from 'components/Loader';
+import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
 
 type QuickActionsProps = {
   causeId: string;
@@ -33,16 +33,17 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
   const { formatMessage } = useIntl();
   const { validateForm } = useValidateQuickActionsForm();
   const { loading, publishQuickActions } = usePublishQuickActions(causeId);
-  const { fetchQuickActions } = useFetchQuickActions(causeId);
+  const { loading: isFetchingCause, fetchCause } = useFetchOneCause(causeId);
   const quickActions = useSelector(getCauseQuickActions(causeId));
 
   useEffect(() => {
-    fetchQuickActions();
-  }, [fetchQuickActions]);
+    fetchCause(true);
+  }, [fetchCause]);
 
   const onSubmit = async (values: QuickActionsForms) => {
     await publishQuickActions(values.quickActions);
   };
+
   return (
     <>
       <QuickActionsTitle>
@@ -51,12 +52,14 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
       <QuickActionsDescription>
         <FormattedMessage id="quick_actions.description" />
       </QuickActionsDescription>
-      {quickActions === undefined ? (
+      {quickActions === undefined && isFetchingCause ? (
         <Loader />
       ) : (
         <Formik<QuickActionsForms>
           initialValues={
-            quickActions.length > 0 ? { quickActions } : { quickActions: [{ label: '', link: '' }] }
+            quickActions !== undefined && quickActions.length > 0
+              ? { quickActions }
+              : { quickActions: [{ label: '', link: '' }] }
           }
           onSubmit={onSubmit}
           validate={validateForm}

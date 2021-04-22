@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { LoaderContainer } from './UpdateCause.style';
 import useSelector from 'redux/useSelector';
-import { isUserLogged } from 'redux/Login';
 import Loader from 'components/Loader';
 import CauseForm from 'components/CauseForm';
 import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
@@ -14,16 +13,15 @@ type UpdateCauseProps = {
 };
 
 const UpdateCause: FunctionComponent<UpdateCauseProps> = ({ causeId }) => {
-  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const toUpdateCause = useSelector(getCause(causeId));
   const { loading: isFetchingCause, fetchCause } = useFetchOneCause(causeId);
   const { loading: isUpdatingCause, updateCause } = useUpdateCause();
 
   useEffect(() => {
     if (causeId !== null) {
-      fetchCause(isUserLoggedIn);
+      fetchCause();
     }
-  }, [fetchCause, isUserLoggedIn, causeId]);
+  }, [fetchCause, causeId]);
 
   const onSubmit = useCallback(
     (cause: InCreationCause | Cause) => {

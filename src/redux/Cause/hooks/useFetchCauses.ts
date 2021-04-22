@@ -6,6 +6,14 @@ import { useCallback, useState, useEffect } from 'react';
 import { Cause } from '../types';
 import { useFetchFollowedCauses } from './useFetchFollowedCauses';
 import HandleErrorService from 'services/HandleErrorService';
+import { useSelector } from 'react-redux';
+import { isUserLogged } from 'redux/Login';
+
+type RawQuickActions = {
+  id: string;
+  title: string;
+  url: string;
+};
 
 const PAGE_SIZE = 12;
 
@@ -87,6 +95,7 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
 
 export const useFetchOneCause = (id: string | null) => {
   const dispatch = useDispatch();
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
   const [{ loading, error }, doFetchCause] = useTypedAsyncFn(async () => {
     if (id === null) {
@@ -95,17 +104,24 @@ export const useFetchOneCause = (id: string | null) => {
     return await coalitionApiClient.get(`causes/${id}`);
   }, []);
 
+  const [
+    { loading: isFetchingQuickActions, error: errorFetchingQuickActions },
+    doFetchQuickActions,
+  ] = useTypedAsyncFn(async () => {
+    return await coalitionApiClient.get(`causes/${id}/quick_actions`);
+  }, []);
+
   useEffect(() => {
-    if (error !== undefined) {
+    if (error !== undefined || errorFetchingQuickActions !== undefined) {
       HandleErrorService.showErrorSnackbar(error);
     }
-  }, [error]);
+  }, [error, errorFetchingQuickActions]);
 
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 
   const fetchCause = useCallback(
-    async (isUserLoggedIn = false) => {
-      const cause: Cause | undefined = await doFetchCause();
+    async (withQuickActions: boolean = false) => {
+      let cause: Cause | undefined = await doFetchCause();
 
       if (cause === undefined || cause instanceof Error) {
         return;
@@ -115,11 +131,29 @@ export const useFetchOneCause = (id: string | null) => {
         uuids: [cause.uuid],
         isUserLoggedIn,
       });
+
+      if (withQuickActions) {
+        const rawQuickActions: RawQuickActions[] = await doFetchQuickActions();
+
+        if (rawQuickActions instanceof Error) {
+          return;
+        }
+
+        cause = {
+          ...cause,
+          quickActions: rawQuickActions.map(({ id, title, url }) => ({
+            id,
+            label: title,
+            link: url,
+          })),
+        };
+      }
+
       dispatch(updateOneCause(cause));
       dispatch(markCausesAsSupported(supportedCauses));
     },
-    [dispatch, doFetchCause, doFetchFollowedCauses],
+    [dispatch, doFetchCause, doFetchFollowedCauses, doFetchQuickActions, isUserLoggedIn],
   );
 
-  return { loading: loading || loadingFollowed, fetchCause };
+  return { loading: loading || loadingFollowed || isFetchingQuickActions, fetchCause };
 };

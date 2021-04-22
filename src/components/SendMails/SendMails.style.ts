@@ -1,3 +1,4 @@
+import { FullWidthButton } from 'components/Button/Button';
 import styled from 'styled-components';
 import { colorPalette, fonts, getSpacing, media, borderRadius } from 'stylesheet';
 
@@ -18,5 +19,12 @@ export const SendMailsDescription = styled.p`
   margin-bottom: ${getSpacing(8)};
   ${media.desktop(`
     padding: ${getSpacing(4)};
+  `)}
+`;
+
+export const ValidateButton = styled(FullWidthButton)`
+  margin-top: ${getSpacing(6)};
+  ${media.desktop(`
+    margin-top: ${getSpacing(8)};
   `)}
 `;

@@ -289,6 +289,16 @@
     "title": "Envoyer un mail à mes soutiens",
     "description": "Faites grandir votre cause en activant vos soutiens.",
     "object": "Objet",
-    "body": "Contenu"
+    "body": "Contenu",
+    "validate": "Envoyer",
+    "form_errors": {
+      "too-short-object": "L'objet doit faire minimum 3 caractères.",
+      "too-short-body": "Le contenu doit faire minimum 3 caractères.",
+      "too-long-object": "L'objet est limité à 100 caractères.",
+      "too-long-body": "Le contenu est limité à 6000 caractères."
+    },
+    "success_screen": {
+      "title": "Félicitations, votre email a bien été envoyé !"
+    }
   }
 }

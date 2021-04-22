@@ -3,19 +3,16 @@ import InputField from 'components/InputField';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { SendMailsDescription, SendMailsTitle } from './SendMails.style';
+import { useValidateSendMailsForm, SendMailForm } from './hooks/useValidateSendMailsForm';
+import { SendMailsDescription, SendMailsTitle, ValidateButton } from './SendMails.style';
 
 type SendMailsProps = {
   causeId: string;
 };
 
-type SendMailForm = {
-  object: string;
-  body: string;
-};
-
 export const SendMails: FunctionComponent<SendMailsProps> = () => {
   const { formatMessage } = useIntl();
+  const { validateForm } = useValidateSendMailsForm();
   const onSubmit = (values: SendMailForm) => {
     console.log('values', values);
   };
@@ -27,7 +24,12 @@ export const SendMails: FunctionComponent<SendMailsProps> = () => {
       <SendMailsDescription>
         <FormattedMessage id="send_mails.description" />
       </SendMailsDescription>
-      <Formik<SendMailForm> initialValues={{} as SendMailForm} onSubmit={onSubmit}>
+      <Formik<SendMailForm>
+        initialValues={{} as SendMailForm}
+        onSubmit={onSubmit}
+        validate={validateForm}
+        validateOnMount
+      >
         {({ values, handleChange, handleBlur, handleSubmit, touched, errors }) => (
           <form onSubmit={handleSubmit}>
             <InputFieldWrapper>
@@ -52,7 +54,7 @@ export const SendMails: FunctionComponent<SendMailsProps> = () => {
                 })}
                 required
                 type="text"
-                name="description"
+                name="body"
                 multiline
                 rows={10}
                 onChange={handleChange}
@@ -63,6 +65,15 @@ export const SendMails: FunctionComponent<SendMailsProps> = () => {
                 inputProps={{ maxLength: 6000 }}
               />
             </InputFieldWrapper>
+            <ValidateButton
+              disabled={Object.keys(errors).length > 0}
+              type="submit"
+              size="small"
+              variant="contained"
+              color="primary"
+            >
+              <FormattedMessage id="send_mails.validate" />
+            </ValidateButton>
           </form>
         )}
       </Formik>

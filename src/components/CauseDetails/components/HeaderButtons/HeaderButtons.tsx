@@ -37,7 +37,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
   isMobile,
 }) => {
   const history = useHistory();
-  const isPreview = Boolean(!onSupport);
+  const isPreview = !Boolean(onSupport);
   const isSupported = Boolean(cause.supported);
   const intl = useIntl();
   const { loading, publishCause } = usePublishCause();
@@ -117,11 +117,11 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           >
             {intl.formatMessage({ id: 'cause.support-button' })}
           </Button>
-          {isMobile || (
+          {!isMobile ? (
             <ButtonWrapper>
               <ShareButton shareContent={{ title: cause.name, text: cause.name }} />
             </ButtonWrapper>
-          )}
+          ) : null}
         </>
       );
     }

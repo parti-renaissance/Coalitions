@@ -1,8 +1,6 @@
-import React, { FunctionComponent, useEffect } from 'react';
-import { useFetchQuickActions } from 'redux/Cause/hooks/useFetchQuickActions';
+import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getCauseQuickActions } from 'redux/Cause/selectors';
-import Loader from 'components/Loader';
 import {
   Container,
   Title,
@@ -35,16 +33,7 @@ const QuickAction: FunctionComponent<{ quickAction: QuickActionType }> = ({ quic
 
 const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) => {
   const quickActions = useSelector(getCauseQuickActions(causeId));
-  const { loading, fetchQuickActions } = useFetchQuickActions(causeId);
   const intl = useIntl();
-
-  useEffect(() => {
-    fetchQuickActions();
-  }, [fetchQuickActions]);
-
-  if (loading && (quickActions === undefined || quickActions.length === 0)) {
-    return <Loader />;
-  }
 
   if (quickActions === undefined || quickActions.length === 0) {
     return null;

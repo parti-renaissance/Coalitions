@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Cause, InCreationCause, QuickAction } from './types';
+import { Cause, InCreationCause } from './types';
 
 export type CauseStatistics = {
   total: number;
@@ -91,12 +91,6 @@ const causeSlice = createSlice({
     updateCauseStatistics: (state, action: PayloadAction<CauseStatistics>) => {
       state.statistics = action.payload;
     },
-    setCauseQuickActions: (
-      state,
-      action: PayloadAction<{ id: string; quickActions: QuickAction[] }>,
-    ) => {
-      state.causes[action.payload.id].quickActions = action.payload.quickActions;
-    },
   },
 });
 
@@ -111,6 +105,5 @@ export const {
   updateInCreationCause,
   cleanInCreationCause,
   updateCauseStatistics,
-  setCauseQuickActions,
 } = causeSlice.actions;
 export default causeSlice.reducer;

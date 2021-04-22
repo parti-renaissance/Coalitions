@@ -23,8 +23,8 @@ const CausePage: React.FunctionComponent = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
   useEffect(() => {
-    fetchCause(isUserLoggedIn);
-  }, [fetchCause, isUserLoggedIn]);
+    fetchCause(true);
+  }, [fetchCause]);
 
   const onSupport = () => {
     if (isUserLoggedIn) {

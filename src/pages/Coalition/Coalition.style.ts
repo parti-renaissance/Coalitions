@@ -81,3 +81,8 @@ export const FollowButton = styled(FullWidthButton)`
     margin-bottom: ${getSpacing(3)};
   `)};
 `;
+
+export const HeaderSubSubContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;

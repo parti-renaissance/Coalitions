@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { authenticatedApiClient } from 'services/networking/client';
-import { optimisticallyMarkCoalitionAsFollowed } from '..';
+import { optimisticallyMarkCoalitionAsFollowed, optimisticallyRemoveFollow } from '..';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { useIntl } from 'react-intl';
 
@@ -51,4 +51,31 @@ export const useCoalitionFollow = (id: string) => {
   }, [dispatch, doFollowCoalition, id]);
 
   return { loading, followCoalition };
+};
+
+export const useCoalitionUnfollow = (id: string) => {
+  const dispatch = useDispatch();
+
+  const [{ loading, error }, doUnfollowCoalition] = useTypedAsyncFn(
+    async () => await authenticatedApiClient.delete(`v3/coalitions/${id}/follower`, null),
+    [],
+  );
+
+  useEffect(() => {
+    if (error !== undefined) {
+      HandleErrorService.showErrorSnackbar(error);
+    }
+  }, [error]);
+
+  const unfollowCoalition = useCallback(async () => {
+    const response = await doUnfollowCoalition();
+
+    if (response instanceof Error) {
+      return;
+    }
+
+    dispatch(optimisticallyRemoveFollow(id));
+  }, [dispatch, doUnfollowCoalition, id]);
+
+  return { loading, unfollowCoalition };
 };

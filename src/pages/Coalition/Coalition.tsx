@@ -12,6 +12,7 @@ import {
   ContentSubContainer,
   HeaderSubContainer,
   FollowButton,
+  HeaderSubSubContainer,
 } from './Coalition.style';
 import { SeeMore } from 'components/SeeMore/SeeMore';
 import ShareButton from 'components/ShareButton';
@@ -22,10 +23,11 @@ import { VIDEO_ID as HOME_VIDEO_ID } from 'pages/Home/Home';
 import { getIsMobile } from 'services/mobile/mobile';
 import { useIntl } from 'react-intl';
 import { isUserLogged } from 'redux/Login';
-import { useCoalitionFollow } from 'redux/Coalition/hooks/useCoalitionFollow';
+import { useCoalitionFollow, useCoalitionUnfollow } from 'redux/Coalition/hooks/useCoalitionFollow';
 import FixedBottomButton from 'components/FixedBottomButton';
 import FollowTag, { FOLLOW_TAG_TYPE } from 'components/FollowTag/FollowTag';
 import IconAndLabel from 'components/IconAndLabel';
+import MoreOptionsMenu from 'components/MoreOptionsMenu';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -40,6 +42,7 @@ const Coalition: FunctionComponent = () => {
   const isMobile = getIsMobile();
   const { loading: isFollowing, followCoalition } = useCoalitionFollow(coalitionId);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const { loading: isUnfollowing, unfollowCoalition } = useCoalitionUnfollow(coalitionId);
   const intl = useIntl();
 
   useEffect(() => {
@@ -82,25 +85,38 @@ const Coalition: FunctionComponent = () => {
       <HeaderContainer>
         <div>
           <Title>{coalition.name}</Title>
-          <IconAndLabel
-            iconSrc="/images/supports.svg"
-            label={
-              coalition.cause_followers_count > 1
-                ? intl.formatMessage(
-                    { id: 'coalition.followers' },
-                    {
-                      followersNumber: coalition.cause_followers_count,
-                    },
-                  )
-                : intl.formatMessage(
-                    { id: 'coalition.follower' },
-                    {
-                      followersNumber: coalition.cause_followers_count,
-                    },
-                  )
-            }
-          />
+          <HeaderSubSubContainer>
+            <IconAndLabel
+              iconSrc="/images/supports.svg"
+              label={
+                coalition.cause_followers_count > 1
+                  ? intl.formatMessage(
+                      { id: 'coalition.followers' },
+                      {
+                        followersNumber: coalition.cause_followers_count,
+                      },
+                    )
+                  : intl.formatMessage(
+                      { id: 'coalition.follower' },
+                      {
+                        followersNumber: coalition.cause_followers_count,
+                      },
+                    )
+              }
+            />
+            {coalition.followed === true ? (
+              <MoreOptionsMenu
+                isUnfollowing={isUnfollowing}
+                unfollow={unfollowCoalition}
+                unfollowModalLabels={{
+                  description: intl.formatMessage({ id: 'coalition.unfollow_modal.description' }),
+                  confirm: intl.formatMessage({ id: 'coalition.unfollow_modal.confirm' }),
+                }}
+              />
+            ) : null}
+          </HeaderSubSubContainer>
         </div>
+
         <HeaderSubContainer>
           {showFollowButton ? (
             <FollowButton

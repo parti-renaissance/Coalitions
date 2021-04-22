@@ -242,7 +242,11 @@
     "follow": "Suivre",
     "followed": "Suivie",
     "follower": "{followersNumber} soutien recueilli",
-    "followers": "{followersNumber} soutiens recueillis"
+    "followers": "{followersNumber} soutiens recueillis",
+    "unfollow_modal": {
+      "description": "En retirant votre soutien, les causes de cette coalition ont moins de chance d’aboutir",
+      "confirm": "Ne plus suivre"
+    }
   },
   "our_commitments": {
     "title": "Nos engagements",

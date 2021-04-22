@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const AuthorAndSupportsWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin-top: ${getSpacing(2)};
 `;
 

@@ -46,6 +46,9 @@ const coalitionSlice = createSlice({
         { ...state.coalitions },
       );
     },
+    optimisticallyRemoveFollow: (state, action: PayloadAction<string>) => {
+      state.coalitions[action.payload].followed = false;
+    },
   },
 });
 
@@ -53,5 +56,6 @@ export const {
   updateCoalitions,
   optimisticallyMarkCoalitionAsFollowed,
   markCoalitionsAsFollowed,
+  optimisticallyRemoveFollow,
 } = coalitionSlice.actions;
 export default coalitionSlice.reducer;

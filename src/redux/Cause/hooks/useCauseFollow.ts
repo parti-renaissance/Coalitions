@@ -55,7 +55,6 @@ export const useCauseFollow = (id: string) => {
 
 export const useCauseUnfollow = (id: string) => {
   const dispatch = useDispatch();
-  const errorHandler = useCauseFollowErrorHandler();
 
   const [{ loading, error }, doUnfollowCause] = useTypedAsyncFn(
     async () => await authenticatedApiClient.delete(`v3/causes/${id}/follower`, null),
@@ -64,9 +63,9 @@ export const useCauseUnfollow = (id: string) => {
 
   useEffect(() => {
     if (error !== undefined) {
-      HandleErrorService.showErrorSnackbar(error, errorHandler);
+      HandleErrorService.showErrorSnackbar(error);
     }
-  }, [error, errorHandler]);
+  }, [error]);
 
   const unfollowCause = useCallback(async () => {
     const response = await doUnfollowCause();

@@ -120,7 +120,7 @@ export const useFetchOneCause = (id: string | null) => {
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 
   const fetchCause = useCallback(
-    async (withQuickActions: boolean = false) => {
+    async (withQuickActions = false) => {
       let cause: Cause | undefined = await doFetchCause();
 
       if (cause === undefined || cause instanceof Error) {

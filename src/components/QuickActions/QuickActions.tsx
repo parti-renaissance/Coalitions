@@ -33,7 +33,7 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
   const { formatMessage } = useIntl();
   const { validateForm } = useValidateQuickActionsForm();
   const { loading, publishQuickActions } = usePublishQuickActions(causeId);
-  const { loading: isFetchingCause, fetchCause } = useFetchOneCause(causeId);
+  const { fetchCause } = useFetchOneCause(causeId);
   const quickActions = useSelector(getCauseQuickActions(causeId));
 
   useEffect(() => {

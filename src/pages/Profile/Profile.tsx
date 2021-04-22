@@ -2,7 +2,7 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { format } from 'date-fns';
-import { Container, GenderItem, AdherentText, Form } from './Profile.style';
+import { Container, GenderItem, AdherentText, Form, PhoneContainer } from './Profile.style';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
 import { FullWidthButton } from 'components/Button/Button';
@@ -118,6 +118,7 @@ export const Profile: FunctionComponent = () => {
                 placeholder={intl.formatMessage({ id: 'profile.last-name' })}
                 type="text"
                 name="lastName"
+                hideOptionnal
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.lastName}
@@ -130,6 +131,7 @@ export const Profile: FunctionComponent = () => {
                 select
                 type="text"
                 name="gender"
+                hideOptionnal
                 placeholder={intl.formatMessage({ id: 'profile.gender.placeholder' })}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -162,6 +164,7 @@ export const Profile: FunctionComponent = () => {
               <InputField
                 type="date"
                 name="birthday"
+                hideOptionnal
                 placeholder={intl.formatMessage({ id: 'profile.birthday' })}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -172,32 +175,37 @@ export const Profile: FunctionComponent = () => {
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
-              <Autocomplete
-                options={phoneCountries}
-                value={values.phoneCountry}
-                onChange={(_, newValue: PhoneCountry | null) => {
-                  if (newValue !== null) setValues({ ...values, phoneCountry: newValue });
-                }}
-                getOptionLabel={formatPhoneCountryInput}
-                renderInput={params => (
-                  <InputField
-                    {...params}
-                    placeholder={intl.formatMessage({ id: 'profile.country' })}
-                    variant="outlined"
-                  />
-                )}
-              />
-              <InputField
-                placeholder={intl.formatMessage({ id: 'profile.phone-number' })}
-                type="tel"
-                name="phoneNumber"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.phoneNumber}
-                error={touched.phoneNumber === true && errors.phoneNumber !== undefined}
-                helperText={touched.phoneNumber === true ? errors.phoneNumber : undefined}
-              />
+              <PhoneContainer>
+                <Autocomplete
+                  options={phoneCountries}
+                  value={values.phoneCountry}
+                  onChange={(_, newValue: PhoneCountry | null) => {
+                    if (newValue !== null) setValues({ ...values, phoneCountry: newValue });
+                  }}
+                  getOptionLabel={formatPhoneCountryInput}
+                  renderInput={params => (
+                    <InputField
+                      {...params}
+                      hideOptionnal
+                      placeholder={intl.formatMessage({ id: 'profile.country' })}
+                      variant="outlined"
+                    />
+                  )}
+                />
+                <InputField
+                  placeholder={intl.formatMessage({ id: 'profile.phone-number' })}
+                  type="tel"
+                  name="phoneNumber"
+                  hideOptionnal
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.phoneNumber}
+                  error={touched.phoneNumber === true && errors.phoneNumber !== undefined}
+                  helperText={touched.phoneNumber === true ? errors.phoneNumber : undefined}
+                />
+              </PhoneContainer>
             </InputFieldWrapper>
+
             <ValidateButtonContainer isInPage>
               <FullWidthButton
                 disabled={!dirty || Object.keys(errors).length > 0}

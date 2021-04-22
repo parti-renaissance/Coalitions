@@ -6,6 +6,7 @@ export const COALITIONS = [
     uuid: '46353ae4-76ab-11eb-8125-42010a840071',
     followers_count: 72,
     image_url: 'imageUrl',
+    cause_followers_count: 3,
   },
   {
     name: 'Démocratie',
@@ -14,6 +15,7 @@ export const COALITIONS = [
     uuid: '76f36b12-76ab-11eb-8125-42010a840071',
     followers_count: 25,
     image_url: 'imageUrl',
+    cause_followers_count: 1,
   },
   {
     name: 'Economie',
@@ -22,6 +24,7 @@ export const COALITIONS = [
     uuid: 'f3168be8-76ab-11eb-8125-42010a840071',
     followers_count: 42,
     image_url: 'imageUrl',
+    cause_followers_count: 100,
   },
 ];
 
@@ -39,6 +42,7 @@ export const COALITIONS_STORE = {
       uuid: '46353ae4-76ab-11eb-8125-42010a840071',
       followers_count: 72,
       image_url: 'imageUrl',
+      cause_followers_count: 3,
     },
     '76f36b12-76ab-11eb-8125-42010a840071': {
       name: 'Démocratie',
@@ -47,6 +51,7 @@ export const COALITIONS_STORE = {
       uuid: '76f36b12-76ab-11eb-8125-42010a840071',
       followers_count: 25,
       image_url: 'imageUrl',
+      cause_followers_count: 1,
     },
     'f3168be8-76ab-11eb-8125-42010a840071': {
       name: 'Economie',
@@ -55,6 +60,7 @@ export const COALITIONS_STORE = {
       uuid: 'f3168be8-76ab-11eb-8125-42010a840071',
       followers_count: 42,
       image_url: 'imageUrl',
+      cause_followers_count: 100,
     },
   },
 };

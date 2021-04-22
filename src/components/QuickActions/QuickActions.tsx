@@ -52,7 +52,7 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
       <QuickActionsDescription>
         <FormattedMessage id="quick_actions.description" />
       </QuickActionsDescription>
-      {quickActions === undefined && isFetchingCause ? (
+      {quickActions === undefined ? (
         <Loader />
       ) : (
         <Formik<QuickActionsForms>

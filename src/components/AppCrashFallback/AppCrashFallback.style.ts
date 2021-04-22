@@ -49,6 +49,7 @@ export const Button = styled(MediumLargeButton)`
   :last-child {
     margin-top: ${getSpacing(3)};
   }
+
   ${media.desktop(`
     width: ${getSpacing(60)};
     :last-child {

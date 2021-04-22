@@ -49,7 +49,7 @@ const LoginModal: React.FunctionComponent<LoginModalProps> = ({
     if (showSuccessScreen) {
       return (
         <SuccessModalContent
-          imageUrl="/images/createCause.svg"
+          imageUrl="/images/createAccount.svg"
           titleKey="login_modal.success_screen.title"
           contentKey="login_modal.success_screen.text"
         />

@@ -2,8 +2,6 @@ import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { updateSnackbar } from 'redux/Snackbar';
-import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
@@ -33,7 +31,6 @@ export const usePublishCause = () => {
   const causeWithoutAuthor = useSelector(getInCreationCause);
   const { push } = useHistory();
   const dispatch = useDispatch();
-  const { formatMessage } = useIntl();
   const errorHandler = usePublishCauseErrorHandler();
 
   const [{ loading, error }, doPublishCause] = useTypedAsyncFn(async () => {
@@ -59,14 +56,8 @@ export const usePublishCause = () => {
     if (response instanceof Error) return;
 
     push({ pathname: PATHS.HOME.url(), search: `?publishedCause=true` });
-    dispatch(
-      updateSnackbar({
-        message: formatMessage({ id: 'create_cause.success' }),
-        severity: Severity.success,
-      }),
-    );
     dispatch(cleanInCreationCause());
-  }, [dispatch, doPublishCause, formatMessage, push]);
+  }, [dispatch, doPublishCause, push]);
 
   return { loading, error, publishCause };
 };

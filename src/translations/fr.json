@@ -207,8 +207,7 @@
       "zero-or-one-selected-coalition": "{numberOfSelectedCoalitions} sélectionnée",
       "more-than-one-selected-coalitions": "{numberOfSelectedCoalitions} sélectionnées",
       "max-number-of-selected-coalitions": "(vous pouvez en sélectionner jusqu’à deux)"
-    },
-    "success": "Votre cause a été enregistrée. Nous vous avertirons par email dès qu’elle sera validée."
+    }
   },
   "form_errors": {
     "required": "Le champ est requis.",

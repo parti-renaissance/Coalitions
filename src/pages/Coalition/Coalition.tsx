@@ -25,6 +25,7 @@ import { isUserLogged } from 'redux/Login';
 import { useCoalitionFollow } from 'redux/Coalition/hooks/useCoalitionFollow';
 import FixedBottomButton from 'components/FixedBottomButton';
 import FollowTag, { FOLLOW_TAG_TYPE } from 'components/FollowTag/FollowTag';
+import IconAndLabel from 'components/IconAndLabel';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -79,7 +80,27 @@ const Coalition: FunctionComponent = () => {
         <FollowTag labelKey="coalition.followed" type={FOLLOW_TAG_TYPE.coalition} />
       ) : null}
       <HeaderContainer>
-        <Title>{coalition.name}</Title>
+        <div>
+          <Title>{coalition.name}</Title>
+          <IconAndLabel
+            iconSrc="/images/supports.svg"
+            label={
+              coalition.cause_followers_count > 1
+                ? intl.formatMessage(
+                    { id: 'coalition.followers' },
+                    {
+                      followersNumber: coalition.cause_followers_count,
+                    },
+                  )
+                : intl.formatMessage(
+                    { id: 'coalition.follower' },
+                    {
+                      followersNumber: coalition.cause_followers_count,
+                    },
+                  )
+            }
+          />
+        </div>
         <HeaderSubContainer>
           {showFollowButton ? (
             <FollowButton

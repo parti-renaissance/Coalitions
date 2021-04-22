@@ -18,13 +18,13 @@ const SuccessModal: FunctionComponent<{}> = () => {
 
     if (publishedCause !== null) {
       setConfig({
-        imageUrl: '/images/createCause.svg',
+        imageUrl: '/images/publishCause.svg',
         titleKey: 'home.published_cause_modal.title',
         contentKey: 'home.published_cause_modal.content',
       });
     } else if (didCreateAccount !== null) {
       setConfig({
-        imageUrl: '/images/createCause.svg',
+        imageUrl: '/images/createAccount.svg',
         titleKey: 'login_modal.success_screen.title',
         contentKey: 'login_modal.success_screen.text',
       });

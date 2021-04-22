@@ -3,7 +3,7 @@ import React from 'react';
 
 import configureStore from 'redux/store';
 import * as hooks from 'redux/Cause/hooks/useFetchCauses';
-import * as coalitionsHooks from 'redux/Coalition/hooks';
+import * as coalitionsHooks from 'redux/Coalition/hooks/useFetchCoalitions';
 import CauseList from './CauseList';
 import { CAUSES_MOCK_STORE } from 'redux/Cause/fixtures';
 import { TestProvider } from 'services/test/TestProvider';

@@ -8,7 +8,6 @@ import {
   fontFamily,
   fontSize,
   lineHeight,
-  fonts,
   fontWeight,
 } from 'stylesheet';
 
@@ -89,14 +88,3 @@ export const ButtonContainer = styled.div`
   }
 `;
 ButtonContainer.displayName = 'ButtonContainer';
-
-export const Supported = styled.div`
-  ${fonts.input};
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: ${colorPalette.mintGreen};
-  color: ${colorPalette.blueCoalition};
-  padding: ${getSpacing(1)} ${getSpacing(2)};
-  border-radius: 0 0 0 ${borderRadius.medium};
-`;

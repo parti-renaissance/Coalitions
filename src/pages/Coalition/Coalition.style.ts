@@ -8,6 +8,7 @@ import {
   contentMaxWidth,
 } from 'stylesheet';
 import { DESKTOP_BUTTONS_WIDTH } from 'components/CauseDetails/components/HeaderButtons/HeaderButtons.style';
+import { FullWidthButton } from 'components/Button/Button';
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -69,5 +70,13 @@ export const ContentSubContainer = styled.div<{ center?: boolean; maxWidth?: boo
 export const HeaderSubContainer = styled.div`
   ${media.desktop(`
     width: ${DESKTOP_BUTTONS_WIDTH};
+  `)};
+`;
+
+export const FollowButton = styled(FullWidthButton)`
+  display: none;
+  ${media.desktop(`
+    display: flex;
+    margin-bottom: ${getSpacing(3)};
   `)};
 `;

@@ -12,13 +12,13 @@ import { FormattedMessage } from 'react-intl';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
 import { TabsWrapper } from 'components/TabsWrapper/TabsWrapper';
-import { Supported } from 'components/Cause/Cause.style';
 import AboutThisCause from './components/AboutThisCause';
 import Header from './components/Header';
 import HeaderButtons from './components/HeaderButtons';
 import EmptySection from './components/EmptySection';
 import { useCauseOwner } from 'redux/Cause/hooks/useCauseOwner';
 import QuickActions from './components/QuickActions';
+import FollowTag from 'components/FollowTag/FollowTag';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;
@@ -54,11 +54,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
         <SubContainer center={!showQuickActions}>
           <HeaderContainer>
             <CauseImage backgroundImage={cause.image_url} />
-            {isSupported ? (
-              <Supported>
-                <FormattedMessage id="cause.supported" />
-              </Supported>
-            ) : null}
+            {isSupported ? <FollowTag labelKey="cause.supported" /> : null}
             <MobileHeaderWrapper>{renderHeader()}</MobileHeaderWrapper>
           </HeaderContainer>
           <TabsWrapper

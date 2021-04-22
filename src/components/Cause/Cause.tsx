@@ -12,7 +12,6 @@ import {
   StyledCard,
   StyledContent,
   StyledMedia,
-  Supported,
 } from './Cause.style';
 
 import { DefaultLink as Link } from 'components/Link/Link';
@@ -22,6 +21,7 @@ import LoginAndSupportModal from 'components/LoginAndSupportModal';
 import { PATHS } from 'routes';
 import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 import { CoalitionsDisplay } from 'components/CauseDetails/components/CoalitionsDisplay';
+import FollowTag from 'components/FollowTag/FollowTag';
 
 interface CauseProps {
   cause: CauseType;
@@ -54,11 +54,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           history.push(PATHS.CAUSE.url(cause.uuid));
         }}
       >
-        {Boolean(cause.supported) ? (
-          <Supported>
-            <FormattedMessage id="cause.supported" />
-          </Supported>
-        ) : null}
+        {Boolean(cause.supported) ? <FollowTag labelKey="cause.supported" /> : null}
         <StyledMedia backgroundImage={cause.image_url} />
         <StyledContent>
           <CoalitionsDisplay cause={cause} small />

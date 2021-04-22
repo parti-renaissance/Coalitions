@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import * as coalitionsHooks from 'redux/Coalition/hooks';
+import * as coalitionsHooks from 'redux/Coalition/hooks/useFetchCoalitions';
 import * as service from './service';
 
 import { TestProvider } from 'services/test/TestProvider';

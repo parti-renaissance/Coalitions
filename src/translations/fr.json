@@ -230,7 +230,9 @@
   "coalition": {
     "title": "Retrouvez les coalitions",
     "what-is-it": "Qu’est-ce qu’une coalition ?",
-    "definition": "C’est l’ensemble des citoyens et acteurs engagés dans des causes d’une même thématique et tous ceux que la thématique intéresse. Parce qu’unis, on est plus forts\u00A0!"
+    "definition": "C’est l’ensemble des citoyens et acteurs engagés dans des causes d’une même thématique et tous ceux que la thématique intéresse. Parce qu’unis, on est plus forts\u00A0!",
+    "follow": "Suivre",
+    "followed": "Suivie"
   },
   "our_commitments": {
     "title": "Nos engagements",
@@ -242,6 +244,7 @@
   "errors": {
     "already-followed-cause-for-unauthenticated": "Vous soutenez déjà cette cause, connectez-vous ou créez un compte pour aller plus loin",
     "already-followed-cause": "Vous soutenez déjà cette cause.",
+    "already-followed-coalition": "Vous suivez déjà cette coalition.",
     "mail-of-existing-account-for-support": "L’utilisateur avec cette adresse e-mail existe déjà. Veuillez vous connecter pour soutenir la cause.",
     "mail-of-existing-account": "L’utilisateur avec cette adresse e-mail existe déjà.",
     "already-used-cause-name": "Ce nom de cause existe déjà.",

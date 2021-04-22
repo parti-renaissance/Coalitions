@@ -6,4 +6,5 @@ export interface Coalition {
   image_url: string;
   filtered_by?: boolean;
   youtube_id?: string | null;
+  followed?: boolean;
 }

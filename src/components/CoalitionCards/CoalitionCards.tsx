@@ -8,11 +8,12 @@ import {
   SelectedCoalitionContainer,
   SelectedCoalitionIndex,
 } from './CoalitionCards.style';
-import { useFetchCoalitions } from 'redux/Coalition/hooks';
+import { useFetchCoalitions } from 'redux/Coalition/hooks/useFetchCoalitions';
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
 import { Coalition } from 'redux/Coalition/types';
 import Loader from 'components/Loader';
+import FollowTag, { FOLLOW_TAG_TYPE } from 'components/FollowTag/FollowTag';
 
 interface CoalitionCardsProps {
   onCoalitionClick?: (coalition: Coalition) => void;
@@ -58,6 +59,9 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
           ) : null}
         </CoalitionImage>
         <CoalitionName>{coalition.name}</CoalitionName>
+        {Boolean(coalition.followed) ? (
+          <FollowTag labelKey="coalition.followed" type={FOLLOW_TAG_TYPE.coalition} />
+        ) : null}
       </CoalitionContainer>
     );
   };

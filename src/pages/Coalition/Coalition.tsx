@@ -1,8 +1,8 @@
-import React, { useEffect, FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import Loader from 'components/Loader';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { useFetchCoalitions } from 'redux/Coalition/hooks';
+import { useFetchCoalitions } from 'redux/Coalition/hooks/useFetchCoalitions';
 import { getCoalition } from 'redux/Coalition/selectors';
 import {
   HeaderContainer,
@@ -11,6 +11,7 @@ import {
   ContentContainer,
   ContentSubContainer,
   HeaderSubContainer,
+  FollowButton,
 } from './Coalition.style';
 import { SeeMore } from 'components/SeeMore/SeeMore';
 import ShareButton from 'components/ShareButton';
@@ -19,17 +20,26 @@ import { useFeatureToggling } from 'services/useFeatureToggling';
 import Video from 'components/Video';
 import { VIDEO_ID as HOME_VIDEO_ID } from 'pages/Home/Home';
 import { getIsMobile } from 'services/mobile/mobile';
+import { useIntl } from 'react-intl';
+import { isUserLogged } from 'redux/Login';
+import { useCoalitionFollow } from 'redux/Coalition/hooks/useCoalitionFollow';
+import FixedBottomButton from 'components/FixedBottomButton';
+import FollowTag, { FOLLOW_TAG_TYPE } from 'components/FollowTag/FollowTag';
 
 interface CoalitionNavParams {
   coalitionId: string;
 }
 
+// eslint-disable-next-line complexity
 const Coalition: FunctionComponent = () => {
   const { coalitionId } = useParams<CoalitionNavParams>();
   const coalition = useSelector(getCoalition(coalitionId));
   const { fetchCoalitions, isFetchingCoalitions } = useFetchCoalitions();
   const { isCoalitionVideoPlaceholderEnable } = useFeatureToggling();
   const isMobile = getIsMobile();
+  const { loading: isFollowing, followCoalition } = useCoalitionFollow(coalitionId);
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const intl = useIntl();
 
   useEffect(() => {
     fetchCoalitions();
@@ -61,12 +71,27 @@ const Coalition: FunctionComponent = () => {
     );
   };
 
+  const showFollowButton = isUserLoggedIn && !Boolean(coalition.followed);
   return (
     <>
       <Image src={coalition.image_url} />
+      {Boolean(coalition.followed) ? (
+        <FollowTag labelKey="coalition.followed" type={FOLLOW_TAG_TYPE.coalition} />
+      ) : null}
       <HeaderContainer>
         <Title>{coalition.name}</Title>
         <HeaderSubContainer>
+          {showFollowButton ? (
+            <FollowButton
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={followCoalition}
+              isLoading={isFollowing}
+            >
+              {intl.formatMessage({ id: 'coalition.follow' })}
+            </FollowButton>
+          ) : null}
           <ShareButton
             displayMobileIcon
             shareContent={{ title: coalition.name, text: coalition.name }}
@@ -83,6 +108,11 @@ const Coalition: FunctionComponent = () => {
           <HorizontalCausesList coalitionId={coalitionId} />
         </ContentSubContainer>
       </ContentContainer>
+      {showFollowButton ? (
+        <FixedBottomButton onClick={followCoalition} isLoading={isFollowing}>
+          {intl.formatMessage({ id: 'coalition.follow' })}
+        </FixedBottomButton>
+      ) : null}
     </>
   );
 };

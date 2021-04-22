@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useFetchCoalitions } from 'redux/Coalition/hooks';
+import { useFetchCoalitions } from 'redux/Coalition/hooks/useFetchCoalitions';
 import {
   Chevron,
   CoalitionFiltersContainer,

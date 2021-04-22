@@ -1,8 +1,5 @@
 import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
-import { useDispatch } from 'react-redux';
-import { updateSnackbar } from 'redux/Snackbar';
-import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { InscriptionFormValues } from 'components/LoginModal/components/CreateAccountForm/lib/useValidateForm';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
@@ -37,8 +34,6 @@ type CreateAccountPayload = {
 };
 
 export const useCreateAccount = (doAfterAccountCreation?: () => Promise<void>) => {
-  const dispatch = useDispatch();
-  const { formatMessage } = useIntl();
   const errorHandler = useCreateAccountErrorHandler();
 
   const [{ loading, error }, doCreateAccount] = useTypedAsyncFn(
@@ -71,15 +66,8 @@ export const useCreateAccount = (doAfterAccountCreation?: () => Promise<void>) =
       if (doAfterAccountCreation !== undefined) {
         await doAfterAccountCreation();
       }
-
-      dispatch(
-        updateSnackbar({
-          message: formatMessage({ id: 'login_modal.create_account.success' }),
-          severity: Severity.success,
-        }),
-      );
     },
-    [dispatch, doAfterAccountCreation, doCreateAccount, formatMessage],
+    [doAfterAccountCreation, doCreateAccount],
   );
 
   return { loading, error, createAccount };

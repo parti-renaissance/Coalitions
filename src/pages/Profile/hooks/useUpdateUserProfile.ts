@@ -29,7 +29,7 @@ const useUpdateUserProfileErrorHandler = () => {
 type UpdateUserProfilePayload = {
   first_name?: string;
   last_name?: string;
-  phone?: string;
+  phone?: { number?: string; country?: string };
   gender?: string;
   birthdate?: string;
 };
@@ -59,7 +59,13 @@ export const useUpdateUserProfile = (userId?: string) => {
         last_name: values.lastName,
         gender: values.gender === GENDERS[0].value ? undefined : values.gender,
         birthdate: values.birthday,
-        //phone: values.phoneNumber,
+        phone:
+          values.phoneNumber !== null
+            ? {
+                number: values.phoneNumber,
+                country: values.phoneCountry?.region,
+              }
+            : undefined,
       });
 
       if (response instanceof Error) return;

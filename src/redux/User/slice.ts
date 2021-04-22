@@ -27,6 +27,14 @@ const userSlice = createSlice({
         lastName: action.payload.lastName,
         gender: action.payload.gender === GENDERS[0].value ? undefined : action.payload.gender,
         birthdate: action.payload.birthday,
+        phone:
+          action.payload.phoneNumber !== undefined &&
+          action.payload.phoneCountry?.region !== undefined
+            ? {
+                number: action.payload.phoneNumber,
+                country: action.payload.phoneCountry?.region,
+              }
+            : null,
       };
     },
     deleteCurrentUser: state => {

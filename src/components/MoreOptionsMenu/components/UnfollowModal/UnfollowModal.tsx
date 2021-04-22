@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Modal } from 'components/Modal/Modal';
 import { Title, Description } from 'components/Modal/Modal.style';
 import { ButtonContainer } from './UnfollowModal.style';
@@ -8,41 +8,48 @@ import { MediumLargeButton as Button } from 'components/Button/Button';
 interface UnfollowModalProps {
   isOpened: boolean;
   onClose: () => void;
-  loading: boolean;
-  unfollowCause: () => Promise<void>;
+  isUnfollowing: boolean;
+  unfollow: () => void;
+  labels: {
+    description: string;
+    confirm: string;
+  };
 }
 
-export const UnfollowModal: React.FunctionComponent<UnfollowModalProps> = ({
+const UnfollowModal: FunctionComponent<UnfollowModalProps> = ({
   isOpened,
   onClose,
-  loading,
-  unfollowCause,
+  isUnfollowing,
+  unfollow,
+  labels: { description, confirm },
 }) => {
+  const onConfirmClick = async () => {
+    await unfollow();
+    onClose();
+  };
+
   return (
     <Modal isOpened={isOpened} onClose={onClose}>
       <Title>
-        <FormattedMessage id="unfollow_modal.title" />
+        <FormattedMessage id="more_options_menu.unfollow_modal.title" />
       </Title>
-      <Description>
-        <FormattedMessage id="unfollow_modal.text" />
-      </Description>
+      <Description>{description}</Description>
       <ButtonContainer>
         <Button
           size="small"
           variant="outlined"
           color="primary"
-          isLoading={loading}
-          onClick={async () => {
-            await unfollowCause();
-            onClose();
-          }}
+          isLoading={isUnfollowing}
+          onClick={onConfirmClick}
         >
-          <FormattedMessage id="unfollow_modal.confirm" />
+          {confirm}
         </Button>
         <Button size="small" variant="contained" color="primary" onClick={onClose}>
-          <FormattedMessage id="unfollow_modal.cancel" />
+          <FormattedMessage id="more_options_menu.unfollow_modal.cancel" />
         </Button>
       </ButtonContainer>
     </Modal>
   );
 };
+
+export default UnfollowModal;

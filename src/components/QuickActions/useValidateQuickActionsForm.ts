@@ -19,29 +19,29 @@ export const useValidateQuickActionsForm = () => {
 
     let errorsList = {};
 
-    let hasQuickActionsErros = false;
+    let hasQuickActionsErrors = false;
     const quickActionsErrors = quickActions.map(quickAction => {
       const errors = {} as QuickActionError;
       if (isFieldEmpty(quickAction.label)) {
         errors.label = requiredErrorMessage;
-        hasQuickActionsErros = true;
+        hasQuickActionsErrors = true;
       }
       if (quickAction.label.length <= 2) {
         errors.label = formatMessage({ id: 'form_errors.too-short-value' });
-        hasQuickActionsErros = true;
+        hasQuickActionsErrors = true;
       }
       if (isFieldEmpty(quickAction.link)) {
         errors.link = requiredErrorMessage;
-        hasQuickActionsErros = true;
+        hasQuickActionsErrors = true;
       }
       if (isURLValid(quickAction.link)) {
         errors.link = formatMessage({ id: 'form_errors.not-valid-url' });
-        hasQuickActionsErros = true;
+        hasQuickActionsErrors = true;
       }
       return errors;
     });
 
-    if (hasQuickActionsErros) {
+    if (hasQuickActionsErrors) {
       errorsList = {
         ...errorsList,
         quickActions: quickActionsErrors,

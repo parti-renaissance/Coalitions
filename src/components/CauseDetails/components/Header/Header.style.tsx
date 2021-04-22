@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { getSpacing, colorPalette, media, fonts, defaultMargins } from 'stylesheet';
-import Menu from '@material-ui/core/Menu';
 
 export const Container = styled.div`
   padding: ${getSpacing(3)} ${getSpacing(3)} ${getSpacing(2)} ${getSpacing(3)};
@@ -32,23 +31,4 @@ export const NameAndShareWrapper = styled.div`
 
 export const ShareButtonContainer = styled.div`
   margin-left: ${getSpacing(9)};
-`;
-
-const MORE_ICON_SIZE = '18px';
-
-export const MoreIcon = styled.img`
-  width: ${MORE_ICON_SIZE};
-  height: ${MORE_ICON_SIZE};
-  cursor: pointer;
-`;
-
-export const MoreIconContainer = styled.div`
-  margin-left: ${getSpacing(3)};
-`;
-
-export const MoreOptionsMenu = styled(Menu)`
-  margin-top: ${getSpacing(8)};
-  li {
-    ${fonts.input};
-  }
 `;

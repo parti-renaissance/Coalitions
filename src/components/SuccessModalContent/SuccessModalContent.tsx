@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 
 interface SuccessModalContentProps {
   titleKey: string;
-  contentKey: string;
+  contentKey?: string;
   imageUrl: string;
 }
 
@@ -19,7 +19,9 @@ const SuccessModalContent: FunctionComponent<SuccessModalContentProps> = ({
     <Container>
       <Image src={imageUrl} />
       <Title>{intl.formatMessage({ id: titleKey })}</Title>
-      <Content>{intl.formatMessage({ id: contentKey })}</Content>
+      {contentKey !== undefined ? (
+        <Content>{intl.formatMessage({ id: contentKey })}</Content>
+      ) : null}
     </Container>
   );
 };

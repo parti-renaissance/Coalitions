@@ -299,7 +299,7 @@
       "too-long-body": "Le contenu est limité à 6000 caractères."
     },
     "success_screen": {
-      "title": "Félicitations, votre email a bien été envoyé !"
+      "title": "Félicitations, votre email a bien été envoyé\u00A0!"
     }
   }
 }

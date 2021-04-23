@@ -9,6 +9,7 @@ import LoginAndSupportModal from 'components/LoginAndSupportModal';
 import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 import { PATHS } from 'routes';
 import CauseDetails from 'components/CauseDetails';
+import SuccessModal from 'pages/Home/components/SuccessModal';
 
 interface CausePageNavParams {
   causeId: string;
@@ -55,6 +56,7 @@ const CausePage: React.FunctionComponent = () => {
         cause={cause}
         redirectToAfterAuth={PATHS.CAUSE.url(cause.uuid)}
       />
+      <SuccessModal />
     </>
   );
 };

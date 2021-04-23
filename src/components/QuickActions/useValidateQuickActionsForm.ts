@@ -53,11 +53,3 @@ export const useValidateQuickActionsForm = () => {
 
   return { validateForm };
 };
-
-export const hasFormErrors = (errors: QuickActionError[]) => {
-  return errors.reduce(
-    (isInError: boolean, quickActionErrors: QuickActionError) =>
-      isInError || Object.keys(quickActionErrors).length > 0,
-    false,
-  );
-};

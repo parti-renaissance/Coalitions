@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useFetchCoalitions } from 'redux/Coalition/hooks/useFetchCoalitions';
 import {
   Chevron,
@@ -6,43 +6,40 @@ import {
   CoalitionFiltersSubContainer,
   StyledChip,
 } from './CoalitionsFilter.style';
-
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
 import { getIsMobile } from 'services/mobile/mobile';
-import { useLocation } from 'react-router';
 import { useCoalitionsFilter } from './service';
+import { FormattedMessage } from 'react-intl';
 
-type Props = {
-  handleCoalitionsFilterClick: (ids: string[]) => void;
-};
+interface CoalitionFilterProps {
+  setSelectedCoalitionIds: (ids: string[] | undefined) => void;
+}
 
-export const CoalitionsFilter: React.FunctionComponent<Props> = ({
-  handleCoalitionsFilterClick,
+export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
+  setSelectedCoalitionIds: setSelectedCoalitionIdsFromProps,
 }) => {
   const coalitions = useSelector(getCoalitions);
-  const {
-    allSelected,
-    selectedCoalitions,
-    handleClickOnChips,
-    onClickOnChips,
-  } = useCoalitionsFilter(handleCoalitionsFilterClick);
+  const { selectedCoalitionIds, onSelectCoalitionId } = useCoalitionsFilter();
   const { fetchCoalitions } = useFetchCoalitions();
   const isMobile = getIsMobile();
   const [displayAll, setDisplayAll] = useState(!isMobile);
-  const { search } = useLocation();
 
   useEffect(() => {
     fetchCoalitions();
   }, [fetchCoalitions]);
 
   useEffect(() => {
-    const params = new URLSearchParams(search);
-    const coalitionId = params.get('coalitionId');
-    if (selectedCoalitions.length === 0) {
-      handleClickOnChips(coalitionId);
-    }
-  }, [search, handleCoalitionsFilterClick, handleClickOnChips, selectedCoalitions]);
+    setSelectedCoalitionIdsFromProps(selectedCoalitionIds);
+  }, [selectedCoalitionIds, setSelectedCoalitionIdsFromProps]);
+
+  const hideOrShowAllChips = () => {
+    setDisplayAll(!displayAll);
+  };
+
+  const onChipClick = (id?: string) => () => {
+    onSelectCoalitionId(id);
+  };
 
   if (coalitions.length === 0) {
     return null;
@@ -51,14 +48,14 @@ export const CoalitionsFilter: React.FunctionComponent<Props> = ({
   return (
     <CoalitionFiltersContainer>
       <CoalitionFiltersSubContainer displayAll={displayAll}>
-        <StyledChip onClick={() => onClickOnChips(null)} isSelected={allSelected}>
-          Tout
+        <StyledChip onClick={onChipClick()} isSelected={selectedCoalitionIds.length === 0}>
+          <FormattedMessage id="cause_list.all" />
         </StyledChip>
         {coalitions.map(coalition => (
           <StyledChip
             key={coalition.uuid}
-            onClick={() => onClickOnChips(coalition.uuid)}
-            isSelected={selectedCoalitions.includes(coalition.uuid)}
+            onClick={onChipClick(coalition.uuid)}
+            isSelected={selectedCoalitionIds.includes(coalition.uuid)}
           >
             {coalition.name}
           </StyledChip>
@@ -67,7 +64,7 @@ export const CoalitionsFilter: React.FunctionComponent<Props> = ({
       {isMobile && (
         <Chevron
           displayAll={displayAll}
-          onClick={() => setDisplayAll(!displayAll)}
+          onClick={hideOrShowAllChips}
           src="/images/chevronDownBlack.svg"
         />
       )}

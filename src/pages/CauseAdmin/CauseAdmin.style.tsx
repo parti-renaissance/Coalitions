@@ -18,7 +18,7 @@ export const UpdateCauseWrapper = styled.div`
   `)}
 `;
 
-export const QuickActionsWrapper = styled.div`
+export const TabWrapper = styled.div`
   margin-top: ${getSpacing(4)};
   ${media.desktop(`
     margin-top: ${getSpacing(8)};

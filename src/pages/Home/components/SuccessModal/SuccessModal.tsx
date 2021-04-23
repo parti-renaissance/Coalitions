@@ -7,7 +7,7 @@ const SuccessModal: FunctionComponent<{}> = () => {
   const location = useLocation();
   const history = useHistory();
   const [config, setConfig] = useState<
-    { imageUrl: string; titleKey: string; contentKey: string } | undefined
+    { imageUrl: string; titleKey: string; contentKey?: string } | undefined
   >(undefined);
 
   useEffect(() => {
@@ -15,6 +15,7 @@ const SuccessModal: FunctionComponent<{}> = () => {
 
     const publishedCause = params.get('publishedCause');
     const didCreateAccount = params.get('didCreateAccount');
+    const sendMail = params.get('sendMail');
 
     if (publishedCause !== null) {
       setConfig({
@@ -27,6 +28,11 @@ const SuccessModal: FunctionComponent<{}> = () => {
         imageUrl: '/images/createAccount.svg',
         titleKey: 'login_modal.success_screen.title',
         contentKey: 'login_modal.success_screen.text',
+      });
+    } else if (sendMail !== null) {
+      setConfig({
+        imageUrl: '/images/sendMail.svg',
+        titleKey: 'send_mails.success_screen.title',
       });
     }
   }, [location]);

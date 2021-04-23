@@ -3,6 +3,7 @@ interface FeatureToggles {
   isProfilePageEnable: boolean;
   isCoalitionPageEnable: boolean;
   isCoalitionVideoPlaceholderEnable: boolean;
+  isSendMailEnabled: boolean;
 }
 
 export const useFeatureToggling = (): FeatureToggles => {
@@ -12,6 +13,7 @@ export const useFeatureToggling = (): FeatureToggles => {
       isProfilePageEnable: true,
       isCoalitionPageEnable: false,
       isCoalitionVideoPlaceholderEnable: false,
+      isSendMailEnabled: false,
     };
   }
 
@@ -20,5 +22,6 @@ export const useFeatureToggling = (): FeatureToggles => {
     isProfilePageEnable: true,
     isCoalitionPageEnable: true,
     isCoalitionVideoPlaceholderEnable: true,
+    isSendMailEnabled: true,
   };
 };

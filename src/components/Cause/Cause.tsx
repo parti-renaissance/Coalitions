@@ -65,7 +65,10 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
                 id="cause.author"
                 values={{
                   firstName: cause.author.first_name,
-                  lastNameInitial: cause.author.last_name_initial,
+                  lastName:
+                    isUserLoggedIn && cause.author.last_name !== undefined
+                      ? cause.author.last_name
+                      : cause.author.last_name_initial,
                 }}
               />
             </Author>

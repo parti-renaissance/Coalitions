@@ -265,8 +265,8 @@
     "mail-of-existing-account": "L’utilisateur avec cette adresse e-mail existe déjà.",
     "already-used-cause-name": "Ce nom de cause existe déjà.",
     "incorrect-password-token": "Une erreur s’est produite : ce lien n’est plus valide.",
-    "cannot-edit-this-cause": "Vous n'avez pas le droit de modifier cette cause.",
-    "cannot-send-mail-for-this-cause": "Vous n'avez pas le droit d'envoyer de mails pour cette cause."
+    "cannot-edit-this-cause": "Vous n’avez pas le droit de modifier cette cause.",
+    "cannot-send-mail-for-this-cause": "Vous n’avez pas le droit d’envoyer de mails pour cette cause."
   },
   "success_stories": {
     "title": "Ils ont créé leur cause",
@@ -293,9 +293,9 @@
     "body": "Contenu",
     "validate": "Envoyer",
     "form_errors": {
-      "too-short-object": "L'objet doit faire minimum 3 caractères.",
+      "too-short-object": "L’objet doit faire minimum 3 caractères.",
       "too-short-body": "Le contenu doit faire minimum 3 caractères.",
-      "too-long-object": "L'objet est limité à 100 caractères.",
+      "too-long-object": "L’objet est limité à 100 caractères.",
       "too-long-body": "Le contenu est limité à 6000 caractères."
     },
     "success_screen": {

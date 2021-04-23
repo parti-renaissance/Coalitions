@@ -98,7 +98,7 @@
     "join-coalition": "Tenez-moi informé(e) par email de l’actualité des coalitions que je suis.",
     "grow-the-cause": "Faites grandir la cause",
     "unfollow_modal": {
-      "description": "En retirant votre soutien, la cause a moins de chance d’aboutir",
+      "description": "En retirant votre soutien, la cause a moins de chance d’aboutir.",
       "confirm": "Ne plus soutenir"
     },
     "about": {
@@ -245,7 +245,7 @@
     "follower": "{followersNumber} soutien recueilli",
     "followers": "{followersNumber} soutiens recueillis",
     "unfollow_modal": {
-      "description": "En retirant votre soutien, les causes de cette coalition ont moins de chance d’aboutir",
+      "description": "Vous ne serez plus tenu au courant des dernières actualités.",
       "confirm": "Ne plus suivre"
     }
   },

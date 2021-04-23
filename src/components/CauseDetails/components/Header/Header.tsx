@@ -5,6 +5,7 @@ import {
   CauseName,
   NameAndShareWrapper,
   ShareButtonContainer,
+  MoreOptionsMenuWrapper,
 } from './Header.style';
 import AuthorAndSupports from 'components/AuthorAndSupports';
 import { InCreationCause, Cause } from 'redux/Cause/types';
@@ -52,14 +53,16 @@ const Header: FunctionComponent<HeaderProps> = ({ cause, onSupport, isSupporting
         <AuthorAndSupportsWrapper>
           <AuthorAndSupports cause={cause} showAuthor />
           {shouldDisplayMoreIcon() ? (
-            <MoreOptionsMenu
-              isUnfollowing={loading}
-              unfollow={unfollowCause}
-              unfollowModalLabels={{
-                description: intl.formatMessage({ id: 'cause.unfollow_modal.description' }),
-                confirm: intl.formatMessage({ id: 'cause.unfollow_modal.confirm' }),
-              }}
-            />
+            <MoreOptionsMenuWrapper>
+              <MoreOptionsMenu
+                isUnfollowing={loading}
+                unfollow={unfollowCause}
+                unfollowModalLabels={{
+                  description: intl.formatMessage({ id: 'cause.unfollow_modal.description' }),
+                  confirm: intl.formatMessage({ id: 'cause.unfollow_modal.confirm' }),
+                }}
+              />
+            </MoreOptionsMenuWrapper>
           ) : null}
         </AuthorAndSupportsWrapper>
       </div>

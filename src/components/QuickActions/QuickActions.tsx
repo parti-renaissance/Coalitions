@@ -12,12 +12,7 @@ import {
 } from './QuickActions.style';
 import Formik from 'components/Formik';
 import { FieldArray, getIn } from 'formik';
-import {
-  hasFormErrors,
-  QuickActionError,
-  QuickActionsForms,
-  useValidateQuickActionsForm,
-} from './useValidateQuickActionsForm';
+import { QuickActionsForms, useValidateQuickActionsForm } from './useValidateQuickActionsForm';
 import { AddButton } from './components/AddButton/AddButton';
 import { usePublishQuickActions } from './usePublishQuickActions';
 import { useSelector } from 'react-redux';
@@ -68,74 +63,84 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
           isInitialValid={Object.keys(validateForm(initialValues)).length === 0}
         >
           {// eslint-disable-next-line complexity
-          ({ values, handleChange, handleBlur, handleSubmit, touched, errors }) => (
+          ({
+            values,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            touched,
+            errors,
+            setFieldTouched,
+          }) => (
             <form onSubmit={handleSubmit}>
               <FieldArray
                 name="quickActions"
-                render={arrayHelpers => (
-                  <>
-                    {values.quickActions.map((quickAction, index) => {
-                      const labelFieldName = `quickActions[${index}].label`;
-                      const labelFieldTouched = getIn(touched, labelFieldName);
-                      const labelFieldError = getIn(errors, labelFieldName);
+                render={arrayHelpers => {
+                  const deleteAction = (index: number) => () => {
+                    setFieldTouched('quickActions');
+                    arrayHelpers.remove(index);
+                  };
+                  return (
+                    <>
+                      {values.quickActions.map((quickAction, index) => {
+                        const labelFieldName = `quickActions[${index}].label`;
+                        const labelFieldTouched = getIn(touched, labelFieldName);
+                        const labelFieldError = getIn(errors, labelFieldName);
 
-                      const linkFieldName = `quickActions[${index}].link`;
-                      const linkFieldTouched = getIn(touched, linkFieldName);
-                      const linkFieldError = getIn(errors, linkFieldName);
-                      return (
-                        <QuickActionContainer
-                          key={quickAction.id !== undefined ? quickAction.id : index}
-                        >
-                          <QuickActionHeadLineContainer>
-                            <h3>
-                              <FormattedMessage
-                                id="quick_actions.action-title"
-                                values={{ number: index + 1 }}
+                        const linkFieldName = `quickActions[${index}].link`;
+                        const linkFieldTouched = getIn(touched, linkFieldName);
+                        const linkFieldError = getIn(errors, linkFieldName);
+                        return (
+                          <QuickActionContainer
+                            key={quickAction.id !== undefined ? quickAction.id : index}
+                          >
+                            <QuickActionHeadLineContainer>
+                              <h3>
+                                <FormattedMessage
+                                  id="quick_actions.action-title"
+                                  values={{ number: index + 1 }}
+                                />
+                              </h3>
+                              <QuickActionDeleteButton onClick={deleteAction(index)}>
+                                <FormattedMessage id="quick_actions.action-delete" />
+                              </QuickActionDeleteButton>
+                            </QuickActionHeadLineContainer>
+                            <InputFieldWrapper>
+                              <InputField
+                                required
+                                placeholder={formatMessage({ id: 'quick_actions.label' })}
+                                type="text"
+                                name={labelFieldName}
+                                error={labelFieldTouched === true && labelFieldError !== undefined}
+                                helperText={labelFieldTouched === true ? labelFieldError : null}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={quickAction.label}
                               />
-                            </h3>
-                            <QuickActionDeleteButton onClick={() => arrayHelpers.remove(index)}>
-                              <FormattedMessage id="quick_actions.action-delete" />
-                            </QuickActionDeleteButton>
-                          </QuickActionHeadLineContainer>
-                          <InputFieldWrapper>
-                            <InputField
-                              required
-                              placeholder={formatMessage({ id: 'quick_actions.label' })}
-                              type="text"
-                              name={labelFieldName}
-                              error={labelFieldTouched === true && labelFieldError !== undefined}
-                              helperText={labelFieldTouched === true ? labelFieldError : null}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={quickAction.label}
-                            />
-                          </InputFieldWrapper>
-                          <InputFieldWrapper>
-                            <InputField
-                              required
-                              placeholder={formatMessage({ id: 'quick_actions.link' })}
-                              type="text"
-                              name={linkFieldName}
-                              error={linkFieldTouched === true && linkFieldError !== undefined}
-                              helperText={linkFieldTouched === true ? linkFieldError : null}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={quickAction.link}
-                            />
-                          </InputFieldWrapper>
-                        </QuickActionContainer>
-                      );
-                    })}
-                    <AddButton
-                      disabled={
-                        errors.quickActions === undefined
-                          ? false
-                          : hasFormErrors(errors.quickActions as QuickActionError[])
-                      }
-                      push={arrayHelpers.push}
-                    />
-                  </>
-                )}
+                            </InputFieldWrapper>
+                            <InputFieldWrapper>
+                              <InputField
+                                required
+                                placeholder={formatMessage({ id: 'quick_actions.link' })}
+                                type="text"
+                                name={linkFieldName}
+                                error={linkFieldTouched === true && linkFieldError !== undefined}
+                                helperText={linkFieldTouched === true ? linkFieldError : null}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={quickAction.link}
+                              />
+                            </InputFieldWrapper>
+                          </QuickActionContainer>
+                        );
+                      })}
+                      <AddButton
+                        disabled={Object.keys(errors).length > 0}
+                        push={arrayHelpers.push}
+                      />
+                    </>
+                  );
+                }}
               />
               <ValidateButton
                 disabled={

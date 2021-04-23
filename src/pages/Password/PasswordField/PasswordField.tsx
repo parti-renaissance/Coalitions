@@ -38,6 +38,7 @@ export const PasswordField: React.FunctionComponent<PasswordFieldProps> = ({
         onChange={handleChange}
         onBlur={handleBlur}
         value={value}
+        inputProps={{ maxLength: 255 }}
         endAdornment={
           <InputAdornment position="end">
             <IconButton aria-label="toggle password visibility" onClick={togglePassword}>

@@ -116,6 +116,7 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={quickAction.label}
+                                inputProps={{ maxLength: 100 }}
                               />
                             </InputFieldWrapper>
                             <InputFieldWrapper>
@@ -129,6 +130,7 @@ export const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) 
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={quickAction.link}
+                                inputProps={{ maxLength: 255 }}
                               />
                             </InputFieldWrapper>
                           </QuickActionContainer>

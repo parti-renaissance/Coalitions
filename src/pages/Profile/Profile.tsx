@@ -98,6 +98,7 @@ export const Profile: FunctionComponent = () => {
                 type="email"
                 name="email"
                 value={values.email}
+                inputProps={{ maxLength: 255 }}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
@@ -111,6 +112,7 @@ export const Profile: FunctionComponent = () => {
                 value={values.firstName}
                 error={touched.firstName === true && errors.firstName !== undefined}
                 helperText={touched.firstName === true ? errors.firstName : undefined}
+                inputProps={{ maxLength: 50 }}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
@@ -124,6 +126,7 @@ export const Profile: FunctionComponent = () => {
                 value={values.lastName}
                 error={touched.lastName === true && errors.lastName !== undefined}
                 helperText={touched.lastName === true ? errors.lastName : undefined}
+                inputProps={{ maxLength: 50 }}
               />
             </InputFieldWrapper>
             <InputFieldWrapper isPlaceholder={values.gender === GENDERS[0].value}>

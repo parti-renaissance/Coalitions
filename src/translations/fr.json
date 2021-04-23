@@ -84,7 +84,7 @@
     "see-all": "Voir tout"
   },
   "cause": {
-    "author": "Par {firstName} {lastNameInitial}",
+    "author": "Par {firstName} {lastName}",
     "support": "{supportsNumber} soutien",
     "supports": "{supportsNumber} soutiens",
     "support-button": "Soutenir",

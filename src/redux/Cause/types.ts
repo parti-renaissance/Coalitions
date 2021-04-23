@@ -17,6 +17,7 @@ export type Cause = {
 interface Author {
   first_name: string;
   last_name_initial: string;
+  last_name?: string;
   uuid: string;
 }
 

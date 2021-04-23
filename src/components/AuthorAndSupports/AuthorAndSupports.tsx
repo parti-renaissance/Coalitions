@@ -3,6 +3,8 @@ import { Cause, InCreationCause } from 'redux/Cause/types';
 import { Container, AuthorContainer } from './AuthorAndSupports.style';
 import { useIntl } from 'react-intl';
 import IconAndLabel from 'components/IconAndLabel';
+import useSelector from 'redux/useSelector';
+import { isUserLogged } from 'redux/Login';
 
 interface AuthorAndSupportsProps {
   cause: InCreationCause | Cause;
@@ -10,6 +12,7 @@ interface AuthorAndSupportsProps {
 }
 
 const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, showAuthor }) => {
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const intl = useIntl();
 
   if (cause.author === undefined || cause.author === null) {
@@ -26,7 +29,10 @@ const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, s
               { id: 'cause.author' },
               {
                 firstName: cause.author.first_name,
-                lastNameInitial: cause.author.last_name_initial,
+                lastName:
+                  isUserLoggedIn && cause.author.last_name !== undefined
+                    ? cause.author.last_name
+                    : cause.author.last_name_initial,
               },
             )}
           />

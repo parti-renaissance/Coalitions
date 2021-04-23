@@ -33,3 +33,7 @@ export const NameAndShareWrapper = styled.div`
 export const ShareButtonContainer = styled.div`
   margin-left: ${getSpacing(9)};
 `;
+
+export const MoreOptionsMenuWrapper = styled.div`
+  margin-bottom: ${getSpacing(1)};
+`;

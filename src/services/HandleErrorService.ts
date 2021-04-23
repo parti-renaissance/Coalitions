@@ -1,4 +1,4 @@
-import debounce from 'lodash/debounce';
+import throttle from 'lodash/throttle';
 import * as Sentry from '@sentry/browser';
 import { store } from 'redux/store';
 import { updateSnackbar } from 'redux/Snackbar';
@@ -53,7 +53,7 @@ export default class HandleErrorService {
     return HandleErrorService.sendDefault(error, defaultHandler);
   }
 
-  static showErrorSnackbarBounced(error?: APIErrorsType, defaultHandler?: DefaultHandlerType) {
+  static showErrorSnackbarThrottled(error?: APIErrorsType, defaultHandler?: DefaultHandlerType) {
     store.dispatch(
       updateSnackbar({
         message: HandleErrorService.getErrorMessage(error, defaultHandler),
@@ -62,7 +62,7 @@ export default class HandleErrorService {
     );
   }
 
-  static showErrorSnackbar = debounce(HandleErrorService.showErrorSnackbarBounced, 2000);
+  static showErrorSnackbar = throttle(HandleErrorService.showErrorSnackbarThrottled, 2000);
 }
 
 export const doesErrorIncludes = (error: Error, message: string) => {

@@ -30,7 +30,7 @@ describe('<CoalitionsFilter />', () => {
       .mockImplementation(() => mockUseFetchCoalitions);
     const wrapper = mount(
       <TestProvider partialState={{ coalition: COALITIONS_STORE }}>
-        <CoalitionsFilter handleCoalitionsFilterClick={handleCoalitionsFilterClickMock} />
+        <CoalitionsFilter setSelectedCoalitionIds={handleCoalitionsFilterClickMock} />
       </TestProvider>,
     );
     expect(wrapper.find('StyledChip')).toHaveLength(4);
@@ -43,7 +43,7 @@ describe('<CoalitionsFilter />', () => {
       .mockImplementation(() => mockUseFetchCoalitions);
     const wrapper = mount(
       <TestProvider>
-        <CoalitionsFilter handleCoalitionsFilterClick={handleCoalitionsFilterClickMock} />
+        <CoalitionsFilter setSelectedCoalitionIds={handleCoalitionsFilterClickMock} />
       </TestProvider>,
     );
     expect(wrapper.find('StyledChip')).toHaveLength(0);
@@ -56,7 +56,7 @@ describe('<CoalitionsFilter />', () => {
       .mockImplementation(() => mockUseFetchCoalitions);
     const wrapper = mount(
       <TestProvider partialState={{ coalition: COALITIONS_STORE }}>
-        <CoalitionsFilter handleCoalitionsFilterClick={handleCoalitionsFilterClickMock} />
+        <CoalitionsFilter setSelectedCoalitionIds={handleCoalitionsFilterClickMock} />
       </TestProvider>,
     );
     const styledChips = wrapper.find('StyledChip');
@@ -77,7 +77,7 @@ describe('<CoalitionsFilter />', () => {
       .mockImplementation(() => mockUseFetchCoalitions);
     const wrapper = mount(
       <TestProvider partialState={{ coalition: COALITIONS_STORE }}>
-        <CoalitionsFilter handleCoalitionsFilterClick={handleCoalitionsFilterClickMock} />
+        <CoalitionsFilter setSelectedCoalitionIds={handleCoalitionsFilterClickMock} />
       </TestProvider>,
     );
     const styledChips = wrapper.find('StyledChip');
@@ -87,25 +87,5 @@ describe('<CoalitionsFilter />', () => {
     expect(handleCoalitionsFilterClickMock).toHaveBeenCalledWith([
       '76f36b12-76ab-11eb-8125-42010a840071',
     ]);
-  });
-
-  it('should initialize filter without search params', async () => {
-    const mockUseCoalitionsFilter = {
-      allSelected: false,
-      selectedCoalitions: [],
-      handleClickOnChips: jest.fn(),
-      onClickOnChips: jest.fn(),
-    };
-    const handleCoalitionsFilterClickMock = jest.fn();
-    jest
-      .spyOn(coalitionsHooks, 'useFetchCoalitions')
-      .mockImplementation(() => mockUseFetchCoalitions);
-    jest.spyOn(service, 'useCoalitionsFilter').mockImplementation(() => mockUseCoalitionsFilter);
-    mount(
-      <TestProvider partialState={{ coalition: COALITIONS_STORE }}>
-        <CoalitionsFilter handleCoalitionsFilterClick={handleCoalitionsFilterClickMock} />
-      </TestProvider>,
-    );
-    expect(mockUseCoalitionsFilter.handleClickOnChips).toHaveBeenCalledWith(null);
   });
 });

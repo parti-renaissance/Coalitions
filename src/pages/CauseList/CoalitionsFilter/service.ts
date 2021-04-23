@@ -1,21 +1,16 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router';
 
 export const useCoalitionsFilter = () => {
-  const [selectedCoalitionIds, setSelectedCoalitionIds] = useState<string[]>([]);
   const { replace } = useHistory();
   const { search } = useLocation();
-
-  useEffect(() => {
-    const params = new URLSearchParams(search);
-    const coalitionId = params.get('coalitionId');
-    if (coalitionId !== null) {
-      setSelectedCoalitionIds([coalitionId]);
-    }
-  }, [search]);
+  const coalitionId = new URLSearchParams(window.location.search).get('coalitionId');
+  const [selectedCoalitionIds, setSelectedCoalitionIds] = useState<string[]>(
+    coalitionId !== null ? [coalitionId] : [],
+  );
 
   const onSelectCoalitionId = useCallback(
-    (id?: string) => () => {
+    (id?: string) => {
       let newSelectedCoalitionIds = [...selectedCoalitionIds];
 
       if (id === undefined && newSelectedCoalitionIds.length !== 0) {

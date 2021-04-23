@@ -10,11 +10,10 @@ import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
 import { getIsMobile } from 'services/mobile/mobile';
 import { useCoalitionsFilter } from './service';
-import Loader from 'components/Loader';
 import { FormattedMessage } from 'react-intl';
 
 interface CoalitionFilterProps {
-  setSelectedCoalitionIds: (ids: string[]) => void;
+  setSelectedCoalitionIds: (ids: string[] | undefined) => void;
 }
 
 export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
@@ -22,7 +21,7 @@ export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
 }) => {
   const coalitions = useSelector(getCoalitions);
   const { selectedCoalitionIds, onSelectCoalitionId } = useCoalitionsFilter();
-  const { fetchCoalitions, isFetchingCoalitions } = useFetchCoalitions();
+  const { fetchCoalitions } = useFetchCoalitions();
   const isMobile = getIsMobile();
   const [displayAll, setDisplayAll] = useState(!isMobile);
 
@@ -38,9 +37,9 @@ export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
     setDisplayAll(!displayAll);
   };
 
-  if (isFetchingCoalitions && coalitions.length === 0) {
-    return <Loader />;
-  }
+  const onChipClick = (id?: string) => () => {
+    onSelectCoalitionId(id);
+  };
 
   if (coalitions.length === 0) {
     return null;
@@ -49,13 +48,13 @@ export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
   return (
     <CoalitionFiltersContainer>
       <CoalitionFiltersSubContainer displayAll={displayAll}>
-        <StyledChip onClick={onSelectCoalitionId()} isSelected={selectedCoalitionIds.length === 0}>
+        <StyledChip onClick={onChipClick()} isSelected={selectedCoalitionIds.length === 0}>
           <FormattedMessage id="cause_list.all" />
         </StyledChip>
         {coalitions.map(coalition => (
           <StyledChip
             key={coalition.uuid}
-            onClick={onSelectCoalitionId(coalition.uuid)}
+            onClick={onChipClick(coalition.uuid)}
             isSelected={selectedCoalitionIds.includes(coalition.uuid)}
           >
             {coalition.name}

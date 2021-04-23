@@ -41,13 +41,15 @@ const defineCtaPositionInList = (): number => {
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const [selectedCoalitionIds, setSelectedCoalitionIds] = useState<string[]>([]);
+  const [selectedCoalitionIds, setSelectedCoalitionIds] = useState<string[] | undefined>(undefined);
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
   const numberOfCauses = useSelector(getNumberOfCauses);
 
   useEffect(() => {
-    fetchFirstPage(selectedCoalitionIds, isUserLoggedIn);
+    if (selectedCoalitionIds !== undefined) {
+      fetchFirstPage(selectedCoalitionIds, isUserLoggedIn);
+    }
   }, [fetchFirstPage, selectedCoalitionIds, isUserLoggedIn]);
 
   useEffect(() => {
@@ -61,7 +63,9 @@ const CauseList: React.FunctionComponent = () => {
   });
 
   const fetchNextPageCauses = useCallback(() => {
-    fetchNextPage(selectedCoalitionIds, isUserLoggedIn);
+    if (selectedCoalitionIds !== undefined) {
+      fetchNextPage(selectedCoalitionIds, isUserLoggedIn);
+    }
   }, [fetchNextPage, selectedCoalitionIds, isUserLoggedIn]);
 
   const causesBeforeCTA = causes.slice(0, ctaPosition);

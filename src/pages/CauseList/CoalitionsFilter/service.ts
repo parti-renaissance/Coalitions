@@ -1,38 +1,47 @@
-import { useState, useCallback } from 'react';
-import { useHistory } from 'react-router';
+import { useState, useCallback, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router';
 
-export const useCoalitionsFilter = (handleCoalitionsFilterClick: (ids: string[]) => void) => {
-  const [allSelected, setAllSelected] = useState(false);
-  const [selectedCoalitions, setSelectedCoalitions] = useState<string[]>([]);
+export const useCoalitionsFilter = () => {
+  const [selectedCoalitionIds, setSelectedCoalitionIds] = useState<string[]>([]);
   const { replace } = useHistory();
+  const { search } = useLocation();
 
-  const handleClickOnChips = useCallback(
-    (id: string | null) => {
-      if (id === null && !allSelected) {
-        setAllSelected(true);
-        setSelectedCoalitions([]);
-        handleCoalitionsFilterClick([]);
-      } else if (id !== null && !selectedCoalitions.includes(id)) {
-        setAllSelected(false);
-        setSelectedCoalitions([...selectedCoalitions, id]);
-        handleCoalitionsFilterClick([...selectedCoalitions, id]);
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const coalitionId = params.get('coalitionId');
+    if (coalitionId !== null) {
+      setSelectedCoalitionIds([coalitionId]);
+    }
+  }, [search]);
+
+  const onSelectCoalitionId = useCallback(
+    (id?: string) => () => {
+      let newSelectedCoalitionIds = [...selectedCoalitionIds];
+
+      if (id === undefined && newSelectedCoalitionIds.length !== 0) {
+        newSelectedCoalitionIds = [];
+      }
+
+      if (id !== undefined) {
+        const idIndex = newSelectedCoalitionIds.indexOf(id);
+        if (idIndex > -1) {
+          newSelectedCoalitionIds.splice(idIndex, 1);
+        } else {
+          newSelectedCoalitionIds.push(id);
+        }
+      }
+
+      setSelectedCoalitionIds(newSelectedCoalitionIds);
+
+      if (search.length > 0) {
+        replace({ search: '' });
       }
     },
-    [handleCoalitionsFilterClick, selectedCoalitions, allSelected],
-  );
-
-  const onClickOnChips = useCallback(
-    (id: string | null) => {
-      handleClickOnChips(id);
-      replace({ search: '' });
-    },
-    [handleClickOnChips, replace],
+    [selectedCoalitionIds, search, replace],
   );
 
   return {
-    allSelected,
-    selectedCoalitions,
-    handleClickOnChips,
-    onClickOnChips,
+    selectedCoalitionIds,
+    onSelectCoalitionId,
   };
 };

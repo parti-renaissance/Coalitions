@@ -66,7 +66,8 @@
   "cause_list": {
     "title": "{numberOfCauses} causes à soutenir",
     "description": "Vous pouvez soutenir une cause existante ou créer la vôtre.",
-    "no_cause": "Aucune cause ne correspond à votre filtre."
+    "no_cause": "Aucune cause ne correspond à votre filtre.",
+    "all": "Tout"
   },
   "share": {
     "label": "Partager",

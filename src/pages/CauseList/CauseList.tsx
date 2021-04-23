@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
 import useSelector from 'redux/useSelector';
 import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
 import { CauseListContainer, CTAContainer, Title, TitleContainer } from './CauseList.style';
@@ -42,33 +41,31 @@ const defineCtaPositionInList = (): number => {
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const [filteredByCoalitionIds, setFilteredByCoalitionIds] = useState<string[] | null>(null);
+  const [selectedCoalitionIds, setSelectedCoalitionIds] = useState<string[]>([]);
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
+  const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
   const numberOfCauses = useSelector(getNumberOfCauses);
 
   useEffect(() => {
-    if (filteredByCoalitionIds !== null) {
-      fetchFirstPage(filteredByCoalitionIds, isUserLoggedIn);
-    }
-  }, [fetchFirstPage, filteredByCoalitionIds, isUserLoggedIn]);
-
-  const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
+    fetchFirstPage(selectedCoalitionIds, isUserLoggedIn);
+  }, [fetchFirstPage, selectedCoalitionIds, isUserLoggedIn]);
 
   useEffect(() => {
     const handleResize = () => {
       setCtaPosition(defineCtaPositionInList());
     };
-
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   });
 
+  const fetchNextPageCauses = useCallback(() => {
+    fetchNextPage(selectedCoalitionIds, isUserLoggedIn);
+  }, [fetchNextPage, selectedCoalitionIds, isUserLoggedIn]);
+
   const causesBeforeCTA = causes.slice(0, ctaPosition);
   const causesAfterCTA = causes.slice(ctaPosition);
-
   return (
     <>
       <TitleContainer>
@@ -79,18 +76,13 @@ const CauseList: React.FunctionComponent = () => {
           <FormattedMessage id="cause_list.description" />
         </p>
       </TitleContainer>
-      <CoalitionsFilter handleCoalitionsFilterClick={setFilteredByCoalitionIds} />
+      <CoalitionsFilter setSelectedCoalitionIds={setSelectedCoalitionIds} />
       <CauseListHeader loading={loading} causesNumber={causes.length} />
-      {causes.length > 0 && (
+      {causes.length > 0 ? (
         <>
           <InfiniteScroll
             dataLength={causes.length}
-            next={() =>
-              fetchNextPage(
-                filteredByCoalitionIds !== null ? filteredByCoalitionIds : [],
-                isUserLoggedIn,
-              )
-            }
+            next={fetchNextPageCauses}
             hasMore={hasMore}
             loader={<Loader />}
           >
@@ -109,7 +101,7 @@ const CauseList: React.FunctionComponent = () => {
             </CauseListContainer>
           </InfiniteScroll>
         </>
-      )}
+      ) : null}
     </>
   );
 };

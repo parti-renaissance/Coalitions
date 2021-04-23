@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, MouseEvent } from 'react';
 import { MoreIcon, IconContainer, Menu } from './MoreOptionsMenu.style';
-import { FormattedMessage } from 'react-intl';
 import UnfollowModal from './components/UnfollowModal';
 import { MenuItem } from '@material-ui/core';
 
@@ -44,9 +43,7 @@ const MoreOptionsMenu: FunctionComponent<MoreOptionsMenuProps> = ({
         <MoreIcon src="/images/more_vertical.svg" />
       </IconContainer>
       <Menu anchorEl={menu} keepMounted open={Boolean(menu)} onClose={closeMenu}>
-        <MenuItem onClick={onFollowClick}>
-          <FormattedMessage id="more_options_menu.unfollow" />
-        </MenuItem>
+        <MenuItem onClick={onFollowClick}>{unfollowModalLabels.confirm}</MenuItem>
       </Menu>
       <UnfollowModal
         isOpened={isUnfollowModalOpened}

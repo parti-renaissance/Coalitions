@@ -44,6 +44,7 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
                 value={values.object}
                 error={touched.object === true && errors.object !== undefined}
                 helperText={touched.object === true ? errors.object : undefined}
+                inputProps={{ maxLength: 255 }}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>

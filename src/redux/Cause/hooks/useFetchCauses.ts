@@ -9,6 +9,7 @@ import HandleErrorService from 'services/HandleErrorService';
 import { useSelector } from 'react-redux';
 import { isUserLogged } from 'redux/Login';
 import request from 'superagent';
+import { useIntl } from 'react-intl';
 
 type RawQuickActions = {
   id: string;
@@ -44,16 +45,19 @@ const buildFilteredByUrl = (filters: Filters) => {
 
 export const useFetchCauses = (pageSize = PAGE_SIZE) => {
   let pendingRequest: request.SuperAgentRequest | undefined;
+  let useFilters = false;
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const { formatMessage } = useIntl();
 
   const [{ loading: loadingFetch, error }, doFetchCauses] = useTypedAsyncFn(
     async ({ page, filters }: { page: number; filters: string }) => {
       if (pendingRequest !== undefined) {
         pendingRequest.abort();
       }
+      useFilters = filters.length > 0;
 
       pendingRequest = coalitionApiClient.getRequestWithoutTokenCheck(
         `causes?page_size=${pageSize}&page=${page}${filters}`,
@@ -67,9 +71,12 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
 
   useEffect(() => {
     if (error !== undefined) {
-      HandleErrorService.showErrorSnackbar(error);
+      const handler = useFilters
+        ? () => formatMessage({ id: 'errors.filtered-causes-error' })
+        : undefined;
+      HandleErrorService.showErrorSnackbar(error, handler);
     }
-  }, [error]);
+  }, [error, formatMessage]);
 
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 

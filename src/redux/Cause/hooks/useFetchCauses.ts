@@ -5,7 +5,7 @@ import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback, useState, useEffect } from 'react';
 import { Cause } from '../types';
 import { useFetchFollowedCauses } from './useFetchFollowedCauses';
-import HandleErrorService from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
 import { useSelector } from 'react-redux';
 import { isUserLogged } from 'redux/Login';
 import request from 'superagent';
@@ -43,6 +43,23 @@ const buildFilteredByUrl = (filters: Filters) => {
   return urlWithFilters;
 };
 
+const useFetchCausesErrorHandler = () => {
+  const { formatMessage } = useIntl();
+
+  return useCallback(
+    (useFilters: boolean, error?: APIErrorsType) => {
+      if (error instanceof Response || error === undefined || error.message === undefined) {
+        return null;
+      }
+      if (useFilters) {
+        return formatMessage({ id: 'errors.filtered-causes-error' });
+      }
+      return null;
+    },
+    [formatMessage],
+  );
+};
+
 export const useFetchCauses = (pageSize = PAGE_SIZE) => {
   let pendingRequest: request.SuperAgentRequest | undefined;
   let useFilters = false;
@@ -50,7 +67,7 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const { formatMessage } = useIntl();
+  const errorHandler = useFetchCausesErrorHandler();
 
   const [{ loading: loadingFetch, error }, doFetchCauses] = useTypedAsyncFn(
     async ({ page, filters }: { page: number; filters: string }) => {
@@ -71,12 +88,9 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
 
   useEffect(() => {
     if (error !== undefined) {
-      const handler = useFilters
-        ? () => formatMessage({ id: 'errors.filtered-causes-error' })
-        : undefined;
-      HandleErrorService.showErrorSnackbar(error, handler);
+      HandleErrorService.showErrorSnackbar(error, e => errorHandler(useFilters, e));
     }
-  }, [error, formatMessage, useFilters]);
+  }, [error, errorHandler, useFilters]);
 
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 

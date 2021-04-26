@@ -8,6 +8,12 @@ const doFetchCauses = jest
   .fn()
   .mockReturnValue({ items: CAUSES_MOCK, metadata: { total_items: 12, last_page: 1 } });
 
+jest.mock('react-intl', () => ({
+  useIntl: () => ({
+    formatMessage: jest.fn(),
+  }),
+}));
+
 const doFetchFollowedCauses = jest.fn().mockReturnValue([CAUSES_MOCK[1].uuid]);
 jest
   .spyOn(useTypedAsyncFn, 'useTypedAsyncFn')

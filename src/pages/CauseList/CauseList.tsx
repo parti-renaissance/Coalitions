@@ -3,7 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import useSelector from 'redux/useSelector';
 import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
-import { CauseListContainer, CTAContainer, Title, TitleContainer } from './CauseList.style';
+import {
+  CauseListContainer,
+  CTAContainer,
+  Title,
+  TitleContainer,
+  SearchFieldWrapper,
+} from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
 import { getAllCauses, getNumberOfCauses } from 'redux/Cause/selectors';
@@ -11,6 +17,7 @@ import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
 import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
 import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
 import { isUserLogged } from 'redux/Login/selectors';
+import SearchField from 'components/SearchField';
 
 interface CauseListHeaderProps {
   loading: boolean;
@@ -80,6 +87,9 @@ const CauseList: React.FunctionComponent = () => {
           <FormattedMessage id="cause_list.description" />
         </p>
       </TitleContainer>
+      <SearchFieldWrapper>
+        <SearchField />
+      </SearchFieldWrapper>
       <CoalitionsFilter setSelectedCoalitionIds={setSelectedCoalitionIds} />
       <CauseListHeader loading={loading} causesNumber={causes.length} />
       {causes.length > 0 ? (

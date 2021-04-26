@@ -76,7 +76,7 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
         : undefined;
       HandleErrorService.showErrorSnackbar(error, handler);
     }
-  }, [error, formatMessage]);
+  }, [error, formatMessage, useFilters]);
 
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 

@@ -295,5 +295,8 @@
     "success_screen": {
       "title": "Félicitations, votre email a bien été envoyé\u00A0!"
     }
+  },
+  "search_field": {
+    "placeholder": "Rechercher une cause à soutenir"
   }
 }

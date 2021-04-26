@@ -1,48 +1,62 @@
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { QuickActions } from 'components/QuickActions/QuickActions';
 import { SendMails } from 'components/SendMails/SendMails';
 import { TabsWrapper } from 'components/TabsWrapper/TabsWrapper';
 import UpdateCause from 'components/UpdateCause';
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
+import { getCause } from 'redux/Cause/selectors';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import { CauseAdminContainer, UpdateCauseWrapper, TabWrapper } from './CauseAdmin.style';
+import Loader from 'components/Loader';
 
 interface CausePageNavParams {
-  causeId: string;
+  causeIdOrSlug: string;
 }
 
 const CauseAdmin: FunctionComponent = () => {
-  const { causeId } = useParams<CausePageNavParams>();
+  const { causeIdOrSlug } = useParams<CausePageNavParams>();
   const { isSendMailEnabled } = useFeatureToggling();
+  const cause = useSelector(getCause(causeIdOrSlug));
+  const { fetchCause, loading } = useFetchOneCause(causeIdOrSlug);
 
-  const renderTabPanel = (tabIndex: number) => {
-    if (causeId === null) {
-      return <></>;
-    }
-    switch (tabIndex) {
-      case 0:
-        return (
-          <UpdateCauseWrapper>
-            <UpdateCause causeId={causeId} />
-          </UpdateCauseWrapper>
-        );
-      case 1:
-        return (
-          <TabWrapper>
-            <QuickActions causeId={causeId} />
-          </TabWrapper>
-        );
-      case 2:
-        return (
-          <TabWrapper>
-            <SendMails causeId={causeId} />
-          </TabWrapper>
-        );
-      default:
+  useEffect(() => {
+    fetchCause(true);
+  }, [fetchCause]);
+
+  const renderTabPanel = useCallback(
+    (tabIndex: number) => {
+      if (cause === undefined) {
         return <></>;
-    }
-  };
+      }
+
+      switch (tabIndex) {
+        case 0:
+          return (
+            <UpdateCauseWrapper>
+              <UpdateCause cause={cause} />
+            </UpdateCauseWrapper>
+          );
+        case 1:
+          return (
+            <TabWrapper>
+              <QuickActions cause={cause} />
+            </TabWrapper>
+          );
+        case 2:
+          return (
+            <TabWrapper>
+              <SendMails causeId={cause.uuid} />
+            </TabWrapper>
+          );
+        default:
+          return <></>;
+      }
+    },
+    [cause],
+  );
 
   const getTabsLabel = () => {
     if (isSendMailEnabled) {
@@ -57,6 +71,14 @@ const CauseAdmin: FunctionComponent = () => {
       <FormattedMessage id="admin_cause.quick-action" key="admin_cause.quick-action" />,
     ];
   };
+
+  if (cause === undefined && loading) {
+    return <Loader />;
+  }
+
+  if (cause === undefined) {
+    return null;
+  }
 
   return (
     <CauseAdminContainer>

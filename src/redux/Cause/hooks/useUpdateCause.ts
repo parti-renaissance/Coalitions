@@ -62,7 +62,7 @@ export const useUpdateCause = () => {
 
       if (response instanceof Error) return;
 
-      push(PATHS.CAUSE.url(cause.uuid));
+      push(PATHS.CAUSE.url(cause.slug));
       dispatch(
         updateSnackbar({
           message: formatMessage({ id: 'update_cause.success' }),

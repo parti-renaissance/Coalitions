@@ -6,11 +6,17 @@ export const getAllCauses = (store: RootState) => {
   return store.cause.ids.map(id => store.cause.causes[id]);
 };
 
-export const getCause = (id: string | null) => (store: RootState): Cause | undefined => {
-  if (id === null) {
+export const getCause = (idOrSlug: string | null) => (store: RootState): Cause | undefined => {
+  if (idOrSlug === null) {
     return undefined;
   }
-  return store.cause.causes[id as string];
+
+  const cause = store.cause.causes[idOrSlug as string];
+  if (cause !== undefined) {
+    return cause;
+  }
+
+  return (Object.values(store.cause.causes) as Cause[]).find(({ slug }) => slug === idOrSlug);
 };
 
 export const getCauseQuickActions = (id: string) => (

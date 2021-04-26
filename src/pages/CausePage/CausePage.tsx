@@ -1,5 +1,5 @@
+import React, { useEffect, useState, FunctionComponent } from 'react';
 import Loader from 'components/Loader';
-import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
@@ -12,15 +12,15 @@ import CauseDetails from 'components/CauseDetails';
 import SuccessModal from 'pages/Home/components/SuccessModal';
 
 interface CausePageNavParams {
-  causeId: string;
+  causeIdOrSlug: string;
 }
 
-const CausePage: React.FunctionComponent = () => {
-  const { causeId } = useParams<CausePageNavParams>();
-  const { loading, fetchCause } = useFetchOneCause(causeId);
-  const cause = useSelector(getCause(causeId));
+const CausePage: FunctionComponent = () => {
+  const { causeIdOrSlug } = useParams<CausePageNavParams>();
+  const { loading, fetchCause } = useFetchOneCause(causeIdOrSlug);
+  const cause = useSelector(getCause(causeIdOrSlug));
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
-  const { loading: loadingCauseFollow, followCause } = useCauseFollow(causeId);
+  const { loading: loadingCauseFollow, followCause } = useCauseFollow(cause?.uuid);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const CausePage: React.FunctionComponent = () => {
         isOpened={isModalOpened}
         onClose={closeModal}
         cause={cause}
-        redirectToAfterAuth={PATHS.CAUSE.url(cause.uuid)}
+        redirectToAfterAuth={PATHS.CAUSE.url(cause.slug)}
       />
       <SuccessModal />
     </>

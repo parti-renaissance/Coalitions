@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
-import { QuickAction } from 'redux/Cause/types';
+import { Cause, QuickAction } from 'redux/Cause/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
@@ -27,7 +27,7 @@ const usePublishQuickActionsErrorHandler = () => {
   );
 };
 
-export const usePublishQuickActions = (causeId: string) => {
+export const usePublishQuickActions = (cause: Cause) => {
   const { push } = useHistory();
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
@@ -35,7 +35,7 @@ export const usePublishQuickActions = (causeId: string) => {
 
   const [{ loading, error }, doPublishQuickActions] = useTypedAsyncFn(
     async (quickActions: QuickAction[]) => {
-      await authenticatedApiClient.put(`v3/causes/${causeId}`, {
+      await authenticatedApiClient.put(`v3/causes/${cause.uuid}`, {
         quickActions: quickActions.map(({ id, label, link }) => ({
           id,
           title: label,
@@ -57,7 +57,7 @@ export const usePublishQuickActions = (causeId: string) => {
       const response = await doPublishQuickActions(quickActions);
       if (response instanceof Error) return;
 
-      push({ pathname: PATHS.CAUSE.url(causeId) });
+      push({ pathname: PATHS.CAUSE.url(cause.slug) });
       dispatch(
         updateSnackbar({
           message: formatMessage({ id: 'update_cause.success' }),
@@ -65,7 +65,7 @@ export const usePublishQuickActions = (causeId: string) => {
         }),
       );
     },
-    [causeId, dispatch, doPublishQuickActions, formatMessage, push],
+    [cause, dispatch, doPublishQuickActions, formatMessage, push],
   );
 
   return { loading, error, publishQuickActions };

@@ -5,8 +5,7 @@ import { useIntl } from 'react-intl';
 
 const InputField: FunctionComponent<TextFieldProps & {
   hideOptionnal?: boolean;
-  hideLabel?: boolean;
-}> = ({ placeholder, required, hideOptionnal = false, hideLabel = false, ...restOfProps }) => {
+}> = ({ placeholder, required, hideOptionnal = false, ...restOfProps }) => {
   const intl = useIntl();
 
   let newPlaceholder = placeholder;
@@ -19,8 +18,7 @@ const InputField: FunctionComponent<TextFieldProps & {
       {...restOfProps}
       required={required}
       variant="outlined"
-      label={hideLabel ? undefined : newPlaceholder}
-      placeholder={newPlaceholder}
+      label={newPlaceholder}
     />
   );
 };

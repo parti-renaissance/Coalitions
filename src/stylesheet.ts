@@ -149,7 +149,7 @@ export const fontSize = {
   },
   h2: {
     mobile: '18px',
-    desktop: '34px',
+    desktop: '32px',
   },
   h3: {
     mobile: '18px',
@@ -204,7 +204,7 @@ export const fonts = {
   h2: css`
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
-    font-weight: ${fontWeight.bold};
+    font-weight: ${fontWeight.veryBold};
     font-size: ${fontSize.h2.mobile};
     ${media.desktop(`
       font-size: ${fontSize.h2.desktop};

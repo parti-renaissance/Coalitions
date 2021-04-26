@@ -64,3 +64,13 @@ export const DesktopQuickActionsWrapper = styled.div`
     width: ${DESKTOP_BUTTONS_WIDTH};
   `)}
 `;
+
+export const AboutThisCauseWrapper = styled.div`
+  margin: calc(${defaultMargins.vertical.mobile} - ${getSpacing(1)})
+    ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
+    ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    margin: unset;
+    margin-top: ${defaultMargins.vertical.desktop};
+  `)}
+`;

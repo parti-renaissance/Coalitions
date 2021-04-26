@@ -26,7 +26,7 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
   const history = useHistory();
 
   useEffect(() => {
-    fetchCauses({ coalitionIds: coalitionId !== undefined ? [coalitionId] : [] });
+    fetchCauses({ coalitionIds: coalitionId !== undefined ? [coalitionId] : [], searchText: '' });
   }, [fetchCauses, coalitionId]);
 
   const onSeeAllClick = () => {

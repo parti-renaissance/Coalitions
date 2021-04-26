@@ -3,9 +3,12 @@ import { StyledTextField } from './InputField.style';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import { useIntl } from 'react-intl';
 
-const InputField: FunctionComponent<TextFieldProps & {
-  hideOptionnal?: boolean;
-}> = ({ placeholder, required, hideOptionnal = false, ...restOfProps }) => {
+const InputField: FunctionComponent<TextFieldProps & { hideOptionnal?: boolean }> = ({
+  placeholder,
+  required,
+  hideOptionnal = false,
+  ...restOfProps
+}) => {
   const intl = useIntl();
 
   let newPlaceholder = placeholder;

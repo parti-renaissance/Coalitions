@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 
 export const useCoalitionsFilter = ({
@@ -16,7 +16,8 @@ export const useCoalitionsFilter = ({
     if (coalitionId !== null) {
       setSelectedCoalitionIds([coalitionId]);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setSelectedCoalitionIds]);
 
   const onSelectCoalitionId = useCallback(
     (id?: string) => {
@@ -41,7 +42,7 @@ export const useCoalitionsFilter = ({
         replace({ search: '' });
       }
     },
-    [selectedCoalitionIds, search, replace],
+    [selectedCoalitionIds, setSelectedCoalitionIds, search, replace],
   );
 
   return {

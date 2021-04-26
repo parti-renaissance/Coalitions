@@ -37,12 +37,11 @@ class Client {
     }
   }
 
-  async request(method: Method, endpoint: string, data: object | null = null, checkToken = true) {
-    if (this.withCredentials) {
-      // Checking token validity, refreshing it if necessary.
-      if (checkToken) await this.checkToken();
-    }
-
+  requestWithoutTokenCheck(
+    method: Method,
+    endpoint: string,
+    data: object | null = null,
+  ): request.SuperAgentRequest {
     const url = /^https?:\/\//.test(endpoint) ? endpoint : `${this.baseUrl}${endpoint}`;
     let promise = this.agent[method](url);
 
@@ -55,7 +54,15 @@ class Client {
       promise = promise.send(data);
     }
 
-    const { body } = await promise;
+    return promise;
+  }
+
+  async request(method: Method, endpoint: string, data: object | null = null, checkToken = true) {
+    if (this.withCredentials) {
+      // Checking token validity, refreshing it if necessary.
+      if (checkToken) this.checkToken();
+    }
+    const { body } = await this.requestWithoutTokenCheck(method, endpoint, data);
     return body;
   }
 
@@ -79,6 +86,10 @@ class Client {
         await refresh();
       }
     }
+  }
+
+  getRequestWithoutTokenCheck(endpoint: string): request.SuperAgentRequest {
+    return this.requestWithoutTokenCheck('get', endpoint);
   }
 
   get(endpoint: string) {

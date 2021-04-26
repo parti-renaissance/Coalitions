@@ -13,7 +13,6 @@ import Loader from 'components/Loader';
 import { useSelector } from 'react-redux';
 import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
 import { getAllCauses } from 'redux/Cause/selectors';
-import { isUserLogged } from 'redux/Login/selectors';
 import { useHistory } from 'react-router';
 
 interface HorizontalCausesListProps {
@@ -23,13 +22,12 @@ interface HorizontalCausesListProps {
 const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ coalitionId }) => {
   const intl = useIntl();
   const causes = useSelector(getAllCauses);
-  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const { loading: isFetchingCauses, fetchFirstPage: fetchCauses } = useFetchCauses();
   const history = useHistory();
 
   useEffect(() => {
-    fetchCauses(coalitionId !== undefined ? [coalitionId] : [], isUserLoggedIn);
-  }, [fetchCauses, coalitionId, isUserLoggedIn]);
+    fetchCauses({ coalitionIds: coalitionId !== undefined ? [coalitionId] : [], searchText: '' });
+  }, [fetchCauses, coalitionId]);
 
   const onSeeAllClick = () => {
     if (coalitionId !== undefined) {

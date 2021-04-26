@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import { coalitionApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
 import { markCausesAsSupported, resetCauses, updateCauses, updateOneCause } from '../slice';
@@ -5,9 +7,11 @@ import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback, useState, useEffect } from 'react';
 import { Cause } from '../types';
 import { useFetchFollowedCauses } from './useFetchFollowedCauses';
-import HandleErrorService from 'services/HandleErrorService';
+import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
 import { useSelector } from 'react-redux';
 import { isUserLogged } from 'redux/Login';
+import request from 'superagent';
+import { useIntl } from 'react-intl';
 
 type RawQuickActions = {
   id: string;
@@ -15,41 +19,88 @@ type RawQuickActions = {
   url: string;
 };
 
+export type Filters = {
+  coalitionIds: string[];
+  searchText: string;
+};
+
 const PAGE_SIZE = 12;
 
-const buildFilteredByUrl = (ids: string[]) => {
-  if (ids.length === 0) {
+const buildFilteredByUrl = (filters: Filters) => {
+  if (filters.coalitionIds.length === 0 && filters.searchText.length === 0) {
     return '';
   }
-  return ids.reduce((url, id) => {
-    return url + `&coalition.uuid[]=${id}`;
-  }, '');
+
+  let urlWithFilters = '';
+  if (filters.coalitionIds.length > 0) {
+    urlWithFilters = filters.coalitionIds.reduce((url, coalitionId) => {
+      return url + `&coalition.uuid[]=${coalitionId}`;
+    }, urlWithFilters);
+  }
+
+  if (filters.searchText.length > 0) {
+    urlWithFilters = `&name=${filters.searchText}`;
+  }
+
+  return urlWithFilters;
+};
+
+const useFetchCausesErrorHandler = () => {
+  const { formatMessage } = useIntl();
+
+  return useCallback(
+    (useFilters: boolean, error?: APIErrorsType) => {
+      if (error instanceof Response || error === undefined || error.message === undefined) {
+        return null;
+      }
+      if (useFilters) {
+        return formatMessage({ id: 'errors.filtered-causes-error' });
+      }
+      return null;
+    },
+    [formatMessage],
+  );
 };
 
 export const useFetchCauses = (pageSize = PAGE_SIZE) => {
+  let pendingRequest: request.SuperAgentRequest | undefined;
+  let useFilters = false;
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const errorHandler = useFetchCausesErrorHandler();
 
   const [{ loading: loadingFetch, error }, doFetchCauses] = useTypedAsyncFn(
-    async ({ page, coalitionsFilter }: { page: number; coalitionsFilter: string }) =>
-      await coalitionApiClient.get(`causes?page_size=${pageSize}&page=${page}${coalitionsFilter}`),
+    async ({ page, filters }: { page: number; filters: string }) => {
+      if (pendingRequest !== undefined) {
+        pendingRequest.abort();
+      }
+      useFilters = filters.length > 0;
+
+      pendingRequest = coalitionApiClient.getRequestWithoutTokenCheck(
+        `causes?page_size=${pageSize}&page=${page}${filters}`,
+      );
+      const response = await pendingRequest;
+      pendingRequest = undefined;
+      return response.body;
+    },
     [],
   );
 
   useEffect(() => {
     if (error !== undefined) {
-      HandleErrorService.showErrorSnackbar(error);
+      HandleErrorService.showErrorSnackbar(error, e => errorHandler(useFilters, e));
     }
-  }, [error]);
+  }, [error, errorHandler, useFilters]);
 
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 
   const fetch = useCallback(
-    async (page: number, filteredByCoalitionIds: string[], isUserLoggedIn: boolean) => {
+    async (page: number, filters: Filters) => {
       const causes = await doFetchCauses({
         page,
-        coalitionsFilter: buildFilteredByUrl(filteredByCoalitionIds),
+        filters: buildFilteredByUrl(filters),
       });
 
       if (causes instanceof Error) {
@@ -65,22 +116,22 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
       setHasMore(causes.metadata.last_page >= page + 1);
       setPage(page + 1);
     },
-    [dispatch, doFetchCauses, doFetchFollowedCauses],
+    [dispatch, doFetchCauses, doFetchFollowedCauses, isUserLoggedIn],
   );
 
   const fetchFirstPage = useCallback(
-    async (filteredByCoalitionIds: string[], isUserLoggedIn = false) => {
+    async (filters: Filters) => {
       dispatch(resetCauses());
-      await fetch(1, filteredByCoalitionIds, isUserLoggedIn);
+      await fetch(1, filters);
     },
     [dispatch, fetch],
   );
 
   const fetchNextPage = useCallback(
-    async (filteredByCoalitionIds: string[], isUserLoggedIn = false) => {
+    async (filters: Filters) => {
       if (!hasMore) return;
 
-      await fetch(page, filteredByCoalitionIds, isUserLoggedIn);
+      await fetch(page, filters);
     },
     [hasMore, fetch, page],
   );
@@ -157,3 +208,5 @@ export const useFetchOneCause = (id: string | null) => {
 
   return { loading: loading || loadingFollowed || isFetchingQuickActions, fetchCause };
 };
+
+/* eslint-enable max-lines */

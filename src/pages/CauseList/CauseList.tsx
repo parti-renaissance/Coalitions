@@ -2,15 +2,22 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import useSelector from 'redux/useSelector';
-import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
-import { CauseListContainer, CTAContainer, Title, TitleContainer } from './CauseList.style';
+import { useFetchCauses, Filters } from 'redux/Cause/hooks/useFetchCauses';
+import {
+  CauseListContainer,
+  CTAContainer,
+  Title,
+  TitleContainer,
+  SearchFieldWrapper,
+} from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
 import { getAllCauses, getNumberOfCauses } from 'redux/Cause/selectors';
 import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
 import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
 import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
-import { isUserLogged } from 'redux/Login/selectors';
+import SearchField from 'components/SearchField';
+import { useLocation } from 'react-router';
 
 interface CauseListHeaderProps {
   loading: boolean;
@@ -40,17 +47,19 @@ const defineCtaPositionInList = (): number => {
 
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
-  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const [selectedCoalitionIds, setSelectedCoalitionIds] = useState<string[] | undefined>(undefined);
+  const { search } = useLocation();
+  const coalitionId = new URLSearchParams(search).get('coalitionId');
+  const [filters, setFilters] = useState<Filters>({
+    coalitionIds: coalitionId !== null ? [coalitionId] : [],
+    searchText: '',
+  });
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
   const numberOfCauses = useSelector(getNumberOfCauses);
 
   useEffect(() => {
-    if (selectedCoalitionIds !== undefined) {
-      fetchFirstPage(selectedCoalitionIds, isUserLoggedIn);
-    }
-  }, [fetchFirstPage, selectedCoalitionIds, isUserLoggedIn]);
+    fetchFirstPage(filters);
+  }, [fetchFirstPage, filters]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,10 +72,16 @@ const CauseList: React.FunctionComponent = () => {
   });
 
   const fetchNextPageCauses = useCallback(() => {
-    if (selectedCoalitionIds !== undefined) {
-      fetchNextPage(selectedCoalitionIds, isUserLoggedIn);
-    }
-  }, [fetchNextPage, selectedCoalitionIds, isUserLoggedIn]);
+    fetchNextPage(filters);
+  }, [fetchNextPage, filters]);
+
+  const setSearchText = (searchText: string) => {
+    setFilters({ ...filters, searchText });
+  };
+
+  const setSelectedCoalitionIds = (coalitionIds: string[]) => {
+    setFilters({ ...filters, coalitionIds });
+  };
 
   const causesBeforeCTA = causes.slice(0, ctaPosition);
   const causesAfterCTA = causes.slice(ctaPosition);
@@ -80,7 +95,13 @@ const CauseList: React.FunctionComponent = () => {
           <FormattedMessage id="cause_list.description" />
         </p>
       </TitleContainer>
-      <CoalitionsFilter setSelectedCoalitionIds={setSelectedCoalitionIds} />
+      <SearchFieldWrapper>
+        <SearchField searchText={filters.searchText} setSearchText={setSearchText} />
+      </SearchFieldWrapper>
+      <CoalitionsFilter
+        setSelectedCoalitionIds={setSelectedCoalitionIds}
+        selectedCoalitionIds={filters.coalitionIds}
+      />
       <CauseListHeader loading={loading} causesNumber={causes.length} />
       {causes.length > 0 ? (
         <>

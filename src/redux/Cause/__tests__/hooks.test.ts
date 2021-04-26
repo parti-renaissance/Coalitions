@@ -8,6 +8,12 @@ const doFetchCauses = jest
   .fn()
   .mockReturnValue({ items: CAUSES_MOCK, metadata: { total_items: 12, last_page: 1 } });
 
+jest.mock('react-intl', () => ({
+  useIntl: () => ({
+    formatMessage: jest.fn(),
+  }),
+}));
+
 const doFetchFollowedCauses = jest.fn().mockReturnValue([CAUSES_MOCK[1].uuid]);
 jest
   .spyOn(useTypedAsyncFn, 'useTypedAsyncFn')
@@ -20,6 +26,7 @@ jest.spyOn(hooks, 'useFetchFollowedCauses').mockImplementation(() => {
 const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
   useDispatch: () => mockDispatch,
+  useSelector: () => jest.fn(),
 }));
 
 describe('useFetchCauses', () => {
@@ -29,8 +36,8 @@ describe('useFetchCauses', () => {
 
   it('should return a function to load first page', async () => {
     const { result } = renderHook(() => useFetchCauses());
-    void (await act(() => result.current.fetchFirstPage([])));
-    expect(doFetchCauses).toHaveBeenCalledWith({ page: 1, coalitionsFilter: '' });
+    void (await act(() => result.current.fetchFirstPage({ coalitionIds: [], searchText: '' })));
+    expect(doFetchCauses).toHaveBeenCalledWith({ page: 1, filters: '' });
     expect(mockDispatch.mock.calls).toEqual([
       [{ payload: undefined, type: 'Cause/resetCauses' }],
       [
@@ -51,8 +58,8 @@ describe('useFetchCauses', () => {
 
   it('should indicate if there is more items to load', async () => {
     const { result } = renderHook(() => useFetchCauses());
-    void (await act(() => result.current.fetchFirstPage([])));
-    void (await act(() => result.current.fetchNextPage([])));
+    void (await act(() => result.current.fetchFirstPage({ coalitionIds: [], searchText: '' })));
+    void (await act(() => result.current.fetchNextPage({ coalitionIds: [], searchText: '' })));
     expect(doFetchCauses).toHaveBeenCalledTimes(1);
     expect(result.current.hasMore).toBe(false);
   });

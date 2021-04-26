@@ -260,7 +260,8 @@
     "already-used-cause-name": "Ce nom de cause existe déjà.",
     "incorrect-password-token": "Une erreur s’est produite : ce lien n’est plus valide.",
     "cannot-edit-this-cause": "Vous n’avez pas le droit de modifier cette cause.",
-    "cannot-send-mail-for-this-cause": "Vous n’avez pas le droit d’envoyer de mails pour cette cause."
+    "cannot-send-mail-for-this-cause": "Vous n’avez pas le droit d’envoyer de mails pour cette cause.",
+    "filtered-causes-error": "Votre recherche n’a pas pu aboutir. Essayez de le reformuler autrement ou merci de réessayer plus tard."
   },
   "success_stories": {
     "title": "Ils ont créé leur cause",
@@ -295,5 +296,8 @@
     "success_screen": {
       "title": "Félicitations, votre email a bien été envoyé\u00A0!"
     }
+  },
+  "search_field": {
+    "placeholder": "Rechercher une cause à soutenir"
   }
 }

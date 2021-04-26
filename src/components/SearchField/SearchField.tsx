@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 import { IconButton, InputAdornment, OutlinedInput } from '@material-ui/core';
 import { StyledFormControl } from 'components/InputField/InputField.style';
 import { CrossIcon, SearchIcon } from './SearchField.style';
+import { hasEmoji } from 'services/formik/hasEmoji';
 
 interface SearchFieldProps {
   searchText: string;
@@ -13,7 +14,10 @@ const SearchField: FunctionComponent<SearchFieldProps> = ({ searchText, setSearc
   const intl = useIntl();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+    const newSearchText = e.target.value;
+    if (!hasEmoji(newSearchText)) {
+      setSearchText(newSearchText);
+    }
   };
 
   const resetSearchText = () => {

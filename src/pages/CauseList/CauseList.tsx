@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import useSelector from 'redux/useSelector';
-import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
+import { useFetchCauses, Filters } from 'redux/Cause/hooks/useFetchCauses';
 import {
   CauseListContainer,
   CTAContainer,
@@ -46,16 +46,14 @@ const defineCtaPositionInList = (): number => {
 
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
-  const [selectedCoalitionIds, setSelectedCoalitionIds] = useState<string[] | undefined>(undefined);
+  const [filters, setFilters] = useState<Filters>({ coalitionIds: [], searchText: '' });
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
   const numberOfCauses = useSelector(getNumberOfCauses);
 
   useEffect(() => {
-    if (selectedCoalitionIds !== undefined) {
-      fetchFirstPage({ coalitionIds: selectedCoalitionIds });
-    }
-  }, [fetchFirstPage, selectedCoalitionIds]);
+    fetchFirstPage(filters);
+  }, [fetchFirstPage, filters]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -68,10 +66,16 @@ const CauseList: React.FunctionComponent = () => {
   });
 
   const fetchNextPageCauses = useCallback(() => {
-    if (selectedCoalitionIds !== undefined) {
-      fetchNextPage({ coalitionIds: selectedCoalitionIds });
-    }
-  }, [fetchNextPage, selectedCoalitionIds]);
+    fetchNextPage(filters);
+  }, [fetchNextPage, filters]);
+
+  const setSearchText = (searchText: string) => {
+    setFilters({ ...filters, searchText });
+  };
+
+  const setSelectedCoalitionIds = (coalitionIds: string[]) => {
+    setFilters({ ...filters, coalitionIds });
+  };
 
   const causesBeforeCTA = causes.slice(0, ctaPosition);
   const causesAfterCTA = causes.slice(ctaPosition);
@@ -86,9 +90,18 @@ const CauseList: React.FunctionComponent = () => {
         </p>
       </TitleContainer>
       <SearchFieldWrapper>
-        <SearchField />
+        <SearchField
+          searchText={filters?.searchText}
+          setSearchText={setSearchText}
+          isSearchingByText={
+            loading && filters?.searchText !== undefined && filters.searchText.length > 0
+          }
+        />
       </SearchFieldWrapper>
-      <CoalitionsFilter setSelectedCoalitionIds={setSelectedCoalitionIds} />
+      <CoalitionsFilter
+        setSelectedCoalitionIds={setSelectedCoalitionIds}
+        selectedCoalitionIds={filters?.coalitionIds}
+      />
       <CauseListHeader loading={loading} causesNumber={causes.length} />
       {causes.length > 0 ? (
         <>

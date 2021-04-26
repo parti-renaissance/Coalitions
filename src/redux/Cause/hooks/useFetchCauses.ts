@@ -15,17 +15,30 @@ type RawQuickActions = {
   url: string;
 };
 
-type Filters = { coalitionIds?: string[]; searchText?: string };
+export type Filters = {
+  coalitionIds: string[];
+  searchText: string;
+};
 
 const PAGE_SIZE = 12;
 
 const buildFilteredByUrl = (filters: Filters) => {
-  if (filters.coalitionIds === undefined || filters.coalitionIds.length === 0) {
+  if (filters.coalitionIds.length === 0 && filters.searchText.length === 0) {
     return '';
   }
-  return filters.coalitionIds.reduce((url, coalitionId) => {
-    return url + `&coalition.uuid[]=${coalitionId}`;
-  }, '');
+
+  let urlWithFilters = '';
+  if (filters.coalitionIds.length > 0) {
+    urlWithFilters = filters.coalitionIds.reduce((url, coalitionId) => {
+      return url + `&coalition.uuid[]=${coalitionId}`;
+    }, urlWithFilters);
+  }
+
+  if (filters.searchText.length > 0) {
+    urlWithFilters = `&name=${filters.searchText}`;
+  }
+
+  return urlWithFilters;
 };
 
 export const useFetchCauses = (pageSize = PAGE_SIZE) => {

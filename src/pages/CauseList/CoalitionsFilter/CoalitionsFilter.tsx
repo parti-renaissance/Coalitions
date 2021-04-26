@@ -13,14 +13,19 @@ import { useCoalitionsFilter } from './service';
 import { FormattedMessage } from 'react-intl';
 
 interface CoalitionFilterProps {
-  setSelectedCoalitionIds: (ids: string[] | undefined) => void;
+  selectedCoalitionIds: string[];
+  setSelectedCoalitionIds: (ids: string[]) => void;
 }
 
 export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
-  setSelectedCoalitionIds: setSelectedCoalitionIdsFromProps,
+  selectedCoalitionIds,
+  setSelectedCoalitionIds,
 }) => {
   const coalitions = useSelector(getCoalitions);
-  const { selectedCoalitionIds, onSelectCoalitionId } = useCoalitionsFilter();
+  const { onSelectCoalitionId } = useCoalitionsFilter({
+    selectedCoalitionIds,
+    setSelectedCoalitionIds,
+  });
   const { fetchCoalitions } = useFetchCoalitions();
   const isMobile = getIsMobile();
   const [displayAll, setDisplayAll] = useState(!isMobile);
@@ -28,10 +33,6 @@ export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
   useEffect(() => {
     fetchCoalitions();
   }, [fetchCoalitions]);
-
-  useEffect(() => {
-    setSelectedCoalitionIdsFromProps(selectedCoalitionIds);
-  }, [selectedCoalitionIds, setSelectedCoalitionIdsFromProps]);
 
   const hideOrShowAllChips = () => {
     setDisplayAll(!displayAll);

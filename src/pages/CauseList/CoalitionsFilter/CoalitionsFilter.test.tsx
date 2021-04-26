@@ -1,7 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import * as coalitionsHooks from 'redux/Coalition/hooks/useFetchCoalitions';
-import * as service from './service';
 
 import { TestProvider } from 'services/test/TestProvider';
 import { COALITIONS_STORE } from 'redux/Coalition/fixtures';
@@ -30,7 +29,10 @@ describe('<CoalitionsFilter />', () => {
       .mockImplementation(() => mockUseFetchCoalitions);
     const wrapper = mount(
       <TestProvider partialState={{ coalition: COALITIONS_STORE }}>
-        <CoalitionsFilter setSelectedCoalitionIds={handleCoalitionsFilterClickMock} />
+        <CoalitionsFilter
+          setSelectedCoalitionIds={handleCoalitionsFilterClickMock}
+          selectedCoalitionIds={[]}
+        />
       </TestProvider>,
     );
     expect(wrapper.find('StyledChip')).toHaveLength(4);
@@ -43,7 +45,10 @@ describe('<CoalitionsFilter />', () => {
       .mockImplementation(() => mockUseFetchCoalitions);
     const wrapper = mount(
       <TestProvider>
-        <CoalitionsFilter setSelectedCoalitionIds={handleCoalitionsFilterClickMock} />
+        <CoalitionsFilter
+          setSelectedCoalitionIds={handleCoalitionsFilterClickMock}
+          selectedCoalitionIds={[]}
+        />
       </TestProvider>,
     );
     expect(wrapper.find('StyledChip')).toHaveLength(0);
@@ -56,7 +61,10 @@ describe('<CoalitionsFilter />', () => {
       .mockImplementation(() => mockUseFetchCoalitions);
     const wrapper = mount(
       <TestProvider partialState={{ coalition: COALITIONS_STORE }}>
-        <CoalitionsFilter setSelectedCoalitionIds={handleCoalitionsFilterClickMock} />
+        <CoalitionsFilter
+          setSelectedCoalitionIds={handleCoalitionsFilterClickMock}
+          selectedCoalitionIds={[]}
+        />
       </TestProvider>,
     );
     const styledChips = wrapper.find('StyledChip');
@@ -77,7 +85,10 @@ describe('<CoalitionsFilter />', () => {
       .mockImplementation(() => mockUseFetchCoalitions);
     const wrapper = mount(
       <TestProvider partialState={{ coalition: COALITIONS_STORE }}>
-        <CoalitionsFilter setSelectedCoalitionIds={handleCoalitionsFilterClickMock} />
+        <CoalitionsFilter
+          setSelectedCoalitionIds={handleCoalitionsFilterClickMock}
+          selectedCoalitionIds={[]}
+        />
       </TestProvider>,
     );
     const styledChips = wrapper.find('StyledChip');

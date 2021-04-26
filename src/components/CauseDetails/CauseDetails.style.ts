@@ -66,11 +66,17 @@ export const DesktopQuickActionsWrapper = styled.div`
 `;
 
 export const AboutThisCauseWrapper = styled.div`
-  margin: calc(${defaultMargins.vertical.mobile} - ${getSpacing(1)})
-    ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
-    ${defaultMargins.horizontal.mobile};
+  margin: ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     margin: unset;
     margin-top: ${defaultMargins.vertical.desktop};
+  `)}
+`;
+
+export const FirstQuickActionWrapper = styled.div`
+  margin: calc(${defaultMargins.vertical.mobile} - ${getSpacing(1)})
+    ${defaultMargins.horizontal.mobile} 0 ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    display: none;
   `)}
 `;

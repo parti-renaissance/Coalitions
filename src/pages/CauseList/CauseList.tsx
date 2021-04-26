@@ -16,7 +16,6 @@ import { getAllCauses, getNumberOfCauses } from 'redux/Cause/selectors';
 import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
 import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
 import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
-import { isUserLogged } from 'redux/Login/selectors';
 import SearchField from 'components/SearchField';
 
 interface CauseListHeaderProps {
@@ -47,7 +46,6 @@ const defineCtaPositionInList = (): number => {
 
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
-  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const [selectedCoalitionIds, setSelectedCoalitionIds] = useState<string[] | undefined>(undefined);
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
@@ -55,9 +53,9 @@ const CauseList: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (selectedCoalitionIds !== undefined) {
-      fetchFirstPage(selectedCoalitionIds, isUserLoggedIn);
+      fetchFirstPage({ coalitionIds: selectedCoalitionIds });
     }
-  }, [fetchFirstPage, selectedCoalitionIds, isUserLoggedIn]);
+  }, [fetchFirstPage, selectedCoalitionIds]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -71,9 +69,9 @@ const CauseList: React.FunctionComponent = () => {
 
   const fetchNextPageCauses = useCallback(() => {
     if (selectedCoalitionIds !== undefined) {
-      fetchNextPage(selectedCoalitionIds, isUserLoggedIn);
+      fetchNextPage({ coalitionIds: selectedCoalitionIds });
     }
-  }, [fetchNextPage, selectedCoalitionIds, isUserLoggedIn]);
+  }, [fetchNextPage, selectedCoalitionIds]);
 
   const causesBeforeCTA = causes.slice(0, ctaPosition);
   const causesAfterCTA = causes.slice(ctaPosition);

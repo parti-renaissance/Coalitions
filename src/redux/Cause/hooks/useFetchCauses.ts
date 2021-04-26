@@ -15,14 +15,16 @@ type RawQuickActions = {
   url: string;
 };
 
+type Filters = { coalitionIds?: string[]; searchText?: string };
+
 const PAGE_SIZE = 12;
 
-const buildFilteredByUrl = (ids: string[]) => {
-  if (ids.length === 0) {
+const buildFilteredByUrl = (filters: Filters) => {
+  if (filters.coalitionIds === undefined || filters.coalitionIds.length === 0) {
     return '';
   }
-  return ids.reduce((url, id) => {
-    return url + `&coalition.uuid[]=${id}`;
+  return filters.coalitionIds.reduce((url, coalitionId) => {
+    return url + `&coalition.uuid[]=${coalitionId}`;
   }, '');
 };
 
@@ -30,10 +32,11 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
   const [{ loading: loadingFetch, error }, doFetchCauses] = useTypedAsyncFn(
-    async ({ page, coalitionsFilter }: { page: number; coalitionsFilter: string }) =>
-      await coalitionApiClient.get(`causes?page_size=${pageSize}&page=${page}${coalitionsFilter}`),
+    async ({ page, filters }: { page: number; filters: string }) =>
+      await coalitionApiClient.get(`causes?page_size=${pageSize}&page=${page}${filters}`),
     [],
   );
 
@@ -46,10 +49,10 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 
   const fetch = useCallback(
-    async (page: number, filteredByCoalitionIds: string[], isUserLoggedIn: boolean) => {
+    async (page: number, filters: Filters) => {
       const causes = await doFetchCauses({
         page,
-        coalitionsFilter: buildFilteredByUrl(filteredByCoalitionIds),
+        filters: buildFilteredByUrl(filters),
       });
 
       if (causes instanceof Error) {
@@ -65,22 +68,22 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
       setHasMore(causes.metadata.last_page >= page + 1);
       setPage(page + 1);
     },
-    [dispatch, doFetchCauses, doFetchFollowedCauses],
+    [dispatch, doFetchCauses, doFetchFollowedCauses, isUserLoggedIn],
   );
 
   const fetchFirstPage = useCallback(
-    async (filteredByCoalitionIds: string[], isUserLoggedIn = false) => {
+    async (filters: Filters) => {
       dispatch(resetCauses());
-      await fetch(1, filteredByCoalitionIds, isUserLoggedIn);
+      await fetch(1, filters);
     },
     [dispatch, fetch],
   );
 
   const fetchNextPage = useCallback(
-    async (filteredByCoalitionIds: string[], isUserLoggedIn = false) => {
+    async (filters: Filters) => {
       if (!hasMore) return;
 
-      await fetch(page, filteredByCoalitionIds, isUserLoggedIn);
+      await fetch(page, filters);
     },
     [hasMore, fetch, page],
   );

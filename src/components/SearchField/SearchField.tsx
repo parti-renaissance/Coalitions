@@ -1,20 +1,15 @@
 import React, { FunctionComponent, ChangeEvent } from 'react';
 import { useIntl } from 'react-intl';
-import { CircularProgress, IconButton, InputAdornment, OutlinedInput } from '@material-ui/core';
+import { IconButton, InputAdornment, OutlinedInput } from '@material-ui/core';
 import { StyledFormControl } from 'components/InputField/InputField.style';
-import { CrossIcon, SearchIcon, LoaderContainer } from './SearchField.style';
+import { CrossIcon, SearchIcon } from './SearchField.style';
 
 interface SearchFieldProps {
   searchText: string;
   setSearchText: (text: string) => void;
-  isSearchingByText: boolean;
 }
 
-const SearchField: FunctionComponent<SearchFieldProps> = ({
-  searchText,
-  setSearchText,
-  isSearchingByText,
-}) => {
+const SearchField: FunctionComponent<SearchFieldProps> = ({ searchText, setSearchText }) => {
   const intl = useIntl();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,15 +29,9 @@ const SearchField: FunctionComponent<SearchFieldProps> = ({
         value={searchText}
         endAdornment={
           <InputAdornment position="end">
-            {isSearchingByText ? (
-              <LoaderContainer>
-                <CircularProgress size={20} />
-              </LoaderContainer>
-            ) : (
-              <IconButton onClick={resetSearchText}>
-                {searchText.length > 0 ? <CrossIcon /> : <SearchIcon />}
-              </IconButton>
-            )}
+            <IconButton onClick={resetSearchText}>
+              {searchText.length > 0 ? <CrossIcon /> : <SearchIcon />}
+            </IconButton>
           </InputAdornment>
         }
       />

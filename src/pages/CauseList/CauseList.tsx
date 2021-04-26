@@ -90,13 +90,7 @@ const CauseList: React.FunctionComponent = () => {
         </p>
       </TitleContainer>
       <SearchFieldWrapper>
-        <SearchField
-          searchText={filters.searchText}
-          setSearchText={setSearchText}
-          isSearchingByText={
-            loading && filters.searchText !== undefined && filters.searchText.length > 0
-          }
-        />
+        <SearchField searchText={filters.searchText} setSearchText={setSearchText} />
       </SearchFieldWrapper>
       <CoalitionsFilter
         setSelectedCoalitionIds={setSelectedCoalitionIds}

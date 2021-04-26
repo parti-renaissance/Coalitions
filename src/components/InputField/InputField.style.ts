@@ -58,6 +58,7 @@ export const getInputStyle = (props: InputBaseProps) => css`
     font-family: ${fontFamily.primary};
     line-height: ${lineHeight.primary};
     font-size: ${fontSize.p.mobile};
+    margin: ${getSpacing(1)} ${getSpacing(3)} 0;
   }
 `;
 

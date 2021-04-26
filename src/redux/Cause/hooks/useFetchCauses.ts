@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import { coalitionApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
 import { markCausesAsSupported, resetCauses, updateCauses, updateOneCause } from '../slice';
@@ -206,3 +208,5 @@ export const useFetchOneCause = (id: string | null) => {
 
   return { loading: loading || loadingFollowed || isFetchingQuickActions, fetchCause };
 };
+
+/* eslint-enable max-lines */

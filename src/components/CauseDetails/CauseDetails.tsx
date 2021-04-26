@@ -28,6 +28,7 @@ interface CauseDetailsProps {
   isSupporting?: boolean;
 }
 
+// eslint-disable-next-line complexity
 const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, isSupporting }) => {
   const isPreview = Boolean(!onSupport);
   const isSupported = Boolean(cause.supported);

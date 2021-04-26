@@ -41,6 +41,7 @@ export const SearchFieldWrapper = styled.div`
   margin: 0 ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
     ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    margin: ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+    max-width: ${getSpacing(100)};
+    margin: ${defaultMargins.vertical.desktop} auto;
   `)};
 `;

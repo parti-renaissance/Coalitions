@@ -1,6 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
-import { getCauseQuickActions } from 'redux/Cause/selectors';
 import {
   Container,
   Title,
@@ -13,10 +11,12 @@ import { QuickAction as QuickActionType } from 'redux/Cause/types';
 import { useIntl } from 'react-intl';
 
 interface QuickActionsProps {
-  causeId: string;
+  quickActions: QuickActionType[];
 }
 
-const QuickAction: FunctionComponent<{ quickAction: QuickActionType }> = ({ quickAction }) => {
+export const QuickAction: FunctionComponent<{ quickAction: QuickActionType }> = ({
+  quickAction,
+}) => {
   const onClick = () => {
     window.open(quickAction.link);
   };
@@ -31,8 +31,7 @@ const QuickAction: FunctionComponent<{ quickAction: QuickActionType }> = ({ quic
   );
 };
 
-const QuickActions: FunctionComponent<QuickActionsProps> = ({ causeId }) => {
-  const quickActions = useSelector(getCauseQuickActions(causeId));
+const QuickActions: FunctionComponent<QuickActionsProps> = ({ quickActions }) => {
   const intl = useIntl();
 
   if (quickActions === undefined || quickActions.length === 0) {

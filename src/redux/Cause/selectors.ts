@@ -13,9 +13,12 @@ export const getCause = (id: string | null) => (store: RootState): Cause | undef
   return store.cause.causes[id as string];
 };
 
-export const getCauseQuickActions = (id: string) => (
+export const getCauseQuickActions = (id?: string) => (
   store: RootState,
 ): QuickAction[] | undefined => {
+  if (id === undefined) {
+    return;
+  }
   return store.cause.causes[id].quickActions;
 };
 

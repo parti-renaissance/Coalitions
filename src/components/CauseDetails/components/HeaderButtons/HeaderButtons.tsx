@@ -11,7 +11,7 @@ import {
   ButtonWrapper,
 } from './HeaderButtons.style';
 import { useIntl } from 'react-intl';
-import { InCreationCause, Cause } from 'redux/Cause/types';
+import { InCreationCause, Cause, QuickAction } from 'redux/Cause/types';
 import { PATHS } from 'routes';
 import { Container as StickyMobileButtonsContainer } from 'components/FixedBottomButton/FixedBottomButton.style';
 import { usePublishCause } from 'redux/Cause/hooks/usePublishCause';
@@ -28,6 +28,8 @@ interface HeaderProps {
   onSupport?: () => void;
   isSupporting?: boolean;
   isMobile?: boolean;
+  quickActions?: QuickAction[];
+  showQuickActions?: boolean;
 }
 
 const HeaderButtons: FunctionComponent<HeaderProps> = ({
@@ -35,6 +37,8 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
   onSupport,
   isSupporting,
   isMobile,
+  quickActions,
+  showQuickActions,
 }) => {
   const history = useHistory();
   const isPreview = !Boolean(onSupport);
@@ -137,9 +141,11 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           >
             <GrowModalContentContainer>
               {renderUpdateAndShareButtons()}
-              <MobileQuickActionsWrapper>
-                <QuickActions causeId={(cause as Cause).uuid} />
-              </MobileQuickActionsWrapper>
+              {showQuickActions === true && quickActions !== undefined ? (
+                <MobileQuickActionsWrapper>
+                  <QuickActions quickActions={quickActions} />
+                </MobileQuickActionsWrapper>
+              ) : null}
             </GrowModalContentContainer>
             {renderGrowModalButton({ inModal: true })}
           </Modal>

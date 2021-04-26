@@ -2,7 +2,7 @@ import React, { FunctionComponent, ChangeEvent } from 'react';
 import { useIntl } from 'react-intl';
 import { CircularProgress, IconButton, InputAdornment, OutlinedInput } from '@material-ui/core';
 import { StyledFormControl } from 'components/InputField/InputField.style';
-import { CrossIcon, LoupeIcon, LoaderContainer } from './SearchField.style';
+import { CrossIcon, SearchIcon, LoaderContainer } from './SearchField.style';
 
 interface SearchFieldProps {
   searchText: string;
@@ -40,7 +40,7 @@ const SearchField: FunctionComponent<SearchFieldProps> = ({
               </LoaderContainer>
             ) : (
               <IconButton onClick={resetSearchText}>
-                {searchText.length > 0 ? <CrossIcon /> : <LoupeIcon />}
+                {searchText.length > 0 ? <CrossIcon /> : <SearchIcon />}
               </IconButton>
             )}
           </InputAdornment>

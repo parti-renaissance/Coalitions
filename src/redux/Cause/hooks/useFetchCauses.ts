@@ -8,6 +8,7 @@ import { useFetchFollowedCauses } from './useFetchFollowedCauses';
 import HandleErrorService from 'services/HandleErrorService';
 import { useSelector } from 'react-redux';
 import { isUserLogged } from 'redux/Login';
+import request from 'superagent';
 
 type RawQuickActions = {
   id: string;
@@ -42,14 +43,25 @@ const buildFilteredByUrl = (filters: Filters) => {
 };
 
 export const useFetchCauses = (pageSize = PAGE_SIZE) => {
+  let pendingRequest: request.SuperAgentRequest | undefined;
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
   const [{ loading: loadingFetch, error }, doFetchCauses] = useTypedAsyncFn(
-    async ({ page, filters }: { page: number; filters: string }) =>
-      await coalitionApiClient.get(`causes?page_size=${pageSize}&page=${page}${filters}`),
+    async ({ page, filters }: { page: number; filters: string }) => {
+      if (pendingRequest !== undefined) {
+        pendingRequest.abort();
+      }
+
+      pendingRequest = coalitionApiClient.getRequestWithoutTokenCheck(
+        `causes?page_size=${pageSize}&page=${page}${filters}`,
+      );
+      const response = await pendingRequest;
+      pendingRequest = undefined;
+      return response.body;
+    },
     [],
   );
 

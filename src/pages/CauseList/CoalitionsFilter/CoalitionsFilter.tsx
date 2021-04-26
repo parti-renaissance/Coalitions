@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState, useCallback } from 'react';
 import { useFetchCoalitions } from 'redux/Coalition/hooks/useFetchCoalitions';
 import {
   Chevron,
@@ -9,7 +9,6 @@ import {
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
 import { getIsMobile } from 'services/mobile/mobile';
-import { useCoalitionsFilter } from './service';
 import { FormattedMessage } from 'react-intl';
 
 interface CoalitionFilterProps {
@@ -22,10 +21,6 @@ export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
   setSelectedCoalitionIds,
 }) => {
   const coalitions = useSelector(getCoalitions);
-  const { onSelectCoalitionId } = useCoalitionsFilter({
-    selectedCoalitionIds,
-    setSelectedCoalitionIds,
-  });
   const { fetchCoalitions } = useFetchCoalitions();
   const isMobile = getIsMobile();
   const [displayAll, setDisplayAll] = useState(!isMobile);
@@ -34,12 +29,30 @@ export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
     fetchCoalitions();
   }, [fetchCoalitions]);
 
+  const onChipClick = useCallback(
+    (id?: string) => () => {
+      let newSelectedCoalitionIds = [...selectedCoalitionIds];
+
+      if (id === undefined && newSelectedCoalitionIds.length !== 0) {
+        newSelectedCoalitionIds = [];
+      }
+
+      if (id !== undefined) {
+        const idIndex = newSelectedCoalitionIds.indexOf(id);
+        if (idIndex > -1) {
+          newSelectedCoalitionIds.splice(idIndex, 1);
+        } else {
+          newSelectedCoalitionIds.push(id);
+        }
+      }
+
+      setSelectedCoalitionIds(newSelectedCoalitionIds);
+    },
+    [selectedCoalitionIds, setSelectedCoalitionIds],
+  );
+
   const hideOrShowAllChips = () => {
     setDisplayAll(!displayAll);
-  };
-
-  const onChipClick = (id?: string) => () => {
-    onSelectCoalitionId(id);
   };
 
   if (coalitions.length === 0) {

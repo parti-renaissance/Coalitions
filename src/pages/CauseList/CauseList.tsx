@@ -17,6 +17,7 @@ import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
 import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
 import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
 import SearchField from 'components/SearchField';
+import { useLocation } from 'react-router';
 
 interface CauseListHeaderProps {
   loading: boolean;
@@ -46,7 +47,12 @@ const defineCtaPositionInList = (): number => {
 
 const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
-  const [filters, setFilters] = useState<Filters>({ coalitionIds: [], searchText: '' });
+  const { search } = useLocation();
+  const coalitionId = new URLSearchParams(search).get('coalitionId');
+  const [filters, setFilters] = useState<Filters>({
+    coalitionIds: coalitionId !== null ? [coalitionId] : [],
+    searchText: '',
+  });
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
   const numberOfCauses = useSelector(getNumberOfCauses);

@@ -34,7 +34,7 @@ const SearchField: FunctionComponent<SearchFieldProps> = ({ searchText, setSearc
         endAdornment={
           <InputAdornment position="end">
             <IconButton onClick={resetSearchText}>
-              {searchText.length > 0 ? <CrossIcon /> : <SearchIcon />}
+              {searchText.length > 0 ? <CrossIcon /> : <SearchIcon src="/images/search.svg" />}
             </IconButton>
           </InputAdornment>
         }

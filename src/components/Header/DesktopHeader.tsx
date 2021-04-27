@@ -12,6 +12,7 @@ import {
 import { MediumLargeButton } from 'components/Button/Button';
 import LogInOrOutButton from './components/LogInOrOutButton';
 import { useLocation } from 'react-router';
+import SearchBar from './components/SearchBar';
 
 export const DesktopHeader: FunctionComponent<{}> = () => {
   const location = useLocation();
@@ -35,6 +36,7 @@ export const DesktopHeader: FunctionComponent<{}> = () => {
             <FormattedMessage id="header.coalitions" />
           </SubCategory>
         </DefaultHashLink>
+        <SearchBar />
       </HeaderSubContainer>
       <HeaderSubContainer>
         {showCreateCauseButton ? (

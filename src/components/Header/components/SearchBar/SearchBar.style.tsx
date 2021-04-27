@@ -5,12 +5,14 @@ import { ICON_SIZE } from '../LogInOrOutButton/LogInOrOutButton.style';
 
 const DESKTOP_SEARCH_BAR_HEIGHT = '53px';
 
+const Z_INDEX = 1;
+
 export const Container = styled.div`
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: ${Z_INDEX};
   ${media.desktop(`
     position: relative;
     margin-left: ${getSpacing(5)};

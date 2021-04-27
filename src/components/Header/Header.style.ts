@@ -131,3 +131,10 @@ export const ChevronRight = styled.img`
 export const CreateCauseWrapper = styled(DefaultLink)`
   padding: ${getSpacing(3)};
 `;
+
+export const SearchBarWrapper = styled.div`
+  ${media.desktop(`
+    margin-left: ${getSpacing(5)};
+    margin-right: ${getSpacing(10)};
+`)}
+`;

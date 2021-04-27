@@ -8,6 +8,7 @@ import {
   HeaderTitle,
   SubCategory,
   CreateCauseButton,
+  SearchBarWrapper,
 } from './Header.style';
 import { MediumLargeButton } from 'components/Button/Button';
 import LogInOrOutButton from './components/LogInOrOutButton';
@@ -15,8 +16,9 @@ import { useLocation } from 'react-router';
 import SearchBar from './components/SearchBar';
 
 export const DesktopHeader: FunctionComponent<{}> = () => {
-  const location = useLocation();
-  const showCreateCauseButton = !location.pathname.includes(PATHS.OUR_MISSION.url());
+  const { pathname } = useLocation();
+  const showCreateCauseButton = !pathname.includes(PATHS.OUR_MISSION.url());
+  const showSearchBar = !pathname.includes(PATHS.CAUSE_LIST.url());
 
   return (
     <HeaderContainer>
@@ -36,7 +38,11 @@ export const DesktopHeader: FunctionComponent<{}> = () => {
             <FormattedMessage id="header.coalitions" />
           </SubCategory>
         </DefaultHashLink>
-        <SearchBar />
+        {showSearchBar ? (
+          <SearchBarWrapper>
+            <SearchBar />
+          </SearchBarWrapper>
+        ) : null}
       </HeaderSubContainer>
       <HeaderSubContainer>
         {showCreateCauseButton ? (

@@ -9,6 +9,7 @@ import {
   DesktopQuickActionsWrapper,
   AboutThisCauseWrapper,
   FirstQuickActionWrapper,
+  Separator,
 } from './CauseDetails.style';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
@@ -51,9 +52,12 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
             <MobileHeaderWrapper>{renderHeader()}</MobileHeaderWrapper>
           </HeaderContainer>
           {showQuickActions && quickActions !== undefined && quickActions.length > 0 ? (
-            <FirstQuickActionWrapper>
-              <QuickAction quickAction={quickActions[0]} />
-            </FirstQuickActionWrapper>
+            <>
+              <FirstQuickActionWrapper>
+                <QuickAction quickAction={quickActions[0]} />
+              </FirstQuickActionWrapper>
+              <Separator />
+            </>
           ) : null}
           <AboutThisCauseWrapper>
             <AboutThisCause cause={cause} />

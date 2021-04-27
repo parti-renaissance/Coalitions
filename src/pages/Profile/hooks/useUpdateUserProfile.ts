@@ -32,6 +32,8 @@ type UpdateUserProfilePayload = {
   phone?: { number?: string; country?: string };
   gender?: string;
   birthdate?: string;
+  coalition_subscription?: boolean;
+  cause_subscription?: boolean;
 };
 
 export const useUpdateUserProfile = (userId?: string) => {
@@ -59,6 +61,8 @@ export const useUpdateUserProfile = (userId?: string) => {
         last_name: values.lastName,
         gender: values.gender === GENDERS[0].value ? undefined : values.gender,
         birthdate: values.birthday,
+        coalition_subscription: values.coalitionSubscription,
+        cause_subscription: values.causeSubscription,
         phone:
           values.phoneNumber !== null
             ? {

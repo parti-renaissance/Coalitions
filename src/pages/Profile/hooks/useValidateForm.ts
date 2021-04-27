@@ -16,6 +16,8 @@ export interface ProfileFormValues {
   phoneCountry?: PhoneCountry;
   gender?: string;
   birthday?: string;
+  coalitionSubscription?: boolean;
+  causeSubscription?: boolean;
 }
 
 type ErrorForm = {

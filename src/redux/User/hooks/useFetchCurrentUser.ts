@@ -35,6 +35,8 @@ export const useFetchCurrentUser = () => {
         email: currentUser.email_address,
         isAdherent: currentUser.adherent,
         hasAcceptedCGU: currentUser.coalitions_cgu_accepted,
+        coalitionSubscription: currentUser.coalition_subscription,
+        causeSubscription: currentUser.cause_subscription,
         gender: currentUser.gender,
         birthdate: currentUser.birthdate,
         phone: currentUser.phone,

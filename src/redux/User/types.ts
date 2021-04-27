@@ -8,4 +8,6 @@ export interface User {
   phone?: { country: string; number: string } | null;
   isAdherent: boolean;
   hasAcceptedCGU: boolean;
+  coalitionSubscription: boolean;
+  causeSubscription: boolean;
 }

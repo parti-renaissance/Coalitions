@@ -39,7 +39,7 @@ const buildFilteredByUrl = (filters: Filters) => {
   }
 
   if (filters.searchText.length > 0) {
-    urlWithFilters = `&name=${filters.searchText}`;
+    urlWithFilters = `${urlWithFilters}&name=${filters.searchText}`;
   }
 
   return urlWithFilters;

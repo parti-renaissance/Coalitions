@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { media, defaultMargins, getSpacing, contentMaxWidth } from 'stylesheet';
+import { media, defaultMargins, getSpacing, contentMaxWidth, colorPalette } from 'stylesheet';
 import { DESKTOP_BUTTONS_WIDTH } from './components/HeaderButtons/HeaderButtons.style';
 
 export const Container = styled.div`
@@ -76,6 +76,17 @@ export const AboutThisCauseWrapper = styled.div`
 export const FirstQuickActionWrapper = styled.div`
   margin: calc(${defaultMargins.vertical.mobile} - ${getSpacing(1)})
     ${defaultMargins.horizontal.mobile} 0 ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    display: none;
+  `)}
+`;
+
+const SEPARATOR_HEIGHT = '1px';
+
+export const Separator = styled.div`
+  height: ${SEPARATOR_HEIGHT};
+  background-color: ${colorPalette.greyLight};
+  margin-top: ${defaultMargins.vertical.mobile};
   ${media.desktop(`
     display: none;
   `)}

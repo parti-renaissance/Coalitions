@@ -261,7 +261,7 @@
     "incorrect-password-token": "Une erreur s’est produite : ce lien n’est plus valide.",
     "cannot-edit-this-cause": "Vous n’avez pas le droit de modifier cette cause.",
     "cannot-send-mail-for-this-cause": "Vous n’avez pas le droit d’envoyer de mails pour cette cause.",
-    "filtered-causes-error": "Votre recherche n’a pas pu aboutir. Essayez de le reformuler autrement ou merci de réessayer plus tard."
+    "filtered-causes-error": "Votre recherche n’a pas pu aboutir. Essayez de reformuler ou réessayez plus tard."
   },
   "success_stories": {
     "title": "Ils ont créé leur cause",

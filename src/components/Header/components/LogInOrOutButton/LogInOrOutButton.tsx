@@ -53,7 +53,7 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
     return (
       <StyledButton onClick={login}>
         {getIsMobile() ? (
-          <UserIcon src="/images/user.svg" />
+          <UserIcon src="/images/thinUser.svg" />
         ) : (
           <FormattedMessage id="header.login" />
         )}
@@ -66,7 +66,7 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
       <>
         <StyledButton onClick={showDesktopUserMenu as () => void}>
           <FirstNameContainer>
-            <UserIcon src="/images/user.svg" />
+            <UserIcon src="/images/thinUser.svg" />
             <FirstName>{currentUser.firstName}</FirstName>
           </FirstNameContainer>
         </StyledButton>

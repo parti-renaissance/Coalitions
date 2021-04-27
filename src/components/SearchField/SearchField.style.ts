@@ -1,17 +1,16 @@
-import styled, { css } from 'styled-components';
-import { Close, Search } from '@material-ui/icons';
+import styled from 'styled-components';
+import { Close } from '@material-ui/icons';
 import { colorPalette } from 'stylesheet';
 
-const CROSS_ICON_FONT_SIZE = '24px';
+const CROSS_ICON_SIZE = '24px';
+const SEARCH_ICON_SIZE = '20px';
 
-const ICON_STYLE = css`
-  font-size: ${CROSS_ICON_FONT_SIZE};
+export const CrossIcon = styled(Close)`
+  font-size: ${CROSS_ICON_SIZE};
   color: ${colorPalette.greyDark};
 `;
-export const CrossIcon = styled(Close)`
-  ${ICON_STYLE};
-`;
 
-export const SearchIcon = styled(Search)`
-  ${ICON_STYLE};
+export const SearchIcon = styled.img`
+  height: ${SEARCH_ICON_SIZE};
+  width: ${SEARCH_ICON_SIZE};
 `;

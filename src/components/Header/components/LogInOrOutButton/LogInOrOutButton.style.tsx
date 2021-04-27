@@ -16,11 +16,11 @@ export const FirstName = styled.div`
   `)}
 `;
 
-const USER_ICON_WIDTH = '20px';
+export const ICON_SIZE = '20px';
 
 export const UserIcon = styled.img`
-  height: ${USER_ICON_WIDTH};
-  width: ${USER_ICON_WIDTH};
+  height: ${ICON_SIZE};
+  width: ${ICON_SIZE};
 `;
 
 export const StyledDesktopUserMenu = styled(Menu)`

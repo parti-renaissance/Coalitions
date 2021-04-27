@@ -21,9 +21,9 @@ export const Container = styled.div`
     `)}
   }
   .MuiButtonBase-root {
-    padding-right: ${getSpacing(5)};
+    margin-right: calc(${getSpacing(5)} - 12px);
     ${media.desktop(`
-      padding-right: ${getSpacing(4)};
+      margin-right: calc(${getSpacing(4)} - 12px);
     `)}
   }
   .MuiInputBase-input {

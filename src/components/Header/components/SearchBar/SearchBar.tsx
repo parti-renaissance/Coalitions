@@ -1,14 +1,16 @@
-import React, { useState, FunctionComponent } from 'react';
-import SearchField from 'components/SearchField';
+import React, { useState, FunctionComponent, lazy, Suspense } from 'react';
 import { OutlinedInputProps } from '@material-ui/core/OutlinedInput';
 import { Container } from './SearchBar.style';
+const SearchField = lazy(() => import('components/SearchField'));
 
 const SearchBar: FunctionComponent<OutlinedInputProps> = props => {
   const [searchText, setSearchText] = useState('');
 
   return (
     <Container>
-      <SearchField searchText={searchText} setSearchText={setSearchText} {...props} />
+      <Suspense fallback={null}>
+        <SearchField searchText={searchText} setSearchText={setSearchText} {...props} />
+      </Suspense>
     </Container>
   );
 };

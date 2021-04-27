@@ -51,7 +51,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
     <>
       <StyledCard
         onClick={() => {
-          history.push(PATHS.CAUSE.url(cause.uuid));
+          history.push(PATHS.CAUSE.url(cause.slug));
         }}
       >
         {Boolean(cause.supported) ? <FollowTag labelKey="cause.supported" /> : null}
@@ -86,7 +86,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
                 <FormattedMessage id="cause.support-button" />
               </SmallButton>
             )}
-            <Link to={PATHS.CAUSE.url(cause.uuid)}>
+            <Link to={PATHS.CAUSE.url(cause.slug)}>
               <DefaultButton size="small" variant="outlined">
                 <FormattedMessage id="cause.see-button" />
               </DefaultButton>
@@ -98,7 +98,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
         isOpened={isModalOpened}
         onClose={closeModal}
         cause={cause}
-        redirectToAfterAuth={PATHS.CAUSE.url(cause.uuid)}
+        redirectToAfterAuth={PATHS.CAUSE.url(cause.slug)}
       />
     </>
   );

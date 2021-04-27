@@ -27,8 +27,8 @@ export const PATHS = {
     url: () => '/',
   },
   CAUSE: {
-    route: '/cause/:causeId',
-    url: (causeId: string) => `/cause/${causeId}`,
+    route: '/cause/:causeIdOrSlug',
+    url: (causeIdOrSlug: string) => `/cause/${causeIdOrSlug}`,
   },
   CAUSE_LIST: {
     route: '/causes',
@@ -43,8 +43,8 @@ export const PATHS = {
     url: () => '/creer-une-cause',
   },
   CAUSE_ADMIN: {
-    route: '/administrer-une-cause/:causeId',
-    url: (causeId: string) => `/administrer-une-cause/${causeId}`,
+    route: '/administrer-une-cause/:causeIdOrSlug',
+    url: (causeIdOrSlug: string) => `/administrer-une-cause/${causeIdOrSlug}`,
   },
   CAUSE_PREVIEW: {
     route: '/apercu',

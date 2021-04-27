@@ -14,6 +14,7 @@ export const CAUSES_MOCK = [
     description: 'Description de la première des causes',
     uuid: 'cause1Uuid',
     image_url: 'imageUrl',
+    slug: 'cause-1',
   },
   {
     followers_count: 1,
@@ -30,6 +31,7 @@ export const CAUSES_MOCK = [
     description: 'Description de la seconde des causes',
     uuid: 'cause2Uuid',
     image_url: 'imageUrl',
+    slug: 'cause-2',
   },
 ];
 
@@ -50,6 +52,7 @@ export const CAUSES_MOCK_STORE = {
       description: 'Description de la première des causes',
       uuid: 'cause1Uuid',
       image_url: 'imageUrl',
+      slug: 'cause-1',
     },
     cause2Uuid: {
       followers_count: 1,
@@ -66,6 +69,7 @@ export const CAUSES_MOCK_STORE = {
       description: 'Description de la seconde des causes',
       uuid: 'cause2Uuid',
       image_url: 'imageUrl',
+      slug: 'cause-2',
     },
   },
   ids: ['cause1Uuid', 'cause2Uuid'],

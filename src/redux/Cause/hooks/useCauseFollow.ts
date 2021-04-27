@@ -23,14 +23,16 @@ const useCauseFollowErrorHandler = () => {
   );
 };
 
-export const useCauseFollow = (id: string) => {
+export const useCauseFollow = (id: string | undefined) => {
   const dispatch = useDispatch();
   const errorHandler = useCauseFollowErrorHandler();
 
-  const [{ loading, error }, doFollowCause] = useTypedAsyncFn(
-    async () => await authenticatedApiClient.put(`v3/causes/${id}/follower`, null),
-    [],
-  );
+  const [{ loading, error }, doFollowCause] = useTypedAsyncFn(async () => {
+    if (id === undefined) {
+      return;
+    }
+    return await authenticatedApiClient.put(`v3/causes/${id}/follower`, null);
+  }, [id]);
 
   useEffect(() => {
     if (error !== undefined) {
@@ -39,6 +41,10 @@ export const useCauseFollow = (id: string) => {
   }, [error, errorHandler]);
 
   const followCause = useCallback(async () => {
+    if (id === undefined) {
+      return;
+    }
+
     const response = await doFollowCause();
 
     if (response instanceof Error) {

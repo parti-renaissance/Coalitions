@@ -12,6 +12,7 @@ export interface InCreationCause {
 export type Cause = {
   uuid: string;
   quickActions?: QuickAction[];
+  slug: string;
 } & InCreationCause;
 
 interface Author {

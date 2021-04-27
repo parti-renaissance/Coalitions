@@ -144,29 +144,23 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
   };
 };
 
-export const useFetchOneCause = (id: string | null) => {
+export const useFetchOneCause = (idOrSlug: string | null) => {
   const dispatch = useDispatch();
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const [isFetchingQuickActions, setIsFetchingQuickActions] = useState(false);
 
   const [{ loading, error }, doFetchCause] = useTypedAsyncFn(async () => {
-    if (id === null) {
+    if (idOrSlug === null) {
       return;
     }
-    return await coalitionApiClient.get(`causes/${id}`);
-  }, []);
-
-  const [
-    { loading: isFetchingQuickActions, error: errorFetchingQuickActions },
-    doFetchQuickActions,
-  ] = useTypedAsyncFn(async () => {
-    return await coalitionApiClient.get(`causes/${id}/quick_actions`);
+    return await coalitionApiClient.get(`causes/${idOrSlug}`);
   }, []);
 
   useEffect(() => {
-    if (error !== undefined || errorFetchingQuickActions !== undefined) {
+    if (error !== undefined) {
       HandleErrorService.showErrorSnackbar(error);
     }
-  }, [error, errorFetchingQuickActions]);
+  }, [error]);
 
   const { loading: loadingFollowed, doFetchFollowedCauses } = useFetchFollowedCauses();
 
@@ -184,26 +178,37 @@ export const useFetchOneCause = (id: string | null) => {
       });
 
       if (withQuickActions) {
-        const rawQuickActions: RawQuickActions[] = await doFetchQuickActions();
+        const doFetchQuickActions = async (causeId: string) => {
+          setIsFetchingQuickActions(true);
+          try {
+            const rawQuickActions: RawQuickActions[] = await coalitionApiClient.get(
+              `causes/${causeId}/quick_actions`,
+            );
 
-        if (rawQuickActions instanceof Error) {
-          return;
-        }
+            return rawQuickActions.map(({ id, title, url }) => ({
+              id,
+              label: title,
+              link: url,
+            }));
+          } catch (e) {
+            HandleErrorService.showErrorSnackbar(e);
+          } finally {
+            setIsFetchingQuickActions(false);
+          }
+        };
+
+        const quickActions = await doFetchQuickActions(cause.uuid);
 
         cause = {
           ...cause,
-          quickActions: rawQuickActions.map(({ id, title, url }) => ({
-            id,
-            label: title,
-            link: url,
-          })),
+          quickActions,
         };
       }
 
       dispatch(updateOneCause(cause));
       dispatch(markCausesAsSupported(supportedCauses));
     },
-    [dispatch, doFetchCause, doFetchFollowedCauses, doFetchQuickActions, isUserLoggedIn],
+    [dispatch, doFetchCause, doFetchFollowedCauses, isUserLoggedIn],
   );
 
   return { loading: loading || loadingFollowed || isFetchingQuickActions, fetchCause };

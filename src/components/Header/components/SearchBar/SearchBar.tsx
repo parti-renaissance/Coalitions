@@ -1,4 +1,4 @@
-import React, { FunctionComponent, lazy, Suspense, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { OutlinedInputProps } from '@material-ui/core/OutlinedInput';
 import { Container, SearchIcon } from './SearchBar.style';
 import Formik from 'components/Formik';
@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
 import { getIsMobile } from 'services/mobile/mobile';
 import { StyledButton } from '../../Header.style';
-const SearchField = lazy(() => import('components/SearchField'));
+import SearchField from 'components/SearchField';
 
 interface FormValues {
   searchText: string;
@@ -41,18 +41,16 @@ const SearchBar: FunctionComponent<OutlinedInputProps> = props => {
       <Formik<FormValues> initialValues={{ searchText: '' }} onSubmit={onSubmit}>
         {({ values, handleSubmit, setFieldValue }) => (
           <form onSubmit={handleSubmit}>
-            <Suspense fallback={null}>
-              <SearchField
-                name="searchText"
-                searchText={values.searchText}
-                setSearchText={(text: string) => {
-                  setFieldValue('searchText', text);
-                }}
-                onBlur={hideOrShowSearchButton(true)}
-                autoFocus={isMobile}
-                {...props}
-              />
-            </Suspense>
+            <SearchField
+              name="searchText"
+              searchText={values.searchText}
+              setSearchText={(text: string) => {
+                setFieldValue('searchText', text);
+              }}
+              onBlur={hideOrShowSearchButton(true)}
+              autoFocus={isMobile}
+              {...props}
+            />
           </form>
         )}
       </Formik>

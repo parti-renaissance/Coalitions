@@ -6,9 +6,8 @@ import {
   StyledDesktopUserMenu,
   FirstName,
 } from './LogInOrOutButton.style';
-import { isUserLogged, userLoggedOut } from 'redux/Login';
+import { isUserLogged } from 'redux/Login';
 import useSelector from 'redux/useSelector';
-import { useDispatch } from 'react-redux';
 import { oauthUrl } from 'services/networking/auth';
 import { getCurrentUser } from 'redux/User/selectors';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -17,23 +16,18 @@ import { StyledButton } from '../../Header.style';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
-import { deleteCurrentUser } from 'redux/User';
+import { useLogout } from 'redux/Login/hooks/useLogout';
 
 const LogInOrOutButton: FunctionComponent<{}> = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
   const [desktopUserMenu, setDesktopUserMenu] = useState<null | HTMLAnchorElement>(null);
   const { isProfilePageEnable } = useFeatureToggling();
   const history = useHistory();
+  const { logout } = useLogout();
 
   const login = () => {
     window.location.href = oauthUrl;
-  };
-
-  const logout = () => {
-    dispatch(userLoggedOut());
-    dispatch(deleteCurrentUser());
   };
 
   const showDesktopUserMenu = (event: MouseEvent<HTMLAnchorElement>) => {

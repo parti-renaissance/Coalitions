@@ -1,6 +1,6 @@
 import { FullWidthButton } from 'components/Button/Button';
 import styled from 'styled-components';
-import { colorPalette, fonts, getSpacing, media, borderRadius } from 'stylesheet';
+import { colorPalette, fonts, fontWeight, getSpacing, media, borderRadius } from 'stylesheet';
 
 export const SendMailsTitle = styled.h1`
   ${fonts.h1Small};
@@ -27,4 +27,8 @@ export const ValidateButton = styled(FullWidthButton)`
   ${media.desktop(`
     margin-top: ${getSpacing(8)};
   `)}
+`;
+
+export const EditorContainer = styled.div`
+  font-weight: ${fontWeight.normal};
 `;

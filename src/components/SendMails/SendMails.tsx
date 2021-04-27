@@ -1,12 +1,22 @@
+import React, { FunctionComponent, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
 import Formik from 'components/Formik';
 import InputField from 'components/InputField';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
-import React, { FunctionComponent, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { SyncModal } from './components/SyncModal/SyncModal';
 import { usePostMails } from './hooks/usePostMails';
 import { useValidateSendMailsForm, SendMailForm } from './hooks/useValidateSendMailsForm';
-import { SendMailsDescription, SendMailsTitle, ValidateButton } from './SendMails.style';
+import {
+  SendMailsDescription,
+  SendMailsTitle,
+  ValidateButton,
+  EditorContainer,
+} from './SendMails.style';
+import { fontFamily, lineHeight, fontSize } from 'stylesheet';
 
 type SendMailsProps = {
   causeId: string;
@@ -24,6 +34,8 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
     setMailId(response);
     setOpenSyncModal(true);
   };
+  const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
+
   return (
     <>
       <SendMailsTitle>
@@ -38,7 +50,16 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
         validate={validateForm}
         validateOnMount
       >
-        {({ values, handleChange, handleBlur, handleSubmit, touched, errors }) => (
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          touched,
+          errors,
+          setFieldTouched,
+          setFieldValue,
+        }) => (
           <form onSubmit={handleSubmit}>
             <InputFieldWrapper>
               <InputField
@@ -56,7 +77,29 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
                 inputProps={{ maxLength: 255 }}
               />
             </InputFieldWrapper>
-            <InputFieldWrapper>
+            <EditorContainer>
+              <Editor
+                editorState={editorState}
+                onEditorStateChange={(state: EditorState) => {
+                  setEditorState(state);
+                  setFieldTouched('body');
+                  setFieldValue('body', state);
+                }}
+                editorStyle={{
+                  fontFamily: fontFamily.primary,
+                  lineHeight: lineHeight.primary,
+                  fontSize: fontSize.input.desktop,
+                }}
+                toolbar={{
+                  options: ['inline', 'textAlign', 'list', 'link', 'image'],
+                  inline: { options: ['bold', 'italic', 'underline'] },
+                }}
+                placeholder={formatMessage({
+                  id: 'send_mails.body',
+                })}
+              />
+            </EditorContainer>
+            {/* <InputFieldWrapper>
               <InputField
                 placeholder={formatMessage({
                   id: 'send_mails.body',
@@ -73,7 +116,7 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
                 helperText={touched.body === true ? errors.body : undefined}
                 inputProps={{ maxLength: 6000 }}
               />
-            </InputFieldWrapper>
+            </InputFieldWrapper> */}
             <ValidateButton
               disabled={loading || Object.keys(errors).length > 0}
               type="submit"

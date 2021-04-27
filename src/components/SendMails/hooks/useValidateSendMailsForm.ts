@@ -1,9 +1,10 @@
+import { EditorState } from 'draft-js';
 import { useIntl } from 'react-intl';
 import { isFieldEmpty } from 'services/formik/form';
 
 export type SendMailForm = {
   object: string;
-  body: string;
+  body: EditorState;
 };
 
 export type SendMailFormError = {
@@ -29,14 +30,20 @@ export const useValidateSendMailsForm = () => {
       errors.object = formatMessage({ id: 'send_mails.form_errors.too-long-object' });
     }
 
-    if (isFieldEmpty(body)) {
+    if (body === undefined) {
       errors.body = requiredErrorMessage;
-    }
-    if (body !== undefined && body.length < 3) {
-      errors.body = formatMessage({ id: 'send_mails.form_errors.too-short-body' });
-    }
-    if (body !== undefined && body.length > 6000) {
-      errors.body = formatMessage({ id: 'send_mails.form_errors.too-long-body' });
+    } else {
+      const currentBody = body.getCurrentContent();
+
+      if (!currentBody.hasText()) {
+        errors.body = requiredErrorMessage;
+      }
+      if (currentBody.getPlainText().length < 3) {
+        errors.body = formatMessage({ id: 'send_mails.form_errors.too-short-body' });
+      }
+      if (currentBody.getPlainText().length > 6000) {
+        errors.body = formatMessage({ id: 'send_mails.form_errors.too-long-body' });
+      }
     }
 
     return errors;

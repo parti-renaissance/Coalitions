@@ -1,35 +1,35 @@
 import styled from 'styled-components';
-import { fonts, getSpacing, colorPalette, media } from 'stylesheet';
-import Menu from '@material-ui/core/Menu';
+import { getSpacing, media } from 'stylesheet';
+import { MOBILE_HEADER_HEIGHT } from '../../Header.style';
 
-export const FirstNameContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
+const DESKTOP_SEARCH_BAR_HEIGHT = '53px';
 
-export const FirstName = styled.div`
-  display: none;
+export const Container = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   ${media.desktop(`
-    display: flex;
-    margin-left: ${getSpacing(2)};
-    color: ${colorPalette.black};
+    position: relative;
+    margin-left: ${getSpacing(5)};
+    margin-right: ${getSpacing(10)};
   `)}
-`;
-
-const USER_ICON_WIDTH = '20px';
-
-export const UserIcon = styled.img`
-  height: ${USER_ICON_WIDTH};
-  width: ${USER_ICON_WIDTH};
-`;
-
-export const StyledDesktopUserMenu = styled(Menu)`
-  margin-top: ${getSpacing(8)};
-  li {
-    ${fonts.input};
+  .MuiInputBase-root {
+    height: ${MOBILE_HEADER_HEIGHT};
+    ${media.desktop(`
+      height: ${DESKTOP_SEARCH_BAR_HEIGHT};
+    `)}
   }
-
-  ${media.desktop(`
-    margin-top: ${getSpacing(10)};
-  `)}
+  .MuiButtonBase-root {
+    padding-right: ${getSpacing(5)};
+    ${media.desktop(`
+      padding-right: ${getSpacing(4)};
+    `)}
+  }
+  .MuiInputBase-input {
+    padding-left: ${getSpacing(5)};
+    ${media.desktop(`
+      padding-left: ${getSpacing(4)};
+    `)}
+  }
 `;

@@ -8,7 +8,6 @@ import {
   HeaderTitle,
   SubCategory,
   CreateCauseButton,
-  SearchBarWrapper,
 } from './Header.style';
 import { MediumLargeButton } from 'components/Button/Button';
 import LogInOrOutButton from './components/LogInOrOutButton';
@@ -38,11 +37,7 @@ export const DesktopHeader: FunctionComponent<{}> = () => {
             <FormattedMessage id="header.coalitions" />
           </SubCategory>
         </DefaultHashLink>
-        {showSearchBar ? (
-          <SearchBarWrapper>
-            <SearchBar />
-          </SearchBarWrapper>
-        ) : null}
+        {showSearchBar ? <SearchBar /> : null}
       </HeaderSubContainer>
       <HeaderSubContainer>
         {showCreateCauseButton ? (

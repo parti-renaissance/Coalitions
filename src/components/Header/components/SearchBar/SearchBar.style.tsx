@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { getSpacing, media } from 'stylesheet';
 import { MOBILE_HEADER_HEIGHT } from '../../Header.style';
+import { ICON_SIZE } from '../LogInOrOutButton/LogInOrOutButton.style';
 
 const DESKTOP_SEARCH_BAR_HEIGHT = '53px';
 
@@ -9,6 +10,7 @@ export const Container = styled.div`
   top: 0;
   right: 0;
   left: 0;
+  z-index: 1;
   ${media.desktop(`
     position: relative;
     margin-left: ${getSpacing(5)};
@@ -32,4 +34,9 @@ export const Container = styled.div`
       padding-left: ${getSpacing(4)};
     `)}
   }
+`;
+
+export const SearchIcon = styled.img`
+  height: ${ICON_SIZE};
+  width: ${ICON_SIZE};
 `;

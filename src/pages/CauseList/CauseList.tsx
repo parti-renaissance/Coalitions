@@ -49,9 +49,10 @@ const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
   const { search } = useLocation();
   const coalitionId = new URLSearchParams(search).get('coalitionId');
+  const searchText = new URLSearchParams(search).get('name');
   const [filters, setFilters] = useState<Filters>({
     coalitionIds: coalitionId !== null ? [coalitionId] : [],
-    searchText: '',
+    searchText: searchText !== null ? searchText : '',
   });
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());

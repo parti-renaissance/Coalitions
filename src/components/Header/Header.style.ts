@@ -13,7 +13,6 @@ import { DefaultLink, DefaultHashLink } from 'components/Link/Link';
 import { Close } from '@material-ui/icons';
 import { IconButton, Drawer } from '@material-ui/core';
 import { MediumLargeButton, FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
-import { ICON_SIZE } from './components/LogInOrOutButton/LogInOrOutButton.style';
 
 export const MOBILE_HEADER_HEIGHT = '64px';
 const DESKTOP_HEADER_HEIGHT = '80px';
@@ -131,9 +130,4 @@ export const ChevronRight = styled.img`
 
 export const CreateCauseWrapper = styled(DefaultLink)`
   padding: ${getSpacing(3)};
-`;
-
-export const SearchIcon = styled.img`
-  height: ${ICON_SIZE};
-  width: ${ICON_SIZE};
 `;

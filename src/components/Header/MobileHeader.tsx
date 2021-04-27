@@ -14,7 +14,6 @@ import {
   MenuLinkLabel,
   ChevronRight,
   CreateCauseWrapper,
-  SearchIcon,
 } from './Header.style';
 import { DefaultLink } from 'components/Link/Link';
 import { PATHS } from 'routes';
@@ -54,13 +53,8 @@ const MENU_LINKS: { labelId: string; linkTo: string; isHashLink?: boolean }[] = 
 export const MobileHeader: FunctionComponent<{}> = () => {
   const [isDrawerMenuOpened, setIsDrawerMenuOpened] = useState<boolean>(false);
   const { pathname } = useLocation();
-  const showSearchIconButton = !pathname.includes(PATHS.CAUSE_LIST.url());
-  const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
+  const showSearchBar = !pathname.includes(PATHS.CAUSE_LIST.url());
   const intl = useIntl();
-
-  const hideOrShowSearchBar = (isVisible: boolean) => () => {
-    setIsSearchBarVisible(isVisible);
-  };
 
   const closeDrawerMenu = () => {
     setIsDrawerMenuOpened(false);
@@ -84,14 +78,9 @@ export const MobileHeader: FunctionComponent<{}> = () => {
           </DefaultLink>
         </HeaderSubContainer>
         <HeaderSubContainer>
-          {showSearchIconButton ? (
-            <StyledButton onClick={hideOrShowSearchBar(true)}>
-              <SearchIcon src="/images/search.svg" />
-            </StyledButton>
-          ) : null}
+          {showSearchBar ? <SearchBar /> : null}
           <LogInOrOutButton />
         </HeaderSubContainer>
-        {isSearchBarVisible ? <SearchBar onBlur={hideOrShowSearchBar(false)} autoFocus /> : null}
       </HeaderContainer>
       <DrawerMenu open={isDrawerMenuOpened} onClose={closeDrawerMenu}>
         <div>

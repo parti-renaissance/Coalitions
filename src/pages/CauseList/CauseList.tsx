@@ -18,6 +18,7 @@ import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
 import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
 import SearchField from 'components/SearchField';
 import { useLocation } from 'react-router';
+import { useSetSearchParams } from './lib/useSetSearchParams';
 
 interface CauseListHeaderProps {
   loading: boolean;
@@ -49,13 +50,15 @@ const CauseList: React.FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
   const { search } = useLocation();
   const coalitionId = new URLSearchParams(search).get('coalitionId');
+  const searchText = new URLSearchParams(search).get('name');
   const [filters, setFilters] = useState<Filters>({
     coalitionIds: coalitionId !== null ? [coalitionId] : [],
-    searchText: '',
+    searchText: searchText !== null ? searchText : '',
   });
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
   const numberOfCauses = useSelector(getNumberOfCauses);
+  const { setSearchParams } = useSetSearchParams();
 
   useEffect(() => {
     fetchFirstPage(filters);
@@ -70,6 +73,10 @@ const CauseList: React.FunctionComponent = () => {
       window.removeEventListener('resize', handleResize);
     };
   });
+
+  useEffect(() => {
+    setSearchParams(filters);
+  }, [filters, setSearchParams]);
 
   const fetchNextPageCauses = useCallback(() => {
     fetchNextPage(filters);

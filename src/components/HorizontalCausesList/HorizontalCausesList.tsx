@@ -1,4 +1,10 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, {
+  forwardRef,
+  FunctionComponent,
+  ForwardRefRenderFunction,
+  useEffect,
+  useRef,
+} from 'react';
 import {
   Header,
   SubContainer,
@@ -22,21 +28,31 @@ import { useSelector } from 'react-redux';
 import { useFetchCauses, SortOptions } from 'redux/Cause/hooks/useFetchCauses';
 import { getAllCauses } from 'redux/Cause/selectors';
 import { useHistory } from 'react-router';
-import Carousel, { CarouselProps } from 'components/Carousel/Carousel';
 import { getIsMobile } from 'services/mobile/mobile';
 import { DESKTOP_CAUSE_CARD_WIDTH } from 'components/Cause/Cause.style';
-import { Cause as CauseType } from 'redux/Cause/types';
 import { LARGE_DESKTOP_BREAK_POINT, defaultMarginsAsNumber } from 'stylesheet';
+import Carousel, { CarouselProps } from 'nuka-carousel';
 
 interface HorizontalCausesListProps {
   coalitionId?: string;
 }
 
-const renderCause = (cause: CauseType) => (
-  <CauseCardWrapper key={cause.uuid}>
-    <Cause cause={cause} />
-  </CauseCardWrapper>
+const DesktopCarousel: ForwardRefRenderFunction<any, CarouselProps> = (props, ref) => (
+  <CarouselWrapper>
+    <Carousel
+      {...props}
+      slideWidth={`${DESKTOP_CAUSE_CARD_WIDTH + DESKTOP_CAUSE_MARGIN_RIGHT}px`}
+      width={`${Math.min(window.innerWidth, LARGE_DESKTOP_BREAK_POINT)}px`}
+      framePadding={`0px ${defaultMarginsAsNumber.horizontal.desktop}px`}
+      frameOverflow="visible"
+      swiping={false}
+      withoutControls
+      ref={ref}
+    />
+  </CarouselWrapper>
 );
+
+const DesktopCarouselWithRef = forwardRef<any, CarouselProps>(DesktopCarousel);
 
 const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ coalitionId }) => {
   const intl = useIntl();
@@ -44,6 +60,7 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
   const { loading: isFetchingCauses, fetchFirstPage: fetchCauses } = useFetchCauses();
   const history = useHistory();
   const isMobile = getIsMobile();
+  const carouselRef = useRef<any>(null);
 
   useEffect(() => {
     fetchCauses({
@@ -61,33 +78,35 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
     }
   };
 
+  const onControlButtonClick = (goRight: boolean) => () => {
+    if (
+      carouselRef?.current?.previousSlide === undefined ||
+      carouselRef?.current?.nextSlide === undefined
+    ) {
+      return;
+    }
+
+    if (goRight) {
+      carouselRef.current.nextSlide();
+    } else {
+      carouselRef.current.previousSlide();
+    }
+  };
+
   if (!isFetchingCauses && causes.length === 0) {
     return null;
   }
 
-  const CausesContainer = isMobile
-    ? SubContainer
-    : (props: CarouselProps) => (
-        <CarouselWrapper>
-          <Carousel
-            {...props}
-            slideWidth={`${DESKTOP_CAUSE_CARD_WIDTH + DESKTOP_CAUSE_MARGIN_RIGHT}px`}
-            width={`${Math.min(window.innerWidth, LARGE_DESKTOP_BREAK_POINT)}px`}
-            framePadding={`0px ${defaultMarginsAsNumber.horizontal.desktop}px`}
-            frameOverflow="visible"
-            swiping={false}
-          />
-        </CarouselWrapper>
-      );
+  const CausesContainer = isMobile ? SubContainer : DesktopCarouselWithRef;
   return (
     <Container>
       <Header>
         <h3>{intl.formatMessage({ id: 'horizontal_causes_list.title' })}</h3>
         <RightHeaderSubContainer>
-          <LeftCarouselButton>
+          <LeftCarouselButton onClick={onControlButtonClick(false)}>
             <LeftArrow src="/images/leftCircleArrow.svg" />
           </LeftCarouselButton>
-          <RightCarouselButton>
+          <RightCarouselButton onClick={onControlButtonClick(true)}>
             <RightArrow src="/images/leftCircleArrow.svg" />
           </RightCarouselButton>
           <SeeAllButton onClick={onSeeAllClick}>
@@ -98,8 +117,12 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
       {isFetchingCauses && causes.length === 0 ? (
         <Loader />
       ) : (
-        <CausesContainer>
-          {causes.slice(0, 5).map(renderCause)}
+        <CausesContainer ref={carouselRef}>
+          {causes.slice(0, 5).map(cause => (
+            <CauseCardWrapper key={cause.uuid}>
+              <Cause cause={cause} />
+            </CauseCardWrapper>
+          ))}
           <EmptyMobileDiv />
         </CausesContainer>
       )}

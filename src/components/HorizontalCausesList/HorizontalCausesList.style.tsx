@@ -4,7 +4,6 @@ import {
   ADDITIONAL_MARGIN_FOR_SHADOW,
   MOBILE_CAUSE_MARGIN_RIGHT,
   MOBILE_CAUSE_CARD_HEIGHT,
-  DESKTOP_CAUSE_MARGIN_RIGHT,
 } from 'components/Cause/Cause.style';
 
 export const Container = styled.div`
@@ -46,7 +45,5 @@ export const SubContainer = styled.div`
 export const CarouselWrapper = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(6)};
-    margin-left: -${DESKTOP_CAUSE_MARGIN_RIGHT / 2}px;
-    padding-left: ${defaultMargins.horizontal.desktop};
   `)}
 `;

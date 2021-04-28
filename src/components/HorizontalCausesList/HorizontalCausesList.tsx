@@ -18,6 +18,7 @@ import Carousel, { CarouselProps } from 'components/Carousel/Carousel';
 import { getIsMobile } from 'services/mobile/mobile';
 import { DESKTOP_CAUSE_CARD_WIDTH, DESKTOP_CAUSE_MARGIN_RIGHT } from 'components/Cause/Cause.style';
 import { Cause as CauseType } from 'redux/Cause/types';
+import { LARGE_DESKTOP_BREAK_POINT, defaultMarginsAsNumber } from 'stylesheet';
 
 interface HorizontalCausesListProps {
   coalitionId?: string;
@@ -59,6 +60,10 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
           <Carousel
             {...props}
             slideWidth={`${DESKTOP_CAUSE_CARD_WIDTH + DESKTOP_CAUSE_MARGIN_RIGHT}px`}
+            width={`${Math.min(window.innerWidth, LARGE_DESKTOP_BREAK_POINT)}px`}
+            framePadding={`0px ${defaultMarginsAsNumber.horizontal.desktop -
+              DESKTOP_CAUSE_MARGIN_RIGHT / 2}px`}
+            frameOverflow="visible"
           />
         </CarouselWrapper>
       );

@@ -14,7 +14,7 @@ import Loader from 'components/Loader';
 import Cause from 'components/Cause';
 import { getAllCauses, getNumberOfCauses } from 'redux/Cause/selectors';
 import CoalitionsFilter from './components/CoalitionsFilter';
-import CreateCauseCTA from '../../components/CreateCauseCTA';
+import CreateCauseCTA from 'components/CreateCauseCTA';
 import { useLocation } from 'react-router';
 import { useSetSearchParams } from './lib/useSetSearchParams';
 import { Cause as CauseType } from 'redux/Cause/types';

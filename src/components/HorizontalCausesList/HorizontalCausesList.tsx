@@ -3,8 +3,8 @@ import {
   Header,
   SubContainer,
   SeeAllButton,
-  EmptyDiv,
-  CauseWrapper,
+  MobileEmptyDiv,
+  CarouselWrapper,
 } from './HorizontalCausesList.style';
 import Cause from 'components/Cause';
 import { useIntl } from 'react-intl';
@@ -14,16 +14,23 @@ import { useSelector } from 'react-redux';
 import { useFetchCauses, SortOptions } from 'redux/Cause/hooks/useFetchCauses';
 import { getAllCauses } from 'redux/Cause/selectors';
 import { useHistory } from 'react-router';
+import Carousel, { CarouselProps } from 'components/Carousel/Carousel';
+import { getIsMobile } from 'services/mobile/mobile';
+import { DESKTOP_CAUSE_CARD_WIDTH, DESKTOP_CAUSE_MARGIN_RIGHT } from 'components/Cause/Cause.style';
+import { Cause as CauseType } from 'redux/Cause/types';
 
 interface HorizontalCausesListProps {
   coalitionId?: string;
 }
+
+const renderCause = (cause: CauseType) => <Cause key={cause.uuid} cause={cause} />;
 
 const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ coalitionId }) => {
   const intl = useIntl();
   const causes = useSelector(getAllCauses);
   const { loading: isFetchingCauses, fetchFirstPage: fetchCauses } = useFetchCauses();
   const history = useHistory();
+  const isMobile = getIsMobile();
 
   useEffect(() => {
     fetchCauses({
@@ -45,6 +52,16 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
     return null;
   }
 
+  const CausesContainer = isMobile
+    ? SubContainer
+    : (props: CarouselProps) => (
+        <CarouselWrapper>
+          <Carousel
+            {...props}
+            slideWidth={`${DESKTOP_CAUSE_CARD_WIDTH + DESKTOP_CAUSE_MARGIN_RIGHT}px`}
+          />
+        </CarouselWrapper>
+      );
   return (
     <div>
       <Header>
@@ -56,14 +73,10 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
       {isFetchingCauses && causes.length === 0 ? (
         <Loader />
       ) : (
-        <SubContainer>
-          {causes.map(cause => (
-            <CauseWrapper key={cause.uuid}>
-              <Cause cause={cause} />
-            </CauseWrapper>
-          ))}
-          <EmptyDiv />
-        </SubContainer>
+        <CausesContainer>
+          {causes.slice(0, 5).map(renderCause)}
+          <MobileEmptyDiv />
+        </CausesContainer>
       )}
     </div>
   );

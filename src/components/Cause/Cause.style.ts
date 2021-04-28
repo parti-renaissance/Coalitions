@@ -9,7 +9,38 @@ import {
   fontSize,
   lineHeight,
   fontWeight,
+  SPACING_UNIT,
 } from 'stylesheet';
+
+export const DESKTOP_CAUSE_CARD_WIDTH = SPACING_UNIT * 60;
+export const DESKTOP_CAUSE_CARD_HEIGHT = SPACING_UNIT * 89;
+export const DESKTOP_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 8;
+export const MOBILE_CAUSE_MARGIN_RIGHT = getSpacing(3);
+export const ADDITIONAL_MARGIN_FOR_SHADOW = getSpacing(5);
+
+export const Container = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: ${getSpacing(50)};
+  max-width: ${getSpacing(75)};
+  margin-right: ${MOBILE_CAUSE_MARGIN_RIGHT};
+  margin-bottom: ${ADDITIONAL_MARGIN_FOR_SHADOW};
+  box-shadow: ${boxShadow.card};
+  border-radius: ${borderRadius.medium};
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 100%;
+  ${media.desktop(`
+    min-height: unset;
+    height: ${DESKTOP_CAUSE_CARD_HEIGHT}px;
+    margin-right: ${DESKTOP_CAUSE_MARGIN_RIGHT}px;
+    width: ${DESKTOP_CAUSE_CARD_WIDTH}px;
+  `)};
+  :first-child {
+    margin-left: ${ADDITIONAL_MARGIN_FOR_SHADOW};
+  }
+`;
 
 export const CauseName = styled.div`
   /*
@@ -42,24 +73,6 @@ export const Author = styled.div`
   font-weight: ${fontWeight.normal};
 `;
 Author.displayName = 'Author';
-
-export const StyledCard = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: ${getSpacing(4)};
-  box-shadow: ${boxShadow.card};
-  border-radius: ${borderRadius.medium};
-  overflow: hidden;
-  cursor: pointer;
-  ${media.desktop(`
-    width: ${getSpacing(68)};
-    margin-bottom: ${getSpacing(6)};
-    margin-left: ${getSpacing(4)};
-    margin-right: ${getSpacing(4)};
-  `)};
-`;
 
 export const StyledMedia = styled.div<{ backgroundImage: string }>`
   width: 100%;

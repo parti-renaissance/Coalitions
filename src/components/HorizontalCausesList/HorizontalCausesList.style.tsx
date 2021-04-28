@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { colorPalette, fonts, fontWeight, getSpacing, media } from 'stylesheet';
+import { colorPalette, defaultMargins, fonts, fontWeight, getSpacing, media } from 'stylesheet';
+import {
+  ADDITIONAL_MARGIN_FOR_SHADOW,
+  MOBILE_CAUSE_MARGIN_RIGHT,
+} from 'components/Cause/Cause.style';
 
 export const Header = styled.div`
   display: flex;
@@ -20,38 +24,19 @@ export const SubContainer = styled.div`
   flex: 1;
   flex-wrap: nowrap;
   overflow: scroll;
-  margin: ${getSpacing(1)} -${getSpacing(3)} 0 -${getSpacing(3)};
+  margin: ${getSpacing(4)} -${MOBILE_CAUSE_MARGIN_RIGHT} 0 -${ADDITIONAL_MARGIN_FOR_SHADOW};
+`;
+
+export const CarouselWrapper = styled.div`
   ${media.desktop(`
-    height: ${getSpacing(97)};
-    flex-wrap: wrap;
-    overflow: hidden;
-    justify-content: center;
-    margin-top: ${getSpacing(6)};
+    margin: ${getSpacing(6)} 0 -${ADDITIONAL_MARGIN_FOR_SHADOW} -${ADDITIONAL_MARGIN_FOR_SHADOW};
   `)}
-
-  > :first-child {
-    margin-left: ${getSpacing(3)};
-  }
-
-  > * {
-    min-width: ${getSpacing(50)};
-    margin-right: ${getSpacing(3)};
-    margin-top: ${getSpacing(3)};
-    ${media.desktop(`
-      min-width: ${getSpacing(62)};
-    `)}
-  }
 `;
 
-export const EmptyDiv = styled.div`
-  min-width: ${getSpacing(3)};
-  margin-left: -${getSpacing(3)};
-`;
-
-export const CauseWrapper = styled.div`
-  display: flex;
-  max-width: ${getSpacing(75)};
+export const MobileEmptyDiv = styled.div`
+  min-width: ${defaultMargins.horizontal.mobile};
+  margin-left: -${MOBILE_CAUSE_MARGIN_RIGHT};
   ${media.desktop(`
-    max-width: unset;
+    display: none;
   `)}
 `;

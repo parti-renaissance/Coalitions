@@ -7,19 +7,19 @@ import {
   CauseListContainer,
   Title,
   TitleContainer,
-  SearchFieldWrapper,
+  SearchAndSortWrapper,
   LoaderAndEmptyLabelContainer,
 } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
 import { getAllCauses, getNumberOfCauses } from 'redux/Cause/selectors';
-import { CoalitionsFilter } from './CoalitionsFilter/CoalitionsFilter';
-import { CreateCauseCTA } from './CreateCauseCTA/CreateCauseCTA';
-import { DESKTOP_BREAK_POINT, TABLET_BREAK_POINT } from 'stylesheet';
+import CoalitionsFilter from './components/CoalitionsFilter';
+import CreateCauseCTA from '../../components/CreateCauseCTA';
 import SearchField from 'components/SearchField';
 import { useLocation } from 'react-router';
 import { useSetSearchParams } from './lib/useSetSearchParams';
 import { Cause as CauseType } from 'redux/Cause/types';
+import { defineCtaPositionInList } from './lib/defineCtaPositionInList';
 
 const renderCause = (cause: CauseType) => <Cause key={cause.uuid} cause={cause} />;
 
@@ -48,17 +48,6 @@ const LoaderAndEmptyLabel: FunctionComponent<{
       </p>
     </LoaderAndEmptyLabelContainer>
   );
-};
-
-const defineCtaPositionInList = (): number => {
-  let ctaPosition = 3;
-  if (window.innerWidth > TABLET_BREAK_POINT) {
-    ctaPosition = 6;
-  }
-  if (window.innerWidth > DESKTOP_BREAK_POINT) {
-    ctaPosition = 12;
-  }
-  return ctaPosition;
 };
 
 const CauseList: React.FunctionComponent = () => {
@@ -114,9 +103,9 @@ const CauseList: React.FunctionComponent = () => {
         <Title>{intl.formatMessage({ id: 'cause_list.title' }, { numberOfCauses })}</Title>
         <p>{intl.formatMessage({ id: 'cause_list.description' })}</p>
       </TitleContainer>
-      <SearchFieldWrapper>
+      <SearchAndSortWrapper>
         <SearchField searchText={filters.searchText} setSearchText={setSearchText} />
-      </SearchFieldWrapper>
+      </SearchAndSortWrapper>
       <CoalitionsFilter
         setSelectedCoalitionIds={setSelectedCoalitionIds}
         selectedCoalitionIds={filters.coalitionIds}

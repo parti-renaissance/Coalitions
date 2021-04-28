@@ -19,7 +19,7 @@ import { PATHS } from 'routes';
 import { MediumLargeButton } from 'components/Button/Button';
 import CoalitionCards from 'components/CoalitionCards';
 import { Coalition } from 'redux/Coalition/types';
-import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
+import CreateCauseCTA from 'components/CreateCauseCTA';
 import { useHistory } from 'react-router';
 import Video from 'components/Video';
 import OurCommitments from 'components/OurCommitments';

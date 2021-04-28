@@ -16,7 +16,7 @@ interface CoalitionFilterProps {
   setSelectedCoalitionIds: (ids: string[]) => void;
 }
 
-export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
+const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
   selectedCoalitionIds,
   setSelectedCoalitionIds,
 }) => {
@@ -85,3 +85,5 @@ export const CoalitionsFilter: FunctionComponent<CoalitionFilterProps> = ({
     </CoalitionFiltersContainer>
   );
 };
+
+export default CoalitionsFilter;

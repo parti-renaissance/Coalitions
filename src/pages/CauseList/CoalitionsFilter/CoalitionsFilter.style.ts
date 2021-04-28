@@ -18,9 +18,9 @@ export const CoalitionFiltersContainer = styled.div`
   padding: 0 ${defaultMargins.horizontal.mobile}
     calc(${defaultMargins.vertical.mobile} - ${getSpacing(2)}) ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    padding: 0 ${defaultMargins.horizontal.desktop} ${getSpacing(6)} ${
-    defaultMargins.horizontal.desktop
-  };
+    padding: 0 ${defaultMargins.horizontal.desktop} calc(${
+    defaultMargins.vertical.desktop
+  } - ${getSpacing(2)}) ${defaultMargins.horizontal.desktop};
   `)};
 `;
 

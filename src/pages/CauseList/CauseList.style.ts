@@ -44,7 +44,7 @@ export const SearchAndSortWrapper = styled.div`
   margin: 0 ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
     ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    max-width: ${getSpacing(100)};
+    max-width: ${getSpacing(120)};
     margin: ${defaultMargins.vertical.desktop} auto;
   `)};
 `;

@@ -15,11 +15,11 @@ import Cause from 'components/Cause';
 import { getAllCauses, getNumberOfCauses } from 'redux/Cause/selectors';
 import CoalitionsFilter from './components/CoalitionsFilter';
 import CreateCauseCTA from '../../components/CreateCauseCTA';
-import SearchField from 'components/SearchField';
 import { useLocation } from 'react-router';
 import { useSetSearchParams } from './lib/useSetSearchParams';
 import { Cause as CauseType } from 'redux/Cause/types';
 import { defineCtaPositionInList } from './lib/defineCtaPositionInList';
+import SearchAndSort from './components/SearchAndSort';
 
 const renderCause = (cause: CauseType) => <Cause key={cause.uuid} cause={cause} />;
 
@@ -50,7 +50,7 @@ const LoaderAndEmptyLabel: FunctionComponent<{
   );
 };
 
-const CauseList: React.FunctionComponent = () => {
+const CauseList: FunctionComponent = () => {
   const causes = useSelector(getAllCauses);
   const { search } = useLocation();
   const coalitionId = new URLSearchParams(search).get('coalitionId');
@@ -104,7 +104,7 @@ const CauseList: React.FunctionComponent = () => {
         <p>{intl.formatMessage({ id: 'cause_list.description' })}</p>
       </TitleContainer>
       <SearchAndSortWrapper>
-        <SearchField searchText={filters.searchText} setSearchText={setSearchText} />
+        <SearchAndSort searchText={filters.searchText} setSearchText={setSearchText} />
       </SearchAndSortWrapper>
       <CoalitionsFilter
         setSelectedCoalitionIds={setSelectedCoalitionIds}

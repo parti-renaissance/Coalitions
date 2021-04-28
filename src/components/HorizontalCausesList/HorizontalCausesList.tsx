@@ -5,6 +5,9 @@ import {
   SeeAllButton,
   CarouselWrapper,
   Container,
+  CauseCardWrapper,
+  DESKTOP_CAUSE_MARGIN_RIGHT,
+  EmptyMobileDiv,
 } from './HorizontalCausesList.style';
 import Cause from 'components/Cause';
 import { useIntl } from 'react-intl';
@@ -16,7 +19,7 @@ import { getAllCauses } from 'redux/Cause/selectors';
 import { useHistory } from 'react-router';
 import Carousel, { CarouselProps } from 'components/Carousel/Carousel';
 import { getIsMobile } from 'services/mobile/mobile';
-import { DESKTOP_CAUSE_CARD_WIDTH, DESKTOP_CAUSE_MARGIN_RIGHT } from 'components/Cause/Cause.style';
+import { DESKTOP_CAUSE_CARD_WIDTH } from 'components/Cause/Cause.style';
 import { Cause as CauseType } from 'redux/Cause/types';
 import { LARGE_DESKTOP_BREAK_POINT, defaultMarginsAsNumber } from 'stylesheet';
 
@@ -24,7 +27,11 @@ interface HorizontalCausesListProps {
   coalitionId?: string;
 }
 
-const renderCause = (cause: CauseType) => <Cause key={cause.uuid} cause={cause} />;
+const renderCause = (cause: CauseType) => (
+  <CauseCardWrapper key={cause.uuid}>
+    <Cause cause={cause} />
+  </CauseCardWrapper>
+);
 
 const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ coalitionId }) => {
   const intl = useIntl();
@@ -61,8 +68,7 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
             {...props}
             slideWidth={`${DESKTOP_CAUSE_CARD_WIDTH + DESKTOP_CAUSE_MARGIN_RIGHT}px`}
             width={`${Math.min(window.innerWidth, LARGE_DESKTOP_BREAK_POINT)}px`}
-            framePadding={`0px ${defaultMarginsAsNumber.horizontal.desktop -
-              DESKTOP_CAUSE_MARGIN_RIGHT / 2}px`}
+            framePadding={`0px ${defaultMarginsAsNumber.horizontal.desktop}px`}
             frameOverflow="visible"
           />
         </CarouselWrapper>
@@ -78,7 +84,10 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
       {isFetchingCauses && causes.length === 0 ? (
         <Loader />
       ) : (
-        <CausesContainer>{causes.slice(0, 5).map(renderCause)}</CausesContainer>
+        <CausesContainer>
+          {causes.slice(0, 5).map(renderCause)}
+          <EmptyMobileDiv />
+        </CausesContainer>
       )}
     </Container>
   );

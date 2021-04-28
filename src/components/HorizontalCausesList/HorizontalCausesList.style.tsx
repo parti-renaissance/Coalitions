@@ -1,10 +1,20 @@
 import styled from 'styled-components';
-import { colorPalette, defaultMargins, fonts, fontWeight, getSpacing, media } from 'stylesheet';
+import {
+  colorPalette,
+  defaultMargins,
+  fonts,
+  fontWeight,
+  getSpacing,
+  media,
+  SPACING_UNIT,
+} from 'stylesheet';
 import {
   ADDITIONAL_MARGIN_FOR_SHADOW,
-  MOBILE_CAUSE_MARGIN_RIGHT,
   MOBILE_CAUSE_CARD_HEIGHT,
 } from 'components/Cause/Cause.style';
+
+const MOBILE_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 3;
+export const DESKTOP_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 8;
 
 export const Container = styled.div`
   margin: 0 -${defaultMargins.horizontal.mobile};
@@ -37,7 +47,6 @@ export const SubContainer = styled.div`
   flex-wrap: nowrap;
   overflow: scroll;
   margin-top: ${getSpacing(4)};
-  margin-left: -${MOBILE_CAUSE_MARGIN_RIGHT / 2}px;
   padding-left: ${defaultMargins.horizontal.mobile};
   height: ${MOBILE_CAUSE_CARD_HEIGHT + ADDITIONAL_MARGIN_FOR_SHADOW}px;
 `;
@@ -45,5 +54,17 @@ export const SubContainer = styled.div`
 export const CarouselWrapper = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(6)};
+  `)}
+`;
+
+export const CauseCardWrapper = styled.div`
+  margin-right: ${MOBILE_CAUSE_MARGIN_RIGHT}px;
+`;
+
+export const EmptyMobileDiv = styled.div`
+  min-width: ${defaultMargins.horizontal.mobile};
+  margin-left: -${MOBILE_CAUSE_MARGIN_RIGHT}px;
+  ${media.desktop(`
+    display: none;
   `)}
 `;

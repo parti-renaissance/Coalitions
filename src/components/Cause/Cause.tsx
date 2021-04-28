@@ -10,8 +10,6 @@ import {
   ButtonContainer,
   CauseName,
   Container,
-  SubContainer,
-  SubSubContainer,
   StyledContent,
   StyledMedia,
 } from './Cause.style';
@@ -56,49 +54,45 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           history.push(PATHS.CAUSE.url(cause.slug));
         }}
       >
-        <SubContainer>
-          <SubSubContainer>
-            {Boolean(cause.supported) ? <FollowTag labelKey="cause.supported" /> : null}
-            <StyledMedia backgroundImage={cause.image_url} />
-            <StyledContent>
-              <CoalitionsDisplay cause={cause} small />
-              <CauseName>{cause.name}</CauseName>
-              {cause.author !== undefined && cause.author !== null ? (
-                <Author>
-                  <FormattedMessage
-                    id="cause.author"
-                    values={{
-                      firstName: cause.author.first_name,
-                      lastName:
-                        isUserLoggedIn && cause.author.last_name !== undefined
-                          ? cause.author.last_name
-                          : cause.author.last_name_initial,
-                    }}
-                  />
-                </Author>
-              ) : null}
-              <AuthorAndSupports cause={cause} />
-              <ButtonContainer>
-                {Boolean(cause.supported) || (
-                  <SmallButton
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={onSupportClick}
-                    isLoading={loading}
-                  >
-                    <FormattedMessage id="cause.support-button" />
-                  </SmallButton>
-                )}
-                <Link to={PATHS.CAUSE.url(cause.slug)}>
-                  <DefaultButton size="small" variant="outlined">
-                    <FormattedMessage id="cause.see-button" />
-                  </DefaultButton>
-                </Link>
-              </ButtonContainer>
-            </StyledContent>
-          </SubSubContainer>
-        </SubContainer>
+        {Boolean(cause.supported) ? <FollowTag labelKey="cause.supported" /> : null}
+        <StyledMedia backgroundImage={cause.image_url} />
+        <StyledContent>
+          <CoalitionsDisplay cause={cause} small />
+          <CauseName>{cause.name}</CauseName>
+          {cause.author !== undefined && cause.author !== null ? (
+            <Author>
+              <FormattedMessage
+                id="cause.author"
+                values={{
+                  firstName: cause.author.first_name,
+                  lastName:
+                    isUserLoggedIn && cause.author.last_name !== undefined
+                      ? cause.author.last_name
+                      : cause.author.last_name_initial,
+                }}
+              />
+            </Author>
+          ) : null}
+          <AuthorAndSupports cause={cause} />
+          <ButtonContainer>
+            {Boolean(cause.supported) || (
+              <SmallButton
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={onSupportClick}
+                isLoading={loading}
+              >
+                <FormattedMessage id="cause.support-button" />
+              </SmallButton>
+            )}
+            <Link to={PATHS.CAUSE.url(cause.slug)}>
+              <DefaultButton size="small" variant="outlined">
+                <FormattedMessage id="cause.see-button" />
+              </DefaultButton>
+            </Link>
+          </ButtonContainer>
+        </StyledContent>
       </Container>
       <LoginAndSupportModal
         isOpened={isModalOpened}

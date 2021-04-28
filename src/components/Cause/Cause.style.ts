@@ -14,24 +14,10 @@ import {
 
 export const DESKTOP_CAUSE_CARD_WIDTH = SPACING_UNIT * 60;
 export const DESKTOP_CAUSE_CARD_HEIGHT = SPACING_UNIT * 89;
-export const DESKTOP_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 8;
-export const MOBILE_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 3;
 export const MOBILE_CAUSE_CARD_HEIGHT = SPACING_UNIT * 79;
 export const ADDITIONAL_MARGIN_FOR_SHADOW = SPACING_UNIT * 5;
 
 export const Container = styled.div`
-  margin: 0 ${MOBILE_CAUSE_MARGIN_RIGHT / 2}px;
-  ${media.desktop(`
-    margin: 0 ${DESKTOP_CAUSE_MARGIN_RIGHT / 2}px;
-  `)};
-`;
-
-export const SubContainer = styled.div`
-  margin: -${ADDITIONAL_MARGIN_FOR_SHADOW}px;
-  padding: ${ADDITIONAL_MARGIN_FOR_SHADOW}px;
-`;
-
-export const SubSubContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -102,7 +88,7 @@ export const StyledContent = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  margin-top: ${getSpacing(5)};
+  margin-top: auto;
 
   > :first-child {
     margin-right: ${getSpacing(3)};

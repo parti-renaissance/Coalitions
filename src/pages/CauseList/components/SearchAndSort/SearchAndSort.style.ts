@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import IconButton from '@material-ui/core/IconButton';
-import { media, getSpacing, fonts } from 'stylesheet';
+import { media, getSpacing, fonts, fontWeight } from 'stylesheet';
 import Menu from '@material-ui/core/Menu';
 
 export const Container = styled.div`
@@ -33,4 +33,13 @@ export const SortMenu = styled(Menu)`
   ${media.desktop(`
     margin-top: ${getSpacing(10)};
   `)}
+`;
+
+export const SortItem = styled.div<{ isSelected: boolean }>`
+  ${({ isSelected }) =>
+    isSelected
+      ? css`
+          font-weight: ${fontWeight.bold};
+        `
+      : css``}
 `;

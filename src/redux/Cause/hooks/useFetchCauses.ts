@@ -19,18 +19,22 @@ type RawQuickActions = {
   url: string;
 };
 
+export enum SortOptions {
+  moreSupported = '[followersCount]=desc',
+  lessSupported = '[followersCount]=asc',
+  lastCreated = '[createdAt]=desc',
+  firstCreated = '[createdAt]=asc',
+}
+
 export type Filters = {
   coalitionIds: string[];
   searchText: string;
+  sort: SortOptions;
 };
 
 const PAGE_SIZE = 12;
 
 const buildFilteredByUrl = (filters: Filters) => {
-  if (filters.coalitionIds.length === 0 && filters.searchText.length === 0) {
-    return '';
-  }
-
   let urlWithFilters = '';
   if (filters.coalitionIds.length > 0) {
     urlWithFilters = filters.coalitionIds.reduce((url, coalitionId) => {
@@ -41,6 +45,8 @@ const buildFilteredByUrl = (filters: Filters) => {
   if (filters.searchText.length > 0) {
     urlWithFilters = `${urlWithFilters}&name=${filters.searchText}`;
   }
+
+  urlWithFilters = `${urlWithFilters}&order${filters.sort}`;
 
   return urlWithFilters;
 };

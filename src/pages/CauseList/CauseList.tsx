@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, FunctionComponent } from 'reac
 import { useIntl } from 'react-intl';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import useSelector from 'redux/useSelector';
-import { useFetchCauses, Filters } from 'redux/Cause/hooks/useFetchCauses';
+import { useFetchCauses, Filters, SortOptions } from 'redux/Cause/hooks/useFetchCauses';
 import {
   CauseListContainer,
   Title,
@@ -58,6 +58,7 @@ const CauseList: FunctionComponent = () => {
   const [filters, setFilters] = useState<Filters>({
     coalitionIds: coalitionId !== null ? [coalitionId] : [],
     searchText: searchText !== null ? searchText : '',
+    sort: SortOptions.moreSupported,
   });
   const { hasMore, loading, fetchFirstPage, fetchNextPage } = useFetchCauses();
   const [ctaPosition, setCtaPosition] = useState(defineCtaPositionInList());
@@ -95,6 +96,10 @@ const CauseList: FunctionComponent = () => {
     setFilters({ ...filters, coalitionIds });
   };
 
+  const setSort = (sort: SortOptions) => {
+    setFilters({ ...filters, sort });
+  };
+
   const causesBeforeCTA = causes.slice(0, ctaPosition);
   const causesAfterCTA = causes.slice(ctaPosition);
   return (
@@ -104,7 +109,12 @@ const CauseList: FunctionComponent = () => {
         <p>{intl.formatMessage({ id: 'cause_list.description' })}</p>
       </TitleContainer>
       <SearchAndSortWrapper>
-        <SearchAndSort searchText={filters.searchText} setSearchText={setSearchText} />
+        <SearchAndSort
+          searchText={filters.searchText}
+          setSearchText={setSearchText}
+          sort={filters.sort}
+          setSort={setSort}
+        />
       </SearchAndSortWrapper>
       <CoalitionsFilter
         setSelectedCoalitionIds={setSelectedCoalitionIds}

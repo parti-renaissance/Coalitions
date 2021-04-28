@@ -68,7 +68,13 @@
     "description": "Vous pouvez soutenir une cause existante ou créer la vôtre.",
     "no_cause": "Aucune cause ne correspond à votre filtre.",
     "no_search_result": "Il n’existe pas encore de cause associée à cette recherche, créez-en une ou soutenez une autre cause.",
-    "all": "Tout"
+    "all": "Tout",
+    "sort": {
+      "more_supported": "Plus soutenues",
+      "less_supported": "Moins soutenues",
+      "last_created": "Plus récentes",
+      "first_created": "Plus anciennes"
+    }
   },
   "share": {
     "label": "Partager",

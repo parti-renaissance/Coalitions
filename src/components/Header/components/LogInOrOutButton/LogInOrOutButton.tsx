@@ -1,11 +1,6 @@
 import React, { useState, MouseEvent, FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import {
-  FirstNameContainer,
-  UserIcon,
-  StyledDesktopUserMenu,
-  FirstName,
-} from './LogInOrOutButton.style';
+import { FirstNameContainer, UserIcon, UserMenu, FirstName } from './LogInOrOutButton.style';
 import { isUserLogged } from 'redux/Login';
 import useSelector from 'redux/useSelector';
 import { oauthUrl } from 'services/networking/auth';
@@ -64,7 +59,7 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
             <FirstName>{currentUser.firstName}</FirstName>
           </FirstNameContainer>
         </StyledButton>
-        <StyledDesktopUserMenu
+        <UserMenu
           anchorEl={desktopUserMenu}
           keepMounted
           open={Boolean(desktopUserMenu)}
@@ -78,7 +73,7 @@ const LogInOrOutButton: FunctionComponent<{}> = () => {
               <FormattedMessage id="header.profile" />
             </MenuItem>
           )}
-        </StyledDesktopUserMenu>
+        </UserMenu>
       </>
     );
   }

@@ -23,7 +23,7 @@ export const UserIcon = styled.img`
   width: ${ICON_SIZE};
 `;
 
-export const StyledDesktopUserMenu = styled(Menu)`
+export const UserMenu = styled(Menu)`
   margin-top: ${getSpacing(8)};
   li {
     ${fonts.input};

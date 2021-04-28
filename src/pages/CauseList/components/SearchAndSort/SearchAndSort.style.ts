@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import IconButton from '@material-ui/core/IconButton';
-import { getSpacing } from 'stylesheet';
+import { media, getSpacing, fonts } from 'stylesheet';
+import Menu from '@material-ui/core/Menu';
 
 export const Container = styled.div`
   display: flex;
@@ -8,7 +9,10 @@ export const Container = styled.div`
 `;
 
 export const SortButton = styled(IconButton)`
-  margin-left: ${getSpacing(5)};
+  margin-left: ${getSpacing(3)};
+  ${media.desktop(`
+    margin-left: ${getSpacing(5)};
+  `)};
 `;
 
 const SORT_ICON_HEIGHT = '12px';
@@ -18,4 +22,15 @@ export const SortIcon = styled.img`
   height: ${SORT_ICON_HEIGHT};
   margin: calc(calc(${SORT_ICON_WIDTH} - ${SORT_ICON_HEIGHT}) / 2) 0;
   width: ${SORT_ICON_WIDTH};
+`;
+
+export const SortMenu = styled(Menu)`
+  margin-top: ${getSpacing(8)};
+  li {
+    ${fonts.input};
+  }
+
+  ${media.desktop(`
+    margin-top: ${getSpacing(10)};
+  `)}
 `;

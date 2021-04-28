@@ -59,6 +59,9 @@ export const CarouselWrapper = styled.div`
 
 export const CauseCardWrapper = styled.div`
   margin-right: ${MOBILE_CAUSE_MARGIN_RIGHT}px;
+  ${media.desktop(`
+    margin-right: ${DESKTOP_CAUSE_MARGIN_RIGHT}px;
+  `)}
 `;
 
 export const EmptyMobileDiv = styled.div`

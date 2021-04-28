@@ -70,6 +70,7 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
             width={`${Math.min(window.innerWidth, LARGE_DESKTOP_BREAK_POINT)}px`}
             framePadding={`0px ${defaultMarginsAsNumber.horizontal.desktop}px`}
             frameOverflow="visible"
+            swiping={false}
           />
         </CarouselWrapper>
       );

@@ -79,16 +79,9 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
   };
 
   const onControlButtonClick = (goRight: boolean) => () => {
-    if (
-      carouselRef?.current?.previousSlide === undefined ||
-      carouselRef?.current?.nextSlide === undefined
-    ) {
-      return;
-    }
-
-    if (goRight) {
+    if (goRight && carouselRef?.current?.nextSlide !== undefined) {
       carouselRef.current.nextSlide();
-    } else {
+    } else if (!goRight && carouselRef?.current?.previousSlide !== undefined) {
       carouselRef.current.previousSlide();
     }
   };
@@ -123,7 +116,7 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
               <Cause cause={cause} />
             </CauseCardWrapper>
           ))}
-          <EmptyMobileDiv />
+          {isMobile ? <EmptyMobileDiv /> : null}
         </CausesContainer>
       )}
     </Container>

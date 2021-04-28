@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { useCallback, useEffect, useState, FunctionComponent } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import useSelector from 'redux/useSelector';
 import { useFetchCauses, Filters } from 'redux/Cause/hooks/useFetchCauses';
 import {
   CauseListContainer,
-  CTAContainer,
   Title,
   TitleContainer,
   SearchFieldWrapper,
+  LoaderAndEmptyLabelContainer,
 } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
@@ -20,20 +20,30 @@ import SearchField from 'components/SearchField';
 import { useLocation } from 'react-router';
 import { useSetSearchParams } from './lib/useSetSearchParams';
 
-interface CauseListHeaderProps {
+const LoaderAndEmptyLabel: FunctionComponent<{
   loading: boolean;
-  causesNumber: number;
-}
+  hasFilters: boolean;
+}> = ({ loading, hasFilters }) => {
+  const intl = useIntl();
 
-const CauseListHeader: React.FunctionComponent<CauseListHeaderProps> = ({
-  loading,
-  causesNumber,
-}) => (
-  <>
-    {loading && causesNumber === 0 && <Loader />}
-    {!loading && causesNumber === 0 && <FormattedMessage id="cause_list.no_cause" />}
-  </>
-);
+  if (loading) {
+    return (
+      <LoaderAndEmptyLabelContainer>
+        <Loader />
+      </LoaderAndEmptyLabelContainer>
+    );
+  }
+
+  return (
+    <LoaderAndEmptyLabelContainer>
+      <p>
+        {hasFilters
+          ? intl.formatMessage({ id: 'cause_list.no_search_result' })
+          : intl.formatMessage({ id: 'cause_list.no_cause' })}
+      </p>
+    </LoaderAndEmptyLabelContainer>
+  );
+};
 
 const defineCtaPositionInList = (): number => {
   let ctaPosition = 3;
@@ -109,31 +119,39 @@ const CauseList: React.FunctionComponent = () => {
         setSelectedCoalitionIds={setSelectedCoalitionIds}
         selectedCoalitionIds={filters.coalitionIds}
       />
-      <CauseListHeader loading={loading} causesNumber={causes.length} />
       {causes.length > 0 ? (
         <>
           <InfiniteScroll
             dataLength={causes.length}
             next={fetchNextPageCauses}
             hasMore={hasMore}
-            loader={<Loader />}
+            loader={
+              <LoaderAndEmptyLabelContainer>
+                <Loader />
+              </LoaderAndEmptyLabelContainer>
+            }
           >
             <CauseListContainer>
               {causesBeforeCTA.map(cause => (
                 <Cause key={cause.uuid} cause={cause} />
               ))}
             </CauseListContainer>
-            <CTAContainer>
-              <CreateCauseCTA />
-            </CTAContainer>
-            <CauseListContainer>
-              {causesAfterCTA.map(cause => (
-                <Cause key={cause.uuid} cause={cause} />
-              ))}
-            </CauseListContainer>
+            <CreateCauseCTA />
+            {causesAfterCTA.length > 0 ? (
+              <CauseListContainer bellowCTA>
+                {causesAfterCTA.map(cause => (
+                  <Cause key={cause.uuid} cause={cause} />
+                ))}
+              </CauseListContainer>
+            ) : null}
           </InfiniteScroll>
         </>
-      ) : null}
+      ) : (
+        <LoaderAndEmptyLabel
+          loading={loading}
+          hasFilters={filters.searchText.length > 0 || filters.coalitionIds.length > 0}
+        />
+      )}
     </>
   );
 };

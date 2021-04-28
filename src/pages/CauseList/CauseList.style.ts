@@ -1,23 +1,26 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { getSpacing, media, fonts, defaultMargins, colorPalette } from 'stylesheet';
 
-export const CauseListContainer = styled.div`
+export const CauseListContainer = styled.div<{ bellowCTA?: boolean }>`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 0 ${defaultMargins.horizontal.mobile};
+  margin: 0 ${defaultMargins.horizontal.mobile}
+    calc(${defaultMargins.vertical.mobile} - ${getSpacing(4)}) ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    padding: 0 ${defaultMargins.horizontal.desktop};
+    margin: 0 ${defaultMargins.horizontal.desktop} calc(${
+    defaultMargins.vertical.desktop
+  } - ${getSpacing(6)}) ${defaultMargins.horizontal.desktop};
   `)};
-`;
-
-export const CTAContainer = styled.div`
-  margin-top: calc(${defaultMargins.vertical.mobile} - ${getSpacing(4)});
-  margin-bottom: ${defaultMargins.vertical.mobile};
-  ${media.desktop(`
-    margin-top: calc(${defaultMargins.vertical.desktop} - ${getSpacing(6)});
-    margin-bottom: ${defaultMargins.vertical.desktop};
-  `)};
+  ${({ bellowCTA }) =>
+    bellowCTA === true
+      ? css`
+          margin-top: ${defaultMargins.vertical.mobile};
+          ${media.desktop(`
+            margin-top: ${defaultMargins.vertical.desktop};
+          `)};
+        `
+      : css``}
 `;
 
 export const TitleContainer = styled.div`
@@ -43,5 +46,13 @@ export const SearchFieldWrapper = styled.div`
   ${media.desktop(`
     max-width: ${getSpacing(100)};
     margin: ${defaultMargins.vertical.desktop} auto;
+  `)};
+`;
+
+export const LoaderAndEmptyLabelContainer = styled.div`
+  margin: 0 ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile}
+    ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    margin: 0 ${defaultMargins.horizontal.desktop} ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)};
 `;

@@ -3,8 +3,8 @@ import {
   Header,
   SubContainer,
   SeeAllButton,
-  MobileEmptyDiv,
   CarouselWrapper,
+  Container,
 } from './HorizontalCausesList.style';
 import Cause from 'components/Cause';
 import { useIntl } from 'react-intl';
@@ -63,7 +63,7 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
         </CarouselWrapper>
       );
   return (
-    <div>
+    <Container>
       <Header>
         <h3>{intl.formatMessage({ id: 'horizontal_causes_list.title' })}</h3>
         <SeeAllButton onClick={onSeeAllClick}>
@@ -73,12 +73,9 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
       {isFetchingCauses && causes.length === 0 ? (
         <Loader />
       ) : (
-        <CausesContainer>
-          {causes.slice(0, 5).map(renderCause)}
-          <MobileEmptyDiv />
-        </CausesContainer>
+        <CausesContainer>{causes.slice(0, 5).map(renderCause)}</CausesContainer>
       )}
-    </div>
+    </Container>
   );
 };
 

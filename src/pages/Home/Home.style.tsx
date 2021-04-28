@@ -86,9 +86,9 @@ export const Bold = styled.span`
 `;
 
 export const OurCommitmentsWrapper = styled.div`
-  margin: -${ADDITIONAL_MARGIN_FOR_SHADOW} ${defaultMargins.horizontal.mobile} ${defaultMargins
+  margin: -${ADDITIONAL_MARGIN_FOR_SHADOW}px ${defaultMargins.horizontal.mobile} ${defaultMargins
       .vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    margin: -${ADDITIONAL_MARGIN_FOR_SHADOW} ${defaultMargins.horizontal.desktop} ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
+    margin: -${ADDITIONAL_MARGIN_FOR_SHADOW}px ${defaultMargins.horizontal.desktop} ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)}
 `;

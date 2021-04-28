@@ -3,12 +3,25 @@ import { colorPalette, defaultMargins, fonts, fontWeight, getSpacing, media } fr
 import {
   ADDITIONAL_MARGIN_FOR_SHADOW,
   MOBILE_CAUSE_MARGIN_RIGHT,
+  MOBILE_CAUSE_CARD_HEIGHT,
+  DESKTOP_CAUSE_MARGIN_RIGHT,
 } from 'components/Cause/Cause.style';
+
+export const Container = styled.div`
+  margin: 0 -${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    margin: 0 -${defaultMargins.horizontal.desktop};
+  `)};
+`;
 
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    margin: 0 ${defaultMargins.horizontal.desktop};
+  `)};
 `;
 
 export const SeeAllButton = styled.div`
@@ -24,19 +37,16 @@ export const SubContainer = styled.div`
   flex: 1;
   flex-wrap: nowrap;
   overflow: scroll;
-  margin: ${getSpacing(4)} -${MOBILE_CAUSE_MARGIN_RIGHT} 0 -${ADDITIONAL_MARGIN_FOR_SHADOW};
+  margin-top: ${getSpacing(4)};
+  margin-left: -${MOBILE_CAUSE_MARGIN_RIGHT / 2}px;
+  padding-left: ${defaultMargins.horizontal.mobile};
+  height: ${MOBILE_CAUSE_CARD_HEIGHT + ADDITIONAL_MARGIN_FOR_SHADOW}px;
 `;
 
 export const CarouselWrapper = styled.div`
   ${media.desktop(`
-    margin: ${getSpacing(6)} 0 -${ADDITIONAL_MARGIN_FOR_SHADOW} -${ADDITIONAL_MARGIN_FOR_SHADOW};
-  `)}
-`;
-
-export const MobileEmptyDiv = styled.div`
-  min-width: ${defaultMargins.horizontal.mobile};
-  margin-left: -${MOBILE_CAUSE_MARGIN_RIGHT};
-  ${media.desktop(`
-    display: none;
+    margin-top: ${getSpacing(6)};
+    margin-left: -${DESKTOP_CAUSE_MARGIN_RIGHT / 2}px;
+    padding-left: ${defaultMargins.horizontal.desktop};
   `)}
 `;

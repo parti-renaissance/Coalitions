@@ -4,7 +4,7 @@ import * as coalitionsHooks from 'redux/Coalition/hooks/useFetchCoalitions';
 
 import { TestProvider } from 'services/test/TestProvider';
 import { COALITIONS_STORE } from 'redux/Coalition/fixtures';
-import { CoalitionsFilter } from './CoalitionsFilter';
+import CoalitionsFilter from './CoalitionsFilter';
 
 jest.mock('react-router', () => ({
   useLocation: jest.fn().mockReturnValue({

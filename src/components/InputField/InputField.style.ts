@@ -26,7 +26,7 @@ export const getInputStyle = (props: InputBaseProps) => css`
   }
   .MuiSelect-select {
     ${fonts.input};
-    color: ${colorPalette.greyDark};
+    color: inherit;
   }
   .MuiInputBase-root {
     ${fonts.p};

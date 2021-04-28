@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { optimisticallyUpdateCurrentUser } from 'redux/User';
+import { getCurrentUser } from 'redux/User/selectors';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService, { APIErrorsType } from 'services/HandleErrorService';
 import { authenticatedApiClient } from 'services/networking/client';
@@ -32,12 +33,15 @@ type UpdateUserProfilePayload = {
   phone?: { number?: string; country?: string };
   gender?: string;
   birthdate?: string;
+  coalition_subscription?: boolean;
+  cause_subscription?: boolean;
 };
 
 export const useUpdateUserProfile = (userId?: string) => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
   const errorHandler = useUpdateUserProfileErrorHandler();
+  const currentUser = useSelector(getCurrentUser);
 
   const [{ loading, error }, doUpdateUserProfile] = useTypedAsyncFn(
     async (payload: UpdateUserProfilePayload) => {
@@ -54,19 +58,27 @@ export const useUpdateUserProfile = (userId?: string) => {
 
   const updateUserProfile = useCallback(
     async (values: ProfileFormValues) => {
-      const response = await doUpdateUserProfile({
-        first_name: values.firstName,
-        last_name: values.lastName,
-        gender: values.gender === GENDERS[0].value ? undefined : values.gender,
-        birthdate: values.birthday,
-        phone:
-          values.phoneNumber !== null
-            ? {
-                number: values.phoneNumber,
-                country: values.phoneCountry?.region,
-              }
-            : undefined,
-      });
+      let payload: UpdateUserProfilePayload = {
+        coalition_subscription: values.coalitionSubscription,
+        cause_subscription: values.causeSubscription,
+      };
+      if (currentUser !== undefined && !currentUser.isAdherent) {
+        payload = {
+          ...payload,
+          first_name: values.firstName,
+          last_name: values.lastName,
+          gender: values.gender === GENDERS[0].value ? undefined : values.gender,
+          birthdate: values.birthday,
+          phone:
+            values.phoneNumber !== null
+              ? {
+                  number: values.phoneNumber,
+                  country: values.phoneCountry?.region,
+                }
+              : undefined,
+        };
+      }
+      const response = await doUpdateUserProfile(payload);
 
       if (response instanceof Error) return;
 
@@ -78,7 +90,7 @@ export const useUpdateUserProfile = (userId?: string) => {
         }),
       );
     },
-    [dispatch, doUpdateUserProfile, formatMessage],
+    [currentUser, dispatch, doUpdateUserProfile, formatMessage],
   );
 
   return { loading, error, updateUserProfile };

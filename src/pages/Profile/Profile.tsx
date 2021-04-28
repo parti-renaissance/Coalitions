@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
 import React, { FunctionComponent, useEffect } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { format } from 'date-fns';
-import { Container, GenderItem, AdherentText, Form, PhoneContainer } from './Profile.style';
+import { Container, GenderItem, AdherentText, PhoneContainer } from './Profile.style';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
 import { FullWidthButton } from 'components/Button/Button';
@@ -14,6 +14,8 @@ import { getCurrentUser } from 'redux/User/selectors';
 import { useUpdateUserProfile } from './hooks/useUpdateUserProfile';
 import { Autocomplete } from '@material-ui/lab';
 import { useFetchPhoneCountries, PhoneCountry } from './hooks/useFetchPhoneCountries';
+import { Label } from 'components/IconAndLabel/IconAndLabel.style';
+import { ModalCheckbox } from 'components/Modal/ModalCheckbox';
 
 const UpdateEmProfileLink: FunctionComponent<{}> = () => (
   <a
@@ -54,12 +56,24 @@ export const Profile: FunctionComponent = () => {
     return null;
   }
 
-  const { email, firstName, lastName, gender, birthdate, phone, isAdherent } = currentUser;
+  const {
+    email,
+    firstName,
+    lastName,
+    gender,
+    birthdate,
+    phone,
+    isAdherent,
+    causeSubscription,
+    coalitionSubscription,
+  } = currentUser;
 
   const initialValues = {
     email,
     firstName,
     lastName,
+    causeSubscription,
+    coalitionSubscription,
     gender: gender === null ? GENDERS[0].value : gender,
     birthday:
       birthdate === undefined || birthdate === null
@@ -89,7 +103,7 @@ export const Profile: FunctionComponent = () => {
       >
         {// eslint-disable-next-line complexity
         ({ values, errors, handleChange, handleBlur, handleSubmit, touched, dirty, setValues }) => (
-          <Form onSubmit={handleSubmit} isAdherent={isAdherent}>
+          <form onSubmit={handleSubmit}>
             <InputFieldWrapper>
               <InputField
                 required
@@ -104,6 +118,7 @@ export const Profile: FunctionComponent = () => {
             <InputFieldWrapper>
               <InputField
                 required
+                disabled={isAdherent}
                 placeholder={intl.formatMessage({ id: 'profile.first-name' })}
                 type="text"
                 name="firstName"
@@ -117,6 +132,7 @@ export const Profile: FunctionComponent = () => {
             </InputFieldWrapper>
             <InputFieldWrapper>
               <InputField
+                disabled={isAdherent}
                 placeholder={intl.formatMessage({ id: 'profile.last-name' })}
                 type="text"
                 name="lastName"
@@ -132,6 +148,7 @@ export const Profile: FunctionComponent = () => {
             <InputFieldWrapper isPlaceholder={values.gender === GENDERS[0].value}>
               <InputField
                 select
+                disabled={isAdherent}
                 type="text"
                 name="gender"
                 hideOptionnal
@@ -165,6 +182,7 @@ export const Profile: FunctionComponent = () => {
             </InputFieldWrapper> */}
             <InputFieldWrapper isPlaceholder={values.birthday === null}>
               <InputField
+                disabled={isAdherent}
                 type="date"
                 name="birthday"
                 hideOptionnal
@@ -189,6 +207,7 @@ export const Profile: FunctionComponent = () => {
                   renderInput={params => (
                     <InputField
                       {...params}
+                      disabled={isAdherent}
                       hideOptionnal
                       placeholder={intl.formatMessage({ id: 'profile.country' })}
                       variant="outlined"
@@ -196,6 +215,7 @@ export const Profile: FunctionComponent = () => {
                   )}
                 />
                 <InputField
+                  disabled={isAdherent}
                   placeholder={intl.formatMessage({ id: 'profile.phone-number' })}
                   type="tel"
                   name="phoneNumber"
@@ -208,6 +228,26 @@ export const Profile: FunctionComponent = () => {
                 />
               </PhoneContainer>
             </InputFieldWrapper>
+            <ModalCheckbox
+              handleChange={handleChange}
+              value={values.coalitionSubscription}
+              name="coalitionSubscription"
+              label={
+                <Label>
+                  <FormattedMessage id="cgu_modal.accept-cause" />
+                </Label>
+              }
+            />
+            <ModalCheckbox
+              handleChange={handleChange}
+              value={values.causeSubscription}
+              name="causeSubscription"
+              label={
+                <Label>
+                  <FormattedMessage id="cgu_modal.accept-coalition" />
+                </Label>
+              }
+            />
 
             <ValidateButtonContainer isInPage>
               <FullWidthButton
@@ -221,7 +261,7 @@ export const Profile: FunctionComponent = () => {
                 {intl.formatMessage({ id: 'profile.save' })}
               </FullWidthButton>
             </ValidateButtonContainer>
-          </Form>
+          </form>
         )}
       </Formik>
     </Container>

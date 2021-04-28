@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { getSpacing, media, defaultMargins, fonts, colorPalette, borderRadius } from 'stylesheet';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -28,16 +28,6 @@ export const AdherentText = styled.p`
   a {
     color: ${colorPalette.blueCoalition};
   }
-`;
-
-export const Form = styled.form<{ isAdherent: boolean }>`
-  ${({ isAdherent }) =>
-    isAdherent
-      ? css`
-          pointer-events: none;
-          opacity: 0.4;
-        `
-      : css``}
 `;
 
 export const PhoneContainer = styled.div`

@@ -12,6 +12,7 @@ import {
   ADDITIONAL_MARGIN_FOR_SHADOW,
   MOBILE_CAUSE_CARD_HEIGHT,
 } from 'components/Cause/Cause.style';
+import IconButton from '@material-ui/core/IconButton';
 
 const MOBILE_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 3;
 export const DESKTOP_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 8;
@@ -70,4 +71,37 @@ export const EmptyMobileDiv = styled.div`
   ${media.desktop(`
     display: none;
   `)}
+`;
+
+export const RightHeaderSubContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const LeftCarouselButton = styled(IconButton)`
+  display: none;
+  ${media.desktop(`
+    display: flex;
+  `)}
+`;
+
+export const RightCarouselButton = styled(IconButton)`
+  display: none;
+  ${media.desktop(`
+    display: flex;
+    margin-right: ${getSpacing(4)};
+  `)}
+`;
+
+const ARROW_SIZE = '27.5px';
+
+export const LeftArrow = styled.img`
+  height: ${ARROW_SIZE};
+  width: ${ARROW_SIZE};
+`;
+
+export const RightArrow = styled.img`
+  transform: rotate(180deg);
+  height: ${ARROW_SIZE};
+  width: ${ARROW_SIZE};
 `;

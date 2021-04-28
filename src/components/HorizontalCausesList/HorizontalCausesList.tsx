@@ -8,6 +8,11 @@ import {
   CauseCardWrapper,
   DESKTOP_CAUSE_MARGIN_RIGHT,
   EmptyMobileDiv,
+  RightHeaderSubContainer,
+  RightCarouselButton,
+  LeftCarouselButton,
+  LeftArrow,
+  RightArrow,
 } from './HorizontalCausesList.style';
 import Cause from 'components/Cause';
 import { useIntl } from 'react-intl';
@@ -78,9 +83,17 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
     <Container>
       <Header>
         <h3>{intl.formatMessage({ id: 'horizontal_causes_list.title' })}</h3>
-        <SeeAllButton onClick={onSeeAllClick}>
-          {intl.formatMessage({ id: 'horizontal_causes_list.see-all' })}
-        </SeeAllButton>
+        <RightHeaderSubContainer>
+          <LeftCarouselButton>
+            <LeftArrow src="/images/leftCircleArrow.svg" />
+          </LeftCarouselButton>
+          <RightCarouselButton>
+            <RightArrow src="/images/leftCircleArrow.svg" />
+          </RightCarouselButton>
+          <SeeAllButton onClick={onSeeAllClick}>
+            {intl.formatMessage({ id: 'horizontal_causes_list.see-all' })}
+          </SeeAllButton>
+        </RightHeaderSubContainer>
       </Header>
       {isFetchingCauses && causes.length === 0 ? (
         <Loader />

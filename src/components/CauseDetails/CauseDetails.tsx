@@ -12,7 +12,7 @@ import {
   Separator,
 } from './CauseDetails.style';
 import { InCreationCause, Cause } from 'redux/Cause/types';
-import { CreateCauseCTA } from 'pages/CauseList/CreateCauseCTA/CreateCauseCTA';
+import CreateCauseCTA from 'components/CreateCauseCTA';
 import AboutThisCause from './components/AboutThisCause';
 import Header from './components/Header';
 import HeaderButtons from './components/HeaderButtons';

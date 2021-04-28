@@ -11,7 +11,7 @@ import { useIntl } from 'react-intl';
 import { PATHS } from 'routes';
 import Loader from 'components/Loader';
 import { useSelector } from 'react-redux';
-import { useFetchCauses } from 'redux/Cause/hooks/useFetchCauses';
+import { useFetchCauses, SortOptions } from 'redux/Cause/hooks/useFetchCauses';
 import { getAllCauses } from 'redux/Cause/selectors';
 import { useHistory } from 'react-router';
 
@@ -26,7 +26,11 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
   const history = useHistory();
 
   useEffect(() => {
-    fetchCauses({ coalitionIds: coalitionId !== undefined ? [coalitionId] : [], searchText: '' });
+    fetchCauses({
+      coalitionIds: coalitionId !== undefined ? [coalitionId] : [],
+      searchText: '',
+      sort: SortOptions.moreSupported,
+    });
   }, [fetchCauses, coalitionId]);
 
   const onSeeAllClick = () => {

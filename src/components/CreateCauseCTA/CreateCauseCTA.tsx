@@ -15,7 +15,7 @@ import { PATHS } from 'routes';
 import { FormattedMessage } from 'react-intl';
 import { useFetchCauseStatistics } from './services';
 
-export const CreateCauseCTA: React.FunctionComponent<{ displayLinkToCauseList?: boolean }> = ({
+const CreateCauseCTA: React.FunctionComponent<{ displayLinkToCauseList?: boolean }> = ({
   displayLinkToCauseList = false,
 }) => {
   const { fetchCauseStatistics } = useFetchCauseStatistics();
@@ -60,3 +60,5 @@ export const CreateCauseCTA: React.FunctionComponent<{ displayLinkToCauseList?: 
     </CTAContainer>
   );
 };
+
+export default CreateCauseCTA;

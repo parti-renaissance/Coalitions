@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
 import { getSpacing, media, borderRadius, colorPalette, fontSize, fontFamily } from 'stylesheet';
+import { SmallButton } from 'components/Button/Button';
 
 export const MARGIN_BETWEEN_CARDS = getSpacing(5);
 
 export const Container = styled.div<{ responsiveNbOfCardsByLine?: boolean }>`
   border-radius: ${borderRadius.medium};
   overflow: hidden;
-  cursor: pointer;
   position: relative;
   margin-bottom: ${getSpacing(3)};
   width: calc((100% - 2 * ${MARGIN_BETWEEN_CARDS}) / 2);
@@ -50,15 +50,23 @@ export const Image = styled.div<{ backgroundImage: string }>`
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
+  cursor: pointer;
   ${({ backgroundImage }) =>
     css`
       background-image: url(${backgroundImage});
     `};
 `;
 
-export const Name = styled.p`
-  color: ${colorPalette.greyDark};
+export const NameContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin-top: ${getSpacing(2)};
+`;
+
+export const Name = styled.p`
+  display: flex;
+  color: ${colorPalette.greyDark};
+  align-items: center;
 `;
 
 const BORDER_WIDTH = '3px';
@@ -94,4 +102,12 @@ export const SelectedIndex = styled.div`
     height: ${DESKTOP_INDEX_SIZE};
     width: ${DESKTOP_INDEX_SIZE};
   `)}
+`;
+
+export const UnfollowButtonWrapper = styled.div`
+  margin-top: ${getSpacing(1)};
+`;
+
+export const FollowButton = styled(SmallButton)`
+  background-color: ${colorPalette.blueCoalition}0A;
 `;

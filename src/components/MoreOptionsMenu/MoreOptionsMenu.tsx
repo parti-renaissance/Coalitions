@@ -21,6 +21,8 @@ const MoreOptionsMenu: FunctionComponent<MoreOptionsMenuProps> = ({
   const [menu, setMenu] = useState<null | HTMLDivElement>(null);
 
   const openMenu = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     setMenu(event.currentTarget);
   };
 
@@ -28,11 +30,15 @@ const MoreOptionsMenu: FunctionComponent<MoreOptionsMenuProps> = ({
     setMenu(null);
   };
 
-  const closeUnfollowModal = () => {
+  const closeUnfollowModal = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     setIsUnfollowModalOpened(false);
   };
 
-  const onFollowClick = () => {
+  const onUnFollowClick = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     setIsUnfollowModalOpened(true);
     closeMenu();
   };
@@ -43,11 +49,11 @@ const MoreOptionsMenu: FunctionComponent<MoreOptionsMenuProps> = ({
         <MoreIcon src="/images/more_vertical.svg" />
       </IconContainer>
       <Menu anchorEl={menu} keepMounted open={Boolean(menu)} onClose={closeMenu}>
-        <MenuItem onClick={onFollowClick}>{unfollowModalLabels.confirm}</MenuItem>
+        <MenuItem onClick={onUnFollowClick}>{unfollowModalLabels.confirm}</MenuItem>
       </Menu>
       <UnfollowModal
         isOpened={isUnfollowModalOpened}
-        onClose={closeUnfollowModal}
+        onClose={closeUnfollowModal as () => void}
         isUnfollowing={isUnfollowing}
         unfollow={unfollow}
         labels={unfollowModalLabels}

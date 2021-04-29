@@ -47,6 +47,7 @@ const DesktopCarousel: ForwardRefRenderFunction<any, CarouselProps> = (props, re
       frameOverflow="visible"
       swiping={false}
       withoutControls
+      wrapAround
       ref={ref}
     />
   </CarouselWrapper>
@@ -111,7 +112,7 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
         <Loader />
       ) : (
         <CausesContainer ref={carouselRef}>
-          {causes.slice(0, 5).map(cause => (
+          {causes.slice(0, 20).map(cause => (
             <CauseCardWrapper key={cause.uuid}>
               <Cause cause={cause} />
             </CauseCardWrapper>

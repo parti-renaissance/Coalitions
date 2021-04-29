@@ -54,7 +54,7 @@ export const SubContainer = styled.div`
 
 export const CarouselWrapper = styled.div`
   ${media.desktop(`
-    margin-top: ${getSpacing(6)};
+    margin-top: ${getSpacing(4)};
   `)}
 `;
 

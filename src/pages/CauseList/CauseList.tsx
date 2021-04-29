@@ -9,6 +9,7 @@ import {
   TitleContainer,
   SearchAndSortWrapper,
   LoaderAndEmptyLabelContainer,
+  CauseWrapper,
 } from './CauseList.style';
 import Loader from 'components/Loader';
 import Cause from 'components/Cause';
@@ -21,7 +22,11 @@ import { Cause as CauseType } from 'redux/Cause/types';
 import { defineCtaPositionInList } from './lib/defineCtaPositionInList';
 import SearchAndSort from './components/SearchAndSort';
 
-const renderCause = (cause: CauseType) => <Cause key={cause.uuid} cause={cause} />;
+const renderCause = (cause: CauseType) => (
+  <CauseWrapper key={cause.uuid}>
+    <Cause cause={cause} />
+  </CauseWrapper>
+);
 
 const renderLoader = () => (
   <LoaderAndEmptyLabelContainer>

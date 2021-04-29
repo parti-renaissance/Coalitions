@@ -85,10 +85,11 @@ export const StyledContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  justify-content: space-between;
 `;
 
 export const ButtonContainer = styled.div`
-  margin-top: auto;
+  margin-top: ${getSpacing(5)};
 
   > :first-child {
     margin-right: ${getSpacing(3)};

@@ -39,6 +39,9 @@ export const useCoalitionFollow = (id: string) => {
   }, [error, errorHandler]);
 
   const followCoalition = useCallback(async () => {
+    if (loading) {
+      return;
+    }
     const response = await doFollowCoalition();
 
     if (response instanceof Error) {
@@ -48,7 +51,7 @@ export const useCoalitionFollow = (id: string) => {
     if (response.uuid !== undefined) {
       dispatch(optimisticallyMarkCoalitionAsFollowed(id));
     }
-  }, [dispatch, doFollowCoalition, id]);
+  }, [dispatch, doFollowCoalition, id, loading]);
 
   return { loading, followCoalition };
 };

@@ -1,19 +1,11 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import {
-  Container,
-  SubContainer,
-  CoalitionContainer,
-  CoalitionImage,
-  CoalitionName,
-  SelectedCoalitionContainer,
-  SelectedCoalitionIndex,
-} from './CoalitionCards.style';
+import { Container, SubContainer } from './CoalitionCards.style';
 import { useFetchCoalitions } from 'redux/Coalition/hooks/useFetchCoalitions';
 import { getCoalitions } from 'redux/Coalition/selectors';
 import { useSelector } from 'react-redux';
 import { Coalition } from 'redux/Coalition/types';
 import Loader from 'components/Loader';
-import FollowTag, { FOLLOW_TAG_TYPE } from 'components/FollowTag/FollowTag';
+import CoalitionCard from './components/CoalitionCard';
 
 interface CoalitionCardsProps {
   onCoalitionClick?: (coalition: Coalition) => void;
@@ -42,27 +34,19 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
         onCoalitionClick(coalition);
       }
     };
+
+    const selectedIndex =
+      selectedCoalitionUuids !== undefined && selectedCoalitionUuids.includes(coalition.uuid)
+        ? selectedCoalitionUuids.indexOf(coalition.uuid)
+        : undefined;
+
     return (
-      <CoalitionContainer
-        key={coalition.uuid}
-        onClick={onCoalitionClick !== undefined ? onClick : undefined}
+      <CoalitionCard
+        onClick={onClick}
+        selectedIndex={selectedIndex}
+        coalition={coalition}
         responsiveNbOfCardsByLine={responsiveNbOfCardsByLine}
-      >
-        <CoalitionImage backgroundImage={coalition.image_url}>
-          {selectedCoalitionUuids !== undefined &&
-          selectedCoalitionUuids.includes(coalition.uuid) ? (
-            <SelectedCoalitionContainer>
-              <SelectedCoalitionIndex>
-                {selectedCoalitionUuids.indexOf(coalition.uuid) + 1}
-              </SelectedCoalitionIndex>
-            </SelectedCoalitionContainer>
-          ) : null}
-        </CoalitionImage>
-        <CoalitionName>{coalition.name}</CoalitionName>
-        {Boolean(coalition.followed) ? (
-          <FollowTag labelKey="coalition.followed" type={FOLLOW_TAG_TYPE.coalition} />
-        ) : null}
-      </CoalitionContainer>
+      />
     );
   };
 

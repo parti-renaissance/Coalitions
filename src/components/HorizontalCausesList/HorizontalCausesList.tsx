@@ -16,7 +16,7 @@ import {
   EmptyMobileDiv,
   RightHeaderSubContainer,
   RightCarouselButton,
-  LeftCarouselButton,
+  CarouselControlsContainer,
   LeftArrow,
   RightArrow,
 } from './HorizontalCausesList.style';
@@ -30,8 +30,9 @@ import { getAllCauses } from 'redux/Cause/selectors';
 import { useHistory } from 'react-router';
 import { getIsMobile } from 'services/mobile/mobile';
 import { DESKTOP_CAUSE_CARD_WIDTH } from 'components/Cause/Cause.style';
-import { LARGE_DESKTOP_BREAK_POINT, defaultMarginsAsNumber } from 'stylesheet';
+import { defaultMarginsAsNumber } from 'stylesheet';
 import Carousel, { CarouselProps } from 'nuka-carousel';
+import IconButton from '@material-ui/core/IconButton';
 
 interface HorizontalCausesListProps {
   coalitionId?: string;
@@ -41,11 +42,10 @@ const DesktopCarousel: ForwardRefRenderFunction<any, CarouselProps> = (props, re
   <CarouselWrapper>
     <Carousel
       {...props}
-      slideWidth={`${DESKTOP_CAUSE_CARD_WIDTH + DESKTOP_CAUSE_MARGIN_RIGHT}px`}
-      width={`${Math.min(window.innerWidth, LARGE_DESKTOP_BREAK_POINT)}px`}
+      slideWidth={`${DESKTOP_CAUSE_CARD_WIDTH}px`}
+      cellSpacing={DESKTOP_CAUSE_MARGIN_RIGHT}
       framePadding={`0px ${defaultMarginsAsNumber.horizontal.desktop}px`}
       frameOverflow="visible"
-      swiping={false}
       withoutControls
       wrapAround
       ref={ref}
@@ -97,12 +97,14 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
       <Header>
         <h3>{intl.formatMessage({ id: 'horizontal_causes_list.title' })}</h3>
         <RightHeaderSubContainer>
-          <LeftCarouselButton onClick={onControlButtonClick(false)}>
-            <LeftArrow src="/images/leftCircleArrow.svg" />
-          </LeftCarouselButton>
-          <RightCarouselButton onClick={onControlButtonClick(true)}>
-            <RightArrow src="/images/leftCircleArrow.svg" />
-          </RightCarouselButton>
+          <CarouselControlsContainer>
+            <IconButton onClick={onControlButtonClick(false)}>
+              <LeftArrow src="/images/leftCircleArrow.svg" />
+            </IconButton>
+            <RightCarouselButton onClick={onControlButtonClick(true)}>
+              <RightArrow src="/images/leftCircleArrow.svg" />
+            </RightCarouselButton>
+          </CarouselControlsContainer>
           <SeeAllButton onClick={onSeeAllClick}>
             {intl.formatMessage({ id: 'horizontal_causes_list.see-all' })}
           </SeeAllButton>

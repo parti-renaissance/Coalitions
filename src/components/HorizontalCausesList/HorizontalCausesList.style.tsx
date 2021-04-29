@@ -60,17 +60,11 @@ export const CarouselWrapper = styled.div`
 
 export const CauseCardWrapper = styled.div`
   margin-right: ${MOBILE_CAUSE_MARGIN_RIGHT}px;
-  ${media.desktop(`
-    margin-right: ${DESKTOP_CAUSE_MARGIN_RIGHT}px;
-  `)}
 `;
 
 export const EmptyMobileDiv = styled.div`
   min-width: ${defaultMargins.horizontal.mobile};
   margin-left: -${MOBILE_CAUSE_MARGIN_RIGHT}px;
-  ${media.desktop(`
-    display: none;
-  `)}
 `;
 
 export const RightHeaderSubContainer = styled.div`
@@ -78,17 +72,16 @@ export const RightHeaderSubContainer = styled.div`
   align-items: center;
 `;
 
-export const LeftCarouselButton = styled(IconButton)`
+export const CarouselControlsContainer = styled.div`
   display: none;
   ${media.desktop(`
     display: flex;
+    align-items: center;
   `)}
 `;
 
 export const RightCarouselButton = styled(IconButton)`
-  display: none;
   ${media.desktop(`
-    display: flex;
     margin-right: ${getSpacing(4)};
   `)}
 `;

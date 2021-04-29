@@ -69,5 +69,7 @@ export const CauseWrapper = styled.div`
   > div {
     width: unset;
     height: 100%;
+    min-width: unset;
+    max-width: unset;
   }
 `;

@@ -24,6 +24,7 @@
     "history": "4.10.1",
     "jwt-decode": "2.2.0",
     "lodash": "4.17.21",
+    "nuka-carousel": "^4.7.7",
     "react": "16.14.0",
     "react-cropper": "^2.1.7",
     "react-dom": "16.14.0",

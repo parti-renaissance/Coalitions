@@ -9,7 +9,7 @@ import {
   Author,
   ButtonContainer,
   CauseName,
-  StyledCard,
+  Container,
   StyledContent,
   StyledMedia,
 } from './Cause.style';
@@ -49,7 +49,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
 
   return (
     <>
-      <StyledCard
+      <Container
         onClick={() => {
           history.push(PATHS.CAUSE.url(cause.slug));
         }}
@@ -93,7 +93,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
             </Link>
           </ButtonContainer>
         </StyledContent>
-      </StyledCard>
+      </Container>
       <LoginAndSupportModal
         isOpened={isModalOpened}
         onClose={closeModal}

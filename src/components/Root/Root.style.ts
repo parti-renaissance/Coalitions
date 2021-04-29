@@ -8,6 +8,7 @@ export const RootContainer = styled.div`
   ${styledTags}
   max-width: calc(${LARGE_DESKTOP_BREAK_POINT}px + 2 * ${defaultMargins.horizontal.desktop});
   margin: 0 auto;
+  overflow: hidden;
 `;
 RootContainer.displayName = 'RootContainer';
 

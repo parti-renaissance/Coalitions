@@ -56,3 +56,20 @@ export const LoaderAndEmptyLabelContainer = styled.div`
     margin: 0 ${defaultMargins.horizontal.desktop} ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)};
 `;
+
+export const CauseWrapper = styled.div`
+  width: 100%;
+  margin-bottom: ${getSpacing(4)};
+  ${media.desktop(`
+    width: ${getSpacing(68)};
+    margin-bottom: ${getSpacing(6)};
+    margin-left: ${getSpacing(4)};
+    margin-right: ${getSpacing(4)};
+  `)};
+  > div {
+    width: unset;
+    height: 100%;
+    min-width: unset;
+    max-width: unset;
+  }
+`;

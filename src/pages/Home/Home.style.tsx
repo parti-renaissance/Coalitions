@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colorPalette, fonts, getSpacing, media, defaultMargins, fontWeight } from 'stylesheet';
+import { ADDITIONAL_MARGIN_FOR_SHADOW } from 'components/Cause/Cause.style';
 
 const TEXT_MAX_WIDTH = getSpacing(140);
 
@@ -85,10 +86,9 @@ export const Bold = styled.span`
 `;
 
 export const OurCommitmentsWrapper = styled.div`
-  margin: -${getSpacing(4)} ${defaultMargins.horizontal.mobile} ${defaultMargins.vertical.mobile} ${defaultMargins.horizontal.mobile};
+  margin: -${ADDITIONAL_MARGIN_FOR_SHADOW}px ${defaultMargins.horizontal.mobile} ${defaultMargins
+      .vertical.mobile} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
-    margin: -${getSpacing(6)} ${defaultMargins.horizontal.desktop} ${
-    defaultMargins.vertical.desktop
-  } ${defaultMargins.horizontal.desktop};
+    margin: 0 ${defaultMargins.horizontal.desktop} ${defaultMargins.vertical.desktop} ${defaultMargins.horizontal.desktop};
   `)}
 `;

@@ -9,7 +9,31 @@ import {
   fontSize,
   lineHeight,
   fontWeight,
+  SPACING_UNIT,
 } from 'stylesheet';
+
+export const DESKTOP_CAUSE_CARD_WIDTH = SPACING_UNIT * 60;
+export const MOBILE_CAUSE_CARD_HEIGHT = SPACING_UNIT * 79;
+export const ADDITIONAL_MARGIN_FOR_SHADOW = SPACING_UNIT * 5;
+
+export const Container = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: ${boxShadow.card};
+  border-radius: ${borderRadius.medium};
+  overflow: hidden;
+  cursor: pointer;
+  height: ${MOBILE_CAUSE_CARD_HEIGHT}px;
+  min-width: ${getSpacing(50)};
+  max-width: ${getSpacing(75)};
+  ${media.desktop(`
+    height: ${getSpacing(89)};
+    width: ${DESKTOP_CAUSE_CARD_WIDTH}px;
+    min-width: unset;
+    max-width: unset;
+  `)};
+`;
 
 export const CauseName = styled.div`
   /*
@@ -43,24 +67,6 @@ export const Author = styled.div`
 `;
 Author.displayName = 'Author';
 
-export const StyledCard = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: ${getSpacing(4)};
-  box-shadow: ${boxShadow.card};
-  border-radius: ${borderRadius.medium};
-  overflow: hidden;
-  cursor: pointer;
-  ${media.desktop(`
-    width: ${getSpacing(68)};
-    margin-bottom: ${getSpacing(6)};
-    margin-left: ${getSpacing(4)};
-    margin-right: ${getSpacing(4)};
-  `)};
-`;
-
 export const StyledMedia = styled.div<{ backgroundImage: string }>`
   width: 100%;
   padding-bottom: 56.25%;
@@ -78,6 +84,7 @@ export const StyledContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  justify-content: space-between;
 `;
 
 export const ButtonContainer = styled.div`

@@ -10,13 +10,11 @@ import CoalitionCard from './components/CoalitionCard';
 interface CoalitionCardsProps {
   onCoalitionClick?: (coalition: Coalition) => void;
   selectedCoalitionUuids?: string[];
-  responsiveNbOfCardsByLine?: boolean;
 }
 
 const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
   onCoalitionClick,
   selectedCoalitionUuids,
-  responsiveNbOfCardsByLine,
 }) => {
   const coalitions = useSelector(getCoalitions);
   const { fetchCoalitions, isFetchingCoalitions } = useFetchCoalitions();
@@ -40,14 +38,7 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
         ? selectedCoalitionUuids.indexOf(coalition.uuid)
         : undefined;
 
-    return (
-      <CoalitionCard
-        onClick={onClick}
-        selectedIndex={selectedIndex}
-        coalition={coalition}
-        responsiveNbOfCardsByLine={responsiveNbOfCardsByLine}
-      />
-    );
+    return <CoalitionCard onClick={onClick} selectedIndex={selectedIndex} coalition={coalition} />;
   };
 
   if (isFetchingCoalitions && coalitions.length === 0) {

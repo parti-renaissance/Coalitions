@@ -27,6 +27,8 @@ const userSlice = createSlice({
         lastName: action.payload.lastName,
         gender: action.payload.gender === GENDERS[0].value ? undefined : action.payload.gender,
         birthdate: action.payload.birthday,
+        coalitionSubscription: action.payload.coalitionSubscription ?? false,
+        causeSubscription: action.payload.causeSubscription ?? false,
         phone:
           action.payload.phoneNumber !== undefined &&
           action.payload.phoneCountry?.region !== undefined

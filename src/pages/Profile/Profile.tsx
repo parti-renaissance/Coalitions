@@ -16,6 +16,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { useFetchPhoneCountries, PhoneCountry } from './hooks/useFetchPhoneCountries';
 import { Label } from 'components/IconAndLabel/IconAndLabel.style';
 import { ModalCheckbox } from 'components/Modal/ModalCheckbox';
+import { useFeatureToggling } from 'services/useFeatureToggling';
 
 const UpdateEmProfileLink: FunctionComponent<{}> = () => (
   <a
@@ -43,6 +44,7 @@ export const Profile: FunctionComponent = () => {
   const currentUser = useSelector(getCurrentUser);
   const { loading, updateUserProfile } = useUpdateUserProfile(currentUser?.uuid);
   const { phoneCountries, fetchPhoneCountries } = useFetchPhoneCountries();
+  const { isSubscriptionUpdateEnabled } = useFeatureToggling();
 
   useEffect(() => {
     fetchPhoneCountries();
@@ -228,26 +230,30 @@ export const Profile: FunctionComponent = () => {
                 />
               </PhoneContainer>
             </InputFieldWrapper>
-            <ModalCheckbox
-              handleChange={handleChange}
-              value={values.coalitionSubscription}
-              name="coalitionSubscription"
-              label={
-                <Label>
-                  <FormattedMessage id="cgu_modal.accept-cause" />
-                </Label>
-              }
-            />
-            <ModalCheckbox
-              handleChange={handleChange}
-              value={values.causeSubscription}
-              name="causeSubscription"
-              label={
-                <Label>
-                  <FormattedMessage id="cgu_modal.accept-coalition" />
-                </Label>
-              }
-            />
+            {isSubscriptionUpdateEnabled ? (
+              <>
+                <ModalCheckbox
+                  handleChange={handleChange}
+                  value={values.coalitionSubscription}
+                  name="coalitionSubscription"
+                  label={
+                    <Label>
+                      <FormattedMessage id="cgu_modal.accept-cause" />
+                    </Label>
+                  }
+                />
+                <ModalCheckbox
+                  handleChange={handleChange}
+                  value={values.causeSubscription}
+                  name="causeSubscription"
+                  label={
+                    <Label>
+                      <FormattedMessage id="cgu_modal.accept-coalition" />
+                    </Label>
+                  }
+                />
+              </>
+            ) : null}
 
             <ValidateButtonContainer isInPage>
               <FullWidthButton

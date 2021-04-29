@@ -42,11 +42,7 @@ const CoalitionCards: FunctionComponent<CoalitionCardsProps> = ({
   };
 
   if (isFetchingCoalitions && coalitions.length === 0) {
-    return (
-      <Container>
-        <Loader />
-      </Container>
-    );
+    return <Loader />;
   }
 
   if (coalitions.length === 0) {

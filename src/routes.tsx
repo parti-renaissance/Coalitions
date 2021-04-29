@@ -94,7 +94,7 @@ const Routes: FunctionComponent<{}> = () => {
 
   return (
     <>
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader fullScreen />}>
         <Switch>
           <Route exact path={PATHS.HOME.route} component={Home} />
           <Route exact path={PATHS.CAUSE_LIST.route} component={CauseList} />

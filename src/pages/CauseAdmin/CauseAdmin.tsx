@@ -73,7 +73,7 @@ const CauseAdmin: FunctionComponent = () => {
   };
 
   if (cause === undefined && loading) {
-    return <Loader />;
+    return <Loader fullScreen />;
   }
 
   if (cause === undefined) {

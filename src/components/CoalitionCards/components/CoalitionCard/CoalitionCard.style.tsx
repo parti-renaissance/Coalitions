@@ -105,7 +105,10 @@ export const SelectedIndex = styled.div`
 `;
 
 export const UnfollowButtonWrapper = styled.div`
-  margin-top: ${getSpacing(1)};
+  margin-top: 2px;
+  ${media.desktop(`
+    margin-top: ${getSpacing(1)};
+  `)}
 `;
 
 export const FollowButton = styled(SmallButton)`

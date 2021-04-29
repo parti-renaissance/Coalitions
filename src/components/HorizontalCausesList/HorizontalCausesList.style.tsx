@@ -20,7 +20,9 @@ export const DESKTOP_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 8;
 export const Container = styled.div`
   margin: 0 -${defaultMargins.horizontal.mobile};
   ${media.desktop(`
+    overflow: hidden;
     margin: 0 -${defaultMargins.horizontal.desktop};
+    padding-bottom: ${ADDITIONAL_MARGIN_FOR_SHADOW}px;
   `)};
 `;
 

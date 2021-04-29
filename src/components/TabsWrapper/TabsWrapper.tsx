@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, FunctionComponent } from 'react';
-import { TabsContainer, StyledTab, TabPanelContainer } from './TabsWrapper.style';
+import { Container, Tab, PanelContainer, Tabs } from './TabsWrapper.style';
 import { colorPalette } from 'stylesheet';
-import { Tabs } from '@material-ui/core';
 
 interface TabsWrapperProps {
   renderTabPanel: (tab: number) => JSX.Element;
@@ -27,13 +26,13 @@ export const TabsWrapper: FunctionComponent<TabsWrapperProps> = ({
   };
 
   return (
-    <TabsContainer>
+    <Container>
       <Tabs value={tabIndex} onChange={onTabIndexChange} TabIndicatorProps={TAB_INDICATOR_PROPS}>
-        {tabsLabel.map((tabLabel, index) => (
-          <StyledTab label={tabLabel} key={tabLabel.key} />
+        {tabsLabel.map(tabLabel => (
+          <Tab label={tabLabel} key={tabLabel.key} />
         ))}
       </Tabs>
-      <TabPanelContainer>{renderTabPanel(tabIndex)}</TabPanelContainer>
-    </TabsContainer>
+      <PanelContainer>{renderTabPanel(tabIndex)}</PanelContainer>
+    </Container>
   );
 };

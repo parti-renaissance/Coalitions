@@ -116,7 +116,6 @@ const Coalition: FunctionComponent = () => {
             ) : null}
           </HeaderSubSubContainer>
         </div>
-
         <HeaderSubContainer>
           {showFollowButton ? (
             <FollowButton

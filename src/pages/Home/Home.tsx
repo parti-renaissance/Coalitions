@@ -90,7 +90,7 @@ const Home: React.FunctionComponent = () => {
           <FormattedMessage id="coalition.title" />
         </h3>
         <CoalitionCardsWrapper>
-          <CoalitionCards onCoalitionClick={onCoalitionClick} responsiveNbOfCardsByLine />
+          <CoalitionCards onCoalitionClick={onCoalitionClick} />
         </CoalitionCardsWrapper>
       </Block>
       <CreateCauseCTA displayLinkToCauseList />

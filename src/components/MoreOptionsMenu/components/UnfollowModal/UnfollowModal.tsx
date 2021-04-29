@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, MouseEvent } from 'react';
 import { Modal } from 'components/Modal/Modal';
 import { Title, Description } from 'components/Modal/Modal.style';
 import { ButtonContainer } from './UnfollowModal.style';
@@ -7,7 +7,7 @@ import { MediumLargeButton as Button } from 'components/Button/Button';
 
 interface UnfollowModalProps {
   isOpened: boolean;
-  onClose: () => void;
+  onClose: (e?: MouseEvent) => void;
   isUnfollowing: boolean;
   unfollow: () => void;
   labels: {
@@ -23,9 +23,11 @@ const UnfollowModal: FunctionComponent<UnfollowModalProps> = ({
   unfollow,
   labels: { description, confirm },
 }) => {
-  const onConfirmClick = async () => {
+  const onConfirmClick = async (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     await unfollow();
-    onClose();
+    onClose(event);
   };
 
   return (

@@ -100,3 +100,7 @@ export const RightArrow = styled.img`
   height: ${ARROW_SIZE};
   width: ${ARROW_SIZE};
 `;
+
+export const LoaderContainer = styled.div`
+  margin-top: ${getSpacing(4)};
+`;

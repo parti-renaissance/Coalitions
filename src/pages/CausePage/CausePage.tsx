@@ -40,7 +40,7 @@ const CausePage: FunctionComponent = () => {
   };
 
   if (loading && cause === undefined) {
-    return <Loader />;
+    return <Loader fullScreen />;
   }
 
   if (cause === undefined) {

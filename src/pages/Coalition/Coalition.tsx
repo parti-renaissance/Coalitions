@@ -50,7 +50,7 @@ const Coalition: FunctionComponent = () => {
   }, [fetchCoalitions]);
 
   if (isFetchingCoalitions && coalition === undefined) {
-    return <Loader />;
+    return <Loader fullScreen />;
   }
 
   if (coalition === undefined) {

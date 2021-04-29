@@ -19,6 +19,7 @@ import {
   CarouselControlsContainer,
   LeftArrow,
   RightArrow,
+  LoaderContainer,
 } from './HorizontalCausesList.style';
 import Cause from 'components/Cause';
 import { useIntl } from 'react-intl';
@@ -111,7 +112,9 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
         </RightHeaderSubContainer>
       </Header>
       {isFetchingCauses && causes.length === 0 ? (
-        <Loader />
+        <LoaderContainer>
+          <Loader />
+        </LoaderContainer>
       ) : (
         <CausesContainer ref={carouselRef}>
           {causes.slice(0, 20).map(cause => (

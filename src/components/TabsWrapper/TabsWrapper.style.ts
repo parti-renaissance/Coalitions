@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import { fontWeight, getSpacing, colorPalette, media, fonts } from 'stylesheet';
-import { Tab } from '@material-ui/core';
+import { Tab as MUITab, Tabs as MUITabs } from '@material-ui/core';
 
-export const TabsContainer = styled.div`
+export const Container = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(5)};
   `)}
@@ -11,7 +11,7 @@ export const TabsContainer = styled.div`
   }
 `;
 
-export const StyledTab = styled(Tab)`
+export const Tab = styled(MUITab)`
   ${fonts.p};
   padding: ${getSpacing(2)} ${getSpacing(3)};
   text-transform: none;
@@ -22,7 +22,7 @@ export const StyledTab = styled(Tab)`
     `};
 `;
 
-export const TabPanelContainer = styled.div`
+export const PanelContainer = styled.div`
   padding: ${getSpacing(3)};
   margin-top: ${getSpacing(2)};
   margin-bottom: ${getSpacing(2)};
@@ -31,4 +31,13 @@ export const TabPanelContainer = styled.div`
     margin-top: ${getSpacing(5)};
     margin-bottom: unset;
   `)}
+`;
+
+const TABS_Z_INDEX = 2;
+
+export const Tabs = styled(MUITabs)`
+  position: sticky;
+  top: 0;
+  background-color: ${colorPalette.white};
+  z-index: ${TABS_Z_INDEX};
 `;

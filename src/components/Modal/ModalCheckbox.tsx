@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ReactNode } from 'react';
-import { Checkbox, FormControlLabel } from '@material-ui/core';
+import { Checkbox } from '@material-ui/core';
+import { FormControlLabel } from './Modal.style';
 import { FormControlLabelWrapper } from 'components/LoginAndSupportModal/LoginAndSupportModal.style';
 
 type ModalCheckboxProps = {

@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
 import { getInCreationCause } from 'redux/Cause/selectors';
@@ -40,20 +40,12 @@ export const useValidatePasswordForm = () => {
 };
 
 const useConfirmPasswordErrorHandler = () => {
-  const { formatMessage } = useIntl();
-
-  return useCallback(
-    (error?: APIErrorsType) => {
-      if (error instanceof Response || error === undefined || error.message === undefined) {
-        return null;
-      }
-      if (doesErrorIncludes(error, '404') || doesErrorIncludes(error, 'Pas de Token')) {
-        return formatMessage({ id: 'errors.incorrect-password-token' });
-      }
+  return useCallback((error?: APIErrorsType) => {
+    if (error instanceof Response || error === undefined || error.message === undefined) {
       return null;
-    },
-    [formatMessage],
-  );
+    }
+    return null;
+  }, []);
 };
 
 type ConfirmPasswordPayload = {
@@ -67,6 +59,7 @@ export const useConfirmPassword = () => {
   const causeToPublish = useSelector(getInCreationCause);
   const dispatch = useDispatch();
   const errorHandler = useConfirmPasswordErrorHandler();
+  const [openCustomSnackbar, setOpenCustomSnackbar] = useState(false);
   //const [, login] = useLogin();
 
   const [{ loading, error }, doConfirmPassword] = useTypedAsyncFn(
@@ -83,6 +76,10 @@ export const useConfirmPassword = () => {
 
   useEffect(() => {
     if (error !== undefined) {
+      if (doesErrorIncludes(error, '404') || doesErrorIncludes(error, 'Pas de Token')) {
+        setOpenCustomSnackbar(true);
+        return;
+      }
       HandleErrorService.showErrorSnackbar(error, errorHandler);
     }
   }, [error, errorHandler]);
@@ -107,5 +104,5 @@ export const useConfirmPassword = () => {
     [causeToPublish, dispatch, doConfirmPassword],
   );
 
-  return { loading, error, confirmPasswordAndLogin };
+  return { openCustomSnackbar, loading, error, confirmPasswordAndLogin };
 };

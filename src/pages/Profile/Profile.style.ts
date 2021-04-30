@@ -40,3 +40,11 @@ export const PhoneContainer = styled.div`
     flex: 1 0 50%;
   }`)};
 `;
+
+export const AutocompleteWrapper = styled.div`
+  margin-bottom: ${getSpacing(4)};
+  ${media.desktop(`
+    margin-right: ${getSpacing(2)};
+    margin-bottom: unset;
+  `)}
+`;

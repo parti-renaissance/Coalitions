@@ -211,7 +211,9 @@
       "tips": "le choix du thème permet de recommander aux personnes intéressées par les mêmes sujets que vous de soutenir votre cause.",
       "zero-or-one-selected-coalition": "{numberOfSelectedCoalitions} sélectionnée",
       "more-than-one-selected-coalitions": "{numberOfSelectedCoalitions} sélectionnées",
-      "max-number-of-selected-coalitions": "(vous pouvez en sélectionner jusqu’à deux)"
+      "max-number-of-selected-coalitions": "(vous pouvez en sélectionner jusqu’à deux)",
+      "main_theme": "Thème principal",
+      "secondary_theme": "Thème secondaire"
     }
   },
   "form_errors": {

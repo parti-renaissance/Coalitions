@@ -1,6 +1,7 @@
-import { Menu } from '@material-ui/core';
+import Menu from 'components/Menu';
 import styled from 'styled-components';
-import { fonts, getSpacing } from 'stylesheet';
+import { getSpacing } from 'stylesheet';
+import { DESKTOP_BUTTONS_WIDTH } from 'components/CauseDetails/components/HeaderButtons/HeaderButtons.style';
 
 export const MobileShareIcon = styled.img`
   height: ${getSpacing(5)};
@@ -8,8 +9,13 @@ export const MobileShareIcon = styled.img`
 `;
 
 export const ShareMenu = styled(Menu)`
-  margin-top: ${getSpacing(10)};
-  li {
-    ${fonts.input};
+  margin-top: ${getSpacing(12)};
+  a {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .MuiMenu-paper {
+    width: ${DESKTOP_BUTTONS_WIDTH};
   }
 `;

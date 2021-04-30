@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { OutlinedInputProps } from '@material-ui/core/OutlinedInput';
-import { Container, SearchIcon } from './SearchBar.style';
+import { Container, SearchIcon, Form } from './SearchBar.style';
 import Formik from 'components/Formik';
 import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
@@ -31,7 +31,7 @@ const SearchBar: FunctionComponent<OutlinedInputProps> = props => {
   if (isShowSearchButtonVisible) {
     return (
       <StyledButton onClick={hideOrShowSearchButton(false)}>
-        <SearchIcon src="/images/search.svg" />
+        <SearchIcon src="/images/blueSearch.svg" />
       </StyledButton>
     );
   }
@@ -40,7 +40,7 @@ const SearchBar: FunctionComponent<OutlinedInputProps> = props => {
     <Container>
       <Formik<FormValues> initialValues={{ searchText: '' }} onSubmit={onSubmit}>
         {({ values, handleSubmit, setFieldValue }) => (
-          <form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <SearchField
               name="searchText"
               searchText={values.searchText}
@@ -51,7 +51,7 @@ const SearchBar: FunctionComponent<OutlinedInputProps> = props => {
               autoFocus={isMobile}
               {...props}
             />
-          </form>
+          </Form>
         )}
       </Formik>
     </Container>

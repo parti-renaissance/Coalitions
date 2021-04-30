@@ -77,7 +77,7 @@ export const MobileHeader: FunctionComponent<{}> = () => {
             </HeaderTitle>
           </DefaultLink>
         </HeaderSubContainer>
-        <HeaderSubContainer>
+        <HeaderSubContainer fullWidth>
           {showSearchBar ? <SearchBar /> : null}
           <LogInOrOutButton />
         </HeaderSubContainer>

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { getSpacing, fonts } from 'stylesheet';
-import MUIMenu from '@material-ui/core/Menu';
+import { getSpacing } from 'stylesheet';
 
 const MORE_ICON_SIZE = '18px';
 
@@ -15,11 +14,4 @@ export const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-export const Menu = styled(MUIMenu)`
-  margin-top: ${getSpacing(8)};
-  li {
-    ${fonts.input};
-  }
 `;

@@ -29,9 +29,16 @@ export const HeaderContainer = styled.header`
   `)}
 `;
 
-export const HeaderSubContainer = styled.div`
+export const HeaderSubContainer = styled.div<{ fullWidth?: boolean }>`
   display: flex;
   align-items: center;
+  ${({ fullWidth }) =>
+    fullWidth === true
+      ? css`
+          flex: 1;
+          justify-content: flex-end;
+        `
+      : css``}
 `;
 
 const BURGER_ICON_WIDTH = '18px';
@@ -54,7 +61,7 @@ export const StyledButton = styled(MediumLargeButton)`
 `;
 
 const DESKTOP_LOGO_FONT_WEIGHT = 700;
-const LOGO_LETTER_SPACING = '1.5px';
+const LOGO_LETTER_SPACING = '1px';
 
 export const HeaderTitle = styled.div`
   ${fonts.button};
@@ -76,7 +83,7 @@ export const SubCategory = styled(StyledButton)`
 `;
 
 export const CreateCauseButton = styled(DefaultLink)`
-  margin-right: ${getSpacing(5)};
+  margin: 0 ${getSpacing(5)};
 `;
 
 export const DrawerMenu = styled(Drawer)`

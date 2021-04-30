@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState, MouseEvent } from 'react';
-import { Container, SortButton, SortIcon, SortMenu, SortItem } from './SearchAndSort.style';
+import { Container, SortButton, SortIcon, SortItem } from './SearchAndSort.style';
 import SearchField from 'components/SearchField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useIntl } from 'react-intl';
 import { SortOptions } from 'redux/Cause/hooks/useFetchCauses';
+import SortMenu from 'components/Menu';
 
 interface SearchAndSort {
   searchText: string;
@@ -45,7 +46,7 @@ const SearchAndSort: FunctionComponent<SearchAndSort> = ({
     <Container>
       <SearchField searchText={searchText} setSearchText={setSearchText} />
       <SortButton onClick={showSortMenu as () => void}>
-        <SortIcon src="/images/greenSort.svg" />
+        <SortIcon src="/images/blueSort.svg" />
       </SortButton>
       <SortMenu anchorEl={sortMenu} keepMounted open={Boolean(sortMenu)} onClose={closeSortMenu}>
         {SORT_OPTIONS.map(({ labelKey, option }) => (

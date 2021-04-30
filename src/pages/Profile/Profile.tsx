@@ -2,7 +2,13 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { format } from 'date-fns';
-import { Container, GenderItem, AdherentText, PhoneContainer } from './Profile.style';
+import {
+  Container,
+  GenderItem,
+  AdherentText,
+  PhoneContainer,
+  AutocompleteWrapper,
+} from './Profile.style';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
 import { FullWidthButton } from 'components/Button/Button';
@@ -199,23 +205,25 @@ export const Profile: FunctionComponent = () => {
             </InputFieldWrapper>
             <InputFieldWrapper>
               <PhoneContainer>
-                <Autocomplete
-                  options={phoneCountries}
-                  value={values.phoneCountry}
-                  onChange={(_, newValue: PhoneCountry | null) => {
-                    if (newValue !== null) setValues({ ...values, phoneCountry: newValue });
-                  }}
-                  getOptionLabel={formatPhoneCountryInput}
-                  renderInput={params => (
-                    <InputField
-                      {...params}
-                      disabled={isAdherent}
-                      hideOptionnal
-                      placeholder={intl.formatMessage({ id: 'profile.country' })}
-                      variant="outlined"
-                    />
-                  )}
-                />
+                <AutocompleteWrapper>
+                  <Autocomplete
+                    options={phoneCountries}
+                    value={values.phoneCountry}
+                    onChange={(_, newValue: PhoneCountry | null) => {
+                      if (newValue !== null) setValues({ ...values, phoneCountry: newValue });
+                    }}
+                    getOptionLabel={formatPhoneCountryInput}
+                    renderInput={params => (
+                      <InputField
+                        {...params}
+                        disabled={isAdherent}
+                        hideOptionnal
+                        placeholder={intl.formatMessage({ id: 'profile.country' })}
+                        variant="outlined"
+                      />
+                    )}
+                  />
+                </AutocompleteWrapper>
                 <InputField
                   disabled={isAdherent}
                   placeholder={intl.formatMessage({ id: 'profile.phone-number' })}

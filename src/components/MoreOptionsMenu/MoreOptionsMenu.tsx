@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useState, MouseEvent } from 'react';
-import { MoreIcon, IconContainer, Menu } from './MoreOptionsMenu.style';
+import { MoreIcon, IconContainer } from './MoreOptionsMenu.style';
 import UnfollowModal from './components/UnfollowModal';
 import { MenuItem } from '@material-ui/core';
+import Menu from 'components/Menu';
 
 interface MoreOptionsMenuProps {
   isUnfollowing: boolean;

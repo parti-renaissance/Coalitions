@@ -3,6 +3,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Close } from '@material-ui/icons';
 import styled from 'styled-components';
 import { colorPalette, media, getSpacing, styledTags } from 'stylesheet';
+import { FormControlLabel as MUIFormControlLabel } from '@material-ui/core';
 
 export const Container = styled(Dialog)`
   ${styledTags};
@@ -38,4 +39,8 @@ export const Title = styled.h3`
 `;
 export const Description = styled.p`
   margin: ${getSpacing(5)} 0;
+`;
+
+export const FormControlLabel = styled(MUIFormControlLabel)`
+  margin: 0;
 `;

@@ -1,9 +1,9 @@
 import React, { FunctionComponent, ChangeEvent } from 'react';
 import { useIntl } from 'react-intl';
-import { IconButton, InputAdornment, OutlinedInput } from '@material-ui/core';
+import { IconButton, InputAdornment } from '@material-ui/core';
 import { OutlinedInputProps } from '@material-ui/core/OutlinedInput';
 import { StyledFormControl } from 'components/InputField/InputField.style';
-import { CrossIcon, SearchIcon } from './SearchField.style';
+import { CrossIcon, SearchIcon, OutlinedInput } from './SearchField.style';
 import { hasEmoji } from 'services/formik/hasEmoji';
 
 type SearchFieldProps = {
@@ -39,7 +39,7 @@ const SearchField: FunctionComponent<SearchFieldProps> = ({
         endAdornment={
           <InputAdornment position="end">
             <IconButton onClick={resetSearchText}>
-              {searchText.length > 0 ? <CrossIcon /> : <SearchIcon src="/images/search.svg" />}
+              {searchText.length > 0 ? <CrossIcon /> : <SearchIcon src="/images/blueSearch.svg" />}
             </IconButton>
           </InputAdornment>
         }

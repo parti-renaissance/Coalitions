@@ -1,6 +1,6 @@
 import React, { useState, MouseEvent, FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { FirstNameContainer, UserIcon, UserMenu, FirstName } from './LogInOrOutButton.style';
+import { FirstNameContainer, UserIcon, FirstName } from './LogInOrOutButton.style';
 import { isUserLogged } from 'redux/Login';
 import useSelector from 'redux/useSelector';
 import { oauthUrl } from 'services/networking/auth';
@@ -12,6 +12,7 @@ import { useFeatureToggling } from 'services/useFeatureToggling';
 import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
 import { useLogout } from 'redux/Login/hooks/useLogout';
+import UserMenu from 'components/Menu';
 
 const LogInOrOutButton: FunctionComponent<{}> = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));

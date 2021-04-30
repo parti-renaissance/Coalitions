@@ -15,8 +15,8 @@ export const Container = styled.div`
   z-index: ${Z_INDEX};
   ${media.desktop(`
     position: relative;
-    margin-left: ${getSpacing(5)};
-    margin-right: ${getSpacing(5)};
+    display: flex;
+    flex: 1;
   `)}
   .MuiInputBase-root {
     height: ${MOBILE_HEADER_HEIGHT};
@@ -41,4 +41,9 @@ export const Container = styled.div`
 export const SearchIcon = styled.img`
   height: ${ICON_SIZE};
   width: ${ICON_SIZE};
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex: 1;
 `;

@@ -13,10 +13,11 @@ import { MediumLargeButton } from 'components/Button/Button';
 import LogInOrOutButton from './components/LogInOrOutButton';
 import { useLocation } from 'react-router';
 import SearchBar from './components/SearchBar';
+import { getIsMediumDesktop } from 'services/mobile/mobile';
 
 export const DesktopHeader: FunctionComponent<{}> = () => {
   const { pathname } = useLocation();
-  const showCreateCauseButton = !pathname.includes(PATHS.OUR_MISSION.url());
+  const showCreateCauseButton = !pathname.includes(PATHS.OUR_MISSION.url()) && getIsMediumDesktop();
   const showSearchBar = !pathname.includes(PATHS.CAUSE_LIST.url());
 
   return (
@@ -38,7 +39,7 @@ export const DesktopHeader: FunctionComponent<{}> = () => {
           </SubCategory>
         </DefaultHashLink>
       </HeaderSubContainer>
-      <HeaderSubContainer>
+      <HeaderSubContainer fullWidth>
         {showSearchBar ? <SearchBar /> : null}
         {showCreateCauseButton ? (
           <CreateCauseButton to={PATHS.OUR_MISSION.url()}>

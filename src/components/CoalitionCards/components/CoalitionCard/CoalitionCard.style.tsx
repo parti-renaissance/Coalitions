@@ -1,13 +1,5 @@
 import styled, { css } from 'styled-components';
-import {
-  getSpacing,
-  media,
-  borderRadius,
-  colorPalette,
-  fontSize,
-  fontFamily,
-  SPACING_UNIT,
-} from 'stylesheet';
+import { getSpacing, media, borderRadius, colorPalette, fontSize, fontFamily } from 'stylesheet';
 import { SmallButton } from 'components/Button/Button';
 
 export const MARGIN_BETWEEN_CARDS = getSpacing(5);

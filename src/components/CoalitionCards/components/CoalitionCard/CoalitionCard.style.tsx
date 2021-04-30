@@ -87,7 +87,7 @@ export const SelectedIndex = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${getSpacing(1)};
+  padding: ${getSpacing(2)};
   background-color: ${colorPalette.mintGreen};
   border-radius: ${borderRadius.medium};
   color: ${colorPalette.blueCoalition};

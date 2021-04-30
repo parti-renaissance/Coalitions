@@ -13,7 +13,7 @@ import {
 } from 'stylesheet';
 
 export const DESKTOP_CAUSE_CARD_WIDTH = SPACING_UNIT * 60;
-export const MOBILE_CAUSE_CARD_HEIGHT = SPACING_UNIT * 79;
+export const MOBILE_CAUSE_CARD_HEIGHT = SPACING_UNIT * 83;
 export const ADDITIONAL_MARGIN_FOR_SHADOW = SPACING_UNIT * 5;
 
 export const Container = styled.div`
@@ -42,10 +42,10 @@ export const CauseName = styled.div`
   */
   display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
   -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   overflow: hidden;
   flex-grow: 1;
-  max-height: ${getSpacing(10)};
+  max-height: ${getSpacing(15)};
   font-family: ${fontFamily.secondary};
   font-size: ${fontSize.h1Small.mobile};
   line-height: ${lineHeight.secondary};

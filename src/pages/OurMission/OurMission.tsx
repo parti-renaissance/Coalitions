@@ -6,7 +6,7 @@ import { PATHS } from 'routes';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router';
 import OurCommitments from 'components/OurCommitments';
-import { OurCommitmentsWrapper, VideoWrapper } from './OurMission.style';
+import { OurCommitmentsWrapper, VideoWrapper, SuccessStoriesWrapper } from './OurMission.style';
 import Video from 'components/Video';
 import SuccessStories from 'components/SuccessStories';
 
@@ -27,7 +27,9 @@ const OurMission: FunctionComponent = () => {
       <OurCommitmentsWrapper>
         <OurCommitments />
       </OurCommitmentsWrapper>
-      <SuccessStories />
+      <SuccessStoriesWrapper>
+        <SuccessStories />
+      </SuccessStoriesWrapper>
       <FixedBottomButton onClick={onCreateCauseClick}>
         <FormattedMessage id="cause-cta.cause-creation" />
       </FixedBottomButton>

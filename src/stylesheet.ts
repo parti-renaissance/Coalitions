@@ -72,6 +72,8 @@ export const borderRadius = {
   large: '10px',
 };
 
+export const ADDITIONAL_MARGIN_FOR_SHADOW = SPACING_UNIT * 5;
+
 export const boxShadow = {
   card: `0px 4px 14px 0px rgba(0,0,0,0.1)`,
 };

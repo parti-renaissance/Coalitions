@@ -1,38 +1,12 @@
 import styled from 'styled-components';
-import { media, defaultMargins, getSpacing } from 'stylesheet';
+import { defaultMargins } from 'stylesheet';
+import { MOBILE_MARGIN_BETWEEN_CARDS } from './components/SuccessStoryCard/SuccessStoryCard.style';
 
-export const Container = styled.div`
-  overflow: hidden;
-  padding-bottom: ${defaultMargins.vertical.mobile};
-  ${media.desktop(`
-    padding-bottom: ${defaultMargins.vertical.desktop};
-  `)}
+export const SuccessStoryCardWrapper = styled.div`
+  margin-right: ${MOBILE_MARGIN_BETWEEN_CARDS}px;
 `;
 
-export const Title = styled.h3`
-  margin-left: ${defaultMargins.horizontal.mobile};
-  margin-bottom: ${getSpacing(3)};
-  ${media.desktop(`
-    margin-left: ${defaultMargins.horizontal.desktop};
-    margin-bottom: ${getSpacing(6)};
-  `)}
-`;
-
-export const SubContainer = styled.div`
-  margin: -${getSpacing(3)};
-`;
-
-export const SubSubContainer = styled.div`
-  display: flex;
-  overflow-y: scroll;
-  padding: ${getSpacing(3)};
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-export const EmptyDiv = styled.div`
-  min-width: ${getSpacing(3)};
+export const EmptyMobileDiv = styled.div`
+  min-width: ${defaultMargins.horizontal.mobile};
+  margin-left: -${MOBILE_MARGIN_BETWEEN_CARDS}px;
 `;

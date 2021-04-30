@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { getSpacing, colorPalette, media, fonts, defaultMargins } from 'stylesheet';
 
 export const Container = styled.div`
-  padding: ${getSpacing(3)} ${getSpacing(3)} 0 ${getSpacing(3)};
+  padding: ${getSpacing(3)};
+  border-bottom: 1px solid ${colorPalette.greyLight};
   ${media.desktop(`
     display: flex;
     align-items: center;

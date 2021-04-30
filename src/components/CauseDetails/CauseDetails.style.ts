@@ -80,14 +80,3 @@ export const FirstQuickActionWrapper = styled.div`
     display: none;
   `)}
 `;
-
-const SEPARATOR_HEIGHT = '1px';
-
-export const Separator = styled.div`
-  height: ${SEPARATOR_HEIGHT};
-  background-color: ${colorPalette.greyLight};
-  margin-top: ${defaultMargins.vertical.mobile};
-  ${media.desktop(`
-    display: none;
-  `)}
-`;

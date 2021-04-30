@@ -25,6 +25,7 @@ interface CoalitionCardProps {
   coalition: Coalition;
 }
 
+// eslint-disable-next-line complexity
 const CoalitionCard: FunctionComponent<CoalitionCardProps> = ({
   onClick,
   selectedIndex,

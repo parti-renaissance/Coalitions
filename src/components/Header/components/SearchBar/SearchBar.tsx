@@ -31,7 +31,7 @@ const SearchBar: FunctionComponent<OutlinedInputProps> = props => {
   if (isShowSearchButtonVisible) {
     return (
       <StyledButton onClick={hideOrShowSearchButton(false)}>
-        <SearchIcon src="/images/search.svg" />
+        <SearchIcon src="/images/blueSearch.svg" />
       </StyledButton>
     );
   }

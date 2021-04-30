@@ -37,9 +37,9 @@ export const DesktopHeader: FunctionComponent<{}> = () => {
             <FormattedMessage id="header.coalitions" />
           </SubCategory>
         </DefaultHashLink>
-        {showSearchBar ? <SearchBar /> : null}
       </HeaderSubContainer>
       <HeaderSubContainer>
+        {showSearchBar ? <SearchBar /> : null}
         {showCreateCauseButton ? (
           <CreateCauseButton to={PATHS.OUR_MISSION.url()}>
             <MediumLargeButton variant="contained" color="primary">

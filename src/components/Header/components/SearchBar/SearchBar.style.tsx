@@ -16,7 +16,7 @@ export const Container = styled.div`
   ${media.desktop(`
     position: relative;
     margin-left: ${getSpacing(5)};
-    margin-right: ${getSpacing(10)};
+    margin-right: ${getSpacing(5)};
   `)}
   .MuiInputBase-root {
     height: ${MOBILE_HEADER_HEIGHT};

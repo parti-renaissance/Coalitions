@@ -45,7 +45,7 @@ const SearchAndSort: FunctionComponent<SearchAndSort> = ({
     <Container>
       <SearchField searchText={searchText} setSearchText={setSearchText} />
       <SortButton onClick={showSortMenu as () => void}>
-        <SortIcon src="/images/greenSort.svg" />
+        <SortIcon src="/images/blueSort.svg" />
       </SortButton>
       <SortMenu anchorEl={sortMenu} keepMounted open={Boolean(sortMenu)} onClose={closeSortMenu}>
         {SORT_OPTIONS.map(({ labelKey, option }) => (

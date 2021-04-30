@@ -1,6 +1,13 @@
 import styled from 'styled-components';
-import { colorPalette, fonts, getSpacing, media, defaultMargins, fontWeight } from 'stylesheet';
-import { ADDITIONAL_MARGIN_FOR_SHADOW } from 'components/Cause/Cause.style';
+import {
+  colorPalette,
+  fonts,
+  getSpacing,
+  media,
+  defaultMargins,
+  fontWeight,
+  ADDITIONAL_MARGIN_FOR_SHADOW,
+} from 'stylesheet';
 
 const TEXT_MAX_WIDTH = getSpacing(140);
 

@@ -15,7 +15,6 @@ import {
 export const DESKTOP_CAUSE_CARD_WIDTH = SPACING_UNIT * 60;
 export const MOBILE_CAUSE_CARD_HEIGHT = SPACING_UNIT * 83;
 export const DESKTOP_CAUSE_CARD_HEIGHT = SPACING_UNIT * 89;
-export const ADDITIONAL_MARGIN_FOR_SHADOW = SPACING_UNIT * 5;
 
 export const Container = styled.div`
   position: relative;

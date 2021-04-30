@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   colorPalette,
   defaultMargins,
@@ -6,14 +6,9 @@ import {
   fontWeight,
   getSpacing,
   media,
-  SPACING_UNIT,
   ADDITIONAL_MARGIN_FOR_SHADOW,
 } from 'stylesheet';
-import { MOBILE_CAUSE_CARD_HEIGHT, DESKTOP_CAUSE_CARD_HEIGHT } from 'components/Cause/Cause.style';
 import IconButton from '@material-ui/core/IconButton';
-
-const MOBILE_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 3;
-export const DESKTOP_CAUSE_MARGIN_RIGHT = SPACING_UNIT * 8;
 
 export const Container = styled.div`
   margin: 0 -${defaultMargins.horizontal.mobile};
@@ -41,7 +36,7 @@ export const SeeAllButton = styled.div`
   cursor: pointer;
 `;
 
-export const SubContainer = styled.div`
+export const SubContainer = styled.div<{ height: number }>`
   display: flex;
   flex-direction: row;
   flex: 1;
@@ -49,22 +44,13 @@ export const SubContainer = styled.div`
   overflow: scroll;
   margin-top: ${getSpacing(4)};
   padding-left: ${defaultMargins.horizontal.mobile};
-  height: ${MOBILE_CAUSE_CARD_HEIGHT + ADDITIONAL_MARGIN_FOR_SHADOW}px;
+  height: ${({ height }) => height + ADDITIONAL_MARGIN_FOR_SHADOW}px;
 `;
 
 export const CarouselWrapper = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(4)};
   `)}
-`;
-
-export const CauseCardWrapper = styled.div`
-  margin-right: ${MOBILE_CAUSE_MARGIN_RIGHT}px;
-`;
-
-export const EmptyMobileDiv = styled.div`
-  min-width: ${defaultMargins.horizontal.mobile};
-  margin-left: -${MOBILE_CAUSE_MARGIN_RIGHT}px;
 `;
 
 export const RightHeaderSubContainer = styled.div`
@@ -99,13 +85,15 @@ export const RightArrow = styled.img`
   width: ${ARROW_SIZE};
 `;
 
-export const LoaderContainer = styled.div`
+export const LoaderContainer = styled.div<{ mobileHeight: number; desktopHeight: number }>`
   margin-top: ${getSpacing(4)};
-  height: ${MOBILE_CAUSE_CARD_HEIGHT}px;
   display: flex;
   align-items: center;
   justify-content: center;
-  ${media.desktop(`
-    height: ${DESKTOP_CAUSE_CARD_HEIGHT}px;
-  `)}
+  ${({ mobileHeight, desktopHeight }) => css`
+    height: ${mobileHeight}px;
+    ${media.desktop(`
+      height: ${desktopHeight}px;
+    `)}
+  `};
 `;

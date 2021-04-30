@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState, MouseEvent } from 'react';
-import { Container, SortButton, SortIcon, SortMenu, SortItem } from './SearchAndSort.style';
+import { Container, SortButton, SortIcon, SortItem } from './SearchAndSort.style';
 import SearchField from 'components/SearchField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useIntl } from 'react-intl';
 import { SortOptions } from 'redux/Cause/hooks/useFetchCauses';
+import SortMenu from 'components/Menu';
 
 interface SearchAndSort {
   searchText: string;

@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import IconButton from '@material-ui/core/IconButton';
-import { media, getSpacing, fonts, fontWeight } from 'stylesheet';
-import Menu from '@material-ui/core/Menu';
+import { media, getSpacing, fontWeight } from 'stylesheet';
 
 export const Container = styled.div`
   display: flex;
@@ -22,17 +21,6 @@ export const SortIcon = styled.img`
   height: ${SORT_ICON_HEIGHT};
   margin: calc(calc(${SORT_ICON_WIDTH} - ${SORT_ICON_HEIGHT}) / 2) 0;
   width: ${SORT_ICON_WIDTH};
-`;
-
-export const SortMenu = styled(Menu)`
-  margin-top: ${getSpacing(8)};
-  li {
-    ${fonts.input};
-  }
-
-  ${media.desktop(`
-    margin-top: ${getSpacing(10)};
-  `)}
 `;
 
 export const SortItem = styled.div<{ isSelected: boolean }>`

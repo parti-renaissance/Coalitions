@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { media, defaultMargins, getSpacing, contentMaxWidth, colorPalette } from 'stylesheet';
+import { media, defaultMargins, getSpacing, contentMaxWidth } from 'stylesheet';
 import { DESKTOP_BUTTONS_WIDTH } from './components/HeaderButtons/HeaderButtons.style';
 
 export const Container = styled.div`

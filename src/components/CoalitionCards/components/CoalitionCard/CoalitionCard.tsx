@@ -50,7 +50,11 @@ const CoalitionCard: FunctionComponent<CoalitionCardProps> = ({
       <Image backgroundImage={coalition.image_url} onClick={onClick}>
         {selectedIndex !== undefined ? (
           <SelectedContainer>
-            <SelectedIndex>{selectedIndex + 1}</SelectedIndex>
+            <SelectedIndex>
+              {selectedIndex === 0
+                ? intl.formatMessage({ id: 'create_cause.coalitions.main_theme' })
+                : intl.formatMessage({ id: 'create_cause.coalitions.secondary_theme' })}
+            </SelectedIndex>
           </SelectedContainer>
         ) : null}
       </Image>

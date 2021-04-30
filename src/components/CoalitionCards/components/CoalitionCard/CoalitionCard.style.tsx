@@ -1,5 +1,13 @@
 import styled, { css } from 'styled-components';
-import { getSpacing, media, borderRadius, colorPalette, fontSize, fontFamily } from 'stylesheet';
+import {
+  getSpacing,
+  media,
+  borderRadius,
+  colorPalette,
+  fontSize,
+  fontFamily,
+  SPACING_UNIT,
+} from 'stylesheet';
 import { SmallButton } from 'components/Button/Button';
 
 export const MARGIN_BETWEEN_CARDS = getSpacing(5);
@@ -83,25 +91,16 @@ export const SelectedContainer = styled.div`
   justify-content: center;
 `;
 
-const MOBILE_INDEX_SIZE = getSpacing(5);
-const DESKTOP_INDEX_SIZE = getSpacing(6);
-
 export const SelectedIndex = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: ${MOBILE_INDEX_SIZE};
-  width: ${MOBILE_INDEX_SIZE};
+  padding: ${getSpacing(1)};
   background-color: ${colorPalette.mintGreen};
-  border-radius: 50%;
+  border-radius: ${borderRadius.medium};
   color: ${colorPalette.blueCoalition};
   font-family: ${fontFamily.secondary};
   font-size: ${fontSize.button.mobile};
-  ${media.desktop(`
-    font-size: ${fontSize.button.desktop};
-    height: ${DESKTOP_INDEX_SIZE};
-    width: ${DESKTOP_INDEX_SIZE};
-  `)}
 `;
 
 export const UnfollowButtonWrapper = styled.div`

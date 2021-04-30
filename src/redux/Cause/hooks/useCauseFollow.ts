@@ -41,7 +41,7 @@ export const useCauseFollow = (id: string | undefined) => {
   }, [error, errorHandler]);
 
   const followCause = useCallback(async () => {
-    if (id === undefined) {
+    if (id === undefined || loading) {
       return;
     }
 
@@ -54,7 +54,7 @@ export const useCauseFollow = (id: string | undefined) => {
     if (response.uuid !== undefined) {
       dispatch(optimisticallyMarkCauseAsSupported(id));
     }
-  }, [dispatch, doFollowCause, id]);
+  }, [dispatch, doFollowCause, id, loading]);
 
   return { loading, followCause };
 };

@@ -58,6 +58,9 @@ export const useUnauthenticatedCauseFollow = (causeId: string, onClose?: () => v
 
   const unauthenticatedCauseFollow = useCallback(
     async (values: InscriptionFormValues) => {
+      if (loading) {
+        return;
+      }
       const response = await doUnauthenticatedCauseFollow({
         email_address: values.email !== undefined ? values.email : '',
         first_name: values.firstName !== undefined ? values.firstName : '',
@@ -81,7 +84,7 @@ export const useUnauthenticatedCauseFollow = (causeId: string, onClose?: () => v
         }),
       );
     },
-    [causeId, dispatch, doUnauthenticatedCauseFollow, formatMessage, onClose],
+    [causeId, dispatch, doUnauthenticatedCauseFollow, formatMessage, loading, onClose],
   );
 
   return { loading, error, unauthenticatedCauseFollow };

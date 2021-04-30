@@ -54,7 +54,7 @@ export const StyledButton = styled(MediumLargeButton)`
 `;
 
 const DESKTOP_LOGO_FONT_WEIGHT = 700;
-const LOGO_LETTER_SPACING = '1.5px';
+const LOGO_LETTER_SPACING = '1px';
 
 export const HeaderTitle = styled.div`
   ${fonts.button};

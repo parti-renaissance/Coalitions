@@ -29,8 +29,18 @@ export const CoalitionFiltersSubContainer = styled.div<{ displayAll: boolean }>`
   flex-wrap: wrap;
   align-items: space-between;
   overflow: hidden;
-  max-height: ${({ displayAll }) => (displayAll ? '800px' : getSpacing(9))};
   transition: max-height 0.5s;
+  ${({ displayAll }) =>
+    displayAll
+      ? css`
+          max-height: 800px;
+        `
+      : css`
+          max-height: ${getSpacing(7)};
+          ${media.desktop(`
+            max-height: ${getSpacing(9)};
+          `)};
+        `};
 `;
 
 export const StyledChip = styled.div<{ isSelected?: boolean }>`

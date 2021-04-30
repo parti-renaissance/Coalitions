@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { format } from 'date-fns';
 import {
@@ -8,6 +8,7 @@ import {
   AdherentText,
   PhoneContainer,
   AutocompleteWrapper,
+  DeleteAccountButton,
 } from './Profile.style';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
@@ -23,6 +24,7 @@ import { useFetchPhoneCountries, PhoneCountry } from './hooks/useFetchPhoneCount
 import { Label } from 'components/IconAndLabel/IconAndLabel.style';
 import { ModalCheckbox } from 'components/Modal/ModalCheckbox';
 import { useFeatureToggling } from 'services/useFeatureToggling';
+import DeleteAccountModal from './components/DeleteAccountModal/DeleteAccountModal';
 
 const UpdateEmProfileLink: FunctionComponent<{}> = () => (
   <a
@@ -51,6 +53,7 @@ export const Profile: FunctionComponent = () => {
   const { loading, updateUserProfile } = useUpdateUserProfile(currentUser?.uuid);
   const { phoneCountries, fetchPhoneCountries } = useFetchPhoneCountries();
   const { isSubscriptionUpdateEnabled } = useFeatureToggling();
+  const [openDeleteAccountModal, setOpenDeleteAccountModal] = useState(false);
 
   useEffect(() => {
     fetchPhoneCountries();
@@ -278,6 +281,19 @@ export const Profile: FunctionComponent = () => {
           </form>
         )}
       </Formik>
+      {isAdherent === false ? (
+        <DeleteAccountButton
+          size="small"
+          variant="outlined"
+          onClick={() => setOpenDeleteAccountModal(true)}
+        >
+          <FormattedMessage id="profile.delete_account" />
+        </DeleteAccountButton>
+      ) : null}
+      <DeleteAccountModal
+        isOpened={openDeleteAccountModal}
+        onClose={() => setOpenDeleteAccountModal(false)}
+      />
     </Container>
   );
 };

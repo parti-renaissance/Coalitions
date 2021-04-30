@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { getSpacing, media, fontSize } from 'stylesheet';
+import { getSpacing, media, fonts, fontWeight } from 'stylesheet';
+import { MediumLargeButton as Button } from 'components/Button/Button';
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -11,11 +12,16 @@ export const ButtonContainer = styled.div`
   ${media.desktop(`
     flex-direction: row;
     > * {
-      font-size: ${fontSize.button.mobile}
       flex: 1 1 content;
       :first-child {
         margin-right: ${getSpacing(3)};
       }
     }
     `)}
+`;
+
+export const ActionButton = styled(Button)`
+  ${fonts.input}
+  font-weight: ${fontWeight.bold};
+  padding: ${getSpacing(2)};
 `;

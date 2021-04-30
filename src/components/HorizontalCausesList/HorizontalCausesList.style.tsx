@@ -11,6 +11,7 @@ import {
 import {
   ADDITIONAL_MARGIN_FOR_SHADOW,
   MOBILE_CAUSE_CARD_HEIGHT,
+  DESKTOP_CAUSE_CARD_HEIGHT,
 } from 'components/Cause/Cause.style';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -103,4 +104,11 @@ export const RightArrow = styled.img`
 
 export const LoaderContainer = styled.div`
   margin-top: ${getSpacing(4)};
+  height: ${MOBILE_CAUSE_CARD_HEIGHT}px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${media.desktop(`
+    height: ${DESKTOP_CAUSE_CARD_HEIGHT}px;
+  `)}
 `;

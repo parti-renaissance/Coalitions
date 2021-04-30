@@ -14,6 +14,7 @@ import {
 
 export const DESKTOP_CAUSE_CARD_WIDTH = SPACING_UNIT * 60;
 export const MOBILE_CAUSE_CARD_HEIGHT = SPACING_UNIT * 83;
+export const DESKTOP_CAUSE_CARD_HEIGHT = SPACING_UNIT * 89;
 export const ADDITIONAL_MARGIN_FOR_SHADOW = SPACING_UNIT * 5;
 
 export const Container = styled.div`
@@ -28,7 +29,7 @@ export const Container = styled.div`
   min-width: ${getSpacing(50)};
   max-width: ${getSpacing(75)};
   ${media.desktop(`
-    height: ${getSpacing(89)};
+    height: ${DESKTOP_CAUSE_CARD_HEIGHT}px;
     width: ${DESKTOP_CAUSE_CARD_WIDTH}px;
     min-width: unset;
     max-width: unset;

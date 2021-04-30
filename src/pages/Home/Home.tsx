@@ -10,6 +10,7 @@ import {
   CreateCauseButtonWrapper,
   Bold,
   OurCommitmentsWrapper,
+  SuccessStoriesWrapper,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
 import { CoalitionDefinition } from 'components/Definition/CoalitionDefinition';
@@ -83,7 +84,9 @@ const Home: React.FunctionComponent = () => {
       <OurCommitmentsWrapper>
         <OurCommitments />
       </OurCommitmentsWrapper>
-      <SuccessStories />
+      <SuccessStoriesWrapper>
+        <SuccessStories />
+      </SuccessStoriesWrapper>
       <CoalitionDefinition />
       <Block>
         <h3 id="coalitions">

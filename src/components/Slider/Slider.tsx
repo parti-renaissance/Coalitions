@@ -6,7 +6,6 @@ import {
   CarouselWrapper,
   Container,
   RightHeaderSubContainer,
-  RightCarouselButton,
   CarouselControlsContainer,
   LeftArrow,
   RightArrow,
@@ -80,9 +79,9 @@ const Slider: FunctionComponent<SliderProps> = ({
             <IconButton onClick={onControlButtonClick(false)}>
               <LeftArrow src="/images/leftCircleArrow.svg" />
             </IconButton>
-            <RightCarouselButton onClick={onControlButtonClick(true)}>
+            <IconButton onClick={onControlButtonClick(true)}>
               <RightArrow src="/images/leftCircleArrow.svg" />
-            </RightCarouselButton>
+            </IconButton>
           </CarouselControlsContainer>
           {onSeeAllClick !== undefined ? (
             <SeeAllButton onClick={onSeeAllClick}>

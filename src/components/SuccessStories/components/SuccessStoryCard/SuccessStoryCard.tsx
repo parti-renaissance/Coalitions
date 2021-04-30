@@ -12,20 +12,14 @@ import { SuccessStory } from '../../data';
 import { FormattedMessage } from 'react-intl';
 
 interface SuccessStoryProps {
-  isFirst: boolean;
-  show: boolean;
   successStory: SuccessStory;
 }
 
-const SuccessStoryCard: FunctionComponent<SuccessStoryProps> = ({
-  successStory,
-  isFirst,
-  show,
-}) => {
+const SuccessStoryCard: FunctionComponent<SuccessStoryProps> = ({ successStory }) => {
   const { coalition, description, author, imageSrc } = successStory;
 
   return (
-    <Container isFirst={isFirst} show={show}>
+    <Container>
       <Image src={imageSrc} />
       <SubContainer>
         <Coalition>{coalition}</Coalition>

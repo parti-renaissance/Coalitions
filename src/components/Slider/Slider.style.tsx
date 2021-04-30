@@ -8,7 +8,6 @@ import {
   media,
   ADDITIONAL_MARGIN_FOR_SHADOW,
 } from 'stylesheet';
-import IconButton from '@material-ui/core/IconButton';
 
 export const Container = styled.div`
   margin: 0 -${defaultMargins.horizontal.mobile};
@@ -34,6 +33,9 @@ export const SeeAllButton = styled.div`
   font-weight: ${fontWeight.normal};
   color: ${colorPalette.blueCoalition};
   cursor: pointer;
+  ${media.desktop(`
+    margin-left: ${getSpacing(4)};
+  `)}
 `;
 
 export const SubContainer = styled.div<{ height: number }>`
@@ -63,12 +65,6 @@ export const CarouselControlsContainer = styled.div`
   ${media.desktop(`
     display: flex;
     align-items: center;
-  `)}
-`;
-
-export const RightCarouselButton = styled(IconButton)`
-  ${media.desktop(`
-    margin-right: ${getSpacing(4)};
   `)}
 `;
 

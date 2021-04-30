@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   colorPalette,
   getSpacing,
@@ -9,13 +9,15 @@ import {
   fontSize,
   lineHeight,
   fontWeight,
-  defaultMargins,
+  SPACING_UNIT,
 } from 'stylesheet';
 
-const DESKTOP_MARGIN_BETWEEN_CARDS = getSpacing(10);
-const MOBILE_MARGIN_BETWEEN_CARDS = getSpacing(3);
+export const DESKTOP_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 10;
+export const MOBILE_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 3;
+export const DESKTOP_HEIGHT = SPACING_UNIT * 68;
+export const MOBILE_HEIGHT = SPACING_UNIT * 102;
 
-export const Container = styled.div<{ isFirst: boolean; show: boolean }>`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${colorPalette.white};
@@ -24,36 +26,13 @@ export const Container = styled.div<{ isFirst: boolean; show: boolean }>`
   overflow: hidden;
   width: min(75vw, ${getSpacing(60)});
   min-width: min(75vw, ${getSpacing(60)});
-  height: ${getSpacing(102)};
+  height: ${MOBILE_HEIGHT}px;
   ${media.desktop(`
     flex-direction: row;
     min-width: unset;
-    width: calc(
-      calc(100% - ${DESKTOP_MARGIN_BETWEEN_CARDS}) / 2
-      );
-    height: ${getSpacing(68)};
+    width: 100%;
+    height: ${DESKTOP_HEIGHT}px;
   `)}
-  margin-right: ${MOBILE_MARGIN_BETWEEN_CARDS};
-  ${media.desktop(`
-    margin-right: ${DESKTOP_MARGIN_BETWEEN_CARDS};
-  `)};
-  ${({ isFirst }) =>
-    isFirst
-      ? css`
-          margin-left: ${defaultMargins.horizontal.mobile};
-          ${media.desktop(`
-            margin-left: ${defaultMargins.horizontal.desktop};
-          `)}
-        `
-      : css``};
-  ${({ show }) =>
-    show
-      ? css``
-      : css`
-          ${media.desktop(`
-            display: none;
-          `)}
-        `};
 `;
 
 export const Image = styled.img`

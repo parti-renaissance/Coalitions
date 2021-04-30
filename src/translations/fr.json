@@ -138,7 +138,9 @@
     "title": "Créer un mot de passe",
     "password": "Mot de passe",
     "password-confirm": "Confirmer le mot de passe",
-    "submit": "Enregistrer"
+    "submit": "Enregistrer",
+    "expired-link": "Votre lien a expiré, vous pouvez en demander un nouveau",
+    "reset-password": "Renvoyer un lien"
   },
   "general": {
     "see-more": "Voir plus"

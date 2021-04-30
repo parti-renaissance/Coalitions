@@ -12,6 +12,7 @@ export const oauthUrl = `${oauthBaseUrl}?response_type=code&client_id=${oauthCli
 export const OAUTH_SOURCE = 'coalitions';
 
 export const logoutUrl = `${process.env.REACT_APP_OAUTH_URL}/deconnexion`;
+export const forgottenPasswordUrl = `${process.env.REACT_APP_OAUTH_URL}/mot-de-passe-oublie`;
 
 type oauthPayload = {
   client_id?: string;

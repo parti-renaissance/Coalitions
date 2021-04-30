@@ -10,7 +10,7 @@ import { SUCCESS_STORIES } from './data';
 import { useIntl } from 'react-intl';
 import { getIsMobile } from 'services/mobile/mobile';
 import Slider from 'components/Slider';
-import { LARGE_DESKTOP_BREAK_POINT, defaultMarginsAsNumber } from 'stylesheet';
+import { defaultMarginsAsNumber, TABLET_BREAK_POINT } from 'stylesheet';
 
 const SuccessStories: FunctionComponent<{}> = () => {
   const intl = useIntl();
@@ -21,13 +21,9 @@ const SuccessStories: FunctionComponent<{}> = () => {
       slidesCount={SUCCESS_STORIES.length}
       title={intl.formatMessage({ id: 'success_stories.title' })}
       desktopCarouselProps={{
-        slideWidth: `${(Math.min(
-          window.innerWidth,
-          LARGE_DESKTOP_BREAK_POINT + 2 * defaultMarginsAsNumber.horizontal.desktop,
-        ) -
+        slideWidth: `${TABLET_BREAK_POINT -
           2 * defaultMarginsAsNumber.horizontal.desktop -
-          DESKTOP_MARGIN_BETWEEN_CARDS) /
-          2}px`,
+          DESKTOP_MARGIN_BETWEEN_CARDS}px`,
         cellSpacing: DESKTOP_MARGIN_BETWEEN_CARDS,
       }}
       slidesHeight={{ mobile: MOBILE_HEIGHT, desktop: DESKTOP_HEIGHT }}

@@ -25,10 +25,25 @@ export const SyncModal: FunctionComponent<SyncModalProps> = ({ isOpened, onClose
   return (
     <Modal isOpened={isOpened} onClose={onClose}>
       <Container>
-        <Image src="/images/walking.gif" />
-        <Content>
-          <FormattedMessage id="send_mails.sync-modal.loading-content" />{' '}
-        </Content>
+        {recipients === null ? (
+          <>
+            <Image src="/images/walking.gif" />
+            <Content>
+              <FormattedMessage id="send_mails.sync-modal.loading-content" />{' '}
+            </Content>
+          </>
+        ) : (
+          <>
+            <Content>
+              <FormattedMessage
+                id="send_mails.sync-modal.recipients-info"
+                values={{
+                  recipientsNumber: recipients,
+                }}
+              />
+            </Content>
+          </>
+        )}
         <FullWidthButton
           disabled={recipients === null}
           type="submit"

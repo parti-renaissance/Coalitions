@@ -300,6 +300,7 @@
     "validate": "Envoyer",
     "sync-modal": {
       "loading-content": "Nous créons votre email, encore quelques secondes...",
+      "recipients-info": "Votre email est prêt, il sera envoyé à {recipientsNumber} soutiens.",
       "submit": "Envoyer"
     },
     "form_errors": {

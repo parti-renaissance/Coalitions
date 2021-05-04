@@ -1,10 +1,9 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
-import { SendMailForm } from './useValidateSendMailsForm';
 
-const usePostMailsErrorHandler = () => {
+const useSyncMailsErrorHandler = () => {
   const { formatMessage } = useIntl();
 
   return useCallback(
@@ -21,13 +20,13 @@ const usePostMailsErrorHandler = () => {
   );
 };
 
-export const usePostMails = (causeId: string) => {
-  const errorHandler = usePostMailsErrorHandler();
+export const useSyncMails = () => {
+  const errorHandler = useSyncMailsErrorHandler();
+  const [recipients, setRecipients] = useState<number | null>(null);
 
-  const [{ loading, error }, doPostMails] = useTypedAsyncFn(async (mails: SendMailForm) => {
-    console.log('mail', mails);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    return 'mailId';
+  const [{ error }, doSyncMails] = useTypedAsyncFn(async () => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    return 12;
   }, []);
 
   useEffect(() => {
@@ -36,15 +35,16 @@ export const usePostMails = (causeId: string) => {
     }
   }, [error, errorHandler]);
 
-  const postMails = useCallback(
-    async (mails: SendMailForm) => {
-      const response = await doPostMails(mails);
+  const syncMails = useCallback(
+    async (mailId: string) => {
+      console.log('mailId', mailId);
+      const response = await doSyncMails();
       if (response instanceof Error) return;
 
-      return response;
+      setRecipients(response);
     },
-    [doPostMails],
+    [doSyncMails],
   );
 
-  return { loading, error, postMails };
+  return { recipients, error, syncMails };
 };

@@ -17,9 +17,11 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
   const { validateForm } = useValidateSendMailsForm();
   const { loading, error, postMails } = usePostMails(causeId);
   const [openSyncModal, setOpenSyncModal] = useState(false);
+  const [mailId, setMailId] = useState<string | undefined>(undefined);
 
   const onSubmit = async (values: SendMailForm) => {
-    await postMails(values);
+    const response = await postMails(values);
+    setMailId(response);
     setOpenSyncModal(true);
   };
   return (
@@ -88,6 +90,7 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
       <SyncModal
         isOpened={openSyncModal && error === undefined}
         onClose={() => setOpenSyncModal(false)}
+        mailId={mailId}
       />
     </>
   );

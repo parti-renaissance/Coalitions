@@ -1,15 +1,27 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { Modal } from 'components/Modal/Modal';
 import { Container, Image, Content } from './SyncModal.style';
 import { FormattedMessage } from 'react-intl';
 import { FullWidthButton } from 'components/Button/Button';
+import { useSyncMails } from 'components/SendMails/hooks/useSyncMail';
 
 interface SyncModalProps {
   isOpened: boolean;
   onClose: () => void;
+  mailId?: string;
 }
 
-export const SyncModal: FunctionComponent<SyncModalProps> = ({ isOpened, onClose }) => {
+export const SyncModal: FunctionComponent<SyncModalProps> = ({ isOpened, onClose, mailId }) => {
+  const { recipients, error, syncMails } = useSyncMails();
+
+  useEffect(() => {
+    if (error !== undefined) onClose();
+  }, [error, onClose]);
+
+  useEffect(() => {
+    if (isOpened && mailId !== undefined) syncMails(mailId);
+  }, [isOpened, mailId, syncMails]);
+
   return (
     <Modal isOpened={isOpened} onClose={onClose}>
       <Container>
@@ -18,7 +30,7 @@ export const SyncModal: FunctionComponent<SyncModalProps> = ({ isOpened, onClose
           <FormattedMessage id="send_mails.sync-modal.loading-content" />{' '}
         </Content>
         <FullWidthButton
-          disabled={true}
+          disabled={recipients === null}
           type="submit"
           size="small"
           variant="contained"

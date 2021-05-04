@@ -91,6 +91,7 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
         isOpened={openSyncModal && error === undefined}
         onClose={() => setOpenSyncModal(false)}
         mailId={mailId}
+        causeId={causeId}
       />
     </>
   );

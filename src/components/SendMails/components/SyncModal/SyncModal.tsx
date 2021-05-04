@@ -4,15 +4,23 @@ import { Container, Image, Content } from './SyncModal.style';
 import { FormattedMessage } from 'react-intl';
 import { FullWidthButton } from 'components/Button/Button';
 import { useSyncMails } from 'components/SendMails/hooks/useSyncMail';
+import { useSendMails } from 'components/SendMails/hooks/useSendMails';
 
 interface SyncModalProps {
   isOpened: boolean;
   onClose: () => void;
   mailId?: string;
+  causeId: string;
 }
 
-export const SyncModal: FunctionComponent<SyncModalProps> = ({ isOpened, onClose, mailId }) => {
+export const SyncModal: FunctionComponent<SyncModalProps> = ({
+  isOpened,
+  onClose,
+  mailId,
+  causeId,
+}) => {
   const { recipients, error, syncMails } = useSyncMails();
+  const { loading, sendMails } = useSendMails(causeId);
 
   useEffect(() => {
     if (error !== undefined) onClose();
@@ -45,7 +53,9 @@ export const SyncModal: FunctionComponent<SyncModalProps> = ({ isOpened, onClose
           </>
         )}
         <FullWidthButton
-          disabled={recipients === null}
+          disabled={recipients === null || mailId === undefined}
+          onClick={() => sendMails(mailId ?? '')}
+          isLoading={loading}
           type="submit"
           size="small"
           variant="contained"

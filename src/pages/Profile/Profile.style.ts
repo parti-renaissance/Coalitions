@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { getSpacing, media, defaultMargins, fonts, colorPalette, borderRadius } from 'stylesheet';
 import MenuItem from '@material-ui/core/MenuItem';
+import { DefaultButton } from 'components/Button/Button';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     margin: ${defaultMargins.vertical.desktop} auto;
@@ -47,4 +50,9 @@ export const AutocompleteWrapper = styled.div`
     margin-right: ${getSpacing(2)};
     margin-bottom: unset;
   `)}
+`;
+
+export const DeleteAccountButton = styled(DefaultButton)`
+  align-self: center;
+  margin-top: ${getSpacing(10)};
 `;

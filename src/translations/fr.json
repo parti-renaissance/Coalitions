@@ -23,7 +23,14 @@
       "female": "Femme"
     },
     "update_for_adherent": "Pour modifier votre profil adhérent, connectez-vous à {link}.",
-    "update_success": "Vos nouvelles informations ont été enregistrées avec succès"
+    "update_success": "Vos nouvelles informations ont été enregistrées avec succès",
+    "delete_account": "Supprimer mon compte"
+  },
+  "delete-account-modal": {
+    "title": "Êtes-vous sûr de votre choix ?",
+    "description": "Cette action est définitive, vos soutiens seront supprimés, vos causes seront supprimées ou reprises.",
+    "confirm": "Supprimer mon compte",
+    "cancel": "Annuler"
   },
   "footer": {
     "legal-notice": "Mentions Légales",

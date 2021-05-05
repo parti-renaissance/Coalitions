@@ -305,6 +305,11 @@
     "object": "Objet",
     "body": "Contenu",
     "validate": "Envoyer",
+    "sync-modal": {
+      "loading-content": "Nous créons votre email, encore quelques secondes...",
+      "recipients-info": "Votre email est prêt, il sera envoyé à {recipientsNumber} soutiens.",
+      "submit": "Envoyer"
+    },
     "form_errors": {
       "too-short-object": "L’objet doit faire minimum 3 caractères.",
       "too-short-body": "Le contenu doit faire minimum 3 caractères.",

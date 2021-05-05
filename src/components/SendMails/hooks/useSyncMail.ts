@@ -1,11 +1,9 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { useHistory } from 'react-router-dom';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
-import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 
-const useSendMailsErrorHandler = () => {
+const useSyncMailsErrorHandler = () => {
   const { formatMessage } = useIntl();
 
   return useCallback(
@@ -22,13 +20,13 @@ const useSendMailsErrorHandler = () => {
   );
 };
 
-export const useSendMails = (causeId: string) => {
-  const errorHandler = useSendMailsErrorHandler();
-  const { push } = useHistory();
+export const useSyncMails = () => {
+  const errorHandler = useSyncMailsErrorHandler();
+  const [recipients, setRecipients] = useState<number | null>(null);
 
-  const [{ loading, error }, doSendMails] = useTypedAsyncFn(async (mailId: string) => {
-    console.log('mailId', mailId);
-    await new Promise(resolve => setTimeout(resolve, 1000));
+  const [{ error }, doSyncMails] = useTypedAsyncFn(async () => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    return 12;
   }, []);
 
   useEffect(() => {
@@ -37,15 +35,16 @@ export const useSendMails = (causeId: string) => {
     }
   }, [error, errorHandler]);
 
-  const sendMails = useCallback(
+  const syncMails = useCallback(
     async (mailId: string) => {
-      const response = await doSendMails(mailId);
+      console.log('mailId', mailId);
+      const response = await doSyncMails();
       if (response instanceof Error) return;
 
-      push({ pathname: PATHS.CAUSE.url(causeId), search: '?sendMail=true' });
+      setRecipients(response);
     },
-    [causeId, doSendMails, push],
+    [doSyncMails],
   );
 
-  return { loading, error, sendMails };
+  return { recipients, error, syncMails };
 };

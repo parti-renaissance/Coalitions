@@ -1,9 +1,10 @@
 import Formik from 'components/Formik';
 import InputField from 'components/InputField';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useSendMails } from './hooks/useSendMails';
+import { SyncModal } from './components/SyncModal/SyncModal';
+import { usePostMails } from './hooks/usePostMails';
 import { useValidateSendMailsForm, SendMailForm } from './hooks/useValidateSendMailsForm';
 import { SendMailsDescription, SendMailsTitle, ValidateButton } from './SendMails.style';
 
@@ -14,7 +15,15 @@ type SendMailsProps = {
 export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
   const { formatMessage } = useIntl();
   const { validateForm } = useValidateSendMailsForm();
-  const { loading, sendMails } = useSendMails(causeId);
+  const { loading, error, postMails } = usePostMails(causeId);
+  const [openSyncModal, setOpenSyncModal] = useState(false);
+  const [mailId, setMailId] = useState<string | undefined>(undefined);
+
+  const onSubmit = async (values: SendMailForm) => {
+    const response = await postMails(values);
+    setMailId(response);
+    setOpenSyncModal(true);
+  };
   return (
     <>
       <SendMailsTitle>
@@ -25,7 +34,7 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
       </SendMailsDescription>
       <Formik<SendMailForm>
         initialValues={{} as SendMailForm}
-        onSubmit={sendMails}
+        onSubmit={onSubmit}
         validate={validateForm}
         validateOnMount
       >
@@ -78,6 +87,12 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
           </form>
         )}
       </Formik>
+      <SyncModal
+        isOpened={openSyncModal && error === undefined}
+        onClose={() => setOpenSyncModal(false)}
+        mailId={mailId}
+        causeId={causeId}
+      />
     </>
   );
 };

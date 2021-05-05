@@ -27,7 +27,7 @@ const useUpdateCauseErrorHandler = () => {
   );
 };
 
-export const useUpdateCause = () => {
+export const useUpdateCause = (slug: string) => {
   const { push } = useHistory();
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
@@ -62,7 +62,7 @@ export const useUpdateCause = () => {
 
       if (response instanceof Error) return;
 
-      push(PATHS.CAUSE.url(cause.slug));
+      push(PATHS.CAUSE.url(slug));
       dispatch(
         updateSnackbar({
           message: formatMessage({ id: 'update_cause.success' }),
@@ -70,7 +70,7 @@ export const useUpdateCause = () => {
         }),
       );
     },
-    [dispatch, doUpdateCause, formatMessage, push],
+    [dispatch, doUpdateCause, formatMessage, push, slug],
   );
 
   return { loading, error, updateCause };

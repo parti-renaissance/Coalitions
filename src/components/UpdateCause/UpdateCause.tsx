@@ -8,12 +8,12 @@ type UpdateCauseProps = {
 };
 
 const UpdateCause: FunctionComponent<UpdateCauseProps> = ({ cause }) => {
-  const { loading: isUpdatingCause, updateCause } = useUpdateCause();
+  const { loading: isUpdatingCause, updateCause } = useUpdateCause(cause.slug);
 
   const onSubmit = useCallback(
     (updatedCause: InCreationCause | Cause) => {
       updateCause({
-        cause: cause as Cause,
+        cause: updatedCause as Cause,
         shouldUpdateImage: cause.image_url !== updatedCause.image_url,
       });
     },

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
+import { authenticatedApiClient } from 'services/networking/client';
 
 const useSyncMailsErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -24,9 +25,25 @@ export const useSyncMails = () => {
   const errorHandler = useSyncMailsErrorHandler();
   const [recipients, setRecipients] = useState<number | null>(null);
 
-  const [{ error }, doSyncMails] = useTypedAsyncFn(async () => {
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    return 12;
+  const [{ error }, doSyncMails] = useTypedAsyncFn(async (mailId: string) => {
+    let attempts = 0;
+
+    const executePoll = async (
+      resolve: (value: { synchronized?: boolean }) => void,
+      reject: (reason?: Error) => void,
+    ) => {
+      const result = await authenticatedApiClient.get(`v3/adherent_messages/${mailId}`);
+      attempts++;
+
+      if (result.synchronized !== undefined && result.synchronized) {
+        return resolve(result);
+      } else if (attempts === 10) {
+        return reject(new Error('Exceeded max attempts'));
+      } else {
+        setTimeout(executePoll, 3000, resolve, reject);
+      }
+    };
+    return new Promise(executePoll);
   }, []);
 
   useEffect(() => {
@@ -37,11 +54,10 @@ export const useSyncMails = () => {
 
   const syncMails = useCallback(
     async (mailId: string) => {
-      console.log('mailId', mailId);
-      const response = await doSyncMails();
+      const response = await doSyncMails(mailId);
       if (response instanceof Error) return;
 
-      setRecipients(response);
+      setRecipients(response?.recipient_count);
     },
     [doSyncMails],
   );

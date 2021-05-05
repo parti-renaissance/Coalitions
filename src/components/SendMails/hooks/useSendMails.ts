@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
+import { authenticatedApiClient } from 'services/networking/client';
 
 const useSendMailsErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -27,8 +28,7 @@ export const useSendMails = (causeId: string) => {
   const { push } = useHistory();
 
   const [{ loading, error }, doSendMails] = useTypedAsyncFn(async (mailId: string) => {
-    console.log('mailId', mailId);
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await authenticatedApiClient.post(`v3/adherent_messages/${mailId}/send`, {});
   }, []);
 
   useEffect(() => {

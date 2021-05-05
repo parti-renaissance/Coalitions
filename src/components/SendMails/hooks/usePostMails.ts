@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
+import { authenticatedApiClient } from 'services/networking/client';
 import { SendMailForm } from './useValidateSendMailsForm';
 
 const usePostMailsErrorHandler = () => {
@@ -24,10 +25,17 @@ const usePostMailsErrorHandler = () => {
 export const usePostMails = (causeId: string) => {
   const errorHandler = usePostMailsErrorHandler();
 
-  const [{ loading, error }, doPostMails] = useTypedAsyncFn(async (mails: SendMailForm) => {
-    console.log('mail', mails);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    return 'mailId';
+  const [{ loading, error }, doPostMails] = useTypedAsyncFn(async (mail: SendMailForm) => {
+    const postedMail = await authenticatedApiClient.post('v3/adherent_messages', {
+      type: 'coalitions',
+      label: `Pourunecause: ${mail.object}`,
+      subject: mail.object,
+      content: mail.body,
+    });
+    await authenticatedApiClient.put(`v3/adherent_messages/${postedMail.uuid}/filter`, {
+      cause: causeId,
+    });
+    return postedMail.uuid;
   }, []);
 
   useEffect(() => {
@@ -37,8 +45,8 @@ export const usePostMails = (causeId: string) => {
   }, [error, errorHandler]);
 
   const postMails = useCallback(
-    async (mails: SendMailForm) => {
-      const response = await doPostMails(mails);
+    async (mail: SendMailForm) => {
+      const response = await doPostMails(mail);
       if (response instanceof Error) return;
 
       return response;

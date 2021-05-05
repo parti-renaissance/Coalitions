@@ -249,7 +249,7 @@ export const Profile: FunctionComponent = () => {
                   name="coalitionSubscription"
                   label={
                     <Label>
-                      <FormattedMessage id="cgu_modal.accept-cause" />
+                      <FormattedMessage id="cgu_modal.accept-coalition" />
                     </Label>
                   }
                 />
@@ -259,7 +259,7 @@ export const Profile: FunctionComponent = () => {
                   name="causeSubscription"
                   label={
                     <Label>
-                      <FormattedMessage id="cgu_modal.accept-coalition" />
+                      <FormattedMessage id="cgu_modal.accept-cause" />
                     </Label>
                   }
                 />

@@ -53,7 +53,7 @@ export const SyncModal: FunctionComponent<SyncModalProps> = ({
           </>
         )}
         <FullWidthButton
-          disabled={recipients === null || mailId === undefined}
+          disabled={recipients === null || mailId === undefined || recipients === 0}
           onClick={() => sendMails(mailId ?? '')}
           isLoading={loading}
           type="submit"

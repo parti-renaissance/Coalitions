@@ -6,9 +6,12 @@ import { updateCoalitions, markCoalitionsAsFollowed } from '../slice';
 import { Coalition } from '../types';
 import HandleErrorService from 'services/HandleErrorService';
 import { useFetchFollowedCoalitions } from './useFetchFollowedCoalitions';
+import useSelector from 'redux/useSelector';
+import { isUserLogged } from 'redux/Login/selectors';
 
 export const useFetchCoalitions = () => {
   const dispatch = useDispatch();
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
   const { loading: loadingFollowed, doFetchFollowedCoalitions } = useFetchFollowedCoalitions();
 
@@ -30,11 +33,11 @@ export const useFetchCoalitions = () => {
       return;
     }
 
-    const followedCoalitions = await doFetchFollowedCoalitions();
+    const followedCoalitions = await doFetchFollowedCoalitions(isUserLoggedIn);
 
     dispatch(updateCoalitions(coalitions));
     dispatch(markCoalitionsAsFollowed(followedCoalitions));
-  }, [dispatch, doFetchCoalitions, doFetchFollowedCoalitions]);
+  }, [dispatch, doFetchCoalitions, doFetchFollowedCoalitions, isUserLoggedIn]);
 
   return { fetchCoalitions, isFetchingCoalitions: isFetchingCoalitions || loadingFollowed };
 };

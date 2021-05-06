@@ -1,8 +1,10 @@
+import { convertToHTML } from 'draft-convert';
 import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { authenticatedApiClient } from 'services/networking/client';
+import { mailFormatting } from './format';
 import { SendMailForm } from './useValidateSendMailsForm';
 
 const usePostMailsErrorHandler = () => {
@@ -30,7 +32,7 @@ export const usePostMails = (causeId: string) => {
       type: 'coalitions',
       label: `Pourunecause: ${mail.object}`,
       subject: mail.object,
-      content: mail.body,
+      content: convertToHTML(mailFormatting)(mail.body.getCurrentContent()),
     });
     await authenticatedApiClient.put(`v3/adherent_messages/${postedMail.uuid}/filter`, {
       cause: causeId,

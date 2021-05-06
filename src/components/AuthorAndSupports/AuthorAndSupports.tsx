@@ -15,26 +15,26 @@ const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, s
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const intl = useIntl();
 
-  if (cause.author === undefined || cause.author === null) {
-    return null;
-  }
-
   return (
     <Container>
       {showAuthor === true ? (
         <AuthorContainer>
           <IconAndLabel
             iconSrc="/images/user.svg"
-            label={intl.formatMessage(
-              { id: 'cause.author' },
-              {
-                firstName: cause.author.first_name,
-                lastName:
-                  isUserLoggedIn && cause.author.last_name !== undefined
-                    ? cause.author.last_name
-                    : cause.author.last_name_initial,
-              },
-            )}
+            label={
+              cause.author === undefined || cause.author === null
+                ? intl.formatMessage({ id: 'cause.anonymous-author' })
+                : intl.formatMessage(
+                    { id: 'cause.author' },
+                    {
+                      firstName: cause.author.first_name,
+                      lastName:
+                        isUserLoggedIn && cause.author.last_name !== undefined
+                          ? cause.author.last_name
+                          : cause.author.last_name_initial,
+                    },
+                  )
+            }
           />
         </AuthorContainer>
       ) : null}

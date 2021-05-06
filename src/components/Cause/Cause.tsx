@@ -59,8 +59,8 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
         <StyledContent>
           <CoalitionsDisplay cause={cause} small />
           <CauseName>{cause.name}</CauseName>
-          {cause.author !== undefined && cause.author !== null ? (
-            <Author>
+          <Author>
+            {cause.author !== undefined && cause.author !== null ? (
               <FormattedMessage
                 id="cause.author"
                 values={{
@@ -71,8 +71,10 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
                       : cause.author.last_name_initial,
                 }}
               />
-            </Author>
-          ) : null}
+            ) : (
+              <FormattedMessage id="cause.anonymous-author" />
+            )}
+          </Author>
           <AuthorAndSupports cause={cause} />
           <ButtonContainer>
             {Boolean(cause.supported) || (

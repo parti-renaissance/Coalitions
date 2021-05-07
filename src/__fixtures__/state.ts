@@ -15,6 +15,7 @@ export const state = {
     numberOfCauses: null,
     inCreationCause: undefined,
     statistics: null,
+    causeSupportModal: null,
   },
   coalition: {
     ids: [],

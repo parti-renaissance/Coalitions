@@ -17,6 +17,7 @@ const LegalNotice = lazy(() => import('./pages/LegalNotice'));
 const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Coalition = lazy(() => import('./pages/Coalition'));
+const LoginAndSupportModal = lazy(() => import('./components/LoginAndSupportModal'));
 
 export const CHARTER_OF_VALUES_URL =
   'https://storage.googleapis.com/pourunecause/charte_des_valeurs.pdf';
@@ -111,6 +112,7 @@ const Routes: FunctionComponent<{}> = () => {
           <Route path={PATHS.PROFILE.route} component={Profile}></Route>
           <Route path={PATHS.COALITION.route} component={Coalition}></Route>
         </Switch>
+        <LoginAndSupportModal />
       </Suspense>
       <Snackbar />
     </>

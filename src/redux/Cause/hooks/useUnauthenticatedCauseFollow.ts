@@ -1,13 +1,14 @@
 import { useCallback, useEffect } from 'react';
 import { InscriptionFormValues } from 'components/LoginModal/components/CreateAccountForm/lib/useValidateForm';
 import { useIntl } from 'react-intl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { coalitionApiClient } from 'services/networking/client';
 import { optimisticallyIncrementCauseFollower } from '../slice';
+import { getCauseSupportModal } from '../selectors';
 
 const useUnauthenticatedCauseFollowErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -38,16 +39,20 @@ type UnauthenticatedCauseFollowPayload = {
   coalition_subscription: boolean;
 };
 
-export const useUnauthenticatedCauseFollow = (causeId: string, onClose?: () => void) => {
+export const useUnauthenticatedCauseFollow = (onClose?: () => void) => {
   const dispatch = useDispatch();
+  const cause = useSelector(getCauseSupportModal);
+  const causeId = cause !== null ? cause.uuid : '';
   const { formatMessage } = useIntl();
   const errorHandler = useUnauthenticatedCauseFollowErrorHandler();
 
   const [{ loading, error }, doUnauthenticatedCauseFollow] = useTypedAsyncFn(
     async (payload: UnauthenticatedCauseFollowPayload) => {
-      await coalitionApiClient.put(`causes/${causeId}/follower`, { ...payload });
+      await coalitionApiClient.put(`causes/${causeId}/follower`, {
+        ...payload,
+      });
     },
-    [],
+    [causeId],
   );
 
   useEffect(() => {

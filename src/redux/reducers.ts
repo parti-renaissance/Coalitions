@@ -7,7 +7,6 @@ import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
-import { reducer as avatar } from './Avatar';
 import { reducer as login } from './Login';
 import { reducer as cause } from './Cause';
 import { reducer as coalition } from './Coalition';
@@ -22,7 +21,6 @@ const causePersistConfig = {
 
 export default combineReducers({
   login,
-  avatar,
   cause: persistReducer(causePersistConfig, cause),
   coalition,
   snackbar,

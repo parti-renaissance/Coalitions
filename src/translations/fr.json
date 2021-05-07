@@ -49,9 +49,7 @@
   },
   "page": {
     "back": "Retour",
-    "api-to-translate-example": "Ce message est traduit en utilisant directement l’API react-intl",
-    "fetch-github-avatar": "Affiche l’avatar github",
-    "add-github-username": "Entrer un username github"
+    "api-to-translate-example": "Ce message est traduit en utilisant directement l’API react-intl"
   },
   "login": {
     "title": "Démarrer un projet Theodo en quelques secondes",

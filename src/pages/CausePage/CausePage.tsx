@@ -1,15 +1,14 @@
-import React, { useEffect, useState, FunctionComponent } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 import Loader from 'components/Loader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
 import { getCause } from 'redux/Cause/selectors';
 import { isUserLogged } from 'redux/Login';
-import LoginAndSupportModal from 'components/LoginAndSupportModal';
 import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
-import { PATHS } from 'routes';
 import CauseDetails from 'components/CauseDetails';
 import SuccessModal from 'pages/Home/components/SuccessModal';
+import { openCauseSupportModal } from 'redux/Cause';
 
 interface CausePageNavParams {
   causeIdOrSlug: string;
@@ -19,7 +18,7 @@ const CausePage: FunctionComponent = () => {
   const { causeIdOrSlug } = useParams<CausePageNavParams>();
   const { loading, fetchCause } = useFetchOneCause(causeIdOrSlug);
   const cause = useSelector(getCause(causeIdOrSlug));
-  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const { loading: loadingCauseFollow, followCause } = useCauseFollow(cause?.uuid);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
 
@@ -31,12 +30,8 @@ const CausePage: FunctionComponent = () => {
     if (isUserLoggedIn) {
       followCause();
     } else {
-      setIsModalOpened(true);
+      dispatch(openCauseSupportModal(cause !== undefined ? cause : null));
     }
-  };
-
-  const closeModal = () => {
-    setIsModalOpened(false);
   };
 
   if (loading && cause === undefined) {
@@ -50,12 +45,6 @@ const CausePage: FunctionComponent = () => {
   return (
     <>
       <CauseDetails cause={cause} onSupport={onSupport} isSupporting={loadingCauseFollow} />
-      <LoginAndSupportModal
-        isOpened={isModalOpened}
-        onClose={closeModal}
-        cause={cause}
-        redirectToAfterAuth={PATHS.CAUSE.url(cause.slug)}
-      />
       <SuccessModal />
     </>
   );

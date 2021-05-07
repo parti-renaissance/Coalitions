@@ -11,6 +11,7 @@ export type CauseState = Readonly<{
   ids: string[];
   numberOfCauses: number | null;
   inCreationCause?: InCreationCause;
+  causeSupportModal: Cause | null;
   statistics: CauseStatistics | null;
 }>;
 
@@ -19,6 +20,7 @@ const initialState: CauseState = {
   ids: [],
   numberOfCauses: null,
   inCreationCause: undefined,
+  causeSupportModal: null,
   statistics: null,
 };
 
@@ -91,6 +93,12 @@ const causeSlice = createSlice({
     updateCauseStatistics: (state, action: PayloadAction<CauseStatistics>) => {
       state.statistics = action.payload;
     },
+    openCauseSupportModal: (state, action: PayloadAction<Cause | null>) => {
+      state.causeSupportModal = action.payload;
+    },
+    closeCauseSupportModal: state => {
+      state.causeSupportModal = null;
+    },
   },
 });
 
@@ -105,5 +113,7 @@ export const {
   updateInCreationCause,
   cleanInCreationCause,
   updateCauseStatistics,
+  openCauseSupportModal,
+  closeCauseSupportModal,
 } = causeSlice.actions;
 export default causeSlice.reducer;

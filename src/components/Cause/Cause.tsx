@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent, MouseEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router';
 import { SmallButton, DefaultButton } from 'components/Button/Button';
@@ -16,19 +16,20 @@ import {
 
 import { DefaultLink as Link } from 'components/Link/Link';
 import AuthorAndSupports from 'components/AuthorAndSupports';
-import LoginAndSupportModal from 'components/LoginAndSupportModal';
 
 import { PATHS } from 'routes';
 import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 import { CoalitionsDisplay } from 'components/CauseDetails/components/CoalitionsDisplay';
 import FollowTag from 'components/FollowTag/FollowTag';
+import { useDispatch } from 'react-redux';
+import { openCauseSupportModal } from 'redux/Cause';
 
 interface CauseProps {
   cause: CauseType;
 }
 
 const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
-  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const { loading, followCause } = useCauseFollow(cause.uuid);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const history = useHistory();
@@ -39,12 +40,8 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
     if (isUserLoggedIn) {
       followCause();
     } else {
-      setIsModalOpened(true);
+      dispatch(openCauseSupportModal(cause !== undefined ? cause : null));
     }
-  };
-
-  const closeModal = () => {
-    setIsModalOpened(false);
   };
 
   return (
@@ -96,12 +93,6 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
           </ButtonContainer>
         </StyledContent>
       </Container>
-      <LoginAndSupportModal
-        isOpened={isModalOpened}
-        onClose={closeModal}
-        cause={cause}
-        redirectToAfterAuth={PATHS.CAUSE.url(cause.slug)}
-      />
     </>
   );
 };

@@ -39,3 +39,7 @@ export const getInCreationCause = (store: RootState): InCreationCause | undefine
 export const getCauseStatistics = (store: RootState): CauseStatistics | null => {
   return store.cause.statistics;
 };
+
+export const getCauseSupportModal = (store: RootState): Cause | null => {
+  return store.cause.causeSupportModal;
+};

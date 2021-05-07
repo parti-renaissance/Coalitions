@@ -110,7 +110,6 @@ class Client {
 }
 
 const client = new Client(backendBaseUrl);
-export const githubApiClient = new Client('https://api.github.com', false);
 export const coalitionApiClient = new Client(backendBaseUrl, false);
 export const authenticatedApiClient = new Client(backendBaseUrl, true);
 

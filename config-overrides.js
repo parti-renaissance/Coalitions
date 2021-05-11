@@ -1,7 +1,12 @@
 const path = require('path');
+const htmlWebpackInjectAttributesPlugin = require('html-webpack-inject-attributes-plugin');
 
 module.exports = {
   webpack: function override(config, env) {
+    config.plugins = config.plugins.concat([new htmlWebpackInjectAttributesPlugin({
+      'data-cookieconsent': 'ignore',
+    })]);
+
     const analyzeBundle = process.argv.indexOf('--analyze-bundle') !== -1;
 
     if (analyzeBundle) {

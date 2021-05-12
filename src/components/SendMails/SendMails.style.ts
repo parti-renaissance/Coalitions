@@ -15,7 +15,7 @@ export const SendMailsDescription = styled.p`
   border-radius: ${borderRadius.medium};
   background-color: ${colorPalette.greyLight};
   color: ${colorPalette.greyDark};
-  padding: ${getSpacing(3)};
+  padding: ${getSpacing(2)};
   margin-bottom: ${getSpacing(8)};
   ${media.desktop(`
     padding: ${getSpacing(4)};
@@ -31,4 +31,7 @@ export const ValidateButton = styled(FullWidthButton)`
 
 export const EditorContainer = styled.div`
   font-weight: ${fontWeight.normal};
+  margin-top: ${getSpacing(4)};
+  background-color: rgb(244, 249, 251);
+  border-radius: 4px;
 `;

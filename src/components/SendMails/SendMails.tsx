@@ -89,6 +89,7 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
                   fontFamily: fontFamily.primary,
                   lineHeight: lineHeight.primary,
                   fontSize: fontSize.input.desktop,
+                  padding: '13.5px 14px 18.5px',
                 }}
                 toolbar={{
                   options: ['inline', 'textAlign', 'list', 'link', 'image'],

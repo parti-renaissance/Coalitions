@@ -14,7 +14,7 @@ export const useFeatureToggling = (): FeatureToggles => {
       isProfilePageEnable: true,
       isCoalitionPageEnable: false,
       isCoalitionVideoPlaceholderEnable: false,
-      isSendMailEnabled: false,
+      isSendMailEnabled: true,
       isSubscriptionUpdateEnabled: true,
     };
   }

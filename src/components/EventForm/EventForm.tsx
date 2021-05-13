@@ -42,7 +42,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
         onSubmit={onSubmit}
         enableReinitialize
       >
-        {({ values, errors, handleChange, handleBlur, handleSubmit, touched, setFieldValue }) => (
+        {// eslint-disable-next-line complexity
+        ({ values, errors, handleChange, handleBlur, handleSubmit, touched, setFieldValue }) => (
           <Form onSubmit={handleSubmit}>
             {initialEvent !== undefined ? (
               <input type="text" hidden value={initialEvent.uuid} name="uuid" />
@@ -89,8 +90,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.post_address?.address}
-                error={touched.post_address && errors.post_address !== undefined}
-                helperText={touched.post_address ? errors.post_address : undefined}
+                error={Boolean(touched.post_address) && errors.post_address !== undefined}
+                helperText={Boolean(touched.post_address) ? errors.post_address : undefined}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
@@ -101,8 +102,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.visio_url}
-                error={touched.visio_url && errors.visio_url !== undefined}
-                helperText={touched.visio_url ? errors.visio_url : undefined}
+                error={Boolean(touched.visio_url) && errors.visio_url !== undefined}
+                helperText={Boolean(touched.visio_url) ? errors.visio_url : undefined}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
@@ -114,8 +115,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.category?.event_group_category?.name}
-                error={touched.category && errors.category !== undefined}
-                helperText={touched.category ? errors.category : undefined}
+                error={Boolean(touched.category) && errors.category !== undefined}
+                helperText={Boolean(touched.category) ? errors.category : undefined}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
@@ -126,8 +127,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.description}
-                error={touched.description && errors.description !== undefined}
-                helperText={touched.description ? errors.description : undefined}
+                error={Boolean(touched.description) && errors.description !== undefined}
+                helperText={Boolean(touched.description) ? errors.description : undefined}
                 multiline
                 rows={10}
               />

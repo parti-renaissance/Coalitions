@@ -12,9 +12,9 @@ import {
 import EventCard from 'components/EventCard';
 import TabBar from 'components/TabBar';
 
-interface EventCardsSliderProps {}
+const TAB_LABEL_KEYS = ['events.upcoming', 'events.passed'];
 
-const EventCardsSlider: FunctionComponent<EventCardsSliderProps> = () => {
+const EventCardsSlider: FunctionComponent = () => {
   const intl = useIntl();
   const isMobile = getIsMobile();
   const { upcomingEvents, passedEvents, fetchEvents, isFetchingEvents } = useFetchEvents();
@@ -33,10 +33,9 @@ const EventCardsSlider: FunctionComponent<EventCardsSliderProps> = () => {
   const renderTabBar = () => (
     <TabBarWrapper>
       <TabBar
-        tabLabels={[
-          <FormattedMessage id="events.upcoming" />,
-          <FormattedMessage id="events.passed" />,
-        ]}
+        tabLabels={TAB_LABEL_KEYS.map(key => (
+          <FormattedMessage id={key} key={key} />
+        ))}
         selectedTabIndex={selectedTabIndex}
         setSelectedTabIndex={setSelectedTabIndex}
       />

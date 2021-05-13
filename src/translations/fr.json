@@ -350,6 +350,10 @@
       "validate": "Créer l’événement",
       "tips": "Les événements vous permettent de réunir vos soutiens pour faire grandir votre cause."
     },
-    "title": "Titre de l’événement"
+    "title": "Titre de l’événement",
+    "address": "Adresse postale",
+    "link": "Lien",
+    "category": "Catégorie d’événement",
+    "description": "Description"
   }
 }

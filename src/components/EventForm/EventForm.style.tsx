@@ -30,3 +30,7 @@ export const Form = styled.form`
 export const ValidateButton = styled(FullWidthButton)`
   margin-top: ${getSpacing(6)};
 `;
+
+export const InputFieldWrapper = styled.div`
+  margin-top: ${getSpacing(4)};
+`;

@@ -335,6 +335,8 @@
     "subscribers": "{numberOfSubscribers} inscrits",
     "see": "Voir",
     "upcoming": "À venir",
-    "passed": "Passés"
+    "passed": "Passés",
+    "subscribed": "Inscrit(e)",
+    "subscribe": "M’inscrire"
   }
 }

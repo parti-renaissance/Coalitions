@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media, getSpacing, fonts, borderRadius, colorPalette } from 'stylesheet';
 import { FullWidthButton } from 'components/Button/Button';
+import { EventMode } from 'redux/Events/types';
 
 export const Container = styled.div``;
 
@@ -31,6 +32,27 @@ export const ValidateButton = styled(FullWidthButton)`
   margin-top: ${getSpacing(6)};
 `;
 
-export const InputFieldWrapper = styled.div`
+export const ModeButtonsContainer = styled.div<{ mode: EventMode }>`
+  display: flex;
   margin-top: ${getSpacing(4)};
+  ${({ mode }) =>
+    mode === 'online'
+      ? css`
+          button:first-child {
+            border-color: ${colorPalette.grey2};
+            color: ${colorPalette.grey2};
+          }
+        `
+      : css`
+          button:not(:first-child) {
+            border-color: ${colorPalette.grey2};
+            color: ${colorPalette.grey2};
+          }
+        `}
+`;
+
+export const ModeButton = styled(FullWidthButton)`
+  :not(:first-child) {
+    margin-left: ${getSpacing(3)};
+  }
 `;

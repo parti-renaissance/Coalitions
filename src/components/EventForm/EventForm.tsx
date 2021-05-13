@@ -5,7 +5,8 @@ import {
   Description,
   Form,
   ValidateButton,
-  InputFieldWrapper,
+  ModeButtonsContainer,
+  ModeButton,
 } from './EventForm.style';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
@@ -13,6 +14,7 @@ import Formik from 'components/Formik';
 import { useValidateForm } from './lib/useValidateForm';
 import { InCreationEventType, EventType } from 'redux/Events/types';
 import { getInitialValues } from './lib/getInitialValues';
+import { InputFieldWrapper } from 'components/InputField/InputField.style';
 
 interface EventFormProps {
   initialEvent?: EventType;
@@ -40,10 +42,10 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
         onSubmit={onSubmit}
         enableReinitialize
       >
-        {({ values, errors, handleChange, handleBlur, handleSubmit, touched }) => (
+        {({ values, errors, handleChange, handleBlur, handleSubmit, touched, setFieldValue }) => (
           <Form onSubmit={handleSubmit}>
             {initialEvent !== undefined ? (
-              <input type="text" hidden value={initialEvent.uuid} />
+              <input type="text" hidden value={initialEvent.uuid} name="uuid" />
             ) : null}
             <InputFieldWrapper>
               <InputField
@@ -58,9 +60,29 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                 helperText={touched.name === true ? errors.name : undefined}
               />
             </InputFieldWrapper>
+            <input type="text" hidden value={values.mode} name="mode" />
+            <ModeButtonsContainer mode={values.mode}>
+              <ModeButton
+                size="small"
+                variant="outlined"
+                color="primary"
+                onClick={() => setFieldValue('mode', 'meeting')}
+              >
+                {intl.formatMessage({ id: 'event_form.mode.meeting' })}
+              </ModeButton>
+              <ModeButton
+                size="small"
+                variant="outlined"
+                color="primary"
+                onClick={() => setFieldValue('mode', 'online')}
+              >
+                {intl.formatMessage({ id: 'event_form.mode.online' })}
+              </ModeButton>
+            </ModeButtonsContainer>
             <InputFieldWrapper>
               <InputField
                 required
+                disabled={values.mode === 'online'}
                 placeholder={intl.formatMessage({ id: 'event_form.address' })}
                 type="text"
                 name="post_address.address"
@@ -85,6 +107,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
             </InputFieldWrapper>
             <InputFieldWrapper>
               <InputField
+                disabled={values.mode === 'online'}
                 placeholder={intl.formatMessage({ id: 'event_form.category' })}
                 type="text"
                 name="category.event_group_category.name"

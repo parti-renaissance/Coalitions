@@ -1,3 +1,5 @@
+export type EventMode = 'meeting' | 'online';
+
 export interface InCreationEventType {
   begin_at: string;
   finish_at: string;
@@ -7,7 +9,7 @@ export interface InCreationEventType {
       name: string;
     };
   };
-  mode: 'meeting' | 'online';
+  mode: EventMode;
   name: string;
   time_zone: string;
   description?: string;

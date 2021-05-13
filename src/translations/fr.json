@@ -354,6 +354,10 @@
     "address": "Adresse postale",
     "link": "Lien",
     "category": "Catégorie d’événement",
-    "description": "Description"
+    "description": "Description",
+    "mode": {
+      "meeting": "Présentiel",
+      "online": "En ligne"
+    }
   }
 }

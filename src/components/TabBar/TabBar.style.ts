@@ -17,7 +17,11 @@ export const Container = styled.div<{ isSticky?: boolean; isBottomBorderFullWidt
             border-bottom: 2px solid ${colorPalette.greyLight};
           }
         `
-      : css``};
+      : css`
+          .MuiButtonBase-root {
+            border-bottom: 2px solid ${colorPalette.greyLight};
+          }
+        `};
 `;
 
 const Z_INDEX = 2;
@@ -31,7 +35,6 @@ export const Label = styled(MUITab)`
   ${fonts.p};
   padding: ${getSpacing(2)} ${getSpacing(3)};
   text-transform: none;
-  border-bottom: 2px solid ${colorPalette.greyLight};
   ${({ selected }) =>
     css`
       opacity: ${Boolean(selected) ? 1 : 0.6};

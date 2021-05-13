@@ -24,3 +24,9 @@ export const TabWrapper = styled.div`
     margin-top: ${getSpacing(8)};
   `)}
 `;
+
+export const TabBarAndPanelWrapper = styled.div`
+  ${media.desktop(`
+    margin-top: ${getSpacing(5)};
+  `)}
+`;

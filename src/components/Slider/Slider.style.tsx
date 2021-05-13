@@ -44,7 +44,7 @@ export const SubContainer = styled.div<{ height: number }>`
   flex: 1;
   flex-wrap: nowrap;
   overflow: scroll;
-  margin-top: ${getSpacing(4)};
+  padding-top: ${getSpacing(4)};
   padding-left: ${defaultMargins.horizontal.mobile};
   height: ${({ height }) => height + ADDITIONAL_MARGIN_FOR_SHADOW}px;
 `;

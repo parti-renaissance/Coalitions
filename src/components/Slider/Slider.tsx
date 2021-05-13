@@ -25,6 +25,8 @@ interface SliderProps {
   onSeeAllClick?: () => void;
   desktopCarouselProps: CarouselProps;
   slidesHeight: { mobile: number; desktop: number };
+  SubTitle?: FunctionComponent;
+  TitleComponent?: FunctionComponent;
 }
 
 const DesktopCarousel: ForwardRefRenderFunction<any, CarouselProps> = (props, ref) => (
@@ -49,6 +51,8 @@ const Slider: FunctionComponent<SliderProps> = ({
   onSeeAllClick,
   desktopCarouselProps,
   slidesHeight,
+  SubTitle,
+  TitleComponent = 'h3',
   children,
 }) => {
   const intl = useIntl();
@@ -73,7 +77,7 @@ const Slider: FunctionComponent<SliderProps> = ({
   return (
     <Container>
       <Header>
-        <h3>{title}</h3>
+        <TitleComponent>{title}</TitleComponent>
         <RightHeaderSubContainer>
           <CarouselControlsContainer>
             <IconButton onClick={onControlButtonClick(false)}>
@@ -90,6 +94,7 @@ const Slider: FunctionComponent<SliderProps> = ({
           ) : null}
         </RightHeaderSubContainer>
       </Header>
+      {SubTitle !== undefined ? <SubTitle /> : null}
       {isLoadingSlides === true && slidesCount === 0 ? (
         <LoaderContainer mobileHeight={slidesHeight.mobile} desktopHeight={slidesHeight.desktop}>
           <Loader />

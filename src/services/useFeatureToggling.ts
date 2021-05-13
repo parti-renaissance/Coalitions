@@ -5,6 +5,7 @@ interface FeatureToggles {
   isCoalitionVideoPlaceholderEnable: boolean;
   isSendMailEnabled: boolean;
   isSubscriptionUpdateEnabled: boolean;
+  areEventsEnable: boolean;
 }
 
 export const useFeatureToggling = (): FeatureToggles => {
@@ -16,6 +17,7 @@ export const useFeatureToggling = (): FeatureToggles => {
       isCoalitionVideoPlaceholderEnable: false,
       isSendMailEnabled: true,
       isSubscriptionUpdateEnabled: true,
+      areEventsEnable: false,
     };
   }
 
@@ -26,5 +28,6 @@ export const useFeatureToggling = (): FeatureToggles => {
     isCoalitionVideoPlaceholderEnable: true,
     isSendMailEnabled: true,
     isSubscriptionUpdateEnabled: true,
+    areEventsEnable: true,
   };
 };

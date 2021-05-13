@@ -9,6 +9,7 @@ import {
   DesktopQuickActionsWrapper,
   AboutThisCauseWrapper,
   FirstQuickActionWrapper,
+  EventCardsSliderWrapper,
 } from './CauseDetails.style';
 import { InCreationCause, Cause } from 'redux/Cause/types';
 import CreateCauseCTA from 'components/CreateCauseCTA';
@@ -21,6 +22,7 @@ import { QuickAction } from './components/QuickActions/QuickActions';
 import FollowTag from 'components/FollowTag/FollowTag';
 import { getCauseQuickActions } from 'redux/Cause/selectors';
 import { useSelector } from 'react-redux';
+import EventCardsSlider from 'components/EventCardsSlider';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;
@@ -65,7 +67,14 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
           </DesktopQuickActionsWrapper>
         ) : null}
       </Container>
-      {!isPreview ? <CreateCauseCTA displayLinkToCauseList /> : null}
+      {!isPreview ? (
+        <>
+          <EventCardsSliderWrapper>
+            <EventCardsSlider />
+          </EventCardsSliderWrapper>
+          <CreateCauseCTA displayLinkToCauseList />
+        </>
+      ) : null}
       <HeaderButtons
         cause={cause}
         onSupport={onSupport}

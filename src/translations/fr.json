@@ -323,5 +323,16 @@
   },
   "search_field": {
     "placeholder": "Rechercher une cause à soutenir"
+  },
+  "events": {
+    "title": "Evénements",
+    "creator": "Par {creator}",
+    "mode": {
+      "online": "En ligne",
+      "meeting": "Présentiel"
+    },
+    "subscriber": "{numberOfSubscribers} inscrit",
+    "subscribers": "{numberOfSubscribers} inscrits",
+    "see": "Voir"
   }
 }

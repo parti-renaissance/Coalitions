@@ -1,5 +1,11 @@
 import styled, { css } from 'styled-components';
-import { media, defaultMargins, getSpacing, contentMaxWidth } from 'stylesheet';
+import {
+  media,
+  defaultMargins,
+  getSpacing,
+  contentMaxWidth,
+  ADDITIONAL_MARGIN_FOR_SHADOW,
+} from 'stylesheet';
 import { DESKTOP_BUTTONS_WIDTH } from './components/HeaderButtons/HeaderButtons.style';
 
 export const Container = styled.div`
@@ -78,5 +84,14 @@ export const FirstQuickActionWrapper = styled.div`
     ${defaultMargins.horizontal.mobile} 0 ${defaultMargins.horizontal.mobile};
   ${media.desktop(`
     display: none;
+  `)}
+`;
+
+export const EventCardsSliderWrapper = styled.div`
+  margin: 0 ${defaultMargins.horizontal.mobile}
+    calc(${defaultMargins.vertical.mobile} - ${ADDITIONAL_MARGIN_FOR_SHADOW}px)
+    ${defaultMargins.horizontal.mobile};
+  ${media.desktop(`
+    margin: 0 ${defaultMargins.horizontal.desktop} calc(${defaultMargins.vertical.desktop} - ${ADDITIONAL_MARGIN_FOR_SHADOW}px) ${defaultMargins.horizontal.desktop};
   `)}
 `;

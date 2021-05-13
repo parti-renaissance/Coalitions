@@ -326,7 +326,7 @@
   },
   "events": {
     "title": "Evénements",
-    "creator": "Par {creator}",
+    "organizer": "Par {organizer}",
     "mode": {
       "online": "En ligne",
       "meeting": "Présentiel"

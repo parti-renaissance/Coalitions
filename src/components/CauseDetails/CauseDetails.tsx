@@ -23,6 +23,7 @@ import FollowTag from 'components/FollowTag/FollowTag';
 import { getCauseQuickActions } from 'redux/Cause/selectors';
 import { useSelector } from 'react-redux';
 import EventCardsSlider from 'components/EventCardsSlider';
+import { useFeatureToggling } from 'services/useFeatureToggling';
 
 interface CauseDetailsProps {
   cause: Cause | InCreationCause;
@@ -36,6 +37,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
   const isSupported = Boolean(cause.supported);
   const isCauseOwner = useCauseOwner(cause);
   const quickActions = useSelector(getCauseQuickActions((cause as Cause).uuid));
+  const { areEventsEnable } = useFeatureToggling();
 
   const renderHeader = () => (
     <Header cause={cause} onSupport={onSupport} isSupporting={isSupporting} />
@@ -69,9 +71,11 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
       </Container>
       {!isPreview ? (
         <>
-          <EventCardsSliderWrapper>
-            <EventCardsSlider />
-          </EventCardsSliderWrapper>
+          {areEventsEnable ? (
+            <EventCardsSliderWrapper>
+              <EventCardsSlider />
+            </EventCardsSliderWrapper>
+          ) : null}
           <CreateCauseCTA displayLinkToCauseList />
         </>
       ) : null}

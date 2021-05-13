@@ -1,7 +1,7 @@
 export interface InCreationEventType {
-  begin_at: Date;
-  finish_at: Date;
-  capacity: number | null;
+  begin_at: string;
+  finish_at: string;
+  capacity?: number | null;
   category: {
     event_group_category: {
       name: string;
@@ -26,7 +26,7 @@ export interface InCreationEventType {
     latitude: number;
     longitude: number;
   };
-  visio_url: string | null;
+  visio_url?: string | null;
 }
 
 export type EventType = {

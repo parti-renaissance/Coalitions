@@ -30,7 +30,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
     // TODO
   };
 
-  const numberOfSubscribers = 201;
+  const numberOfSubscribers = event.participants_count;
   const tag = isUpcomingEvent(event)
     ? intl.formatMessage({ id: 'events.upcoming' })
     : intl.formatMessage({ id: 'events.passed' });
@@ -50,14 +50,21 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
         <Name>{event.name}</Name>
       </div>
       <div>
-        <MobileGreyP>
-          {intl.formatMessage({ id: 'events.creator' }, { creator: 'creator' })}
-        </MobileGreyP>
-        <MobileGreyP>
-          {numberOfSubscribers > 1
-            ? intl.formatMessage({ id: 'events.subscribers' }, { numberOfSubscribers })
-            : intl.formatMessage({ id: 'events.subscriber' }, { numberOfSubscribers })}
-        </MobileGreyP>
+        {event.organizer !== undefined ? (
+          <MobileGreyP>
+            {intl.formatMessage(
+              { id: 'events.organizer' },
+              { organizer: `${event.organizer.first_name} ${event.organizer.last_name}` },
+            )}
+          </MobileGreyP>
+        ) : null}
+        {numberOfSubscribers !== undefined ? (
+          <MobileGreyP>
+            {numberOfSubscribers > 1
+              ? intl.formatMessage({ id: 'events.subscribers' }, { numberOfSubscribers })
+              : intl.formatMessage({ id: 'events.subscriber' }, { numberOfSubscribers })}
+          </MobileGreyP>
+        ) : null}
         <BottomButtonsContainer>
           <InscriptionButtonWrapper alreadySubscribed={alreadySubscribed}>
             <DefaultButton size="small" variant="contained" onClick={onSubscribeClick}>

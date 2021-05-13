@@ -16,14 +16,17 @@ import {
   TabBarAndPanelWrapper,
 } from './CauseAdmin.style';
 import Loader from 'components/Loader';
+import { CreateEventForm } from 'components/EventForm';
 
 interface CausePageNavParams {
   causeIdOrSlug: string;
 }
 
+let TAB_LABEL_KEYS = ['admin_cause.update-cause', 'admin_cause.quick-action'];
+
 const CauseAdmin: FunctionComponent = () => {
   const { causeIdOrSlug } = useParams<CausePageNavParams>();
-  const { isSendMailEnabled } = useFeatureToggling();
+  const { isSendMailEnabled, areEventsEnable } = useFeatureToggling();
   const cause = useSelector(getCause(causeIdOrSlug));
   const { fetchCause, loading } = useFetchOneCause(causeIdOrSlug);
 
@@ -56,6 +59,12 @@ const CauseAdmin: FunctionComponent = () => {
               <SendMails causeId={cause.uuid} />
             </TabWrapper>
           );
+        case 3:
+          return (
+            <TabWrapper>
+              <CreateEventForm />
+            </TabWrapper>
+          );
         default:
           return <></>;
       }
@@ -65,16 +74,12 @@ const CauseAdmin: FunctionComponent = () => {
 
   const getTabLabels = () => {
     if (isSendMailEnabled) {
-      return [
-        <FormattedMessage id="admin_cause.update-cause" key="admin_cause.update-cause" />,
-        <FormattedMessage id="admin_cause.quick-action" key="admin_cause.quick-action" />,
-        <FormattedMessage id="admin_cause.send-mails" key="admin_cause.send-mails" />,
-      ];
+      TAB_LABEL_KEYS = [...TAB_LABEL_KEYS, 'admin_cause.send-mails'];
     }
-    return [
-      <FormattedMessage id="admin_cause.update-cause" key="admin_cause.update-cause" />,
-      <FormattedMessage id="admin_cause.quick-action" key="admin_cause.quick-action" />,
-    ];
+    if (areEventsEnable) {
+      TAB_LABEL_KEYS = [...TAB_LABEL_KEYS, 'admin_cause.events'];
+    }
+    return TAB_LABEL_KEYS.map(key => <FormattedMessage id={key} key={key} />);
   };
 
   if (cause === undefined && loading) {

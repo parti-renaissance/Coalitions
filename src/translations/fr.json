@@ -170,7 +170,8 @@
   "admin_cause": {
     "update-cause": "Général",
     "quick-action": "Actions de soutien",
-    "send-mails": "Envoi de mails"
+    "send-mails": "Envoi de mails",
+    "events": "Événements"
   },
   "update_cause": {
     "validate": "Enregistrer et publier",
@@ -325,8 +326,8 @@
     "placeholder": "Rechercher une cause à soutenir"
   },
   "events": {
-    "title": "Evénements",
-    "creator": "Par {creator}",
+    "title": "Événements",
+    "organizer": "Par {organizer}",
     "mode": {
       "online": "En ligne",
       "meeting": "Présentiel"
@@ -338,5 +339,25 @@
     "passed": "Passés",
     "subscribed": "Inscrit(e)",
     "subscribe": "M’inscrire"
+  },
+  "event_form": {
+    "update": {
+      "title": "Gérer mon événement",
+      "validate": "Enregistrer"
+    },
+    "create": {
+      "title": "Créer un événement",
+      "validate": "Créer l’événement",
+      "tips": "Les événements vous permettent de réunir vos soutiens pour faire grandir votre cause."
+    },
+    "title": "Titre de l’événement",
+    "address": "Adresse postale",
+    "link": "Lien",
+    "category": "Catégorie d’événement",
+    "description": "Description",
+    "mode": {
+      "meeting": "Présentiel",
+      "online": "En ligne"
+    }
   }
 }

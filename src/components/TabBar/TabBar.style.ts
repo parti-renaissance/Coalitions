@@ -6,6 +6,7 @@ export const Container = styled.div<{ isSticky?: boolean; isBottomBorderFullWidt
   ${({ isSticky }) =>
     isSticky === true
       ? css`
+          z-index: 2;
           position: sticky;
           top: 0;
         `

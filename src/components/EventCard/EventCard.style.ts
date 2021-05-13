@@ -70,3 +70,26 @@ export const BottomButtonsContainer = styled.div`
   flex-direction: row;
   margin-top: ${getSpacing(3)};
 `;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const TAG_HEIGHT = SPACING_UNIT * 5;
+
+export const Tag = styled.div`
+  display: flex;
+  align-items: center;
+  height: ${TAG_HEIGHT}px;
+  padding: 0 ${getSpacing(2)};
+  border-radius: ${TAG_HEIGHT / 2}px;
+  background-color: ${colorPalette.greyDark};
+  margin-left: ${getSpacing(3)};
+  color: ${colorPalette.white};
+  font-family: ${fontFamily.primary};
+  font-size: ${fontSize.p.mobile};
+  line-height: ${lineHeight.primary};
+  font-weight: ${fontWeight.normal};
+`;

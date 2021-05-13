@@ -5,10 +5,12 @@ import HandleErrorService from 'services/HandleErrorService';
 import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login/selectors';
 import { EventType } from '../types';
+import { isUpcomingEvent } from '../helpers/isUpcomingEvent';
 
 export const useFetchEvents = () => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const [events, setEvents] = useState<EventType[]>([]);
+  const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([]);
+  const [passedEvents, setPassedEvents] = useState<EventType[]>([]);
 
   const [{ loading: isFetchingEvents, error }, doFetchEvents] = useTypedAsyncFn(
     async () => await authenticatedApiClient.get('v3/events'),
@@ -32,8 +34,20 @@ export const useFetchEvents = () => {
       return;
     }
 
-    setEvents(eventsResponse.items as EventType[]);
+    let newUpcomingEvents: EventType[] = [];
+    let newPassedEvents: EventType[] = [];
+
+    (eventsResponse.items as EventType[]).forEach(event => {
+      if (isUpcomingEvent(event)) {
+        newUpcomingEvents = [...newUpcomingEvents, event];
+      } else {
+        newPassedEvents = [...newPassedEvents, event];
+      }
+    });
+
+    setUpcomingEvents(newUpcomingEvents);
+    setPassedEvents(newPassedEvents);
   }, [doFetchEvents, isUserLoggedIn]);
 
-  return { events, fetchEvents, isFetchingEvents };
+  return { upcomingEvents, passedEvents, fetchEvents, isFetchingEvents };
 };

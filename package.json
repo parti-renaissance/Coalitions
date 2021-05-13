@@ -19,6 +19,7 @@
     "babel-polyfill": "6.26.0",
     "cropperjs": "^1.5.11",
     "date-fns": "^2.21.1",
+    "date-fns-tz": "^1.1.4",
     "draft-convert": "^2.1.11",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",

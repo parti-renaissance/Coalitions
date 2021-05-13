@@ -333,6 +333,8 @@
     },
     "subscriber": "{numberOfSubscribers} inscrit",
     "subscribers": "{numberOfSubscribers} inscrits",
-    "see": "Voir"
+    "see": "Voir",
+    "upcoming": "À venir",
+    "passed": "Passés"
   }
 }

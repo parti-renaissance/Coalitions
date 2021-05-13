@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { QuickActions } from 'components/QuickActions/QuickActions';
 import { SendMails } from 'components/SendMails/SendMails';
-import { TabsWrapper } from 'components/TabsWrapper/TabsWrapper';
+import TabBarAndPanel from 'components/TabBarAndPanel';
 import UpdateCause from 'components/UpdateCause';
 import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
@@ -9,7 +9,12 @@ import { useParams } from 'react-router';
 import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
 import { getCause } from 'redux/Cause/selectors';
 import { useFeatureToggling } from 'services/useFeatureToggling';
-import { CauseAdminContainer, UpdateCauseWrapper, TabWrapper } from './CauseAdmin.style';
+import {
+  CauseAdminContainer,
+  UpdateCauseWrapper,
+  TabWrapper,
+  TabBarAndPanelWrapper,
+} from './CauseAdmin.style';
 import Loader from 'components/Loader';
 
 interface CausePageNavParams {
@@ -58,7 +63,7 @@ const CauseAdmin: FunctionComponent = () => {
     [cause],
   );
 
-  const getTabsLabel = () => {
+  const getTabLabels = () => {
     if (isSendMailEnabled) {
       return [
         <FormattedMessage id="admin_cause.update-cause" key="admin_cause.update-cause" />,
@@ -82,7 +87,14 @@ const CauseAdmin: FunctionComponent = () => {
 
   return (
     <CauseAdminContainer>
-      <TabsWrapper renderTabPanel={renderTabPanel} tabsLabel={getTabsLabel()} />
+      <TabBarAndPanelWrapper>
+        <TabBarAndPanel
+          renderTabPanel={renderTabPanel}
+          tabLabels={getTabLabels()}
+          isSticky
+          isTabBarBottomBorderFullWidth
+        />
+      </TabBarAndPanelWrapper>
     </CauseAdminContainer>
   );
 };

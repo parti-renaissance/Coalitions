@@ -358,6 +358,8 @@
     "mode": {
       "meeting": "Présentiel",
       "online": "En ligne"
-    }
+    },
+    "begin_at": "Date, heure de début",
+    "finish_at": "Date, heure de fin"
   }
 }

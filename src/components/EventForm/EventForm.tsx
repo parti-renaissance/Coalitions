@@ -7,6 +7,7 @@ import {
   ValidateButton,
   ModeButtonsContainer,
   ModeButton,
+  DateFieldsWrapper,
 } from './EventForm.style';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
@@ -106,6 +107,36 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                 helperText={Boolean(touched.visio_url) ? errors.visio_url : undefined}
               />
             </InputFieldWrapper>
+            <DateFieldsWrapper>
+              <InputFieldWrapper>
+                <InputField
+                  required
+                  placeholder={intl.formatMessage({ id: 'event_form.begin_at' })}
+                  type="datetime-local"
+                  name="begin_at"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.begin_at}
+                  error={Boolean(touched.begin_at) && errors.begin_at !== undefined}
+                  helperText={Boolean(touched.begin_at) ? errors.visio_url : undefined}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </InputFieldWrapper>
+              <InputFieldWrapper>
+                <InputField
+                  required
+                  placeholder={intl.formatMessage({ id: 'event_form.finish_at' })}
+                  type="datetime-local"
+                  name="finish_at"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.finish_at}
+                  error={Boolean(touched.finish_at) && errors.finish_at !== undefined}
+                  helperText={Boolean(touched.finish_at) ? errors.finish_at : undefined}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </InputFieldWrapper>
+            </DateFieldsWrapper>
             <InputFieldWrapper>
               <InputField
                 disabled={values.mode === 'online'}

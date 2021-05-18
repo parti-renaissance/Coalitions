@@ -7,7 +7,6 @@ interface TabBarProps {
   selectedTabIndex: number;
   setSelectedTabIndex: (index: number) => void;
   isSticky?: boolean;
-  isBottomBorderFullWidth?: boolean;
 }
 
 const TAB_INDICATOR_PROPS = {
@@ -21,18 +20,19 @@ const TabBar: FunctionComponent<TabBarProps> = ({
   selectedTabIndex,
   setSelectedTabIndex,
   isSticky,
-  isBottomBorderFullWidth,
 }) => {
   const onTabIndexChange = (_: ChangeEvent<{}>, value: number) => {
     setSelectedTabIndex(value);
   };
 
   return (
-    <Container isSticky={isSticky} isBottomBorderFullWidth={isBottomBorderFullWidth}>
+    <Container isSticky={isSticky}>
       <LabelsContainer
         value={selectedTabIndex}
         onChange={onTabIndexChange}
         TabIndicatorProps={TAB_INDICATOR_PROPS}
+        variant="scrollable"
+        scrollButtons="off"
       >
         {tabLabels.map(tabLabel => (
           <Label label={tabLabel} key={tabLabel.key} />

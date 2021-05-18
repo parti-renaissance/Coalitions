@@ -45,6 +45,7 @@ export const MobileGreyP = styled.div`
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};
   font-weight: ${fontWeight.normal};
+  flex: 1;
 `;
 
 export const Name = styled.div`

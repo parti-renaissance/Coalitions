@@ -14,10 +14,18 @@ import TabBar from 'components/TabBar';
 
 const TAB_LABEL_KEYS = ['events.upcoming', 'events.passed'];
 
-const EventCardsSlider: FunctionComponent = () => {
+interface EventCardsSliderProps {
+  coalitionId?: string;
+  causeId?: string;
+}
+
+const EventCardsSlider: FunctionComponent<EventCardsSliderProps> = ({ coalitionId, causeId }) => {
   const intl = useIntl();
   const isMobile = getIsMobile();
-  const { upcomingEvents, passedEvents, fetchEvents, isFetchingEvents } = useFetchEvents();
+  const { upcomingEvents, passedEvents, fetchEvents, isFetchingEvents } = useFetchEvents({
+    coalitionId,
+    causeId,
+  });
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
   useEffect(() => {

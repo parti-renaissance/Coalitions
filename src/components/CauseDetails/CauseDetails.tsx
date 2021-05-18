@@ -73,7 +73,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
         <>
           {areEventsEnable ? (
             <EventCardsSliderWrapper>
-              <EventCardsSlider />
+              <EventCardsSlider causeId={(cause as Cause).uuid} />
             </EventCardsSliderWrapper>
           ) : null}
           <CreateCauseCTA displayLinkToCauseList />

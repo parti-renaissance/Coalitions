@@ -6,14 +6,12 @@ interface TabBarAndPanelProps {
   renderTabPanel: (tab: number) => JSX.Element;
   tabLabels: JSX.Element[];
   isSticky?: boolean;
-  isTabBarBottomBorderFullWidth?: boolean;
 }
 
 const TabBarAndPanel: FunctionComponent<TabBarAndPanelProps> = ({
   renderTabPanel,
   tabLabels,
   isSticky,
-  isTabBarBottomBorderFullWidth,
 }) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 
@@ -24,7 +22,6 @@ const TabBarAndPanel: FunctionComponent<TabBarAndPanelProps> = ({
         selectedTabIndex={selectedTabIndex}
         setSelectedTabIndex={setSelectedTabIndex}
         isSticky={isSticky}
-        isBottomBorderFullWidth={isTabBarBottomBorderFullWidth}
       />
       <PanelContainer>{renderTabPanel(selectedTabIndex)}</PanelContainer>
     </div>

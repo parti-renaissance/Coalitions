@@ -22,8 +22,6 @@ interface CausePageNavParams {
   causeIdOrSlug: string;
 }
 
-let TAB_LABEL_KEYS = ['admin_cause.update-cause', 'admin_cause.quick-action'];
-
 const CauseAdmin: FunctionComponent = () => {
   const { causeIdOrSlug } = useParams<CausePageNavParams>();
   const { isSendMailEnabled, areEventsEnable } = useFeatureToggling();
@@ -73,6 +71,7 @@ const CauseAdmin: FunctionComponent = () => {
   );
 
   const getTabLabels = () => {
+    let TAB_LABEL_KEYS = ['admin_cause.update-cause', 'admin_cause.quick-action'];
     if (isSendMailEnabled) {
       TAB_LABEL_KEYS = [...TAB_LABEL_KEYS, 'admin_cause.send-mails'];
     }
@@ -93,12 +92,7 @@ const CauseAdmin: FunctionComponent = () => {
   return (
     <CauseAdminContainer>
       <TabBarAndPanelWrapper>
-        <TabBarAndPanel
-          renderTabPanel={renderTabPanel}
-          tabLabels={getTabLabels()}
-          isSticky
-          isTabBarBottomBorderFullWidth
-        />
+        <TabBarAndPanel renderTabPanel={renderTabPanel} tabLabels={getTabLabels()} isSticky />
       </TabBarAndPanelWrapper>
     </CauseAdminContainer>
   );

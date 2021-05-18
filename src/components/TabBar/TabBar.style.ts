@@ -2,7 +2,11 @@ import styled, { css } from 'styled-components';
 import { fontWeight, getSpacing, colorPalette, fonts } from 'stylesheet';
 import { Tab as MUITab, Tabs as MUITabs } from '@material-ui/core';
 
-export const Container = styled.div<{ isSticky?: boolean; isBottomBorderFullWidth?: boolean }>`
+export const Container = styled.div<{ isSticky?: boolean }>`
+  .MuiButtonBase-root {
+    border-bottom: 2px solid ${colorPalette.greyLight};
+  }
+
   ${({ isSticky }) =>
     isSticky === true
       ? css`
@@ -11,18 +15,6 @@ export const Container = styled.div<{ isSticky?: boolean; isBottomBorderFullWidt
           top: 0;
         `
       : css``};
-  ${({ isBottomBorderFullWidth }) =>
-    isBottomBorderFullWidth === true
-      ? css`
-          .MuiTabs-flexContainer {
-            border-bottom: 2px solid ${colorPalette.greyLight};
-          }
-        `
-      : css`
-          .MuiButtonBase-root {
-            border-bottom: 2px solid ${colorPalette.greyLight};
-          }
-        `};
 `;
 
 const Z_INDEX = 2;

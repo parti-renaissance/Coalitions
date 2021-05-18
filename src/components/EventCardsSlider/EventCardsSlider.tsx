@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState, createElement } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { EmptyMobileDiv, EventCardWrapper, TabBarWrapper } from './EventCardsSlider.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { getIsMobile } from 'services/mobile/mobile';
@@ -17,9 +17,14 @@ const TAB_LABEL_KEYS = ['events.upcoming', 'events.passed'];
 interface EventCardsSliderProps {
   coalitionId?: string;
   causeId?: string;
+  TitleComponent?: FunctionComponent;
 }
 
-const EventCardsSlider: FunctionComponent<EventCardsSliderProps> = ({ coalitionId, causeId }) => {
+const EventCardsSlider: FunctionComponent<EventCardsSliderProps> = ({
+  coalitionId,
+  causeId,
+  TitleComponent,
+}) => {
   const intl = useIntl();
   const isMobile = getIsMobile();
   const { upcomingEvents, passedEvents, fetchEvents, isFetchingEvents } = useFetchEvents({
@@ -56,7 +61,7 @@ const EventCardsSlider: FunctionComponent<EventCardsSliderProps> = ({ coalitionI
     <Slider
       slidesCount={eventsToDisplay.length}
       isLoadingSlides={isFetchingEvents}
-      TitleComponent={({ children }) => createElement('h2', null, children)}
+      TitleComponent={TitleComponent}
       title={intl.formatMessage({ id: 'events.title' })}
       desktopCarouselProps={{
         slideWidth: `${DESKTOP_WIDTH}px`,

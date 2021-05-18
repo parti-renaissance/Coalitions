@@ -28,6 +28,7 @@ import FixedBottomButton from 'components/FixedBottomButton';
 import FollowTag, { FOLLOW_TAG_TYPE } from 'components/FollowTag/FollowTag';
 import IconAndLabel from 'components/IconAndLabel';
 import MoreOptionsMenu from 'components/MoreOptionsMenu';
+import EventCardsSlider from 'components/EventCardsSlider';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -38,7 +39,7 @@ const Coalition: FunctionComponent = () => {
   const { coalitionId } = useParams<CoalitionNavParams>();
   const coalition = useSelector(getCoalition(coalitionId));
   const { fetchCoalitions, isFetchingCoalitions } = useFetchCoalitions();
-  const { isCoalitionVideoPlaceholderEnable } = useFeatureToggling();
+  const { isCoalitionVideoPlaceholderEnable, areEventsEnable } = useFeatureToggling();
   const isMobile = getIsMobile();
   const { loading: isFollowing, followCoalition } = useCoalitionFollow(coalitionId);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
@@ -143,6 +144,11 @@ const Coalition: FunctionComponent = () => {
         <ContentSubContainer>
           <HorizontalCausesList coalitionId={coalitionId} />
         </ContentSubContainer>
+        {areEventsEnable ? (
+          <ContentSubContainer>
+            <EventCardsSlider coalitionId={coalitionId} />
+          </ContentSubContainer>
+        ) : null}
       </ContentContainer>
       {showFollowButton ? (
         <FixedBottomButton onClick={followCoalition} isLoading={isFollowing}>

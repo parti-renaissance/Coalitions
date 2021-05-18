@@ -29,7 +29,7 @@ export const useFetchEvent = (id: string) => {
       return;
     }
 
-    let event: EventType | undefined = await doFetchEvent();
+    const event: EventType | undefined = await doFetchEvent();
 
     if (event === undefined || event instanceof Error) {
       return;

@@ -20,7 +20,7 @@ export const useFetchEvents = ({
   const [{ loading: isFetchingEvents, error }, doFetchEvents] = useTypedAsyncFn(
     async (page: number) => {
       const baseUrl = coalitionId !== undefined ? 'coalitions' : 'causes';
-      const id = coalitionId || causeId || '';
+      const id = coalitionId !== undefined ? coalitionId : (causeId as string);
       return await coalitionApiClient.get(`${baseUrl}/${id}/events?page=${page}`);
     },
     [],
@@ -33,7 +33,7 @@ export const useFetchEvents = ({
   }, [error]);
 
   const fetchEvents = useCallback(async () => {
-    if (!hasMore || (!coalitionId && !causeId)) {
+    if (!hasMore || (coalitionId === undefined && causeId === undefined)) {
       return;
     }
 

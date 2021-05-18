@@ -6,6 +6,7 @@ export const Container = styled.div<{ isSticky?: boolean }>`
   .MuiButtonBase-root {
     border-bottom: 2px solid ${colorPalette.greyLight};
   }
+
   ${({ isSticky }) =>
     isSticky === true
       ? css`

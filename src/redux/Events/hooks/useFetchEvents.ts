@@ -1,19 +1,28 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
-import { authenticatedApiClient } from 'services/networking/client';
+import { coalitionApiClient } from 'services/networking/client';
 import HandleErrorService from 'services/HandleErrorService';
-import useSelector from 'redux/useSelector';
-import { isUserLogged } from 'redux/Login/selectors';
 import { EventType } from '../types';
 import { isUpcomingEvent } from '../helpers/isUpcomingEvent';
 
-export const useFetchEvents = () => {
-  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+export const useFetchEvents = ({
+  coalitionId,
+  causeId,
+}: {
+  coalitionId?: string;
+  causeId?: string;
+}) => {
   const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([]);
   const [passedEvents, setPassedEvents] = useState<EventType[]>([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const [{ loading: isFetchingEvents, error }, doFetchEvents] = useTypedAsyncFn(
-    async () => await authenticatedApiClient.get('v3/events'),
+    async (page: number) => {
+      const baseUrl = coalitionId !== undefined ? 'coalitions' : 'causes';
+      const id = coalitionId !== undefined ? coalitionId : (causeId as string);
+      return await coalitionApiClient.get(`${baseUrl}/${id}/events?page=${page}`);
+    },
     [],
   );
 
@@ -24,11 +33,11 @@ export const useFetchEvents = () => {
   }, [error]);
 
   const fetchEvents = useCallback(async () => {
-    if (!isUserLoggedIn) {
+    if (!hasMore || (coalitionId === undefined && causeId === undefined)) {
       return;
     }
 
-    const eventsResponse = await doFetchEvents();
+    const eventsResponse = await doFetchEvents(page);
 
     if (eventsResponse instanceof Error) {
       return;
@@ -47,7 +56,9 @@ export const useFetchEvents = () => {
 
     setUpcomingEvents(newUpcomingEvents);
     setPassedEvents(newPassedEvents);
-  }, [doFetchEvents, isUserLoggedIn]);
+    setHasMore(eventsResponse.metadata.last_page >= page + 1);
+    setPage(page + 1);
+  }, [doFetchEvents, hasMore, coalitionId, causeId, page]);
 
   return { upcomingEvents, passedEvents, fetchEvents, isFetchingEvents };
 };

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, createElement } from 'react';
 import {
   Container,
   SubContainer,
@@ -73,7 +73,10 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
         <>
           {areEventsEnable ? (
             <EventCardsSliderWrapper>
-              <EventCardsSlider />
+              <EventCardsSlider
+                causeId={(cause as Cause).uuid}
+                TitleComponent={({ children }) => createElement('h2', null, children)}
+              />
             </EventCardsSliderWrapper>
           ) : null}
           <CreateCauseCTA displayLinkToCauseList />

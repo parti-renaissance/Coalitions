@@ -2,6 +2,7 @@ import { FormikErrors, FormikTouched } from 'formik';
 import { EventFormValues } from './useValidateForm';
 import isMatch from 'lodash/isMatch';
 
+// eslint-disable-next-line complexity
 export const getIsValidateButtonDisabled = ({
   errors,
   touched,

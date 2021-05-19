@@ -28,6 +28,7 @@ export interface EventFormErrors {
 export const useValidateForm = () => {
   const intl = useIntl();
 
+  // eslint-disable-next-line complexity
   const validateForm = ({
     name,
     mode,

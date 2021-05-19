@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React, { FunctionComponent } from 'react';
 import {
   Container,
@@ -219,3 +221,5 @@ const EventForm: FunctionComponent<EventFormProps> = ({
 };
 
 export default EventForm;
+
+/* eslint-enable max-lines */

@@ -1,16 +1,13 @@
 export type EventMode = 'meeting' | 'online';
 
 export interface InCreationEventType {
-  begin_at: string;
-  finish_at: string;
-  capacity?: number | null;
-  category: {
-    event_group_category: {
-      name: string;
-    };
-  };
   mode: EventMode;
   name: string;
+  begin_at: string;
+  finish_at: string;
+  category: {
+    name: string;
+  };
   time_zone: string;
   description?: string;
   organizer?: {
@@ -18,17 +15,13 @@ export interface InCreationEventType {
     last_name: string;
   };
   participants_count?: number;
-  status?: string;
   post_address?: {
     address: string;
     postal_code: string;
-    city: string;
     city_name: string;
     country: string;
-    latitude: number;
-    longitude: number;
   };
-  visio_url?: string | null;
+  visio_url?: string;
 }
 
 export type EventType = {

@@ -12,10 +12,12 @@ import {
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
-import { useValidateForm } from './lib/useValidateForm';
-import { InCreationEventType, EventType } from 'redux/Events/types';
-import { getInitialValues } from './lib/getInitialValues';
+import { EventFormValues, useValidateForm } from './lib/useValidateForm';
+import { InCreationEventType, EventType, EventMode } from 'redux/Events/types';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
+import { convertFormValuesToEvent } from './lib/convertFormValuesToEvent';
+import { getIsValidateButtonDisabled } from './lib/getIsValidateButtonDisabled';
+import { convertEventToFormValues } from './lib/convertEventToFormValues';
 
 interface EventFormProps {
   initialEvent?: EventType;
@@ -23,9 +25,23 @@ interface EventFormProps {
   isSubmitting: boolean;
 }
 
-const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, isSubmitting }) => {
+const EventForm: FunctionComponent<EventFormProps> = ({
+  initialEvent,
+  onSubmit: onSubmitProp,
+  isSubmitting,
+}) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
+
+  const onSubmit = (values: EventFormValues) => {
+    const event = convertFormValuesToEvent(values);
+    return onSubmitProp(event);
+  };
+
+  let initialValues = { mode: 'meeting' as EventMode };
+  if (initialEvent !== undefined) {
+    initialValues = convertEventToFormValues(initialEvent);
+  }
 
   return (
     <Container>
@@ -37,8 +53,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
       {initialEvent === undefined ? (
         <Description>{intl.formatMessage({ id: 'event_form.create.tips' })}</Description>
       ) : null}
-      <Formik<InCreationEventType>
-        initialValues={getInitialValues(initialEvent)}
+      <Formik<EventFormValues>
+        initialValues={initialValues}
         validate={validateForm}
         onSubmit={onSubmit}
         enableReinitialize
@@ -68,7 +84,10 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                 size="small"
                 variant="outlined"
                 color="primary"
-                onClick={() => setFieldValue('mode', 'meeting')}
+                onClick={() => {
+                  setFieldValue('mode', 'meeting');
+                  setFieldValue('link', '');
+                }}
               >
                 {intl.formatMessage({ id: 'event_form.mode.meeting' })}
               </ModeButton>
@@ -76,35 +95,40 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                 size="small"
                 variant="outlined"
                 color="primary"
-                onClick={() => setFieldValue('mode', 'online')}
+                onClick={() => {
+                  setFieldValue('mode', 'online');
+                  setFieldValue('address', '');
+                }}
               >
                 {intl.formatMessage({ id: 'event_form.mode.online' })}
               </ModeButton>
             </ModeButtonsContainer>
             <InputFieldWrapper>
               <InputField
-                required
+                required={values.mode === 'meeting'}
                 disabled={values.mode === 'online'}
                 placeholder={intl.formatMessage({ id: 'event_form.address' })}
                 type="text"
-                name="post_address.address"
+                name="address"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.post_address?.address}
-                error={Boolean(touched.post_address) && errors.post_address !== undefined}
-                helperText={Boolean(touched.post_address) ? errors.post_address : undefined}
+                value={values.address}
+                error={touched.address === true && errors.address !== undefined}
+                helperText={touched.address === true ? errors.address : undefined}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
               <InputField
+                required={values.mode === 'online'}
+                disabled={values.mode === 'meeting'}
                 placeholder={intl.formatMessage({ id: 'event_form.link' })}
                 type="text"
-                name="visio_url"
+                name="link"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.visio_url}
-                error={Boolean(touched.visio_url) && errors.visio_url !== undefined}
-                helperText={Boolean(touched.visio_url) ? errors.visio_url : undefined}
+                value={values.link}
+                error={touched.link === true && errors.link !== undefined}
+                helperText={touched.link === true ? errors.link : undefined}
               />
             </InputFieldWrapper>
             <DateFieldsWrapper>
@@ -113,12 +137,12 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                   required
                   placeholder={intl.formatMessage({ id: 'event_form.begin_at' })}
                   type="datetime-local"
-                  name="begin_at"
+                  name="beginAtDate"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.begin_at}
-                  error={Boolean(touched.begin_at) && errors.begin_at !== undefined}
-                  helperText={Boolean(touched.begin_at) ? errors.visio_url : undefined}
+                  value={values.beginAtDate}
+                  error={touched.beginAtDate === true && errors.beginAtDate !== undefined}
+                  helperText={touched.beginAtDate === true ? errors.beginAtDate : undefined}
                   InputLabelProps={{ shrink: true }}
                 />
               </InputFieldWrapper>
@@ -127,46 +151,57 @@ const EventForm: FunctionComponent<EventFormProps> = ({ initialEvent, onSubmit, 
                   required
                   placeholder={intl.formatMessage({ id: 'event_form.finish_at' })}
                   type="datetime-local"
-                  name="finish_at"
+                  name="finishAtDate"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.finish_at}
-                  error={Boolean(touched.finish_at) && errors.finish_at !== undefined}
-                  helperText={Boolean(touched.finish_at) ? errors.finish_at : undefined}
+                  value={values.finishAtDate}
+                  error={touched.finishAtDate === true && errors.finishAtDate !== undefined}
+                  helperText={touched.finishAtDate === true ? errors.finishAtDate : undefined}
                   InputLabelProps={{ shrink: true }}
                 />
               </InputFieldWrapper>
             </DateFieldsWrapper>
             <InputFieldWrapper>
               <InputField
+                required
                 disabled={values.mode === 'online'}
                 placeholder={intl.formatMessage({ id: 'event_form.category' })}
                 type="text"
-                name="category.event_group_category.name"
+                name="categoryId"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.category?.event_group_category?.name}
-                error={Boolean(touched.category) && errors.category !== undefined}
-                helperText={Boolean(touched.category) ? errors.category : undefined}
+                value={values.categoryId}
+                error={touched.categoryId === true && errors.categoryId !== undefined}
+                helperText={touched.categoryId === true ? errors.categoryId : undefined}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
               <InputField
+                required
                 placeholder={intl.formatMessage({ id: 'event_form.description' })}
                 type="text"
                 name="description"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.description}
-                error={Boolean(touched.description) && errors.description !== undefined}
-                helperText={Boolean(touched.description) ? errors.description : undefined}
+                error={touched.description === true && errors.description !== undefined}
+                helperText={touched.description === true ? errors.description : undefined}
                 multiline
                 rows={10}
               />
             </InputFieldWrapper>
             <ValidateButton
               isLoading={isSubmitting}
-              disabled
+              disabled={
+                Boolean(isSubmitting) ||
+                getIsValidateButtonDisabled({
+                  errors,
+                  initialValues,
+                  touched,
+                  isUpdating: initialEvent !== undefined,
+                  values,
+                })
+              }
               type="submit"
               size="small"
               variant="contained"

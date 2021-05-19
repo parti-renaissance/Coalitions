@@ -41,7 +41,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
       <div>
         <HeaderContainer>
           <MobileGreyP>
-            {`${event.category.event_group_category.name.toUpperCase()} • ${intl.formatMessage({
+            {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
               id: `events.mode.${event.mode}`,
             })}`}
           </MobileGreyP>

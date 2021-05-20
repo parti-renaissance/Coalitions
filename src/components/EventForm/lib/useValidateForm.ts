@@ -7,8 +7,8 @@ export interface EventFormValues {
   mode: EventMode;
   address?: string;
   link?: string;
-  beginAtDate?: Date;
-  finishAtDate?: Date;
+  beginAtDate?: string;
+  finishAtDate?: string;
   categoryId?: string;
   description?: string;
 }

@@ -5,17 +5,28 @@ import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService from 'services/HandleErrorService';
 import { EventType } from '../types';
 
+const FAKE_EVENT: EventType = {
+  uuid: '1',
+  name: 'mon événement',
+  begin_at: '2021-06-20T08:00',
+  finish_at: '2021-06-21T08:00',
+  mode: 'online',
+  category: {
+    uuid: '1',
+    name: 'category1',
+  },
+  time_zone: 'Europe/Paris',
+  description: 'ma description',
+  visio_url: 'www.google.com',
+};
+
 export const useFetchEvent = (id: string) => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const [event, setEvent] = useState<undefined | EventType>(undefined);
 
   const [{ loading, error }, doFetchEvent] = useTypedAsyncFn(async () => {
     console.log({ id });
-    setTimeout(() => {
-      // fake loading state
-    }, 3000);
-    // todo
-    return Promise.resolve();
+    return new Promise(resolve => setTimeout(resolve, 2000, FAKE_EVENT));
   }, []);
 
   useEffect(() => {

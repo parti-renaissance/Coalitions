@@ -16,6 +16,7 @@ const SuccessModal: FunctionComponent<{}> = () => {
     const publishedCause = params.get('publishedCause');
     const didCreateAccount = params.get('didCreateAccount');
     const sendMail = params.get('sendMail');
+    const createdEvent = params.get('createdEvent');
 
     if (publishedCause !== null) {
       setConfig({
@@ -33,6 +34,12 @@ const SuccessModal: FunctionComponent<{}> = () => {
       setConfig({
         imageUrl: '/images/sendMail.svg',
         titleKey: 'send_mails.success_screen.title',
+      });
+    } else if (createdEvent !== null) {
+      setConfig({
+        imageUrl: '/images/publishCause.svg',
+        titleKey: 'event_form.create.success_modal.title',
+        contentKey: 'event_form.create.success_modal.description',
       });
     }
   }, [location]);

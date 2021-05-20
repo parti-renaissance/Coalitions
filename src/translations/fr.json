@@ -276,8 +276,10 @@
     "mail-of-existing-account-for-support": "L’utilisateur avec cette adresse e-mail existe déjà. Veuillez vous connecter pour soutenir la cause.",
     "mail-of-existing-account": "L’utilisateur avec cette adresse e-mail existe déjà.",
     "already-used-cause-name": "Ce nom de cause existe déjà.",
+    "already-used-event-name": "Ce nom d'événement existe déjà.",
     "incorrect-password-token": "Une erreur s’est produite : ce lien n’est plus valide.",
     "cannot-edit-this-cause": "Vous n’avez pas le droit de modifier cette cause.",
+    "cannot-edit-this-event": "Vous n’avez pas le droit de modifier cet événement.",
     "cannot-send-mail-for-this-cause": "Vous n’avez pas le droit d’envoyer de mails pour cette cause.",
     "sync-mail-exceeded-max-attempts": "Problème lors de la synchronisation de votre mail, merci de réessayer plus tard",
     "sync-mail-no-recipients": "Nous n'avons pas trouvé de destinataires pour votre mail",
@@ -343,12 +345,17 @@
   "event_form": {
     "update": {
       "title": "Gérer mon événement",
-      "validate": "Enregistrer"
+      "validate": "Enregistrer",
+      "success": "Votre événement a été modifié avec succès."
     },
     "create": {
       "title": "Créer un événement",
       "validate": "Créer l’événement",
-      "tips": "Les événements vous permettent de réunir vos soutiens pour faire grandir votre cause."
+      "tips": "Les événements vous permettent de réunir vos soutiens pour faire grandir votre cause.",
+      "success_modal": {
+        "title": "Félicitations, votre événement est en ligne",
+        "description": "Partagez l'événement autour de vous !"
+      }
     },
     "title": "Titre de l’événement",
     "address": "Adresse postale",

@@ -1,13 +1,16 @@
 export type EventMode = 'meeting' | 'online';
 
+export type EventCategory = {
+  id: string;
+  name: string;
+};
+
 export interface InCreationEventType {
   mode: EventMode;
   name: string;
   begin_at: string;
   finish_at: string;
-  category: {
-    name: string;
-  };
+  category: EventCategory;
   time_zone: string;
   description?: string;
   organizer?: {

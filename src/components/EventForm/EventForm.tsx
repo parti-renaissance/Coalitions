@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import {
   Container,
   Title,
@@ -10,6 +10,7 @@ import {
   ModeButtonsContainer,
   ModeButton,
   DateFieldsWrapper,
+  CategoryItem,
 } from './EventForm.style';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
@@ -20,6 +21,8 @@ import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { convertFormValuesToEvent } from './lib/convertFormValuesToEvent';
 import { getIsValidateButtonDisabled } from './lib/getIsValidateButtonDisabled';
 import { convertEventToFormValues } from './lib/convertEventToFormValues';
+import { useFetchEventCategories } from 'redux/Events/hooks/useFetchEventCategories';
+import Loader from 'components/Loader';
 
 interface EventFormProps {
   initialEvent?: EventType;
@@ -33,7 +36,12 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   isSubmitting,
 }) => {
   const intl = useIntl();
+  const { loading, eventCategories, fetchEventCategories } = useFetchEventCategories();
   const { validateForm } = useValidateForm();
+
+  useEffect(() => {
+    fetchEventCategories();
+  }, [fetchEventCategories]);
 
   const onSubmit = (values: EventFormValues) => {
     const event = convertFormValuesToEvent(values);
@@ -43,6 +51,10 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   let initialValues = { mode: 'meeting' as EventMode };
   if (initialEvent !== undefined) {
     initialValues = convertEventToFormValues(initialEvent);
+  }
+
+  if (eventCategories.length === 0 && loading) {
+    return <Loader fullScreen />;
   }
 
   return (
@@ -175,8 +187,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({
             </DateFieldsWrapper>
             <InputFieldWrapper>
               <InputField
+                select
                 required
-                disabled={values.mode === 'online'}
                 placeholder={intl.formatMessage({ id: 'event_form.category' })}
                 type="text"
                 name="categoryId"
@@ -185,7 +197,13 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 value={values.categoryId}
                 error={touched.categoryId === true && errors.categoryId !== undefined}
                 helperText={touched.categoryId === true ? errors.categoryId : undefined}
-              />
+              >
+                {eventCategories.map(category => (
+                  <CategoryItem key={category.id} value={category.id}>
+                    {category.name}
+                  </CategoryItem>
+                ))}
+              </InputField>
             </InputFieldWrapper>
             <InputFieldWrapper>
               <InputField

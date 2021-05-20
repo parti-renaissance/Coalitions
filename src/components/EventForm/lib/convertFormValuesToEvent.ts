@@ -4,7 +4,7 @@ import { InCreationEventType, EventType, EventMode } from 'redux/Events/types';
 export const convertFormValuesToEvent = (
   formValues: EventFormValues,
 ): InCreationEventType | EventType => {
-  const { uuid, name, mode, link, beginAtDate, finishAtDate, description } = formValues;
+  const { uuid, name, mode, link, beginAtDate, finishAtDate, description, categoryId } = formValues;
 
   return {
     uuid: uuid as string,
@@ -16,6 +16,7 @@ export const convertFormValuesToEvent = (
     description: description as EventMode,
     visio_url: link as string,
     category: {
+      id: categoryId as string,
       name: '',
     },
   };

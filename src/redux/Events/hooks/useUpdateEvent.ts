@@ -33,9 +33,11 @@ export const useUpdateEvent = () => {
   const errorHandler = useUpdateEventErrorHandler();
 
   const [{ loading, error }, doUpdateEvent] = useTypedAsyncFn(async (event: EventType) => {
-    setTimeout(() => {}, 3000);
+    setTimeout(() => {
+      console.log({ event });
+    }, 3000);
 
-    return await Promise.resolve(console.log({ event }));
+    return await Promise.resolve();
     // return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
     //   content: cause?.image_url,
     // });

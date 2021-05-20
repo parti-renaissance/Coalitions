@@ -361,7 +361,7 @@
       "tips": "Les événements vous permettent de réunir vos soutiens pour faire grandir votre cause.",
       "success_modal": {
         "title": "Félicitations, votre événement est en ligne",
-        "description": "Partagez l'événement autour de vous !"
+        "description": "Partagez l'événement autour de vous\u00A0!"
       }
     },
     "title": "Titre de l’événement",

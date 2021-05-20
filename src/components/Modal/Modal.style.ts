@@ -12,7 +12,7 @@ const getContainerStyle = (large?: boolean) => css`
     ${media.desktop(`
       padding: ${getSpacing(8)};
       max-height: min(${getSpacing(150)}, calc(100vh - 2 * ${getSpacing(8)}));
-      max-width: ${large ? getSpacing(85) : getSpacing(75)};
+      max-width: ${large === true ? getSpacing(85) : getSpacing(75)};
     `)}
   }
 `;

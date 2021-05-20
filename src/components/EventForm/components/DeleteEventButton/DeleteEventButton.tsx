@@ -9,10 +9,12 @@ import {
 import { Modal } from 'components/Modal/Modal';
 import { Title, Description } from 'components/Modal/Modal.style';
 import { FullWidthButton } from 'components/Button/Button';
+import { useCancelEvent } from 'redux/Events/hooks/useCancelEvent';
 
 export const DeleteEventButton: FunctionComponent = () => {
   const intl = useIntl();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { loading, cancelEvent } = useCancelEvent('abc');
 
   const hideOrShowModal = (isVisible: boolean) => () => {
     setIsModalVisible(isVisible);
@@ -35,7 +37,14 @@ export const DeleteEventButton: FunctionComponent = () => {
             {intl.formatMessage({ id: 'event_form.update.cancel_event_modal.description' })}
           </Description>
           <ButtonsContainer>
-            <FullWidthButton size="small" variant="outlined" color="primary">
+            <FullWidthButton
+              size="small"
+              variant="outlined"
+              color="primary"
+              isLoading={loading}
+              disabled={loading}
+              onClick={cancelEvent}
+            >
               {intl.formatMessage({ id: 'event_form.update.cancel_event' })}
             </FullWidthButton>
             <CloseModalButton

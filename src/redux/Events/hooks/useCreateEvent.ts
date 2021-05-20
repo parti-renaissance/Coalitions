@@ -29,11 +29,8 @@ export const useCreateEvent = () => {
 
   const [{ loading, error }, doCreateEvent] = useTypedAsyncFn(
     async (event: InCreationEventType) => {
-      setTimeout(() => {
-        console.log({ event });
-      }, 3000);
-
-      return await Promise.resolve();
+      console.log({ event });
+      return new Promise(resolve => setTimeout(resolve, 2000));
       // return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
       //   content: cause?.image_url,
       // });

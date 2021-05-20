@@ -16,7 +16,7 @@ export const convertFormValuesToEvent = (
     description: description as EventMode,
     visio_url: link as string,
     category: {
-      id: categoryId as string,
+      uuid: categoryId as string,
       name: '',
     },
   };

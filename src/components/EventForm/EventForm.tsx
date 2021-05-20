@@ -199,7 +199,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 helperText={touched.categoryId === true ? errors.categoryId : undefined}
               >
                 {eventCategories.map(category => (
-                  <CategoryItem key={category.id} value={category.id}>
+                  <CategoryItem key={category.uuid} value={category.uuid}>
                     {category.name}
                   </CategoryItem>
                 ))}

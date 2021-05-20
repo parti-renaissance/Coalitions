@@ -1,7 +1,7 @@
 export type EventMode = 'meeting' | 'online';
 
 export type EventCategory = {
-  id: string;
+  uuid: string;
   name: string;
 };
 

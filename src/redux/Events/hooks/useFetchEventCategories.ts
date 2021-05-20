@@ -7,15 +7,13 @@ export const useFetchEventCategories = () => {
   const [eventCategories, setEventCategories] = useState<EventCategory[]>([]);
 
   const [{ loading, error }, doFetchEventCategories] = useTypedAsyncFn(async () => {
-    setTimeout(() => {
-      // fake loading state
-    }, 3000);
-    // todo
-    return Promise.resolve([
-      { id: '1', name: 'category1' },
-      { id: '2', name: 'category2' },
-      { id: '3', name: 'category3' },
-    ]);
+    return new Promise(resolve =>
+      setTimeout(resolve, 2000, [
+        { uuid: '1', name: 'category1' },
+        { uuid: '2', name: 'category2' },
+        { uuid: '3', name: 'category3' },
+      ]),
+    );
   }, []);
 
   useEffect(() => {

@@ -10,8 +10,8 @@ export const convertEventToFormValues = (event: EventType): EventFormValues => {
     mode,
     address: '',
     link: visio_url,
-    beginAtDate: new Date(begin_at),
-    finishAtDate: new Date(finish_at),
+    beginAtDate: begin_at,
+    finishAtDate: finish_at,
     categoryId: '',
     description,
   };

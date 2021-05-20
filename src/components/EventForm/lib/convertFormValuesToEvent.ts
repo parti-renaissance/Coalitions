@@ -9,8 +9,8 @@ export const convertFormValuesToEvent = (
   return {
     uuid: uuid as string,
     name: name as string,
-    begin_at: (beginAtDate as Date).toISOString(),
-    finish_at: (finishAtDate as Date).toISOString(),
+    begin_at: beginAtDate as string,
+    finish_at: finishAtDate as string,
     time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     mode: mode as EventMode,
     description: description as EventMode,

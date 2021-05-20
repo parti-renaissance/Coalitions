@@ -115,8 +115,14 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.address}
-                error={touched.address === true && errors.address !== undefined}
-                helperText={touched.address === true ? errors.address : undefined}
+                error={
+                  values.mode === 'meeting' &&
+                  touched.address === true &&
+                  errors.address !== undefined
+                }
+                helperText={
+                  values.mode === 'meeting' && touched.address === true ? errors.address : undefined
+                }
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
@@ -129,8 +135,12 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.link}
-                error={touched.link === true && errors.link !== undefined}
-                helperText={touched.link === true ? errors.link : undefined}
+                error={
+                  values.mode === 'online' && touched.link === true && errors.link !== undefined
+                }
+                helperText={
+                  values.mode === 'online' && touched.link === true ? errors.link : undefined
+                }
               />
             </InputFieldWrapper>
             <DateFieldsWrapper>

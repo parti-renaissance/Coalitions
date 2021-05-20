@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
+import { useCreateEvent } from 'redux/Events/hooks/useCreateEvent';
 import EventForm from './EventForm';
 
 export const CreateEventForm: FunctionComponent = () => {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  return <EventForm onSubmit={() => {}} isSubmitting={false} />;
+  const { loading, createEvent } = useCreateEvent();
+
+  return <EventForm onSubmit={createEvent} isSubmitting={loading} />;
 };

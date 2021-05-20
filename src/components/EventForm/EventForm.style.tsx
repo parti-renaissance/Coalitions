@@ -4,7 +4,9 @@ import { FullWidthButton } from 'components/Button/Button';
 import { EventMode } from 'redux/Events/types';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  flex: 1;
+`;
 
 export const Title = styled.h1`
   ${fonts.h1Small};

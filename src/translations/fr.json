@@ -347,7 +347,12 @@
       "title": "Gérer mon événement",
       "validate": "Enregistrer",
       "success": "Votre événement a été modifié avec succès.",
-      "cancel_event": "Annuler l'événement"
+      "cancel_event": "Annuler l'événement",
+      "cancel_event_modal": {
+        "title": "Êtes-vous sûr de votre choix\u00A0?",
+        "description": "Cette action est définitive. Nous préviendrons les inscrits par email.",
+        "cancel": "Annuler"
+      }
     },
     "create": {
       "title": "Créer un événement",

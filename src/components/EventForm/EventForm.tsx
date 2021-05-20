@@ -6,11 +6,11 @@ import {
   Title,
   Description,
   Form,
-  ValidateButton,
   ModeButtonsContainer,
   ModeButton,
   DateFieldsWrapper,
   CategoryItem,
+  BottomButtonsWrapper,
 } from './EventForm.style';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
@@ -23,6 +23,8 @@ import { getIsValidateButtonDisabled } from './lib/getIsValidateButtonDisabled';
 import { convertEventToFormValues } from './lib/convertEventToFormValues';
 import { useFetchEventCategories } from 'redux/Events/hooks/useFetchEventCategories';
 import Loader from 'components/Loader';
+import { DeleteEventButton } from './components';
+import { FullWidthButton } from 'components/Button/Button';
 
 interface EventFormProps {
   initialEvent?: EventType;
@@ -220,27 +222,30 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 rows={10}
               />
             </InputFieldWrapper>
-            <ValidateButton
-              isLoading={isSubmitting}
-              disabled={
-                Boolean(isSubmitting) ||
-                getIsValidateButtonDisabled({
-                  errors,
-                  initialValues,
-                  touched,
-                  isUpdating: initialEvent !== undefined,
-                  values,
-                })
-              }
-              type="submit"
-              size="small"
-              variant="contained"
-              color="primary"
-            >
-              {initialEvent !== undefined
-                ? intl.formatMessage({ id: 'event_form.update.validate' })
-                : intl.formatMessage({ id: 'event_form.create.validate' })}
-            </ValidateButton>
+            <BottomButtonsWrapper>
+              {initialEvent !== undefined ? <DeleteEventButton /> : null}
+              <FullWidthButton
+                isLoading={isSubmitting}
+                disabled={
+                  Boolean(isSubmitting) ||
+                  getIsValidateButtonDisabled({
+                    errors,
+                    initialValues,
+                    touched,
+                    isUpdating: initialEvent !== undefined,
+                    values,
+                  })
+                }
+                type="submit"
+                size="small"
+                variant="contained"
+                color="primary"
+              >
+                {initialEvent !== undefined
+                  ? intl.formatMessage({ id: 'event_form.update.validate' })
+                  : intl.formatMessage({ id: 'event_form.create.validate' })}
+              </FullWidthButton>
+            </BottomButtonsWrapper>
           </Form>
         )}
       </Formik>

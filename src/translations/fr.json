@@ -346,7 +346,8 @@
     "update": {
       "title": "Gérer mon événement",
       "validate": "Enregistrer",
-      "success": "Votre événement a été modifié avec succès."
+      "success": "Votre événement a été modifié avec succès.",
+      "cancel_event": "Annuler l'événement"
     },
     "create": {
       "title": "Créer un événement",

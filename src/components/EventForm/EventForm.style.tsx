@@ -31,10 +31,6 @@ export const Form = styled.form`
   `)}
 `;
 
-export const ValidateButton = styled(FullWidthButton)`
-  margin-top: ${getSpacing(6)};
-`;
-
 export const ModeButtonsContainer = styled.div<{ mode: EventMode }>`
   display: flex;
   margin-top: ${getSpacing(4)};
@@ -72,4 +68,8 @@ export const DateFieldsWrapper = styled.div`
 export const CategoryItem = styled(MenuItem)`
   ${fonts.input};
   color: ${colorPalette.greyDark};
+`;
+
+export const BottomButtonsWrapper = styled.div`
+  margin-top: ${getSpacing(6)};
 `;

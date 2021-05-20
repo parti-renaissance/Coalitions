@@ -346,7 +346,14 @@
     "update": {
       "title": "Gérer mon événement",
       "validate": "Enregistrer",
-      "success": "Votre événement a été modifié avec succès."
+      "success": "Votre événement a été modifié avec succès.",
+      "cancel_event": "Annuler l'événement",
+      "cancel_success": "Votre événement a bien été annulé.",
+      "cancel_event_modal": {
+        "title": "Êtes-vous sûr de votre choix\u00A0?",
+        "description": "Cette action est définitive. Nous préviendrons les inscrits par email.",
+        "cancel": "Annuler"
+      }
     },
     "create": {
       "title": "Créer un événement",
@@ -354,7 +361,7 @@
       "tips": "Les événements vous permettent de réunir vos soutiens pour faire grandir votre cause.",
       "success_modal": {
         "title": "Félicitations, votre événement est en ligne",
-        "description": "Partagez l'événement autour de vous !"
+        "description": "Partagez l'événement autour de vous\u00A0!"
       }
     },
     "title": "Titre de l’événement",

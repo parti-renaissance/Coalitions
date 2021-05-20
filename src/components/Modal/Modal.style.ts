@@ -1,20 +1,27 @@
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import { Close } from '@material-ui/icons';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colorPalette, media, getSpacing, styledTags } from 'stylesheet';
 import { FormControlLabel as MUIFormControlLabel } from '@material-ui/core';
 
-export const Container = styled(Dialog)`
+const getContainerStyle = (large?: boolean) => css`
   ${styledTags};
   .MuiPaper-root {
     padding: ${getSpacing(3)};
     ${media.desktop(`
       padding: ${getSpacing(8)};
-      max-width: ${getSpacing(75)};
       max-height: min(${getSpacing(150)}, calc(100vh - 2 * ${getSpacing(8)}));
+      max-width: ${large === true ? getSpacing(85) : getSpacing(75)};
     `)}
   }
+`;
+export const Container = styled(Dialog)`
+  ${getContainerStyle()};
+`;
+
+export const LargeContainer = styled(Dialog)`
+  ${getContainerStyle(true)};
 `;
 
 export const CloseButton = styled(IconButton)`

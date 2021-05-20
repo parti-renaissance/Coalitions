@@ -4,7 +4,9 @@ import { FullWidthButton } from 'components/Button/Button';
 import { EventMode } from 'redux/Events/types';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  flex: 1;
+`;
 
 export const Title = styled.h1`
   ${fonts.h1Small};
@@ -27,10 +29,6 @@ export const Form = styled.form`
   ${media.desktop(`
     margin-top: ${getSpacing(7)};
   `)}
-`;
-
-export const ValidateButton = styled(FullWidthButton)`
-  margin-top: ${getSpacing(6)};
 `;
 
 export const ModeButtonsContainer = styled.div<{ mode: EventMode }>`
@@ -70,4 +68,8 @@ export const DateFieldsWrapper = styled.div`
 export const CategoryItem = styled(MenuItem)`
   ${fonts.input};
   color: ${colorPalette.greyDark};
+`;
+
+export const BottomButtonsWrapper = styled.div`
+  margin-top: ${getSpacing(6)};
 `;

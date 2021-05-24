@@ -381,6 +381,7 @@
     "add_to_calendar": "Ajouter à mon agenda",
     "subscriber": "{numberOfSubscribers} inscrit",
     "subscribers": "{numberOfSubscribers} inscrits",
-    "begin_at": "Le {date} à {time}"
+    "begin_at": "Le {date} à {time}",
+    "not_found": "Aucun événement trouvé."
   }
 }

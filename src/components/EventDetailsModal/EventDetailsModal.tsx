@@ -17,6 +17,7 @@ import {
 import EventInformation from './components/EventInformation';
 import { EventType } from 'redux/Events/types';
 import { Cause } from 'redux/Cause/types';
+import Loader from 'components/Loader';
 
 interface EventDetailsModalProps {
   event: EventType | undefined;
@@ -35,40 +36,39 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
 }) => {
   const intl = useIntl();
 
-  if ((cause === undefined && isFetchingCause) || (event === undefined && isFetchingEvent)) {
-    // TODO
-    return null;
-  }
-
-  if (cause === undefined || event === undefined) {
-    // TODO
-    return null;
-  }
+  const isLoading =
+    (cause === undefined && isFetchingCause) || (event === undefined && isFetchingEvent);
+  const noEventFound =
+    (cause === undefined && !isFetchingCause) || (event === undefined && !isFetchingEvent);
 
   return (
     <Modal onClose={onClose} isOpened width="large">
-      <ContentContainer>
-        <ContentSubContainer>
-          <Category>
-            {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
-              id: `events.mode.${event.mode}`,
-            })}`}
-          </Category>
-          <Name>{event.name}</Name>
-          <CauseNameContainer>
-            <CauseIcon src="/images/point.svg" />
-            <CauseName>{cause.name}</CauseName>
-          </CauseNameContainer>
-          <Separator />
-          <MobileInformationWrapper>
+      {isLoading ? <Loader /> : null}
+      {noEventFound ? intl.formatMessage({ id: 'event_details.not_found' }) : null}
+      {cause !== undefined && event !== undefined ? (
+        <ContentContainer>
+          <ContentSubContainer>
+            <Category>
+              {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
+                id: `events.mode.${event.mode}`,
+              })}`}
+            </Category>
+            <Name>{event.name}</Name>
+            <CauseNameContainer>
+              <CauseIcon src="/images/point.svg" />
+              <CauseName>{cause.name}</CauseName>
+            </CauseNameContainer>
+            <Separator />
+            <MobileInformationWrapper>
+              <EventInformation event={event} cause={cause} />
+            </MobileInformationWrapper>
+            <Description>{event.description}</Description>
+          </ContentSubContainer>
+          <DesktopInformationWrapper>
             <EventInformation event={event} cause={cause} />
-          </MobileInformationWrapper>
-          <Description>{event.description}</Description>
-        </ContentSubContainer>
-        <DesktopInformationWrapper>
-          <EventInformation event={event} cause={cause} />
-        </DesktopInformationWrapper>
-      </ContentContainer>
+          </DesktopInformationWrapper>
+        </ContentContainer>
+      ) : null}
     </Modal>
   );
 };

@@ -6,13 +6,13 @@ import {
   BottomButtonsContainer,
   HeaderContainer,
   Tag,
-  InscriptionButtonWrapper,
 } from './EventCard.style';
 import { EventType } from 'redux/Events/types';
 import { useIntl } from 'react-intl';
 import { DefaultButton } from 'components/Button/Button';
 import { isUpcomingEvent } from 'redux/Events/helpers/isUpcomingEvent';
 import { useHistory } from 'react-router';
+import EventParticipateButton from '../EventParticipateButton';
 
 interface EventCardProps {
   event: EventType;
@@ -64,13 +64,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
             : intl.formatMessage({ id: 'events.subscriber' }, { numberOfSubscribers })}
         </MobileGreyP>
         <BottomButtonsContainer>
-          <InscriptionButtonWrapper alreadySubscribed={alreadySubscribed}>
-            <DefaultButton size="small" variant="contained" onClick={onSubscribeClick}>
-              {alreadySubscribed
-                ? intl.formatMessage({ id: 'events.subscribed' })
-                : intl.formatMessage({ id: 'events.subscribe' })}
-            </DefaultButton>
-          </InscriptionButtonWrapper>
+          <EventParticipateButton event={event} type="card" />
           <DefaultButton size="small" variant="outlined" onClick={showEventDetails}>
             {intl.formatMessage({ id: 'events.see' })}
           </DefaultButton>

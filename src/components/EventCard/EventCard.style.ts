@@ -94,24 +94,3 @@ export const Tag = styled.div`
   line-height: ${lineHeight.primary};
   font-weight: ${fontWeight.normal};
 `;
-
-export const InscriptionButtonWrapper = styled.div<{ alreadySubscribed: boolean }>`
-  margin-right: ${getSpacing(3)};
-  > button,
-  button:hover {
-    color: ${colorPalette.white};
-    ${({ alreadySubscribed }) =>
-      alreadySubscribed
-        ? css`
-            background-color: ${colorPalette.greyDark};
-            border-color: ${colorPalette.greyDark};
-          `
-        : css`
-            background-color: ${colorPalette.mintGreen2};
-            border-color: ${colorPalette.mintGreen2};
-          `}
-  }
-  > button:hover {
-    opacity: 0.8;
-  }
-`;

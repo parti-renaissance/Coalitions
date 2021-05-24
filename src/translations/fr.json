@@ -380,6 +380,7 @@
     "information": "Informations",
     "add_to_calendar": "Ajouter à mon agenda",
     "subscriber": "{numberOfSubscribers} inscrit",
-    "subscribers": "{numberOfSubscribers} inscrits"
+    "subscribers": "{numberOfSubscribers} inscrits",
+    "begin_at": "Le {date} à {time}"
   }
 }

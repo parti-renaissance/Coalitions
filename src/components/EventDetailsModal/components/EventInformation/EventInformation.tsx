@@ -13,6 +13,8 @@ import ShareButton from '../../../ShareButton';
 import { useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
 import { Cause } from 'redux/Cause/types';
+import format from 'date-fns/format';
+import { fr } from 'date-fns/locale';
 
 interface EventInformationProps {
   event: EventType;
@@ -46,9 +48,16 @@ const OneInformation = ({ information }: { information: Information }) => {
 const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cause }) => {
   const intl = useIntl();
 
+  const beginAtDate = new Date(event.begin_at);
   let informations: Information[] = [
     {
-      label: 'coucou',
+      label: intl.formatMessage(
+        { id: 'event_details.begin_at' },
+        {
+          date: format(beginAtDate, 'dd/MM/yyyy', { locale: fr }),
+          time: format(beginAtDate, 'p', { locale: fr }),
+        },
+      ),
       iconSrc: '/images/clock.svg',
       bold: true,
     },

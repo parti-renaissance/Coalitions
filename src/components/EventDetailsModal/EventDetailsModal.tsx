@@ -10,6 +10,9 @@ import {
   Description,
   DesktopInformationWrapper,
   MobileInformationWrapper,
+  CauseNameContainer,
+  CauseIcon,
+  CauseName,
 } from './EventDetailsModal.style';
 import EventInformation from './components/EventInformation';
 import { EventType } from 'redux/Events/types';
@@ -52,6 +55,10 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
             })}`}
           </Category>
           <Name>{event.name}</Name>
+          <CauseNameContainer>
+            <CauseIcon src="/images/point.svg" />
+            <CauseName>{cause.name}</CauseName>
+          </CauseNameContainer>
           <Separator />
           <MobileInformationWrapper>
             <EventInformation event={event} cause={cause} />

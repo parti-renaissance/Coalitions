@@ -66,3 +66,26 @@ export const MobileInformationWrapper = styled.div`
     display: none;
   `)}
 `;
+
+export const CauseNameContainer = styled.div`
+  display: none;
+  ${media.desktop(`
+    display: flex;
+    align-items: center;
+    margin-top: ${getSpacing(2)};
+  `)}
+`;
+
+export const CauseIcon = styled.img`
+  height: ${getSpacing(4)};
+  width: ${getSpacing(4)};
+`;
+
+export const CauseName = styled.div`
+  font-family: ${fontFamily.primary};
+  font-size: ${fontSize.p.mobile};
+  line-height: ${lineHeight.primary};
+  color: ${colorPalette.blueCoalition};
+  font-weight: ${fontWeight.normal};
+  margin-left: ${getSpacing(2)};
+`;

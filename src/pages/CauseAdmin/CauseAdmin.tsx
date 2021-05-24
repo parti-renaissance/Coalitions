@@ -60,7 +60,7 @@ const CauseAdmin: FunctionComponent = () => {
         case 3:
           return (
             <TabWrapper>
-              <CreateEventForm />
+              <CreateEventForm causeId={cause.uuid} />
             </TabWrapper>
           );
         default:

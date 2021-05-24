@@ -29,7 +29,7 @@ export const DeleteEventButton: FunctionComponent = () => {
         isOpened={isModalVisible}
         onClose={hideOrShowModal(false)}
         shouldDisplayCloseIcon={false}
-        large
+        width="medium"
       >
         <ModalContentContainer>
           <Title>{intl.formatMessage({ id: 'event_form.update.cancel_event_modal.title' })}</Title>

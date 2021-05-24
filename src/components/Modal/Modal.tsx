@@ -1,13 +1,19 @@
 import Slide, { SlideProps } from '@material-ui/core/Slide';
 import React, { forwardRef, ForwardRefRenderFunction } from 'react';
 import { getIsMobile } from 'services/mobile/mobile';
-import { Container, CloseButton, CloseIcon, LargeContainer } from './Modal.style';
+import {
+  SmallContainer,
+  MediumContainer,
+  CloseButton,
+  CloseIcon,
+  LargeContainer,
+} from './Modal.style';
 
 type ModalProps = {
   isOpened: boolean;
   onClose: () => void;
   shouldDisplayCloseIcon?: boolean;
-  large?: boolean;
+  width?: 'large' | 'medium' | 'small';
 };
 
 const SlideUpComponent: ForwardRefRenderFunction<{}, SlideProps> = (props, ref) => (
@@ -21,10 +27,24 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
   isOpened,
   onClose,
   shouldDisplayCloseIcon = true,
-  large = false,
+  width = 'small',
 }) => {
   const isMobile = getIsMobile();
-  const ContainerComponent = large === true ? LargeContainer : Container;
+
+  let ContainerComponent;
+  switch (width) {
+    case 'small':
+      ContainerComponent = SmallContainer;
+      break;
+    case 'medium':
+      ContainerComponent = MediumContainer;
+      break;
+    case 'large':
+      ContainerComponent = LargeContainer;
+      break;
+    default:
+      ContainerComponent = SmallContainer;
+  }
 
   return (
     <ContainerComponent

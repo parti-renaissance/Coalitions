@@ -3,6 +3,7 @@ import { CauseState } from './Cause';
 import { CoalitionState } from './Coalition';
 import { SnackbarState } from './Snackbar';
 import { UserState } from './User';
+import { EventState } from './Events';
 
 export type RootState = Readonly<{
   login: LoginState;
@@ -10,4 +11,5 @@ export type RootState = Readonly<{
   coalition: CoalitionState;
   snackbar: SnackbarState;
   user: UserState;
+  event: EventState;
 }>;

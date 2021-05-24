@@ -12,6 +12,7 @@ import { reducer as cause } from './Cause';
 import { reducer as coalition } from './Coalition';
 import { reducer as snackbar } from './Snackbar';
 import { reducer as user } from './User';
+import { reducer as event } from './Events';
 
 const causePersistConfig = {
   key: 'cause',
@@ -25,4 +26,5 @@ export default combineReducers({
   coalition,
   snackbar,
   user,
+  event,
 });

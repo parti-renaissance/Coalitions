@@ -23,4 +23,8 @@ export const state = {
   user: {
     currentUser: undefined,
   },
+  event: {
+    events: {},
+    ids: [],
+  },
 };

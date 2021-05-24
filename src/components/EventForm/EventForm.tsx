@@ -16,7 +16,7 @@ import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
 import { EventFormValues, useValidateForm } from './lib/useValidateForm';
-import { InCreationEventType, EventType, EventMode } from 'redux/Events/types';
+import { InCreationEventType, EventMode, EventType, UpdatedEventType } from 'redux/Events/types';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { convertFormValuesToEvent } from './lib/convertFormValuesToEvent';
 import { getIsValidateButtonDisabled } from './lib/getIsValidateButtonDisabled';
@@ -27,8 +27,9 @@ import { DeleteEventButton } from './components';
 import { FullWidthButton } from 'components/Button/Button';
 
 interface EventFormProps {
+  causeId: string;
   initialEvent?: EventType;
-  onSubmit: (event: InCreationEventType | EventType) => void;
+  onSubmit: (event: InCreationEventType | UpdatedEventType) => void;
   isSubmitting: boolean;
 }
 
@@ -36,6 +37,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   initialEvent,
   onSubmit: onSubmitProp,
   isSubmitting,
+  causeId,
 }) => {
   const intl = useIntl();
   const { loading, eventCategories, fetchEventCategories } = useFetchEventCategories();
@@ -50,7 +52,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     return onSubmitProp(event);
   };
 
-  let initialValues = { mode: 'meeting' as EventMode };
+  let initialValues = { mode: 'meeting' as EventMode, causeId };
   if (initialEvent !== undefined) {
     initialValues = convertEventToFormValues(initialEvent);
   }
@@ -78,6 +80,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
         {// eslint-disable-next-line complexity
         ({ values, errors, handleChange, handleBlur, handleSubmit, touched, setFieldValue }) => (
           <Form onSubmit={handleSubmit}>
+            <input type="text" hidden value={initialValues.causeId} name="causeId" />
             {initialEvent !== undefined ? (
               <input type="text" hidden value={initialEvent.uuid} name="uuid" />
             ) : null}

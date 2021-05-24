@@ -9,6 +9,8 @@ import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 import CauseDetails from 'components/CauseDetails';
 import SuccessModal from 'pages/Home/components/SuccessModal';
 import { openCauseSupportModal } from 'redux/Cause';
+import EventDetailsModal from 'components/EventDetailsModal';
+import { useFeatureToggling } from 'services/useFeatureToggling';
 
 interface CausePageNavParams {
   causeIdOrSlug: string;
@@ -21,6 +23,7 @@ const CausePage: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { loading: loadingCauseFollow, followCause } = useCauseFollow(cause?.uuid);
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+  const { areEventsEnable } = useFeatureToggling();
 
   useEffect(() => {
     fetchCause(true);
@@ -46,6 +49,7 @@ const CausePage: FunctionComponent = () => {
     <>
       <CauseDetails cause={cause} onSupport={onSupport} isSupporting={loadingCauseFollow} />
       <SuccessModal />
+      {areEventsEnable ? <EventDetailsModal /> : null}
     </>
   );
 };

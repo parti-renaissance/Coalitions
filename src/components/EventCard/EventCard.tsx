@@ -12,6 +12,7 @@ import { EventType } from 'redux/Events/types';
 import { useIntl } from 'react-intl';
 import { DefaultButton } from 'components/Button/Button';
 import { isUpcomingEvent } from 'redux/Events/helpers/isUpcomingEvent';
+import { useHistory } from 'react-router';
 
 interface EventCardProps {
   event: EventType;
@@ -19,9 +20,10 @@ interface EventCardProps {
 
 const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
   const intl = useIntl();
+  const history = useHistory();
 
   const showEventDetails = () => {
-    // TODO
+    history.push({ search: `?eventId=${event.uuid}` });
   };
 
   const onSubscribeClick = (event: MouseEvent) => {
@@ -50,21 +52,17 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
         <Name>{event.name}</Name>
       </div>
       <div>
-        {event.organizer !== undefined ? (
-          <MobileGreyP>
-            {intl.formatMessage(
-              { id: 'events.organizer' },
-              { organizer: `${event.organizer.first_name} ${event.organizer.last_name}` },
-            )}
-          </MobileGreyP>
-        ) : null}
-        {numberOfSubscribers !== undefined ? (
-          <MobileGreyP>
-            {numberOfSubscribers > 1
-              ? intl.formatMessage({ id: 'events.subscribers' }, { numberOfSubscribers })
-              : intl.formatMessage({ id: 'events.subscriber' }, { numberOfSubscribers })}
-          </MobileGreyP>
-        ) : null}
+        <MobileGreyP>
+          {intl.formatMessage(
+            { id: 'events.organizer' },
+            { organizer: `${event.organizer.first_name} ${event.organizer.last_name}` },
+          )}
+        </MobileGreyP>
+        <MobileGreyP>
+          {numberOfSubscribers > 1
+            ? intl.formatMessage({ id: 'events.subscribers' }, { numberOfSubscribers })
+            : intl.formatMessage({ id: 'events.subscriber' }, { numberOfSubscribers })}
+        </MobileGreyP>
         <BottomButtonsContainer>
           <InscriptionButtonWrapper alreadySubscribed={alreadySubscribed}>
             <DefaultButton size="small" variant="contained" onClick={onSubscribeClick}>
@@ -73,7 +71,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
                 : intl.formatMessage({ id: 'events.subscribe' })}
             </DefaultButton>
           </InscriptionButtonWrapper>
-          <DefaultButton size="small" variant="outlined">
+          <DefaultButton size="small" variant="outlined" onClick={showEventDetails}>
             {intl.formatMessage({ id: 'events.see' })}
           </DefaultButton>
         </BottomButtonsContainer>

@@ -12,9 +12,11 @@ import {
 import ShareButton from '../../../ShareButton';
 import { useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
+import { Cause } from 'redux/Cause/types';
 
 interface EventInformationProps {
   event: EventType;
+  cause: Cause;
 }
 
 interface Information {
@@ -41,22 +43,29 @@ const OneInformation = ({ information }: { information: Information }) => {
   );
 };
 
-const EventInformation: FunctionComponent<EventInformationProps> = ({ event }) => {
+const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cause }) => {
   const intl = useIntl();
 
-  const informations: Information[] = [
+  let informations: Information[] = [
     {
       label: 'coucou',
       iconSrc: '/images/clock.svg',
       bold: true,
     },
-    {
-      label: 'coucou',
+  ];
+
+  if (event.post_address !== undefined) {
+    informations.push({
+      label: `${event.post_address.address}, ${event.post_address.postal_code} ${event.post_address.city_name}`,
       iconSrc: '/images/mapPin.svg',
       color: colorPalette.blueCoalition,
-    },
+    });
+  }
+
+  informations = [
+    ...informations,
     {
-      label: 'coucou',
+      label: cause.name,
       iconSrc: '/images/point.svg',
       color: colorPalette.blueCoalition,
     },

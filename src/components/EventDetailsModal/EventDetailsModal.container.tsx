@@ -1,20 +1,18 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
-import EventDetailsModalComponent from './EventDetailsModal';
+import EventDetailsModalComponent from './EventDetailsModal.subcontainer';
 
 const EventDetailsModal: FunctionComponent = () => {
-  const location = useLocation();
+  const { search } = useLocation();
   const history = useHistory();
   const [eventId, setEventId] = useState<string | null>(null);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(search);
     const eventId = params.get('eventId');
 
-    if (eventId !== null) {
-      setEventId(eventId);
-    }
-  }, [location]);
+    setEventId(eventId);
+  }, [search]);
 
   const onClose = () => {
     setEventId(null);

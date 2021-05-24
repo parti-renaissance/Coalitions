@@ -27,6 +27,7 @@ interface EventDetailsModalProps {
   onClose: () => void;
 }
 
+// eslint-disable-next-line complexity
 const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
   event,
   isFetchingEvent,

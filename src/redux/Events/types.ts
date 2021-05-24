@@ -12,12 +12,7 @@ export interface InCreationEventType {
   finish_at: string;
   category: EventCategory;
   time_zone: string;
-  description?: string;
-  organizer?: {
-    first_name: string;
-    last_name: string;
-  };
-  participants_count?: number;
+  description: string;
   post_address?: {
     address: string;
     postal_code: string;
@@ -29,4 +24,10 @@ export interface InCreationEventType {
 
 export type EventType = {
   uuid: string;
+  participants_count: number;
+  organizer: {
+    first_name: string;
+    last_name: string;
+  };
+  participate?: boolean;
 } & InCreationEventType;

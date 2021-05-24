@@ -1,1 +1,1 @@
-export { default } from './EventDetailsModal';
+export { default } from './EventDetailsModal.container';

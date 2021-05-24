@@ -38,6 +38,7 @@ export const colorPalette = {
   veryLightYellow: '#FFE9C3',
   lightYellow: '#E89F2B',
   veryLightGreen: '#DAFFC3',
+  pink: '#FF46C2',
 };
 
 /**

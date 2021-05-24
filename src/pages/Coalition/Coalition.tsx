@@ -156,7 +156,7 @@ const Coalition: FunctionComponent = () => {
           {intl.formatMessage({ id: 'coalition.follow' })}
         </FixedBottomButton>
       ) : null}
-      <EventDetailsModal />
+      {areEventsEnable ? <EventDetailsModal /> : null}
     </>
   );
 };

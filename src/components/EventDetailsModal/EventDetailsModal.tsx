@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Modal } from '../Modal/Modal';
 import {
@@ -10,56 +10,66 @@ import {
   Description,
   DesktopInformationWrapper,
   MobileInformationWrapper,
+  CauseNameContainer,
+  CauseIcon,
+  CauseName,
 } from './EventDetailsModal.style';
-import { useFetchEvent } from 'redux/Events/hooks/useFetchEvent';
 import EventInformation from './components/EventInformation';
-import { useSelector } from 'react-redux';
-import { getEvent } from 'redux/Events/selectors';
+import { EventType } from 'redux/Events/types';
+import { Cause } from 'redux/Cause/types';
+import Loader from 'components/Loader';
 
 interface EventDetailsModalProps {
-  eventId: string;
+  event: EventType | undefined;
+  isFetchingEvent: boolean;
+  cause: Cause | undefined;
+  isFetchingCause: boolean;
   onClose: () => void;
 }
 
-const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({ eventId, onClose }) => {
+// eslint-disable-next-line complexity
+const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
+  event,
+  isFetchingEvent,
+  cause,
+  isFetchingCause,
+  onClose,
+}) => {
   const intl = useIntl();
-  const { loading, fetchEvent } = useFetchEvent(eventId);
-  const event = useSelector(getEvent(eventId));
 
-  useEffect(() => {
-    fetchEvent();
-  }, [fetchEvent]);
-
-  if (event === undefined && loading) {
-    // TODO
-    return null;
-  }
-
-  if (event === undefined) {
-    // TODO
-    return null;
-  }
+  const isLoading =
+    (cause === undefined && isFetchingCause) || (event === undefined && isFetchingEvent);
+  const noEventFound =
+    (cause === undefined && !isFetchingCause) || (event === undefined && !isFetchingEvent);
 
   return (
-    <Modal onClose={onClose} isOpened={eventId !== null} width="large">
-      <ContentContainer>
-        <ContentSubContainer>
-          <Category>
-            {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
-              id: `events.mode.${event.mode}`,
-            })}`}
-          </Category>
-          <Name>{event.name}</Name>
-          <Separator />
-          <MobileInformationWrapper>
-            <EventInformation event={event} />
-          </MobileInformationWrapper>
-          <Description>{event.description}</Description>
-        </ContentSubContainer>
-        <DesktopInformationWrapper>
-          <EventInformation event={event} />
-        </DesktopInformationWrapper>
-      </ContentContainer>
+    <Modal onClose={onClose} isOpened width="large">
+      {isLoading ? <Loader /> : null}
+      {noEventFound ? intl.formatMessage({ id: 'event_details.not_found' }) : null}
+      {cause !== undefined && event !== undefined ? (
+        <ContentContainer>
+          <ContentSubContainer>
+            <Category>
+              {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
+                id: `events.mode.${event.mode}`,
+              })}`}
+            </Category>
+            <Name>{event.name}</Name>
+            <CauseNameContainer>
+              <CauseIcon src="/images/point.svg" />
+              <CauseName>{cause.name}</CauseName>
+            </CauseNameContainer>
+            <Separator />
+            <MobileInformationWrapper>
+              <EventInformation event={event} cause={cause} />
+            </MobileInformationWrapper>
+            <Description>{event.description}</Description>
+          </ContentSubContainer>
+          <DesktopInformationWrapper>
+            <EventInformation event={event} cause={cause} />
+          </DesktopInformationWrapper>
+        </ContentContainer>
+      ) : null}
     </Modal>
   );
 };

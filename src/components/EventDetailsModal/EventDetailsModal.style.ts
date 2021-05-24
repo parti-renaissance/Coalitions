@@ -11,17 +11,16 @@ import {
 } from 'stylesheet';
 import { FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
 
-export const ContainerContainer = styled.div`
+export const ContentContainer = styled.div`
   ${media.desktop(`
     display: flex;
   `)}
 `;
 
-export const ContainerSubContainer = styled.div`
+export const ContentSubContainer = styled.div`
   margin: 0 ${getSpacing(3)} calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(3)}) ${getSpacing(3)};
   ${media.desktop(`
     margin: 0;
-    margin-right: ${getSpacing(6)};
   `)}
 `;
 
@@ -53,4 +52,17 @@ export const Separator = styled.div`
 export const Description = styled.p`
   color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(6)};
+`;
+
+export const DesktopInformationWrapper = styled.div`
+  display: none;
+  ${media.desktop(`
+    display: flex;
+  `)}
+`;
+
+export const MobileInformationWrapper = styled.div`
+  ${media.desktop(`
+    display: none;
+  `)}
 `;

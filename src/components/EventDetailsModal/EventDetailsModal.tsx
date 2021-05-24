@@ -2,14 +2,17 @@ import React, { FunctionComponent, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { Modal } from '../Modal/Modal';
 import {
-  ContainerContainer,
-  ContainerSubContainer,
+  ContentContainer,
+  ContentSubContainer,
   Category,
   Name,
   Separator,
   Description,
+  DesktopInformationWrapper,
+  MobileInformationWrapper,
 } from './EventDetailsModal.style';
 import { useFetchEvent } from 'redux/Events/hooks/useFetchEvent';
+import EventInformation from './components/EventInformation';
 
 interface EventDetailsModalProps {
   eventId: string;
@@ -36,8 +39,8 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({ eventId,
 
   return (
     <Modal onClose={onClose} isOpened={eventId !== null} width="large">
-      <ContainerContainer>
-        <ContainerSubContainer>
+      <ContentContainer>
+        <ContentSubContainer>
           <Category>
             {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
               id: `events.mode.${event.mode}`,
@@ -45,9 +48,15 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({ eventId,
           </Category>
           <Name>{event.name}</Name>
           <Separator />
+          <MobileInformationWrapper>
+            <EventInformation event={event} />
+          </MobileInformationWrapper>
           {event.description !== undefined ? <Description>{event.description}</Description> : null}
-        </ContainerSubContainer>
-      </ContainerContainer>
+        </ContentSubContainer>
+        <DesktopInformationWrapper>
+          <EventInformation event={event} />
+        </DesktopInformationWrapper>
+      </ContentContainer>
     </Modal>
   );
 };

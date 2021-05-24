@@ -375,5 +375,9 @@
     },
     "begin_at": "Date, heure de début",
     "finish_at": "Date, heure de fin"
+  },
+  "event_details": {
+    "information": "Informations",
+    "add_to_calendar": "Ajouter à mon agenda"
   }
 }

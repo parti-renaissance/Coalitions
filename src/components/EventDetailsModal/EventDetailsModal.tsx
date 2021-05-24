@@ -27,12 +27,12 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({ eventId,
     fetchEvent();
   }, [fetchEvent]);
 
-  if (!event && loading) {
+  if (event === undefined && loading) {
     // TODO
     return null;
   }
 
-  if (!event) {
+  if (event === undefined) {
     // TODO
     return null;
   }

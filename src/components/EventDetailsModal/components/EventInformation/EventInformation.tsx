@@ -44,7 +44,7 @@ const OneInformation = ({ information }: { information: Information }) => {
 const EventInformation: FunctionComponent<EventInformationProps> = ({ event }) => {
   const intl = useIntl();
 
-  const numberOfSubscribers = event.participants_count || 0;
+  const numberOfSubscribers = event.participants_count !== undefined ? event.participants_count : 0;
   const informations: Information[] = [
     {
       label: 'coucou',

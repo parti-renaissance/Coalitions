@@ -32,6 +32,7 @@ export const SectionTitle = styled.div`
   :not(:nth-child(2)) {
     margin-top: ${getSpacing(6)};
   }
+
   ${media.desktop(`
     margin-top: ${getSpacing(6)};
   `)}

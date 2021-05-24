@@ -54,7 +54,7 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({ eventId,
           <MobileInformationWrapper>
             <EventInformation event={event} />
           </MobileInformationWrapper>
-          {event.description !== undefined ? <Description>{event.description}</Description> : null}
+          <Description>{event.description}</Description>
         </ContentSubContainer>
         <DesktopInformationWrapper>
           <EventInformation event={event} />

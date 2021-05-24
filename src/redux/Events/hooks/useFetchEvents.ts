@@ -51,8 +51,7 @@ export const useFetchEvents = ({
       ({ participants_count, ...restOfEvent }) => ({
         ...restOfEvent,
         causeId: '3165e54b-aab9-40e4-90cf-2de59ac591ca',
-        participants_count:
-          participants_count !== null && participants_count !== undefined ? participants_count : 0,
+        participants_count: typeof participants_count === 'number' ? participants_count : 0,
       }),
     );
     dispatch(updateEvents(events));

@@ -283,8 +283,7 @@
     "cannot-send-mail-for-this-cause": "Vous n’avez pas le droit d’envoyer de mails pour cette cause.",
     "sync-mail-exceeded-max-attempts": "Problème lors de la synchronisation de votre mail, merci de réessayer plus tard",
     "sync-mail-no-recipients": "Nous n'avons pas trouvé de destinataires pour votre mail",
-    "filtered-causes-error": "Votre recherche n’a pas pu aboutir. Essayez de reformuler ou réessayez plus tard.",
-    "already-participate-event": "Vous participez déjà à cet événement."
+    "filtered-causes-error": "Votre recherche n’a pas pu aboutir. Essayez de reformuler ou réessayez plus tard."
   },
   "success_stories": {
     "title": "Ils ont créé leur cause",

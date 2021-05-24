@@ -44,7 +44,6 @@ const OneInformation = ({ information }: { information: Information }) => {
 const EventInformation: FunctionComponent<EventInformationProps> = ({ event }) => {
   const intl = useIntl();
 
-  const numberOfSubscribers = event.participants_count !== undefined ? event.participants_count : 0;
   const informations: Information[] = [
     {
       label: 'coucou',
@@ -62,17 +61,20 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event }) =
       color: colorPalette.blueCoalition,
     },
     {
-      label:
-        event.organizer !== undefined
-          ? `${event.organizer.first_name} ${event.organizer.last_name}`
-          : '',
+      label: `${event.organizer.first_name} ${event.organizer.last_name}`,
       iconSrc: '/images/user.svg',
     },
     {
       label:
-        numberOfSubscribers > 1
-          ? intl.formatMessage({ id: 'event_details.subscribers' }, { numberOfSubscribers })
-          : intl.formatMessage({ id: 'event_details.subscriber' }, { numberOfSubscribers }),
+        event.participants_count > 1
+          ? intl.formatMessage(
+              { id: 'event_details.subscribers' },
+              { numberOfSubscribers: event.participants_count },
+            )
+          : intl.formatMessage(
+              { id: 'event_details.subscriber' },
+              { numberOfSubscribers: event.participants_count },
+            ),
       iconSrc: '/images/supports.svg',
     },
   ];

@@ -29,6 +29,7 @@ import FollowTag, { FOLLOW_TAG_TYPE } from 'components/FollowTag/FollowTag';
 import IconAndLabel from 'components/IconAndLabel';
 import MoreOptionsMenu from 'components/MoreOptionsMenu';
 import EventCardsSlider from 'components/EventCardsSlider';
+import EventDetailsModal from 'components/EventDetailsModal';
 
 interface CoalitionNavParams {
   coalitionId: string;
@@ -155,6 +156,7 @@ const Coalition: FunctionComponent = () => {
           {intl.formatMessage({ id: 'coalition.follow' })}
         </FixedBottomButton>
       ) : null}
+      <EventDetailsModal />
     </>
   );
 };

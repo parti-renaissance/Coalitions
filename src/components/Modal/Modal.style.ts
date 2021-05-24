@@ -5,23 +5,47 @@ import styled, { css } from 'styled-components';
 import { colorPalette, media, getSpacing, styledTags } from 'stylesheet';
 import { FormControlLabel as MUIFormControlLabel } from '@material-ui/core';
 
-const getContainerStyle = (large?: boolean) => css`
-  ${styledTags};
-  .MuiPaper-root {
-    padding: ${getSpacing(3)};
-    ${media.desktop(`
+export type ContainerWidth = 'large' | 'medium' | 'small';
+
+const getContainerStyle = (width: ContainerWidth) => {
+  let widthSpacingMultiple;
+  switch (width) {
+    case 'small':
+      widthSpacingMultiple = 75;
+      break;
+    case 'medium':
+      widthSpacingMultiple = 85;
+      break;
+    case 'large':
+      widthSpacingMultiple = 192;
+      break;
+    default:
+      widthSpacingMultiple = 75;
+      break;
+  }
+  return css`
+    ${styledTags};
+    .MuiPaper-root {
+      padding: ${getSpacing(3)};
+      ${media.desktop(`
       padding: ${getSpacing(8)};
       max-height: min(${getSpacing(150)}, calc(100vh - 2 * ${getSpacing(8)}));
-      max-width: ${large === true ? getSpacing(85) : getSpacing(75)};
+      max-width: ${getSpacing(widthSpacingMultiple)};
     `)}
-  }
+    }
+  `;
+};
+
+export const SmallContainer = styled(Dialog)`
+  ${getContainerStyle('small')};
 `;
-export const Container = styled(Dialog)`
-  ${getContainerStyle()};
+
+export const MediumContainer = styled(Dialog)`
+  ${getContainerStyle('medium')};
 `;
 
 export const LargeContainer = styled(Dialog)`
-  ${getContainerStyle(true)};
+  ${getContainerStyle('large')};
 `;
 
 export const CloseButton = styled(IconButton)`

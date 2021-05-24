@@ -12,6 +12,7 @@ import { EventType } from 'redux/Events/types';
 import { useIntl } from 'react-intl';
 import { DefaultButton } from 'components/Button/Button';
 import { isUpcomingEvent } from 'redux/Events/helpers/isUpcomingEvent';
+import { useHistory } from 'react-router';
 
 interface EventCardProps {
   event: EventType;
@@ -19,9 +20,10 @@ interface EventCardProps {
 
 const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
   const intl = useIntl();
+  const history = useHistory();
 
   const showEventDetails = () => {
-    // TODO
+    history.push({ search: `?eventId=${event.uuid}` });
   };
 
   const onSubscribeClick = (event: MouseEvent) => {
@@ -73,7 +75,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
                 : intl.formatMessage({ id: 'events.subscribe' })}
             </DefaultButton>
           </InscriptionButtonWrapper>
-          <DefaultButton size="small" variant="outlined">
+          <DefaultButton size="small" variant="outlined" onClick={showEventDetails}>
             {intl.formatMessage({ id: 'events.see' })}
           </DefaultButton>
         </BottomButtonsContainer>

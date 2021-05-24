@@ -9,6 +9,7 @@ import { useCauseFollow } from 'redux/Cause/hooks/useCauseFollow';
 import CauseDetails from 'components/CauseDetails';
 import SuccessModal from 'pages/Home/components/SuccessModal';
 import { openCauseSupportModal } from 'redux/Cause';
+import EventDetailsModal from 'components/EventDetailsModal';
 
 interface CausePageNavParams {
   causeIdOrSlug: string;
@@ -46,6 +47,7 @@ const CausePage: FunctionComponent = () => {
     <>
       <CauseDetails cause={cause} onSupport={onSupport} isSupporting={loadingCauseFollow} />
       <SuccessModal />
+      <EventDetailsModal />
     </>
   );
 };

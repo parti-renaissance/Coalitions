@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing, fonts } from 'stylesheet';
+import { colorPalette, media, getSpacing, fonts, fontWeight } from 'stylesheet';
 
 export const Container = styled.div`
   background-color: ${colorPalette.greyLight};
@@ -35,4 +35,24 @@ export const SectionTitle = styled.div`
   ${media.desktop(`
     margin-top: ${getSpacing(6)};
   `)}
+`;
+
+export const OneInformationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: ${getSpacing(3)};
+`;
+
+const ONE_INFORMATION_ICON_SIZE = getSpacing(4);
+
+export const OneInformationIcon = styled.img`
+  height: ${ONE_INFORMATION_ICON_SIZE};
+  width: ${ONE_INFORMATION_ICON_SIZE};
+`;
+
+export const OneInformationLabel = styled.div<{ color?: string; bold?: boolean }>`
+  ${fonts.input};
+  color: ${({ color }) => (color !== undefined ? color : colorPalette.greyDark)};
+  font-weight: ${({ bold }) => (bold === true ? fontWeight.bold : fontWeight.normal)};
+  margin-left: ${getSpacing(2)};
 `;

@@ -378,6 +378,8 @@
   },
   "event_details": {
     "information": "Informations",
-    "add_to_calendar": "Ajouter à mon agenda"
+    "add_to_calendar": "Ajouter à mon agenda",
+    "subscriber": "{numberOfSubscribers} inscrit",
+    "subscribers": "{numberOfSubscribers} inscrits"
   }
 }

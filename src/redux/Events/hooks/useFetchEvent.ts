@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { isUserLogged } from 'redux/Login';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService from 'services/HandleErrorService';
+import { updateOneEvent } from '../slice';
 import { EventType } from '../types';
 
-const FAKE_EVENT: EventType = {
+export const FAKE_EVENT: EventType = {
   uuid: '1',
   name: 'mon événement',
   begin_at: '2021-06-20T08:00',
@@ -19,11 +20,18 @@ const FAKE_EVENT: EventType = {
   description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   visio_url: 'www.google.com',
+  participants_count: 4,
+  organizer: {
+    uuid: '123',
+    first_name: 'Gaspard',
+    last_name: 'Denis',
+  },
+  causeId: '3165e54b-aab9-40e4-90cf-2de59ac591ca',
 };
 
 export const useFetchEvent = (id: string) => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
-  const [event, setEvent] = useState<undefined | EventType>(undefined);
+  const dispatch = useDispatch();
 
   const [{ loading, error }, doFetchEvent] = useTypedAsyncFn(async () => {
     console.log({ id });
@@ -47,8 +55,8 @@ export const useFetchEvent = (id: string) => {
       return;
     }
 
-    setEvent(event);
-  }, [doFetchEvent, isUserLoggedIn]);
+    dispatch(updateOneEvent(event));
+  }, [doFetchEvent, isUserLoggedIn, dispatch]);
 
-  return { loading, fetchEvent, event };
+  return { loading, fetchEvent };
 };

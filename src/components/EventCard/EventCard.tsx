@@ -52,21 +52,17 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
         <Name>{event.name}</Name>
       </div>
       <div>
-        {event.organizer !== undefined ? (
-          <MobileGreyP>
-            {intl.formatMessage(
-              { id: 'events.organizer' },
-              { organizer: `${event.organizer.first_name} ${event.organizer.last_name}` },
-            )}
-          </MobileGreyP>
-        ) : null}
-        {numberOfSubscribers !== undefined ? (
-          <MobileGreyP>
-            {numberOfSubscribers > 1
-              ? intl.formatMessage({ id: 'events.subscribers' }, { numberOfSubscribers })
-              : intl.formatMessage({ id: 'events.subscriber' }, { numberOfSubscribers })}
-          </MobileGreyP>
-        ) : null}
+        <MobileGreyP>
+          {intl.formatMessage(
+            { id: 'events.organizer' },
+            { organizer: `${event.organizer.first_name} ${event.organizer.last_name}` },
+          )}
+        </MobileGreyP>
+        <MobileGreyP>
+          {numberOfSubscribers > 1
+            ? intl.formatMessage({ id: 'events.subscribers' }, { numberOfSubscribers })
+            : intl.formatMessage({ id: 'events.subscriber' }, { numberOfSubscribers })}
+        </MobileGreyP>
         <BottomButtonsContainer>
           <InscriptionButtonWrapper alreadySubscribed={alreadySubscribed}>
             <DefaultButton size="small" variant="contained" onClick={onSubscribeClick}>

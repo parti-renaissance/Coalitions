@@ -13,6 +13,7 @@ export interface InCreationEventType {
   category: EventCategory;
   time_zone: string;
   description: string;
+  causeId: string;
   post_address?: {
     address: string;
     postal_code: string;
@@ -22,10 +23,15 @@ export interface InCreationEventType {
   visio_url?: string;
 }
 
+export type UpdatedEventType = {
+  uuid: string;
+} & InCreationEventType;
+
 export type EventType = {
   uuid: string;
   participants_count: number;
   organizer: {
+    uuid: string;
     first_name: string;
     last_name: string;
   };

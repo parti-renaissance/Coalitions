@@ -2,8 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { useCreateEvent } from 'redux/Events/hooks/useCreateEvent';
 import EventForm from './EventForm';
 
-export const CreateEventForm: FunctionComponent = () => {
+interface CreateEventFormProps {
+  causeId: string;
+}
+
+export const CreateEventForm: FunctionComponent<CreateEventFormProps> = ({ causeId }) => {
   const { loading, createEvent } = useCreateEvent();
 
-  return <EventForm onSubmit={createEvent} isSubmitting={loading} />;
+  return <EventForm onSubmit={createEvent} isSubmitting={loading} causeId={causeId} />;
 };

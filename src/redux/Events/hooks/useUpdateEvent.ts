@@ -7,7 +7,7 @@ import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
-import { EventType } from '../types';
+import { UpdatedEventType } from '../types';
 
 const useUpdateEventErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -32,7 +32,7 @@ export const useUpdateEvent = () => {
   const { formatMessage } = useIntl();
   const errorHandler = useUpdateEventErrorHandler();
 
-  const [{ loading, error }, doUpdateEvent] = useTypedAsyncFn(async (event: EventType) => {
+  const [{ loading, error }, doUpdateEvent] = useTypedAsyncFn(async (event: UpdatedEventType) => {
     console.log({ event });
     return new Promise(resolve => setTimeout(resolve, 2000));
     // return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
@@ -47,7 +47,7 @@ export const useUpdateEvent = () => {
   }, [error, errorHandler]);
 
   const updateEvent = useCallback(
-    async (event: EventType) => {
+    async (event: UpdatedEventType) => {
       const response = await doUpdateEvent(event);
 
       if (response instanceof Error) return;

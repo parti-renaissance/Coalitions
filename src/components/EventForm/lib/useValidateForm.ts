@@ -5,6 +5,7 @@ export interface EventFormValues {
   uuid?: string;
   name?: string;
   mode: EventMode;
+  causeId: string;
   address?: string;
   link?: string;
   beginAtDate?: string;
@@ -23,6 +24,7 @@ export interface EventFormErrors {
   finishAtDate?: string;
   categoryId?: string;
   description?: string;
+  causeId?: string;
 }
 
 export const useValidateForm = () => {

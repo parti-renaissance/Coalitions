@@ -1,14 +1,12 @@
 import { RootState } from 'redux/types';
 import { EventType } from './types';
+import { FAKE_EVENT } from './hooks/useFetchEvent';
 
-export const getAllEvents = (store: RootState) => {
+export const getEvents = (store: RootState) => {
   return store.event.ids.map(id => store.event.events[id]);
 };
 
 export const getEvent = (id: string) => (store: RootState): EventType | undefined => {
-  return store.event.events[id];
-};
-
-export const getEventParticipateModal = (store: RootState): EventType | null => {
-  return store.event.eventParticipateModal;
+  const event = store.event.events[id];
+  return event !== undefined ? event : FAKE_EVENT;
 };

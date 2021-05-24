@@ -13,6 +13,8 @@ import {
 } from './EventDetailsModal.style';
 import { useFetchEvent } from 'redux/Events/hooks/useFetchEvent';
 import EventInformation from './components/EventInformation';
+import { useSelector } from 'react-redux';
+import { getEvent } from 'redux/Events/selectors';
 
 interface EventDetailsModalProps {
   eventId: string;
@@ -21,7 +23,8 @@ interface EventDetailsModalProps {
 
 const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({ eventId, onClose }) => {
   const intl = useIntl();
-  const { loading, fetchEvent, event } = useFetchEvent(eventId);
+  const { loading, fetchEvent } = useFetchEvent(eventId);
+  const event = useSelector(getEvent(eventId));
 
   useEffect(() => {
     fetchEvent();

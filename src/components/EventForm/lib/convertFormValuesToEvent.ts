@@ -1,10 +1,20 @@
 import { EventFormValues } from './useValidateForm';
-import { InCreationEventType, EventType, EventMode } from 'redux/Events/types';
+import { InCreationEventType, UpdatedEventType, EventMode } from 'redux/Events/types';
 
 export const convertFormValuesToEvent = (
   formValues: EventFormValues,
-): InCreationEventType | EventType => {
-  const { uuid, name, mode, link, beginAtDate, finishAtDate, description, categoryId } = formValues;
+): InCreationEventType | UpdatedEventType => {
+  const {
+    uuid,
+    name,
+    mode,
+    link,
+    beginAtDate,
+    finishAtDate,
+    description,
+    categoryId,
+    causeId,
+  } = formValues;
 
   return {
     uuid: uuid as string,
@@ -19,5 +29,6 @@ export const convertFormValuesToEvent = (
       uuid: categoryId as string,
       name: '',
     },
+    causeId,
   };
 };

@@ -25,7 +25,6 @@ interface SliderProps {
   onSeeAllClick?: () => void;
   desktopCarouselProps: CarouselProps;
   slidesHeight: { mobile: number; desktop: number };
-  SubTitle?: FunctionComponent;
   TitleComponent?: FunctionComponent;
 }
 
@@ -51,7 +50,6 @@ const Slider: FunctionComponent<SliderProps> = ({
   onSeeAllClick,
   desktopCarouselProps,
   slidesHeight,
-  SubTitle,
   TitleComponent = 'h3',
   children,
 }) => {
@@ -94,7 +92,6 @@ const Slider: FunctionComponent<SliderProps> = ({
           ) : null}
         </RightHeaderSubContainer>
       </Header>
-      {SubTitle !== undefined ? <SubTitle /> : null}
       {isLoadingSlides === true && slidesCount === 0 ? (
         <LoaderContainer mobileHeight={slidesHeight.mobile} desktopHeight={slidesHeight.desktop}>
           <Loader />

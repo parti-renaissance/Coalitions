@@ -3,7 +3,8 @@ import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { coalitionApiClient } from 'services/networking/client';
 import HandleErrorService from 'services/HandleErrorService';
 import { EventType } from '../types';
-import { isUpcomingEvent } from '../helpers/isUpcomingEvent';
+import { useDispatch } from 'react-redux';
+import { resetEvents, updateEvents } from '../slice';
 
 export const useFetchEvents = ({
   coalitionId,
@@ -12,10 +13,9 @@ export const useFetchEvents = ({
   coalitionId?: string;
   causeId?: string;
 }) => {
-  const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([]);
-  const [passedEvents, setPassedEvents] = useState<EventType[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const dispatch = useDispatch();
 
   const [{ loading: isFetchingEvents, error }, doFetchEvents] = useTypedAsyncFn(
     async (page: number) => {
@@ -37,28 +37,28 @@ export const useFetchEvents = ({
       return;
     }
 
+    if (page === 1) {
+      dispatch(resetEvents());
+    }
+
     const eventsResponse = await doFetchEvents(page);
 
     if (eventsResponse instanceof Error) {
       return;
     }
 
-    let newUpcomingEvents: EventType[] = [];
-    let newPassedEvents: EventType[] = [];
-
-    (eventsResponse.items as EventType[]).forEach(event => {
-      if (isUpcomingEvent(event)) {
-        newUpcomingEvents = [...newUpcomingEvents, event];
-      } else {
-        newPassedEvents = [...newPassedEvents, event];
-      }
-    });
-
-    setUpcomingEvents(newUpcomingEvents);
-    setPassedEvents(newPassedEvents);
+    const events = (eventsResponse.items as EventType[]).map(
+      ({ participants_count, ...restOfEvent }) => ({
+        ...restOfEvent,
+        causeId: '3165e54b-aab9-40e4-90cf-2de59ac591ca',
+        participants_count:
+          participants_count !== null && participants_count !== undefined ? participants_count : 0,
+      }),
+    );
+    dispatch(updateEvents(events));
     setHasMore(eventsResponse.metadata.last_page >= page + 1);
     setPage(page + 1);
-  }, [doFetchEvents, hasMore, coalitionId, causeId, page]);
+  }, [doFetchEvents, hasMore, coalitionId, causeId, page, dispatch]);
 
-  return { upcomingEvents, passedEvents, fetchEvents, isFetchingEvents };
+  return { fetchEvents, isFetchingEvents };
 };

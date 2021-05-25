@@ -5,12 +5,11 @@ import {
   Name,
   BottomButtonsContainer,
   HeaderContainer,
-  Tag,
   SeeButton,
+  CategoryName,
 } from './EventCard.style';
 import { EventType } from 'redux/Events/types';
 import { useIntl } from 'react-intl';
-import { isUpcomingEvent } from 'redux/Events/helpers/isUpcomingEvent';
 import { useHistory } from 'react-router';
 import EventParticipateButton from '../EventParticipateButton';
 
@@ -27,20 +26,16 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
   };
 
   const numberOfSubscribers = event.participants_count;
-  const tag = isUpcomingEvent(event)
-    ? intl.formatMessage({ id: 'events.upcoming' })
-    : intl.formatMessage({ id: 'events.passed' });
 
   return (
     <Container onClick={showEventDetails}>
       <div>
         <HeaderContainer>
-          <MobileGreyP>
+          <CategoryName>
             {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
               id: `events.mode.${event.mode}`,
             })}`}
-          </MobileGreyP>
-          <Tag>{tag}</Tag>
+          </CategoryName>
         </HeaderContainer>
         <Name>{event.name}</Name>
       </div>

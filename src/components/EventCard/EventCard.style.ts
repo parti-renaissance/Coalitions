@@ -64,7 +64,7 @@ export const Name = styled.div`
   font-size: ${fontSize.h1Small.mobile};
   line-height: ${lineHeight.secondary};
   color: ${colorPalette.greyDark};
-  margin-top: ${getSpacing(2)};
+  margin-top: ${getSpacing(1)};
 `;
 
 export const BottomButtonsContainer = styled.div`
@@ -79,23 +79,10 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
 `;
 
-const TAG_HEIGHT = SPACING_UNIT * 5;
-
-export const Tag = styled.div`
-  display: flex;
-  align-items: center;
-  height: ${TAG_HEIGHT}px;
-  padding: 0 ${getSpacing(2)};
-  border-radius: ${TAG_HEIGHT / 2}px;
-  background-color: ${colorPalette.greyDark};
-  margin-left: ${getSpacing(3)};
-  color: ${colorPalette.white};
-  font-family: ${fontFamily.primary};
-  font-size: ${fontSize.p.mobile};
-  line-height: ${lineHeight.primary};
-  font-weight: ${fontWeight.normal};
-`;
-
 export const SeeButton = styled(DefaultButton)`
   margin-left: ${getSpacing(3)};
+`;
+
+export const CategoryName = styled(MobileGreyP)`
+  color: ${colorPalette.pink};
 `;

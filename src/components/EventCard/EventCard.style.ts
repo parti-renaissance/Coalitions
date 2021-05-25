@@ -115,7 +115,6 @@ export const InformationContainer = styled(MobileP)`
   color: ${colorPalette.greyDark};
   a {
     color: ${colorPalette.greyDark};
-    text-decoration: underline;
   }
 `;
 

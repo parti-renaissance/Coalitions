@@ -61,6 +61,9 @@ export const OneInformationLabel = styled.div<{ color?: string; bold?: boolean }
   color: ${({ color }) => (color !== undefined ? color : colorPalette.greyDark)};
   font-weight: ${({ bold }) => (bold === true ? fontWeight.bold : fontWeight.normal)};
   margin-left: ${getSpacing(2)};
+  a {
+    color: ${({ color }) => (color !== undefined ? color : colorPalette.greyDark)};
+  }
 `;
 
 export const MobileEventParticipateButtonWrapper = styled.div`

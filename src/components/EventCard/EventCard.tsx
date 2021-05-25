@@ -19,7 +19,7 @@ import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import EventParticipateButton from '../EventParticipateButton';
 import { formatEventBeginAtDate } from 'redux/Events/helpers/formatEventBeginAtDate';
-import { formatEventAddress } from 'redux/Events/helpers/formatEventAddress';
+import EventAddressOrVisioLink from '../EventAddressOrVisioLink';
 
 interface EventCardProps {
   event: EventType;
@@ -39,21 +39,6 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
     window.open(event.visio_url, '_blank');
   };
 
-  const renderAddressOrVisioLink = () => {
-    if (event.mode === 'online' && event.visio_url !== undefined) {
-      return (
-        <>
-          {' • '}
-          <a onClick={preventOpenDetailsModal}>{intl.formatMessage({ id: 'events.visio_link' })}</a>
-        </>
-      );
-    } else if (event.mode === 'meeting' && event.post_address !== undefined) {
-      return ` • ${formatEventAddress(event)}`;
-    }
-
-    return null;
-  };
-
   const numberOfParticipants = event.participants_count;
 
   return (
@@ -71,7 +56,8 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
       <div>
         <InformationContainer>
           <Bold>{formatEventBeginAtDate({ date: new Date(event.begin_at), type: 'card' })}</Bold>
-          {renderAddressOrVisioLink()}
+          {' • '}
+          <EventAddressOrVisioLink event={event} onVisioLinkClick={preventOpenDetailsModal} />
         </InformationContainer>
         <Author>
           {intl.formatMessage(

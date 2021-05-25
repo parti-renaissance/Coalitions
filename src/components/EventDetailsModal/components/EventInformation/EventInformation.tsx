@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { EventType } from 'redux/Events/types';
 import {
   Container,
@@ -14,9 +14,9 @@ import ShareButton from '../../../ShareButton';
 import { useIntl } from 'react-intl';
 import { colorPalette } from 'stylesheet';
 import { Cause } from 'redux/Cause/types';
-import format from 'date-fns/format';
-import { fr } from 'date-fns/locale';
 import EventParticipateButton from '../../../EventParticipateButton';
+import EventAddressOrVisioLink from '../../../EventAddressOrVisioLink';
+import { formatEventBeginAtDate } from 'redux/Events/helpers/formatEventBeginAtDate';
 
 interface EventInformationProps {
   event: EventType;
@@ -24,7 +24,7 @@ interface EventInformationProps {
 }
 
 interface Information {
-  label: string;
+  label: ReactNode;
   iconSrc: string;
   color?: string;
   bold?: boolean;
@@ -50,16 +50,9 @@ const OneInformation = ({ information }: { information: Information }) => {
 const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cause }) => {
   const intl = useIntl();
 
-  const beginAtDate = new Date(event.begin_at);
   let informations: Information[] = [
     {
-      label: intl.formatMessage(
-        { id: 'event_details.begin_at' },
-        {
-          date: format(beginAtDate, 'dd/MM/yyyy', { locale: fr }),
-          time: format(beginAtDate, 'p', { locale: fr }),
-        },
-      ),
+      label: formatEventBeginAtDate({ date: new Date(event.begin_at), type: 'modal' }),
       iconSrc: '/images/clock.svg',
       bold: true,
     },
@@ -67,7 +60,7 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
 
   if (event.post_address !== undefined) {
     informations.push({
-      label: `${event.post_address.address}, ${event.post_address.postal_code} ${event.post_address.city_name}`,
+      label: <EventAddressOrVisioLink event={event} />,
       iconSrc: '/images/mapPin.svg',
       color: colorPalette.blueCoalition,
     });
@@ -107,7 +100,7 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
       </DesktopButtonsContainer>
       <SectionTitle>{intl.formatMessage({ id: 'event_details.information' })}</SectionTitle>
       {informations.map(information => (
-        <OneInformation key={information.label} information={information} />
+        <OneInformation key={information.iconSrc} information={information} />
       ))}
       <SectionTitle>{intl.formatMessage({ id: 'event_details.add_to_calendar' })}</SectionTitle>
       <MobileButtonsContainer>

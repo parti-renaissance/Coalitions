@@ -7,6 +7,11 @@ import {
   EventParticipateButtonType,
 } from './lib/getEventParticipateButtonConfig';
 import { FullWidthButton, SmallButton } from 'components/Button/Button';
+import { isUpcomingEvent } from 'redux/Events/helpers/isUpcomingEvent';
+import {
+  useEventParticipate,
+  useRemoveEventParticipation,
+} from 'redux/Events/hooks/useEventParticipate';
 
 interface EventParticipateButtonProps {
   type: EventParticipateButtonType;
@@ -19,14 +24,32 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
 }) => {
   const [isHover, setIsHover] = useState(false);
   const intl = useIntl();
+  const isUpcoming = isUpcomingEvent(event);
+  const {
+    loading: isRemovingParticipation,
+    removeEventParticipation,
+  } = useRemoveEventParticipation(event.uuid);
+  const { loading: isParticipateToEventLoading, participateToEvent } = useEventParticipate(
+    event.uuid,
+  );
 
   const getSetIsHover = (hover: boolean) => () => {
     setIsHover(hover);
   };
 
-  const onClick = (event: MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const onClick = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!isUpcoming) {
+      return;
+    }
+
+    if (event.participate === true) {
+      removeEventParticipation();
+    } else {
+      participateToEvent();
+    }
   };
 
   const SubContainer = type === 'card' ? SmallButton : FullWidthButton;
@@ -43,7 +66,11 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
       onMouseEnter={getSetIsHover(true)}
       onMouseLeave={getSetIsHover(false)}
     >
-      <SubContainer onClick={onClick}>
+      <SubContainer
+        onClick={onClick}
+        isLoading={isRemovingParticipation || isParticipateToEventLoading}
+        disabled={isRemovingParticipation || isParticipateToEventLoading || !isUpcoming}
+      >
         {iconSrc !== undefined ? <Icon src={iconSrc} /> : null}
         {labelKey !== undefined ? (
           <Label withMarginLeft={iconSrc !== undefined}>

@@ -41,8 +41,28 @@ const eventSlice = createSlice({
         state.ids = [...state.ids, action.payload.uuid];
       }
     },
+    optimisticallyMarkParticipateToEvent: (state, action: PayloadAction<string>) => {
+      if (state.events[action.payload] !== undefined) {
+        state.events[action.payload].participate = true;
+        state.events[action.payload].participants_count =
+          state.events[action.payload].participants_count + 1;
+      }
+    },
+    optimisticallyRemoveEventParticipation: (state, action: PayloadAction<string>) => {
+      state.events[action.payload].participate = false;
+      state.events[action.payload].participants_count = Math.max(
+        state.events[action.payload].participants_count - 1,
+        0,
+      );
+    },
   },
 });
 
-export const { resetEvents, updateEvents, updateOneEvent } = eventSlice.actions;
+export const {
+  resetEvents,
+  updateEvents,
+  updateOneEvent,
+  optimisticallyMarkParticipateToEvent,
+  optimisticallyRemoveEventParticipation,
+} = eventSlice.actions;
 export default eventSlice.reducer;

@@ -272,6 +272,7 @@
   "errors": {
     "already-followed-cause-for-unauthenticated": "Vous soutenez déjà cette cause, connectez-vous ou créez un compte pour aller plus loin",
     "already-followed-cause": "Vous soutenez déjà cette cause.",
+    "already-participate-to-this-event": "Vous participez déjà à cet événement",
     "already-followed-coalition": "Vous suivez déjà cette coalition.",
     "mail-of-existing-account-for-support": "L’utilisateur avec cette adresse e-mail existe déjà. Veuillez vous connecter pour soutenir la cause.",
     "mail-of-existing-account": "L’utilisateur avec cette adresse e-mail existe déjà.",

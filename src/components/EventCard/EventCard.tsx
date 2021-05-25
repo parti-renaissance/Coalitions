@@ -1,18 +1,25 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, MouseEvent } from 'react';
 import {
   Container,
-  MobileGreyP,
   Name,
   BottomButtonsContainer,
   HeaderContainer,
-  Tag,
   SeeButton,
+  CategoryName,
+  ParticipantsCountContainer,
+  ParticipantsCountIconWrapper,
+  ParticipantsCountIcon,
+  ParticipantsCountLabel,
+  InformationContainer,
+  Bold,
+  Author,
 } from './EventCard.style';
 import { EventType } from 'redux/Events/types';
 import { useIntl } from 'react-intl';
-import { isUpcomingEvent } from 'redux/Events/helpers/isUpcomingEvent';
 import { useHistory } from 'react-router';
 import EventParticipateButton from '../EventParticipateButton';
+import { formatEventBeginAtDate } from 'redux/Events/helpers/formatEventBeginAtDate';
+import EventAddressOrVisioLink from '../EventAddressOrVisioLink';
 
 interface EventCardProps {
   event: EventType;
@@ -26,36 +33,48 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
     history.push({ search: `?eventId=${event.uuid}` });
   };
 
-  const numberOfSubscribers = event.participants_count;
-  const tag = isUpcomingEvent(event)
-    ? intl.formatMessage({ id: 'events.upcoming' })
-    : intl.formatMessage({ id: 'events.passed' });
+  const preventOpenDetailsModal = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(event.visio_url, '_blank');
+  };
+
+  const numberOfParticipants = event.participants_count;
 
   return (
     <Container onClick={showEventDetails}>
       <div>
         <HeaderContainer>
-          <MobileGreyP>
+          <CategoryName>
             {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
               id: `events.mode.${event.mode}`,
             })}`}
-          </MobileGreyP>
-          <Tag>{tag}</Tag>
+          </CategoryName>
         </HeaderContainer>
         <Name>{event.name}</Name>
       </div>
       <div>
-        <MobileGreyP>
+        <InformationContainer>
+          <Bold>{formatEventBeginAtDate({ date: new Date(event.begin_at), type: 'card' })}</Bold>
+          {' • '}
+          <EventAddressOrVisioLink event={event} onVisioLinkClick={preventOpenDetailsModal} />
+        </InformationContainer>
+        <Author>
           {intl.formatMessage(
             { id: 'events.organizer' },
             { organizer: `${event.organizer.first_name} ${event.organizer.last_name}` },
           )}
-        </MobileGreyP>
-        <MobileGreyP>
-          {numberOfSubscribers > 1
-            ? intl.formatMessage({ id: 'events.subscribers' }, { numberOfSubscribers })
-            : intl.formatMessage({ id: 'events.subscriber' }, { numberOfSubscribers })}
-        </MobileGreyP>
+        </Author>
+        <ParticipantsCountContainer>
+          <ParticipantsCountIconWrapper>
+            <ParticipantsCountIcon src="/images/supports.svg" />
+          </ParticipantsCountIconWrapper>
+          <ParticipantsCountLabel>
+            {numberOfParticipants > 1
+              ? intl.formatMessage({ id: 'events.participants' }, { numberOfParticipants })
+              : intl.formatMessage({ id: 'events.participant' }, { numberOfParticipants })}
+          </ParticipantsCountLabel>
+        </ParticipantsCountContainer>
         <BottomButtonsContainer>
           <EventParticipateButton event={event} type="card" />
           <SeeButton size="small" variant="outlined" onClick={showEventDetails}>

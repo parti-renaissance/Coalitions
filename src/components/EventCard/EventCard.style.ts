@@ -15,7 +15,7 @@ import { DefaultButton } from 'components/Button/Button';
 
 export const DESKTOP_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 6;
 export const MOBILE_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 3;
-export const HEIGHT = SPACING_UNIT * 47;
+export const HEIGHT = SPACING_UNIT * 56;
 export const DESKTOP_WIDTH = SPACING_UNIT * 69;
 
 export const Container = styled.div`
@@ -37,7 +37,7 @@ export const Container = styled.div`
   `)}
 `;
 
-export const MobileGreyP = styled.div`
+const MobileP = styled.div`
   color: ${colorPalette.grey};
   white-space: nowrap;
   overflow: hidden;
@@ -79,23 +79,50 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
 `;
 
-const TAG_HEIGHT = SPACING_UNIT * 5;
-
-export const Tag = styled.div`
-  display: flex;
-  align-items: center;
-  height: ${TAG_HEIGHT}px;
-  padding: 0 ${getSpacing(2)};
-  border-radius: ${TAG_HEIGHT / 2}px;
-  background-color: ${colorPalette.greyDark};
-  margin-left: ${getSpacing(3)};
-  color: ${colorPalette.white};
-  font-family: ${fontFamily.primary};
-  font-size: ${fontSize.p.mobile};
-  line-height: ${lineHeight.primary};
-  font-weight: ${fontWeight.normal};
-`;
-
 export const SeeButton = styled(DefaultButton)`
   margin-left: ${getSpacing(3)};
+`;
+
+export const CategoryName = styled(MobileP)`
+  color: ${colorPalette.pink};
+`;
+
+export const ParticipantsCountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: ${getSpacing(2)};
+`;
+
+export const ParticipantsCountIconWrapper = styled.div`
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const PARTICIPANTS_COUNT_ICON_SIZE = getSpacing(3);
+
+export const ParticipantsCountIcon = styled.img`
+  height: ${PARTICIPANTS_COUNT_ICON_SIZE};
+  width: ${PARTICIPANTS_COUNT_ICON_SIZE};
+`;
+
+export const ParticipantsCountLabel = styled(MobileP)`
+  color: ${colorPalette.greyDark};
+  margin-left: ${getSpacing(2)};
+`;
+
+export const InformationContainer = styled(MobileP)`
+  color: ${colorPalette.greyDark};
+  a {
+    color: ${colorPalette.greyDark};
+  }
+`;
+
+export const Bold = styled.span`
+  font-weight: ${fontWeight.bold};
+`;
+
+export const Author = styled(MobileP)`
+  color: ${colorPalette.grey};
+  margin-top: ${getSpacing(2)};
 `;

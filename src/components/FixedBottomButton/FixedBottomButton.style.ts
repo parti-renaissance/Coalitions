@@ -3,7 +3,7 @@ import { getSpacing, colorPalette, media, defaultMargins } from 'stylesheet';
 
 const zIndex = 1;
 
-const SHADOW = '0px -4px 40px rgba(0, 0, 0, 0.05)';
+export const SHADOW = '0px -4px 40px rgba(0, 0, 0, 0.05)';
 
 export const Container = styled.div`
   position: sticky;

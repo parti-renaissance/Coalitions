@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   colorPalette,
   getSpacing,
@@ -11,6 +11,7 @@ import {
   fontWeight,
   SPACING_UNIT,
 } from 'stylesheet';
+import { DefaultButton } from 'components/Button/Button';
 
 export const DESKTOP_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 6;
 export const MOBILE_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 3;
@@ -95,23 +96,6 @@ export const Tag = styled.div`
   font-weight: ${fontWeight.normal};
 `;
 
-export const InscriptionButtonWrapper = styled.div<{ alreadySubscribed: boolean }>`
-  margin-right: ${getSpacing(3)};
-  > button,
-  button:hover {
-    color: ${colorPalette.white};
-    ${({ alreadySubscribed }) =>
-      alreadySubscribed
-        ? css`
-            background-color: ${colorPalette.greyDark};
-            border-color: ${colorPalette.greyDark};
-          `
-        : css`
-            background-color: ${colorPalette.mintGreen2};
-            border-color: ${colorPalette.mintGreen2};
-          `}
-  }
-  > button:hover {
-    opacity: 0.8;
-  }
+export const SeeButton = styled(DefaultButton)`
+  margin-left: ${getSpacing(3)};
 `;

@@ -382,6 +382,10 @@
     "subscriber": "{numberOfSubscribers} inscrit",
     "subscribers": "{numberOfSubscribers} inscrits",
     "begin_at": "Le {date} à {time}",
-    "not_found": "Aucun événement trouvé."
+    "not_found": "Aucun événement trouvé.",
+    "passed": "Terminé",
+    "participate": "Participer",
+    "do_participate": "Vous participez",
+    "remove_participation": "Ne plus participer"
   }
 }

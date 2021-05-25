@@ -11,6 +11,7 @@ interface EventParticipateButtonConfig {
   iconSrc?: string;
 }
 
+// eslint-disable-next-line complexity
 export const getEventParticipateButtonConfig = ({
   event,
   type,

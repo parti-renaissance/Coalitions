@@ -15,7 +15,7 @@ import { DefaultButton } from 'components/Button/Button';
 
 export const DESKTOP_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 6;
 export const MOBILE_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 3;
-export const HEIGHT = SPACING_UNIT * 47;
+export const HEIGHT = SPACING_UNIT * 56;
 export const DESKTOP_WIDTH = SPACING_UNIT * 69;
 
 export const Container = styled.div`
@@ -37,7 +37,7 @@ export const Container = styled.div`
   `)}
 `;
 
-export const MobileGreyP = styled.div`
+const MobileP = styled.div`
   color: ${colorPalette.grey};
   white-space: nowrap;
   overflow: hidden;
@@ -64,7 +64,7 @@ export const Name = styled.div`
   font-size: ${fontSize.h1Small.mobile};
   line-height: ${lineHeight.secondary};
   color: ${colorPalette.greyDark};
-  margin-top: ${getSpacing(1)};
+  margin-top: ${getSpacing(2)};
 `;
 
 export const BottomButtonsContainer = styled.div`
@@ -83,17 +83,17 @@ export const SeeButton = styled(DefaultButton)`
   margin-left: ${getSpacing(3)};
 `;
 
-export const CategoryName = styled(MobileGreyP)`
+export const CategoryName = styled(MobileP)`
   color: ${colorPalette.pink};
 `;
 
 export const ParticipantsCountContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: ${getSpacing(1)};
+  margin-top: ${getSpacing(2)};
 `;
 
-export const ParticipantsCountWrapper = styled.div`
+export const ParticipantsCountIconWrapper = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -106,7 +106,24 @@ export const ParticipantsCountIcon = styled.img`
   width: ${PARTICIPANTS_COUNT_ICON_SIZE};
 `;
 
-export const ParticipantsCountLabel = styled(MobileGreyP)`
+export const ParticipantsCountLabel = styled(MobileP)`
   color: ${colorPalette.greyDark};
   margin-left: ${getSpacing(2)};
+`;
+
+export const InformationContainer = styled(MobileP)`
+  color: ${colorPalette.greyDark};
+  a {
+    color: ${colorPalette.greyDark};
+    text-decoration: underline;
+  }
+`;
+
+export const Bold = styled.span`
+  font-weight: ${fontWeight.bold};
+`;
+
+export const Author = styled(MobileP)`
+  color: ${colorPalette.grey};
+  margin-top: ${getSpacing(2)};
 `;

@@ -339,7 +339,8 @@
     "participants": "{numberOfParticipants} participants",
     "see": "Voir",
     "subscribed": "Inscrit(e)",
-    "subscribe": "M’inscrire"
+    "subscribe": "M’inscrire",
+    "visio_link": "Lien visio"
   },
   "event_form": {
     "update": {

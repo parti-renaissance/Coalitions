@@ -8,6 +8,7 @@ import {
   OneInformationContainer,
   OneInformationIcon,
   OneInformationLabel,
+  MobileEventParticipateButtonWrapper,
 } from './EventInformation.style';
 import ShareButton from '../../../ShareButton';
 import { useIntl } from 'react-intl';
@@ -15,6 +16,7 @@ import { colorPalette } from 'stylesheet';
 import { Cause } from 'redux/Cause/types';
 import format from 'date-fns/format';
 import { fr } from 'date-fns/locale';
+import EventParticipateButton from '../../../EventParticipateButton';
 
 interface EventInformationProps {
   event: EventType;
@@ -100,6 +102,7 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
   return (
     <Container>
       <DesktopButtonsContainer>
+        <EventParticipateButton event={event} type="modal" />
         <ShareEventButton event={event} />
       </DesktopButtonsContainer>
       <SectionTitle>{intl.formatMessage({ id: 'event_details.information' })}</SectionTitle>
@@ -108,6 +111,9 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
       ))}
       <SectionTitle>{intl.formatMessage({ id: 'event_details.add_to_calendar' })}</SectionTitle>
       <MobileButtonsContainer>
+        <MobileEventParticipateButtonWrapper>
+          <EventParticipateButton event={event} type="modal" />
+        </MobileEventParticipateButtonWrapper>
         <ShareEventButton event={event} />
       </MobileButtonsContainer>
     </Container>

@@ -18,7 +18,8 @@ export const ContentContainer = styled.div`
 `;
 
 export const ContentSubContainer = styled.div`
-  margin: 0 ${getSpacing(3)} calc(${FULL_WIDTH_BUTTON_HEIGHT} + ${getSpacing(3)}) ${getSpacing(3)};
+  margin: 0 ${getSpacing(3)} calc(${FULL_WIDTH_BUTTON_HEIGHT} + 3 * ${getSpacing(3)})
+    ${getSpacing(3)};
   ${media.desktop(`
     margin: 0;
   `)}

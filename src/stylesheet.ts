@@ -19,7 +19,7 @@ export const colorPalette = {
   grey: '#979797',
   grey2: '#BDBDBD',
   grey3: '#828282',
-  greyDark: '#222',
+  greyDark: '#222222',
   amberLight: '#FFD54F',
   amber: '#FFC107',
   amberDark: '#FF8F00',

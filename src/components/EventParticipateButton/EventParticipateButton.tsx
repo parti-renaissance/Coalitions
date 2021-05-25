@@ -1,11 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState, MouseEvent } from 'react';
 import { useIntl } from 'react-intl';
-import { isUpcomingEvent } from 'redux/Events/helpers/isUpcomingEvent';
 import { EventType } from 'redux/Events/types';
-import { ModalContainer, CardContainer, Icon } from './EventParticipateButton.style';
+import { Container, Icon, Label } from './EventParticipateButton.style';
+import {
+  getEventParticipateButtonConfig,
+  EventParticipateButtonType,
+} from './lib/getEventParticipateButtonConfig';
+import { FullWidthButton, SmallButton } from 'components/Button/Button';
 
 interface EventParticipateButtonProps {
-  type: 'card' | 'modal';
+  type: EventParticipateButtonType;
   event: EventType;
 }
 
@@ -13,32 +17,40 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
   type,
   event,
 }) => {
+  const [isHover, setIsHover] = useState(false);
   const intl = useIntl();
-  const { participate } = event;
-  const isUpcoming = isUpcomingEvent(event);
 
-  let iconAndLabel: { labelKey: string; iconSrc?: string } = {
-    labelKey: 'event_details.ended',
+  const getSetIsHover = (hover: boolean) => () => {
+    setIsHover(hover);
   };
-  if (isUpcoming && participate !== true) {
-    iconAndLabel = {
-      labelKey: 'event_details.participate',
-    };
-  } else if (isUpcoming && participate === true) {
-    iconAndLabel = {
-      labelKey: 'event_details.already_participate',
-      iconSrc: '/images/check.svg',
-    };
-  }
 
-  const Container = type === 'card' ? CardContainer : ModalContainer;
+  const onClick = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const SubContainer = type === 'card' ? SmallButton : FullWidthButton;
+  const { labelKey, customStyle, iconSrc } = getEventParticipateButtonConfig({
+    event,
+    type,
+    isHover,
+  });
 
   return (
-    <Container>
-      {iconAndLabel.iconSrc !== undefined && type === 'modal' ? (
-        <Icon src={iconAndLabel.iconSrc} />
-      ) : null}
-      {intl.formatMessage({ id: iconAndLabel.labelKey })}
+    <Container
+      width={type === 'modal' ? '100%' : 'unset'}
+      customStyle={customStyle}
+      onMouseEnter={getSetIsHover(true)}
+      onMouseLeave={getSetIsHover(false)}
+    >
+      <SubContainer onClick={onClick}>
+        {iconSrc !== undefined ? <Icon src={iconSrc} /> : null}
+        {labelKey !== undefined ? (
+          <Label withMarginLeft={iconSrc !== undefined}>
+            {intl.formatMessage({ id: labelKey })}
+          </Label>
+        ) : null}
+      </SubContainer>
     </Container>
   );
 };

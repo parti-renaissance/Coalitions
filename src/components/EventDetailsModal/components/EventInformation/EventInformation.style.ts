@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing, fonts, fontWeight } from 'stylesheet';
+import { colorPalette, media, getSpacing, fonts, fontWeight, defaultMargins } from 'stylesheet';
+import { SHADOW } from '../../../FixedBottomButton/FixedBottomButton.style';
 
 export const Container = styled.div`
   background-color: ${colorPalette.greyLight};
@@ -16,6 +17,10 @@ export const DesktopButtonsContainer = styled.div`
   display: none;
   ${media.desktop(`
     display: flex;
+    flex-direction: column;
+    > :first-child {
+      margin-bottom: ${getSpacing(2)};
+    }
   `)}
 `;
 
@@ -56,4 +61,15 @@ export const OneInformationLabel = styled.div<{ color?: string; bold?: boolean }
   color: ${({ color }) => (color !== undefined ? color : colorPalette.greyDark)};
   font-weight: ${({ bold }) => (bold === true ? fontWeight.bold : fontWeight.normal)};
   margin-left: ${getSpacing(2)};
+`;
+
+export const MobileEventParticipateButtonWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: ${getSpacing(3)} ${defaultMargins.horizontal.mobile};
+  background-color: ${colorPalette.white};
+  display: flex;
+  box-shadow: ${SHADOW};
 `;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   Container,
   MobileGreyP,
@@ -6,10 +6,10 @@ import {
   BottomButtonsContainer,
   HeaderContainer,
   Tag,
+  SeeButton,
 } from './EventCard.style';
 import { EventType } from 'redux/Events/types';
 import { useIntl } from 'react-intl';
-import { DefaultButton } from 'components/Button/Button';
 import { isUpcomingEvent } from 'redux/Events/helpers/isUpcomingEvent';
 import { useHistory } from 'react-router';
 import EventParticipateButton from '../EventParticipateButton';
@@ -26,17 +26,10 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
     history.push({ search: `?eventId=${event.uuid}` });
   };
 
-  const onSubscribeClick = (event: MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    // TODO
-  };
-
   const numberOfSubscribers = event.participants_count;
   const tag = isUpcomingEvent(event)
     ? intl.formatMessage({ id: 'events.upcoming' })
     : intl.formatMessage({ id: 'events.passed' });
-  const alreadySubscribed = event.uuid === 'c44a1a3b-a24e-5c78-9dac-4137699c0d00';
 
   return (
     <Container onClick={showEventDetails}>
@@ -65,9 +58,9 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
         </MobileGreyP>
         <BottomButtonsContainer>
           <EventParticipateButton event={event} type="card" />
-          <DefaultButton size="small" variant="outlined" onClick={showEventDetails}>
+          <SeeButton size="small" variant="outlined" onClick={showEventDetails}>
             {intl.formatMessage({ id: 'events.see' })}
-          </DefaultButton>
+          </SeeButton>
         </BottomButtonsContainer>
       </div>
     </Container>

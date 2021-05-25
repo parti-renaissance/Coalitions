@@ -1,18 +1,27 @@
-import styled from 'styled-components';
-import {
-  colorPalette,
-  fontFamily,
-  fontSize,
-  lineHeight,
-  fontWeight,
-  fonts,
-  getSpacing,
-  media,
-} from 'stylesheet';
-import SmallButton, { FullWidthButton, FULL_WIDTH_BUTTON_HEIGHT } from 'components/Button/Button';
+import styled, { FlattenSimpleInterpolation, css } from 'styled-components';
+import { getSpacing } from 'stylesheet';
 
-export const ModalContainer = styled(FullWidthButton)``;
+export const Container = styled.div<{ customStyle: FlattenSimpleInterpolation; width: string }>`
+  width: ${({ width }) => width};
+  > button,
+  button:hover {
+    ${({ customStyle }) => customStyle};
+    height: 100%;
+  }
+`;
 
-export const CardContainer = styled(SmallButton)``;
+const ICON_SIZE = getSpacing(4);
 
-export const Icon = styled.img``;
+export const Icon = styled.img`
+  height: ${ICON_SIZE};
+  width: ${ICON_SIZE};
+`;
+
+export const Label = styled.div<{ withMarginLeft?: boolean }>`
+  ${({ withMarginLeft }) =>
+    withMarginLeft === true
+      ? css`
+          margin-left: ${getSpacing(2)};
+        `
+      : css``}
+`;

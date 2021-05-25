@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   colorPalette,
   getSpacing,
@@ -11,6 +11,7 @@ import {
   fontWeight,
   SPACING_UNIT,
 } from 'stylesheet';
+import { DefaultButton } from 'components/Button/Button';
 
 export const DESKTOP_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 6;
 export const MOBILE_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 3;
@@ -93,4 +94,8 @@ export const Tag = styled.div`
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};
   font-weight: ${fontWeight.normal};
+`;
+
+export const SeeButton = styled(DefaultButton)`
+  margin-left: ${getSpacing(3)};
 `;

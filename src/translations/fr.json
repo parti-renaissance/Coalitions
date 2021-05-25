@@ -335,8 +335,8 @@
       "online": "En ligne",
       "meeting": "Présentiel"
     },
-    "subscriber": "{numberOfSubscribers} inscrit",
-    "subscribers": "{numberOfSubscribers} inscrits",
+    "participant": "{numberOfParticipants} participant",
+    "participants": "{numberOfParticipants} participants",
     "see": "Voir",
     "subscribed": "Inscrit(e)",
     "subscribe": "M’inscrire"
@@ -378,8 +378,8 @@
   "event_details": {
     "information": "Informations",
     "add_to_calendar": "Ajouter à mon agenda",
-    "subscriber": "{numberOfSubscribers} inscrit",
-    "subscribers": "{numberOfSubscribers} inscrits",
+    "participant": "{numberOfParticipants} participant",
+    "participants": "{numberOfParticipants} participants",
     "begin_at": "Le {date} à {time}",
     "not_found": "Aucun événement trouvé.",
     "passed": "Terminé",

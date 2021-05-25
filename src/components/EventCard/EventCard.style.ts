@@ -86,3 +86,27 @@ export const SeeButton = styled(DefaultButton)`
 export const CategoryName = styled(MobileGreyP)`
   color: ${colorPalette.pink};
 `;
+
+export const ParticipantsCountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: ${getSpacing(1)};
+`;
+
+export const ParticipantsCountWrapper = styled.div`
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const PARTICIPANTS_COUNT_ICON_SIZE = getSpacing(3);
+
+export const ParticipantsCountIcon = styled.img`
+  height: ${PARTICIPANTS_COUNT_ICON_SIZE};
+  width: ${PARTICIPANTS_COUNT_ICON_SIZE};
+`;
+
+export const ParticipantsCountLabel = styled(MobileGreyP)`
+  color: ${colorPalette.greyDark};
+  margin-left: ${getSpacing(2)};
+`;

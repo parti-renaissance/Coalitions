@@ -7,6 +7,10 @@ import {
   HeaderContainer,
   SeeButton,
   CategoryName,
+  ParticipantsCountContainer,
+  ParticipantsCountWrapper,
+  ParticipantsCountIcon,
+  ParticipantsCountLabel,
 } from './EventCard.style';
 import { EventType } from 'redux/Events/types';
 import { useIntl } from 'react-intl';
@@ -25,7 +29,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
     history.push({ search: `?eventId=${event.uuid}` });
   };
 
-  const numberOfSubscribers = event.participants_count;
+  const numberOfParticipants = event.participants_count;
 
   return (
     <Container onClick={showEventDetails}>
@@ -46,11 +50,16 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
             { organizer: `${event.organizer.first_name} ${event.organizer.last_name}` },
           )}
         </MobileGreyP>
-        <MobileGreyP>
-          {numberOfSubscribers > 1
-            ? intl.formatMessage({ id: 'events.subscribers' }, { numberOfSubscribers })
-            : intl.formatMessage({ id: 'events.subscriber' }, { numberOfSubscribers })}
-        </MobileGreyP>
+        <ParticipantsCountContainer>
+          <ParticipantsCountWrapper>
+            <ParticipantsCountIcon src="/images/supports.svg" />
+          </ParticipantsCountWrapper>
+          <ParticipantsCountLabel>
+            {numberOfParticipants > 1
+              ? intl.formatMessage({ id: 'events.participants' }, { numberOfParticipants })
+              : intl.formatMessage({ id: 'events.participant' }, { numberOfParticipants })}
+          </ParticipantsCountLabel>
+        </ParticipantsCountContainer>
         <BottomButtonsContainer>
           <EventParticipateButton event={event} type="card" />
           <SeeButton size="small" variant="outlined" onClick={showEventDetails}>

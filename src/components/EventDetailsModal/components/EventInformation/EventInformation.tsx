@@ -88,12 +88,12 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
       label:
         event.participants_count > 1
           ? intl.formatMessage(
-              { id: 'event_details.subscribers' },
-              { numberOfSubscribers: event.participants_count },
+              { id: 'event_details.participants' },
+              { numberOfParticipants: event.participants_count },
             )
           : intl.formatMessage(
-              { id: 'event_details.subscriber' },
-              { numberOfSubscribers: event.participants_count },
+              { id: 'event_details.participant' },
+              { numberOfParticipants: event.participants_count },
             ),
       iconSrc: '/images/supports.svg',
     },

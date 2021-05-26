@@ -68,7 +68,9 @@ const CreateAccountForm = ({
         </ConnectLink>
       </Connect>
       <Formik<InscriptionFormValues>
-        initialValues={{} as InscriptionFormValues}
+        initialValues={
+          { causeMailAgreement: true, coalitionMailAgreement: true } as InscriptionFormValues
+        }
         validate={validateForm}
         onSubmit={handleAccountCreation}
       >

@@ -10,6 +10,12 @@ export const getAfterAuthFollowCause = (store: RootState) =>
     ? store.login.afterAuthAction.followCause.id
     : '';
 
+export const getAfterAuthParticipateToEvent = (store: RootState) =>
+  store.login.afterAuthAction !== undefined &&
+  store.login.afterAuthAction.participateToEvent != null
+    ? store.login.afterAuthAction.participateToEvent.id
+    : '';
+
 export const getAfterAuthRedirectTo = (store: RootState) =>
   store.login.afterAuthAction !== undefined && store.login.afterAuthAction.redirectTo !== null
     ? store.login.afterAuthAction.redirectTo

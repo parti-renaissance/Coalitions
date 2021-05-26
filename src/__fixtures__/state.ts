@@ -1,9 +1,11 @@
-export const state = {
+import { RootState } from 'redux/types';
+
+export const state: RootState = {
   login: {
     accessToken: 'someAccessToken',
     refreshToken: 'someRefreshToken',
     isLogged: false,
-    afterAuthAction: { followCause: null, redirectTo: null },
+    afterAuthAction: { followCause: null, redirectTo: null, participateToEvent: null },
   },
   cause: {
     ids: [],
@@ -26,5 +28,6 @@ export const state = {
   event: {
     events: {},
     ids: [],
+    eventParticipateModal: null,
   },
 };

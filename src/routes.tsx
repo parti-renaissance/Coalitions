@@ -18,6 +18,9 @@ const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Coalition = lazy(() => import('./pages/Coalition'));
 const LoginAndSupportModal = lazy(() => import('./components/LoginAndSupportModal'));
+const LoginAndParticipateToEventModal = lazy(() =>
+  import('./components/LoginAndParticipateToEventModal'),
+);
 const UpdateEvent = lazy(() => import('./pages/UpdateEvent'));
 
 export const CHARTER_OF_VALUES_URL =
@@ -119,6 +122,7 @@ const Routes: FunctionComponent<{}> = () => {
           <Route path={PATHS.UPDATE_EVENT.route} component={UpdateEvent}></Route>
         </Switch>
         <LoginAndSupportModal />
+        <LoginAndParticipateToEventModal />
       </Suspense>
       <Snackbar />
     </>

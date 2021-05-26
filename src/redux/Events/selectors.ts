@@ -10,3 +10,7 @@ export const getEvent = (id: string) => (store: RootState): EventType | undefine
   const event = store.event.events[id];
   return event !== undefined ? event : FAKE_EVENT;
 };
+
+export const getEventParticipateModal = (store: RootState): EventType | null => {
+  return store.event.eventParticipateModal;
+};

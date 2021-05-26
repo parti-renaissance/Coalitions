@@ -13,7 +13,6 @@ export const mailFormatting: IConvertToHTMLConfig<
     }
   },
   entityToHTML: (entity, originalText) => {
-    console.log('entity', entity);
     if (entity.type === 'LINK') {
       return <a href={entity.data.url}>{originalText}</a>;
     }

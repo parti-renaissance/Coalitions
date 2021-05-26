@@ -4,14 +4,18 @@ export type LoginState = Readonly<{
   accessToken: string | null;
   refreshToken: string | null;
   isLogged: boolean;
-  afterAuthAction: { followCause: { id: string } | null; redirectTo: string | null };
+  afterAuthAction: {
+    followCause: { id: string } | null;
+    participateToEvent: { id: string } | null;
+    redirectTo: string | null;
+  };
 }>;
 
 const initialState: LoginState = {
   accessToken: null,
   refreshToken: null,
   isLogged: false,
-  afterAuthAction: { followCause: null, redirectTo: null },
+  afterAuthAction: { followCause: null, participateToEvent: null, redirectTo: null },
 };
 
 const loginSlice = createSlice({
@@ -30,6 +34,9 @@ const loginSlice = createSlice({
     setAfterAuthFollowCause: (state, action: PayloadAction<string>) => {
       state.afterAuthAction.followCause = { id: action.payload };
     },
+    setAfterAuthParticipateToEvent: (state, action: PayloadAction<string>) => {
+      state.afterAuthAction.participateToEvent = { id: action.payload };
+    },
     setAfterAuthRedirect: (state, action: PayloadAction<string>) => {
       state.afterAuthAction.redirectTo = action.payload;
     },
@@ -43,6 +50,7 @@ export const {
   userLoggedIn,
   userLoggedOut,
   setAfterAuthFollowCause,
+  setAfterAuthParticipateToEvent,
   setAfterAuthRedirect,
   cleanAfterAuthAction,
 } = loginSlice.actions;

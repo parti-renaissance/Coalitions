@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, MouseEvent } from 'react';
+import React, { FunctionComponent, useState, MouseEvent, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { EventType } from 'redux/Events/types';
 import { Container, Icon, Label } from './EventParticipateButton.style';
@@ -12,6 +12,10 @@ import {
   useEventParticipate,
   useRemoveEventParticipation,
 } from 'redux/Events/hooks/useEventParticipate';
+import { useDispatch } from 'react-redux';
+import useSelector from 'redux/useSelector';
+import { isUserLogged } from 'redux/Login';
+import { openEventParticipateModal } from 'redux/Events';
 
 interface EventParticipateButtonProps {
   type: EventParticipateButtonType;
@@ -24,6 +28,8 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
 }) => {
   const [isHover, setIsHover] = useState(false);
   const intl = useIntl();
+  const dispatch = useDispatch();
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const isUpcoming = isUpcomingEvent(event);
   const {
     loading: isRemovingParticipation,
@@ -37,20 +43,27 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
     setIsHover(hover);
   };
 
-  const onClick = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const onClick = useCallback(
+    (e: MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-    if (!isUpcoming) {
-      return;
-    }
+      if (!isUpcoming) {
+        return;
+      }
 
-    if (event.participate === true) {
-      removeEventParticipation();
-    } else {
-      participateToEvent();
-    }
-  };
+      if (isUserLoggedIn) {
+        if (event.participate === true) {
+          removeEventParticipation();
+        } else {
+          participateToEvent();
+        }
+      } else {
+        dispatch(openEventParticipateModal(event));
+      }
+    },
+    [isUserLoggedIn, dispatch, event, isUpcoming, participateToEvent, removeEventParticipation],
+  );
 
   const SubContainer = type === 'card' ? SmallButton : FullWidthButton;
   const { labelKey, customStyle, iconSrc } = getEventParticipateButtonConfig({

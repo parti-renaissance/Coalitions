@@ -4,11 +4,13 @@ import { EventType } from './types';
 export type EventState = Readonly<{
   events: { [id: string]: EventType };
   ids: string[];
+  eventParticipateModal: EventType | null;
 }>;
 
 const initialState: EventState = {
   events: {},
   ids: [],
+  eventParticipateModal: null,
 };
 
 const eventSlice = createSlice({
@@ -55,6 +57,12 @@ const eventSlice = createSlice({
         0,
       );
     },
+    openEventParticipateModal: (state, action: PayloadAction<EventType | null>) => {
+      state.eventParticipateModal = action.payload;
+    },
+    closeEventParticipateModal: state => {
+      state.eventParticipateModal = null;
+    },
   },
 });
 
@@ -64,5 +72,7 @@ export const {
   updateOneEvent,
   optimisticallyMarkParticipateToEvent,
   optimisticallyRemoveEventParticipation,
+  openEventParticipateModal,
+  closeEventParticipateModal,
 } = eventSlice.actions;
 export default eventSlice.reducer;

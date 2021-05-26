@@ -41,7 +41,9 @@ export const CGUModal: React.FunctionComponent<CGUModalProps> = ({ isOpened, onC
           <FormattedMessage id="cgu_modal.title" />
         </Title>
         <Formik<CGUFormValues>
-          initialValues={{} as CGUFormValues}
+          initialValues={
+            { causeMailAgreement: true, coalitionMailAgreement: true } as CGUFormValues
+          }
           validate={validateForm}
           onSubmit={onSubmit}
         >

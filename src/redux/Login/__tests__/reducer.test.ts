@@ -7,7 +7,7 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   isLogged: false,
-  afterAuthAction: { followCause: null, redirectTo: null },
+  afterAuthAction: { followCause: null, redirectTo: null, participateToEvent: null },
 };
 
 describe('Login reducer', () => {

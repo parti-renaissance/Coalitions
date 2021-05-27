@@ -6,6 +6,7 @@ import { closeEventParticipateModal } from 'redux/Events';
 import { getEventParticipateModal } from 'redux/Events/selectors';
 import { setAfterAuthParticipateToEvent, setAfterAuthRedirect } from 'redux/Login';
 import { PATHS } from 'routes';
+import { InscriptionFormValues } from 'components/LoginModal/components/CreateAccountForm/lib/useValidateForm';
 
 const LoginAndParticipateToEventModal: FunctionComponent = () => {
   const intl = useIntl();
@@ -33,6 +34,12 @@ const LoginAndParticipateToEventModal: FunctionComponent = () => {
       onConnect={onConnect}
       title={intl.formatMessage({ id: 'events.confirm-participation' })}
       legalTextKey="events.legal-inscription-text"
+      isInEventFlow
+      onAccountFormSubmit={(values: InscriptionFormValues) => {
+        console.log(values);
+        onClose();
+        return Promise.resolve();
+      }}
     />
   );
 };

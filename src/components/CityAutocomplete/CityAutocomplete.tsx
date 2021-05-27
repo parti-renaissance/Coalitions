@@ -57,6 +57,7 @@ const CityAutocomplete: FunctionComponent<CityAutocompleteProps> = ({
             fetchCities(e.target.value);
           }}
           onBlur={handleBlur}
+          InputLabelProps={{ required: false }}
           InputProps={{
             ...params.InputProps,
             endAdornment: (

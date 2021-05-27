@@ -94,8 +94,11 @@ const Routes: FunctionComponent<{}> = () => {
   const history = useHistory();
 
   useEffect(() => {
-    return history.listen((_, action) => {
-      if (action === 'PUSH') {
+    return history.listen(({ search }, action) => {
+      const params = new URLSearchParams(search);
+      const eventId = params.get('eventId');
+
+      if (action === 'PUSH' && eventId === null) {
         window.scrollTo(0, 0);
       }
     });

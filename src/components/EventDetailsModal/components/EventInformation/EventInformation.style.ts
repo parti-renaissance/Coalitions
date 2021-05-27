@@ -66,6 +66,8 @@ export const OneInformationLabel = styled.div<{ color?: string; bold?: boolean }
   }
 `;
 
+const MOBILE_PARTICIPATE_BUTTON_Z_INDEX = 1;
+
 export const MobileEventParticipateButtonWrapper = styled.div`
   position: fixed;
   bottom: 0;
@@ -75,7 +77,7 @@ export const MobileEventParticipateButtonWrapper = styled.div`
   background-color: ${colorPalette.white};
   display: flex;
   box-shadow: ${SHADOW};
-  z-index: 1;
+  z-index: ${MOBILE_PARTICIPATE_BUTTON_Z_INDEX};
 `;
 
 export const ShareEventButtonWrapper = styled.div`

@@ -44,6 +44,7 @@ const DesktopCarousel: ForwardRefRenderFunction<any, CarouselProps> = (props, re
 
 const DesktopCarouselWithRef = forwardRef<any, CarouselProps>(DesktopCarousel);
 
+// eslint-disable-next-line complexity
 const Slider: FunctionComponent<SliderProps> = ({
   slidesCount,
   isLoadingSlides,

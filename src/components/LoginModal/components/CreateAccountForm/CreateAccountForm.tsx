@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import InputField from 'components/InputField';
@@ -28,6 +30,7 @@ interface CreateAccountFormProps {
   title: string;
   onConnect?: () => void;
   legalTextKey: string;
+  isInEventFlow?: boolean;
 }
 
 const CreateAccountForm = ({
@@ -38,6 +41,7 @@ const CreateAccountForm = ({
   title,
   onConnect,
   legalTextKey,
+  isInEventFlow,
 }: CreateAccountFormProps) => {
   const intl = useIntl();
   const { validateForm } = useValidateForm();
@@ -71,7 +75,7 @@ const CreateAccountForm = ({
         initialValues={
           { causeMailAgreement: true, coalitionMailAgreement: true } as InscriptionFormValues
         }
-        validate={validateForm}
+        validate={validateForm(isInEventFlow)}
         onSubmit={handleAccountCreation}
       >
         {// eslint-disable-next-line complexity
@@ -99,8 +103,26 @@ const CreateAccountForm = ({
                 error={touched.firstName === true && errors.firstName !== undefined}
                 helperText={touched.firstName === true ? errors.firstName : undefined}
                 inputProps={{ maxLength: 50 }}
+                InputLabelProps={{ required: false }}
               />
             </InputFieldWrapper>
+            {isInEventFlow === true ? (
+              <InputFieldWrapper>
+                <InputField
+                  required
+                  placeholder={intl.formatMessage({ id: 'login_modal.last-name' })}
+                  type="text"
+                  name="lastName"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.lastName}
+                  error={touched.lastName === true && errors.lastName !== undefined}
+                  helperText={touched.lastName === true ? errors.lastName : undefined}
+                  inputProps={{ maxLength: 50 }}
+                  InputLabelProps={{ required: false }}
+                />
+              </InputFieldWrapper>
+            ) : null}
             <InputFieldWrapper>
               <InputField
                 required
@@ -113,52 +135,75 @@ const CreateAccountForm = ({
                 error={touched.email === true && errors.email !== undefined}
                 helperText={touched.email === true ? errors.email : undefined}
                 inputProps={{ maxLength: 255 }}
+                InputLabelProps={{ required: false }}
               />
             </InputFieldWrapper>
-            <InputFieldWrapper>
-              <CityAutocomplete
+            {isInEventFlow !== true ? (
+              <>
+                <InputFieldWrapper>
+                  <CityAutocomplete
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    setFieldTouched={setFieldTouched}
+                    setFieldValue={setFieldValue}
+                    touched={touched}
+                    errors={errors}
+                  />
+                </InputFieldWrapper>
+                <ModalCheckbox
+                  handleChange={handleChange}
+                  value={values.causeMailAgreement}
+                  name="causeMailAgreement"
+                  label={
+                    <Label>{intl.formatMessage({ id: 'inscription.agree-mail-cause' })}</Label>
+                  }
+                />
+                <ModalCheckbox
+                  handleChange={handleChange}
+                  value={values.coalitionMailAgreement}
+                  name="coalitionMailAgreement"
+                  label={
+                    <Label>{intl.formatMessage({ id: 'inscription.agree-mail-coalition' })}</Label>
+                  }
+                />
+                <ModalCheckbox
+                  handleChange={handleChange}
+                  value={values.cguAgreement}
+                  name="cguAgreement"
+                  label={
+                    <Label>
+                      {intl.formatMessage(
+                        { id: 'inscription.agree-cgu' },
+                        {
+                          charterOfValues: (
+                            <a
+                              href={CHARTER_OF_VALUES_URL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <FormattedMessage id="inscription.charter-of-values" />
+                            </a>
+                          ),
+                        },
+                      )}
+                      <Asterisk>*</Asterisk>
+                    </Label>
+                  }
+                />
+              </>
+            ) : (
+              <ModalCheckbox
                 handleChange={handleChange}
-                handleBlur={handleBlur}
-                setFieldTouched={setFieldTouched}
-                setFieldValue={setFieldValue}
-                touched={touched}
-                errors={errors}
+                value={values.dataShareAgreement}
+                name="dataShareAgreement"
+                label={
+                  <Label>
+                    {intl.formatMessage({ id: 'events.data-share-agreement' })}
+                    <Asterisk>*</Asterisk>
+                  </Label>
+                }
               />
-            </InputFieldWrapper>
-            <ModalCheckbox
-              handleChange={handleChange}
-              value={values.causeMailAgreement}
-              name="causeMailAgreement"
-              label={<Label>{intl.formatMessage({ id: 'inscription.agree-mail-cause' })}</Label>}
-            />
-            <ModalCheckbox
-              handleChange={handleChange}
-              value={values.coalitionMailAgreement}
-              name="coalitionMailAgreement"
-              label={
-                <Label>{intl.formatMessage({ id: 'inscription.agree-mail-coalition' })}</Label>
-              }
-            />
-            <ModalCheckbox
-              handleChange={handleChange}
-              value={values.cguAgreement}
-              name="cguAgreement"
-              label={
-                <Label>
-                  {intl.formatMessage(
-                    { id: 'inscription.agree-cgu' },
-                    {
-                      charterOfValues: (
-                        <a href={CHARTER_OF_VALUES_URL} target="_blank" rel="noopener noreferrer">
-                          <FormattedMessage id="inscription.charter-of-values" />
-                        </a>
-                      ),
-                    },
-                  )}
-                  <Asterisk>*</Asterisk>
-                </Label>
-              }
-            />
+            )}
             <ValidateButtonContainer isInPage={isInPage}>
               <FullWidthButton
                 disabled={
@@ -166,7 +211,7 @@ const CreateAccountForm = ({
                   Object.keys(errors).length > 0 ||
                   touched.firstName !== true ||
                   touched.email !== true ||
-                  touched.cityId !== true
+                  (isInEventFlow === true ? touched.lastName !== true : touched.cityId !== true)
                 }
                 type="submit"
                 size="small"
@@ -185,3 +230,5 @@ const CreateAccountForm = ({
   );
 };
 export default CreateAccountForm;
+
+/* eslint-enable max-lines */

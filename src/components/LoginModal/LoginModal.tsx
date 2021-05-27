@@ -15,6 +15,7 @@ interface LoginModalProps {
   title: string;
   showSuccessScreenOnValidate?: boolean;
   legalTextKey: string;
+  isInEventFlow?: boolean;
 }
 
 const LoginModal: React.FunctionComponent<LoginModalProps> = ({
@@ -27,6 +28,7 @@ const LoginModal: React.FunctionComponent<LoginModalProps> = ({
   doingAfterAccountCreation,
   onAccountFormSubmit,
   legalTextKey,
+  isInEventFlow,
 }) => {
   const [showSuccessScreen, setShowSuccessScreen] = useState<boolean>(false);
 
@@ -64,6 +66,7 @@ const LoginModal: React.FunctionComponent<LoginModalProps> = ({
         onConnect={onConnect}
         title={title}
         legalTextKey={legalTextKey}
+        isInEventFlow={isInEventFlow}
       />
     );
   };

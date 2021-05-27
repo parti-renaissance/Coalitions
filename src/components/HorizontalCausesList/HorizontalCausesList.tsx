@@ -49,10 +49,8 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
       isLoadingSlides={isFetchingCauses}
       title={intl.formatMessage({ id: 'horizontal_causes_list.title' })}
       onSeeAllClick={onSeeAllClick}
-      desktopCarouselProps={{
-        slideWidth: `${DESKTOP_CAUSE_CARD_WIDTH}px`,
-        cellSpacing: DESKTOP_CAUSE_MARGIN_RIGHT,
-      }}
+      desktopCellSpacing={DESKTOP_CAUSE_MARGIN_RIGHT}
+      desktopSlideWidth={DESKTOP_CAUSE_CARD_WIDTH}
       slidesHeight={{ mobile: MOBILE_CAUSE_CARD_HEIGHT, desktop: DESKTOP_CAUSE_CARD_HEIGHT }}
     >
       {causes.slice(0, 20).map(cause => (

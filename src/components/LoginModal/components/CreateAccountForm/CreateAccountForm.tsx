@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import React from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import InputField from 'components/InputField';
@@ -228,3 +230,5 @@ const CreateAccountForm = ({
   );
 };
 export default CreateAccountForm;
+
+/* eslint-enable max-lines */

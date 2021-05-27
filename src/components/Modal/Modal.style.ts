@@ -31,6 +31,7 @@ const getContainerStyle = (width: ContainerWidth) => {
       padding: ${getSpacing(8)};
       max-height: min(${getSpacing(150)}, calc(100vh - 2 * ${getSpacing(8)}));
       max-width: ${getSpacing(widthSpacingMultiple)};
+      min-width: ${getSpacing(widthSpacingMultiple)};
     `)}
     }
   `;

@@ -75,6 +75,7 @@ export const MobileEventParticipateButtonWrapper = styled.div`
   background-color: ${colorPalette.white};
   display: flex;
   box-shadow: ${SHADOW};
+  z-index: 1;
 `;
 
 export const ShareEventButtonWrapper = styled.div`

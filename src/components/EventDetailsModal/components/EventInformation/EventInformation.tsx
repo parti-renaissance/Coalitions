@@ -9,6 +9,7 @@ import {
   OneInformationIcon,
   OneInformationLabel,
   MobileEventParticipateButtonWrapper,
+  ShareEventButtonWrapper,
 } from './EventInformation.style';
 import ShareButton from '../../../ShareButton';
 import { useIntl } from 'react-intl';
@@ -31,7 +32,9 @@ interface Information {
 }
 
 const ShareEventButton = ({ event }: { event: EventType }) => (
-  <ShareButton shareContent={{ title: event.name, text: event.name }} />
+  <ShareEventButtonWrapper>
+    <ShareButton shareContent={{ title: event.name, text: event.name }} />
+  </ShareEventButtonWrapper>
 );
 
 const OneInformation = ({ information }: { information: Information }) => {

@@ -76,3 +76,11 @@ export const MobileEventParticipateButtonWrapper = styled.div`
   display: flex;
   box-shadow: ${SHADOW};
 `;
+
+export const ShareEventButtonWrapper = styled.div`
+  > button,
+  button:hover {
+    color: ${colorPalette.pink};
+    border-color: ${colorPalette.pink};
+  }
+`;

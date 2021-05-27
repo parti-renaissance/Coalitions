@@ -18,6 +18,7 @@ import EventInformation from './components/EventInformation';
 import { EventType } from 'redux/Events/types';
 import { Cause } from 'redux/Cause/types';
 import Loader from 'components/Loader';
+import parse from 'html-react-parser';
 
 interface EventDetailsModalProps {
   event: EventType | undefined;
@@ -63,7 +64,7 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
             <MobileInformationWrapper>
               <EventInformation event={event} cause={cause} />
             </MobileInformationWrapper>
-            <Description>{event.description}</Description>
+            <Description>{parse(event.description)}</Description>
           </ContentSubContainer>
           <DesktopInformationWrapper>
             <EventInformation event={event} cause={cause} />

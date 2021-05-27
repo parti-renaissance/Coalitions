@@ -95,9 +95,10 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 value={values.name}
                 error={touched.name === true && errors.name !== undefined}
                 helperText={touched.name === true ? errors.name : undefined}
+                InputLabelProps={{ required: false }}
               />
             </InputFieldWrapper>
-            <input type="text" hidden value={values.mode} name="mode" />
+            <input type="text" hidden value={values.mode} name="mode" required />
             <ModeButtonsContainer mode={values.mode}>
               <ModeButton
                 size="small"
@@ -140,6 +141,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 helperText={
                   values.mode === 'meeting' && touched.address === true ? errors.address : undefined
                 }
+                InputLabelProps={{ required: false }}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
@@ -158,6 +160,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 helperText={
                   values.mode === 'online' && touched.link === true ? errors.link : undefined
                 }
+                InputLabelProps={{ required: false }}
               />
             </InputFieldWrapper>
             <DateFieldsWrapper>
@@ -172,7 +175,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                   value={values.beginAtDate}
                   error={touched.beginAtDate === true && errors.beginAtDate !== undefined}
                   helperText={touched.beginAtDate === true ? errors.beginAtDate : undefined}
-                  InputLabelProps={{ shrink: true }}
+                  InputLabelProps={{ shrink: true, required: false }}
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
@@ -186,7 +189,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                   value={values.finishAtDate}
                   error={touched.finishAtDate === true && errors.finishAtDate !== undefined}
                   helperText={touched.finishAtDate === true ? errors.finishAtDate : undefined}
-                  InputLabelProps={{ shrink: true }}
+                  InputLabelProps={{ shrink: true, required: false }}
                 />
               </InputFieldWrapper>
             </DateFieldsWrapper>
@@ -202,6 +205,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 value={values.categoryId}
                 error={touched.categoryId === true && errors.categoryId !== undefined}
                 helperText={touched.categoryId === true ? errors.categoryId : undefined}
+                InputLabelProps={{ required: false }}
               >
                 {eventCategories.map(category => (
                   <CategoryItem key={category.uuid} value={category.uuid}>
@@ -223,6 +227,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 helperText={touched.description === true ? errors.description : undefined}
                 multiline
                 rows={10}
+                InputLabelProps={{ required: false }}
               />
             </InputFieldWrapper>
             <BottomButtonsWrapper>

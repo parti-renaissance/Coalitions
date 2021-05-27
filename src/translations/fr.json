@@ -380,7 +380,6 @@
   },
   "event_details": {
     "information": "Informations",
-    "add_to_calendar": "Ajouter à mon agenda",
     "participant": "{numberOfParticipants} participant",
     "participants": "{numberOfParticipants} participants",
     "begin_at": "Le {date} à {time}",

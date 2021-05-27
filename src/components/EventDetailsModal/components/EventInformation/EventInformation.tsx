@@ -105,7 +105,6 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
       {informations.map(information => (
         <OneInformation key={information.iconSrc} information={information} />
       ))}
-      <SectionTitle>{intl.formatMessage({ id: 'event_details.add_to_calendar' })}</SectionTitle>
       <MobileButtonsContainer>
         <MobileEventParticipateButtonWrapper>
           <EventParticipateButton event={event} type="modal" />

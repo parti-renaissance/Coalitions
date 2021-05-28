@@ -1,5 +1,5 @@
 import Menu from 'components/Menu';
-import styled from 'styled-components';
+import styled, { FlattenSimpleInterpolation } from 'styled-components';
 import { getSpacing } from 'stylesheet';
 import { DESKTOP_BUTTONS_WIDTH } from 'components/CauseDetails/components/HeaderButtons/HeaderButtons.style';
 
@@ -8,7 +8,7 @@ export const MobileShareIcon = styled.img`
   width: ${getSpacing(5)};
 `;
 
-export const ShareMenu = styled(Menu)`
+export const getShareMenu = (style?: FlattenSimpleInterpolation) => styled(Menu)`
   margin-top: ${getSpacing(12)};
   a {
     display: flex;
@@ -18,4 +18,5 @@ export const ShareMenu = styled(Menu)`
   .MuiMenu-paper {
     width: ${DESKTOP_BUTTONS_WIDTH};
   }
+  ${style};
 `;

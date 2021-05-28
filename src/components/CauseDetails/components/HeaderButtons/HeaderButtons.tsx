@@ -21,7 +21,7 @@ import { useHistory } from 'react-router';
 import { Modal } from 'components/Modal/Modal';
 import { FullWidthButton } from 'components/Button/Button';
 import QuickActions from '../QuickActions';
-import ShareButton from 'components/ShareButton';
+import ShareButtonComponent from 'components/ShareButton';
 
 interface HeaderProps {
   cause: Cause | InCreationCause;
@@ -31,6 +31,12 @@ interface HeaderProps {
   quickActions?: QuickAction[];
   showQuickActions?: boolean;
 }
+
+const ShareButton: FunctionComponent<{ cause: Cause | InCreationCause }> = ({ cause }) => (
+  <ButtonWrapper>
+    <ShareButtonComponent shareContent={{ title: cause.name, text: cause.name }} />
+  </ButtonWrapper>
+);
 
 const HeaderButtons: FunctionComponent<HeaderProps> = ({
   cause,
@@ -70,9 +76,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           {intl.formatMessage({ id: 'cause.update' })}
         </Button>
       ) : null}
-      <ButtonWrapper>
-        <ShareButton shareContent={{ title: cause.name, text: cause.name }} />
-      </ButtonWrapper>
+      <ShareButton cause={cause} />
     </>
   );
 
@@ -121,11 +125,7 @@ const HeaderButtons: FunctionComponent<HeaderProps> = ({
           >
             {intl.formatMessage({ id: 'cause.support-button' })}
           </Button>
-          {!isMobile ? (
-            <ButtonWrapper>
-              <ShareButton shareContent={{ title: cause.name, text: cause.name }} />
-            </ButtonWrapper>
-          ) : null}
+          {!isMobile ? <ShareButton cause={cause} /> : null}
         </>
       );
     }

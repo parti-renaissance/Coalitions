@@ -10,14 +10,16 @@ import {
   OneInformationLabel,
   MobileEventParticipateButtonWrapper,
   ShareEventButtonWrapper,
+  DESKTOP_CONTAINER_WIDTH,
 } from './EventInformation.style';
 import ShareButton from '../../../ShareButton';
 import { useIntl } from 'react-intl';
-import { colorPalette } from 'stylesheet';
+import { colorPalette, defaultMargins, media } from 'stylesheet';
 import { Cause } from 'redux/Cause/types';
 import EventParticipateButton from '../../../EventParticipateButton';
 import EventAddressOrVisioLink from '../../../EventAddressOrVisioLink';
 import { formatEventBeginAtDate } from 'redux/Events/helpers/formatEventBeginAtDate';
+import { css } from 'styled-components';
 
 interface EventInformationProps {
   event: EventType;
@@ -33,7 +35,17 @@ interface Information {
 
 const ShareEventButton = ({ event }: { event: EventType }) => (
   <ShareEventButtonWrapper>
-    <ShareButton shareContent={{ title: event.name, text: event.name }} />
+    <ShareButton
+      shareContent={{ title: event.name, text: event.name }}
+      menuStyle={css`
+        .MuiMenu-paper {
+          min-width: calc(100vw - 2 * ${defaultMargins.horizontal.mobile});
+          ${media.desktop(`
+            min-width: ${DESKTOP_CONTAINER_WIDTH}px;
+          `)}
+        }
+      `}
+    />
   </ShareEventButtonWrapper>
 );
 

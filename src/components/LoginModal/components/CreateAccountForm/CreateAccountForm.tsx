@@ -196,12 +196,7 @@ const CreateAccountForm = ({
                 handleChange={handleChange}
                 value={values.dataShareAgreement}
                 name="dataShareAgreement"
-                label={
-                  <Label>
-                    {intl.formatMessage({ id: 'events.data-share-agreement' })}
-                    <Asterisk>*</Asterisk>
-                  </Label>
-                }
+                label={<Label>{intl.formatMessage({ id: 'events.data-share-agreement' })}</Label>}
               />
             )}
             <ValidateButtonContainer isInPage={isInPage}>

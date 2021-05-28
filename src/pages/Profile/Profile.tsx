@@ -124,6 +124,7 @@ export const Profile: FunctionComponent = () => {
                 name="email"
                 value={values.email}
                 inputProps={{ maxLength: 255 }}
+                InputLabelProps={{ required: true }}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
@@ -139,6 +140,7 @@ export const Profile: FunctionComponent = () => {
                 error={touched.firstName === true && errors.firstName !== undefined}
                 helperText={touched.firstName === true ? errors.firstName : undefined}
                 inputProps={{ maxLength: 50 }}
+                InputLabelProps={{ required: true }}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>

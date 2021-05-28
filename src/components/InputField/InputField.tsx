@@ -7,6 +7,7 @@ const InputField: FunctionComponent<TextFieldProps & { hideOptionnal?: boolean }
   placeholder,
   required,
   hideOptionnal = false,
+  InputLabelProps,
   ...restOfProps
 }) => {
   const intl = useIntl();
@@ -22,6 +23,10 @@ const InputField: FunctionComponent<TextFieldProps & { hideOptionnal?: boolean }
       required={required}
       variant="outlined"
       label={newPlaceholder}
+      InputLabelProps={{
+        required: false,
+        ...(InputLabelProps !== undefined ? InputLabelProps : {}),
+      }}
     />
   );
 };

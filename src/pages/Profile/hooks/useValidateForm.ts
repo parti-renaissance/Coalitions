@@ -15,7 +15,7 @@ export interface ProfileFormValues {
   phoneNumber?: string;
   phoneCountry?: PhoneCountry;
   gender?: string;
-  birthday?: string;
+  birthday?: string | null;
   coalitionSubscription?: boolean;
   causeSubscription?: boolean;
 }
@@ -26,7 +26,7 @@ type ErrorForm = {
   email?: string;
   phoneNumber?: string;
   gender?: string;
-  birthday?: string;
+  birthday?: string | null;
 };
 
 export const useValidateForm = () => {

@@ -19,6 +19,10 @@ const LEGAL_LINKS: {
     to: PATHS.DATA_PROTECTION_POLICY.url(),
     labelKey: 'footer.data-protection-policy',
   },
+  {
+    to: PATHS.PROFILE.url(),
+    labelKey: 'footer.subscribe-unsubscribe-link',
+  },
 ];
 
 const Footer: FunctionComponent<{}> = () => {

@@ -18,5 +18,6 @@ export const getShareMenu = (style?: FlattenSimpleInterpolation) => styled(Menu)
   .MuiMenu-paper {
     width: ${DESKTOP_BUTTONS_WIDTH};
   }
+
   ${style};
 `;

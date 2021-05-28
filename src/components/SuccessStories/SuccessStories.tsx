@@ -20,12 +20,12 @@ const SuccessStories: FunctionComponent<{}> = () => {
     <Slider
       slidesCount={SUCCESS_STORIES.length}
       title={intl.formatMessage({ id: 'success_stories.title' })}
-      desktopCarouselProps={{
-        slideWidth: `${TABLET_BREAK_POINT -
-          2 * defaultMarginsAsNumber.horizontal.desktop -
-          DESKTOP_MARGIN_BETWEEN_CARDS}px`,
-        cellSpacing: DESKTOP_MARGIN_BETWEEN_CARDS,
-      }}
+      desktopCellSpacing={DESKTOP_MARGIN_BETWEEN_CARDS}
+      desktopSlideWidth={
+        TABLET_BREAK_POINT -
+        2 * defaultMarginsAsNumber.horizontal.desktop -
+        DESKTOP_MARGIN_BETWEEN_CARDS
+      }
       slidesHeight={{ mobile: MOBILE_HEIGHT, desktop: DESKTOP_HEIGHT }}
     >
       {SUCCESS_STORIES.map(successStory => (

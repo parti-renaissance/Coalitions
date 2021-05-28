@@ -23,9 +23,10 @@ interface SliderProps {
   isLoadingSlides?: boolean;
   title: string;
   onSeeAllClick?: () => void;
-  desktopCarouselProps: CarouselProps;
   slidesHeight: { mobile: number; desktop: number };
   TitleComponent?: FunctionComponent;
+  desktopSlideWidth: number;
+  desktopCellSpacing: number;
 }
 
 const DesktopCarousel: ForwardRefRenderFunction<any, CarouselProps> = (props, ref) => (
@@ -43,14 +44,16 @@ const DesktopCarousel: ForwardRefRenderFunction<any, CarouselProps> = (props, re
 
 const DesktopCarouselWithRef = forwardRef<any, CarouselProps>(DesktopCarousel);
 
+// eslint-disable-next-line complexity
 const Slider: FunctionComponent<SliderProps> = ({
   slidesCount,
   isLoadingSlides,
   title,
   onSeeAllClick,
-  desktopCarouselProps,
   slidesHeight,
   TitleComponent = 'h3',
+  desktopSlideWidth,
+  desktopCellSpacing,
   children,
 }) => {
   const intl = useIntl();
@@ -72,19 +75,29 @@ const Slider: FunctionComponent<SliderProps> = ({
   const SlidesContainer = (isMobile
     ? ({ children }) => <SubContainer height={slidesHeight.mobile}>{children}</SubContainer>
     : DesktopCarouselWithRef) as ForwardRefRenderFunction<any, CarouselProps & { ref: any }>;
+
+  let areSlidesAllVisible = false;
+  if (carouselRef?.current?.frame?.clientWidth !== undefined) {
+    areSlidesAllVisible =
+      (desktopSlideWidth + desktopCellSpacing) * slidesCount <
+      carouselRef.current.frame.clientWidth;
+  }
+
   return (
     <Container>
       <Header>
         <TitleComponent>{title}</TitleComponent>
         <RightHeaderSubContainer>
-          <CarouselControlsContainer>
-            <IconButton onClick={onControlButtonClick(false)}>
-              <LeftArrow src="/images/leftCircleArrow.svg" />
-            </IconButton>
-            <IconButton onClick={onControlButtonClick(true)}>
-              <RightArrow src="/images/leftCircleArrow.svg" />
-            </IconButton>
-          </CarouselControlsContainer>
+          {!areSlidesAllVisible ? (
+            <CarouselControlsContainer>
+              <IconButton onClick={onControlButtonClick(false)}>
+                <LeftArrow src="/images/leftCircleArrow.svg" />
+              </IconButton>
+              <IconButton onClick={onControlButtonClick(true)}>
+                <RightArrow src="/images/leftCircleArrow.svg" />
+              </IconButton>
+            </CarouselControlsContainer>
+          ) : null}
           {onSeeAllClick !== undefined ? (
             <SeeAllButton onClick={onSeeAllClick}>
               {intl.formatMessage({ id: 'horizontal_causes_list.see-all' })}
@@ -97,7 +110,13 @@ const Slider: FunctionComponent<SliderProps> = ({
           <Loader />
         </LoaderContainer>
       ) : (
-        <SlidesContainer {...desktopCarouselProps} ref={carouselRef}>
+        <SlidesContainer
+          cellSpacing={desktopCellSpacing}
+          slideWidth={`${desktopSlideWidth}px`}
+          dragging={!areSlidesAllVisible}
+          swiping={!areSlidesAllVisible}
+          ref={carouselRef}
+        >
           {children}
         </SlidesContainer>
       )}

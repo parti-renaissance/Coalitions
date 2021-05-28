@@ -42,10 +42,8 @@ const EventCardsSlider: FunctionComponent<EventCardsSliderProps> = ({
       isLoadingSlides={isFetchingEvents}
       TitleComponent={TitleComponent}
       title={intl.formatMessage({ id: 'events.title' })}
-      desktopCarouselProps={{
-        slideWidth: `${DESKTOP_WIDTH}px`,
-        cellSpacing: DESKTOP_MARGIN_BETWEEN_CARDS,
-      }}
+      desktopSlideWidth={DESKTOP_WIDTH}
+      desktopCellSpacing={DESKTOP_MARGIN_BETWEEN_CARDS}
       slidesHeight={{ mobile: HEIGHT, desktop: HEIGHT }}
     >
       {events.map(event => (

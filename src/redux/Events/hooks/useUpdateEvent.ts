@@ -34,7 +34,9 @@ export const useUpdateEvent = () => {
 
   const [{ loading, error }, doUpdateEvent] = useTypedAsyncFn(async (event: UpdatedEventType) => {
     console.log({ event });
-    return new Promise(resolve => setTimeout(resolve, 2000));
+    return new Promise(resolve =>
+      setTimeout(resolve, 2000, { uuid: '773da575-d7a0-4468-8591-d0fc8d700de3' }),
+    );
     // return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
     //   content: cause?.image_url,
     // });
@@ -52,13 +54,15 @@ export const useUpdateEvent = () => {
 
       if (response instanceof Error) return;
 
-      push(PATHS.CAUSE.url('test'));
-      dispatch(
-        updateSnackbar({
-          message: formatMessage({ id: 'event_form.update.success' }),
-          severity: Severity.success,
-        }),
-      );
+      if (response.uuid !== undefined) {
+        push({ pathname: PATHS.CAUSE.url('test'), search: `?eventId=${response.uuid}` });
+        dispatch(
+          updateSnackbar({
+            message: formatMessage({ id: 'event_form.update.success' }),
+            severity: Severity.success,
+          }),
+        );
+      }
     },
     [dispatch, doUpdateEvent, formatMessage, push],
   );

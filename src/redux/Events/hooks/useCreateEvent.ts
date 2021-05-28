@@ -1,6 +1,9 @@
 import { useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { updateSnackbar } from 'redux/Snackbar';
+import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
@@ -26,11 +29,15 @@ const useCreateEventErrorHandler = () => {
 export const useCreateEvent = () => {
   const { push } = useHistory();
   const errorHandler = useCreateEventErrorHandler();
+  const dispatch = useDispatch();
+  const { formatMessage } = useIntl();
 
   const [{ loading, error }, doCreateEvent] = useTypedAsyncFn(
     async (event: InCreationEventType) => {
       console.log({ event });
-      return new Promise(resolve => setTimeout(resolve, 2000));
+      return new Promise(resolve =>
+        setTimeout(resolve, 2000, { uuid: '773da575-d7a0-4468-8591-d0fc8d700de3' }),
+      );
       // return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
       //   content: cause?.image_url,
       // });
@@ -51,9 +58,17 @@ export const useCreateEvent = () => {
 
       if (response instanceof Error) return;
 
-      push({ pathname: PATHS.CAUSE.url('test'), search: `?createdEvent=true` });
+      if (response.uuid !== undefined) {
+        push({ pathname: PATHS.CAUSE.url('test'), search: `?eventId=${response.uuid}` });
+        dispatch(
+          updateSnackbar({
+            message: formatMessage({ id: 'event_form.create.success' }),
+            severity: Severity.success,
+          }),
+        );
+      }
     },
-    [doCreateEvent, push],
+    [doCreateEvent, push, dispatch, formatMessage],
   );
 
   return { loading, error, createEvent };

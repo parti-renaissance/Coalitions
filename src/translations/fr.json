@@ -364,10 +364,7 @@
       "title": "Créer un événement",
       "validate": "Créer l’événement",
       "tips": "Les événements vous permettent de réunir vos soutiens pour faire grandir votre cause.",
-      "success_modal": {
-        "title": "Félicitations, votre événement est en ligne",
-        "description": "Partagez l'événement autour de vous\u00A0!"
-      }
+      "success": "Votre événement a été créé avec succès."
     },
     "title": "Titre de l’événement",
     "address": "Adresse postale",

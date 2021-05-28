@@ -1,15 +1,25 @@
 import styled from 'styled-components';
-import { colorPalette, media, getSpacing, fonts, fontWeight, defaultMargins } from 'stylesheet';
+import {
+  colorPalette,
+  media,
+  getSpacing,
+  fonts,
+  fontWeight,
+  defaultMargins,
+  SPACING_UNIT,
+} from 'stylesheet';
 import { SHADOW } from '../../../FixedBottomButton/FixedBottomButton.style';
+
+export const DESKTOP_CONTAINER_WIDTH = SPACING_UNIT * 64;
 
 export const Container = styled.div`
   background-color: ${colorPalette.greyLight};
   padding: ${getSpacing(6)};
   margin: ${getSpacing(6)} -${getSpacing(6)} 0 -${getSpacing(6)};
   ${media.desktop(`
-    min-width: ${getSpacing(64)};
-    margin: -64px -${getSpacing(8)} -${getSpacing(8)} ${getSpacing(8)};
-    padding: 64px ${getSpacing(8)} ${getSpacing(8)} ${getSpacing(8)};
+    min-width: ${DESKTOP_CONTAINER_WIDTH}px;
+    margin: -64px -${getSpacing(8)} -${getSpacing(8)} ${getSpacing(6)};
+    padding: 64px ${getSpacing(6)} ${getSpacing(6)} ${getSpacing(6)};
   `)}
 `;
 

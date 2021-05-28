@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, MouseEvent } from 'react';
-import { MobileShareIcon, ShareMenu } from './ShareButton.style';
+import { MobileShareIcon, getShareMenu } from './ShareButton.style';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { getIsDesktop, getIsMobile } from 'services/mobile/mobile';
 import { useDispatch } from 'react-redux';
@@ -7,16 +7,22 @@ import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { FullWidthButton } from 'components/Button/Button';
 import { MenuItem } from '@material-ui/core';
+import { FlattenSimpleInterpolation } from 'styled-components';
 
 interface ShareButtonProps {
   displayMobileIcon?: boolean;
+  menuStyle?: FlattenSimpleInterpolation;
   shareContent: {
     title: string;
     text: string;
   };
 }
 
-const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, displayMobileIcon }) => {
+const ShareButton: FunctionComponent<ShareButtonProps> = ({
+  shareContent,
+  displayMobileIcon,
+  menuStyle,
+}) => {
   // To fix with a global type definition, once behaviour is validated
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nav: any = navigator;
@@ -96,6 +102,8 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({ shareContent, displa
       link: `https://telegram.me/share/url?url=${encodeURIComponent(window.location.href)}`,
     },
   ];
+
+  const ShareMenu = getShareMenu(menuStyle);
 
   return (
     <>

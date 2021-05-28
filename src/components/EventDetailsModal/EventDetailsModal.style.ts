@@ -19,10 +19,10 @@ export const ContentContainer = styled.div`
 
 export const ContentSubContainer = styled.div`
   flex: 1;
-  margin: 0 ${getSpacing(3)} calc(${FULL_WIDTH_BUTTON_HEIGHT} + 3 * ${getSpacing(3)})
-    ${getSpacing(3)};
+  margin-bottom: calc(${FULL_WIDTH_BUTTON_HEIGHT} + 3 * ${getSpacing(3)});
   ${media.desktop(`
-    margin: 0;
+    margin-bottom: -${getSpacing(2)};
+    margin-left: -${getSpacing(2)};
   `)}
 `;
 

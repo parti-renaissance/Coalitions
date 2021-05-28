@@ -4,6 +4,8 @@ import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { optimisticallyMarkParticipateToEvent, optimisticallyRemoveEventParticipation } from '..';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { useIntl } from 'react-intl';
+import { updateSnackbar } from 'redux/Snackbar';
+import { Severity } from 'redux/Snackbar/types';
 
 const useEventParticipateErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -25,6 +27,7 @@ const useEventParticipateErrorHandler = () => {
 export const useEventParticipate = (id: string) => {
   const dispatch = useDispatch();
   const errorHandler = useEventParticipateErrorHandler();
+  const { formatMessage } = useIntl();
 
   const [{ loading, error }, doParticipateToEvent] = useTypedAsyncFn(async () => {
     return new Promise(resolve => setTimeout(resolve, 2000, { uuid: id }));
@@ -49,8 +52,14 @@ export const useEventParticipate = (id: string) => {
 
     if (response.uuid !== undefined) {
       dispatch(optimisticallyMarkParticipateToEvent(id));
+      dispatch(
+        updateSnackbar({
+          message: formatMessage({ id: 'event_details.participate_success' }),
+          severity: Severity.success,
+        }),
+      );
     }
-  }, [dispatch, doParticipateToEvent, id, loading]);
+  }, [dispatch, doParticipateToEvent, id, loading, formatMessage]);
 
   return { loading, participateToEvent };
 };

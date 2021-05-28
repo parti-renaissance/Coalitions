@@ -68,8 +68,13 @@ export const getEventParticipateButtonConfig = ({
           opacity: ${isHover ? 0.8 : 1};
           font-weight: ${fontWeight.bold};
         `,
-        labelKey: 'event_details.remove_participation',
       };
+      if (type === 'modal') {
+        iconAndLabel = {
+          ...iconAndLabel,
+          labelKey: 'event_details.remove_participation',
+        };
+      }
     }
   }
 

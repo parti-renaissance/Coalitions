@@ -103,7 +103,6 @@ const CreateAccountForm = ({
                 error={touched.firstName === true && errors.firstName !== undefined}
                 helperText={touched.firstName === true ? errors.firstName : undefined}
                 inputProps={{ maxLength: 50 }}
-                InputLabelProps={{ required: false }}
               />
             </InputFieldWrapper>
             {isInEventFlow === true ? (
@@ -119,7 +118,6 @@ const CreateAccountForm = ({
                   error={touched.lastName === true && errors.lastName !== undefined}
                   helperText={touched.lastName === true ? errors.lastName : undefined}
                   inputProps={{ maxLength: 50 }}
-                  InputLabelProps={{ required: false }}
                 />
               </InputFieldWrapper>
             ) : null}
@@ -135,7 +133,6 @@ const CreateAccountForm = ({
                 error={touched.email === true && errors.email !== undefined}
                 helperText={touched.email === true ? errors.email : undefined}
                 inputProps={{ maxLength: 255 }}
-                InputLabelProps={{ required: false }}
               />
             </InputFieldWrapper>
             {isInEventFlow !== true ? (
@@ -196,12 +193,7 @@ const CreateAccountForm = ({
                 handleChange={handleChange}
                 value={values.dataShareAgreement}
                 name="dataShareAgreement"
-                label={
-                  <Label>
-                    {intl.formatMessage({ id: 'events.data-share-agreement' })}
-                    <Asterisk>*</Asterisk>
-                  </Label>
-                }
+                label={<Label>{intl.formatMessage({ id: 'events.data-share-agreement' })}</Label>}
               />
             )}
             <ValidateButtonContainer isInPage={isInPage}>

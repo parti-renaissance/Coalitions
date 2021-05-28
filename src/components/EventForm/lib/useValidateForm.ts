@@ -52,7 +52,7 @@ export const useValidateForm = () => {
       errors.mode = requiredErrorMessage;
     }
 
-    if ((address === undefined || address.length === 0) && mode === 'meeting') {
+    if (address === undefined || address.length === 0) {
       errors.address = requiredErrorMessage;
     }
 

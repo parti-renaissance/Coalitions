@@ -125,8 +125,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
             </ModeButtonsContainer>
             <InputFieldWrapper>
               <InputField
-                required={values.mode === 'meeting'}
-                disabled={values.mode === 'online'}
+                required
                 placeholder={intl.formatMessage({ id: 'event_form.address' })}
                 type="text"
                 name="address"
@@ -147,7 +146,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
             <InputFieldWrapper>
               <InputField
                 required={values.mode === 'online'}
-                disabled={values.mode === 'meeting'}
                 placeholder={intl.formatMessage({ id: 'event_form.link' })}
                 type="text"
                 name="link"

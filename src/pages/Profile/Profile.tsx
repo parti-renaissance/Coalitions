@@ -86,10 +86,8 @@ export const Profile: FunctionComponent = () => {
     causeSubscription,
     coalitionSubscription,
     gender: gender === null ? GENDERS[0].value : gender,
-    birthday:
-      birthdate === undefined || birthdate === null
-        ? null
-        : format(new Date(birthdate), 'yyyy-MM-dd'),
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    birthday: birthdate ? format(new Date(birthdate), 'yyyy-MM-dd') : null,
     phoneNumber: phone !== null && phone !== undefined ? phone.number : null,
     phoneCountry: findPhoneCountryByRegion(
       phoneCountries,

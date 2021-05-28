@@ -32,7 +32,7 @@ type UpdateUserProfilePayload = {
   last_name?: string;
   phone?: { number?: string; country?: string };
   gender?: string;
-  birthdate?: string;
+  birthdate?: string | null;
   coalition_subscription?: boolean;
   cause_subscription?: boolean;
 };
@@ -68,7 +68,8 @@ export const useUpdateUserProfile = (userId?: string) => {
           first_name: values.firstName,
           last_name: values.lastName,
           gender: values.gender === GENDERS[0].value ? undefined : values.gender,
-          birthdate: values.birthday,
+          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+          birthdate: values.birthday ? values.birthday : null,
           phone:
             values.phoneNumber !== null
               ? {

@@ -8,8 +8,8 @@ export const Container = styled.div`
   margin: ${getSpacing(6)} -${getSpacing(6)} 0 -${getSpacing(6)};
   ${media.desktop(`
     min-width: ${getSpacing(64)};
-    margin: -64px -${getSpacing(8)} -${getSpacing(8)} ${getSpacing(8)};
-    padding: 64px ${getSpacing(8)} ${getSpacing(8)} ${getSpacing(8)};
+    margin: -64px -${getSpacing(8)} -${getSpacing(8)} ${getSpacing(6)};
+    padding: 64px ${getSpacing(6)} ${getSpacing(6)} ${getSpacing(6)};
   `)}
 `;
 

@@ -21,7 +21,8 @@ export const ContentSubContainer = styled.div`
   flex: 1;
   margin-bottom: calc(${FULL_WIDTH_BUTTON_HEIGHT} + 3 * ${getSpacing(3)});
   ${media.desktop(`
-    margin-bottom: 0;
+    margin-bottom: -${getSpacing(2)};
+    margin-left: -${getSpacing(2)};
   `)}
 `;
 

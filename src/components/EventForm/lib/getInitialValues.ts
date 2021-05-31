@@ -1,4 +1,5 @@
 import { CreateEventType, EventType, UpdatedEventType } from 'redux/Events/types';
+import { formatEventDateToPickerDate } from 'redux/Events/helpers/formatEventDateToPickerDate';
 
 export const getInitialValues = ({
   causeId,
@@ -44,8 +45,8 @@ export const getInitialValues = ({
     name,
     mode,
     visioUrl,
-    beginAt,
-    finishAt,
+    beginAt: formatEventDateToPickerDate({ date: beginAt, timeZone }),
+    finishAt: formatEventDateToPickerDate({ date: finishAt, timeZone }),
     categoryId: category.uuid,
     description,
     causeId: initialEventCauseId,

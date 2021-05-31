@@ -27,6 +27,12 @@ export const FAKE_EVENT: EventType = {
     lastName: 'Denis',
   },
   causeId: '3165e54b-aab9-40e4-90cf-2de59ac591ca',
+  postAddress: {
+    address: '48 boulevard des Batignolles',
+    postalCode: '75017',
+    cityName: 'Paris',
+    country: 'FR',
+  },
 };
 
 export const useFetchEvent = (id: string) => {

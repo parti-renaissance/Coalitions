@@ -24,6 +24,7 @@ import { useFetchEventCategories } from 'redux/Events/hooks/useFetchEventCategor
 import Loader from 'components/Loader';
 import { DeleteEventButton } from './components';
 import { FullWidthButton } from 'components/Button/Button';
+import { formatPickerDateToEventDate } from 'redux/Events/helpers/formatEventDateToPickerDate';
 
 interface EventFormProps {
   causeId: string;
@@ -34,7 +35,7 @@ interface EventFormProps {
 
 const EventForm: FunctionComponent<EventFormProps> = ({
   initialEvent,
-  onSubmit,
+  onSubmit: onSubmitProp,
   isSubmitting,
   causeId,
 }) => {
@@ -45,6 +46,14 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   useEffect(() => {
     fetchEventCategories();
   }, [fetchEventCategories]);
+
+  const onSubmit = (values: CreateEventType | UpdatedEventType) => {
+    onSubmitProp({
+      ...values,
+      beginAt: formatPickerDateToEventDate({ date: values.beginAt, timeZone: values.timeZone }),
+      finishAt: formatPickerDateToEventDate({ date: values.finishAt, timeZone: values.timeZone }),
+    });
+  };
 
   if (eventCategories.length === 0 && loading) {
     return <Loader fullScreen />;
@@ -102,7 +111,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 color="primary"
                 onClick={() => {
                   setFieldValue('mode', 'meeting');
-                  setFieldValue('visioUrl', '');
                 }}
               >
                 {intl.formatMessage({ id: 'event_form.mode.meeting' })}
@@ -113,7 +121,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 color="primary"
                 onClick={() => {
                   setFieldValue('mode', 'online');
-                  setFieldValue('address', '');
                 }}
               >
                 {intl.formatMessage({ id: 'event_form.mode.online' })}
@@ -128,14 +135,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.address}
-                error={
-                  values.mode === 'meeting' &&
-                  touched.address === true &&
-                  errors.address !== undefined
-                }
-                helperText={
-                  values.mode === 'meeting' && touched.address === true ? errors.address : undefined
-                }
+                error={touched.address === true && errors.address !== undefined}
+                helperText={touched.address === true ? errors.address : undefined}
               />
             </InputFieldWrapper>
             <InputFieldWrapper>
@@ -147,16 +148,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.visioUrl}
-                error={
-                  values.mode === 'online' &&
-                  touched.visioUrl === true &&
-                  errors.visioUrl !== undefined
-                }
-                helperText={
-                  values.mode === 'online' && touched.visioUrl === true
-                    ? errors.visioUrl
-                    : undefined
-                }
+                error={touched.visioUrl === true && errors.visioUrl !== undefined}
+                helperText={touched.visioUrl === true ? errors.visioUrl : undefined}
               />
             </InputFieldWrapper>
             <DateFieldsWrapper>

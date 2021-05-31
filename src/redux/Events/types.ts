@@ -5,35 +5,80 @@ export type EventCategory = {
   name: string;
 };
 
-export interface InCreationEventType {
+export interface CreateEventType {
   mode: EventMode;
   name: string;
-  begin_at: string;
-  finish_at: string;
-  category: EventCategory;
-  time_zone: string;
+  beginAt: string;
+  finishAt: string;
+  categoryId: string;
+  timeZone: string;
   description: string;
   causeId: string;
-  post_address?: {
-    address: string;
-    postal_code: string;
-    city_name: string;
-    country: string;
-  };
-  visio_url?: string;
+  address: string;
+  postalCode: string;
+  countryId: string;
+  visioUrl?: string;
+  cityId: string;
 }
 
 export type UpdatedEventType = {
   uuid: string;
-} & InCreationEventType;
+} & CreateEventType;
 
 export type EventType = {
   uuid: string;
-  participants_count: number;
-  organizer: {
+  mode: EventMode;
+  name: string;
+  beginAt: string;
+  finishAt: string;
+  category: EventCategory;
+  timeZone: string;
+  description: string;
+  causeId: string;
+  postAddress?: {
+    address: string;
+    postalCode: string;
+    city: {
+      id: string;
+      name: string;
+    };
+    country: {
+      id: string;
+      name: string;
+    };
+  };
+  visioUrl?: string;
+  numberOfParticipants: number;
+  organizer?: {
     uuid: string;
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
   };
   participate?: boolean;
-} & InCreationEventType;
+};
+
+export type RawEventCategory = {
+  name: string;
+};
+
+export interface RawEventType {
+  uuid: string;
+  mode: EventMode | null;
+  name: string;
+  begin_at: string;
+  finish_at: string;
+  category: RawEventCategory;
+  time_zone: string;
+  description: string;
+  post_address: {
+    address: string;
+    postal_code: string;
+    city_name: string;
+  } | null;
+  visio_url: string | null;
+  participants_count: number | null;
+  organizer: {
+    first_name: string;
+    last_name: string;
+  } | null;
+}

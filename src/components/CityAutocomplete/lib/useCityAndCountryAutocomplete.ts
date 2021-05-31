@@ -21,27 +21,50 @@ export const getCityOrCountryLabel = (cityOrCountry: CityOrCountry) => {
   return label;
 };
 
-export const useCityAndCountryAutocomplete = () => {
-  const [isFetchingCities, setisFetchingCities] = useState<boolean>(false);
-  const [cities, setCities] = useState<CityOrCountry[]>([]);
+const getFetchUrlByType = ({
+  type,
+  searchText,
+}: {
+  type?: CityOrCountryType;
+  searchText: string;
+}) => {
+  let url = `zones?page_size=20&name=${searchText}`;
+  if (type === undefined) {
+    url = `${url}&type[]=city&type[]=country&type[]=borough`;
+  } else {
+    url = `${url}&type[]=${type}`;
+    if (type === CityOrCountryType.city) {
+      url = `${url}&type[]=borough`;
+    }
+  }
+  return url;
+};
 
-  const fetchCities = async (searchText: string) => {
-    setisFetchingCities(true);
+export const useCityAndCountryAutocomplete = (type?: CityOrCountryType) => {
+  const [isFetchingCitiesAndCountries, setIsFetchingCitiesAndCountries] = useState<boolean>(false);
+  const [citiesAndCountries, setCitiesAndCountries] = useState<CityOrCountry[]>([]);
+
+  const fetchCitiesAndCountries = async (searchText: string) => {
+    setIsFetchingCitiesAndCountries(true);
     try {
-      const { items } = await coalitionApiClient.get(
-        `zones?type[]=city&type[]=country&type[]=borough&page_size=20&name=${searchText}`,
-      );
-      setCities((items as CityOrCountry[]).filter(({ code }) => code !== 'FR'));
+      const { items } = await coalitionApiClient.get(getFetchUrlByType({ type, searchText }));
+
+      let fetchedCitiesAndCountries = [...items] as CityOrCountry[];
+      if (type === undefined) {
+        fetchedCitiesAndCountries = fetchedCitiesAndCountries.filter(({ code }) => code !== 'FR');
+      }
+
+      setCitiesAndCountries(fetchedCitiesAndCountries);
     } catch (e) {
       HandleErrorService.showErrorSnackbar(e);
     } finally {
-      setisFetchingCities(false);
+      setIsFetchingCitiesAndCountries(false);
     }
   };
 
   return {
-    fetchCities,
-    isFetchingCities,
-    cities,
+    fetchCitiesAndCountries,
+    isFetchingCitiesAndCountries,
+    citiesAndCountries,
   };
 };

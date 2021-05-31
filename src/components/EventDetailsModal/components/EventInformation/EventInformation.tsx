@@ -18,7 +18,7 @@ import { colorPalette, defaultMargins, media } from 'stylesheet';
 import { Cause } from 'redux/Cause/types';
 import EventParticipateButton from '../../../EventParticipateButton';
 import EventAddressOrVisioLink from '../../../EventAddressOrVisioLink';
-import { formatEventBeginAtDate } from 'redux/Events/helpers/formatEventBeginAtDate';
+import { formatEventDate } from 'redux/Events/helpers/formatEventDate';
 import { css } from 'styled-components';
 
 interface EventInformationProps {
@@ -65,47 +65,44 @@ const OneInformation = ({ information }: { information: Information }) => {
 const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cause }) => {
   const intl = useIntl();
 
-  let informations: Information[] = [
+  const informations = [
     {
-      label: formatEventBeginAtDate({ date: new Date(event.begin_at), type: 'modal' }),
+      label: formatEventDate({ date: event.beginAt, timeZone: event.timeZone, type: 'modal' }),
       iconSrc: '/images/clock.svg',
       bold: true,
     },
-  ];
-
-  if (event.post_address !== undefined) {
-    informations.push({
-      label: <EventAddressOrVisioLink event={event} />,
-      iconSrc: '/images/mapPin.svg',
-      color: colorPalette.blueCoalition,
-    });
-  }
-
-  informations = [
-    ...informations,
+    event.postAddress !== undefined
+      ? {
+          label: <EventAddressOrVisioLink event={event} />,
+          iconSrc: '/images/mapPin.svg',
+          color: colorPalette.blueCoalition,
+        }
+      : null,
     {
       label: cause.name,
       iconSrc: '/images/point.svg',
       color: colorPalette.blueCoalition,
     },
-    {
-      label: `${event.organizer.first_name} ${event.organizer.last_name}`,
-      iconSrc: '/images/user.svg',
-    },
+    event.organizer !== undefined
+      ? {
+          label: `${event.organizer.firstName} ${event.organizer.lastName}`,
+          iconSrc: '/images/user.svg',
+        }
+      : null,
     {
       label:
-        event.participants_count > 1
+        event.numberOfParticipants > 1
           ? intl.formatMessage(
               { id: 'event_details.participants' },
-              { numberOfParticipants: event.participants_count },
+              { numberOfParticipants: event.numberOfParticipants },
             )
           : intl.formatMessage(
               { id: 'event_details.participant' },
-              { numberOfParticipants: event.participants_count },
+              { numberOfParticipants: event.numberOfParticipants },
             ),
       iconSrc: '/images/supports.svg',
     },
-  ];
+  ].filter(Boolean) as Information[];
 
   return (
     <Container>

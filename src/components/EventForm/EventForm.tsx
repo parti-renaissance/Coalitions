@@ -8,28 +8,30 @@ import {
   Form,
   ModeButtonsContainer,
   ModeButton,
-  DateFieldsWrapper,
+  InlineFieldsWrapper,
   CategoryItem,
   BottomButtonsWrapper,
 } from './EventForm.style';
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
-import { EventFormValues, useValidateForm } from './lib/useValidateForm';
-import { InCreationEventType, EventMode, EventType, UpdatedEventType } from 'redux/Events/types';
+import { useValidateForm } from './lib/useValidateForm';
+import { CreateEventType, EventType, UpdatedEventType } from 'redux/Events/types';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
-import { convertFormValuesToEvent } from './lib/convertFormValuesToEvent';
 import { getIsValidateButtonDisabled } from './lib/getIsValidateButtonDisabled';
-import { convertEventToFormValues } from './lib/convertEventToFormValues';
+import { getInitialValues } from './lib/getInitialValues';
 import { useFetchEventCategories } from 'redux/Events/hooks/useFetchEventCategories';
 import Loader from 'components/Loader';
 import { DeleteEventButton } from './components';
 import { FullWidthButton } from 'components/Button/Button';
+import { formatPickerDateToEventDate } from 'redux/Events/helpers/formatEventDateToPickerDate';
+import CityAutocomplete from 'components/CityAutocomplete';
+import { CityOrCountryType } from 'components/CityAutocomplete/lib/useCityAndCountryAutocomplete';
 
 interface EventFormProps {
   causeId: string;
   initialEvent?: EventType;
-  onSubmit: (event: InCreationEventType | UpdatedEventType) => void;
+  onSubmit: (event: CreateEventType | UpdatedEventType) => void;
   isSubmitting: boolean;
 }
 
@@ -47,19 +49,19 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     fetchEventCategories();
   }, [fetchEventCategories]);
 
-  const onSubmit = (values: EventFormValues) => {
-    const event = convertFormValuesToEvent(values);
-    return onSubmitProp(event);
+  const onSubmit = (values: CreateEventType | UpdatedEventType) => {
+    onSubmitProp({
+      ...values,
+      beginAt: formatPickerDateToEventDate({ date: values.beginAt, timeZone: values.timeZone }),
+      finishAt: formatPickerDateToEventDate({ date: values.finishAt, timeZone: values.timeZone }),
+    });
   };
-
-  let initialValues = { mode: 'meeting' as EventMode, causeId };
-  if (initialEvent !== undefined) {
-    initialValues = convertEventToFormValues(initialEvent);
-  }
 
   if (eventCategories.length === 0 && loading) {
     return <Loader fullScreen />;
   }
+
+  const initialValues = getInitialValues({ initialEvent, causeId });
 
   return (
     <Container>
@@ -71,18 +73,33 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       {initialEvent === undefined ? (
         <Description>{intl.formatMessage({ id: 'event_form.create.tips' })}</Description>
       ) : null}
-      <Formik<EventFormValues>
+      <Formik<CreateEventType | UpdatedEventType>
         initialValues={initialValues}
         validate={validateForm}
         onSubmit={onSubmit}
         enableReinitialize
       >
         {// eslint-disable-next-line complexity
-        ({ values, errors, handleChange, handleBlur, handleSubmit, touched, setFieldValue }) => (
+        ({
+          values,
+          errors,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          touched,
+          setFieldValue,
+          setFieldTouched,
+        }) => (
           <Form onSubmit={handleSubmit}>
             <input type="text" hidden value={initialValues.causeId} name="causeId" />
-            {initialEvent !== undefined ? (
-              <input type="text" hidden value={initialEvent.uuid} name="uuid" />
+            <input type="text" hidden value={initialValues.timeZone} name="timeZone" />
+            {(initialValues as UpdatedEventType).uuid !== undefined ? (
+              <input
+                type="text"
+                hidden
+                value={(initialValues as UpdatedEventType).uuid}
+                name="uuid"
+              />
             ) : null}
             <InputFieldWrapper>
               <InputField
@@ -105,7 +122,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 color="primary"
                 onClick={() => {
                   setFieldValue('mode', 'meeting');
-                  setFieldValue('link', '');
                 }}
               >
                 {intl.formatMessage({ id: 'event_form.mode.meeting' })}
@@ -116,7 +132,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 color="primary"
                 onClick={() => {
                   setFieldValue('mode', 'online');
-                  setFieldValue('address', '');
                 }}
               >
                 {intl.formatMessage({ id: 'event_form.mode.online' })}
@@ -131,45 +146,74 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.address}
-                error={
-                  values.mode === 'meeting' &&
-                  touched.address === true &&
-                  errors.address !== undefined
-                }
-                helperText={
-                  values.mode === 'meeting' && touched.address === true ? errors.address : undefined
-                }
+                error={touched.address === true && errors.address !== undefined}
+                helperText={touched.address === true ? errors.address : undefined}
               />
             </InputFieldWrapper>
+            <InlineFieldsWrapper>
+              <InputFieldWrapper>
+                <InputField
+                  required
+                  placeholder={intl.formatMessage({ id: 'event_form.postal_code' })}
+                  type="text"
+                  name="postalCode"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.postalCode}
+                  error={touched.postalCode === true && errors.postalCode !== undefined}
+                  helperText={touched.postalCode === true ? errors.postalCode : undefined}
+                />
+              </InputFieldWrapper>
+              <InputFieldWrapper>
+                <CityAutocomplete
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  setFieldTouched={setFieldTouched}
+                  setFieldValue={setFieldValue}
+                  touched={touched.cityId}
+                  error={errors.cityId}
+                  placeholder={intl.formatMessage({ id: 'event_form.city' })}
+                  type={CityOrCountryType.city}
+                />
+              </InputFieldWrapper>
+              <InputFieldWrapper>
+                <CityAutocomplete
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  setFieldTouched={setFieldTouched}
+                  setFieldValue={setFieldValue}
+                  touched={touched.countryId}
+                  error={errors.countryId}
+                  placeholder={intl.formatMessage({ id: 'event_form.country' })}
+                  type={CityOrCountryType.country}
+                />
+              </InputFieldWrapper>
+            </InlineFieldsWrapper>
             <InputFieldWrapper>
               <InputField
                 required={values.mode === 'online'}
                 placeholder={intl.formatMessage({ id: 'event_form.link' })}
                 type="text"
-                name="link"
+                name="visioUrl"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.link}
-                error={
-                  values.mode === 'online' && touched.link === true && errors.link !== undefined
-                }
-                helperText={
-                  values.mode === 'online' && touched.link === true ? errors.link : undefined
-                }
+                value={values.visioUrl}
+                error={touched.visioUrl === true && errors.visioUrl !== undefined}
+                helperText={touched.visioUrl === true ? errors.visioUrl : undefined}
               />
             </InputFieldWrapper>
-            <DateFieldsWrapper>
+            <InlineFieldsWrapper>
               <InputFieldWrapper>
                 <InputField
                   required
                   placeholder={intl.formatMessage({ id: 'event_form.begin_at' })}
                   type="datetime-local"
-                  name="beginAtDate"
+                  name="beginAt"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.beginAtDate}
-                  error={touched.beginAtDate === true && errors.beginAtDate !== undefined}
-                  helperText={touched.beginAtDate === true ? errors.beginAtDate : undefined}
+                  value={values.beginAt}
+                  error={touched.beginAt === true && errors.beginAt !== undefined}
+                  helperText={touched.beginAt === true ? errors.beginAt : undefined}
                   InputLabelProps={{ shrink: true }}
                 />
               </InputFieldWrapper>
@@ -178,16 +222,16 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                   required
                   placeholder={intl.formatMessage({ id: 'event_form.finish_at' })}
                   type="datetime-local"
-                  name="finishAtDate"
+                  name="finishAt"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.finishAtDate}
-                  error={touched.finishAtDate === true && errors.finishAtDate !== undefined}
-                  helperText={touched.finishAtDate === true ? errors.finishAtDate : undefined}
+                  value={values.finishAt}
+                  error={touched.finishAt === true && errors.finishAt !== undefined}
+                  helperText={touched.finishAt === true ? errors.finishAt : undefined}
                   InputLabelProps={{ shrink: true }}
                 />
               </InputFieldWrapper>
-            </DateFieldsWrapper>
+            </InlineFieldsWrapper>
             <InputFieldWrapper>
               <InputField
                 select

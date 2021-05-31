@@ -1,30 +1,20 @@
 import { useIntl } from 'react-intl';
-import { EventMode } from 'redux/Events/types';
-
-export interface EventFormValues {
-  uuid?: string;
-  name?: string;
-  mode: EventMode;
-  causeId: string;
-  address?: string;
-  link?: string;
-  beginAtDate?: string;
-  finishAtDate?: string;
-  categoryId?: string;
-  description?: string;
-}
+import { CreateEventType, UpdatedEventType } from 'redux/Events/types';
 
 export interface EventFormErrors {
   uuid?: string;
   name?: string;
   mode?: string;
   address?: string;
-  link?: string;
-  beginAtDate?: string;
-  finishAtDate?: string;
+  visioUrl?: string;
+  beginAt?: string;
+  finishAt?: string;
   categoryId?: string;
   description?: string;
   causeId?: string;
+  cityId?: string;
+  postalCode?: string;
+  countryId?: string;
 }
 
 export const useValidateForm = () => {
@@ -35,12 +25,15 @@ export const useValidateForm = () => {
     name,
     mode,
     address,
-    link,
-    beginAtDate,
-    finishAtDate,
+    visioUrl,
+    beginAt,
+    finishAt,
     categoryId,
     description,
-  }: EventFormValues) => {
+    cityId,
+    postalCode,
+    countryId,
+  }: CreateEventType | UpdatedEventType) => {
     const errors = {} as EventFormErrors;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
 
@@ -56,16 +49,28 @@ export const useValidateForm = () => {
       errors.address = requiredErrorMessage;
     }
 
-    if ((link === undefined || link.length === 0) && mode === 'online') {
-      errors.link = requiredErrorMessage;
+    if (cityId === undefined || cityId.length === 0) {
+      errors.cityId = requiredErrorMessage;
     }
 
-    if (beginAtDate === undefined) {
-      errors.beginAtDate = requiredErrorMessage;
+    if (postalCode === undefined || postalCode.length === 0) {
+      errors.postalCode = requiredErrorMessage;
     }
 
-    if (finishAtDate === undefined) {
-      errors.finishAtDate = requiredErrorMessage;
+    if (countryId === undefined || countryId.length === 0) {
+      errors.countryId = requiredErrorMessage;
+    }
+
+    if ((visioUrl === undefined || visioUrl.length === 0) && mode === 'online') {
+      errors.visioUrl = requiredErrorMessage;
+    }
+
+    if (beginAt === undefined) {
+      errors.beginAt = requiredErrorMessage;
+    }
+
+    if (finishAt === undefined) {
+      errors.finishAt = requiredErrorMessage;
     }
 
     if (categoryId === undefined || categoryId.length === 0) {

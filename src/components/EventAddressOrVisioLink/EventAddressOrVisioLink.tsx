@@ -14,18 +14,13 @@ const EventAddressOrVisioLink: FunctionComponent<EventAddressOrVisioLinkProps> =
 }) => {
   const intl = useIntl();
 
-  if (event.mode === 'online' && event.visio_url !== undefined) {
+  if (event.mode === 'online' && event.visioUrl !== undefined) {
     return (
-      <a
-        onClick={onVisioLinkClick}
-        href={event.visio_url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a onClick={onVisioLinkClick} href={event.visioUrl} target="_blank" rel="noopener noreferrer">
         {intl.formatMessage({ id: 'events.visio_link' })}
       </a>
     );
-  } else if (event.mode === 'meeting' && event.post_address !== undefined) {
+  } else if (event.mode === 'meeting' && event.postAddress !== undefined) {
     return <>{formatEventAddress(event)}</>;
   }
 

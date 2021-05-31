@@ -6,6 +6,7 @@ import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/H
 import { useIntl } from 'react-intl';
 import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
+import { authenticatedApiClient } from 'services/networking/client';
 
 const useEventParticipateErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -30,7 +31,7 @@ export const useEventParticipate = (id: string) => {
   const { formatMessage } = useIntl();
 
   const [{ loading, error }, doParticipateToEvent] = useTypedAsyncFn(async () => {
-    return new Promise(resolve => setTimeout(resolve, 2000, { uuid: id }));
+    return await authenticatedApiClient.post(`v3/events/${id}/subscribe`, null);
   }, [id]);
 
   useEffect(() => {
@@ -50,15 +51,13 @@ export const useEventParticipate = (id: string) => {
       return;
     }
 
-    if (response.uuid !== undefined) {
-      dispatch(optimisticallyMarkParticipateToEvent(id));
-      dispatch(
-        updateSnackbar({
-          message: formatMessage({ id: 'event_details.participate_success' }),
-          severity: Severity.success,
-        }),
-      );
-    }
+    dispatch(optimisticallyMarkParticipateToEvent(id));
+    dispatch(
+      updateSnackbar({
+        message: formatMessage({ id: 'event_details.participate_success' }),
+        severity: Severity.success,
+      }),
+    );
   }, [dispatch, doParticipateToEvent, id, loading, formatMessage]);
 
   return { loading, participateToEvent };
@@ -68,7 +67,7 @@ export const useRemoveEventParticipation = (id: string) => {
   const dispatch = useDispatch();
 
   const [{ loading, error }, doRemoveEventParticipation] = useTypedAsyncFn(async () => {
-    return new Promise(resolve => setTimeout(resolve, 2000));
+    return await authenticatedApiClient.delete(`v3/events/${id}/subscribe`, null);
   }, []);
 
   useEffect(() => {

@@ -9,22 +9,22 @@ import { EventType } from '../types';
 export const FAKE_EVENT: EventType = {
   uuid: '1',
   name: 'mon événement',
-  begin_at: '2021-06-20T08:00',
-  finish_at: '2021-06-21T08:00',
+  beginAt: '2021-06-20 16:30:30',
+  finishAt: '2021-06-21 16:30:30',
   mode: 'online',
   category: {
     uuid: '1',
     name: 'category1',
   },
-  time_zone: 'Europe/Paris',
+  timeZone: 'Europe/Paris',
   description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  visio_url: 'www.google.com',
-  participants_count: 4,
+  visioUrl: 'www.google.com',
+  numberOfParticipants: 4,
   organizer: {
     uuid: '123',
-    first_name: 'Gaspard',
-    last_name: 'Denis',
+    firstName: 'Gaspard',
+    lastName: 'Denis',
   },
   causeId: '3165e54b-aab9-40e4-90cf-2de59ac591ca',
 };

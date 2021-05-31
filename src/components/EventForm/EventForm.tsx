@@ -15,12 +15,11 @@ import {
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
-import { EventFormValues, useValidateForm } from './lib/useValidateForm';
-import { InCreationEventType, EventMode, EventType, UpdatedEventType } from 'redux/Events/types';
+import { useValidateForm } from './lib/useValidateForm';
+import { CreateEventType, EventType, UpdatedEventType } from 'redux/Events/types';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
-import { convertFormValuesToEvent } from './lib/convertFormValuesToEvent';
 import { getIsValidateButtonDisabled } from './lib/getIsValidateButtonDisabled';
-import { convertEventToFormValues } from './lib/convertEventToFormValues';
+import { getInitialValues } from './lib/getInitialValues';
 import { useFetchEventCategories } from 'redux/Events/hooks/useFetchEventCategories';
 import Loader from 'components/Loader';
 import { DeleteEventButton } from './components';
@@ -29,13 +28,13 @@ import { FullWidthButton } from 'components/Button/Button';
 interface EventFormProps {
   causeId: string;
   initialEvent?: EventType;
-  onSubmit: (event: InCreationEventType | UpdatedEventType) => void;
+  onSubmit: (event: CreateEventType | UpdatedEventType) => void;
   isSubmitting: boolean;
 }
 
 const EventForm: FunctionComponent<EventFormProps> = ({
   initialEvent,
-  onSubmit: onSubmitProp,
+  onSubmit,
   isSubmitting,
   causeId,
 }) => {
@@ -47,19 +46,11 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     fetchEventCategories();
   }, [fetchEventCategories]);
 
-  const onSubmit = (values: EventFormValues) => {
-    const event = convertFormValuesToEvent(values);
-    return onSubmitProp(event);
-  };
-
-  let initialValues = { mode: 'meeting' as EventMode, causeId };
-  if (initialEvent !== undefined) {
-    initialValues = convertEventToFormValues(initialEvent);
-  }
-
   if (eventCategories.length === 0 && loading) {
     return <Loader fullScreen />;
   }
+
+  const initialValues = getInitialValues({ initialEvent, causeId });
 
   return (
     <Container>
@@ -71,7 +62,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       {initialEvent === undefined ? (
         <Description>{intl.formatMessage({ id: 'event_form.create.tips' })}</Description>
       ) : null}
-      <Formik<EventFormValues>
+      <Formik<CreateEventType | UpdatedEventType>
         initialValues={initialValues}
         validate={validateForm}
         onSubmit={onSubmit}
@@ -81,8 +72,14 @@ const EventForm: FunctionComponent<EventFormProps> = ({
         ({ values, errors, handleChange, handleBlur, handleSubmit, touched, setFieldValue }) => (
           <Form onSubmit={handleSubmit}>
             <input type="text" hidden value={initialValues.causeId} name="causeId" />
-            {initialEvent !== undefined ? (
-              <input type="text" hidden value={initialEvent.uuid} name="uuid" />
+            <input type="text" hidden value={initialValues.timeZone} name="timeZone" />
+            {(initialValues as UpdatedEventType).uuid !== undefined ? (
+              <input
+                type="text"
+                hidden
+                value={(initialValues as UpdatedEventType).uuid}
+                name="uuid"
+              />
             ) : null}
             <InputFieldWrapper>
               <InputField
@@ -105,7 +102,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 color="primary"
                 onClick={() => {
                   setFieldValue('mode', 'meeting');
-                  setFieldValue('link', '');
+                  setFieldValue('visioUrl', '');
                 }}
               >
                 {intl.formatMessage({ id: 'event_form.mode.meeting' })}
@@ -146,15 +143,19 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 required={values.mode === 'online'}
                 placeholder={intl.formatMessage({ id: 'event_form.link' })}
                 type="text"
-                name="link"
+                name="visioUrl"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.link}
+                value={values.visioUrl}
                 error={
-                  values.mode === 'online' && touched.link === true && errors.link !== undefined
+                  values.mode === 'online' &&
+                  touched.visioUrl === true &&
+                  errors.visioUrl !== undefined
                 }
                 helperText={
-                  values.mode === 'online' && touched.link === true ? errors.link : undefined
+                  values.mode === 'online' && touched.visioUrl === true
+                    ? errors.visioUrl
+                    : undefined
                 }
               />
             </InputFieldWrapper>
@@ -164,12 +165,12 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                   required
                   placeholder={intl.formatMessage({ id: 'event_form.begin_at' })}
                   type="datetime-local"
-                  name="beginAtDate"
+                  name="beginAt"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.beginAtDate}
-                  error={touched.beginAtDate === true && errors.beginAtDate !== undefined}
-                  helperText={touched.beginAtDate === true ? errors.beginAtDate : undefined}
+                  value={values.beginAt}
+                  error={touched.beginAt === true && errors.beginAt !== undefined}
+                  helperText={touched.beginAt === true ? errors.beginAt : undefined}
                   InputLabelProps={{ shrink: true }}
                 />
               </InputFieldWrapper>
@@ -178,12 +179,12 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                   required
                   placeholder={intl.formatMessage({ id: 'event_form.finish_at' })}
                   type="datetime-local"
-                  name="finishAtDate"
+                  name="finishAt"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.finishAtDate}
-                  error={touched.finishAtDate === true && errors.finishAtDate !== undefined}
-                  helperText={touched.finishAtDate === true ? errors.finishAtDate : undefined}
+                  value={values.finishAt}
+                  error={touched.finishAt === true && errors.finishAt !== undefined}
+                  helperText={touched.finishAt === true ? errors.finishAt : undefined}
                   InputLabelProps={{ shrink: true }}
                 />
               </InputFieldWrapper>

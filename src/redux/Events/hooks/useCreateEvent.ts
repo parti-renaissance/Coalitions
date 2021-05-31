@@ -7,7 +7,7 @@ import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
-import { InCreationEventType } from '../types';
+import { CreateEventType } from '../types';
 
 const useCreateEventErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -32,18 +32,12 @@ export const useCreateEvent = () => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
 
-  const [{ loading, error }, doCreateEvent] = useTypedAsyncFn(
-    async (event: InCreationEventType) => {
-      console.log({ event });
-      return new Promise(resolve =>
-        setTimeout(resolve, 2000, { uuid: '773da575-d7a0-4468-8591-d0fc8d700de3' }),
-      );
-      // return await authenticatedApiClient.post(`v3/causes/${cause.uuid}/image`, {
-      //   content: cause?.image_url,
-      // });
-    },
-    [],
-  );
+  const [{ loading, error }, doCreateEvent] = useTypedAsyncFn(async (event: CreateEventType) => {
+    console.log({ event });
+    return new Promise(resolve =>
+      setTimeout(resolve, 2000, { uuid: '773da575-d7a0-4468-8591-d0fc8d700de3' }),
+    );
+  }, []);
 
   useEffect(() => {
     if (error !== undefined) {
@@ -52,7 +46,7 @@ export const useCreateEvent = () => {
   }, [error, errorHandler]);
 
   const createEvent = useCallback(
-    async (event: InCreationEventType) => {
+    async (event: CreateEventType) => {
       console.log({ event });
       const response = await doCreateEvent(event);
 

@@ -31,13 +31,13 @@ const eventSlice = createSlice({
       state.ids = [...new Set([...state.ids, ...action.payload.map(event => event.uuid)])];
     },
     updateOneEvent: (state, action: PayloadAction<EventType>) => {
-      const numberOfParticipants = state.events[action.payload.uuid]?.participants_count;
+      const numberOfParticipants = state.events[action.payload.uuid]?.numberOfParticipants;
       state.events[action.payload.uuid] = {
         ...action.payload,
-        participants_count:
+        numberOfParticipants:
           numberOfParticipants !== undefined
-            ? Math.max(numberOfParticipants, action.payload.participants_count)
-            : action.payload.participants_count,
+            ? Math.max(numberOfParticipants, action.payload.numberOfParticipants)
+            : action.payload.numberOfParticipants,
       };
       if (!state.ids.includes(action.payload.uuid)) {
         state.ids = [...state.ids, action.payload.uuid];
@@ -46,14 +46,14 @@ const eventSlice = createSlice({
     optimisticallyMarkParticipateToEvent: (state, action: PayloadAction<string>) => {
       if (state.events[action.payload] !== undefined) {
         state.events[action.payload].participate = true;
-        state.events[action.payload].participants_count =
-          state.events[action.payload].participants_count + 1;
+        state.events[action.payload].numberOfParticipants =
+          state.events[action.payload].numberOfParticipants + 1;
       }
     },
     optimisticallyRemoveEventParticipation: (state, action: PayloadAction<string>) => {
       state.events[action.payload].participate = false;
-      state.events[action.payload].participants_count = Math.max(
-        state.events[action.payload].participants_count - 1,
+      state.events[action.payload].numberOfParticipants = Math.max(
+        state.events[action.payload].numberOfParticipants - 1,
         0,
       );
     },

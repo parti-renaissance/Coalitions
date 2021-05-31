@@ -1,10 +1,10 @@
 import { EventType } from '../types';
 
 export const formatEventAddress = (event: EventType) => {
-  if (event.post_address === undefined) {
+  if (event.postAddress === undefined) {
     return '';
   }
 
-  const { address, city_name, postal_code } = event.post_address;
-  return `${address}, ${postal_code} ${city_name}`;
+  const { address, cityName, postalCode } = event.postAddress;
+  return `${address}, ${postalCode} ${cityName}`;
 };

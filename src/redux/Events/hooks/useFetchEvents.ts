@@ -2,9 +2,10 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { coalitionApiClient } from 'services/networking/client';
 import HandleErrorService from 'services/HandleErrorService';
-import { EventType } from '../types';
+import { RawEventType } from '../types';
 import { useDispatch } from 'react-redux';
 import { resetEvents, updateEvents } from '../slice';
+import { adaptEvent } from '../helpers/adapter';
 
 export const useFetchEvents = ({
   coalitionId,
@@ -47,13 +48,7 @@ export const useFetchEvents = ({
       return;
     }
 
-    const events = (eventsResponse.items as EventType[]).map(
-      ({ participants_count, ...restOfEvent }) => ({
-        ...restOfEvent,
-        causeId: '3165e54b-aab9-40e4-90cf-2de59ac591ca',
-        participants_count: typeof participants_count === 'number' ? participants_count : 0,
-      }),
-    );
+    const events = (eventsResponse.items as RawEventType[]).map(adaptEvent);
     dispatch(updateEvents(events));
     setHasMore(eventsResponse.metadata.last_page >= page + 1);
     setPage(page + 1);

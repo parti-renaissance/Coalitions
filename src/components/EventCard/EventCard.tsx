@@ -18,7 +18,7 @@ import { EventType } from 'redux/Events/types';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import EventParticipateButton from '../EventParticipateButton';
-import { formatEventBeginAtDate } from 'redux/Events/helpers/formatEventBeginAtDate';
+import { formatEventDate } from 'redux/Events/helpers/formatEventDate';
 import EventAddressOrVisioLink from '../EventAddressOrVisioLink';
 
 interface EventCardProps {
@@ -36,10 +36,10 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
   const preventOpenDetailsModal = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    window.open(event.visio_url, '_blank');
+    window.open(event.visioUrl, '_blank');
   };
 
-  const numberOfParticipants = event.participants_count;
+  const numberOfParticipants = event.numberOfParticipants;
 
   return (
     <Container onClick={showEventDetails}>
@@ -55,16 +55,24 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
       </div>
       <div>
         <InformationContainer>
-          <Bold>{formatEventBeginAtDate({ date: new Date(event.begin_at), type: 'card' })}</Bold>
+          <Bold>
+            {formatEventDate({
+              timeZone: event.timeZone,
+              date: event.beginAt,
+              type: 'card',
+            })}
+          </Bold>
           {' • '}
           <EventAddressOrVisioLink event={event} onVisioLinkClick={preventOpenDetailsModal} />
         </InformationContainer>
-        <Author>
-          {intl.formatMessage(
-            { id: 'events.organizer' },
-            { organizer: `${event.organizer.first_name} ${event.organizer.last_name}` },
-          )}
-        </Author>
+        {event.organizer !== undefined ? (
+          <Author>
+            {intl.formatMessage(
+              { id: 'events.organizer' },
+              { organizer: `${event.organizer.firstName} ${event.organizer.lastName}` },
+            )}
+          </Author>
+        ) : null}
         <ParticipantsCountContainer>
           <ParticipantsCountIconWrapper>
             <ParticipantsCountIcon src="/images/supports.svg" />

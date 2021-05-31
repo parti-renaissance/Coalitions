@@ -376,7 +376,10 @@
       "online": "En ligne"
     },
     "begin_at": "Date, heure de début",
-    "finish_at": "Date, heure de fin"
+    "finish_at": "Date, heure de fin",
+    "postal_code": "Code postal",
+    "city": "Ville",
+    "country": "Pays"
   },
   "event_details": {
     "information": "Informations",

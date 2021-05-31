@@ -181,16 +181,6 @@ export const Profile: FunctionComponent = () => {
                 ))}
               </InputField>
             </InputFieldWrapper>
-            {/* <InputFieldWrapper>
-              <CityAutocomplete
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                setFieldTouched={setFieldTouched}
-                setFieldValue={setFieldValue}
-                touched={touched}
-                errors={errors}
-              />
-            </InputFieldWrapper> */}
             <InputFieldWrapper isPlaceholder={values.birthday === null}>
               <InputField
                 disabled={isAdherent}

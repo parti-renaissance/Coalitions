@@ -8,7 +8,7 @@ import {
   Form,
   ModeButtonsContainer,
   ModeButton,
-  DateFieldsWrapper,
+  InlineFieldsWrapper,
   CategoryItem,
   BottomButtonsWrapper,
 } from './EventForm.style';
@@ -25,6 +25,8 @@ import Loader from 'components/Loader';
 import { DeleteEventButton } from './components';
 import { FullWidthButton } from 'components/Button/Button';
 import { formatPickerDateToEventDate } from 'redux/Events/helpers/formatEventDateToPickerDate';
+import CityAutocomplete from 'components/CityAutocomplete';
+import { CityOrCountryType } from 'components/CityAutocomplete/lib/useCityAndCountryAutocomplete';
 
 interface EventFormProps {
   causeId: string;
@@ -78,7 +80,16 @@ const EventForm: FunctionComponent<EventFormProps> = ({
         enableReinitialize
       >
         {// eslint-disable-next-line complexity
-        ({ values, errors, handleChange, handleBlur, handleSubmit, touched, setFieldValue }) => (
+        ({
+          values,
+          errors,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          touched,
+          setFieldValue,
+          setFieldTouched,
+        }) => (
           <Form onSubmit={handleSubmit}>
             <input type="text" hidden value={initialValues.causeId} name="causeId" />
             <input type="text" hidden value={initialValues.timeZone} name="timeZone" />
@@ -139,6 +150,45 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 helperText={touched.address === true ? errors.address : undefined}
               />
             </InputFieldWrapper>
+            <InlineFieldsWrapper>
+              <InputFieldWrapper>
+                <InputField
+                  required
+                  placeholder={intl.formatMessage({ id: 'event_form.postal_code' })}
+                  type="text"
+                  name="postalCode"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.postalCode}
+                  error={touched.postalCode === true && errors.postalCode !== undefined}
+                  helperText={touched.postalCode === true ? errors.postalCode : undefined}
+                />
+              </InputFieldWrapper>
+              <InputFieldWrapper>
+                <CityAutocomplete
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  setFieldTouched={setFieldTouched}
+                  setFieldValue={setFieldValue}
+                  touched={touched.cityId}
+                  error={errors.cityId}
+                  placeholder={intl.formatMessage({ id: 'event_form.city' })}
+                  type={CityOrCountryType.city}
+                />
+              </InputFieldWrapper>
+              <InputFieldWrapper>
+                <CityAutocomplete
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  setFieldTouched={setFieldTouched}
+                  setFieldValue={setFieldValue}
+                  touched={touched.countryId}
+                  error={errors.countryId}
+                  placeholder={intl.formatMessage({ id: 'event_form.country' })}
+                  type={CityOrCountryType.country}
+                />
+              </InputFieldWrapper>
+            </InlineFieldsWrapper>
             <InputFieldWrapper>
               <InputField
                 required={values.mode === 'online'}
@@ -152,7 +202,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 helperText={touched.visioUrl === true ? errors.visioUrl : undefined}
               />
             </InputFieldWrapper>
-            <DateFieldsWrapper>
+            <InlineFieldsWrapper>
               <InputFieldWrapper>
                 <InputField
                   required
@@ -181,7 +231,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                   InputLabelProps={{ shrink: true }}
                 />
               </InputFieldWrapper>
-            </DateFieldsWrapper>
+            </InlineFieldsWrapper>
             <InputFieldWrapper>
               <InputField
                 select

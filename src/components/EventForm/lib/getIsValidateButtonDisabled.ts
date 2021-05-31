@@ -27,7 +27,10 @@ export const getIsValidateButtonDisabled = ({
       touched.beginAt !== true ||
       touched.finishAt !== true ||
       touched.categoryId !== true ||
-      touched.description !== true
+      touched.description !== true ||
+      touched.cityId !== true ||
+      touched.postalCode !== true ||
+      touched.countryId !== true
     );
   }
 };

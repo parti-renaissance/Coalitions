@@ -143,8 +143,9 @@ const CreateAccountForm = ({
                     handleBlur={handleBlur}
                     setFieldTouched={setFieldTouched}
                     setFieldValue={setFieldValue}
-                    touched={touched}
-                    errors={errors}
+                    touched={touched.cityId}
+                    error={errors.cityId}
+                    placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
                   />
                 </InputFieldWrapper>
                 <ModalCheckbox

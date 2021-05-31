@@ -56,11 +56,11 @@ export const ModeButton = styled(FullWidthButton)`
   }
 `;
 
-export const DateFieldsWrapper = styled.div`
+export const InlineFieldsWrapper = styled.div`
   ${media.desktop(`
     display: flex;
-    > div:first-child {
-      margin-right: ${getSpacing(3)};
+    > div:not(:first-child) {
+      margin-left: ${getSpacing(3)};
     }
   `)}
 `;

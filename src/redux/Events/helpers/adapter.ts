@@ -25,8 +25,14 @@ export const adaptEvent = (rawEvent: RawEventType): EventType => {
       post_address != null
         ? {
             address: post_address.address,
-            cityName: post_address.city_name,
-            country: post_address.country,
+            city: {
+              id: '1',
+              name: post_address.city_name,
+            },
+            country: {
+              id: '1',
+              name: 'France',
+            },
             postalCode: post_address.postal_code,
           }
         : undefined,

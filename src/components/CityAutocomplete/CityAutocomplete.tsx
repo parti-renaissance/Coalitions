@@ -1,19 +1,18 @@
 import React, { FunctionComponent, ChangeEvent, FocusEvent } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
-import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import {
   useCityAndCountryAutocomplete,
   CityOrCountry,
   getCityOrCountryLabel,
+  CityOrCountryType,
 } from './lib/useCityAndCountryAutocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { FormikErrors, FormikTouched } from 'formik';
 
 interface CityAutocompleteProps {
-  touched: FormikTouched<{ cityId: boolean }>;
-  errors: FormikErrors<{ cityId: boolean }>;
+  touched?: boolean;
+  error?: string;
   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
   setFieldTouched: (
     field: string,
@@ -22,46 +21,57 @@ interface CityAutocompleteProps {
   ) => void;
   handleChange: (e: ChangeEvent) => void;
   handleBlur: (e: FocusEvent) => void;
+  type?: CityOrCountryType;
+  placeholder: string;
 }
 
 const CityAutocomplete: FunctionComponent<CityAutocompleteProps> = ({
   touched,
-  errors,
+  error,
   setFieldValue,
   setFieldTouched,
   handleChange,
   handleBlur,
+  type,
+  placeholder,
 }) => {
-  const intl = useIntl();
-  const { cities, fetchCities, isFetchingCities } = useCityAndCountryAutocomplete();
+  const {
+    fetchCitiesAndCountries,
+    isFetchingCitiesAndCountries,
+    citiesAndCountries,
+  } = useCityAndCountryAutocomplete(type);
+
+  const field = type === CityOrCountryType.country ? 'countryId' : 'cityId';
 
   return (
     <Autocomplete
       freeSolo
-      options={cities}
+      options={citiesAndCountries}
       getOptionLabel={getCityOrCountryLabel}
-      onBlur={() => setFieldTouched('cityId', true)}
+      onBlur={() => setFieldTouched(field, true)}
       onChange={(e, value) => {
-        setFieldValue('cityId', (value as CityOrCountry)?.uuid || '');
+        setFieldValue(field, (value as CityOrCountry)?.uuid || '');
       }}
       renderInput={(params: TextFieldProps) => (
         <InputField
           {...params}
           required
-          placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}
-          error={touched.cityId === true && errors.cityId !== undefined}
-          helperText={touched.cityId === true ? errors.cityId : undefined}
+          placeholder={placeholder}
+          error={touched === true && error !== undefined}
+          helperText={touched === true ? error : undefined}
           onChange={e => {
             handleChange(e);
-            setFieldValue('cityId', '');
-            fetchCities(e.target.value);
+            setFieldValue(field, '');
+            fetchCitiesAndCountries(e.target.value);
           }}
           onBlur={handleBlur}
           InputProps={{
             ...params.InputProps,
             endAdornment: (
               <>
-                {isFetchingCities ? <CircularProgress color="primary" size={20} /> : null}
+                {isFetchingCitiesAndCountries ? (
+                  <CircularProgress color="primary" size={20} />
+                ) : null}
                 {params?.InputProps?.endAdornment}
               </>
             ),

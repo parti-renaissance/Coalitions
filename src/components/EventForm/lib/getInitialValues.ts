@@ -21,8 +21,8 @@ export const getInitialValues = ({
       causeId,
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       postalCode: '',
-      cityName: '',
-      country: '',
+      cityId: '',
+      countryId: '',
     };
   }
 
@@ -53,7 +53,7 @@ export const getInitialValues = ({
     timeZone,
     address: postAddress !== undefined ? postAddress.address : '',
     postalCode: postAddress !== undefined ? postAddress.postalCode : '',
-    cityName: postAddress !== undefined ? postAddress.cityName : '',
-    country: postAddress !== undefined ? postAddress.country : '',
+    cityId: postAddress !== undefined ? postAddress.city.id : '',
+    countryId: postAddress !== undefined ? postAddress.country.id : '',
   };
 };

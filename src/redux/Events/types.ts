@@ -10,7 +10,7 @@ export interface CreateEventType {
   name: string;
   beginAt: string;
   finishAt: string;
-  category: string;
+  categorySlug: string;
   timeZone: string;
   description: string;
   causeId: string;
@@ -18,7 +18,7 @@ export interface CreateEventType {
   postalCode: string;
   countryId: string;
   visioUrl?: string;
-  cityId: string;
+  cityName: string;
 }
 
 export type UpdatedEventType = {

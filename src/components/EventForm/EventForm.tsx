@@ -155,7 +155,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 <InputField
                   required
                   placeholder={intl.formatMessage({ id: 'event_form.postal_code' })}
-                  type="text"
+                  type="number"
                   name="postalCode"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -165,15 +165,16 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
-                <CityAutocomplete
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  setFieldTouched={setFieldTouched}
-                  setFieldValue={setFieldValue}
-                  touched={touched.cityId}
-                  error={errors.cityId}
+                <InputField
+                  required
                   placeholder={intl.formatMessage({ id: 'event_form.city' })}
-                  type={CityOrCountryType.city}
+                  type="text"
+                  name="cityName"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.cityName}
+                  error={touched.cityName === true && errors.cityName !== undefined}
+                  helperText={touched.cityName === true ? errors.cityName : undefined}
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
@@ -238,12 +239,12 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 required
                 placeholder={intl.formatMessage({ id: 'event_form.category' })}
                 type="text"
-                name="category"
+                name="categorySlug"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.category}
-                error={touched.category === true && errors.category !== undefined}
-                helperText={touched.category === true ? errors.category : undefined}
+                value={values.categorySlug}
+                error={touched.categorySlug === true && errors.categorySlug !== undefined}
+                helperText={touched.categorySlug === true ? errors.categorySlug : undefined}
               >
                 {eventCategories.map(category => (
                   <CategoryItem key={category.slug} value={category.slug}>

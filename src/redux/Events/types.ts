@@ -1,7 +1,7 @@
 export type EventMode = 'meeting' | 'online';
 
 export type EventCategory = {
-  uuid: string;
+  slug: string;
   name: string;
 };
 
@@ -10,7 +10,7 @@ export interface CreateEventType {
   name: string;
   beginAt: string;
   finishAt: string;
-  categoryId: string;
+  category: string;
   timeZone: string;
   description: string;
   causeId: string;
@@ -57,17 +57,13 @@ export type EventType = {
   participate?: boolean;
 };
 
-export type RawEventCategory = {
-  name: string;
-};
-
 export interface RawEventType {
   uuid: string;
   mode: EventMode | null;
   name: string;
   begin_at: string;
   finish_at: string;
-  category: RawEventCategory;
+  category: EventCategory;
   time_zone: string;
   description: string;
   post_address: {

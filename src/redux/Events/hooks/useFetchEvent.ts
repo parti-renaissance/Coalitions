@@ -13,8 +13,8 @@ export const FAKE_EVENT: EventType = {
   finishAt: '2021-06-21 16:30:30',
   mode: 'online',
   category: {
-    uuid: '1',
-    name: 'category1',
+    slug: 'convivialite',
+    name: 'Convivialité',
   },
   timeZone: 'Europe/Paris',
   description:

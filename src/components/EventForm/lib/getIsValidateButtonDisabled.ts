@@ -26,9 +26,9 @@ export const getIsValidateButtonDisabled = ({
       (values.mode === 'online' && touched.visioUrl !== true) ||
       touched.beginAt !== true ||
       touched.finishAt !== true ||
-      touched.category !== true ||
+      touched.categorySlug !== true ||
       touched.description !== true ||
-      touched.cityId !== true ||
+      touched.cityName !== true ||
       touched.postalCode !== true ||
       touched.countryId !== true
     );

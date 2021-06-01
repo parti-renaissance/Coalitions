@@ -40,7 +40,7 @@ export const adaptEvent = (rawEvent: RawEventType): EventType => {
       organizer !== null
         ? { uuid: '123', firstName: organizer.first_name, lastName: organizer.last_name }
         : undefined,
-    category: { ...category, uuid: '1' },
+    category,
     causeId: '3165e54b-aab9-40e4-90cf-2de59ac591ca',
     numberOfParticipants: typeof participants_count === 'number' ? participants_count : 0,
     mode: mode === 'online' ? 'online' : 'meeting',

@@ -9,7 +9,7 @@ export interface EventFormErrors {
   visioUrl?: string;
   beginAt?: string;
   finishAt?: string;
-  categoryId?: string;
+  category?: string;
   description?: string;
   causeId?: string;
   cityId?: string;
@@ -28,7 +28,7 @@ export const useValidateForm = () => {
     visioUrl,
     beginAt,
     finishAt,
-    categoryId,
+    category,
     description,
     cityId,
     postalCode,
@@ -73,8 +73,8 @@ export const useValidateForm = () => {
       errors.finishAt = requiredErrorMessage;
     }
 
-    if (categoryId === undefined || categoryId.length === 0) {
-      errors.categoryId = requiredErrorMessage;
+    if (category === undefined || category.length === 0) {
+      errors.category = requiredErrorMessage;
     }
 
     if (description === undefined || description.length === 0) {

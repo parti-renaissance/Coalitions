@@ -1,19 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService from 'services/HandleErrorService';
+import { coalitionApiClient } from 'services/networking/client';
 import { EventCategory } from '../types';
 
 export const useFetchEventCategories = () => {
   const [eventCategories, setEventCategories] = useState<EventCategory[]>([]);
 
   const [{ loading, error }, doFetchEventCategories] = useTypedAsyncFn(async () => {
-    return new Promise(resolve =>
-      setTimeout(resolve, 2000, [
-        { uuid: '1', name: 'category1' },
-        { uuid: '2', name: 'category2' },
-        { uuid: '3', name: 'category3' },
-      ]),
-    );
+    return await coalitionApiClient.get('event_categories');
   }, []);
 
   useEffect(() => {
@@ -23,9 +18,9 @@ export const useFetchEventCategories = () => {
   }, [error]);
 
   const fetchEventCategories = useCallback(async () => {
-    const categories: EventCategory[] | undefined = await doFetchEventCategories();
+    const categories: EventCategory[] = await doFetchEventCategories();
 
-    if (categories === undefined || categories instanceof Error) {
+    if (categories instanceof Error) {
       return;
     }
 

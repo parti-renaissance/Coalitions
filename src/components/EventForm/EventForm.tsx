@@ -238,15 +238,15 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 required
                 placeholder={intl.formatMessage({ id: 'event_form.category' })}
                 type="text"
-                name="categoryId"
+                name="category"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.categoryId}
-                error={touched.categoryId === true && errors.categoryId !== undefined}
-                helperText={touched.categoryId === true ? errors.categoryId : undefined}
+                value={values.category}
+                error={touched.category === true && errors.category !== undefined}
+                helperText={touched.category === true ? errors.category : undefined}
               >
                 {eventCategories.map(category => (
-                  <CategoryItem key={category.uuid} value={category.uuid}>
+                  <CategoryItem key={category.slug} value={category.slug}>
                     {category.name}
                   </CategoryItem>
                 ))}

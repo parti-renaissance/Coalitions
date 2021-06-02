@@ -5,25 +5,29 @@ export type EventCategory = {
   name: string;
 };
 
-export interface CreateEventType {
-  mode: EventMode;
+export interface RawCreateEventType {
+  type: 'cause' | 'coalition';
   name: string;
-  beginAt: string;
-  finishAt: string;
-  categorySlug: string;
-  timeZone: string;
   description: string;
-  causeId: string;
-  address: string;
-  postalCode: string;
-  countryCode: string;
-  visioUrl?: string;
-  cityName: string;
+  time_zone: string;
+  begin_at: string;
+  finish_at: string;
+  category: string;
+  mode: EventMode;
+  visio_url?: string;
+  post_address: {
+    address: string;
+    postal_code: string;
+    city_name: string;
+    country: string;
+  };
+  causes?: string[];
+  coalitions?: string[];
 }
 
-export type UpdatedEventType = {
+export type RawUpdateEventType = {
   uuid: string;
-} & CreateEventType;
+} & RawCreateEventType;
 
 export type EventType = {
   uuid: string;

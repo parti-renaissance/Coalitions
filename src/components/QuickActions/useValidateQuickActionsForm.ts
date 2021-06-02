@@ -27,7 +27,7 @@ export const useValidateQuickActionsForm = () => {
         hasQuickActionsErrors = true;
       }
       if (quickAction.label.length <= 2) {
-        errors.label = formatMessage({ id: 'form_errors.too-short-value' });
+        errors.label = formatMessage({ id: 'form_errors.too-short' }, { minLength: 3 });
         hasQuickActionsErrors = true;
       }
       if (isFieldEmpty(quickAction.link)) {

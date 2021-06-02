@@ -41,7 +41,7 @@ export const useValidateForm = () => {
     }
 
     if (firstName !== undefined && firstName.length < 2) {
-      errors.firstName = intl.formatMessage({ id: 'form_errors.too-short-name' });
+      errors.firstName = intl.formatMessage({ id: 'form_errors.too-short' }, { minLength: 2 });
     }
 
     if (isFieldEmpty(email)) {
@@ -56,7 +56,7 @@ export const useValidateForm = () => {
       }
 
       if (lastName !== undefined && lastName.length < 2) {
-        errors.lastName = intl.formatMessage({ id: 'form_errors.too-short-name' });
+        errors.lastName = intl.formatMessage({ id: 'form_errors.too-short' }, { minLength: 2 });
       }
 
       if (dataShareAgreement === undefined || dataShareAgreement === false) {

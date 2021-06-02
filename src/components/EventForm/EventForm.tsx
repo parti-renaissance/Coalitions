@@ -71,7 +71,9 @@ const EventForm: FunctionComponent<EventFormProps> = ({
           : intl.formatMessage({ id: 'event_form.create.title' })}
       </Title>
       {initialEvent === undefined ? (
-        <Description>{intl.formatMessage({ id: 'event_form.create.tips' })}</Description>
+        <Description withMarginTop>
+          {intl.formatMessage({ id: 'event_form.create.tips' })}
+        </Description>
       ) : null}
       <Formik<CreateEventType | UpdatedEventType>
         initialValues={initialValues}
@@ -192,6 +194,13 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 />
               </InputFieldWrapper>
             </InlineFieldsWrapper>
+            {values.mode === 'meeting' ? (
+              <InputFieldWrapper>
+                <Description>
+                  {intl.formatMessage({ id: 'event_form.visio_link_tips' })}
+                </Description>
+              </InputFieldWrapper>
+            ) : null}
             <InputFieldWrapper>
               <InputField
                 required={values.mode === 'online'}

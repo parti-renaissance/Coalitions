@@ -13,15 +13,20 @@ export const Title = styled.h1`
   text-align: center;
 `;
 
-export const Description = styled.p`
+export const Description = styled.p<{ withMarginTop?: boolean }>`
   border-radius: ${borderRadius.medium};
   background-color: ${colorPalette.greyLight};
   color: ${colorPalette.greyDark};
   padding: ${getSpacing(3)};
-  margin-top: ${getSpacing(6)};
-  ${media.desktop(`
-    margin-top: ${getSpacing(10)};
-  `)}
+  ${({ withMarginTop }) =>
+    withMarginTop === true
+      ? css`
+          margin-top: ${getSpacing(6)};
+          ${media.desktop(`
+            margin-top: ${getSpacing(10)};
+          `)}
+        `
+      : css``}
 `;
 
 export const Form = styled.form`

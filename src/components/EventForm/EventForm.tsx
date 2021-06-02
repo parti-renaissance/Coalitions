@@ -15,8 +15,8 @@ import {
 import { useIntl } from 'react-intl';
 import InputField from 'components/InputField';
 import Formik from 'components/Formik';
-import { useValidateForm } from './lib/useValidateForm';
-import { CreateEventType, EventType, UpdatedEventType } from 'redux/Events/types';
+import { useValidateForm, EventFormValues } from './lib/useValidateForm';
+import { EventType, RawCreateEventType, RawUpdateEventType } from 'redux/Events/types';
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { getIsValidateButtonDisabled } from './lib/getIsValidateButtonDisabled';
 import { getInitialValues } from './lib/getInitialValues';
@@ -24,14 +24,14 @@ import { useFetchEventCategories } from 'redux/Events/hooks/useFetchEventCategor
 import Loader from 'components/Loader';
 import { DeleteEventButton } from './components';
 import { FullWidthButton } from 'components/Button/Button';
-import { formatPickerDateToEventDate } from 'redux/Events/helpers/formatEventDateToPickerDate';
 import CityAutocomplete from 'components/CityAutocomplete';
 import { CityOrCountryType } from 'components/CityAutocomplete/hooks/useCityAndCountryAutocomplete';
+import { convertEventFormValuesToRawCreateEvent } from './lib/convertEventFormValuesToRawCreateEvent';
 
 interface EventFormProps {
   causeId: string;
   initialEvent?: EventType;
-  onSubmit: (event: CreateEventType | UpdatedEventType) => void;
+  onSubmit: (event: RawCreateEventType | RawUpdateEventType) => void;
   isSubmitting: boolean;
 }
 
@@ -49,19 +49,21 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     fetchEventCategories();
   }, [fetchEventCategories]);
 
-  const onSubmit = (values: CreateEventType | UpdatedEventType) => {
-    onSubmitProp({
-      ...values,
-      beginAt: formatPickerDateToEventDate({ date: values.beginAt, timeZone: values.timeZone }),
-      finishAt: formatPickerDateToEventDate({ date: values.finishAt, timeZone: values.timeZone }),
-    });
+  const onSubmit = (values: EventFormValues) => {
+    onSubmitProp(
+      convertEventFormValuesToRawCreateEvent({
+        values,
+        causeId,
+        eventId: initialEvent !== undefined ? initialEvent.uuid : undefined,
+      }),
+    );
   };
 
   if (eventCategories.length === 0 && loading) {
     return <Loader fullScreen />;
   }
 
-  const initialValues = getInitialValues({ initialEvent, causeId });
+  const initialValues = getInitialValues(initialEvent);
 
   return (
     <Container>
@@ -75,7 +77,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
           {intl.formatMessage({ id: 'event_form.create.tips' })}
         </Description>
       ) : null}
-      <Formik<CreateEventType | UpdatedEventType>
+      <Formik<EventFormValues>
         initialValues={initialValues}
         validate={validateForm}
         onSubmit={onSubmit}
@@ -93,16 +95,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
           setFieldTouched,
         }) => (
           <Form onSubmit={handleSubmit}>
-            <input type="text" hidden value={initialValues.causeId} name="causeId" />
-            <input type="text" hidden value={initialValues.timeZone} name="timeZone" />
-            {(initialValues as UpdatedEventType).uuid !== undefined ? (
-              <input
-                type="text"
-                hidden
-                value={(initialValues as UpdatedEventType).uuid}
-                name="uuid"
-              />
-            ) : null}
             <InputFieldWrapper>
               <InputField
                 required

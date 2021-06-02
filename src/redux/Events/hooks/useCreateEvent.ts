@@ -7,7 +7,8 @@ import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
-import { CreateEventType } from '../types';
+import { authenticatedApiClient } from 'services/networking/client';
+import { RawCreateEventType } from '../types';
 
 const useCreateEventErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -32,11 +33,8 @@ export const useCreateEvent = () => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
 
-  const [{ loading, error }, doCreateEvent] = useTypedAsyncFn(async (event: CreateEventType) => {
-    console.log({ event });
-    return new Promise(resolve =>
-      setTimeout(resolve, 2000, { uuid: '773da575-d7a0-4468-8591-d0fc8d700de3' }),
-    );
+  const [{ loading, error }, doCreateEvent] = useTypedAsyncFn(async (event: RawCreateEventType) => {
+    return await authenticatedApiClient.post('v3/events', event);
   }, []);
 
   useEffect(() => {
@@ -46,8 +44,7 @@ export const useCreateEvent = () => {
   }, [error, errorHandler]);
 
   const createEvent = useCallback(
-    async (event: CreateEventType) => {
-      console.log({ event });
+    async (event: RawCreateEventType) => {
       const response = await doCreateEvent(event);
 
       if (response instanceof Error) return;

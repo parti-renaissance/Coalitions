@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   colorPalette,
   media,
@@ -18,6 +18,7 @@ export const Container = styled.div`
   margin: ${getSpacing(6)} -${getSpacing(6)} 0 -${getSpacing(6)};
   ${media.desktop(`
     min-width: ${DESKTOP_CONTAINER_WIDTH}px;
+    max-width: ${DESKTOP_CONTAINER_WIDTH}px;
     margin: -64px -${getSpacing(8)} -${getSpacing(8)} ${getSpacing(6)};
     padding: 64px ${getSpacing(6)} ${getSpacing(6)} ${getSpacing(6)};
   `)}
@@ -53,10 +54,18 @@ export const SectionTitle = styled.div`
   `)}
 `;
 
-export const OneInformationContainer = styled.div`
+export const OneInformationContainer = styled.div<{
+  onClick?: () => void;
+}>`
   display: flex;
   align-items: center;
   margin-top: ${getSpacing(3)};
+  ${({ onClick }) =>
+    onClick !== undefined
+      ? css`
+          cursor: pointer;
+        `
+      : css``}
 `;
 
 const ONE_INFORMATION_ICON_SIZE = getSpacing(4);
@@ -71,9 +80,9 @@ export const OneInformationLabel = styled.div<{ color?: string; bold?: boolean }
   color: ${({ color }) => (color !== undefined ? color : colorPalette.greyDark)};
   font-weight: ${({ bold }) => (bold === true ? fontWeight.bold : fontWeight.normal)};
   margin-left: ${getSpacing(2)};
-  a {
-    color: ${({ color }) => (color !== undefined ? color : colorPalette.greyDark)};
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const MOBILE_PARTICIPATE_BUTTON_Z_INDEX = 1;

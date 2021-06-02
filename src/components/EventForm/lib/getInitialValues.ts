@@ -16,12 +16,12 @@ export const getInitialValues = ({
       visioUrl: '',
       beginAt: '',
       finishAt: '',
-      category: '',
+      categorySlug: '',
       description: '',
       causeId,
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       postalCode: '',
-      cityId: '',
+      cityName: '',
       countryId: '',
     };
   }
@@ -47,13 +47,13 @@ export const getInitialValues = ({
     visioUrl,
     beginAt: formatEventDateToPickerDate({ date: beginAt, timeZone }),
     finishAt: formatEventDateToPickerDate({ date: finishAt, timeZone }),
-    category: category.slug,
+    categorySlug: category.slug,
     description,
     causeId: initialEventCauseId,
     timeZone,
     address: postAddress !== undefined ? postAddress.address : '',
     postalCode: postAddress !== undefined ? postAddress.postalCode : '',
-    cityId: postAddress !== undefined ? postAddress.city.id : '',
+    cityName: postAddress !== undefined ? postAddress.city.name : '',
     countryId: postAddress !== undefined ? postAddress.country.id : '',
   };
 };

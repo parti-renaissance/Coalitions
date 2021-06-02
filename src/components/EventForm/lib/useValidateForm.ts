@@ -9,10 +9,10 @@ export interface EventFormErrors {
   visioUrl?: string;
   beginAt?: string;
   finishAt?: string;
-  category?: string;
+  categorySlug?: string;
   description?: string;
   causeId?: string;
-  cityId?: string;
+  cityName?: string;
   postalCode?: string;
   countryId?: string;
 }
@@ -28,9 +28,9 @@ export const useValidateForm = () => {
     visioUrl,
     beginAt,
     finishAt,
-    category,
+    categorySlug,
     description,
-    cityId,
+    cityName,
     postalCode,
     countryId,
   }: CreateEventType | UpdatedEventType) => {
@@ -49,8 +49,8 @@ export const useValidateForm = () => {
       errors.address = requiredErrorMessage;
     }
 
-    if (cityId === undefined || cityId.length === 0) {
-      errors.cityId = requiredErrorMessage;
+    if (cityName === undefined || cityName.length === 0) {
+      errors.cityName = requiredErrorMessage;
     }
 
     if (postalCode === undefined || postalCode.length === 0) {
@@ -73,8 +73,8 @@ export const useValidateForm = () => {
       errors.finishAt = requiredErrorMessage;
     }
 
-    if (category === undefined || category.length === 0) {
-      errors.category = requiredErrorMessage;
+    if (categorySlug === undefined || categorySlug.length === 0) {
+      errors.categorySlug = requiredErrorMessage;
     }
 
     if (description === undefined || description.length === 0) {

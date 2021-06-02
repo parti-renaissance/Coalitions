@@ -1,8 +1,21 @@
 import { useIntl } from 'react-intl';
-import { CreateEventType, UpdatedEventType } from 'redux/Events/types';
+import { EventMode } from 'redux/Events/types';
+
+export interface EventFormValues {
+  mode: EventMode;
+  name: string;
+  beginAt: string;
+  finishAt: string;
+  categorySlug: string;
+  description: string;
+  address: string;
+  postalCode: string;
+  countryCode: string;
+  cityName: string;
+  visioUrl?: string;
+}
 
 export interface EventFormErrors {
-  uuid?: string;
   name?: string;
   mode?: string;
   address?: string;
@@ -11,7 +24,6 @@ export interface EventFormErrors {
   finishAt?: string;
   categorySlug?: string;
   description?: string;
-  causeId?: string;
   cityName?: string;
   postalCode?: string;
   countryCode?: string;
@@ -33,12 +45,12 @@ export const useValidateForm = () => {
     cityName,
     postalCode,
     countryCode,
-  }: CreateEventType | UpdatedEventType) => {
+  }: EventFormValues) => {
     const errors = {} as EventFormErrors;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
 
-    if (name === undefined || name.length === 0) {
-      errors.name = requiredErrorMessage;
+    if (name === undefined || name.length < 5) {
+      errors.name = intl.formatMessage({ id: 'form_errors.too-short' }, { minLength: 5 });
     }
 
     if (mode === undefined || mode.length === 0) {
@@ -77,8 +89,8 @@ export const useValidateForm = () => {
       errors.categorySlug = requiredErrorMessage;
     }
 
-    if (description === undefined || description.length === 0) {
-      errors.description = requiredErrorMessage;
+    if (description === undefined || description.length < 10) {
+      errors.description = intl.formatMessage({ id: 'form_errors.too-short' }, { minLength: 10 });
     }
 
     return errors;

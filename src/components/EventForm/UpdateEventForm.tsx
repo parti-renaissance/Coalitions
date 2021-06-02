@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useFetchEvent } from 'redux/Events/hooks/useFetchEvent';
 import { useUpdateEvent } from 'redux/Events/hooks/useUpdateEvent';
 import { getEvent } from 'redux/Events/selectors';
-import { CreateEventType, UpdatedEventType } from 'redux/Events/types';
+import { RawCreateEventType, RawUpdateEventType } from 'redux/Events/types';
 import EventForm from './EventForm';
 
 interface UpdateEventFormProps {
@@ -30,7 +30,7 @@ export const UpdateEventForm: FunctionComponent<UpdateEventFormProps> = ({ event
 
   return (
     <EventForm
-      onSubmit={updateEvent as (event: CreateEventType | UpdatedEventType) => void}
+      onSubmit={updateEvent as (event: RawCreateEventType | RawUpdateEventType) => void}
       isSubmitting={loading}
       initialEvent={event}
       causeId={event.causeId}

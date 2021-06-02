@@ -1,6 +1,6 @@
 import { FormikErrors, FormikTouched } from 'formik';
 import isMatch from 'lodash/isMatch';
-import { CreateEventType, UpdatedEventType } from 'redux/Events/types';
+import { EventFormValues } from './useValidateForm';
 
 // eslint-disable-next-line complexity
 export const getIsValidateButtonDisabled = ({
@@ -10,11 +10,11 @@ export const getIsValidateButtonDisabled = ({
   isUpdating,
   values,
 }: {
-  errors: FormikErrors<CreateEventType | UpdatedEventType>;
-  touched: FormikTouched<CreateEventType | UpdatedEventType>;
-  initialValues: CreateEventType | UpdatedEventType;
+  errors: FormikErrors<EventFormValues>;
+  touched: FormikTouched<EventFormValues>;
+  initialValues: EventFormValues;
   isUpdating: boolean;
-  values: CreateEventType | UpdatedEventType;
+  values: EventFormValues;
 }): boolean => {
   if (isUpdating) {
     return Object.keys(errors).length > 0 || isMatch(values, initialValues);
@@ -29,8 +29,7 @@ export const getIsValidateButtonDisabled = ({
       touched.categorySlug !== true ||
       touched.description !== true ||
       touched.cityName !== true ||
-      touched.postalCode !== true ||
-      touched.countryCode !== true
+      touched.postalCode !== true
     );
   }
 };

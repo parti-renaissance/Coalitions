@@ -4,8 +4,9 @@ import { coalitionApiClient } from 'services/networking/client';
 import HandleErrorService from 'services/HandleErrorService';
 import { RawEventType } from '../types';
 import { useDispatch } from 'react-redux';
-import { resetEvents, updateEvents } from '../slice';
+import { resetEvents, updateEvents, markEventsAsParticipate } from '../slice';
 import { adaptEvent } from '../helpers/adapter';
+import { useFetchUserParticipateEvents } from './useFetchUserParticipateEvents';
 
 export const useFetchEvents = ({
   coalitionId,
@@ -17,6 +18,11 @@ export const useFetchEvents = ({
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
+
+  const {
+    loading: isFetchingUserParticipateEvents,
+    doFetchUserParticipateEvents,
+  } = useFetchUserParticipateEvents();
 
   const [{ loading: isFetchingEvents, error }, doFetchEvents] = useTypedAsyncFn(
     async (page: number) => {
@@ -49,10 +55,14 @@ export const useFetchEvents = ({
     }
 
     const events = (eventsResponse.items as RawEventType[]).map(adaptEvent);
+    const userParticipateEvents = await doFetchUserParticipateEvents(
+      events.map(({ uuid }) => uuid),
+    );
     dispatch(updateEvents(events));
+    dispatch(markEventsAsParticipate(userParticipateEvents));
     setHasMore(eventsResponse.metadata.last_page >= page + 1);
     setPage(page + 1);
-  }, [doFetchEvents, hasMore, coalitionId, causeId, page, dispatch]);
+  }, [doFetchEvents, hasMore, coalitionId, causeId, page, dispatch, doFetchUserParticipateEvents]);
 
-  return { fetchEvents, isFetchingEvents };
+  return { fetchEvents, isFetchingEvents: isFetchingEvents || isFetchingUserParticipateEvents };
 };

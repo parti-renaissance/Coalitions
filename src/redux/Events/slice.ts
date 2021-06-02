@@ -63,6 +63,15 @@ const eventSlice = createSlice({
     closeEventParticipateModal: state => {
       state.eventParticipateModal = null;
     },
+    markEventsAsParticipate: (state, action: PayloadAction<string[]>) => {
+      state.events = action.payload.reduce(
+        (events, eventId) => {
+          events[eventId].participate = true;
+          return events;
+        },
+        { ...state.events },
+      );
+    },
   },
 });
 
@@ -74,5 +83,6 @@ export const {
   optimisticallyRemoveEventParticipation,
   openEventParticipateModal,
   closeEventParticipateModal,
+  markEventsAsParticipate,
 } = eventSlice.actions;
 export default eventSlice.reducer;

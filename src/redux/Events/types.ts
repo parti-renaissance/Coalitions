@@ -16,7 +16,7 @@ export interface CreateEventType {
   causeId: string;
   address: string;
   postalCode: string;
-  countryId: string;
+  countryCode: string;
   visioUrl?: string;
   cityName: string;
 }
@@ -38,14 +38,8 @@ export type EventType = {
   postAddress?: {
     address: string;
     postalCode: string;
-    city: {
-      id: string;
-      name: string;
-    };
-    country: {
-      id: string;
-      name: string;
-    };
+    cityName: string;
+    countryCode: string;
   };
   visioUrl?: string;
   numberOfParticipants: number;

@@ -2,55 +2,64 @@ import React, { FunctionComponent, ChangeEvent, FocusEvent } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import InputField from 'components/InputField';
-import {
-  useCityAndCountryAutocomplete,
-  CityOrCountry,
-  getCityOrCountryLabel,
-  CityOrCountryType,
-} from './lib/useCityAndCountryAutocomplete';
+import { getCityOrCountryLabel, CityOrCountryType } from './hooks/useCityAndCountryAutocomplete';
+import { useCityAndCountryAutocomplete, useCountryAutocompleteDefaultValue } from './hooks';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 interface CityAutocompleteProps {
   touched?: boolean;
   error?: string;
-  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
-  setFieldTouched: (
-    field: string,
-    isTouched?: boolean | undefined,
-    shouldValidate?: boolean | undefined,
-  ) => void;
-  handleChange: (e: ChangeEvent) => void;
-  handleBlur: (e: FocusEvent) => void;
+  setValue: (value: string) => void;
+  setIsTouched: () => void;
+  onChange: (e: ChangeEvent) => void;
+  onBlur: (e: FocusEvent) => void;
   type?: CityOrCountryType;
   placeholder: string;
+  initialCountryCode?: string;
+  useCode?: boolean;
 }
 
 const CityAutocomplete: FunctionComponent<CityAutocompleteProps> = ({
   touched,
   error,
-  setFieldValue,
-  setFieldTouched,
-  handleChange,
-  handleBlur,
+  setValue,
+  setIsTouched,
+  onChange,
+  onBlur,
   type,
   placeholder,
+  initialCountryCode,
+  useCode,
 }) => {
   const {
     fetchCitiesAndCountries,
     isFetchingCitiesAndCountries,
     citiesAndCountries,
   } = useCityAndCountryAutocomplete(type);
+  const { defaultValue, isSettingDefaultValue } = useCountryAutocompleteDefaultValue({
+    fetchCitiesAndCountries,
+    type,
+    initialCountryCode,
+    citiesAndCountries,
+  });
 
-  const field = type === CityOrCountryType.country ? 'countryId' : 'cityId';
+  if (isSettingDefaultValue) {
+    return null;
+  }
 
   return (
     <Autocomplete
       freeSolo
       options={citiesAndCountries}
+      defaultValue={defaultValue}
       getOptionLabel={getCityOrCountryLabel}
-      onBlur={() => setFieldTouched(field, true)}
-      onChange={(e, value) => {
-        setFieldValue(field, (value as CityOrCountry)?.uuid || '');
+      onBlur={setIsTouched}
+      onChange={(_, value) => {
+        if (value !== null && typeof value !== 'string') {
+          setValue(useCode ? value.code : value.uuid);
+        } else {
+          setValue('');
+        }
       }}
       renderInput={(params: TextFieldProps) => (
         <InputField
@@ -60,11 +69,11 @@ const CityAutocomplete: FunctionComponent<CityAutocompleteProps> = ({
           error={touched === true && error !== undefined}
           helperText={touched === true ? error : undefined}
           onChange={e => {
-            handleChange(e);
-            setFieldValue(field, '');
+            onChange(e);
+            setValue('');
             fetchCitiesAndCountries(e.target.value);
           }}
-          onBlur={handleBlur}
+          onBlur={onBlur}
           InputProps={{
             ...params.InputProps,
             endAdornment: (

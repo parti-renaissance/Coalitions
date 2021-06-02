@@ -26,7 +26,7 @@ import { DeleteEventButton } from './components';
 import { FullWidthButton } from 'components/Button/Button';
 import { formatPickerDateToEventDate } from 'redux/Events/helpers/formatEventDateToPickerDate';
 import CityAutocomplete from 'components/CityAutocomplete';
-import { CityOrCountryType } from 'components/CityAutocomplete/lib/useCityAndCountryAutocomplete';
+import { CityOrCountryType } from 'components/CityAutocomplete/hooks/useCityAndCountryAutocomplete';
 
 interface EventFormProps {
   causeId: string;
@@ -179,14 +179,16 @@ const EventForm: FunctionComponent<EventFormProps> = ({
               </InputFieldWrapper>
               <InputFieldWrapper>
                 <CityAutocomplete
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  setFieldTouched={setFieldTouched}
-                  setFieldValue={setFieldValue}
-                  touched={touched.countryId}
-                  error={errors.countryId}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  setIsTouched={() => setFieldTouched('countryCode', true)}
+                  setValue={(value: string) => setFieldValue('countryCode', value)}
+                  touched={touched.countryCode}
+                  error={errors.countryCode}
                   placeholder={intl.formatMessage({ id: 'event_form.country' })}
                   type={CityOrCountryType.country}
+                  initialCountryCode={initialValues.countryCode}
+                  useCode
                 />
               </InputFieldWrapper>
             </InlineFieldsWrapper>

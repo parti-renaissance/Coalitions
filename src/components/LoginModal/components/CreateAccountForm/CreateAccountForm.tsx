@@ -139,10 +139,10 @@ const CreateAccountForm = ({
               <>
                 <InputFieldWrapper>
                   <CityAutocomplete
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    setFieldTouched={setFieldTouched}
-                    setFieldValue={setFieldValue}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    setValue={(value: string) => setFieldValue('cityId', value)}
+                    setIsTouched={() => setFieldTouched('cityId', true)}
                     touched={touched.cityId}
                     error={errors.cityId}
                     placeholder={intl.formatMessage({ id: 'login_modal.city-or-country' })}

@@ -30,7 +30,7 @@ export const getIsValidateButtonDisabled = ({
       touched.description !== true ||
       touched.cityName !== true ||
       touched.postalCode !== true ||
-      touched.countryId !== true
+      touched.countryCode !== true
     );
   }
 };

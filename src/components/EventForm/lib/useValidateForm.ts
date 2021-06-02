@@ -14,7 +14,7 @@ export interface EventFormErrors {
   causeId?: string;
   cityName?: string;
   postalCode?: string;
-  countryId?: string;
+  countryCode?: string;
 }
 
 export const useValidateForm = () => {
@@ -32,7 +32,7 @@ export const useValidateForm = () => {
     description,
     cityName,
     postalCode,
-    countryId,
+    countryCode,
   }: CreateEventType | UpdatedEventType) => {
     const errors = {} as EventFormErrors;
     const requiredErrorMessage = intl.formatMessage({ id: 'form_errors.required' });
@@ -57,8 +57,8 @@ export const useValidateForm = () => {
       errors.postalCode = requiredErrorMessage;
     }
 
-    if (countryId === undefined || countryId.length === 0) {
-      errors.countryId = requiredErrorMessage;
+    if (countryCode === undefined || countryCode.length === 0) {
+      errors.countryCode = requiredErrorMessage;
     }
 
     if ((visioUrl === undefined || visioUrl.length === 0) && mode === 'online') {

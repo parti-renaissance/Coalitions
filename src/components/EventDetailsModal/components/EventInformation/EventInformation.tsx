@@ -17,9 +17,9 @@ import { useIntl } from 'react-intl';
 import { colorPalette, defaultMargins, media } from 'stylesheet';
 import { Cause } from 'redux/Cause/types';
 import EventParticipateButton from '../../../EventParticipateButton';
-import EventAddressOrVisioLink from '../../../EventAddressOrVisioLink';
 import { formatEventDate } from 'redux/Events/helpers/formatEventDate';
 import { css } from 'styled-components';
+import { formatEventAddress } from 'redux/Events/helpers/formatEventAddress';
 
 interface EventInformationProps {
   event: EventType;
@@ -31,6 +31,8 @@ interface Information {
   iconSrc: string;
   color?: string;
   bold?: boolean;
+  onClick?: () => void;
+  onOneLine?: boolean;
 }
 
 const ShareEventButton = ({ event }: { event: EventType }) => (
@@ -50,12 +52,12 @@ const ShareEventButton = ({ event }: { event: EventType }) => (
 );
 
 const OneInformation = ({ information }: { information: Information }) => {
-  const { label, iconSrc, color, bold } = information;
+  const { label, iconSrc, color, bold, onClick, onOneLine } = information;
 
   return (
-    <OneInformationContainer>
+    <OneInformationContainer onClick={onClick}>
       <OneInformationIcon src={iconSrc} />
-      <OneInformationLabel bold={bold} color={color}>
+      <OneInformationLabel bold={bold} color={color} onOneLine={onOneLine}>
         {label}
       </OneInformationLabel>
     </OneInformationContainer>
@@ -73,9 +75,17 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
     },
     event.postAddress !== undefined
       ? {
-          label: <EventAddressOrVisioLink event={event} />,
+          label: formatEventAddress(event),
           iconSrc: '/images/mapPin.svg',
+        }
+      : null,
+    event.visioUrl !== undefined && event.visioUrl.length > 0
+      ? {
+          label: event.visioUrl,
+          iconSrc: '/images/camera.svg',
           color: colorPalette.blueCoalition,
+          onClick: () => window.open(event.visioUrl, '_blank'),
+          onOneLine: true,
         }
       : null,
     {

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   Container,
   Name,
@@ -19,7 +19,7 @@ import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import EventParticipateButton from '../EventParticipateButton';
 import { formatEventDate } from 'redux/Events/helpers/formatEventDate';
-import EventAddressOrVisioLink from '../EventAddressOrVisioLink';
+import { formatEventAddress } from 'redux/Events/helpers/formatEventAddress';
 
 interface EventCardProps {
   event: EventType;
@@ -33,23 +33,13 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
     history.push({ search: `?eventId=${event.uuid}` });
   };
 
-  const preventOpenDetailsModal = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(event.visioUrl, '_blank');
-  };
-
   const numberOfParticipants = event.numberOfParticipants;
 
   return (
     <Container onClick={showEventDetails}>
       <div>
         <HeaderContainer>
-          <CategoryName>
-            {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
-              id: `events.mode.${event.mode}`,
-            })}`}
-          </CategoryName>
+          <CategoryName>{event.category.name.toUpperCase()}</CategoryName>
         </HeaderContainer>
         <Name>{event.name}</Name>
       </div>
@@ -62,8 +52,11 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
               type: 'card',
             })}
           </Bold>
-          {' • '}
-          <EventAddressOrVisioLink event={event} onVisioLinkClick={preventOpenDetailsModal} />
+          {` • ${
+            event.mode === 'online' && event.visioUrl !== undefined && event.visioUrl.length > 0
+              ? intl.formatMessage({ id: 'events.mode.online' })
+              : formatEventAddress(event)
+          }`}
         </InformationContainer>
         {event.organizer !== undefined ? (
           <Author>

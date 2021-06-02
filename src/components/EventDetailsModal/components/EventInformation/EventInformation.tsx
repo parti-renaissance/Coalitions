@@ -32,6 +32,7 @@ interface Information {
   color?: string;
   bold?: boolean;
   onClick?: () => void;
+  onOneLine?: boolean;
 }
 
 const ShareEventButton = ({ event }: { event: EventType }) => (
@@ -51,12 +52,12 @@ const ShareEventButton = ({ event }: { event: EventType }) => (
 );
 
 const OneInformation = ({ information }: { information: Information }) => {
-  const { label, iconSrc, color, bold, onClick } = information;
+  const { label, iconSrc, color, bold, onClick, onOneLine } = information;
 
   return (
     <OneInformationContainer onClick={onClick}>
       <OneInformationIcon src={iconSrc} />
-      <OneInformationLabel bold={bold} color={color}>
+      <OneInformationLabel bold={bold} color={color} onOneLine={onOneLine}>
         {label}
       </OneInformationLabel>
     </OneInformationContainer>
@@ -84,6 +85,7 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
           iconSrc: '/images/camera.svg',
           color: colorPalette.blueCoalition,
           onClick: () => window.open(event.visioUrl, '_blank'),
+          onOneLine: true,
         }
       : null,
     {

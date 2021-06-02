@@ -58,7 +58,7 @@ export const OneInformationContainer = styled.div<{
   onClick?: () => void;
 }>`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-top: ${getSpacing(3)};
   ${({ onClick }) =>
     onClick !== undefined
@@ -75,14 +75,24 @@ export const OneInformationIcon = styled.img`
   width: ${ONE_INFORMATION_ICON_SIZE};
 `;
 
-export const OneInformationLabel = styled.div<{ color?: string; bold?: boolean }>`
+export const OneInformationLabel = styled.div<{
+  color?: string;
+  bold?: boolean;
+  onOneLine?: boolean;
+}>`
   ${fonts.input};
   color: ${({ color }) => (color !== undefined ? color : colorPalette.greyDark)};
   font-weight: ${({ bold }) => (bold === true ? fontWeight.bold : fontWeight.normal)};
   margin-left: ${getSpacing(2)};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin-top: -1px;
+  ${({ onOneLine }) =>
+    onOneLine === true
+      ? css`
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        `
+      : css``}
 `;
 
 const MOBILE_PARTICIPATE_BUTTON_Z_INDEX = 1;

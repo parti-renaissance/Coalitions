@@ -39,13 +39,16 @@ export const Container = styled.div`
 
 const MobileP = styled.div`
   color: ${colorPalette.grey};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-family: ${fontFamily.primary};
   font-size: ${fontSize.p.mobile};
   line-height: ${lineHeight.primary};
   font-weight: ${fontWeight.normal};
+`;
+
+const MobilePOnOneLine = styled(MobileP)`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   flex: 1;
 `;
 
@@ -83,7 +86,7 @@ export const SeeButton = styled(DefaultButton)`
   margin-left: ${getSpacing(3)};
 `;
 
-export const CategoryName = styled(MobileP)`
+export const CategoryName = styled(MobilePOnOneLine)`
   color: ${colorPalette.pink};
 `;
 
@@ -106,7 +109,7 @@ export const ParticipantsCountIcon = styled.img`
   width: ${PARTICIPANTS_COUNT_ICON_SIZE};
 `;
 
-export const ParticipantsCountLabel = styled(MobileP)`
+export const ParticipantsCountLabel = styled(MobilePOnOneLine)`
   color: ${colorPalette.greyDark};
   margin-left: ${getSpacing(2)};
 `;
@@ -122,7 +125,7 @@ export const Bold = styled.span`
   font-weight: ${fontWeight.bold};
 `;
 
-export const Author = styled(MobileP)`
+export const Author = styled(MobilePOnOneLine)`
   color: ${colorPalette.grey};
   margin-top: ${getSpacing(2)};
 `;

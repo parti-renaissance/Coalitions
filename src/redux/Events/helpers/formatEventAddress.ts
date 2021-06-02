@@ -5,10 +5,6 @@ export const formatEventAddress = (event: EventType) => {
     return '';
   }
 
-  const {
-    address,
-    city: { name },
-    postalCode,
-  } = event.postAddress;
-  return `${address}, ${postalCode} ${name}`;
+  const { address, cityName, postalCode } = event.postAddress;
+  return `${address}, ${postalCode} ${cityName}`;
 };

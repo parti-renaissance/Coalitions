@@ -379,7 +379,8 @@
     "finish_at": "Date, heure de fin",
     "postal_code": "Code postal",
     "city": "Ville",
-    "country": "Pays"
+    "country": "Pays",
+    "visio_link_tips": "Votre événement se tiendra en présentiel. Vous pouvez néanmoins lui adjoindre un lien pour une retransmission en direct."
   },
   "event_details": {
     "information": "Informations",

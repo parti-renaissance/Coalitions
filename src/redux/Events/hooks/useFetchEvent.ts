@@ -30,14 +30,8 @@ export const FAKE_EVENT: EventType = {
   postAddress: {
     address: '48 boulevard des Batignolles',
     postalCode: '75017',
-    city: {
-      id: '1',
-      name: 'Paris',
-    },
-    country: {
-      id: '1',
-      name: 'France',
-    },
+    cityName: 'Paris',
+    countryCode: 'FR',
   },
 };
 

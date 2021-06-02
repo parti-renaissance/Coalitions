@@ -22,7 +22,7 @@ export const useFetchEvents = ({
     async (page: number) => {
       const baseUrl = coalitionId !== undefined ? 'coalitions' : 'causes';
       const id = coalitionId !== undefined ? coalitionId : (causeId as string);
-      return await coalitionApiClient.get(`${baseUrl}/${id}/events?page=${page}`);
+      return await coalitionApiClient.get(`${baseUrl}/${id}/events?page=${page}&page_size=30`);
     },
     [],
   );

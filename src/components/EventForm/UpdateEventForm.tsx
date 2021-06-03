@@ -33,7 +33,8 @@ export const UpdateEventForm: FunctionComponent<UpdateEventFormProps> = ({ event
       onSubmit={updateEvent as (event: RawCreateEventType | RawUpdateEventType) => void}
       isSubmitting={loading}
       initialEvent={event}
-      causeId={event.causeId}
+      causeId={event.cause?.uuid}
+      coalitionId={event.coalition?.uuid}
     />
   );
 };

@@ -76,12 +76,12 @@ export const OneInformationIcon = styled.img`
 `;
 
 export const OneInformationLabel = styled.div<{
-  color?: string;
+  color: string;
   bold?: boolean;
   onOneLine?: boolean;
 }>`
   ${fonts.input};
-  color: ${({ color }) => (color !== undefined ? color : colorPalette.greyDark)};
+  color: ${({ color }) => color};
   font-weight: ${({ bold }) => (bold === true ? fontWeight.bold : fontWeight.normal)};
   margin-left: ${getSpacing(2)};
   margin-top: -1px;

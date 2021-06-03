@@ -38,7 +38,6 @@ export type EventType = {
   category: EventCategory;
   timeZone: string;
   description: string;
-  causeId: string;
   postAddress?: {
     address: string;
     postalCode: string;
@@ -53,6 +52,15 @@ export type EventType = {
     lastName: string;
   };
   participate?: boolean;
+  cause?: {
+    uuid: string;
+    name: string;
+    slug: string;
+  };
+  coalition?: {
+    uuid: string;
+    name: string;
+  };
 };
 
 export interface RawEventType {
@@ -68,11 +76,26 @@ export interface RawEventType {
     address: string;
     postal_code: string;
     city_name: string;
+    country: string;
   } | null;
   visio_url: string | null;
   participants_count: number | null;
   organizer: {
+    uuid: string;
     first_name: string;
     last_name: string;
   } | null;
+  cause?: {
+    uuid: string;
+    name: string;
+    slug: string;
+    coalition: {
+      uuid: string;
+      name: string;
+    };
+  };
+  coalition?: {
+    uuid: string;
+    name: string;
+  };
 }

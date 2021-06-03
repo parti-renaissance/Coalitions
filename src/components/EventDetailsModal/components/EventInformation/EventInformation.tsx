@@ -15,21 +15,20 @@ import {
 import ShareButton from '../../../ShareButton';
 import { useIntl } from 'react-intl';
 import { colorPalette, defaultMargins, media } from 'stylesheet';
-import { Cause } from 'redux/Cause/types';
 import EventParticipateButton from '../../../EventParticipateButton';
 import { formatEventDate } from 'redux/Events/helpers/formatEventDate';
 import { css } from 'styled-components';
 import { formatEventAddress } from 'redux/Events/helpers/formatEventAddress';
+import { useHistory } from 'react-router';
+import { PATHS } from 'routes';
 
 interface EventInformationProps {
   event: EventType;
-  cause: Cause;
 }
 
 interface Information {
   label: ReactNode;
   iconSrc: string;
-  color?: string;
   bold?: boolean;
   onClick?: () => void;
   onOneLine?: boolean;
@@ -52,20 +51,33 @@ const ShareEventButton = ({ event }: { event: EventType }) => (
 );
 
 const OneInformation = ({ information }: { information: Information }) => {
-  const { label, iconSrc, color, bold, onClick, onOneLine } = information;
+  const { label, iconSrc, bold, onClick, onOneLine } = information;
 
   return (
     <OneInformationContainer onClick={onClick}>
       <OneInformationIcon src={iconSrc} />
-      <OneInformationLabel bold={bold} color={color} onOneLine={onOneLine}>
+      <OneInformationLabel
+        bold={bold}
+        color={onClick !== undefined ? colorPalette.blueCoalition : colorPalette.greyDark}
+        onOneLine={onOneLine}
+      >
         {label}
       </OneInformationLabel>
     </OneInformationContainer>
   );
 };
 
-const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cause }) => {
+const EventInformation: FunctionComponent<EventInformationProps> = ({ event }) => {
   const intl = useIntl();
+  const history = useHistory();
+
+  const goToCausePage = () => {
+    if (event === undefined || event.cause === undefined) {
+      return;
+    }
+
+    history.push(PATHS.CAUSE.url(event.cause.slug));
+  };
 
   const informations = [
     {
@@ -83,16 +95,17 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
       ? {
           label: event.visioUrl,
           iconSrc: '/images/camera.svg',
-          color: colorPalette.blueCoalition,
           onClick: () => window.open(event.visioUrl, '_blank'),
           onOneLine: true,
         }
       : null,
-    {
-      label: cause.name,
-      iconSrc: '/images/point.svg',
-      color: colorPalette.blueCoalition,
-    },
+    event.cause !== undefined
+      ? {
+          label: event.cause.name,
+          iconSrc: '/images/point.svg',
+          onClick: goToCausePage,
+        }
+      : null,
     event.organizer !== undefined
       ? {
           label: `${event.organizer.firstName} ${event.organizer.lastName}`,

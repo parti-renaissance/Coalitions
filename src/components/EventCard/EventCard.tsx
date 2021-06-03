@@ -43,6 +43,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
       return;
     }
 
+    window.open(PATHS.CAUSE.url(event.cause.slug), '_blank');
     history.push(PATHS.CAUSE.url(event.cause.slug));
   };
 

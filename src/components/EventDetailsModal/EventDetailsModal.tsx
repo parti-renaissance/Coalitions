@@ -18,7 +18,6 @@ import EventInformation from './components/EventInformation';
 import { EventType } from 'redux/Events/types';
 import Loader from 'components/Loader';
 import parse from 'html-react-parser';
-import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
 
 interface EventDetailsModalProps {
@@ -34,14 +33,13 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
   onClose,
 }) => {
   const intl = useIntl();
-  const history = useHistory();
 
   const goToCausePage = () => {
     if (event === undefined || event.cause === undefined) {
       return;
     }
 
-    history.push(PATHS.CAUSE.url(event.cause.slug));
+    window.open(PATHS.CAUSE.url(event.cause.slug), '_blank');
   };
 
   let upperTitle = '';

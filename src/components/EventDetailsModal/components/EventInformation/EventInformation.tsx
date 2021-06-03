@@ -19,7 +19,6 @@ import EventParticipateButton from '../../../EventParticipateButton';
 import { formatEventDate } from 'redux/Events/helpers/formatEventDate';
 import { css } from 'styled-components';
 import { formatEventAddress } from 'redux/Events/helpers/formatEventAddress';
-import { useHistory } from 'react-router';
 import { PATHS } from 'routes';
 
 interface EventInformationProps {
@@ -69,14 +68,13 @@ const OneInformation = ({ information }: { information: Information }) => {
 
 const EventInformation: FunctionComponent<EventInformationProps> = ({ event }) => {
   const intl = useIntl();
-  const history = useHistory();
 
   const goToCausePage = () => {
     if (event === undefined || event.cause === undefined) {
       return;
     }
 
-    history.push(PATHS.CAUSE.url(event.cause.slug));
+    window.open(PATHS.CAUSE.url(event.cause.slug), '_blank');
   };
 
   const informations = [

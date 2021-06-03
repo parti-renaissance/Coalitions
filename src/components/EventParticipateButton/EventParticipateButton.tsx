@@ -16,12 +16,16 @@ import { useDispatch } from 'react-redux';
 import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login';
 import { openEventParticipateModal } from 'redux/Events';
+import { getCurrentUser } from 'redux/User/selectors';
+import { useHistory } from 'react-router';
+import { PATHS } from 'routes';
 
 interface EventParticipateButtonProps {
   type: EventParticipateButtonType;
   event: EventType;
 }
 
+// eslint-disable-next-line complexity
 const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = ({
   type,
   event,
@@ -38,6 +42,12 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
   const { loading: isParticipateToEventLoading, participateToEvent } = useEventParticipate(
     event.uuid,
   );
+  const currentUser = useSelector(getCurrentUser);
+  const isOrganizer =
+    event.organizer !== undefined &&
+    currentUser !== undefined &&
+    event.organizer.uuid === currentUser.uuid;
+  const history = useHistory();
 
   const getSetIsHover = (hover: boolean) => () => {
     setIsHover(hover);
@@ -47,6 +57,11 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
     (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
+
+      if (isOrganizer) {
+        history.push(PATHS.UPDATE_EVENT.url(event.uuid));
+        return;
+      }
 
       if (!isUpcoming) {
         return;
@@ -62,7 +77,16 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
         dispatch(openEventParticipateModal(event));
       }
     },
-    [isUserLoggedIn, dispatch, event, isUpcoming, participateToEvent, removeEventParticipation],
+    [
+      isUserLoggedIn,
+      dispatch,
+      event,
+      isUpcoming,
+      participateToEvent,
+      removeEventParticipation,
+      isOrganizer,
+      history,
+    ],
   );
 
   const SubContainer = type === 'card' ? SmallButton : FullWidthButton;
@@ -70,6 +94,7 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
     event,
     type,
     isHover,
+    isOrganizer,
   });
 
   return (
@@ -82,7 +107,9 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
       <SubContainer
         onClick={onClick}
         isLoading={isRemovingParticipation || isParticipateToEventLoading}
-        disabled={isRemovingParticipation || isParticipateToEventLoading || !isUpcoming}
+        disabled={
+          !isOrganizer && (isRemovingParticipation || isParticipateToEventLoading || !isUpcoming)
+        }
       >
         {iconSrc !== undefined ? <Icon src={iconSrc} /> : null}
         {labelKey !== undefined ? (

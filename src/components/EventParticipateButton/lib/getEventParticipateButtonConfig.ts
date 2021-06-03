@@ -16,11 +16,25 @@ export const getEventParticipateButtonConfig = ({
   event,
   type,
   isHover,
+  isOrganizer,
 }: {
   event: EventType;
   type: EventParticipateButtonType;
   isHover: boolean;
+  isOrganizer: boolean;
 }): EventParticipateButtonConfig => {
+  if (isOrganizer) {
+    return {
+      labelKey: 'event_details.update',
+      customStyle: css`
+        background-color: ${colorPalette.pink};
+        color: ${colorPalette.white};
+        opacity: ${isHover ? 0.8 : 1};
+        font-weight: ${fontWeight.bold};
+      `,
+    };
+  }
+
   const { participate } = event;
   const isUpcoming = isUpcomingEvent(event);
 

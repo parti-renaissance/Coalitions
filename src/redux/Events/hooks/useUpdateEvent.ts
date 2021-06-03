@@ -50,6 +50,7 @@ export const useUpdateEvent = () => {
       if (response instanceof Error) return;
 
       if (response.uuid !== undefined) {
+        // TODO
         push({ pathname: PATHS.CAUSE.url('test'), search: `?eventId=${response.uuid}` });
         dispatch(
           updateSnackbar({

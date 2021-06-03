@@ -5,10 +5,12 @@ import { EventFormValues } from './useValidateForm';
 export const convertEventFormValuesToRawCreateEvent = ({
   values,
   causeId,
+  coalitionId,
   eventId,
 }: {
   values: EventFormValues;
-  causeId: string;
+  causeId?: string;
+  coalitionId?: string;
   eventId?: string;
 }): RawCreateEventType | RawUpdateEventType => {
   const {
@@ -27,7 +29,7 @@ export const convertEventFormValuesToRawCreateEvent = ({
 
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-  const rawCreateEvent = {
+  const rawCreateEvent: RawCreateEventType = {
     type: 'cause',
     mode,
     name,
@@ -40,10 +42,11 @@ export const convertEventFormValuesToRawCreateEvent = ({
       city_name: cityName,
     },
     visio_url: visioUrl,
-    causes: [causeId],
     time_zone: timeZone,
     begin_at: formatPickerDateToEventDate({ date: beginAt, timeZone }),
     finish_at: formatPickerDateToEventDate({ date: finishAt, timeZone }),
+    causes: causeId !== undefined ? [causeId] : [],
+    coalitions: causeId === undefined && coalitionId !== undefined ? [coalitionId] : [],
   };
 
   if (eventId === undefined) {

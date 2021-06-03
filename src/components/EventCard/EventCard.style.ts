@@ -18,6 +18,21 @@ export const MOBILE_MARGIN_BETWEEN_CARDS = SPACING_UNIT * 3;
 export const HEIGHT = SPACING_UNIT * 56;
 export const DESKTOP_WIDTH = SPACING_UNIT * 69;
 
+const MobileP = styled.div`
+  color: ${colorPalette.greyDark};
+  font-family: ${fontFamily.primary};
+  font-size: ${fontSize.p.mobile};
+  line-height: ${lineHeight.primary};
+  font-weight: ${fontWeight.normal};
+`;
+
+const MobilePOnOneLine = styled(MobileP)`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,19 +52,8 @@ export const Container = styled.div`
   `)}
 `;
 
-const MobileP = styled.div`
-  color: ${colorPalette.grey};
-  font-family: ${fontFamily.primary};
-  font-size: ${fontSize.p.mobile};
-  line-height: ${lineHeight.primary};
-  font-weight: ${fontWeight.normal};
-`;
-
-const MobilePOnOneLine = styled(MobileP)`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex: 1;
+export const CategoryName = styled(MobilePOnOneLine)`
+  color: ${colorPalette.pink};
 `;
 
 export const Name = styled.div`
@@ -62,38 +66,51 @@ export const Name = styled.div`
   -webkit-line-clamp: 2;
   overflow: hidden;
   flex-grow: 1;
-  max-height: ${getSpacing(10)};
+  height: 48px;
   font-family: ${fontFamily.secondary};
   font-size: ${fontSize.h1Small.mobile};
   line-height: ${lineHeight.secondary};
   color: ${colorPalette.greyDark};
-  margin-top: ${getSpacing(2)};
+  margin-top: ${getSpacing(1)};
 `;
 
-export const BottomButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
+export const InformationContainer = styled(MobileP)`
+  /*
+  OK for all browser except IE which is not maintained anymore since Nov 2020
+  cf: https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
+  */
+  display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
+  -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  flex-grow: 1;
+  max-height: 40px;
   margin-top: ${getSpacing(3)};
 `;
 
-export const HeaderContainer = styled.div`
+export const CauseNameContainer = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  margin-top: ${getSpacing(1)};
 `;
 
-export const SeeButton = styled(DefaultButton)`
-  margin-left: ${getSpacing(3)};
+const ICON_SIZE = getSpacing(4);
+
+export const CauseNameIcon = styled.img`
+  height: ${ICON_SIZE};
+  width: ${ICON_SIZE};
 `;
 
-export const CategoryName = styled(MobilePOnOneLine)`
-  color: ${colorPalette.pink};
+export const CauseNameLabel = styled(MobilePOnOneLine)`
+  color: ${colorPalette.blueCoalition};
+  margin-left: ${getSpacing(2)};
 `;
 
 export const ParticipantsCountContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: ${getSpacing(2)};
+  margin-top: ${getSpacing(1)};
 `;
 
 export const ParticipantsCountIconWrapper = styled.div`
@@ -102,30 +119,24 @@ export const ParticipantsCountIconWrapper = styled.div`
   justify-content: center;
 `;
 
-const PARTICIPANTS_COUNT_ICON_SIZE = getSpacing(3);
-
 export const ParticipantsCountIcon = styled.img`
-  height: ${PARTICIPANTS_COUNT_ICON_SIZE};
-  width: ${PARTICIPANTS_COUNT_ICON_SIZE};
+  height: ${ICON_SIZE};
+  width: ${ICON_SIZE};
 `;
 
 export const ParticipantsCountLabel = styled(MobilePOnOneLine)`
-  color: ${colorPalette.greyDark};
   margin-left: ${getSpacing(2)};
-`;
-
-export const InformationContainer = styled(MobileP)`
-  color: ${colorPalette.greyDark};
-  a {
-    color: ${colorPalette.greyDark};
-  }
 `;
 
 export const Bold = styled.span`
   font-weight: ${fontWeight.bold};
 `;
 
-export const Author = styled(MobilePOnOneLine)`
-  color: ${colorPalette.grey};
-  margin-top: ${getSpacing(2)};
+export const BottomButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const SeeButton = styled(DefaultButton)`
+  margin-left: ${getSpacing(3)};
 `;

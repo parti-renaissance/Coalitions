@@ -17,8 +17,15 @@ const LoginAndParticipateToEventModal: FunctionComponent = () => {
     dispatch(closeEventParticipateModal());
   };
 
-  const redirectToAfterAuth =
-    event !== null ? `${PATHS.CAUSE.url(event.causeId)}?eventId=${event.uuid}` : null;
+  let redirectToAfterAuth: null | string = null;
+  if (event !== null && (event.cause !== undefined || event.coalition !== undefined)) {
+    if (event.cause !== undefined) {
+      redirectToAfterAuth = PATHS.CAUSE.url(event.cause.slug);
+    } else if (event.coalition !== undefined) {
+      redirectToAfterAuth = PATHS.COALITION.url(event.coalition.uuid);
+    }
+    redirectToAfterAuth = `${redirectToAfterAuth}?eventId=${event.uuid}`;
+  }
 
   const onConnect = () => {
     dispatch(setAfterAuthParticipateToEvent(event !== null ? event.uuid : ''));

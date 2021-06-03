@@ -16,15 +16,13 @@ import {
 } from './EventDetailsModal.style';
 import EventInformation from './components/EventInformation';
 import { EventType } from 'redux/Events/types';
-import { Cause } from 'redux/Cause/types';
 import Loader from 'components/Loader';
 import parse from 'html-react-parser';
+import { PATHS } from 'routes';
 
 interface EventDetailsModalProps {
   event: EventType | undefined;
   isFetchingEvent: boolean;
-  cause: Cause | undefined;
-  isFetchingCause: boolean;
   onClose: () => void;
 }
 
@@ -32,42 +30,51 @@ interface EventDetailsModalProps {
 const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
   event,
   isFetchingEvent,
-  cause,
-  isFetchingCause,
   onClose,
 }) => {
   const intl = useIntl();
 
-  const isLoading =
-    (cause === undefined && isFetchingCause) || (event === undefined && isFetchingEvent);
-  const noEventFound =
-    (cause === undefined && !isFetchingCause) || (event === undefined && !isFetchingEvent);
+  const goToCausePage = () => {
+    if (event === undefined || event.cause === undefined) {
+      return;
+    }
+
+    window.open(PATHS.CAUSE.url(event.cause.slug), '_blank');
+  };
+
+  let upperTitle = '';
+  if (event !== undefined) {
+    upperTitle = event.category.name.toUpperCase();
+    if (event.coalition !== undefined) {
+      upperTitle = `${upperTitle} • ${event.coalition.name}`;
+    }
+  }
 
   return (
     <Modal onClose={onClose} isOpened width="large">
-      {isLoading ? <Loader /> : null}
-      {noEventFound ? intl.formatMessage({ id: 'event_details.not_found' }) : null}
-      {cause !== undefined && event !== undefined ? (
+      {event === undefined && isFetchingEvent ? <Loader /> : null}
+      {event === undefined && !isFetchingEvent
+        ? intl.formatMessage({ id: 'event_details.not_found' })
+        : null}
+      {event !== undefined ? (
         <ContentContainer>
           <ContentSubContainer>
-            <Category>
-              {`${event.category.name.toUpperCase()} • ${intl.formatMessage({
-                id: `events.mode.${event.mode}`,
-              })}`}
-            </Category>
+            <Category>{upperTitle}</Category>
             <Name>{event.name}</Name>
-            <CauseNameContainer>
-              <CauseIcon src="/images/point.svg" />
-              <CauseName>{cause.name}</CauseName>
-            </CauseNameContainer>
+            {event.cause !== undefined ? (
+              <CauseNameContainer onClick={goToCausePage}>
+                <CauseIcon src="/images/point.svg" />
+                <CauseName>{event.cause.name}</CauseName>
+              </CauseNameContainer>
+            ) : null}
             <Separator />
             <MobileInformationWrapper>
-              <EventInformation event={event} cause={cause} />
+              <EventInformation event={event} />
             </MobileInformationWrapper>
             <Description>{parse(event.description)}</Description>
           </ContentSubContainer>
           <DesktopInformationWrapper>
-            <EventInformation event={event} cause={cause} />
+            <EventInformation event={event} />
           </DesktopInformationWrapper>
         </ContentContainer>
       ) : null}

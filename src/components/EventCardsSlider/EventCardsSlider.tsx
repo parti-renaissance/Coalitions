@@ -3,7 +3,7 @@ import { EmptyMobileDiv, EventCardWrapper } from './EventCardsSlider.style';
 import { useIntl } from 'react-intl';
 import { getIsMobile } from 'services/mobile/mobile';
 import Slider from 'components/Slider';
-import { useFetchEvents } from 'redux/Events/hooks/useFetchEvents';
+import { useFetchEvents, GroupSource } from 'redux/Events/hooks/useFetchEvents';
 import {
   DESKTOP_MARGIN_BETWEEN_CARDS,
   DESKTOP_WIDTH,
@@ -17,18 +17,21 @@ interface EventCardsSliderProps {
   coalitionId?: string;
   causeId?: string;
   TitleComponent?: FunctionComponent;
+  groupSource?: GroupSource;
 }
 
 const EventCardsSlider: FunctionComponent<EventCardsSliderProps> = ({
   coalitionId,
   causeId,
   TitleComponent,
+  groupSource,
 }) => {
   const intl = useIntl();
   const isMobile = getIsMobile();
   const { fetchEvents, isFetchingEvents } = useFetchEvents({
     coalitionId,
     causeId,
+    groupSource,
   });
   const events = useSelector(getEvents);
 

@@ -8,12 +8,16 @@ import { resetEvents, updateEvents, markEventsAsParticipate } from '../slice';
 import { adaptEvent } from '../helpers/adapter';
 import { useFetchUserParticipateEvents } from './useFetchUserParticipateEvents';
 
+export type GroupSource = 'en_marche' | 'coalitions';
+
 export const useFetchEvents = ({
   coalitionId,
   causeId,
+  groupSource,
 }: {
   coalitionId?: string;
   causeId?: string;
+  groupSource?: GroupSource;
 }) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -26,9 +30,23 @@ export const useFetchEvents = ({
 
   const [{ loading: isFetchingEvents, error }, doFetchEvents] = useTypedAsyncFn(
     async (page: number) => {
-      const baseUrl = coalitionId !== undefined ? 'coalitions' : 'causes';
-      const id = coalitionId !== undefined ? coalitionId : (causeId as string);
-      return await coalitionApiClient.get(`${baseUrl}/${id}/events?page=${page}&page_size=30`);
+      let baseUrl = '';
+      if (coalitionId === undefined && causeId === undefined) {
+        baseUrl = 'events?';
+      } else {
+        if (coalitionId !== undefined) {
+          baseUrl = `coalitions/${coalitionId}`;
+        } else {
+          baseUrl = `causes/${causeId}`;
+        }
+        baseUrl = `${baseUrl}/events?`;
+      }
+
+      if (groupSource !== undefined) {
+        baseUrl = `${baseUrl}group_source=${groupSource}`;
+      }
+
+      return await coalitionApiClient.get(`${baseUrl}&page=${page}&page_size=30`);
     },
     [],
   );
@@ -40,7 +58,7 @@ export const useFetchEvents = ({
   }, [error]);
 
   const fetchEvents = useCallback(async () => {
-    if (!hasMore || (coalitionId === undefined && causeId === undefined)) {
+    if (!hasMore) {
       return;
     }
 
@@ -62,7 +80,7 @@ export const useFetchEvents = ({
     dispatch(markEventsAsParticipate(userParticipateEvents));
     setHasMore(eventsResponse.metadata.last_page >= page + 1);
     setPage(page + 1);
-  }, [doFetchEvents, hasMore, coalitionId, causeId, page, dispatch, doFetchUserParticipateEvents]);
+  }, [doFetchEvents, hasMore, page, dispatch, doFetchUserParticipateEvents]);
 
   return { fetchEvents, isFetchingEvents: isFetchingEvents || isFetchingUserParticipateEvents };
 };

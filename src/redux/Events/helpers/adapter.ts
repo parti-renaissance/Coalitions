@@ -31,7 +31,7 @@ export const adaptEvent = (rawEvent: RawEventType): EventType => {
           }
         : undefined,
     organizer:
-      organizer !== null
+      organizer != null
         ? { uuid: '123', firstName: organizer.first_name, lastName: organizer.last_name }
         : undefined,
     category,

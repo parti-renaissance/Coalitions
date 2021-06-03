@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
-  Block,
+  Wrapper,
+  WrapperWithHorizontalMargin,
   TopPartContainer,
   Title,
   Content,
@@ -9,8 +10,7 @@ import {
   DesktopVideoWrapper,
   CreateCauseButtonWrapper,
   Bold,
-  OurCommitmentsWrapper,
-  SuccessStoriesWrapper,
+  CardListWrapper,
 } from './Home.style';
 import { CauseDefinition } from 'components/Definition/CauseDefinition';
 import { CoalitionDefinition } from 'components/Definition/CoalitionDefinition';
@@ -29,12 +29,13 @@ import SuccessStories from 'components/SuccessStories';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import HorizontalCausesList from 'components/HorizontalCausesList';
 import { getIsMobile } from 'services/mobile/mobile';
+import EventCardsSlider from 'components/EventCardsSlider';
 
 export const VIDEO_ID = 'KkDsxQLM3Ao';
 
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
-  const { isCoalitionPageEnable } = useFeatureToggling();
+  const { isCoalitionPageEnable, areEventsEnable } = useFeatureToggling();
   const isMobile = getIsMobile();
 
   const onCoalitionClick = (coalition: Coalition) => {
@@ -78,25 +79,34 @@ const Home: React.FunctionComponent = () => {
         {!isMobile ? <DesktopVideoWrapper>{renderVideo()}</DesktopVideoWrapper> : null}
       </TopPartContainer>
       <CauseDefinition />
-      <Block>
+      <CardListWrapper>
         <HorizontalCausesList />
-      </Block>
-      <OurCommitmentsWrapper>
+      </CardListWrapper>
+      {areEventsEnable ? (
+        <CardListWrapper>
+          <EventCardsSlider groupSource="coalitions" />
+        </CardListWrapper>
+      ) : null}
+      <WrapperWithHorizontalMargin>
         <OurCommitments />
-      </OurCommitmentsWrapper>
-      <SuccessStoriesWrapper>
+      </WrapperWithHorizontalMargin>
+      <CardListWrapper>
         <SuccessStories />
-      </SuccessStoriesWrapper>
-      <CoalitionDefinition />
-      <Block>
+      </CardListWrapper>
+      <Wrapper>
+        <CoalitionDefinition />
+      </Wrapper>
+      <WrapperWithHorizontalMargin>
         <h3 id="coalitions">
           <FormattedMessage id="coalition.title" />
         </h3>
         <CoalitionCardsWrapper>
           <CoalitionCards onCoalitionClick={onCoalitionClick} />
         </CoalitionCardsWrapper>
-      </Block>
-      <CreateCauseCTA displayLinkToCauseList />
+      </WrapperWithHorizontalMargin>
+      <Wrapper>
+        <CreateCauseCTA displayLinkToCauseList />
+      </Wrapper>
       <SuccessModal />
     </>
   );

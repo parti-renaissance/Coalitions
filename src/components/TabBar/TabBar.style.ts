@@ -25,7 +25,7 @@ export const LabelsContainer = styled(MUITabs)`
 `;
 
 export const Label = styled(MUITab)`
-  ${fonts.p};
+  ${fonts.input};
   padding: ${getSpacing(2)} ${getSpacing(3)};
   text-transform: none;
   ${({ selected }) =>

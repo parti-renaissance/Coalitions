@@ -170,10 +170,10 @@
     "charter-of-values": "Charte des valeurs"
   },
   "admin_cause": {
-    "update-cause": "Général",
+    "update-cause": "Modifier ma cause",
     "quick-action": "Actions de soutien",
-    "send-mails": "Envoi de mails",
-    "events": "Événements"
+    "send-mails": "Envoyer un email",
+    "events": "Créer un événement"
   },
   "update_cause": {
     "validate": "Enregistrer et publier",
@@ -379,7 +379,8 @@
     "postal_code": "Code postal",
     "city": "Ville",
     "country": "Pays",
-    "visio_link_tips": "Votre événement se tiendra en présentiel. Vous pouvez néanmoins lui adjoindre un lien pour une retransmission en direct."
+    "visio_link_tips": "Votre événement se tiendra en présentiel. Vous pouvez néanmoins lui adjoindre un lien pour une retransmission en direct.",
+    "address_tips": "Votre événement se tiendra en ligne, l’adresse ci-dessous ne sera pas affichée mais servira à promouvoir votre événement aux personnes proches."
   },
   "event_details": {
     "information": "Informations",

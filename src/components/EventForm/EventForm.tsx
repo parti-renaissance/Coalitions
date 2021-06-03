@@ -132,6 +132,11 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 {intl.formatMessage({ id: 'event_form.mode.online' })}
               </ModeButton>
             </ModeButtonsContainer>
+            {values.mode === 'online' ? (
+              <InputFieldWrapper>
+                <Description>{intl.formatMessage({ id: 'event_form.address_tips' })}</Description>
+              </InputFieldWrapper>
+            ) : null}
             <InputFieldWrapper>
               <InputField
                 required

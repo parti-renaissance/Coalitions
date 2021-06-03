@@ -84,7 +84,7 @@ const Home: React.FunctionComponent = () => {
       </CardListWrapper>
       {areEventsEnable ? (
         <CardListWrapper>
-          <EventCardsSlider groupSource="coalitions" />
+          <EventCardsSlider filters={{ groupSource: 'coalitions', inFuture: true }} />
         </CardListWrapper>
       ) : null}
       <WrapperWithHorizontalMargin>

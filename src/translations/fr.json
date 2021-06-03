@@ -170,10 +170,10 @@
     "charter-of-values": "Charte des valeurs"
   },
   "admin_cause": {
-    "update-cause": "Général",
+    "update-cause": "Modifier ma cause",
     "quick-action": "Actions de soutien",
-    "send-mails": "Envoi de mails",
-    "events": "Événements"
+    "send-mails": "Envoyer un email",
+    "events": "Créer un événement"
   },
   "update_cause": {
     "validate": "Enregistrer et publier",

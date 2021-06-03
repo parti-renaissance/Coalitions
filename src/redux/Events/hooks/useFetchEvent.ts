@@ -3,45 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isUserLogged } from 'redux/Login';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import HandleErrorService from 'services/HandleErrorService';
+import { coalitionApiClient } from 'services/networking/client';
+import { adaptEvent } from '../helpers/adapter';
 import { updateOneEvent } from '../slice';
-import { EventType } from '../types';
-
-export const FAKE_EVENT: EventType = {
-  uuid: '1',
-  name: 'mon événement',
-  beginAt: '2021-06-20 16:30:30',
-  finishAt: '2021-06-21 16:30:30',
-  mode: 'online',
-  category: {
-    slug: 'convivialite',
-    name: 'Convivialité',
-  },
-  timeZone: 'Europe/Paris',
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  visioUrl: 'www.google.com',
-  numberOfParticipants: 4,
-  organizer: {
-    uuid: '123',
-    firstName: 'Gaspard',
-    lastName: 'Denis',
-  },
-  causeId: '3165e54b-aab9-40e4-90cf-2de59ac591ca',
-  postAddress: {
-    address: '48 boulevard des Batignolles',
-    postalCode: '75017',
-    cityName: 'Paris',
-    countryCode: 'FR',
-  },
-};
+import { RawEventType } from '../types';
 
 export const useFetchEvent = (id: string) => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const dispatch = useDispatch();
 
   const [{ loading, error }, doFetchEvent] = useTypedAsyncFn(async () => {
-    console.log({ id });
-    return new Promise(resolve => setTimeout(resolve, 2000, FAKE_EVENT));
+    return await coalitionApiClient.get(`events/${id}`);
   }, []);
 
   useEffect(() => {
@@ -55,13 +27,12 @@ export const useFetchEvent = (id: string) => {
       return;
     }
 
-    const event: EventType | undefined = await doFetchEvent();
-
-    if (event === undefined || event instanceof Error) {
+    const rawEvent: RawEventType | undefined = await doFetchEvent();
+    if (rawEvent === undefined || rawEvent instanceof Error) {
       return;
     }
 
-    dispatch(updateOneEvent(event));
+    dispatch(updateOneEvent(adaptEvent(rawEvent)));
   }, [doFetchEvent, isUserLoggedIn, dispatch]);
 
   return { loading, fetchEvent };

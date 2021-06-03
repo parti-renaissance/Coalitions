@@ -30,7 +30,8 @@ import { convertEventFormValuesToRawCreateEvent } from './lib/convertEventFormVa
 import { getDatePickerMinAndMax } from './lib/getDatePickerMinAndMax';
 
 interface EventFormProps {
-  causeId: string;
+  causeId?: string;
+  coalitionId?: string;
   initialEvent?: EventType;
   onSubmit: (event: RawCreateEventType | RawUpdateEventType) => void;
   isSubmitting: boolean;
@@ -41,6 +42,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   onSubmit: onSubmitProp,
   isSubmitting,
   causeId,
+  coalitionId,
 }) => {
   const intl = useIntl();
   const { loading, eventCategories, fetchEventCategories } = useFetchEventCategories();
@@ -55,6 +57,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       convertEventFormValuesToRawCreateEvent({
         values,
         causeId,
+        coalitionId,
         eventId: initialEvent !== undefined ? initialEvent.uuid : undefined,
       }),
     );

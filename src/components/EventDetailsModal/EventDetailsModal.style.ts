@@ -70,6 +70,7 @@ export const MobileInformationWrapper = styled.div`
 `;
 
 export const CauseNameContainer = styled.div`
+  cursor: pointer;
   display: none;
   ${media.desktop(`
     display: flex;

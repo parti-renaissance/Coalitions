@@ -31,6 +31,7 @@ export const useFetchEvents = (
   } = useFetchUserParticipateEvents();
 
   const [{ loading: isFetchingEvents, error }, doFetchEvents] = useTypedAsyncFn(
+    // eslint-disable-next-line complexity
     async (page: number) => {
       let baseUrl = '';
       if (

@@ -32,7 +32,27 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
   const history = useHistory();
 
   const showEventDetails = () => {
-    history.push({ search: `?eventId=${event.uuid}` });
+    const search = `?eventId=${event.uuid}`;
+
+    if (window.location.pathname === PATHS.HOME.url()) {
+      if (event.cause === undefined && event.coalition === undefined) {
+        return;
+      }
+
+      if (event.cause !== undefined) {
+        history.push({
+          pathname: PATHS.CAUSE.url(event.cause.slug),
+          search,
+        });
+      } else if (event.coalition !== undefined) {
+        history.push({
+          pathname: PATHS.COALITION.url(event.coalition.uuid),
+          search,
+        });
+      }
+    } else {
+      history.push({ search });
+    }
   };
 
   const goToCausePage = (e: MouseEvent) => {

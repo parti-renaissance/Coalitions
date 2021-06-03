@@ -25,6 +25,7 @@ interface EventParticipateButtonProps {
   event: EventType;
 }
 
+// eslint-disable-next-line complexity
 const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = ({
   type,
   event,

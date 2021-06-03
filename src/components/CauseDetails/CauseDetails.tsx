@@ -74,7 +74,7 @@ const CauseDetails: FunctionComponent<CauseDetailsProps> = ({ cause, onSupport, 
           {areEventsEnable ? (
             <EventCardsSliderWrapper>
               <EventCardsSlider
-                causeId={(cause as Cause).uuid}
+                filters={{ causeId: (cause as Cause).uuid }}
                 TitleComponent={({ children }) => createElement('h2', null, children)}
               />
             </EventCardsSliderWrapper>

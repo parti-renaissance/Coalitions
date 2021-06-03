@@ -147,7 +147,7 @@ const Coalition: FunctionComponent = () => {
         </ContentSubContainer>
         {areEventsEnable ? (
           <ContentSubContainer>
-            <EventCardsSlider coalitionId={coalitionId} />
+            <EventCardsSlider filters={{ coalitionId }} />
           </ContentSubContainer>
         ) : null}
       </ContentContainer>

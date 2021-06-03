@@ -14,25 +14,22 @@ import { useSelector } from 'react-redux';
 import { getEvents } from 'redux/Events/selectors';
 
 interface EventCardsSliderProps {
-  coalitionId?: string;
-  causeId?: string;
   TitleComponent?: FunctionComponent;
-  groupSource?: GroupSource;
+  filters?: {
+    groupSource?: GroupSource;
+    inFuture?: boolean;
+    coalitionId?: string;
+    causeId?: string;
+  };
 }
 
 const EventCardsSlider: FunctionComponent<EventCardsSliderProps> = ({
-  coalitionId,
-  causeId,
   TitleComponent,
-  groupSource,
+  filters,
 }) => {
   const intl = useIntl();
   const isMobile = getIsMobile();
-  const { fetchEvents, isFetchingEvents } = useFetchEvents({
-    coalitionId,
-    causeId,
-    groupSource,
-  });
+  const { fetchEvents, isFetchingEvents } = useFetchEvents(filters);
   const events = useSelector(getEvents);
 
   useEffect(() => {

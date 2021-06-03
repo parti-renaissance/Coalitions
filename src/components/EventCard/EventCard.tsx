@@ -44,7 +44,6 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
     }
 
     window.open(PATHS.CAUSE.url(event.cause.slug), '_blank');
-    history.push(PATHS.CAUSE.url(event.cause.slug));
   };
 
   const numberOfParticipants = event.numberOfParticipants;

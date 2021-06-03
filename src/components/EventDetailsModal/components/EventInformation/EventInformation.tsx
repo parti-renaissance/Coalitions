@@ -73,7 +73,7 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event, cau
       iconSrc: '/images/clock.svg',
       bold: true,
     },
-    event.postAddress !== undefined
+    event.postAddress !== undefined && event.mode !== 'online'
       ? {
           label: formatEventAddress(event),
           iconSrc: '/images/mapPin.svg',

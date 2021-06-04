@@ -77,6 +77,7 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
                 inputProps={{ maxLength: 255 }}
               />
             </InputFieldWrapper>
+
             <EditorContainer>
               <Editor
                 editorState={editorState}
@@ -90,6 +91,9 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
                   lineHeight: lineHeight.primary,
                   fontSize: fontSize.input.desktop,
                   padding: '13.5px 14px 18.5px',
+                  ...(touched.body === true && errors.body !== undefined
+                    ? { border: '1px solid red', borderRadius: '4px' }
+                    : {}),
                 }}
                 toolbar={{
                   options: ['inline', 'textAlign', 'list', 'link', 'image'],
@@ -99,25 +103,9 @@ export const SendMails: FunctionComponent<SendMailsProps> = ({ causeId }) => {
                   id: 'send_mails.body',
                 })}
               />
+              {touched.body === true && errors.body && <p className={'errors'}>{errors.body}</p>}
             </EditorContainer>
-            {/* <InputFieldWrapper>
-              <InputField
-                placeholder={formatMessage({
-                  id: 'send_mails.body',
-                })}
-                required
-                type="text"
-                name="body"
-                multiline
-                rows={10}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.body}
-                error={touched.body === true && errors.body !== undefined}
-                helperText={touched.body === true ? errors.body : undefined}
-                inputProps={{ maxLength: 6000 }}
-              />
-            </InputFieldWrapper> */}
+
             <ValidateButton
               disabled={loading || Object.keys(errors).length > 0}
               type="submit"

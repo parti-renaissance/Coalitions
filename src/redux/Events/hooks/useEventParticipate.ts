@@ -16,7 +16,7 @@ const useEventParticipateErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (doesErrorIncludes(error, 'Cette valeur est déjà utilisée')) {
+      if (doesErrorIncludes(error, "Vous êtes déjà inscrit(e) à l'événement")) {
         return formatMessage({ id: 'errors.already-participate-to-this-event' });
       }
       return null;

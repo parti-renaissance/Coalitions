@@ -21,8 +21,8 @@ export interface RawCreateEventType {
     city_name: string;
     country: string;
   };
-  causes?: string[];
-  coalitions?: string[];
+  cause?: string;
+  coalition?: string;
 }
 
 export type RawUpdateEventType = {

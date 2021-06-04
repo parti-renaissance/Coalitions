@@ -27,6 +27,7 @@ export const colorPalette = {
   blueCoalition: '#0029FF',
   white: '#FFFFFF',
   red: '#EB0303',
+  error: '#F44336',
   redLight: '#FFDDDD',
   blackTransparent: 'rgba(0, 0, 0, 0.24)',
   blue: '#045BFF',

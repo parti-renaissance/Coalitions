@@ -16,6 +16,7 @@ export const adaptEvent = (rawEvent: RawEventType): EventType => {
     organizer,
     cause,
     coalition: rawCoalition,
+    status,
   } = rawEvent;
 
   let coalition = rawCoalition;
@@ -49,5 +50,6 @@ export const adaptEvent = (rawEvent: RawEventType): EventType => {
     finishAt: finish_at,
     cause,
     coalition,
+    status,
   };
 };

@@ -398,6 +398,7 @@
     "do_participate": "Vous participez",
     "remove_participation": "Ne plus participer",
     "participate_success": "Votre participation a bien été enregistrée.",
-    "update": "Modifier"
+    "update": "Modifier",
+    "cancelled_event": "Événement annulé"
   }
 }

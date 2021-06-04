@@ -30,7 +30,7 @@ export const convertEventFormValuesToRawCreateEvent = ({
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const rawCreateEvent: RawCreateEventType = {
-    type: 'cause',
+    type: causeId !== undefined ? 'cause' : 'coalition',
     mode,
     name,
     description,

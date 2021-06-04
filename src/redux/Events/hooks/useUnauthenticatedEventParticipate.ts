@@ -18,7 +18,7 @@ const useUnauthenticatedEventParticipateErrorHandler = () => {
       if (error instanceof Response || error === undefined || error.message === undefined) {
         return null;
       }
-      if (doesErrorIncludes(error, 'utilisateur avec cette adresse e-mail existe déjà')) {
+      if (doesErrorIncludes(error, "Vous êtes déjà inscrit(e) à l'événement")) {
         return formatMessage({ id: 'errors.mail-of-existing-account-for-event-participate' });
       }
       return null;

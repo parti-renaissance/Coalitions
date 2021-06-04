@@ -381,7 +381,11 @@
     "city": "Ville",
     "country": "Pays",
     "visio_link_tips": "Votre événement se tiendra en présentiel. Vous pouvez néanmoins lui adjoindre un lien pour une retransmission en direct.",
-    "address_tips": "Votre événement se tiendra en ligne, l’adresse ci-dessous ne sera pas affichée mais servira à promouvoir votre événement aux personnes proches."
+    "address_tips": "Votre événement se tiendra en ligne, l’adresse ci-dessous ne sera pas affichée mais servira à promouvoir votre événement aux personnes proches.",
+    "errors": {
+      "empty_dates_range": "La durée de votre événement ne peut pas être égale à 0.",
+      "too_long_event": "Votre événement ne peut pas durer plus de 72h."
+    }
   },
   "event_details": {
     "information": "Informations",

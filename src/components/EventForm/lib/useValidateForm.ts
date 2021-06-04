@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl';
 import { EventMode } from 'redux/Events/types';
+import { format } from 'date-fns';
 
 export interface EventFormValues {
   mode: EventMode;
@@ -77,12 +78,23 @@ export const useValidateForm = () => {
       errors.visioUrl = requiredErrorMessage;
     }
 
-    if (beginAt === undefined) {
+    if (beginAt === undefined || beginAt.length === 0) {
       errors.beginAt = requiredErrorMessage;
-    }
-
-    if (finishAt === undefined) {
+    } else if (finishAt === undefined || finishAt.length === 0) {
       errors.finishAt = requiredErrorMessage;
+    } else if (beginAt >= finishAt) {
+      const dateRangeErrorMessage = intl.formatMessage({
+        id: 'event_form.errors.empty_dates_range',
+      });
+      errors.finishAt = dateRangeErrorMessage;
+    } else {
+      const finishAtMinusMaxDuration = new Date(finishAt);
+      finishAtMinusMaxDuration.setDate(finishAtMinusMaxDuration.getDate() - 3);
+      if (beginAt < format(finishAtMinusMaxDuration, "yyyy-MM-dd'T'HH:mm")) {
+        errors.finishAt = intl.formatMessage({
+          id: 'event_form.errors.too_long_event',
+        });
+      }
     }
 
     if (categorySlug === undefined || categorySlug.length === 0) {

@@ -61,6 +61,7 @@ export type EventType = {
     uuid: string;
     name: string;
   };
+  status: string;
 };
 
 export interface RawEventType {
@@ -98,4 +99,5 @@ export interface RawEventType {
     uuid: string;
     name: string;
   };
+  status: string;
 }

@@ -75,7 +75,8 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
 
   const formattedDate = formatEventDate({
     timeZone: event.timeZone,
-    date: event.beginAt,
+    beginAt: event.beginAt,
+    finishAt: event.finishAt,
     type: 'card',
   });
 

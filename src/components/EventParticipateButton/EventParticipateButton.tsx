@@ -42,12 +42,13 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
   const { loading: isParticipateToEventLoading, participateToEvent } = useEventParticipate(
     event.uuid,
   );
+  const history = useHistory();
   const currentUser = useSelector(getCurrentUser);
   const isOrganizer =
     event.organizer !== undefined &&
     currentUser !== undefined &&
     event.organizer.uuid === currentUser.uuid;
-  const history = useHistory();
+  const isCancelled = event.status === 'CANCELLED';
 
   const getSetIsHover = (hover: boolean) => () => {
     setIsHover(hover);
@@ -57,6 +58,10 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
     (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
+
+      if (isCancelled) {
+        return;
+      }
 
       if (isOrganizer) {
         history.push(PATHS.UPDATE_EVENT.url(event.uuid));
@@ -86,6 +91,7 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
       removeEventParticipation,
       isOrganizer,
       history,
+      isCancelled,
     ],
   );
 
@@ -95,6 +101,7 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
     type,
     isHover,
     isOrganizer,
+    isCancelled,
   });
 
   return (

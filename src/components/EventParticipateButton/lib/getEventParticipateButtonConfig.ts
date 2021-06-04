@@ -17,12 +17,26 @@ export const getEventParticipateButtonConfig = ({
   type,
   isHover,
   isOrganizer,
+  isCancelled,
 }: {
   event: EventType;
   type: EventParticipateButtonType;
   isHover: boolean;
   isOrganizer: boolean;
+  isCancelled: boolean;
 }): EventParticipateButtonConfig => {
+  if (isCancelled) {
+    return {
+      labelKey: 'event_details.cancelled_event',
+      customStyle: css`
+        background-color: ${colorPalette.redLight};
+        color: ${colorPalette.error};
+        opacity: ${isHover ? 0.8 : 1};
+        font-weight: ${fontWeight.bold};
+      `,
+    };
+  }
+
   if (isOrganizer) {
     return {
       labelKey: 'event_details.update',
@@ -35,20 +49,19 @@ export const getEventParticipateButtonConfig = ({
     };
   }
 
-  const { participate } = event;
-  const isUpcoming = isUpcomingEvent(event);
+  if (!isUpcomingEvent(event)) {
+    return {
+      labelKey: 'event_details.passed',
+      customStyle: css`
+        background-color: ${colorPalette.greyDark}1A;
+        color: ${colorPalette.grey};
+        font-weight: ${fontWeight.bold};
+      `,
+    };
+  }
 
-  let iconAndLabel: EventParticipateButtonConfig = {
-    labelKey: 'event_details.passed',
-    customStyle: css`
-      background-color: ${colorPalette.greyDark}1A;
-      color: ${colorPalette.grey};
-      font-weight: ${fontWeight.bold};
-    `,
-  };
-
-  if (isUpcoming && participate !== true) {
-    iconAndLabel = {
+  if (event.participate !== true) {
+    return {
       labelKey: 'event_details.participate',
       customStyle: css`
         background-color: ${colorPalette.pink};
@@ -57,24 +70,19 @@ export const getEventParticipateButtonConfig = ({
         font-weight: ${fontWeight.bold};
       `,
     };
-  } else if (isUpcoming && participate === true) {
+  } else {
     if (!isHover) {
-      iconAndLabel = {
+      return {
         iconSrc: '/images/check.svg',
         customStyle: css`
           background-color: ${colorPalette.greyDark}1A;
           color: ${colorPalette.greyDark};
           font-weight: ${fontWeight.bold};
         `,
+        ...(type === 'modal' ? { labelKey: 'event_details.do_participate' } : {}),
       };
-      if (type === 'modal') {
-        iconAndLabel = {
-          ...iconAndLabel,
-          labelKey: 'event_details.do_participate',
-        };
-      }
     } else {
-      iconAndLabel = {
+      return {
         iconSrc: '/images/cross.svg',
         customStyle: css`
           background-color: ${colorPalette.red}1A;
@@ -82,15 +90,8 @@ export const getEventParticipateButtonConfig = ({
           opacity: ${isHover ? 0.8 : 1};
           font-weight: ${fontWeight.bold};
         `,
+        ...(type === 'modal' ? { labelKey: 'event_details.remove_participation' } : {}),
       };
-      if (type === 'modal') {
-        iconAndLabel = {
-          ...iconAndLabel,
-          labelKey: 'event_details.remove_participation',
-        };
-      }
     }
   }
-
-  return iconAndLabel;
 };

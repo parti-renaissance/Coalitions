@@ -53,9 +53,9 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
   return (
     <Modal onClose={onClose} isOpened width="large">
       {event === undefined && isFetchingEvent ? <Loader /> : null}
-      {event === undefined && !isFetchingEvent
-        ? intl.formatMessage({ id: 'event_details.not_found' })
-        : null}
+      {event === undefined && !isFetchingEvent ? (
+        <p>{intl.formatMessage({ id: 'event_details.not_found' })}</p>
+      ) : null}
       {event !== undefined ? (
         <ContentContainer>
           <ContentSubContainer>

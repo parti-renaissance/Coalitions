@@ -6,30 +6,13 @@ import { updateSnackbar } from 'redux/Snackbar';
 import { Severity } from 'redux/Snackbar/types';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
-import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
+import HandleErrorService from 'services/HandleErrorService';
 import { authenticatedApiClient } from 'services/networking/client';
-import { RawCreateEventType } from '../types';
-
-const useCreateEventErrorHandler = () => {
-  const { formatMessage } = useIntl();
-
-  return useCallback(
-    (error?: APIErrorsType) => {
-      if (error instanceof Response || error === undefined || error.message === undefined) {
-        return null;
-      }
-      if (doesErrorIncludes(error, 'name: Cette valeur est déjà utilisée')) {
-        return formatMessage({ id: 'errors.already-used-event-name' });
-      }
-      return null;
-    },
-    [formatMessage],
-  );
-};
+import { adaptEvent } from '../helpers/adapter';
+import { RawCreateEventType, RawEventType } from '../types';
 
 export const useCreateEvent = () => {
   const { push } = useHistory();
-  const errorHandler = useCreateEventErrorHandler();
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
 
@@ -39,19 +22,27 @@ export const useCreateEvent = () => {
 
   useEffect(() => {
     if (error !== undefined) {
-      HandleErrorService.showErrorSnackbar(error, errorHandler);
+      HandleErrorService.showErrorSnackbar(error);
     }
-  }, [error, errorHandler]);
+  }, [error]);
 
   const createEvent = useCallback(
     async (event: RawCreateEventType) => {
-      const response = await doCreateEvent(event);
+      const response: RawEventType = await doCreateEvent(event);
 
       if (response instanceof Error) return;
 
       if (response.uuid !== undefined) {
-        // TODO
-        push({ pathname: PATHS.CAUSE.url('test'), search: `?eventId=${response.uuid}` });
+        const event = adaptEvent(response);
+
+        if (event.cause !== undefined) {
+          push({ pathname: PATHS.CAUSE.url(event.cause.slug), search: `?eventId=${event.uuid}` });
+        } else if (event.coalition !== undefined) {
+          push({
+            pathname: PATHS.COALITION.url(event.coalition.uuid),
+            search: `?eventId=${event.uuid}`,
+          });
+        }
         dispatch(
           updateSnackbar({
             message: formatMessage({ id: 'event_form.create.success' }),

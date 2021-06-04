@@ -8,7 +8,8 @@ import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { PATHS } from 'routes';
 import HandleErrorService, { APIErrorsType, doesErrorIncludes } from 'services/HandleErrorService';
 import { authenticatedApiClient } from 'services/networking/client';
-import { RawUpdateEventType } from '../types';
+import { adaptEvent } from '../helpers/adapter';
+import { RawEventType, RawUpdateEventType } from '../types';
 
 const useUpdateEventErrorHandler = () => {
   const { formatMessage } = useIntl();
@@ -34,7 +35,7 @@ export const useUpdateEvent = () => {
   const errorHandler = useUpdateEventErrorHandler();
 
   const [{ loading, error }, doUpdateEvent] = useTypedAsyncFn(async (event: RawUpdateEventType) => {
-    return await authenticatedApiClient.put('v3/events', event);
+    return await authenticatedApiClient.put(`v3/events/${event.uuid}`, event);
   }, []);
 
   useEffect(() => {
@@ -45,13 +46,22 @@ export const useUpdateEvent = () => {
 
   const updateEvent = useCallback(
     async (event: RawUpdateEventType) => {
-      const response = await doUpdateEvent(event);
+      const response: RawEventType = await doUpdateEvent(event);
 
       if (response instanceof Error) return;
 
       if (response.uuid !== undefined) {
-        // TODO
-        push({ pathname: PATHS.CAUSE.url('test'), search: `?eventId=${response.uuid}` });
+        const event = adaptEvent(response);
+
+        if (event.cause !== undefined) {
+          push({ pathname: PATHS.CAUSE.url(event.cause.slug), search: `?eventId=${event.uuid}` });
+        } else if (event.coalition !== undefined) {
+          push({
+            pathname: PATHS.COALITION.url(event.coalition.uuid),
+            search: `?eventId=${event.uuid}`,
+          });
+        }
+
         dispatch(
           updateSnackbar({
             message: formatMessage({ id: 'event_form.update.success' }),

@@ -6,6 +6,7 @@ interface FeatureToggles {
   isSendMailEnabled: boolean;
   isSubscriptionUpdateEnabled: boolean;
   areEventsEnable: boolean;
+  isDeleteEventEnable: boolean;
 }
 
 export const useFeatureToggling = (): FeatureToggles => {
@@ -18,6 +19,7 @@ export const useFeatureToggling = (): FeatureToggles => {
       isSendMailEnabled: true,
       isSubscriptionUpdateEnabled: true,
       areEventsEnable: false,
+      isDeleteEventEnable: false,
     };
   }
 
@@ -29,5 +31,6 @@ export const useFeatureToggling = (): FeatureToggles => {
     isSendMailEnabled: true,
     isSubscriptionUpdateEnabled: true,
     areEventsEnable: true,
+    isDeleteEventEnable: false,
   };
 };

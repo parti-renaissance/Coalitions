@@ -45,8 +45,8 @@ export const convertEventFormValuesToRawCreateEvent = ({
     time_zone: timeZone,
     begin_at: formatPickerDateToEventDate({ date: beginAt, timeZone }),
     finish_at: formatPickerDateToEventDate({ date: finishAt, timeZone }),
-    causes: causeId !== undefined ? [causeId] : [],
-    coalitions: causeId === undefined && coalitionId !== undefined ? [coalitionId] : [],
+    cause: causeId,
+    coalition: causeId === undefined ? coalitionId : undefined,
   };
 
   if (eventId === undefined) {

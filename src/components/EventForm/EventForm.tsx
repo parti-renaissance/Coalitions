@@ -29,6 +29,7 @@ import { CityOrCountryType } from 'components/CityAutocomplete/hooks/useCityAndC
 import { convertEventFormValuesToRawCreateEvent } from './lib/convertEventFormValuesToRawCreateEvent';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { useFeatureToggling } from 'services/useFeatureToggling';
 
 interface EventFormProps {
   causeId?: string;
@@ -48,6 +49,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   const intl = useIntl();
   const { loading, eventCategories, fetchEventCategories } = useFetchEventCategories();
   const { validateForm } = useValidateForm();
+  const { isDeleteEventEnable } = useFeatureToggling();
 
   useEffect(() => {
     fetchEventCategories();
@@ -285,7 +287,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
               />
             </InputFieldWrapper>
             <BottomButtonsWrapper>
-              {initialEvent !== undefined ? <DeleteEventButton /> : null}
+              {isDeleteEventEnable && initialEvent !== undefined ? <DeleteEventButton /> : null}
               <FullWidthButton
                 isLoading={isSubmitting}
                 disabled={

@@ -27,7 +27,8 @@ import { FullWidthButton } from 'components/Button/Button';
 import CityAutocomplete from 'components/CityAutocomplete';
 import { CityOrCountryType } from 'components/CityAutocomplete/hooks/useCityAndCountryAutocomplete';
 import { convertEventFormValuesToRawCreateEvent } from './lib/convertEventFormValuesToRawCreateEvent';
-import { getDatePickerMinAndMax } from './lib/getDatePickerMinAndMax';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 interface EventFormProps {
   causeId?: string;
@@ -68,6 +69,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   }
 
   const initialValues = getInitialValues(initialEvent);
+  const now = format(new Date(), "yyyy-MM-dd'T'HH:mm", { locale: fr });
 
   return (
     <Container>
@@ -228,11 +230,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                   error={touched.beginAt === true && errors.beginAt !== undefined}
                   helperText={touched.beginAt === true ? errors.beginAt : undefined}
                   InputLabelProps={{ shrink: true }}
-                  inputProps={getDatePickerMinAndMax({
-                    beginAt: values.beginAt,
-                    finishAt: values.finishAt,
-                    forBeginAt: true,
-                  })}
+                  inputProps={{ min: now }}
                 />
               </InputFieldWrapper>
               <InputFieldWrapper>
@@ -247,11 +245,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                   error={touched.finishAt === true && errors.finishAt !== undefined}
                   helperText={touched.finishAt === true ? errors.finishAt : undefined}
                   InputLabelProps={{ shrink: true }}
-                  inputProps={getDatePickerMinAndMax({
-                    beginAt: values.beginAt,
-                    finishAt: values.finishAt,
-                    forBeginAt: false,
-                  })}
+                  inputProps={{ min: now }}
                 />
               </InputFieldWrapper>
             </InlineFieldsWrapper>

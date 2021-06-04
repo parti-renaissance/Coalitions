@@ -79,7 +79,12 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event }) =
 
   const informations = [
     {
-      label: formatEventDate({ date: event.beginAt, timeZone: event.timeZone, type: 'modal' }),
+      label: formatEventDate({
+        beginAt: event.beginAt,
+        finishAt: event.finishAt,
+        timeZone: event.timeZone,
+        type: 'modal',
+      }),
       iconSrc: '/images/clock.svg',
       bold: true,
     },

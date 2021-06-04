@@ -72,6 +72,10 @@ const eventSlice = createSlice({
         { ...state.events },
       );
     },
+    optimisticallyIncrementEventParticipants: (state, action: PayloadAction<string>) => {
+      state.events[action.payload].numberOfParticipants =
+        state.events[action.payload].numberOfParticipants + 1;
+    },
   },
 });
 
@@ -84,5 +88,6 @@ export const {
   openEventParticipateModal,
   closeEventParticipateModal,
   markEventsAsParticipate,
+  optimisticallyIncrementEventParticipants,
 } = eventSlice.actions;
 export default eventSlice.reducer;

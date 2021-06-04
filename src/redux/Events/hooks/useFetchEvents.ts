@@ -7,18 +7,20 @@ import { useDispatch } from 'react-redux';
 import { resetEvents, updateEvents, markEventsAsParticipate } from '../slice';
 import { adaptEvent } from '../helpers/adapter';
 import { useFetchUserParticipateEvents } from './useFetchUserParticipateEvents';
+import { format } from 'date-fns';
 
 export type GroupSource = 'en_marche' | 'coalitions';
 
-export const useFetchEvents = ({
-  coalitionId,
-  causeId,
-  groupSource,
-}: {
-  coalitionId?: string;
-  causeId?: string;
-  groupSource?: GroupSource;
-}) => {
+export const useFetchEvents = (
+  filters:
+    | {
+        coalitionId?: string;
+        causeId?: string;
+        groupSource?: GroupSource;
+        inFuture?: boolean;
+      }
+    | undefined,
+) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const dispatch = useDispatch();
@@ -29,21 +31,29 @@ export const useFetchEvents = ({
   } = useFetchUserParticipateEvents();
 
   const [{ loading: isFetchingEvents, error }, doFetchEvents] = useTypedAsyncFn(
+    // eslint-disable-next-line complexity
     async (page: number) => {
       let baseUrl = '';
-      if (coalitionId === undefined && causeId === undefined) {
+      if (
+        filters === undefined ||
+        (filters.coalitionId === undefined && filters.causeId === undefined)
+      ) {
         baseUrl = 'events?';
       } else {
-        if (coalitionId !== undefined) {
-          baseUrl = `coalitions/${coalitionId}`;
+        if (filters.coalitionId !== undefined) {
+          baseUrl = `coalitions/${filters.coalitionId}`;
         } else {
-          baseUrl = `causes/${causeId}`;
+          baseUrl = `causes/${filters.causeId}`;
         }
         baseUrl = `${baseUrl}/events?`;
       }
 
-      if (groupSource !== undefined) {
-        baseUrl = `${baseUrl}group_source=${groupSource}`;
+      if (filters !== undefined && filters.groupSource !== undefined) {
+        baseUrl = `${baseUrl}&group_source=${filters.groupSource}`;
+      }
+
+      if (filters !== undefined && filters.inFuture === true) {
+        baseUrl = `${baseUrl}&finishAt[strictly_after]=${format(new Date(), 'yyyy-MM-dd')}`;
       }
 
       return await coalitionApiClient.get(`${baseUrl}&page=${page}&page_size=30`);

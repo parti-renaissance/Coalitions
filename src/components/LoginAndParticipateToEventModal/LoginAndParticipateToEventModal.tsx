@@ -6,25 +6,29 @@ import { closeEventParticipateModal } from 'redux/Events';
 import { getEventParticipateModal } from 'redux/Events/selectors';
 import { setAfterAuthParticipateToEvent, setAfterAuthRedirect } from 'redux/Login';
 import { PATHS } from 'routes';
-import { InscriptionFormValues } from 'components/LoginModal/components/CreateAccountForm/lib/useValidateForm';
+import { useUnauthenticatedEventParticipate } from 'redux/Events/hooks/useUnauthenticatedEventParticipate';
 
 const LoginAndParticipateToEventModal: FunctionComponent = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const event = useSelector(getEventParticipateModal);
-
   const onClose = () => {
     dispatch(closeEventParticipateModal());
   };
+  const { loading, unauthenticatedEventParticipate } = useUnauthenticatedEventParticipate(onClose);
 
   let redirectToAfterAuth: null | string = null;
-  if (event !== null && (event.cause !== undefined || event.coalition !== undefined)) {
-    if (event.cause !== undefined) {
-      redirectToAfterAuth = PATHS.CAUSE.url(event.cause.slug);
-    } else if (event.coalition !== undefined) {
-      redirectToAfterAuth = PATHS.COALITION.url(event.coalition.uuid);
+  if (event !== null) {
+    const search = `?eventId=${event.uuid}`;
+    if (window.location.pathname === PATHS.HOME.url()) {
+      if (event.cause !== undefined) {
+        redirectToAfterAuth = `${PATHS.CAUSE.url(event.cause.slug)}${search}`;
+      } else if (event.coalition !== undefined) {
+        redirectToAfterAuth = `${PATHS.COALITION.url(event.coalition.uuid)}${search}`;
+      }
+    } else {
+      redirectToAfterAuth = `${window.location.pathname}${search}`;
     }
-    redirectToAfterAuth = `${redirectToAfterAuth}?eventId=${event.uuid}`;
   }
 
   const onConnect = () => {
@@ -42,11 +46,8 @@ const LoginAndParticipateToEventModal: FunctionComponent = () => {
       title={intl.formatMessage({ id: 'events.confirm-participation' })}
       legalTextKey="events.legal-inscription-text"
       isInEventFlow
-      onAccountFormSubmit={(values: InscriptionFormValues) => {
-        console.log(values);
-        onClose();
-        return Promise.resolve();
-      }}
+      onAccountFormSubmit={unauthenticatedEventParticipate}
+      doingAfterAccountCreation={loading}
     />
   );
 };

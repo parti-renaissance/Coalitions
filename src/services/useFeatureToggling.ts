@@ -14,11 +14,11 @@ export const useFeatureToggling = (): FeatureToggles => {
     return {
       isCauseUpdateEnable: true,
       isProfilePageEnable: true,
-      isCoalitionPageEnable: false,
+      isCoalitionPageEnable: true,
       isCoalitionVideoPlaceholderEnable: false,
       isSendMailEnabled: true,
       isSubscriptionUpdateEnabled: true,
-      areEventsEnable: false,
+      areEventsEnable: true,
       isDeleteEventEnable: false,
     };
   }

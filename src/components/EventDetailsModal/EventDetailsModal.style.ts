@@ -54,6 +54,7 @@ export const Separator = styled.div`
 export const Description = styled.p`
   color: ${colorPalette.greyDark};
   margin-top: ${getSpacing(6)};
+  white-space: pre-line;
 `;
 
 export const DesktopInformationWrapper = styled.div`

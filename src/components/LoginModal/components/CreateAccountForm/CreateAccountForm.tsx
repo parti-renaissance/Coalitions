@@ -94,7 +94,11 @@ const CreateAccountForm = ({
             <InputFieldWrapper>
               <InputField
                 required
-                placeholder={intl.formatMessage({ id: 'login_modal.first-name' })}
+                placeholder={
+                  isInEventFlow
+                    ? intl.formatMessage({ id: 'login_modal.first-name' })
+                    : intl.formatMessage({ id: 'login_modal.first-name-or-nickname' })
+                }
                 type="text"
                 name="firstName"
                 onChange={handleChange}

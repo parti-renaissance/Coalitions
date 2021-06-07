@@ -14,7 +14,7 @@ export const useFeatureToggling = (): FeatureToggles => {
     return {
       isCauseUpdateEnable: true,
       isProfilePageEnable: true,
-      isCoalitionPageEnable: true,
+      isCoalitionPageEnable: false,
       isCoalitionVideoPlaceholderEnable: false,
       isSendMailEnabled: true,
       isSubscriptionUpdateEnabled: true,

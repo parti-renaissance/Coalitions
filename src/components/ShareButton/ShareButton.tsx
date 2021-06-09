@@ -68,7 +68,7 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({
     }
   };
 
-  const share = (event: MouseEvent<HTMLButtonElement | HTMLImageElement>) => {
+  const share = (event: any) => {
     if (isAbleToUseShareApi && !isDesktop) {
       nav.share({ ...shareContent, url: window.location.href });
     } else {

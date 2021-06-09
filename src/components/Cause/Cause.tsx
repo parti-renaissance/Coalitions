@@ -34,7 +34,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const history = useHistory();
 
-  const onSupportClick = (event: MouseEvent) => {
+  const onSupportClick = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
     if (isUserLoggedIn) {

@@ -55,7 +55,7 @@ const EventParticipateButton: FunctionComponent<EventParticipateButtonProps> = (
   };
 
   const onClick = useCallback(
-    (e: MouseEvent) => {
+    (e: any) => {
       e.preventDefault();
       e.stopPropagation();
 

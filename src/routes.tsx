@@ -1,27 +1,29 @@
-import React, { FunctionComponent, lazy, Suspense, useEffect } from 'react';
+import React, { FunctionComponent, Suspense, useEffect } from 'react';
+// @ts-ignore
+import lazy from 'react-lazy-ssr';
 import { Route, Switch, useHistory } from 'react-router';
 import Loader from './components/Loader/Loader';
 import Snackbar from 'components/Snackbar';
 
-const Home = lazy(() => import('./pages/Home'));
-const CausePage = lazy(() => import('./pages/CausePage'));
-const OurMission = lazy(() => import('./pages/OurMission'));
-const CreateCause = lazy(() => import('./pages/CreateCause'));
-const CauseAdmin = lazy(() => import('./pages/CauseAdmin'));
-const CausePreview = lazy(() => import('./pages/CausePreview'));
-const CauseList = lazy(() => import('./pages/CauseList'));
-const Password = lazy(() => import('./pages/Password'));
-const Inscription = lazy(() => import('./pages/Inscription'));
-const CookiesPolicy = lazy(() => import('./pages/CookiesPolicy'));
-const LegalNotice = lazy(() => import('./pages/LegalNotice'));
-const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'));
-const Profile = lazy(() => import('./pages/Profile'));
-const Coalition = lazy(() => import('./pages/Coalition'));
-const LoginAndSupportModal = lazy(() => import('./components/LoginAndSupportModal'));
+const Home = lazy(() => import('./pages/Home'), { chunkName: 'Home' });
+const CausePage = lazy(() => import('./pages/CausePage'), { chunkName: 'CausePage' });
+const OurMission = lazy(() => import('./pages/OurMission'), { chunkName: 'OurMission' });
+const CreateCause = lazy(() => import('./pages/CreateCause'), { chunkName: 'CreateCause' });
+const CauseAdmin = lazy(() => import('./pages/CauseAdmin'), { chunkName: 'CauseAdmin' });
+const CausePreview = lazy(() => import('./pages/CausePreview'), { chunkName: 'CausePreview' });
+const CauseList = lazy(() => import('./pages/CauseList'), { chunkName: 'CauseList' });
+const Password = lazy(() => import('./pages/Password'), { chunkName: 'Password' });
+const Inscription = lazy(() => import('./pages/Inscription'), { chunkName: 'Inscription' });
+const CookiesPolicy = lazy(() => import('./pages/CookiesPolicy'), { chunkName: 'CookiesPolicy' });
+const LegalNotice = lazy(() => import('./pages/LegalNotice'), { chunkName: 'LegalNotice' });
+const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'), { chunkName: 'DataProtectionPolicy' });
+const Profile = lazy(() => import('./pages/Profile'), { chunkName: 'Profile' });
+const Coalition = lazy(() => import('./pages/Coalition'), { chunkName: 'Coalition' });
+const LoginAndSupportModal = lazy(() => import('./components/LoginAndSupportModal'), { chunkName: 'LoginAndSupportModal' });
 const LoginAndParticipateToEventModal = lazy(() =>
-  import('./components/LoginAndParticipateToEventModal'),
+  import('./components/LoginAndParticipateToEventModal'), { chunkName: 'LoginAndParticipateToEventModal' }
 );
-const UpdateEvent = lazy(() => import('./pages/UpdateEvent'));
+const UpdateEvent = lazy(() => import('./pages/UpdateEvent'), { chunkName: 'UpdateEvent' });
 
 export const CHARTER_OF_VALUES_URL =
   'https://storage.googleapis.com/pourunecause/charte_des_valeurs.pdf';

@@ -1,4 +1,6 @@
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect, Suspense } from 'react';
+// @ts-ignore
+import lazy from 'react-lazy-ssr';
 import { useLocation } from 'react-router';
 import { useLogin } from 'redux/Login/hooks/useLogin';
 import { DesktopHeader } from './DesktopHeader';
@@ -8,7 +10,7 @@ import useSelector from 'redux/useSelector';
 import { isUserLogged } from 'redux/Login';
 import { getCurrentUser } from 'redux/User/selectors';
 import { getIsDesktop } from 'services/mobile/mobile';
-const CGUModal = lazy(() => import('../CGUModal/CGUModal'));
+const CGUModal = lazy(() => import('../CGUModal/CGUModal'), { chunkName: 'CGUModal' });
 
 const Header: React.FC = () => {
   const { search } = useLocation();

@@ -37,7 +37,7 @@ const CoalitionCard: FunctionComponent<CoalitionCardProps> = ({
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const intl = useIntl();
 
-  const follow = (event: MouseEvent) => {
+  const follow = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
     followCoalition();

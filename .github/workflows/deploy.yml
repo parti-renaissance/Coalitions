@@ -52,7 +52,7 @@ jobs:
           REACT_APP_ENV: "${{ steps.ref_name.outputs.SOURCE_NAME == 'master' && 'preprod' || 'production' }}"
         run: |-
           docker build \
-            --file ./docker/nodeserver/Dockerfile
+            --file ./docker/nodeserver/Dockerfile \
             --tag ${REGISTRY}/${IMAGE}:${SOURCE_NAME}-${GITHUB_SHA} \
             --build-arg REACT_APP_ENV=${REACT_APP_ENV} \
             .

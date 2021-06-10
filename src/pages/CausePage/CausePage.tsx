@@ -1,5 +1,4 @@
-import { Cached } from '@material-ui/icons';
-import React, { useEffect, FunctionComponent, Suspense, useRef } from 'react';
+import React, { FunctionComponent, Suspense, useRef } from 'react';
 import Loader from 'components/Loader';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,13 +22,10 @@ interface CausePageNavParams {
 const CauseResource = createResourceFactory(async (fetchFnc: any) => fetchFnc());
 
 const CausePage: FunctionComponent<any> = ({ resource }) => {
-  console.log('cause page');
   const { causeIdOrSlug } = useParams<CausePageNavParams>();
 
   const causeRedux = useSelector(getCause(causeIdOrSlug));
-  console.log('causeRedux:', causeRedux);
   const causeFetched = resource.read();
-  console.log('causeFetched:', causeFetched);
   const cause = causeRedux || causeFetched;
 
   const dispatch = useDispatch();
@@ -49,6 +45,8 @@ const CausePage: FunctionComponent<any> = ({ resource }) => {
     return null;
   }
 
+  const url = `https://pourunecause.fr/cause/${cause.slug}`;
+
   return (
     <>
       <Helmet>
@@ -57,21 +55,19 @@ const CausePage: FunctionComponent<any> = ({ resource }) => {
         <meta property="og:site_name" content="Pour une cause" />
         <meta property="og:title" content={cause.name} />
         <meta property="og:description" content={cause.description} />
-        <meta property="og:image" content="https://pourunecause.fr/images/puc.jpg" />
-        <meta property="og:url" content="https://pourunecause.fr/" />
+        <meta property="og:image" content={cause.image_url.replace('https', 'http')} />
+        <meta property="og:image:secure_url" content={cause.image_url} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content={'1200'} />
+        <meta property="og:image:height" content={'675'} />
+        <meta property="og:url" content={url} />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="Pour une cause" />
-        <meta
-          name="twitter:title"
-          content="Faire de nos combats personnels des actions collectives"
-        />
-        <meta
-          name="twitter:description"
-          content="Citoyens, collectifs, associations, nous avons tous à coeur d’agir pour construire un monde meilleur. Nous avons tous des idées, des combats, des causes qui nous sont chers."
-        />
-        <meta name="twitter:image" content="https://pourunecause.fr/images/puc.jpg" />
-        <meta name="twitter:url" content="https://pourunecause.fr/" />
+        <meta name="twitter:site" content="@enmarchefr" />
+        <meta name="twitter:title" content={cause.name} />
+        <meta name="twitter:description" content={cause.description} />
+        <meta name="twitter:image" content={cause.image_url} />
+        <meta name="twitter:url" content={url} />
       </Helmet>
       <CauseDetails cause={cause} onSupport={onSupport} isSupporting={loadingCauseFollow} />
       <SuccessModal />
@@ -88,15 +84,11 @@ const CausePageWrapper = () => {
 
   function createResource() {
     const resource = CauseResource.create(async () => {
-      console.log('Before fetch');
       await fetchCause(true);
-      console.log('after fetch');
     });
     resourceRef.current = resource;
     return resource;
   }
-
-  console.log('resource:', resource);
 
   return (
     <Suspense fallback={<Loader fullScreen />}>

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, Suspense, useEffect } from 'react';
 // @ts-ignore
 import lazy from 'react-lazy-ssr';
-import { Route, Switch, useHistory, useLocation } from "react-router";
+import { Route, Switch, useHistory, useLocation } from 'react-router';
 import Loader from './components/Loader/Loader';
 import Snackbar from 'components/Snackbar';
 
@@ -16,12 +16,17 @@ const Password = lazy(() => import('./pages/Password'), { chunkName: 'Password' 
 const Inscription = lazy(() => import('./pages/Inscription'), { chunkName: 'Inscription' });
 const CookiesPolicy = lazy(() => import('./pages/CookiesPolicy'), { chunkName: 'CookiesPolicy' });
 const LegalNotice = lazy(() => import('./pages/LegalNotice'), { chunkName: 'LegalNotice' });
-const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'), { chunkName: 'DataProtectionPolicy' });
+const DataProtectionPolicy = lazy(() => import('./pages/DataProtectionPolicy'), {
+  chunkName: 'DataProtectionPolicy',
+});
 const Profile = lazy(() => import('./pages/Profile'), { chunkName: 'Profile' });
 const Coalition = lazy(() => import('./pages/Coalition'), { chunkName: 'Coalition' });
-const LoginAndSupportModal = lazy(() => import('./components/LoginAndSupportModal'), { chunkName: 'LoginAndSupportModal' });
-const LoginAndParticipateToEventModal = lazy(() =>
-  import('./components/LoginAndParticipateToEventModal'), { chunkName: 'LoginAndParticipateToEventModal' }
+const LoginAndSupportModal = lazy(() => import('./components/LoginAndSupportModal'), {
+  chunkName: 'LoginAndSupportModal',
+});
+const LoginAndParticipateToEventModal = lazy(
+  () => import('./components/LoginAndParticipateToEventModal'),
+  { chunkName: 'LoginAndParticipateToEventModal' },
 );
 const UpdateEvent = lazy(() => import('./pages/UpdateEvent'), { chunkName: 'UpdateEvent' });
 
@@ -94,10 +99,7 @@ export const PATHS = {
 
 const Routes: FunctionComponent<{}> = () => {
   const history = useHistory();
-  const location = useLocation()
-
-  console.log('here')
-  console.log("location:", location);
+  const location = useLocation();
 
   useEffect(() => {
     return history.listen(({ search }, action) => {

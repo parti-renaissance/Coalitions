@@ -27,7 +27,6 @@ const stats = require('../build/reactLazySsrStats.json');
 const app = express();
 
 app.get('/*', async (req, res, next) => {
-  console.log(`Request URL = ${req.url}`);
   if (
     req.url.includes('images') ||
     req.url.includes('static') ||
@@ -51,8 +50,6 @@ app.get('/*', async (req, res, next) => {
   const reactApp = await renderToStringAsync(app);
 
   const helmet = Helmet.renderStatic();
-
-  console.log('helmet:', helmet.title.toString());
 
   const indexFile = path.resolve('build/index.html');
   fs.readFile(indexFile, 'utf8', (err, data) => {

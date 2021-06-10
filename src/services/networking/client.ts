@@ -4,10 +4,7 @@ import { store } from 'redux/store';
 import request from 'superagent';
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, refresh } from './auth';
 
-console.log("process.env:", process.env);
 const backendBaseUrl = `${process.env.REACT_APP_API_BASE_URL}api/` ?? '';
-
-console.log("backendBaseUrl:", backendBaseUrl);
 
 interface AccessToken {
   exp: number;

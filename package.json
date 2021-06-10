@@ -110,7 +110,7 @@
   "bundlesize": [
     {
       "path": "./build/static/js/*.js",
-      "maxSize": "200 kB"
+      "maxSize": "215 kB"
     }
   ],
   "devDependencies": {

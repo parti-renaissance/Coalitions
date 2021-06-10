@@ -40,31 +40,35 @@ app.get('/*', async (req, res, next) => {
     return next();
   }
 
-  const sheets = new ServerStyleSheets();
-  const sheet = new ServerStyleSheet();
-
-  const element = (
-    <StaticRouter location={req.url} context={{}}>
-      <App />
-    </StaticRouter>
-  );
-  // Wrap app in a ChunkExtractor
-  const chunkExtractor = new ChunkExtractor({ stats });
-  const app = chunkExtractor.collectChunks(element);
-
-  const reactApp = await renderToStringAsync(sheets.collect(sheet.collectStyles(app)));
-
-  const helmet = Helmet.renderStatic();
-  const cssString = sheets.toString();
-  const styleTags = sheet.getStyleTags();
-
   const indexFile = path.resolve('build/index.html');
-  fs.readFile(indexFile, 'utf8', (err, data) => {
+  fs.readFile(indexFile, 'utf8', async (err, data) => {
     if (err) {
       const errMsg = `There is an error: ${err}`;
       console.error(errMsg);
       return res.status(500).send(errMsg);
     }
+
+    // We use SSR ONLY for cause page (to use meta data when this page is sharing). All other page use CSR
+    if (!req.url.includes('/cause/'))
+      return res.send(data.replace('#META#', '').replace('#CSS#', ''));
+
+    const sheets = new ServerStyleSheets();
+    const sheet = new ServerStyleSheet();
+
+    const element = (
+      <StaticRouter location={req.url} context={{}}>
+        <App />
+      </StaticRouter>
+    );
+    // Wrap app in a ChunkExtractor
+    const chunkExtractor = new ChunkExtractor({ stats });
+    const app = chunkExtractor.collectChunks(element);
+
+    const reactApp = await renderToStringAsync(sheets.collect(sheet.collectStyles(app)));
+
+    const helmet = Helmet.renderStatic();
+    const cssString = sheets.toString();
+    const styleTags = sheet.getStyleTags();
 
     return res.send(
       data

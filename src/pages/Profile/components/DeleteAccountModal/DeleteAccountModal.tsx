@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Modal } from 'components/Modal/Modal';
 import { Title, Description } from 'components/Modal/Modal.style';
 import { ButtonContainer, ActionButton } from './DeleteAccountModal.style';
@@ -7,12 +7,12 @@ import { useDeleteAccount } from 'pages/Profile/hooks/useDeleteAccount';
 
 interface DeleteAccountModalProps {
   isOpened: boolean;
-  onClose: (e?: MouseEvent) => void;
+  onClose: (e?: any) => void;
 }
 
 const DeleteAccountModal: FunctionComponent<DeleteAccountModalProps> = ({ isOpened, onClose }) => {
   const { loading, deleteAccount } = useDeleteAccount();
-  const onConfirmClick = async (event: MouseEvent) => {
+  const onConfirmClick = async (event: any) => {
     event.preventDefault();
     event.stopPropagation();
     await deleteAccount();

@@ -1,11 +1,19 @@
 const path = require('path');
 const htmlWebpackInjectAttributesPlugin = require('html-webpack-inject-attributes-plugin');
+const ReactLazySsrPlugin = require('react-lazy-ssr/webpack');
 
 module.exports = {
   webpack: function override(config, env) {
     config.plugins = config.plugins.concat([new htmlWebpackInjectAttributesPlugin({
       'data-cookieconsent': 'ignore',
     })]);
+
+    config.plugins = config.plugins.concat([new ReactLazySsrPlugin()]);
+
+    config.output = {
+      ...config.output,
+      globalObject: 'this'
+    }
 
     const analyzeBundle = process.argv.indexOf('--analyze-bundle') !== -1;
 

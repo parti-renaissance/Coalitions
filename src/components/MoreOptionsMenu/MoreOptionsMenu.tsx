@@ -31,13 +31,13 @@ const MoreOptionsMenu: FunctionComponent<MoreOptionsMenuProps> = ({
     setMenu(null);
   };
 
-  const closeUnfollowModal = (event: MouseEvent) => {
+  const closeUnfollowModal = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
     setIsUnfollowModalOpened(false);
   };
 
-  const onUnFollowClick = (event: MouseEvent) => {
+  const onUnFollowClick = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
     setIsUnfollowModalOpened(true);

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router';
 import { SmallButton, DefaultButton } from 'components/Button/Button';
@@ -34,7 +34,7 @@ const Cause: FunctionComponent<CauseProps> = ({ cause }: CauseProps) => {
   const isUserLoggedIn = Boolean(useSelector(isUserLogged));
   const history = useHistory();
 
-  const onSupportClick = (event: MouseEvent) => {
+  const onSupportClick = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
     if (isUserLoggedIn) {

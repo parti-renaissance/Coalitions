@@ -211,8 +211,8 @@ export const useFetchOneCause = (idOrSlug: string | null) => {
         };
       }
 
-      dispatch(updateOneCause(cause));
-      dispatch(markCausesAsSupported(supportedCauses));
+      await dispatch(updateOneCause(cause));
+      await dispatch(markCausesAsSupported(supportedCauses));
     },
     [dispatch, doFetchCause, doFetchFollowedCauses, isUserLoggedIn],
   );

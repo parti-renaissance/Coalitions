@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   Container,
   Name,
@@ -55,7 +55,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
     }
   };
 
-  const goToCausePage = (e: MouseEvent) => {
+  const goToCausePage = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
 

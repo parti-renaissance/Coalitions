@@ -1,7 +1,6 @@
 ARG NODE_VERSION=14
-ARG NGINX_VERSION=1.19
 
-FROM node:${NODE_VERSION}-alpine AS build
+FROM node:${NODE_VERSION}-alpine
 
 ARG REACT_APP_ENV
 
@@ -15,13 +14,13 @@ RUN apk add python make gcc g++
 
 COPY . ./
 
+# used for SSR
+RUN npm install -g ts-node
+
 # useful to get react-app-rewired and types for typescript
 RUN yarn install --production=false
 RUN yarn build
 
-FROM nginx:${NGINX_VERSION}-alpine
-RUN rm /etc/nginx/conf.d/default.conf
-COPY docker/nginx_conf /etc/nginx/conf.d
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
+EXPOSE 8080
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["yarn", "run", "start-server"]

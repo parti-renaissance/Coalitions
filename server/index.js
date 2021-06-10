@@ -17,6 +17,8 @@ const express = require('express');
 const fs = require('fs');
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router';
+import { ServerStyleSheets } from '@material-ui/core/styles';
+import { ServerStyleSheet } from 'styled-components';
 import App from '../src/App';
 const { renderToStringAsync } = require('react-async-ssr'),
   { ChunkExtractor } = require('react-lazy-ssr/server');
@@ -38,6 +40,9 @@ app.get('/*', async (req, res, next) => {
     return next();
   }
 
+  const sheets = new ServerStyleSheets();
+  const sheet = new ServerStyleSheet();
+
   const element = (
     <StaticRouter location={req.url} context={{}}>
       <App />
@@ -47,9 +52,11 @@ app.get('/*', async (req, res, next) => {
   const chunkExtractor = new ChunkExtractor({ stats });
   const app = chunkExtractor.collectChunks(element);
 
-  const reactApp = await renderToStringAsync(app);
+  const reactApp = await renderToStringAsync(sheets.collect(sheet.collectStyles(app)));
 
   const helmet = Helmet.renderStatic();
+  const cssString = sheets.toString();
+  const styleTags = sheet.getStyleTags();
 
   const indexFile = path.resolve('build/index.html');
   fs.readFile(indexFile, 'utf8', (err, data) => {
@@ -62,7 +69,8 @@ app.get('/*', async (req, res, next) => {
     return res.send(
       data
         .replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`)
-        .replace('#META#', `${helmet.title.toString()}${helmet.meta.toString()}`),
+        .replace('#META#', `${helmet.title.toString()}${helmet.meta.toString()}`)
+        .replace('#CSS#', `<style id="jss-server-side">${cssString}</style>${styleTags}`),
     );
   });
 });

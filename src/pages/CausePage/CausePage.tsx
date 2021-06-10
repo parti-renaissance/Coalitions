@@ -12,7 +12,6 @@ import SuccessModal from 'pages/Home/components/SuccessModal';
 import { openCauseSupportModal } from 'redux/Cause';
 import EventDetailsModal from 'components/EventDetailsModal';
 import { useFeatureToggling } from 'services/useFeatureToggling';
-// @ts-ignore
 import { createResourceFactory } from 'react-lazy-data';
 
 interface CausePageNavParams {
@@ -78,7 +77,7 @@ const CausePage: FunctionComponent<any> = ({ resource }) => {
 
 const CausePageWrapper = () => {
   const { causeIdOrSlug } = useParams<CausePageNavParams>();
-  const { loading, fetchCause } = useFetchOneCause(causeIdOrSlug);
+  const { fetchCause } = useFetchOneCause(causeIdOrSlug);
   const resourceRef = useRef();
   const resource = resourceRef.current || createResource();
 

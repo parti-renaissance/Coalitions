@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router';
 import { SmallButton, DefaultButton } from 'components/Button/Button';

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, MouseEvent, useCallback } from 'react';
+import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { EventType } from 'redux/Events/types';
 import { Container, Icon, Label } from './EventParticipateButton.style';

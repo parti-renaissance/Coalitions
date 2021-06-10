@@ -28,10 +28,9 @@ const MenuLink: FunctionComponent<{
   isHashLink?: boolean;
   onClick: () => void;
 }> = ({ label, linkTo, isHashLink, onClick }) => {
-  // @ts-ignore
-  const Container = (isHashLink === true
+  const Container = ((isHashLink === true
     ? MenuHashLinkContainer
-    : MenuLinkContainer) as FunctionComponent<{ to: string; onClick: () => void }>;
+    : MenuLinkContainer) as any) as FunctionComponent<{ to: string; onClick: () => void }>;
 
   return (
     <Container to={linkTo} onClick={onClick}>

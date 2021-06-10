@@ -9,15 +9,13 @@ import Routes from './routes';
 
 import { store } from './redux/store';
 
-
-
 const App: React.FunctionComponent = () => {
   return (
     <ErrorBoundary FallbackComponent={AppCrashFallback}>
       <Provider store={store}>
-          <Root>
-            <Routes />
-          </Root>
+        <Root>
+          <Routes />
+        </Root>
       </Provider>
     </ErrorBoundary>
   );

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Modal } from 'components/Modal/Modal';
 import { Title, Description } from 'components/Modal/Modal.style';
 import { ButtonContainer } from './UnfollowModal.style';

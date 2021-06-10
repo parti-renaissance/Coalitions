@@ -1,7 +1,6 @@
 import React, { FunctionComponent, Suspense, useEffect } from 'react';
-// @ts-ignore
 import lazy from 'react-lazy-ssr';
-import { Route, Switch, useHistory, useLocation } from 'react-router';
+import { Route, Switch, useHistory } from 'react-router';
 import Loader from './components/Loader/Loader';
 import Snackbar from 'components/Snackbar';
 
@@ -99,7 +98,6 @@ export const PATHS = {
 
 const Routes: FunctionComponent<{}> = () => {
   const history = useHistory();
-  const location = useLocation();
 
   useEffect(() => {
     return history.listen(({ search }, action) => {

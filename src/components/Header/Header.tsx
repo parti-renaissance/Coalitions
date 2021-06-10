@@ -1,5 +1,4 @@
 import React, { useEffect, Suspense } from 'react';
-// @ts-ignore
 import lazy from 'react-lazy-ssr';
 import { useLocation } from 'react-router';
 import { useLogin } from 'redux/Login/hooks/useLogin';

@@ -172,7 +172,9 @@ export const useFetchOneCause = (idOrSlug: string | null) => {
 
   const fetchCause = useCallback(
     async (withQuickActions = false) => {
+      console.log('withQuickActions:', withQuickActions);
       let cause: Cause | undefined = await doFetchCause();
+      console.log('after withQuickActions', cause);
 
       if (cause === undefined || cause instanceof Error) {
         return;
@@ -182,6 +184,8 @@ export const useFetchOneCause = (idOrSlug: string | null) => {
         uuids: [cause.uuid],
         isUserLoggedIn,
       });
+
+      console.log('cause:', cause);
 
       if (withQuickActions) {
         const doFetchQuickActions = async (causeId: string) => {
@@ -211,8 +215,10 @@ export const useFetchOneCause = (idOrSlug: string | null) => {
         };
       }
 
-      dispatch(updateOneCause(cause));
-      dispatch(markCausesAsSupported(supportedCauses));
+      console.log('cause:', cause);
+
+      await dispatch(updateOneCause(cause));
+      await dispatch(markCausesAsSupported(supportedCauses));
     },
     [dispatch, doFetchCause, doFetchFollowedCauses, isUserLoggedIn],
   );

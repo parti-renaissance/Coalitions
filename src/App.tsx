@@ -7,7 +7,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import Root from './components/Root';
 import Routes from './routes';
 
-import { store, persistor } from './redux/store';
+import { store } from './redux/store';
 
 
 

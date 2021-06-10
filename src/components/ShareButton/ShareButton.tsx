@@ -25,7 +25,7 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({
 }) => {
   // To fix with a global type definition, once behaviour is validated
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const nav: any = navigator;
+  const nav: any = typeof navigator !== 'undefined' ? navigator : {};
   const isAbleToUseShareApi = nav?.share !== undefined;
   const isDesktop = getIsDesktop();
   const isMobile = getIsMobile();
@@ -43,28 +43,30 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({
   };
 
   const copyToClipBoard = () => {
-    try {
-      navigator.clipboard.writeText(window.location.href);
-      dispatch(
-        updateSnackbar({
-          message: intl.formatMessage({ id: 'share.copy-to-clipboard-success' }),
-          severity: Severity.success,
-        }),
-      );
-      closeShareMenu();
-    } catch (error) {
-      if (error instanceof Error && error.toString().includes('AbortError')) {
-        // Do nothing: iOS send this error when the user does not perform the full share process
-      }
-      if (error instanceof Error && error.toString().includes('NotAllowedError')) {
+    if (typeof navigator !== 'undefined') {
+      try {
+        navigator.clipboard.writeText(window.location.href);
         dispatch(
           updateSnackbar({
-            message: intl.formatMessage({ id: 'share.copy-to-clipboard-not-allowed' }),
-            severity: Severity.warning,
+            message: intl.formatMessage({ id: 'share.copy-to-clipboard-success' }),
+            severity: Severity.success,
           }),
         );
+        closeShareMenu();
+      } catch (error) {
+        if (error instanceof Error && error.toString().includes('AbortError')) {
+          // Do nothing: iOS send this error when the user does not perform the full share process
+        }
+        if (error instanceof Error && error.toString().includes('NotAllowedError')) {
+          dispatch(
+            updateSnackbar({
+              message: intl.formatMessage({ id: 'share.copy-to-clipboard-not-allowed' }),
+              severity: Severity.warning,
+            }),
+          );
+        }
+        throw error;
       }
-      throw error;
     }
   };
 
@@ -76,32 +78,37 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({
     }
   };
 
-  const shareLinks = [
-    {
-      label: <FormattedMessage id="share.facebook" />,
-      link: `https://www.facebook.com/sharer.php?u=${encodeURIComponent(window.location.href)}`,
-    },
-    {
-      label: <FormattedMessage id="share.twitter" />,
-      link: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-        window.location.href,
-      )}&text=${shareContent.text}`,
-    },
-    {
-      label: <FormattedMessage id="share.linkedin" />,
-      link: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-        window.location.href,
-      )}&title=${shareContent.title}`,
-    },
-    {
-      label: <FormattedMessage id="share.whatsapp" />,
-      link: `https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href)}`,
-    },
-    {
-      label: <FormattedMessage id="share.telegram" />,
-      link: `https://telegram.me/share/url?url=${encodeURIComponent(window.location.href)}`,
-    },
-  ];
+  const shareLinks =
+    typeof window !== 'undefined'
+      ? [
+          {
+            label: <FormattedMessage id="share.facebook" />,
+            link: `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
+              window.location.href,
+            )}`,
+          },
+          {
+            label: <FormattedMessage id="share.twitter" />,
+            link: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+              window.location.href,
+            )}&text=${shareContent.text}`,
+          },
+          {
+            label: <FormattedMessage id="share.linkedin" />,
+            link: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+              window.location.href,
+            )}&title=${shareContent.title}`,
+          },
+          {
+            label: <FormattedMessage id="share.whatsapp" />,
+            link: `https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href)}`,
+          },
+          {
+            label: <FormattedMessage id="share.telegram" />,
+            link: `https://telegram.me/share/url?url=${encodeURIComponent(window.location.href)}`,
+          },
+        ]
+      : [];
 
   const ShareMenu = getShareMenu(menuStyle);
 
@@ -120,7 +127,7 @@ const ShareButton: FunctionComponent<ShareButtonProps> = ({
         open={Boolean(shareMenu)}
         onClose={closeShareMenu}
       >
-        {navigator.clipboard?.writeText !== undefined ? (
+        {typeof navigator !== 'undefined' && navigator.clipboard?.writeText !== undefined ? (
           <MenuItem component="a" onClick={copyToClipBoard}>
             <FormattedMessage id="share.copy-to-clipboard" />
           </MenuItem>

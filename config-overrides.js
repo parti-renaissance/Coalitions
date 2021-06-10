@@ -10,6 +10,11 @@ module.exports = {
 
     config.plugins = config.plugins.concat([new ReactLazySsrPlugin()]);
 
+    config.output = {
+      ...config.output,
+      globalObject: 'this'
+    }
+
     const analyzeBundle = process.argv.indexOf('--analyze-bundle') !== -1;
 
     if (analyzeBundle) {

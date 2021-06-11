@@ -6,6 +6,10 @@ export const getAllCauses = (store: RootState) => {
   return store.cause.ids.map(id => store.cause.causes[id]);
 };
 
+export const getMyCauses = (store: RootState) => {
+  return Object.values(store.cause.causes_onlyMine);
+};
+
 export const getCause = (idOrSlug: string | null) => (store: RootState): Cause | undefined => {
   if (idOrSlug === null) {
     return undefined;

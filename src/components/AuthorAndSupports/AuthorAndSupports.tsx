@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Cause, InCreationCause } from 'redux/Cause/types';
+import getAuthorName from '../../services/getAuthorName';
 import { Container, AuthorContainer } from './AuthorAndSupports.style';
 import { useIntl } from 'react-intl';
 import IconAndLabel from 'components/IconAndLabel';
@@ -21,20 +22,7 @@ const AuthorAndSupports: FunctionComponent<AuthorAndSupportsProps> = ({ cause, s
         <AuthorContainer>
           <IconAndLabel
             iconSrc="/images/user.svg"
-            label={
-              cause.author === undefined || cause.author === null
-                ? intl.formatMessage({ id: 'cause.anonymous-author' })
-                : intl.formatMessage(
-                    { id: 'cause.author' },
-                    {
-                      firstName: cause.author.first_name,
-                      lastName:
-                        isUserLoggedIn && cause.author.last_name !== undefined
-                          ? cause.author.last_name
-                          : cause.author.last_name_initial,
-                    },
-                  )
-            }
+            label={getAuthorName(cause, intl, isUserLoggedIn)}
           />
         </AuthorContainer>
       ) : null}

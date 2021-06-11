@@ -1,6 +1,7 @@
-import React, { FunctionComponent, Suspense, useRef } from 'react';
+import React, { FunctionComponent, Suspense, useCallback, useEffect, useRef } from 'react';
 import Loader from 'components/Loader';
 import { Helmet } from 'react-helmet';
+import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useFetchOneCause } from 'redux/Cause/hooks/useFetchCauses';
@@ -13,6 +14,7 @@ import { openCauseSupportModal } from 'redux/Cause';
 import EventDetailsModal from 'components/EventDetailsModal';
 import { useFeatureToggling } from 'services/useFeatureToggling';
 import { createResourceFactory } from 'react-lazy-data';
+import getAuthorName from '../../services/getAuthorName';
 
 interface CausePageNavParams {
   causeIdOrSlug: string;
@@ -22,6 +24,7 @@ const CauseResource = createResourceFactory(async (fetchFnc: any) => fetchFnc())
 
 const CausePage: FunctionComponent<any> = ({ resource }) => {
   const { causeIdOrSlug } = useParams<CausePageNavParams>();
+  const intl = useIntl();
 
   const causeRedux = useSelector(getCause(causeIdOrSlug));
   const causeFetched = resource.read();
@@ -36,15 +39,30 @@ const CausePage: FunctionComponent<any> = ({ resource }) => {
     if (isUserLoggedIn) {
       followCause();
     } else {
-      dispatch(openCauseSupportModal(cause !== undefined ? cause : null));
+      openModalSupport();
     }
   };
+
+  const openModalSupport = useCallback(
+    () => dispatch(openCauseSupportModal(cause !== undefined ? cause : null)),
+    [dispatch, cause],
+  );
+
+  useEffect(() => {
+    // Auto open the modal to support this cause if there is a specific hash in the url
+    if (typeof window !== 'undefined' && window.location.hash === '#soutenir') openModalSupport();
+  }, [cause, openModalSupport]);
 
   if (cause === undefined) {
     return null;
   }
 
   const url = `https://pourunecause.fr/cause/${cause.slug}`;
+  const authorName = getAuthorName(cause, intl);
+
+  const description = `Rejoingnez le combat de ${authorName} ! ${
+    cause.followers_count
+  } soutiens l'ont déjà fait • ${cause.description.substr(0, 254)}...`;
 
   return (
     <>
@@ -53,7 +71,7 @@ const CausePage: FunctionComponent<any> = ({ resource }) => {
 
         <meta property="og:site_name" content="Pour une cause" />
         <meta property="og:title" content={cause.name} />
-        <meta property="og:description" content={cause.description} />
+        <meta property="og:description" content={description} />
         <meta property="og:image" content={cause.image_url.replace('https', 'http')} />
         <meta property="og:image:secure_url" content={cause.image_url} />
         <meta property="og:image:type" content="image/jpeg" />
@@ -64,7 +82,7 @@ const CausePage: FunctionComponent<any> = ({ resource }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@enmarchefr" />
         <meta name="twitter:title" content={cause.name} />
-        <meta name="twitter:description" content={cause.description} />
+        <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={cause.image_url} />
         <meta name="twitter:url" content={url} />
       </Helmet>

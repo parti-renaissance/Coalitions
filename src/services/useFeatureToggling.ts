@@ -18,7 +18,7 @@ export const useFeatureToggling = (): FeatureToggles => {
       isCoalitionVideoPlaceholderEnable: false,
       isSendMailEnabled: true,
       isSubscriptionUpdateEnabled: true,
-      areEventsEnable: true,
+      areEventsEnable: false,
       isDeleteEventEnable: false,
     };
   }

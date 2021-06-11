@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Suspense, useEffect, useRef } from 'react';
+import React, { FunctionComponent, Suspense, useCallback, useEffect, useRef } from 'react';
 import Loader from 'components/Loader';
 import { Helmet } from 'react-helmet';
 import { useIntl } from 'react-intl';
@@ -43,13 +43,15 @@ const CausePage: FunctionComponent<any> = ({ resource }) => {
     }
   };
 
+  const openModalSupport = useCallback(
+    () => dispatch(openCauseSupportModal(cause !== undefined ? cause : null)),
+    [dispatch, cause],
+  );
+
   useEffect(() => {
     // Auto open the modal to support this cause if there is a specific hash in the url
     if (typeof window !== 'undefined' && window.location.hash === '#soutenir') openModalSupport();
-  }, [cause]);
-
-  const openModalSupport = () =>
-    dispatch(openCauseSupportModal(cause !== undefined ? cause : null));
+  }, [cause, openModalSupport]);
 
   if (cause === undefined) {
     return null;

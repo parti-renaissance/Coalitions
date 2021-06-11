@@ -4,8 +4,8 @@ import Cause from 'components/Cause';
 import { useIntl } from 'react-intl';
 import { PATHS } from 'routes';
 import { useSelector } from 'react-redux';
-import { useFetchCauses, SortOptions } from 'redux/Cause/hooks/useFetchCauses';
-import { getAllCauses } from 'redux/Cause/selectors';
+import { useFetchCauses, SortOptions, PAGE_SIZE } from 'redux/Cause/hooks/useFetchCauses';
+import { getAllCauses, getMyCauses } from 'redux/Cause/selectors';
 import { useHistory } from 'react-router';
 import { getIsMobile } from 'services/mobile/mobile';
 import Slider from 'components/Slider';
@@ -18,12 +18,19 @@ import {
 
 interface HorizontalCausesListProps {
   coalitionId?: string;
+  onlyMine?: boolean;
 }
 
-const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ coalitionId }) => {
+const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({
+  coalitionId,
+  onlyMine = false,
+}) => {
   const intl = useIntl();
-  const causes = useSelector(getAllCauses);
-  const { loading: isFetchingCauses, fetchFirstPage: fetchCauses } = useFetchCauses();
+  const causes = useSelector(onlyMine ? getMyCauses : getAllCauses);
+  const { loading: isFetchingCauses, fetchFirstPage: fetchCauses } = useFetchCauses(
+    PAGE_SIZE,
+    onlyMine,
+  );
   const history = useHistory();
   const isMobile = getIsMobile();
 
@@ -43,19 +50,23 @@ const HorizontalCausesList: FunctionComponent<HorizontalCausesListProps> = ({ co
     }
   };
 
+  const title = onlyMine
+    ? intl.formatMessage({ id: 'horizontal_causes_list.title_onlyMine' })
+    : intl.formatMessage({ id: 'horizontal_causes_list.title' });
+
   return (
     <Slider
       slidesCount={causes.length}
       isLoadingSlides={isFetchingCauses}
-      title={intl.formatMessage({ id: 'horizontal_causes_list.title' })}
-      onSeeAllClick={onSeeAllClick}
+      title={title}
+      onSeeAllClick={!onlyMine ? onSeeAllClick : undefined}
       desktopCellSpacing={DESKTOP_CAUSE_MARGIN_RIGHT}
       desktopSlideWidth={DESKTOP_CAUSE_CARD_WIDTH}
       slidesHeight={{ mobile: MOBILE_CAUSE_CARD_HEIGHT, desktop: DESKTOP_CAUSE_CARD_HEIGHT }}
     >
       {causes.slice(0, 20).map(cause => (
         <CauseCardWrapper key={cause.uuid}>
-          <Cause cause={cause} />
+          <Cause cause={!onlyMine ? cause : { ...cause, supported: true }} />
         </CauseCardWrapper>
       ))}
       {isMobile ? <EmptyMobileDiv /> : null}

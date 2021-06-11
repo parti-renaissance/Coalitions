@@ -10,6 +10,7 @@ export const state: RootState = {
   cause: {
     ids: [],
     causes: {},
+    causes_onlyMine: {},
     numberOfCauses: null,
     inCreationCause: undefined,
     statistics: null,

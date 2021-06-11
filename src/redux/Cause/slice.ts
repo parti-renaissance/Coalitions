@@ -8,6 +8,7 @@ export type CauseStatistics = {
 
 export type CauseState = Readonly<{
   causes: { [id: string]: Cause };
+  causes_onlyMine: { [id: string]: Cause };
   ids: string[];
   numberOfCauses: number | null;
   inCreationCause?: InCreationCause;
@@ -17,6 +18,7 @@ export type CauseState = Readonly<{
 
 const initialState: CauseState = {
   causes: {},
+  causes_onlyMine: {},
   ids: [],
   numberOfCauses: null,
   inCreationCause: undefined,
@@ -41,6 +43,15 @@ const causeSlice = createSlice({
       );
       state.ids = [...new Set([...state.ids, ...action.payload.causes.map(cause => cause.uuid)])];
       state.numberOfCauses = action.payload.numberOfCauses;
+    },
+    updateMyCauses: (state, action: PayloadAction<{ causes: Cause[] }>) => {
+      state.causes_onlyMine = action.payload.causes.reduce(
+        (accumulator, cause) => ({
+          ...accumulator,
+          [cause.uuid]: cause,
+        }),
+        state.causes_onlyMine,
+      );
     },
     updateOneCause: (state, action: PayloadAction<Cause>) => {
       state.causes[action.payload.uuid] = {
@@ -105,6 +116,7 @@ const causeSlice = createSlice({
 export const {
   resetCauses,
   updateCauses,
+  updateMyCauses,
   updateOneCause,
   markCausesAsSupported,
   optimisticallyMarkCauseAsSupported,

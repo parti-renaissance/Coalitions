@@ -95,6 +95,7 @@
   },
   "horizontal_causes_list": {
     "title": "Soutenez des causes",
+    "title_onlyMine": "Mes causes",
     "see-all": "Voir tout"
   },
   "cause": {

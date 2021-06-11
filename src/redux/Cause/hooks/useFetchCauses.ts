@@ -1,8 +1,14 @@
 /* eslint-disable max-lines */
 
-import { coalitionApiClient } from 'services/networking/client';
+import { authenticatedApiClient, coalitionApiClient } from 'services/networking/client';
 import { useDispatch } from 'react-redux';
-import { markCausesAsSupported, resetCauses, updateCauses, updateOneCause } from '../slice';
+import {
+  markCausesAsSupported,
+  resetCauses,
+  updateCauses,
+  updateMyCauses,
+  updateOneCause,
+} from '../slice';
 import { useTypedAsyncFn } from 'redux/useTypedAsyncFn';
 import { useCallback, useState, useEffect } from 'react';
 import { Cause } from '../types';
@@ -30,9 +36,10 @@ export type Filters = {
   coalitionIds: string[];
   searchText: string;
   sort: SortOptions;
+  onlyMine?: boolean;
 };
 
-const PAGE_SIZE = 12;
+export const PAGE_SIZE = 12;
 
 const buildFilteredByUrl = (filters: Filters) => {
   let urlWithFilters = '';
@@ -68,7 +75,8 @@ const useFetchCausesErrorHandler = () => {
   );
 };
 
-export const useFetchCauses = (pageSize = PAGE_SIZE) => {
+export const useFetchCauses = (pageSize = PAGE_SIZE, onlyMine = false) => {
+  // If onlyMine is true, we call another endPoint to have only supported causes for the authenticated user
   let pendingRequest: request.SuperAgentRequest | undefined;
   let useFilters = false;
   const [page, setPage] = useState(1);
@@ -84,9 +92,16 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
       }
       useFilters = filters.length > 0;
 
-      pendingRequest = coalitionApiClient.getRequestWithoutTokenCheck(
-        `causes?page_size=${pageSize}&page=${page}${filters}`,
-      );
+      const _func = (endPoint: string) =>
+        onlyMine
+          ? authenticatedApiClient.getRequestWithoutTokenCheck(endPoint)
+          : coalitionApiClient.getRequestWithoutTokenCheck(endPoint);
+
+      const endpoint = `${
+        onlyMine ? 'v3/' : ''
+      }causes?page_size=${pageSize}&page=${page}${filters}${onlyMine ? '&onlyMine' : ''}`;
+
+      pendingRequest = _func(endpoint);
       const response = await pendingRequest;
       pendingRequest = undefined;
       return response.body;
@@ -117,20 +132,24 @@ export const useFetchCauses = (pageSize = PAGE_SIZE) => {
         uuids: causes.items.map((cause: Cause) => cause.uuid),
         isUserLoggedIn,
       });
-      dispatch(updateCauses({ causes: causes.items, numberOfCauses: causes.metadata.total_items }));
-      dispatch(markCausesAsSupported(supportedCauses));
+      if (!onlyMine) {
+        dispatch(
+          updateCauses({ causes: causes.items, numberOfCauses: causes.metadata.total_items }),
+        );
+        dispatch(markCausesAsSupported(supportedCauses));
+      } else dispatch(updateMyCauses({ causes: causes.items }));
       setHasMore(causes.metadata.last_page >= page + 1);
       setPage(page + 1);
     },
-    [dispatch, doFetchCauses, doFetchFollowedCauses, isUserLoggedIn],
+    [dispatch, doFetchCauses, doFetchFollowedCauses, isUserLoggedIn, onlyMine],
   );
 
   const fetchFirstPage = useCallback(
     async (filters: Filters) => {
-      dispatch(resetCauses());
+      if (!onlyMine) dispatch(resetCauses());
       await fetch(1, filters);
     },
-    [dispatch, fetch],
+    [dispatch, fetch, onlyMine],
   );
 
   const fetchNextPage = useCallback(

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { isUserLogged } from '../../redux/Login';
+import useSelector from '../../redux/useSelector';
 import {
   Wrapper,
   WrapperWithHorizontalMargin,
@@ -36,6 +38,8 @@ export const VIDEO_ID = 'KkDsxQLM3Ao';
 const Home: React.FunctionComponent = () => {
   const history = useHistory();
   const { isCoalitionPageEnable, areEventsEnable } = useFeatureToggling();
+  const isUserLoggedIn = Boolean(useSelector(isUserLogged));
+
   const isMobile = getIsMobile();
 
   const onCoalitionClick = (coalition: Coalition) => {
@@ -79,9 +83,17 @@ const Home: React.FunctionComponent = () => {
         {!isMobile ? <DesktopVideoWrapper>{renderVideo()}</DesktopVideoWrapper> : null}
       </TopPartContainer>
       <CauseDefinition />
+
+      {isUserLoggedIn && (
+        <CardListWrapper>
+          <HorizontalCausesList onlyMine={true} />
+        </CardListWrapper>
+      )}
+
       <CardListWrapper>
         <HorizontalCausesList />
       </CardListWrapper>
+
       {areEventsEnable ? (
         <CardListWrapper>
           <EventCardsSlider filters={{ groupSource: 'coalitions', inFuture: true }} />

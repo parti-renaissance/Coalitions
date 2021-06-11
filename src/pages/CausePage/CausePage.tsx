@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Suspense, useRef } from 'react';
+import React, { FunctionComponent, Suspense, useEffect, useRef } from 'react';
 import Loader from 'components/Loader';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,9 +36,17 @@ const CausePage: FunctionComponent<any> = ({ resource }) => {
     if (isUserLoggedIn) {
       followCause();
     } else {
-      dispatch(openCauseSupportModal(cause !== undefined ? cause : null));
+      openModalSupport();
     }
   };
+
+  useEffect(() => {
+    // Auto open the modal to support this cause if there is a specific hash in the url
+    if (typeof window !== 'undefined' && window.location.hash === '#soutenir') openModalSupport();
+  }, [cause]);
+
+  const openModalSupport = () =>
+    dispatch(openCauseSupportModal(cause !== undefined ? cause : null));
 
   if (cause === undefined) {
     return null;

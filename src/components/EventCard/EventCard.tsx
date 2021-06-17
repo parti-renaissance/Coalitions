@@ -7,13 +7,13 @@ import {
   CategoryName,
   ParticipantsCountContainer,
   ParticipantsCountIconWrapper,
-  ParticipantsCountIcon,
   ParticipantsCountLabel,
   InformationContainer,
   Bold,
   CauseNameContainer,
   CauseNameLabel,
-  CauseNameIcon,
+  DefaultIcon,
+  CoalitionNameLabel,
 } from './EventCard.style';
 import { EventType } from 'redux/Events/types';
 import { useIntl } from 'react-intl';
@@ -95,13 +95,21 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
         </InformationContainer>
         {event.cause !== undefined ? (
           <CauseNameContainer onClick={goToCausePage}>
-            <CauseNameIcon src="/images/point.svg" />
+            <DefaultIcon src="/images/point.svg" />
             <CauseNameLabel>{event.cause.name}</CauseNameLabel>
+          </CauseNameContainer>
+        ) : null}
+        {event.coalition !== undefined ? (
+          <CauseNameContainer>
+            <DefaultIcon src="/images/disc.svg" />
+            <CoalitionNameLabel>
+              Coalition {event.coalition.name.toLocaleLowerCase()}
+            </CoalitionNameLabel>
           </CauseNameContainer>
         ) : null}
         <ParticipantsCountContainer>
           <ParticipantsCountIconWrapper>
-            <ParticipantsCountIcon src="/images/supports.svg" />
+            <DefaultIcon src="/images/supports.svg" />
           </ParticipantsCountIconWrapper>
           <ParticipantsCountLabel>
             {numberOfParticipants > 1

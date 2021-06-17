@@ -109,10 +109,20 @@ const EventInformation: FunctionComponent<EventInformationProps> = ({ event }) =
           onClick: goToCausePage,
         }
       : null,
-    event.organizer !== undefined
+    event.organizer !== undefined && event.coalition === undefined
       ? {
           label: `${event.organizer.firstName} ${event.organizer.lastName}`,
           iconSrc: '/images/user.svg',
+        }
+      : null,
+    event.coalition !== undefined
+      ? {
+          label: `Coalition ${event.coalition.name.toLocaleLowerCase()}`,
+          iconSrc: '/images/disc.svg',
+          onClick: () =>
+            event.coalition !== undefined
+              ? (window.location.href = PATHS.COALITION.url(event.coalition.uuid))
+              : null,
         }
       : null,
     {

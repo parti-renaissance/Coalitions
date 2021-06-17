@@ -62,7 +62,7 @@
     "@typescript-eslint/interface-name-prefix": 0,
     "@typescript-eslint/strict-boolean-expressions": 0,
     "@typescript-eslint/no-explicit-any": 0,
-    "complexity": ["error", 8],
+    "complexity": ["error", 10],
     "max-lines": ["error", 200],
     "max-depth": ["error", 3],
     "max-params": ["error", 4],

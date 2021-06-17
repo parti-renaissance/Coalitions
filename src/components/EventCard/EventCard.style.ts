@@ -97,13 +97,17 @@ export const CauseNameContainer = styled.div`
 
 const ICON_SIZE = getSpacing(4);
 
-export const CauseNameIcon = styled.img`
+export const DefaultIcon = styled.img`
   height: ${ICON_SIZE};
   width: ${ICON_SIZE};
 `;
 
 export const CauseNameLabel = styled(MobilePOnOneLine)`
   color: ${colorPalette.blueCoalition};
+  margin-left: ${getSpacing(2)};
+`;
+
+export const CoalitionNameLabel = styled(MobilePOnOneLine)`
   margin-left: ${getSpacing(2)};
 `;
 
@@ -117,11 +121,6 @@ export const ParticipantsCountIconWrapper = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
-`;
-
-export const ParticipantsCountIcon = styled.img`
-  height: ${ICON_SIZE};
-  width: ${ICON_SIZE};
 `;
 
 export const ParticipantsCountLabel = styled(MobilePOnOneLine)`

@@ -15,14 +15,9 @@ export const adaptEvent = (rawEvent: RawEventType): EventType => {
     participants_count,
     organizer,
     cause,
-    coalition: rawCoalition,
+    coalition,
     status,
   } = rawEvent;
-
-  let coalition = rawCoalition;
-  if (cause !== undefined) {
-    coalition = cause.coalition;
-  }
 
   return {
     uuid,

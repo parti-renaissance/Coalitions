@@ -55,6 +55,10 @@ export type EventType = {
     uuid: string;
     name: string;
     slug: string;
+    coalition: {
+      uuid: string;
+      name: string;
+    };
   };
   coalition?: {
     uuid: string;

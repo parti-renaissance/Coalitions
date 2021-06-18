@@ -9,6 +9,8 @@ export const getEventHeaderTitle = (event: EventType) => {
 
   if (event.coalition !== undefined) {
     nameParts.push(event.coalition.name);
+  } else if (event.cause !== undefined) {
+    nameParts.push(event.cause.coalition.name);
   }
 
   return nameParts.join(' • ');

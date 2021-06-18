@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   Container,
   Title,
@@ -9,7 +9,6 @@ import {
   ModeButtonsContainer,
   ModeButton,
   InlineFieldsWrapper,
-  CategoryItem,
   BottomButtonsWrapper,
 } from './EventForm.style';
 import { useIntl } from 'react-intl';
@@ -20,8 +19,6 @@ import { EventType, RawCreateEventType, RawUpdateEventType } from 'redux/Events/
 import { InputFieldWrapper } from 'components/InputField/InputField.style';
 import { getIsValidateButtonDisabled } from './lib/getIsValidateButtonDisabled';
 import { getInitialValues } from './lib/getInitialValues';
-import { useFetchEventCategories } from 'redux/Events/hooks/useFetchEventCategories';
-import Loader from 'components/Loader';
 import { DeleteEventButton } from './components';
 import { FullWidthButton } from 'components/Button/Button';
 import CityAutocomplete from 'components/CityAutocomplete';
@@ -47,13 +44,8 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   coalitionId,
 }) => {
   const intl = useIntl();
-  const { loading, eventCategories, fetchEventCategories } = useFetchEventCategories();
   const { validateForm } = useValidateForm();
   const { isDeleteEventEnable } = useFeatureToggling();
-
-  useEffect(() => {
-    fetchEventCategories();
-  }, [fetchEventCategories]);
 
   const onSubmit = (values: EventFormValues) => {
     onSubmitProp(
@@ -65,10 +57,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       }),
     );
   };
-
-  if (eventCategories.length === 0 && loading) {
-    return <Loader fullScreen />;
-  }
 
   const initialValues = getInitialValues(initialEvent);
   const now = format(new Date(), "yyyy-MM-dd'T'HH:mm", { locale: fr });
@@ -251,26 +239,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
                 />
               </InputFieldWrapper>
             </InlineFieldsWrapper>
-            <InputFieldWrapper>
-              <InputField
-                select
-                required
-                placeholder={intl.formatMessage({ id: 'event_form.category' })}
-                type="text"
-                name="categorySlug"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.categorySlug}
-                error={touched.categorySlug === true && errors.categorySlug !== undefined}
-                helperText={touched.categorySlug === true ? errors.categorySlug : undefined}
-              >
-                {eventCategories.map(category => (
-                  <CategoryItem key={category.slug} value={category.slug}>
-                    {category.name}
-                  </CategoryItem>
-                ))}
-              </InputField>
-            </InputFieldWrapper>
             <InputFieldWrapper>
               <InputField
                 required

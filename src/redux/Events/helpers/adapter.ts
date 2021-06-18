@@ -42,7 +42,7 @@ export const adaptEvent = (rawEvent: RawEventType): EventType => {
       organizer != null
         ? { uuid: organizer.uuid, firstName: organizer.first_name, lastName: organizer.last_name }
         : undefined,
-    category,
+    category: category != null ? category : undefined,
     numberOfParticipants: typeof participants_count === 'number' ? participants_count : 0,
     mode: mode === 'online' ? 'online' : 'meeting',
     timeZone: time_zone,

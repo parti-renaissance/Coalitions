@@ -35,7 +35,7 @@ export type EventType = {
   name: string;
   beginAt: string;
   finishAt: string;
-  category: EventCategory;
+  category?: EventCategory;
   timeZone: string;
   description: string;
   postAddress?: {

@@ -22,6 +22,7 @@ import EventParticipateButton from '../EventParticipateButton';
 import { formatEventDate } from 'redux/Events/helpers/formatEventDate';
 import { formatEventAddress } from 'redux/Events/helpers/formatEventAddress';
 import { PATHS } from 'routes';
+import { getEventHeaderTitle } from '../Event/EventHelper';
 
 interface EventCardProps {
   event: EventType;
@@ -68,11 +69,6 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
 
   const numberOfParticipants = event.numberOfParticipants;
 
-  let categoryName = event.category.name.toUpperCase();
-  if (event.coalition !== undefined) {
-    categoryName = `${categoryName} • ${event.coalition.name}`;
-  }
-
   const formattedDate = formatEventDate({
     timeZone: event.timeZone,
     beginAt: event.beginAt,
@@ -83,7 +79,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({ event }) => {
   return (
     <Container onClick={showEventDetails}>
       <div>
-        <CategoryName>{categoryName}</CategoryName>
+        <CategoryName>{getEventHeaderTitle(event)}</CategoryName>
         <Name>{event.name}</Name>
         <InformationContainer>
           <Bold>{formattedDate}</Bold>

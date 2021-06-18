@@ -19,6 +19,7 @@ import { EventType } from 'redux/Events/types';
 import Loader from 'components/Loader';
 import parse from 'html-react-parser';
 import { PATHS } from 'routes';
+import { getEventHeaderTitle } from '../Event/EventHelper';
 
 interface EventDetailsModalProps {
   event: EventType | undefined;
@@ -42,14 +43,6 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
     window.open(PATHS.CAUSE.url(event.cause.slug), '_blank');
   };
 
-  let upperTitle = '';
-  if (event !== undefined) {
-    upperTitle = event.category.name.toUpperCase();
-    if (event.coalition !== undefined) {
-      upperTitle = `${upperTitle} • ${event.coalition.name}`;
-    }
-  }
-
   return (
     <Modal onClose={onClose} isOpened width="large">
       {event === undefined && isFetchingEvent ? <Loader /> : null}
@@ -59,7 +52,7 @@ const EventDetailsModal: FunctionComponent<EventDetailsModalProps> = ({
       {event !== undefined ? (
         <ContentContainer>
           <ContentSubContainer>
-            <Category>{upperTitle}</Category>
+            <Category>{getEventHeaderTitle(event)}</Category>
             <Name>{event.name}</Name>
             {event.cause !== undefined ? (
               <CauseNameContainer onClick={goToCausePage}>

@@ -12,7 +12,6 @@ export interface RawCreateEventType {
   time_zone: string;
   begin_at: string;
   finish_at: string;
-  category: string;
   mode: EventMode;
   visio_url?: string;
   post_address: {
@@ -70,7 +69,7 @@ export interface RawEventType {
   name: string;
   begin_at: string;
   finish_at: string;
-  category: EventCategory;
+  category?: EventCategory;
   time_zone: string;
   description: string;
   post_address: {

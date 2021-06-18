@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import { media, getSpacing, fonts, borderRadius, colorPalette } from 'stylesheet';
 import { FullWidthButton } from 'components/Button/Button';
 import { EventMode } from 'redux/Events/types';
-import MenuItem from '@material-ui/core/MenuItem';
 
 export const Container = styled.div`
   flex: 1;
@@ -68,11 +67,6 @@ export const InlineFieldsWrapper = styled.div`
       margin-left: ${getSpacing(3)};
     }
   `)}
-`;
-
-export const CategoryItem = styled(MenuItem)`
-  ${fonts.input};
-  color: ${colorPalette.greyDark};
 `;
 
 export const BottomButtonsWrapper = styled.div`

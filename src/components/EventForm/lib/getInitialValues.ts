@@ -11,7 +11,6 @@ export const getInitialValues = (initialEvent?: EventType): EventFormValues => {
       visioUrl: '',
       beginAt: '',
       finishAt: '',
-      categorySlug: '',
       description: '',
       postalCode: '',
       cityName: '',
@@ -26,7 +25,6 @@ export const getInitialValues = (initialEvent?: EventType): EventFormValues => {
     beginAt,
     finishAt,
     description,
-    category,
     postAddress,
     timeZone,
   } = initialEvent;
@@ -37,7 +35,6 @@ export const getInitialValues = (initialEvent?: EventType): EventFormValues => {
     visioUrl,
     beginAt: formatEventDateToPickerDate({ date: beginAt, timeZone }),
     finishAt: formatEventDateToPickerDate({ date: finishAt, timeZone }),
-    categorySlug: category !== undefined ? category.slug : '',
     description,
     address: postAddress !== undefined ? postAddress.address : '',
     postalCode: postAddress !== undefined ? postAddress.postalCode : '',

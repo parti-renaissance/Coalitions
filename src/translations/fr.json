@@ -371,7 +371,6 @@
     "title": "Titre de l’événement",
     "address": "Adresse postale",
     "link": "Lien",
-    "category": "Catégorie d’événement",
     "description": "Description",
     "mode": {
       "meeting": "Présentiel",

@@ -7,7 +7,6 @@ export interface EventFormValues {
   name: string;
   beginAt: string;
   finishAt: string;
-  categorySlug: string;
   description: string;
   address: string;
   postalCode: string;
@@ -23,7 +22,6 @@ export interface EventFormErrors {
   visioUrl?: string;
   beginAt?: string;
   finishAt?: string;
-  categorySlug?: string;
   description?: string;
   cityName?: string;
   postalCode?: string;
@@ -41,7 +39,6 @@ export const useValidateForm = () => {
     visioUrl,
     beginAt,
     finishAt,
-    categorySlug,
     description,
     cityName,
     postalCode,
@@ -95,10 +92,6 @@ export const useValidateForm = () => {
           id: 'event_form.errors.too_long_event',
         });
       }
-    }
-
-    if (categorySlug === undefined || categorySlug.length === 0) {
-      errors.categorySlug = requiredErrorMessage;
     }
 
     if (description === undefined || description.length < 10) {

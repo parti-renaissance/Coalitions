@@ -18,7 +18,6 @@ export const convertEventFormValuesToRawCreateEvent = ({
     name,
     beginAt,
     finishAt,
-    categorySlug,
     description,
     address,
     postalCode,
@@ -34,7 +33,6 @@ export const convertEventFormValuesToRawCreateEvent = ({
     mode,
     name,
     description,
-    category: categorySlug,
     post_address: {
       address,
       postal_code: postalCode.toString(),

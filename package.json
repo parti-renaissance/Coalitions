@@ -44,7 +44,7 @@
     "react-intl": "3.12.1",
     "react-lazy-data": "^0.2.4",
     "react-lazy-ssr": "^0.2.4",
-    "react-redux": "7.2.2",
+    "react-redux": "7.2.4",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
     "react-router-hash-link": "^2.4.0",

@@ -41,11 +41,4 @@ export const SUCCESS_STORIES: SuccessStory[] = [
     author: 'Olivia C.',
     imageSrc: '/images/successStories/oliviabarrasco.jpg',
   },
-  {
-    coalition: 'Numérique',
-    description:
-      'J’ai 28 ans, je suis ingénieure cybersécurité, et je porte la cause “Pour vulgariser la cybersécurité au quotidien”. Ce que je souhaite c’est encourager les jeunes à intégrer cette filière et pouvoir protéger nos entreprises, nos institutions et notre pays.',
-    author: 'Sarah L.',
-    imageSrc: '/images/successStories/sarahlazri.jpeg',
-  },
 ];

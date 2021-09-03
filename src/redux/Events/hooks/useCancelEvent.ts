@@ -14,7 +14,6 @@ export const useCancelEvent = (id: string) => {
   const { formatMessage } = useIntl();
 
   const [{ loading, error }, doCancelEvent] = useTypedAsyncFn(async () => {
-    console.log({ id });
     return new Promise(resolve => setTimeout(resolve, 3000));
   }, []);
 

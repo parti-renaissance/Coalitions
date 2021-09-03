@@ -6,8 +6,6 @@ import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, refresh } from './auth';
 
 const backendBaseUrl = `${process.env.REACT_APP_API_BASE_URL}api/` ?? '';
 
-console.log('Backend URL : ', backendBaseUrl);
-
 interface AccessToken {
   exp: number;
 }

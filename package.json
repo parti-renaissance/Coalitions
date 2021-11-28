@@ -39,7 +39,7 @@
     "react-dom": "16.14.0",
     "react-draft-wysiwyg": "^1.14.6",
     "react-helmet": "^6.1.0",
-    "react-image-file-resizer": "^0.4.2",
+    "react-image-file-resizer": "^0.4.7",
     "react-infinite-scroll-component": "^6.0.0",
     "react-intl": "3.12.1",
     "react-lazy-data": "^0.2.4",

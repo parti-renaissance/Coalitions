@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@formatjs/intl-pluralrules": "1.5.9",
+    "@formatjs/intl-pluralrules": "4.3.2",
     "@formatjs/intl-relativetimeformat": "4.5.16",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -41,7 +41,7 @@
     "react-helmet": "^6.1.0",
     "react-image-file-resizer": "^0.4.7",
     "react-infinite-scroll-component": "^6.0.0",
-    "react-intl": "3.12.1",
+    "react-intl": "5.24.6",
     "react-lazy-data": "^0.2.4",
     "react-lazy-ssr": "^0.2.4",
     "react-redux": "7.2.5",

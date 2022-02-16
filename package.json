@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@formatjs/intl-pluralrules": "1.5.9",
+    "@formatjs/intl-pluralrules": "4.3.2",
     "@formatjs/intl-relativetimeformat": "4.5.16",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -115,7 +115,7 @@
   ],
   "devDependencies": {
     "@babel/register": "^7.13.16",
-    "@types/cheerio": "0.22.24",
+    "@types/cheerio": "0.22.31",
     "@types/draft-convert": "^2.1.4",
     "@types/enzyme": "3.10.8",
     "@types/history": "4.7.8",

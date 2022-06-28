@@ -114,7 +114,7 @@
     }
   ],
   "devDependencies": {
-    "@babel/register": "^7.13.16",
+    "@babel/register": "^7.18.6",
     "@types/cheerio": "0.22.24",
     "@types/draft-convert": "^2.1.4",
     "@types/enzyme": "3.10.8",

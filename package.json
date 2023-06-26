@@ -162,7 +162,7 @@
     "react-test-renderer": "16.14.0",
     "redux-saga-test-plan": "4.0.1",
     "stylelint": "14.0.0",
-    "stylelint-config-prettier": "8.0.2",
+    "stylelint-config-prettier": "9.0.5",
     "stylelint-config-standard": "24.0.0",
     "stylelint-config-styled-components": "0.1.1",
     "stylelint-declaration-strict-value": "1.1.8",

@@ -158,7 +158,7 @@
     "plop": "3.0.0",
     "prettier": "2.5.1",
     "react-app-rewire-webpack-bundle-analyzer": "1.1.0",
-    "react-app-rewired": "2.1.8",
+    "react-app-rewired": "2.2.1",
     "react-test-renderer": "16.14.0",
     "redux-saga-test-plan": "4.0.1",
     "stylelint": "14.0.0",

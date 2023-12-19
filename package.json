@@ -11,7 +11,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@reduxjs/toolkit": "1.6.0",
-    "@sentry/browser": "5.15.0",
+    "@sentry/browser": "7.89.0",
     "@testing-library/react-hooks": "^5.1.0",
     "@types/react-draft-wysiwyg": "^1.13.2",
     "@types/react-router-hash-link": "^1.2.1",

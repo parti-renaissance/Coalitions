@@ -13206,10 +13206,10 @@ stylelint-config-styled-components@0.1.1:
   resolved "https://registry.yarnpkg.com/stylelint-config-styled-components/-/stylelint-config-styled-components-0.1.1.tgz#b408388d7c687833ab4be4c4e6522d97d2827ede"
   integrity sha512-z5Xz/9GmvxO6e/DLzBMwkB85zHxEEjN6K7Cj80Bi+o/9vR9eS3GX3E9VuMnX9WLFYulqbqLtTapGGY28JBiy9Q==
 
-stylelint-declaration-strict-value@1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/stylelint-declaration-strict-value/-/stylelint-declaration-strict-value-1.1.8.tgz#82a8a593c03950452571b1c8d92547cbd29c545c"
-  integrity sha512-j9L2LA0lEQ2y34unA/hxhq4UZLVlVHYX9PD9HQw3wPILGfJoycYTICeKYZqxi3YfxRDf/LwzMfPeleCKebqvLQ==
+stylelint-declaration-strict-value@1.10.9:
+  version "1.10.9"
+  resolved "https://registry.yarnpkg.com/stylelint-declaration-strict-value/-/stylelint-declaration-strict-value-1.10.9.tgz#318e0a99be7980fdc1b408725a1668574165816a"
+  integrity sha512-spHtxoEVutgbYiQkPjhJo95YhHGSVl8fgD4MWBIfNM8aFGr200i65dKl7A00udZZ5VxxAysuMivhbWEN1BnjpQ==
 
 stylelint-processor-styled-components@1.10.0:
   version "1.10.0"
